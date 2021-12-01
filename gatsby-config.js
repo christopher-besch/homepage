@@ -18,17 +18,10 @@ module.exports = {
             resolve: "gatsby-plugin-page-creator",
             options: {
                 path: path.join(__dirname, "src", "pages"),
-                ignore: ["__generated__/*"],
+                ignore: ["**/__generated__/*"],
             }
         },
         // load files from a dir
-        {
-            resolve: "gatsby-source-filesystem",
-            options: {
-                name: "projects",
-                path: `${__dirname}/src/projects`,
-            }
-        },
         {
             resolve: "gatsby-source-filesystem",
             options: {
