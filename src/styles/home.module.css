@@ -1,5 +1,41 @@
-.portfolio h1 {
+.portfolio_heading h1 {
     font-size: 50px;
     /* break at word endings */
     word-break: break-word;
+}
+
+.row {
+    margin: 8px -16px;
+    padding: 8px;
+}
+
+.row::after {
+    /* clear floats afterwards */
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.column {
+    padding: 8px;
+    float: left;
+    width: 25%;
+}
+
+.content {
+    background-color: white;
+    padding: 10px;
+}
+
+/* responsive layout, only two or one element per row */
+@media screen and (max-width: 900px) {
+    .project {
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .project {
+        width: 100%;
+    }
 }
