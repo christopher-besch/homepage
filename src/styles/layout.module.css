@@ -1,0 +1,87 @@
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: teal;
+    color: #fff;
+}
+
+.nav input[type=checkbox] {
+    display: none;
+}
+
+.nav_menu a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.nav_menu {
+    display: flex;
+    gap: 1em;
+    font-size: 18px;
+}
+
+.nav_menu li {
+    list-style: none;
+}
+
+.nav_menu li:hover {
+    background-color: #4c9e9e;
+    /* rounded corners */
+    border-radius: 5px;
+    /* hover changes animated */
+    transition: 0.3s;
+}
+
+.hamburger {
+    display: none;
+    font-size: 24px;
+    user-select: none;
+}
+
+@media screen and (max-width: 768px) {
+    .nav_menu {
+        display: block;
+        position: absolute;
+        background-color: teal;
+        right: 0px;
+        left: 0px;
+        text-align: center;
+
+        max-height: 0;
+        padding: 0 0;
+        transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+        overflow: hidden;
+    }
+    /* .nav_menu that is preceded by a checked checkbox in .nav */
+    .nav input[type=checkbox]:checked ~ .nav_menu {
+        /* grow menu when hamburger clicked */
+        max-height: 500px;
+        padding: 16px 0;
+        transition: max-height 0.3s ease-in, padding 0.3s ease-in;
+    }
+
+    .nav_menu li:hover {
+        display: inline-block;
+    }
+    /* all lis except first one */
+    .nav_menu li + li {
+        margin-top: 12px;
+    }
+
+    .hamburger {
+        display: block;
+    }
+    .hamburger:hover {
+        cursor: pointer;
+    }
+}
+
+.content {
+    padding: 20px;
+    max-width: 1000px;
+    /* center horizontally */
+    margin: auto;
+}
+

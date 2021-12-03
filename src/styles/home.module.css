@@ -4,19 +4,19 @@
     word-break: break-word;
 }
 
-.row {
+.projects {
     margin: 8px -16px;
     padding: 8px;
 }
 
-.row::after {
+.projects::after {
     /* clear floats afterwards */
     content: "";
     display: table;
     clear: both;
 }
 
-.column {
+.project {
     padding: 8px;
     float: left;
     width: 25%;
