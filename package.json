@@ -11,8 +11,8 @@
         "start": "gatsby develop",
         "serve": "gatsby serve",
         "clean": "gatsby clean",
-        "type-check": "find ./src/ -name __generated__ -type d | xargs rm -r -v || true && node_modules/.bin/tsgql typegen && tsc && echo 'type check ok'",
-        "type-check:watch": "tsc --watch",
+        "type-check": "find ./src/ -name __generated__ -type d | xargs rm -r -v || true && node_modules/.bin/tsgql typegen && node_modules/.bin/tsc && echo 'type check ok'",
+        "type-check:watch": "node_modules/.bin/tsc --watch",
         "load-gql": "node_modules/.bin/get-graphql-schema http://localhost:8000/___graphql > schema.graphql && yarn run type-check"
     },
     "repository": {

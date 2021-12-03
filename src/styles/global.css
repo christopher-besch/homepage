@@ -1,0 +1,16 @@
+* {
+    /* border and padding should also count to element width and height */
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f1f1f1;
+    padding: 20px;
+    font-family: Arial;
+}
+
+.content {
+    max-width: 1000px;
+    /* center horizontally */
+    margin: auto;
+}
