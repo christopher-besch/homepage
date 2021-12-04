@@ -5,12 +5,12 @@
     "version": "0.1.0",
     "license": "0BSD",
     "scripts": {
-        "build": "gatsby build",
-        "develop": "gatsby develop",
-        "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
-        "start": "gatsby develop",
-        "serve": "gatsby serve",
-        "clean": "gatsby clean",
+        "build": "node_modules/.bin/gatsby build",
+        "develop": "node_modules/.bin/gatsby develop",
+        "format": "node_modules/.bin/gatsby prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
+        "start": "node_modules/.bin/gatsby develop",
+        "serve": "node_modules/.bin/gatsby serve",
+        "clean": "node_modules/.bin/gatsby clean",
         "type-check": "find ./src/ -name __generated__ -type d | xargs rm -r -v || true && node_modules/.bin/tsgql typegen && node_modules/.bin/tsc && echo 'type check ok'",
         "type-check:watch": "node_modules/.bin/tsc --watch",
         "load-gql": "node_modules/.bin/get-graphql-schema http://localhost:8000/___graphql > schema.graphql && yarn run type-check"
