@@ -39,69 +39,6 @@ const Home: React.FC = () => {
                         <p>I like cheese</p>
                     </div>
                 </div>
-                <div className={styles.project}>
-                    <div className={styles.content}>
-                        <img src="https://www.w3schools.com/w3images/lights.jpg" alt="broken image" style={{ width: "100%" }} />
-                        <h3>My Work</h3>
-                        <p>I like cheese</p>
-                    </div>
-                </div>
-                <div className={styles.project}>
-                    <div className={styles.content}>
-                        <img src="https://www.w3schools.com/w3images/lights.jpg" alt="broken image" style={{ width: "100%" }} />
-                        <h3>My Work</h3>
-                        <p>I like cheese</p>
-                    </div>
-                </div>
-                <div className={styles.project}>
-                    <div className={styles.content}>
-                        <img src="https://www.w3schools.com/w3images/lights.jpg" alt="broken image" style={{ width: "100%" }} />
-                        <h3>My Work</h3>
-                        <p>I like cheese</p>
-                    </div>
-                </div>
-                <div className={styles.project}>
-                    <div className={styles.content}>
-                        <img src="https://www.w3schools.com/w3images/lights.jpg" alt="broken image" style={{ width: "100%" }} />
-                        <h3>My Work</h3>
-                        <p>I like cheese</p>
-                    </div>
-                </div>
-                <div className={styles.project}>
-                    <div className={styles.content}>
-                        <img src="https://www.w3schools.com/w3images/lights.jpg" alt="broken image" style={{ width: "100%" }} />
-                        <h3>My Work</h3>
-                        <p>I like cheese</p>
-                    </div>
-                </div>
-                <div className={styles.project}>
-                    <div className={styles.content}>
-                        <img src="https://www.w3schools.com/w3images/lights.jpg" alt="broken image" style={{ width: "100%" }} />
-                        <h3>My Work</h3>
-                        <p>I like cheese</p>
-                    </div>
-                </div>
-                <div className={styles.project}>
-                    <div className={styles.content}>
-                        <img src="https://www.w3schools.com/w3images/lights.jpg" alt="broken image" style={{ width: "100%" }} />
-                        <h3>My Work</h3>
-                        <p>I like cheese</p>
-                    </div>
-                </div>
-                <div className={styles.project}>
-                    <div className={styles.content}>
-                        <img src="https://www.w3schools.com/w3images/lights.jpg" alt="broken image" style={{ width: "100%" }} />
-                        <h3>My Work</h3>
-                        <p>I like cheese</p>
-                    </div>
-                </div>
-                <div className={styles.project}>
-                    <div className={styles.content}>
-                        <img src="https://www.w3schools.com/w3images/lights.jpg" alt="broken image" style={{ width: "100%" }} />
-                        <h3>My Work</h3>
-                        <p>I like cheese</p>
-                    </div>
-                </div>
             </div>
         </Layout >
     )

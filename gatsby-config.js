@@ -36,11 +36,7 @@ module.exports = {
                 path: `${__dirname}/src/projects`,
             }
         },
-        // load markdown
-        {
-            resolve: "gatsby-transformer-remark",
-        },
-        // image optimizations
+        // image handling
         {
             resolve: "gatsby-transformer-sharp",
         },
@@ -50,12 +46,39 @@ module.exports = {
         {
             resolve: "gatsby-plugin-image",
         },
+        // load markdown
+        {
+            resolve: "gatsby-transformer-remark",
+            options: {
+                plugins: [
+                    {
+                        // load images from markdown
+                        resolve: "gatsby-remark-images",
+                        options: {
+                            maxWidth: 8000,
+                        },
+                    },
+                ]
+            }
+        },
     ],
     // can be loaded from page with GraphQL
     siteMetadata: {
-        title: "Gatsby Test",
-        description: "Web Dev Portfolio",
-        copyright: "This website is copyright 2021 Web Worrior",
-        contact: "me@example.com"
+        email: {
+            name: "christopher.besch@manim.community",
+            link: "mailto:christopher.besch@manim.community",
+        },
+        github: {
+            name: "christopher-besch",
+            link: "https://github.com/christopher-besch",
+        },
+        linkedin: {
+            name: "christopher-besch",
+            link: "https://www.linkedin.com/in/christopher-besch",
+        },
+        discord: {
+            name: "Stromel#1046",
+            link: "https://discord.com/users/455374552352948236",
+        },
     },
 }
