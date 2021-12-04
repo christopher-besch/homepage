@@ -1,6 +1,11 @@
 import { graphql } from "gatsby";
 import React from "react";
 import Layout from "../components/layout";
+import Heading from "../components/heading";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGithub, faLinkedin, faDiscord } from "@fortawesome/free-brands-svg-icons";
+import { faAt } from "@fortawesome/free-solid-svg-icons";
+
 import * as styles from "../styles/contact.module.css";
 import { ContactData } from "./__generated__/contact-data";
 
@@ -18,24 +23,40 @@ const Contact: React.FC<ContactProps> = (props) => {
     const linkedin_link = props.data.site?.siteMetadata?.linkedin?.link as string;
     return (
         <Layout>
-            <table>
-                <tr>
-                    <td>GitHub</td>
-                    <td><a href={github_link}>{github_name}</a></td>
-                </tr>
-                <tr>
-                    <td>LinkedIn</td>
-                    <td><a href={linkedin_link}>{linkedin_name}</a></td>
-                </tr>
-                <tr>
-                    <td>Email</td>
-                    <td><a href={email_link}>{email_name}</a></td>
-                </tr>
-                <tr>
-                    <td>Discord</td>
-                    <td><a href={discord_link}>{discord_name}</a></td>
-                </tr>
-            </table>
+            <Heading>
+                <h1>Contact</h1>
+                <hr />
+            </Heading>
+            <div className={styles.contacts}>
+                <div className={styles.contact}>
+                    <div className={styles.content}>
+                        <FontAwesomeIcon icon={faGithub} size={"10x"} />
+                        <h3>GitHub</h3>
+                        <a href={github_link}>{github_name}</a>
+                    </div>
+                </div>
+                <div className={styles.contact}>
+                    <div className={styles.content}>
+                        <FontAwesomeIcon icon={faLinkedin} size={"10x"} />
+                        <h3>LinkedIn</h3>
+                        <a href={linkedin_link}>{linkedin_name}</a>
+                    </div>
+                </div>
+                <div className={styles.contact}>
+                    <div className={styles.content}>
+                        <FontAwesomeIcon icon={faDiscord} size={"10x"} />
+                        <h3>Discord</h3>
+                        <a href={discord_link}>{discord_name}</a>
+                    </div>
+                </div>
+                <div className={styles.contact}>
+                    <div className={styles.content}>
+                        <FontAwesomeIcon icon={faAt} size={"10x"} />
+                        <h3>Mail</h3>
+                        <a href={email_link}>{email_name}</a>
+                    </div>
+                </div>
+            </div>
         </Layout>
     );
 }

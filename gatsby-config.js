@@ -61,6 +61,9 @@ module.exports = {
                 ]
             }
         },
+        {
+            resolve: "gatsby-plugin-fontawesome-css",
+        },
     ],
     // can be loaded from page with GraphQL
     siteMetadata: {

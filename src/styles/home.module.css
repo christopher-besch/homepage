@@ -1,17 +1,3 @@
-.portfolio_heading h1 {
-    font-size: 50px;
-    /* break at word endings */
-    word-break: break-word;
-}
-.portfolio_heading h2 {
-    margin-top: 10px;
-    font-size: 30px;
-}
-.portfolio_heading hr {
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
 .projects {
     margin: 8px -16px;
     padding: 8px;

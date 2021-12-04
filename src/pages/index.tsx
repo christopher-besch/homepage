@@ -1,15 +1,16 @@
 import React from "react";
 import Layout from "../components/layout";
+import Heading from "../components/heading";
 import * as styles from "../styles/home.module.css";
 
 const Home: React.FC = () => {
     return (
         <Layout>
-            <div className={styles.portfolio_heading}>
+            <Heading>
                 <h1>Christopher Besch</h1>
                 <h2>Software Developer - Problem Solver</h2>
                 <hr />
-            </div>
+            </Heading>
             <div className={styles.projects}>
                 <div className={styles.project}>
                     <div className={styles.content}>

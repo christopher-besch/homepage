@@ -1,5 +1,6 @@
 import { graphql, Link, useStaticQuery } from "gatsby";
 import React from "react";
+
 import "../styles/global.css";
 import * as styles from "../styles/layout.module.css";
 import { SiteInfo } from "./__generated__/site-info";
@@ -57,8 +58,8 @@ query SiteInfo {
                 <ul>
                     <li className={styles.link}><a href={github}>GitHub</a></li>
                     <li className={styles.link}><a href={linkedin}>LinkedIn</a></li>
-                    <li className={styles.link}><a href={email}>Mail</a></li>
                     <li className={styles.link}><a href={discord}>Discord</a></li>
+                    <li className={styles.link}><a href={email}>Mail</a></li>
                     <li><p>&#169; 2021</p></li>
                     <li className={styles.emoji}><p>🔗</p></li>
                 </ul>
