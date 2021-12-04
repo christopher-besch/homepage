@@ -9,7 +9,20 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: enriikke/gatsby-gh-pages-action@v2
+      - name: Clone Repo
+        uses: actions/checkout@v1
+
+      - name: Install Dependencies
+        run: yarn install
+
+      - name: Type Check
+        run: yarn run load-gql
+
+      - name: Build
+        run: yarn run build
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
-          deploy-branch: pages
+          branch: pages
+          folder: public
