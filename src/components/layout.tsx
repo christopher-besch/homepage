@@ -23,8 +23,17 @@ const Layout: React.FC = (props) =>
             {props.children}
         </div>
 
-        <footer>
-            <p>Copyright 2021 Christopher Besch</p>
+        <footer className={styles.footer}>
+            <ul>
+                <li><a href="#">Twitter</a></li>
+                <li><a href="#">Twitter</a></li>
+                <li><a href="#">Twitter</a></li>
+                <li><a href="#">Twitter</a></li>
+                <li><a href="#">Twitter</a></li>
+                <li>
+                    <p>🔗</p>
+                </li>
+            </ul>
         </footer>
-    </div >;
+    </div>;
 export default Layout;
