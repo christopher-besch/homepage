@@ -3,10 +3,10 @@ import "../styles/global.css";
 import * as styles from "../styles/layout.module.css";
 
 const Layout: React.FC = (props) =>
-    <div className={styles.layout}>
+    <div>
         <nav className={styles.nav}>
             <div>LOGO</div>
-            <div className={styles.nav_links}>
+            <div>
                 <input type="checkbox" id="nav_toggle" />
                 <label htmlFor="nav_toggle" className={styles.hamburger}>&#9776;</label>
                 <div className={styles.nav_menu}>
