@@ -3,23 +3,26 @@ import Layout from "../components/layout";
 import * as styles from "../styles/home.module.scss";
 import { graphql } from "gatsby";
 import { HomePage } from "./__generated__/home-page";
+import { GatsbyImage, getImage, ImageDataLike } from "gatsby-plugin-image";
+import { Link } from "@reach/router";
 
 interface HomeProps {
     data: HomePage
 }
 const Home: React.FC<HomeProps> = (props) => {
-    const projects = props.data.allMarkdownRemark.edges.map(project => project.node.frontmatter!);
+    const projects = props.data.allMarkdownRemark.edges;
+
     return (
         <Layout heading="Flagship Projects">
             <div className={styles.projects}>
                 {projects.map(project =>
-                    <div className={styles.project}>
+                    <Link to={`/project/${project.node.frontmatter?.slug}`} key={project.node.id} className={styles.project}>
                         <div className={styles.content}>
-                            <img src="https://www.w3schools.com/w3images/lights.jpg" alt="broken image" />
-                            <h3>{project.title}</h3>
-                            <p>{project.description}</p>
+                            <GatsbyImage image={getImage(project.node.frontmatter?.thumb as ImageDataLike)!} alt="thumbnail" />
+                            <h3>{project.node.frontmatter?.title}</h3>
+                            <p>{project.node.frontmatter?.description}</p>
                         </div>
-                    </div>
+                    </Link>
                 )}
             </div>
         </Layout >
@@ -35,6 +38,7 @@ query HomePage {
   ) {
     edges {
       node {
+        id
         frontmatter {
           language
           dependencies
