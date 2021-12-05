@@ -38,7 +38,7 @@ const Contact: React.FC<ContactProps> = (props) => {
                 <a className={styles.contact} href={linkedin_link}>
                     <div className={styles.content}>
                         <span className={styles.icon} data-type="linkedin"></span>
-                        <p>{github_name}</p>
+                        <p>{linkedin_name}</p>
                     </div>
                 </a>
                 <a className={styles.contact} href={discord_link}>
