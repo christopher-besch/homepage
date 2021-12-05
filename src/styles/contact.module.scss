@@ -65,13 +65,13 @@
 }
 
 /* responsive layout, only two or one element per row */
-@media (max-width: 900px) {
+@media (max-width: 1200px) {
     .contact {
         width: 50%;
     }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 800px) {
     .contact {
         width: 100%;
     }

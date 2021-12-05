@@ -11,14 +11,13 @@ interface ProjectProps {
 const Project: React.FC<ProjectProps> = (props) => {
     const html = props.data.markdownRemark?.html as string;
     const title = props.data.markdownRemark?.frontmatter?.title as string;
-    const start_date = props.data.markdownRemark?.frontmatter?.start_date as string;
+    const date = props.data.markdownRemark?.frontmatter?.date as string;
     const banner = getImage(props.data.markdownRemark?.frontmatter?.banner as ImageDataLike) as IGatsbyImageData;
     return (
-        <Layout>
+        <Layout heading={title}>
             <div className={styles.project}>
                 <GatsbyImage image={banner} alt="project img" />
-                <h1>{title}</h1>
-                <p>{start_date}</p>
+                <p>{date}</p>
                 <div dangerouslySetInnerHTML={{ __html: html }} />
             </div>
         </Layout>
@@ -31,7 +30,7 @@ query ProjectPage($slug: String) {
   markdownRemark(frontmatter: {slug: {eq: $slug}}) {
     html
     frontmatter {
-      start_date(formatString: "MMMM YYYY")
+      date(formatString: "MMMM YYYY")
       title
       banner {
         childImageSharp {

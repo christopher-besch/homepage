@@ -862,7 +862,11 @@ enum FileFieldsEnum {
   childrenMarkdownRemark___id
   childrenMarkdownRemark___frontmatter___title
   childrenMarkdownRemark___frontmatter___slug
-  childrenMarkdownRemark___frontmatter___start_date
+  childrenMarkdownRemark___frontmatter___description
+  childrenMarkdownRemark___frontmatter___priority
+  childrenMarkdownRemark___frontmatter___date
+  childrenMarkdownRemark___frontmatter___language
+  childrenMarkdownRemark___frontmatter___dependencies
   childrenMarkdownRemark___frontmatter___thumb___sourceInstanceName
   childrenMarkdownRemark___frontmatter___thumb___absolutePath
   childrenMarkdownRemark___frontmatter___thumb___relativePath
@@ -994,7 +998,11 @@ enum FileFieldsEnum {
   childMarkdownRemark___id
   childMarkdownRemark___frontmatter___title
   childMarkdownRemark___frontmatter___slug
-  childMarkdownRemark___frontmatter___start_date
+  childMarkdownRemark___frontmatter___description
+  childMarkdownRemark___frontmatter___priority
+  childMarkdownRemark___frontmatter___date
+  childMarkdownRemark___frontmatter___language
+  childMarkdownRemark___frontmatter___dependencies
   childMarkdownRemark___frontmatter___thumb___sourceInstanceName
   childMarkdownRemark___frontmatter___thumb___absolutePath
   childMarkdownRemark___frontmatter___thumb___relativePath
@@ -1888,7 +1896,11 @@ enum MarkdownRemarkFieldsEnum {
   id
   frontmatter___title
   frontmatter___slug
-  frontmatter___start_date
+  frontmatter___description
+  frontmatter___priority
+  frontmatter___date
+  frontmatter___language
+  frontmatter___dependencies
   frontmatter___thumb___sourceInstanceName
   frontmatter___thumb___absolutePath
   frontmatter___thumb___relativePath
@@ -2172,7 +2184,9 @@ input MarkdownRemarkFilterListInput {
 type MarkdownRemarkFrontmatter {
   title: String
   slug: String
-  start_date(
+  description: String
+  priority: Int
+  date(
     """
     Format the date using Moment.js' date tokens, e.g. `date(formatString: "YYYY
     MMMM DD")`. See https://momentjs.com/docs/#/displaying/format/ for
@@ -2193,6 +2207,8 @@ type MarkdownRemarkFrontmatter {
     """Configures the locale Moment.js will use to format the date."""
     locale: String
   ): Date
+  language: [String]
+  dependencies: [String]
   thumb: File
   banner: File
 }
@@ -2200,7 +2216,11 @@ type MarkdownRemarkFrontmatter {
 input MarkdownRemarkFrontmatterFilterInput {
   title: StringQueryOperatorInput
   slug: StringQueryOperatorInput
-  start_date: DateQueryOperatorInput
+  description: StringQueryOperatorInput
+  priority: IntQueryOperatorInput
+  date: DateQueryOperatorInput
+  language: StringQueryOperatorInput
+  dependencies: StringQueryOperatorInput
   thumb: FileFilterInput
   banner: FileFilterInput
 }

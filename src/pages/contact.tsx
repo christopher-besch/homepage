@@ -1,7 +1,6 @@
 import { graphql } from "gatsby";
 import React from "react";
 import Layout from "../components/layout";
-import Heading from "../components/heading";
 
 import * as styles from "../styles/contact.module.scss";
 import { ContactData } from "./__generated__/contact-data";
@@ -23,11 +22,7 @@ const Contact: React.FC<ContactProps> = (props) => {
     const linkedin_link = props.data.site?.siteMetadata?.linkedin?.link as string;
 
     return (
-        <Layout>
-            <Heading>
-                <h1>Contact</h1>
-                <hr />
-            </Heading>
+        <Layout heading="Contact">
             <div className={styles.contacts}>
                 <a className={styles.contact} href={github_link}>
                     <div className={styles.content}>
@@ -56,7 +51,7 @@ const Contact: React.FC<ContactProps> = (props) => {
             </div>
         </Layout>
     );
-}
+};
 export default Contact;
 
 export const query = graphql`

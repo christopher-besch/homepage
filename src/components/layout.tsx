@@ -5,7 +5,11 @@ import "../styles/global.scss";
 import * as styles from "../styles/layout.module.scss";
 import { SiteInfo } from "./__generated__/site-info";
 
-const Layout: React.FC = (props) => {
+interface LayoutProps {
+    heading: string;
+}
+const Layout: React.FC<LayoutProps> = (props) => {
+    const heading = props.heading;
     const data: SiteInfo = useStaticQuery(graphql`
 query SiteInfo {
   site {
@@ -38,19 +42,27 @@ query SiteInfo {
     return (
         <div>
             <nav className={styles.nav}>
-                <div className={styles.logo}>LOGO</div>
+                <div className={styles.logo}>
+                    <h1>Christopher Besch</h1>
+                    <h2>Software Developer&mdash;Problem Solver</h2>
+                </div>
                 <div>
                     <input type="checkbox" id="nav_toggle" />
                     <label htmlFor="nav_toggle" className={styles.hamburger}>&#9776;</label>
                     <div className={styles.nav_menu}>
                         <li><Link to="/">Home</Link></li>
                         <li><Link to="/projects">Projects</Link></li>
+                        <li><Link to="/about">About</Link></li>
                         <li><Link to="/contact">Contact</Link></li>
                     </div>
                 </div>
             </nav >
 
             <div className={styles.content}>
+                <div className={styles.heading}>
+                    <h1>{heading}</h1>
+                    <hr />
+                </div>
                 {props.children}
             </div>
 

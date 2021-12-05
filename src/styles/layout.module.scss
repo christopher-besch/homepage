@@ -21,6 +21,14 @@
 
 .logo {
     margin-left: 30px;
+    font-family: Menlo, monospace;
+}
+.logo h1 {
+    font-size: 24px;
+}
+.logo h2 {
+    margin-top: 5px;
+    font-size: 18px;
 }
 
 .nav_menu li:last-child {
@@ -95,6 +103,23 @@
     .hamburger:hover {
         cursor: pointer;
     }
+}
+
+/* heading */
+.heading h1 {
+    font-size: 50px;
+    /* break at word endings */
+    word-break: break-word;
+}
+
+.heading h2 {
+    margin-top: 10px;
+    font-size: 30px;
+}
+
+.heading hr {
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 /* content */

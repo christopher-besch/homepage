@@ -8,3 +8,4 @@
 - [Footer](https://codepen.io/julesforrest/pen/qLpgNB)
 - [reset.css](https://meyerweb.com/eric/tools/css/reset)
 - [Icons](https://css-tricks.com/change-color-of-svg-on-hover)
+- [Query String](https://github.com/chrisfitkin/gatsby-query-string-demo)
