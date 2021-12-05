@@ -21,6 +21,10 @@ module.exports = {
                 ignore: ["**/__generated__/*"],
             }
         },
+        // support sass
+        {
+            resolve: "gatsby-plugin-sass",
+        },
         // load files from a dir
         {
             resolve: "gatsby-source-filesystem",

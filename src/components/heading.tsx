@@ -1,6 +1,6 @@
 import React from "react";
 
-import * as styles from "../styles/heading.module.css";
+import * as styles from "../styles/heading.module.scss";
 
 const Heading: React.FC = (props) =>
     <div className={styles.heading}>

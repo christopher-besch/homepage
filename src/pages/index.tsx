@@ -1,7 +1,7 @@
 import React from "react";
 import Layout from "../components/layout";
 import Heading from "../components/heading";
-import * as styles from "../styles/home.module.css";
+import * as styles from "../styles/home.module.scss";
 
 const Home: React.FC = () => {
     return (
@@ -14,28 +14,28 @@ const Home: React.FC = () => {
             <div className={styles.projects}>
                 <div className={styles.project}>
                     <div className={styles.content}>
-                        <img src="https://www.w3schools.com/w3images/lights.jpg" alt="broken image" style={{ width: "100%" }} />
+                        <img src="https://www.w3schools.com/w3images/lights.jpg" alt="broken image" />
                         <h3>My Work</h3>
                         <p>I like cheese</p>
                     </div>
                 </div>
                 <div className={styles.project}>
                     <div className={styles.content}>
-                        <img src="https://www.w3schools.com/w3images/lights.jpg" alt="broken image" style={{ width: "100%" }} />
+                        <img src="https://www.w3schools.com/w3images/lights.jpg" alt="broken image" />
                         <h3>My Work</h3>
                         <p>I like cheese</p>
                     </div>
                 </div>
                 <div className={styles.project}>
                     <div className={styles.content}>
-                        <img src="https://www.w3schools.com/w3images/lights.jpg" alt="broken image" style={{ width: "100%" }} />
+                        <img src="https://www.w3schools.com/w3images/lights.jpg" alt="broken image" />
                         <h3>My Work</h3>
                         <p>I like cheese</p>
                     </div>
                 </div>
                 <div className={styles.project}>
                     <div className={styles.content}>
-                        <img src="https://www.w3schools.com/w3images/lights.jpg" alt="broken image" style={{ width: "100%" }} />
+                        <img src="https://www.w3schools.com/w3images/lights.jpg" alt="broken image" />
                         <h3>My Work</h3>
                         <p>I like cheese</p>
                     </div>

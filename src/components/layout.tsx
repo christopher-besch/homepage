@@ -1,8 +1,8 @@
 import { graphql, Link, useStaticQuery } from "gatsby";
 import React from "react";
 
-import "../styles/global.css";
-import * as styles from "../styles/layout.module.css";
+import "../styles/global.scss";
+import * as styles from "../styles/layout.module.scss";
 import { SiteInfo } from "./__generated__/site-info";
 
 const Layout: React.FC = (props) => {

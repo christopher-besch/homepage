@@ -3,7 +3,7 @@ import React from "react";
 import Layout from "../components/layout";
 import Heading from "../components/heading";
 
-import * as styles from "../styles/contact.module.css";
+import * as styles from "../styles/contact.module.scss";
 import { ContactData } from "./__generated__/contact-data";
 
 interface ContactProps {
@@ -12,12 +12,16 @@ interface ContactProps {
 const Contact: React.FC<ContactProps> = (props) => {
     const discord_name = props.data.site?.siteMetadata?.discord?.name as string;
     const discord_link = props.data.site?.siteMetadata?.discord?.link as string;
+
     const email_name = props.data.site?.siteMetadata?.email?.name as string;
     const email_link = props.data.site?.siteMetadata?.email?.link as string;
+
     const github_name = props.data.site?.siteMetadata?.github?.name as string;
     const github_link = props.data.site?.siteMetadata?.github?.link as string;
+
     const linkedin_name = props.data.site?.siteMetadata?.linkedin?.name as string;
     const linkedin_link = props.data.site?.siteMetadata?.linkedin?.link as string;
+
     return (
         <Layout>
             <Heading>
@@ -25,30 +29,30 @@ const Contact: React.FC<ContactProps> = (props) => {
                 <hr />
             </Heading>
             <div className={styles.contacts}>
-                <div className={styles.contact}>
+                <a className={styles.contact} href={github_link}>
                     <div className={styles.content}>
-                        <h3>GitHub</h3>
-                        <a href={github_link}>{github_name}</a>
+                        <span className={styles.icon} data-type="github"></span>
+                        <p>{github_name}</p>
                     </div>
-                </div>
-                <div className={styles.contact}>
+                </a>
+                <a className={styles.contact} href={linkedin_link}>
                     <div className={styles.content}>
-                        <h3>LinkedIn</h3>
-                        <a href={linkedin_link}>{linkedin_name}</a>
+                        <span className={styles.icon} data-type="linkedin"></span>
+                        <p>{github_name}</p>
                     </div>
-                </div>
-                <div className={styles.contact}>
+                </a>
+                <a className={styles.contact} href={discord_link}>
                     <div className={styles.content}>
-                        <h3>Discord</h3>
-                        <a href={discord_link}>{discord_name}</a>
+                        <span className={styles.icon} data-type="discord"></span>
+                        <p>{discord_name}</p>
                     </div>
-                </div>
-                <div className={styles.contact}>
+                </a>
+                <a className={styles.contact} href={email_link}>
                     <div className={styles.content}>
-                        <h3>Mail</h3>
-                        <a href={email_link}>{email_name}</a>
+                        <span className={styles.icon} data-type="email"></span>
+                        <p>{email_name}</p>
                     </div>
-                </div>
+                </a>
             </div>
         </Layout>
     );

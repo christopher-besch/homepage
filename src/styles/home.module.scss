@@ -1,3 +1,5 @@
+@import "colors.scss";
+
 .projects {
     margin: 8px -16px;
     padding: 8px;
@@ -17,7 +19,7 @@
 }
 
 .content {
-    background-color: white;
+    background-color: $back_sec;
     padding: 10px;
 }
 .content h3 {
@@ -26,6 +28,9 @@
 }
 .content p {
     margin-top: 20px;
+}
+.content img {
+    width: 100%;
 }
 
 /* responsive layout, only two or one element per row */
