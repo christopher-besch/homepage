@@ -60,6 +60,10 @@
 }
 
 @media (max-width: 768px) {
+    .hamburger {
+        margin-bottom: 25px;
+    }
+
     .nav_menu {
         display: block;
         position: absolute;
