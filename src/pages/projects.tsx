@@ -5,22 +5,18 @@ import { ProjectsPage } from "./__generated__/projects-page";
 
 import Layout from "../components/layout";
 import * as styles from "../styles/projects.module.scss";
+import { languages } from "../utils/languages";
 
 interface ProjectsProps extends PropsWithLocation {
     data: ProjectsPage;
 }
 const Projects: React.FC<ProjectsProps> = (props) => {
-    const selected_language = props.search.language;
-    const projects = props.data.allMarkdownRemark.edges.map(project => project.node.frontmatter!);
-    for (let project of projects) {
-        console.log(project.dependencies);
-    }
+    const selected_language_id = props.search.language;
+    const all_projects = props.data.allMarkdownRemark.edges.map(project => project.node.frontmatter!);
+    const selected_language = languages.get(selected_language_id as string);
     return (
-        <Layout heading="Public Projects">
-            <p>
-                {selected_language}
-            </p>
-        </Layout>
+        <Layout heading={selected_language ? `${selected_language.name} Projects` : `Projects`} icon={selected_language ? selected_language.icon : undefined}>
+        </Layout >
     );
 };
 export default with_location(Projects);

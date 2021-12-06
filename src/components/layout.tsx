@@ -7,6 +7,7 @@ import { SiteInfo } from "./__generated__/site-info";
 
 interface LayoutProps {
     heading: string;
+    icon?: string;
 }
 const Layout: React.FC<LayoutProps> = (props) => {
     const heading = props.heading;
@@ -60,7 +61,10 @@ query SiteInfo {
 
             <div className={styles.content}>
                 <div className={styles.heading}>
-                    <h1>{heading}</h1>
+                    <h1>
+                        {heading}
+                        {props.icon ? <span className={styles.icon} style={{ maskImage: `url(${props.icon})` }}></span> : undefined}
+                    </h1>
                     <hr />
                 </div>
                 {props.children}

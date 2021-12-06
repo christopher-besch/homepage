@@ -26,25 +26,25 @@ const Contact: React.FC<ContactProps> = (props) => {
             <div className={styles.contacts}>
                 <a className={styles.contact} href={github_link}>
                     <div className={styles.content}>
-                        <span className={styles.icon} data-type="github"></span>
+                        <span className={styles.icon} style={{ maskImage: "url(/icons/github.svg)" }}></span>
                         <p>{github_name}</p>
                     </div>
                 </a>
                 <a className={styles.contact} href={linkedin_link}>
                     <div className={styles.content}>
-                        <span className={styles.icon} data-type="linkedin"></span>
+                        <span className={styles.icon} style={{ maskImage: "url(/icons/linkedin.svg)" }}></span>
                         <p>{linkedin_name}</p>
                     </div>
                 </a>
                 <a className={styles.contact} href={discord_link}>
                     <div className={styles.content}>
-                        <span className={styles.icon} data-type="discord"></span>
+                        <span className={styles.icon} style={{ maskImage: "url(/icons/discord.svg)" }}></span>
                         <p>{discord_name}</p>
                     </div>
                 </a>
                 <a className={styles.contact} href={email_link}>
                     <div className={styles.content}>
-                        <span className={styles.icon} data-type="email"></span>
+                        <span className={styles.icon} style={{ maskImage: "url(/icons/email-svgrepo-com.svg)" }}></span>
                         <p>{email_name}</p>
                     </div>
                 </a>

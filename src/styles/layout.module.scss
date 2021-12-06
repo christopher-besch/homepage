@@ -126,6 +126,18 @@
     margin-bottom: 10px;
 }
 
+.icon {
+    width: 1em;
+    height: 1em;
+    background: $text;
+    float: right;
+
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-mode: alpha;
+}
+
 /* content */
 .content {
     padding: 20px;

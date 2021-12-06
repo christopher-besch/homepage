@@ -33,7 +33,7 @@ export default Home;
 export const query = graphql`
 query HomePage {
   allMarkdownRemark(
-    # filter: {frontmatter: {priority: {gte: 0, lte: 1}}}
+    filter: {frontmatter: {priority: {gte: 0, lte: 1}}}
     sort: {fields: frontmatter___priority, order: ASC}
   ) {
     edges {
@@ -47,7 +47,9 @@ query HomePage {
           title
           thumb {
             childImageSharp {
-              gatsbyImageData
+              gatsbyImageData(
+                placeholder: BLURRED
+              )
             }
           }
         }
