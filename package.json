@@ -6,7 +6,7 @@
     "license": "0BSD",
     "scripts": {
         "build": "node_modules/.bin/gatsby build",
-        "build_github": "node_modules/.bin/gatsby build --prefix-paths homepage",
+        "build_github": "node_modules/.bin/gatsby build --prefix-paths=homepage",
         "develop": "node_modules/.bin/gatsby develop",
         "format": "node_modules/.bin/gatsby prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
         "start": "node_modules/.bin/gatsby develop",
