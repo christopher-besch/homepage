@@ -4,7 +4,7 @@ slug: cryptography
 description: Cryptography Cracking Tool.
 priority: 2
 date: 2020-12-09T00:00:00+00:00
-language: [cpp]
+languages: [cpp]
 dependencies: [gcc, premake]
 thumb: ../images/manim_editor/thumb.png
 banner: ../images/manim_editor/thumb.png

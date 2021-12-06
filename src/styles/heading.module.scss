@@ -1,0 +1,32 @@
+@import "colors.scss";
+
+/* heading */
+.heading h1 {
+    font-size: 50px;
+    /* break at word endings */
+    word-break: break-word;
+}
+
+.heading h2 {
+    margin-top: 10px;
+    font-size: 30px;
+}
+
+.heading hr {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: $text;
+}
+
+.icon {
+    margin-left: 10px;
+    height: 2em;
+    width: 2em;
+    background: $text;
+    float: right;
+
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    mask-position: center;
+}
+

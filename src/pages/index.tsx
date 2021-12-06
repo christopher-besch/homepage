@@ -1,30 +1,20 @@
 import React from "react";
-import Layout from "../components/layout";
-import * as styles from "../styles/home.module.scss";
-import { graphql } from "gatsby";
+import { graphql, Link } from "gatsby";
 import { HomePage } from "./__generated__/home-page";
-import { GatsbyImage, getImage, ImageDataLike } from "gatsby-plugin-image";
-import { Link } from "@reach/router";
+
+import Layout from "../components/layout";
+import ProjectList, { gql_to_project } from "../components/project_list";
+import * as styles from "../styles/home.module.scss";
 
 interface HomeProps {
     data: HomePage
 }
 const Home: React.FC<HomeProps> = (props) => {
-    const projects = props.data.allMarkdownRemark.edges;
+    const projects = props.data.allMarkdownRemark.edges.map(gql_to_project);
 
     return (
         <Layout heading="Flagship Projects">
-            <div className={styles.projects}>
-                {projects.map(project =>
-                    <Link to={`/project/${project.node.frontmatter?.slug}`} key={project.node.id} className={styles.project}>
-                        <div className={styles.content}>
-                            <GatsbyImage image={getImage(project.node.frontmatter?.thumb as ImageDataLike)!} alt="thumbnail" />
-                            <h3>{project.node.frontmatter?.title}</h3>
-                            <p>{project.node.frontmatter?.description}</p>
-                        </div>
-                    </Link>
-                )}
-            </div>
+            <ProjectList projects={projects} />
         </Layout >
     )
 };
@@ -40,7 +30,7 @@ query HomePage {
       node {
         id
         frontmatter {
-          language
+          languages
           dependencies
           slug
           description

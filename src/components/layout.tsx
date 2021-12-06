@@ -1,16 +1,16 @@
 import { graphql, Link, useStaticQuery } from "gatsby";
 import React from "react";
+import { SiteInfo } from "./__generated__/site-info";
 
+import Heading from "./heading";
 import "../styles/global.scss";
 import * as styles from "../styles/layout.module.scss";
-import { SiteInfo } from "./__generated__/site-info";
 
 interface LayoutProps {
     heading: string;
     icon?: string;
 }
 const Layout: React.FC<LayoutProps> = (props) => {
-    const heading = props.heading;
     const data: SiteInfo = useStaticQuery(graphql`
 query SiteInfo {
   site {
@@ -60,13 +60,7 @@ query SiteInfo {
             </nav >
 
             <div className={styles.content}>
-                <div className={styles.heading}>
-                    <h1>
-                        {heading}
-                        {props.icon ? <span className={styles.icon} style={{ maskImage: `url(${props.icon})` }}></span> : undefined}
-                    </h1>
-                    <hr />
-                </div>
+                <Heading heading={props.heading} icon={props.icon} />
                 {props.children}
             </div>
 

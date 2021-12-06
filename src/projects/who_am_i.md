@@ -4,7 +4,7 @@ description: '"Who Am I" game with your friends as characters.'
 slug: who_am_i
 priority: 3
 date: 2021-03-09T00:00:00+00:00
-language: [typescript]
+languages: [typescript]
 dependencies: [bootstrap]
 thumb: ../images/manim_editor/thumb.png
 banner: ../images/manim_editor/thumb.png

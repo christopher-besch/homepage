@@ -865,7 +865,7 @@ enum FileFieldsEnum {
   childrenMarkdownRemark___frontmatter___description
   childrenMarkdownRemark___frontmatter___priority
   childrenMarkdownRemark___frontmatter___date
-  childrenMarkdownRemark___frontmatter___language
+  childrenMarkdownRemark___frontmatter___languages
   childrenMarkdownRemark___frontmatter___dependencies
   childrenMarkdownRemark___frontmatter___thumb___sourceInstanceName
   childrenMarkdownRemark___frontmatter___thumb___absolutePath
@@ -1001,7 +1001,7 @@ enum FileFieldsEnum {
   childMarkdownRemark___frontmatter___description
   childMarkdownRemark___frontmatter___priority
   childMarkdownRemark___frontmatter___date
-  childMarkdownRemark___frontmatter___language
+  childMarkdownRemark___frontmatter___languages
   childMarkdownRemark___frontmatter___dependencies
   childMarkdownRemark___frontmatter___thumb___sourceInstanceName
   childMarkdownRemark___frontmatter___thumb___absolutePath
@@ -1899,7 +1899,7 @@ enum MarkdownRemarkFieldsEnum {
   frontmatter___description
   frontmatter___priority
   frontmatter___date
-  frontmatter___language
+  frontmatter___languages
   frontmatter___dependencies
   frontmatter___thumb___sourceInstanceName
   frontmatter___thumb___absolutePath
@@ -2207,7 +2207,7 @@ type MarkdownRemarkFrontmatter {
     """Configures the locale Moment.js will use to format the date."""
     locale: String
   ): Date
-  language: [String]
+  languages: [String]
   dependencies: [String]
   thumb: File
   banner: File
@@ -2219,7 +2219,7 @@ input MarkdownRemarkFrontmatterFilterInput {
   description: StringQueryOperatorInput
   priority: IntQueryOperatorInput
   date: DateQueryOperatorInput
-  language: StringQueryOperatorInput
+  languages: StringQueryOperatorInput
   dependencies: StringQueryOperatorInput
   thumb: FileFilterInput
   banner: FileFilterInput
@@ -2316,7 +2316,7 @@ type Query {
   allFile(filter: FileFilterInput, sort: FileSortInput, skip: Int, limit: Int): FileConnection!
   directory(sourceInstanceName: StringQueryOperatorInput, absolutePath: StringQueryOperatorInput, relativePath: StringQueryOperatorInput, extension: StringQueryOperatorInput, size: IntQueryOperatorInput, prettySize: StringQueryOperatorInput, modifiedTime: DateQueryOperatorInput, accessTime: DateQueryOperatorInput, changeTime: DateQueryOperatorInput, birthTime: DateQueryOperatorInput, root: StringQueryOperatorInput, dir: StringQueryOperatorInput, base: StringQueryOperatorInput, ext: StringQueryOperatorInput, name: StringQueryOperatorInput, relativeDirectory: StringQueryOperatorInput, dev: IntQueryOperatorInput, mode: IntQueryOperatorInput, nlink: IntQueryOperatorInput, uid: IntQueryOperatorInput, gid: IntQueryOperatorInput, rdev: IntQueryOperatorInput, ino: FloatQueryOperatorInput, atimeMs: FloatQueryOperatorInput, mtimeMs: FloatQueryOperatorInput, ctimeMs: FloatQueryOperatorInput, atime: DateQueryOperatorInput, mtime: DateQueryOperatorInput, ctime: DateQueryOperatorInput, birthtime: DateQueryOperatorInput, birthtimeMs: FloatQueryOperatorInput, id: StringQueryOperatorInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput): Directory
   allDirectory(filter: DirectoryFilterInput, sort: DirectorySortInput, skip: Int, limit: Int): DirectoryConnection!
-  site(buildTime: DateQueryOperatorInput, siteMetadata: SiteSiteMetadataFilterInput, port: IntQueryOperatorInput, host: StringQueryOperatorInput, polyfill: BooleanQueryOperatorInput, pathPrefix: StringQueryOperatorInput, jsxRuntime: StringQueryOperatorInput, id: StringQueryOperatorInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput): Site
+  site(buildTime: DateQueryOperatorInput, siteMetadata: SiteSiteMetadataFilterInput, port: IntQueryOperatorInput, host: StringQueryOperatorInput, pathPrefix: StringQueryOperatorInput, polyfill: BooleanQueryOperatorInput, jsxRuntime: StringQueryOperatorInput, id: StringQueryOperatorInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput): Site
   allSite(filter: SiteFilterInput, sort: SiteSortInput, skip: Int, limit: Int): SiteConnection!
   siteFunction(functionRoute: StringQueryOperatorInput, pluginName: StringQueryOperatorInput, originalAbsoluteFilePath: StringQueryOperatorInput, originalRelativeFilePath: StringQueryOperatorInput, relativeCompiledFilePath: StringQueryOperatorInput, absoluteCompiledFilePath: StringQueryOperatorInput, matchPath: StringQueryOperatorInput, id: StringQueryOperatorInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput): SiteFunction
   allSiteFunction(filter: SiteFunctionFilterInput, sort: SiteFunctionSortInput, skip: Int, limit: Int): SiteFunctionConnection!
@@ -2357,8 +2357,8 @@ type Site implements Node {
   siteMetadata: SiteSiteMetadata
   port: Int
   host: String
-  polyfill: Boolean
   pathPrefix: String
+  polyfill: Boolean
   jsxRuntime: String
   id: ID!
   parent: Node
@@ -2561,8 +2561,8 @@ enum SiteFieldsEnum {
   siteMetadata___discord___link
   port
   host
-  polyfill
   pathPrefix
+  polyfill
   jsxRuntime
   id
   parent___id
@@ -2657,8 +2657,8 @@ input SiteFilterInput {
   siteMetadata: SiteSiteMetadataFilterInput
   port: IntQueryOperatorInput
   host: StringQueryOperatorInput
-  polyfill: BooleanQueryOperatorInput
   pathPrefix: StringQueryOperatorInput
+  polyfill: BooleanQueryOperatorInput
   jsxRuntime: StringQueryOperatorInput
   id: StringQueryOperatorInput
   parent: NodeFilterInput
