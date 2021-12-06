@@ -1,6 +1,7 @@
 const path = require("path");
 
 module.exports = {
+    pathPrefix: "/homepage",
     plugins: [
         // support TypeScript
         {
