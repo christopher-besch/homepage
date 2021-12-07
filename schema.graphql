@@ -861,8 +861,9 @@ enum FileFieldsEnum {
   childrenMarkdownRemark
   childrenMarkdownRemark___id
   childrenMarkdownRemark___frontmatter___title
-  childrenMarkdownRemark___frontmatter___slug
   childrenMarkdownRemark___frontmatter___description
+  childrenMarkdownRemark___frontmatter___slug
+  childrenMarkdownRemark___frontmatter___link
   childrenMarkdownRemark___frontmatter___priority
   childrenMarkdownRemark___frontmatter___date
   childrenMarkdownRemark___frontmatter___languages
@@ -997,8 +998,9 @@ enum FileFieldsEnum {
   childrenMarkdownRemark___internal___type @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
   childMarkdownRemark___id
   childMarkdownRemark___frontmatter___title
-  childMarkdownRemark___frontmatter___slug
   childMarkdownRemark___frontmatter___description
+  childMarkdownRemark___frontmatter___slug
+  childMarkdownRemark___frontmatter___link
   childMarkdownRemark___frontmatter___priority
   childMarkdownRemark___frontmatter___date
   childMarkdownRemark___frontmatter___languages
@@ -1895,8 +1897,9 @@ type MarkdownRemarkEdge {
 enum MarkdownRemarkFieldsEnum {
   id
   frontmatter___title
-  frontmatter___slug
   frontmatter___description
+  frontmatter___slug
+  frontmatter___link
   frontmatter___priority
   frontmatter___date
   frontmatter___languages
@@ -2183,8 +2186,9 @@ input MarkdownRemarkFilterListInput {
 
 type MarkdownRemarkFrontmatter {
   title: String
-  slug: String
   description: String
+  slug: String
+  link: String
   priority: Int
   date(
     """
@@ -2215,8 +2219,9 @@ type MarkdownRemarkFrontmatter {
 
 input MarkdownRemarkFrontmatterFilterInput {
   title: StringQueryOperatorInput
-  slug: StringQueryOperatorInput
   description: StringQueryOperatorInput
+  slug: StringQueryOperatorInput
+  link: StringQueryOperatorInput
   priority: IntQueryOperatorInput
   date: DateQueryOperatorInput
   languages: StringQueryOperatorInput

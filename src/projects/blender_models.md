@@ -1,6 +1,6 @@
 ---
 title: Blender Models
-description: 3D MOdels created with Blender.
+description: 3D Models created with Blender.
 slug: blender_models
 link: https://github.com/christopher-besch/blender_models
 priority: 8

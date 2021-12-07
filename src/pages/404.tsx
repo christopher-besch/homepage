@@ -1,5 +1,5 @@
 import React from "react";
-import Layout from "../components/layout";
+import Layout from "src/components/layout";
 
 const NotFound: React.FC = () =>
     <Layout heading="404 Not Found">

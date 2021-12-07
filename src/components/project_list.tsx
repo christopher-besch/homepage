@@ -2,11 +2,13 @@ import { getImage, GatsbyImage, IGatsbyImageData, ImageDataLike } from "gatsby-p
 import React from "react";
 import { Link } from "gatsby";
 
-import * as styles from "../styles/project_list.module.scss";
+import * as styles from "src/styles/project_list.module.scss";
+import { Language, languages } from "src/utils/languages";
 
 export type Project = {
     id: number;
-    languages: string;
+    date: string;
+    languages: Language[];
     priority: number;
     dependencies: string[];
     description: string;
@@ -18,7 +20,8 @@ export type Project = {
 export function gql_to_project(project: any): Project {
     return {
         id: project.node.id,
-        languages: project.node.frontmatter?.languages,
+        date: project.node.frontmatter?.date,
+        languages: project.node.frontmatter?.languages.map((language: string) => languages.get(language)),
         priority: parseInt(project.node.frontmatter?.priority),
         dependencies: project.node.frontmatter?.dependencies,
         description: project.node.frontmatter?.description,
@@ -36,8 +39,16 @@ const ProjectList: React.FC<ProjectListProps> = (props) =>
         {props.projects.map(project =>
             <Link to={`/project/${project.slug}`} key={project.id} className={styles.project}>
                 <div className={styles.content}>
-                    <GatsbyImage image={project.thumb} alt="thumbnail" />
-                    <h3>{project.title} - {project.priority}</h3>
+                    <div className={styles.image}>
+                        <GatsbyImage image={project.thumb} alt="thumbnail" />
+                        <div className={styles.overlay}>
+                            {project.languages.map(language =>
+                                <div className={styles.language_icon} style={{ maskImage: `url(${language.icon_mono})` }}></div>
+                            )}
+                        </div>
+                    </div>
+                    <h3>{project.title} {project.priority}<br />{project.date}</h3>
+                    {/* <h3>{project.title}</h3> */}
                     <p>{project.description}</p>
                 </div>
             </Link>

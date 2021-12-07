@@ -2,9 +2,9 @@ import { graphql, Link, useStaticQuery } from "gatsby";
 import React from "react";
 import { SiteInfo } from "./__generated__/site-info";
 
-import Heading from "./heading";
-import "../styles/global.scss";
-import * as styles from "../styles/layout.module.scss";
+import Heading from "src/components/heading";
+import "src/styles/global.scss";
+import * as styles from "src/styles/layout.module.scss";
 
 interface LayoutProps {
     heading: string;

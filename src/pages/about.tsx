@@ -1,6 +1,6 @@
 import React from "react";
-import Layout from "../components/layout";
-import * as styles from "../styles/about.module.scss";
+import Layout from "src/components/layout";
+import * as styles from "src/styles/about.module.scss";
 
 const About: React.FC = (props) => {
     return (

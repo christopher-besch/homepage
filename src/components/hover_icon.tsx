@@ -1,6 +1,6 @@
 import React from "react";
 
-import * as styles from "../styles/hover_icon.module.scss";
+import * as styles from "src/styles/hover_icon.module.scss";
 
 interface HoverIconProps {
     icon: string;

@@ -2,9 +2,9 @@ import React from "react";
 import { graphql, Link } from "gatsby";
 import { HomePage } from "./__generated__/home-page";
 
-import Layout from "../components/layout";
-import ProjectList, { gql_to_project } from "../components/project_list";
-import * as styles from "../styles/home.module.scss";
+import Layout from "src/components/layout";
+import ProjectList, { gql_to_project } from "src/components/project_list";
+import * as styles from "src/styles/home.module.scss";
 import Heading from "src/components/heading";
 import HoverIcon from "src/components/hover_icon";
 
@@ -17,7 +17,7 @@ const Home: React.FC<HomeProps> = (props) => {
     return (
         <Layout heading="Flagship Projects">
             <ProjectList projects={projects} />
-            <Heading heading="Languages" />
+            <Heading heading="Main Languages" />
             <div className={styles.languages}>
                 <Link to="/projects?language=cpp" className={styles.language}>
                     <HoverIcon className={styles.icon} icon="/icons/c-plusplus.svg" icon_mono="/icons/c-plusplus_mono.svg" />
@@ -52,11 +52,12 @@ query HomePage {
           title
           thumb {
             childImageSharp {
-              gatsbyImageData(
+              gatsbyImageData (
                 placeholder: BLURRED
               )
             }
           }
+          date(formatString: "MMMM YYYY")
         }
       }
     }

@@ -1,7 +1,7 @@
 import React from "react";
-import Layout from "../components/layout";
+import Layout from "src/components/layout";
 import { GatsbyImage, getImage, ImageDataLike } from "gatsby-plugin-image";
-import * as styles from "../styles/project.module.scss";
+import * as styles from "src/styles/project.module.scss";
 import { graphql } from "gatsby";
 import { ProjectPage } from "./__generated__/project-page";
 

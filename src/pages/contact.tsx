@@ -1,8 +1,8 @@
 import { graphql } from "gatsby";
 import React from "react";
-import Layout from "../components/layout";
+import Layout from "src/components/layout";
 
-import * as styles from "../styles/contact.module.scss";
+import * as styles from "src/styles/contact.module.scss";
 import { ContactData } from "./__generated__/contact-data";
 
 interface ContactProps {

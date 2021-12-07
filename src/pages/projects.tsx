@@ -2,11 +2,11 @@ import React from "react";
 import { Link, graphql } from "gatsby";
 import { ProjectsPage } from "./__generated__/projects-page";
 
-import { PropsWithLocation, with_location } from "../components/with_location";
-import Layout from "../components/layout";
-import ProjectList, { gql_to_project } from "../components/project_list";
-import * as styles from "../styles/projects.module.scss";
-import { languages } from "../utils/languages";
+import { PropsWithLocation, with_location } from "src/components/with_location";
+import Layout from "src/components/layout";
+import ProjectList, { gql_to_project } from "src/components/project_list";
+import * as styles from "src/styles/projects.module.scss";
+import { languages } from "src/utils/languages";
 import Heading from "src/components/heading";
 
 interface ProjectsProps extends PropsWithLocation {
@@ -21,10 +21,10 @@ const Projects: React.FC<ProjectsProps> = (props) => {
 
     if (selected_language)
         return (
-            <Layout heading={`${selected_language.name} Projects`} icon={selected_language.icon}>
-                <ProjectList projects={projects.filter(project => project.languages.includes(selected_language.id))} />
+            <Layout heading={`${selected_language.name} Projects`} icon={selected_language.icon_mono}>
+                <ProjectList projects={all_projects.filter(project => project.languages.includes(selected_language))} />
                 <Heading heading="Other Projects" />
-                <ProjectList projects={projects.filter(project => !project.languages.includes(selected_language.id))} />
+                <ProjectList projects={projects.filter(project => !project.languages.includes(selected_language))} />
             </Layout >);
     else return (
         <Layout heading={`${max_priority >= 100 ? "All " : ""}Projects`}>
@@ -45,14 +45,17 @@ query ProjectsPage {
           languages
           priority
           dependencies
-          description
           slug
+          description
           title
           thumb {
             childImageSharp {
-              gatsbyImageData
+              gatsbyImageData (
+                placeholder: BLURRED
+              )
             }
           }
+          date(formatString: "MMMM YYYY")
         }
       }
     }

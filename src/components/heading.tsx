@@ -1,6 +1,6 @@
 import React from "react";
 
-import * as styles from "../styles/heading.module.scss";
+import * as styles from "src/styles/heading.module.scss";
 
 interface HeadingProps {
     heading: string;
