@@ -1,1 +1,30 @@
 @import "colors.scss";
+
+.languages {
+    margin: 8px -16px;
+    padding: 8px;
+}
+
+.languages::after {
+    /* clear floats afterwards */
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.language {
+    float: left;
+    width: 33%;
+    font-size: 20vh;
+    text-align: center;
+}
+
+.icon {
+    display: inline-block;
+}
+
+@media (max-width: 600px) {
+    .language {
+        width: 100%;
+    }
+}

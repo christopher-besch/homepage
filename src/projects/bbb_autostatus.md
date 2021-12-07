@@ -1,5 +1,5 @@
 ---
-title: Big Blue Button Autostatus
+title: BBB Autostatus
 slug: bbb_autostatus
 description: Firefox Extension Simulating Human Interaction in Video Conferences.
 priority: 3
