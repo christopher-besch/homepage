@@ -45,6 +45,7 @@ query HomePage {
         id
         frontmatter {
           languages
+          priority
           dependencies
           slug
           description

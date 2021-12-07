@@ -1,1 +1,13 @@
 @import "colors.scss";
+
+.link {
+    display: inline-block;
+    background: $back_sec;
+    padding: 10px 16px;
+    border-radius: 1px;
+    font-weight: 500;
+}
+
+.link:hover {
+    background-color: $link_hover;
+}
