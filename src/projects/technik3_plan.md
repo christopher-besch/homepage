@@ -8,6 +8,5 @@ date: 2019-02-27T00:00:00+00:00
 languages: [python]
 dependencies: []
 thumb: ../images/manim_editor/thumb.png
-banner: ../images/manim_editor/thumb.png
 ---
 

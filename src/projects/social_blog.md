@@ -8,6 +8,5 @@ date: 2020-10-08T00:00:00+00:00
 languages: [java]
 dependencies: [sqllite, spark, maven]
 thumb: ../images/manim_editor/thumb.png
-banner: ../images/manim_editor/thumb.png
 ---
 

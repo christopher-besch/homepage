@@ -8,6 +8,5 @@ date: 2020-12-22T00:00:00+00:00
 languages: [cpp]
 dependencies: []
 thumb: ../images/manim_editor/thumb.png
-banner: ../images/manim_editor/thumb.png
 ---
 

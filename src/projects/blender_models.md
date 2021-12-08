@@ -8,6 +8,5 @@ date: 2020-05-14T00:00:00+00:00
 languages: []
 dependencies: [blender]
 thumb: ../images/manim_editor/thumb.png
-banner: ../images/manim_editor/thumb.png
 ---
 

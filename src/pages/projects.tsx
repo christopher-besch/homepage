@@ -46,6 +46,7 @@ query ProjectsPage {
           priority
           dependencies
           slug
+          link
           description
           title
           thumb {

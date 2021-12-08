@@ -48,6 +48,7 @@ query HomePage {
           priority
           dependencies
           slug
+          link
           description
           title
           thumb {
