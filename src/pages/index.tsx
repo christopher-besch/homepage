@@ -19,13 +19,13 @@ const Home: React.FC<HomeProps> = (props) => {
             <ProjectList projects={projects} />
             <Heading heading="Main Languages" />
             <div className={styles.languages}>
-                <Link to="/projects?language=cpp" className={styles.language}>
+                <Link to="/projects/cpp" className={styles.language}>
                     <HoverIcon className={styles.icon} icon="/icons/c-plusplus.svg" icon_mono="/icons/c-plusplus_mono.svg" />
                 </Link>
-                <Link to="/projects?language=typescript" className={styles.language}>
+                <Link to="/projects/typescript" className={styles.language}>
                     <HoverIcon className={styles.icon} icon="/icons/typescript-icon.svg" icon_mono="/icons/typescript-icon_mono.svg" />
                 </Link>
-                <Link to="/projects?language=python" className={styles.language}>
+                <Link to="/projects/python" className={styles.language}>
                     <HoverIcon className={styles.icon} icon="/icons/python.svg" />
                 </Link>
             </div>

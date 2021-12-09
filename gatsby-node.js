@@ -1,27 +1,28 @@
 const path = require("path");
 
 exports.createPages = async ({ graphql, actions }) => {
-    const { data } = await graphql(`
-query Projects {
-  allMarkdownRemark {
-    nodes {
-      frontmatter {
-        slug
-      }
-    }
-  }
-}
-    `);
+    // TODO: ridiculousness to be removed with typescript
+    const languages = ["python", "cpp", "typescript", "java"];
 
-    data.allMarkdownRemark.nodes.forEach(node => {
+    languages.forEach(language => {
         actions.createPage({
-            path: `project/${node.frontmatter.slug}`,
-            component: path.resolve("./src/templates/project.tsx"),
+            path: `projects/${language}`,
+            component: path.resolve("./src/templates/projects_language.tsx"),
             context: {
-                slug: node.frontmatter.slug,
+                language: language,
             },
         })
-
     });
+
+    // data.allMarkdownRemark.nodes.forEach(node => {
+    //     actions.createPage({
+    //         path: `project/${node.frontmatter.slug}`,
+    //         component: path.resolve("./src/templates/project.tsx"),
+    //         context: {
+    //             slug: node.frontmatter.slug,
+    //         },
+    //     })
+
+    // });
 
 }
