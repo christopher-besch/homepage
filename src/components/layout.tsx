@@ -50,12 +50,12 @@ query SiteInfo {
                 <div>
                     <input type="checkbox" id="nav_toggle" />
                     <label htmlFor="nav_toggle" className={styles.hamburger}>&#9776;</label>
-                    <div className={styles.nav_menu}>
+                    <ul className={styles.nav_menu}>
                         <li><Link to="/">Home</Link></li>
                         <li><Link to="/projects">Projects</Link></li>
                         <li><Link to="/about">About</Link></li>
                         <li><Link to="/contact">Contact</Link></li>
-                    </div>
+                    </ul>
                 </div>
             </nav >
 

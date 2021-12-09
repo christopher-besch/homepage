@@ -20,13 +20,13 @@ const Home: React.FC<HomeProps> = (props) => {
             <Heading heading="Main Languages" />
             <div className={styles.languages}>
                 <Link to="/projects/cpp" className={styles.language}>
-                    <HoverIcon className={styles.icon} icon="/icons/c-plusplus.svg" icon_mono="/icons/c-plusplus_mono.svg" />
+                    <HoverIcon className={styles.icon} icon="/icons/c-plusplus.svg" icon_mono="/icons/c-plusplus_mono.svg" alt="C++" />
                 </Link>
                 <Link to="/projects/typescript" className={styles.language}>
-                    <HoverIcon className={styles.icon} icon="/icons/typescript-icon.svg" icon_mono="/icons/typescript-icon_mono.svg" />
+                    <HoverIcon className={styles.icon} icon="/icons/typescript-icon.svg" icon_mono="/icons/typescript-icon_mono.svg" alt="TypeScript" />
                 </Link>
                 <Link to="/projects/python" className={styles.language}>
-                    <HoverIcon className={styles.icon} icon="/icons/python.svg" />
+                    <HoverIcon className={styles.icon} icon="/icons/python.svg" alt="Python" />
                 </Link>
             </div>
         </Layout>
