@@ -14,4 +14,4 @@
 
 - [Benjamin Hackl](https://benjamin-hackl.at)
 - [Aatish Bhatia](https://aatishb.com)
-- [LEMMIiNO](https://www.lemmi.no)
+- [LEMMiNO](https://www.lemmi.no)
