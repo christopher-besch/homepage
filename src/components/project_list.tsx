@@ -1,9 +1,9 @@
 import { getImage, GatsbyImage, IGatsbyImageData, ImageDataLike } from "gatsby-plugin-image";
 import React from "react";
-import { Link } from "gatsby";
 
 import * as styles from "src/styles/project_list.module.scss";
 import { Language, languages } from "src/utils/languages";
+import get_mask from "src/utils/svg_mask";
 
 export type Project = {
     id: number;
@@ -39,20 +39,25 @@ interface ProjectListProps {
 const ProjectList: React.FC<ProjectListProps> = (props) =>
     <div className={styles.projects}>
         {props.projects.map(project =>
-            <Link to={project.link} key={project.id} className={styles.project}>
+            // TODO: can't link same project twice <- non-unique key
+            <a href={project.link} key={`${project.id}`} className={styles.project}>
                 <div className={styles.content}>
                     <div className={styles.image}>
                         <GatsbyImage image={project.thumb} alt="thumbnail" />
                         <div className={styles.overlay}>
                             {project.languages.map(language =>
-                                <div className={styles.language_icon} style={{ maskImage: `url(${language.icon_mono})` }}></div>
+                                <div
+                                    className={styles.language_icon}
+                                    style={get_mask(language.icon_mono)}
+                                    key={`${project.id}${language.id}`}
+                                ></div>
                             )}
                         </div>
                     </div>
                     <h3>{project.title}</h3>
                     <p>{project.description}</p>
                 </div>
-            </Link>
+            </a>
         )}
     </div>;
 export default ProjectList;

@@ -2,7 +2,7 @@ import React from "react";
 import { Link, graphql } from "gatsby";
 import { ProjectsPage } from "./__generated__/projects-page";
 
-import { PropsWithLocation, with_location } from "src/components/with_location";
+import { PropsWithLocation, with_location } from "src/utils/with_location";
 import Layout from "src/components/layout";
 import ProjectList, { gql_to_project } from "src/components/project_list";
 import * as styles from "src/styles/projects.module.scss";

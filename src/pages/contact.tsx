@@ -4,6 +4,7 @@ import Layout from "src/components/layout";
 
 import * as styles from "src/styles/contact.module.scss";
 import { ContactData } from "./__generated__/contact-data";
+import get_mask from "src/utils/svg_mask";
 
 interface ContactProps {
     data: ContactData;
@@ -26,25 +27,25 @@ const Contact: React.FC<ContactProps> = (props) => {
             <div className={styles.contacts}>
                 <a className={styles.contact} href={github_link}>
                     <div className={styles.content}>
-                        <span className={styles.icon} style={{ maskImage: "url(/icons/github.svg)" }}></span>
+                        <span className={styles.icon} style={get_mask("/icons/github.svg")}></span>
                         <p>{github_name}</p>
                     </div>
                 </a>
                 <a className={styles.contact} href={linkedin_link}>
                     <div className={styles.content}>
-                        <span className={styles.icon} style={{ maskImage: "url(/icons/linkedin.svg)" }}></span>
+                        <span className={styles.icon} style={get_mask("/icons/linkedin.svg")}></span>
                         <p>{linkedin_name}</p>
                     </div>
                 </a>
                 <a className={styles.contact} href={discord_link}>
                     <div className={styles.content}>
-                        <span className={styles.icon} style={{ maskImage: "url(/icons/discord.svg)" }}></span>
+                        <span className={styles.icon} style={get_mask("/icons/discord.svg")}></span>
                         <p>{discord_name}</p>
                     </div>
                 </a>
                 <a className={styles.contact} href={email_link}>
                     <div className={styles.content}>
-                        <span className={styles.icon} style={{ maskImage: "url(/icons/email-svgrepo-com.svg)" }}></span>
+                        <span className={styles.icon} style={get_mask("/icons/email-svgrepo-com.svg")}></span>
                         <p>{email_name}</p>
                     </div>
                 </a>

@@ -45,7 +45,7 @@ query SiteInfo {
             <nav className={styles.nav}>
                 <div className={styles.logo}>
                     <h1>Christopher Besch</h1>
-                    <h2>Software Developer&mdash;Problem Solver</h2>
+                    <h2>Software Developer &mdash; Problem Solver</h2>
                 </div>
                 <div>
                     <input type="checkbox" id="nav_toggle" />
