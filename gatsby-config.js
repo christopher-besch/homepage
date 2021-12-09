@@ -66,6 +66,10 @@ module.exports = {
                 ]
             }
         },
+        // support custom header
+        {
+            resolve: "gatsby-plugin-react-helmet",
+        },
     ],
     // can be loaded from page with GraphQL
     siteMetadata: {
@@ -85,5 +89,6 @@ module.exports = {
             name: "Stromel#1046",
             link: "https://discord.com/users/455374552352948236",
         },
+        address: "https://dev.chris-besch.codes",
     },
 }

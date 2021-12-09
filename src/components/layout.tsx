@@ -1,6 +1,7 @@
 import { graphql, Link, useStaticQuery } from "gatsby";
 import React from "react";
 import { SiteInfo } from "./__generated__/site-info";
+import { Helmet } from "react-helmet";
 
 import Heading from "src/components/heading";
 import "src/styles/global.scss";
@@ -31,6 +32,7 @@ query SiteInfo {
         name
         link
       }
+      address
     }
   }
 }
@@ -40,8 +42,18 @@ query SiteInfo {
     const github = data.site?.siteMetadata?.github?.link as string;
     const linkedin = data.site?.siteMetadata?.linkedin?.link as string;
 
+    const address = data.site?.siteMetadata?.address as string;
+
     return (
         <div>
+            <Helmet htmlAttributes={{ lang: "en" }}>
+                <meta charSet="utf-8" />
+                <meta property="description" content="Christopher Besch - Software Devoper" />
+                {/* TODO: add social preview */}
+                {/* <meta property="og:image" image=""/> */}
+                <title>Christopher Besch</title>
+                <link rel="canonical" href={address} />
+            </Helmet>
             <nav className={styles.nav}>
                 <div className={styles.logo}>
                     <h1>Christopher Besch</h1>

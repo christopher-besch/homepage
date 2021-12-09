@@ -2564,6 +2564,7 @@ enum SiteFieldsEnum {
   siteMetadata___linkedin___link
   siteMetadata___discord___name
   siteMetadata___discord___link
+  siteMetadata___address
   port
   host
   pathPrefix
@@ -3227,6 +3228,7 @@ type SiteSiteMetadata {
   github: SiteSiteMetadataGithub
   linkedin: SiteSiteMetadataLinkedin
   discord: SiteSiteMetadataDiscord
+  address: String
 }
 
 type SiteSiteMetadataDiscord {
@@ -3256,6 +3258,7 @@ input SiteSiteMetadataFilterInput {
   github: SiteSiteMetadataGithubFilterInput
   linkedin: SiteSiteMetadataLinkedinFilterInput
   discord: SiteSiteMetadataDiscordFilterInput
+  address: StringQueryOperatorInput
 }
 
 type SiteSiteMetadataGithub {

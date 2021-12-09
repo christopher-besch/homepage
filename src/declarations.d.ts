@@ -5,4 +5,6 @@ interface CSSModule {
 declare module '*.module.scss' {
     const cssModule: CSSModule
     export = cssModule
-}
+};
+
+declare module "react-helmet";
