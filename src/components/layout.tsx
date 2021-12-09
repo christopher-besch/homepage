@@ -48,7 +48,7 @@ query SiteInfo {
         <div>
             <Helmet htmlAttributes={{ lang: "en" }}>
                 <meta charSet="utf-8" />
-                <meta property="og:description" content="Software Devoper - Problem Solver" />
+                <meta property="og:description" content="Christopher Besch - Software Devoper" />
                 <meta name="description" content="Software Devoper - Problem Solver" />
                 {/* TODO: add social preview */}
                 {/* <meta property="og:image" image=""/> */}
