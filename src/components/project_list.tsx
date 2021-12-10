@@ -36,28 +36,30 @@ export function gql_to_project(project: any): Project {
 interface ProjectListProps {
     projects: Project[];
 }
-const ProjectList: React.FC<ProjectListProps> = (props) =>
-    <div className={styles.projects}>
-        {props.projects.map(project =>
-            // TODO: can't link same project twice <- non-unique key
-            <a href={project.link} key={`${project.id}`} className={styles.project}>
-                <div className={styles.content}>
-                    <div className={styles.image}>
-                        <GatsbyImage image={project.thumb} alt="thumbnail" />
-                        <div className={styles.overlay}>
-                            {project.languages.map(language =>
-                                <div
-                                    className={styles.language_icon}
-                                    style={get_mask(language.icon_mono)}
-                                    key={`${project.id}${language.id}`}
-                                ></div>
-                            )}
+const ProjectList: React.FC<ProjectListProps> = (props) => {
+    return (
+        <div className={styles.projects}>
+            {props.projects.map(project =>
+                // TODO: can't link same project twice <- non-unique key
+                <a href={project.link} key={`${project.id}`} className={styles.project}>
+                    <div className={styles.content}>
+                        <div className={styles.image}>
+                            <GatsbyImage image={project.thumb} alt="thumbnail" />
+                            <div className={styles.overlay}>
+                                {project.languages.map(language =>
+                                    <div
+                                        className={styles.language_icon}
+                                        style={get_mask(language.icon_mono)}
+                                        key={`${project.id}${language.id}`}
+                                    ></div>
+                                )}
+                            </div>
                         </div>
+                        <h3>{project.title}</h3>
+                        <p>{project.description}</p>
                     </div>
-                    <h3>{project.title}</h3>
-                    <p>{project.description}</p>
-                </div>
-            </a>
-        )}
-    </div>;
+                </a>
+            )}
+        </div>);
+};
 export default ProjectList;

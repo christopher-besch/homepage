@@ -35,13 +35,12 @@ query ProjectsPage {
           priority
           dependencies
           slug
+          link
           description
           title
           thumb {
             childImageSharp {
-              gatsbyImageData (
-                placeholder: BLURRED
-              )
+              gatsbyImageData(placeholder: BLURRED)
             }
           }
           date(formatString: "MMMM YYYY")
