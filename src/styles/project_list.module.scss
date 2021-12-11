@@ -20,7 +20,7 @@
 .project {
     padding: 8px;
     float: left;
-    width: 25%;
+    width: var(--full-width);
     text-decoration: none;
 }
 
@@ -73,12 +73,12 @@
 /* responsive layout, only two or one element per row */
 @media (max-width: 1000px) {
     .project {
-        width: 50%;
+        width: var(--half-width);
     }
 }
 
 @media (max-width: 600px) {
     .project {
-        width: 100%;
+        width: var(--quarter-width);
     }
 }

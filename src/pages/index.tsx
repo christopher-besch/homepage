@@ -15,22 +15,26 @@ const Home: React.FC<HomeProps> = (props) => {
     const projects = props.data.allMarkdownRemark.edges.map(gql_to_project);
 
     return (
-        <Layout heading="Flagship Projects">
-            <ProjectList projects={projects} />
-            <Heading heading="Main Languages" />
-            <div className={styles.languages}>
-                <Link to="/projects/cpp" className={styles.language}>
-                    <HoverIcon className={styles.icon} icon="/icons/c-plusplus.svg" icon_mono="/icons/c-plusplus_mono.svg" alt="C++" />
-                </Link>
-                <Link to="/projects/typescript" className={styles.language}>
-                    <HoverIcon className={styles.icon} icon="/icons/typescript-icon.svg" icon_mono="/icons/typescript-icon_mono.svg" alt="TypeScript" />
-                </Link>
-                <Link to="/projects/python" className={styles.language}>
-                    <HoverIcon className={styles.icon} icon="/icons/python.svg" alt="Python" />
-                </Link>
+        <Layout>
+            <Heading heading="Hello smart people!" sub_heading="I Solve Problems." />
+            <div className={styles.first_con}>
+                <ProjectList projects={projects} count={2} />
+            </div>
+            <div className={styles.second_con}>
+                <div className={styles.languages}>
+                    <Link to="/projects/cpp" className={styles.language}>
+                        <HoverIcon className={styles.icon} icon="/icons/c-plusplus.svg" icon_mono="/icons/c-plusplus_mono.svg" alt="C++" />
+                    </Link>
+                    <Link to="/projects/typescript" className={styles.language}>
+                        <HoverIcon className={styles.icon} icon="/icons/typescript-icon.svg" icon_mono="/icons/typescript-icon_mono.svg" alt="TypeScript" />
+                    </Link>
+                    <Link to="/projects/python" className={styles.language}>
+                        <HoverIcon className={styles.icon} icon="/icons/python.svg" alt="Python" />
+                    </Link>
+                </div>
             </div>
         </Layout>
-    )
+    );
 };
 export default Home;
 

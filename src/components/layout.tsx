@@ -8,7 +8,7 @@ import "src/styles/global.scss";
 import * as styles from "src/styles/layout.module.scss";
 
 interface LayoutProps {
-    heading: string;
+    heading?: string;
     icon?: string;
 }
 const Layout: React.FC<LayoutProps> = (props) => {
@@ -58,7 +58,7 @@ query SiteInfo {
             <nav className={styles.nav}>
                 <div className={styles.logo}>
                     <h1>Christopher Besch</h1>
-                    <h2>Software Developer &mdash; Problem Solver</h2>
+                    <h2>Software Developer</h2>
                 </div>
                 <div>
                     <input type="checkbox" id="nav_toggle" />
@@ -73,7 +73,7 @@ query SiteInfo {
             </nav >
 
             <div className={styles.content}>
-                <Heading heading={props.heading} icon={props.icon} />
+                {props.heading ? <Heading heading={props.heading} icon={props.icon} /> : undefined}
                 {props.children}
             </div>
 

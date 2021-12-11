@@ -35,13 +35,23 @@ export function gql_to_project(project: any): Project {
 
 interface ProjectListProps {
     projects: Project[];
+    count?: number;
 }
 const ProjectList: React.FC<ProjectListProps> = (props) => {
+    const count = props.count ? props.count : 4;
+    const full_width = `${100 / count}%`;
+    const half_width = `${100 / Math.ceil(count / 2)}%`;
+    const quarter_width = `${100 / Math.ceil(count / 4)}%`;
+    let width_properties = {
+        "--full-width": full_width,
+        "--half-width": half_width,
+        "--quarter-width": quarter_width,
+    } as React.CSSProperties;
     return (
         <div className={styles.projects}>
             {props.projects.map(project =>
                 // TODO: can't link same project twice <- non-unique key
-                <a href={project.link} key={`${project.id}`} className={styles.project}>
+                <a href={project.link} key={`${project.id}`} className={styles.project} style={width_properties}>
                     <div className={styles.content}>
                         <div className={styles.image}>
                             <GatsbyImage image={project.thumb} alt="thumbnail" />
