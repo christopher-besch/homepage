@@ -54,6 +54,7 @@ query SiteInfo {
                 {/* <meta property="og:image" image=""/> */}
                 <title>Christopher Besch</title>
                 <link rel="canonical" href={address} />
+                <link rel="shortcut icon" href="/favicon.png" />
             </Helmet>
             <nav className={styles.nav}>
                 <div className={styles.logo}>
