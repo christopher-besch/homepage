@@ -1,5 +1,5 @@
 ---
-title: Java Encryption
+title: Encryption
 description: A Funky Encryption Algorithm no one should ever use.
 slug: java_encryption
 link: https://github.com/christopher-besch/java_encryption

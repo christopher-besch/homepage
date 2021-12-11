@@ -8,6 +8,9 @@ interface HoverIconProps {
     alt?: string;
     icon_mono?: string;
     className?: string;
+    // used to add hover effect to out-of-scope elements
+    icon_class?: string;
+    icon_mono_class?: string;
 }
 const HoverIcon: React.FC<HoverIconProps> = (props) => {
     const icon = props.icon;
@@ -15,8 +18,15 @@ const HoverIcon: React.FC<HoverIconProps> = (props) => {
     const icon_mono = props.icon_mono ? props.icon_mono : icon;
     return (
         <div className={`${styles.icon_wrapper} ${props.className}`}>
-            <img className={styles.icon} src={icon} alt={alt} />
-            <div className={styles.icon_mono} style={get_mask(icon_mono)}></div>
+            <img
+                className={`${styles.icon} ${props.icon_class}`}
+                src={icon}
+                alt={alt}
+            />
+            <div
+                className={`${styles.icon_mono} ${props.icon_mono_class}`}
+                style={get_mask(icon_mono)}
+            ></div>
         </div>
     );
 };

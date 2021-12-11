@@ -2,10 +2,10 @@ $back_pri:        #343A40;
 $back_sec:        #212529;
 $back_pri_dim:    rgba($back_pri, 0.98);
 $back_sec_dim:    rgba($back_sec, 0.98);
-$nav:             #212529;
+$nav:             $back_sec;
 $text:            #ffffff;
 $link:            #fffcf2;
 $link_hover:      rgba(100%, 100%, 100%, 0.4);
-$link_background: $nav;
+$accent:          orange;
 
 $border_radius:  5px;

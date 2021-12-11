@@ -2,11 +2,13 @@
 
 .icon_wrapper {
     position: relative;
+    width: 1em;
+    height: 1em;
 }
 
 .icon {
-    width: 1em;
-    height: 1em;
+    width: 100%;
+    height: 100%;
     opacity: 0%;
     transition: opacity 0.3s;
 }
@@ -15,8 +17,8 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 1em;
-    height: 1em;
+    width: 100%;
+    height: 100%;
     background: $text;
 
     opacity: 100%;

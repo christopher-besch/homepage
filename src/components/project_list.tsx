@@ -4,6 +4,7 @@ import React from "react";
 import * as styles from "src/styles/project_list.module.scss";
 import { Language, languages } from "src/utils/languages";
 import get_mask from "src/utils/svg_mask";
+import HoverIcon from "./hover_icon";
 
 export type Project = {
     id: number;
@@ -56,17 +57,28 @@ const ProjectList: React.FC<ProjectListProps> = (props) => {
                         <div className={styles.image}>
                             <GatsbyImage image={project.thumb} alt="thumbnail" />
                             <div className={styles.overlay}>
-                                {project.languages.map(language =>
-                                    <div
-                                        className={styles.language_icon}
-                                        style={get_mask(language.icon_mono)}
-                                        key={`${project.id}${language.id}`}
-                                    ></div>
-                                )}
+                                <div className={styles.heading}>
+                                    <h3>{project.title}</h3>
+                                </div>
+                                <div className={styles.languages}>
+                                    {project.languages.map(language =>
+                                        <HoverIcon
+                                            className={styles.language_icon}
+                                            key={`${project.id}${language.id}`}
+                                            icon={language.icon}
+                                            icon_mono={language.icon_mono}
+                                            alt={language.id}
+                                            icon_class={styles.icon}
+                                            icon_mono_class={styles.icon_mono}
+                                        />
+                                    )}
+                                </div>
                             </div>
                         </div>
-                        <h3>{project.title}</h3>
-                        <p>{project.description}</p>
+                        <hr />
+                        <div className={styles.text}>
+                            <p>{project.description}</p>
+                        </div>
                     </div>
                 </a>
             )}

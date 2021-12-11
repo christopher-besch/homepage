@@ -15,7 +15,7 @@
     width: 25%;
     float: left;
     text-align: right;
-    /* margin-right: 16px; */
+    padding-left: 7px;
 }
 
 @media (max-width: 800px) {
@@ -25,6 +25,7 @@
     .second_con {
         width: 100%;
         text-align: center;
+        padding-left: 0;
     }
 }
 
