@@ -906,44 +906,6 @@ enum FileFieldsEnum {
   childrenMarkdownRemark___frontmatter___thumb___childrenMarkdownRemark
   childrenMarkdownRemark___frontmatter___thumb___id
   childrenMarkdownRemark___frontmatter___thumb___children
-  childrenMarkdownRemark___frontmatter___banner___sourceInstanceName
-  childrenMarkdownRemark___frontmatter___banner___absolutePath
-  childrenMarkdownRemark___frontmatter___banner___relativePath
-  childrenMarkdownRemark___frontmatter___banner___extension
-  childrenMarkdownRemark___frontmatter___banner___size
-  childrenMarkdownRemark___frontmatter___banner___prettySize
-  childrenMarkdownRemark___frontmatter___banner___modifiedTime
-  childrenMarkdownRemark___frontmatter___banner___accessTime
-  childrenMarkdownRemark___frontmatter___banner___changeTime
-  childrenMarkdownRemark___frontmatter___banner___birthTime
-  childrenMarkdownRemark___frontmatter___banner___root
-  childrenMarkdownRemark___frontmatter___banner___dir
-  childrenMarkdownRemark___frontmatter___banner___base
-  childrenMarkdownRemark___frontmatter___banner___ext
-  childrenMarkdownRemark___frontmatter___banner___name
-  childrenMarkdownRemark___frontmatter___banner___relativeDirectory
-  childrenMarkdownRemark___frontmatter___banner___dev
-  childrenMarkdownRemark___frontmatter___banner___mode
-  childrenMarkdownRemark___frontmatter___banner___nlink
-  childrenMarkdownRemark___frontmatter___banner___uid
-  childrenMarkdownRemark___frontmatter___banner___gid
-  childrenMarkdownRemark___frontmatter___banner___rdev
-  childrenMarkdownRemark___frontmatter___banner___ino
-  childrenMarkdownRemark___frontmatter___banner___atimeMs
-  childrenMarkdownRemark___frontmatter___banner___mtimeMs
-  childrenMarkdownRemark___frontmatter___banner___ctimeMs
-  childrenMarkdownRemark___frontmatter___banner___atime
-  childrenMarkdownRemark___frontmatter___banner___mtime
-  childrenMarkdownRemark___frontmatter___banner___ctime
-  childrenMarkdownRemark___frontmatter___banner___birthtime
-  childrenMarkdownRemark___frontmatter___banner___birthtimeMs
-  childrenMarkdownRemark___frontmatter___banner___blksize
-  childrenMarkdownRemark___frontmatter___banner___blocks
-  childrenMarkdownRemark___frontmatter___banner___publicURL
-  childrenMarkdownRemark___frontmatter___banner___childrenImageSharp
-  childrenMarkdownRemark___frontmatter___banner___childrenMarkdownRemark
-  childrenMarkdownRemark___frontmatter___banner___id
-  childrenMarkdownRemark___frontmatter___banner___children
   childrenMarkdownRemark___excerpt @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
   childrenMarkdownRemark___rawMarkdownBody @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
   childrenMarkdownRemark___fileAbsolutePath @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
@@ -1043,44 +1005,6 @@ enum FileFieldsEnum {
   childMarkdownRemark___frontmatter___thumb___childrenMarkdownRemark
   childMarkdownRemark___frontmatter___thumb___id
   childMarkdownRemark___frontmatter___thumb___children
-  childMarkdownRemark___frontmatter___banner___sourceInstanceName
-  childMarkdownRemark___frontmatter___banner___absolutePath
-  childMarkdownRemark___frontmatter___banner___relativePath
-  childMarkdownRemark___frontmatter___banner___extension
-  childMarkdownRemark___frontmatter___banner___size
-  childMarkdownRemark___frontmatter___banner___prettySize
-  childMarkdownRemark___frontmatter___banner___modifiedTime
-  childMarkdownRemark___frontmatter___banner___accessTime
-  childMarkdownRemark___frontmatter___banner___changeTime
-  childMarkdownRemark___frontmatter___banner___birthTime
-  childMarkdownRemark___frontmatter___banner___root
-  childMarkdownRemark___frontmatter___banner___dir
-  childMarkdownRemark___frontmatter___banner___base
-  childMarkdownRemark___frontmatter___banner___ext
-  childMarkdownRemark___frontmatter___banner___name
-  childMarkdownRemark___frontmatter___banner___relativeDirectory
-  childMarkdownRemark___frontmatter___banner___dev
-  childMarkdownRemark___frontmatter___banner___mode
-  childMarkdownRemark___frontmatter___banner___nlink
-  childMarkdownRemark___frontmatter___banner___uid
-  childMarkdownRemark___frontmatter___banner___gid
-  childMarkdownRemark___frontmatter___banner___rdev
-  childMarkdownRemark___frontmatter___banner___ino
-  childMarkdownRemark___frontmatter___banner___atimeMs
-  childMarkdownRemark___frontmatter___banner___mtimeMs
-  childMarkdownRemark___frontmatter___banner___ctimeMs
-  childMarkdownRemark___frontmatter___banner___atime
-  childMarkdownRemark___frontmatter___banner___mtime
-  childMarkdownRemark___frontmatter___banner___ctime
-  childMarkdownRemark___frontmatter___banner___birthtime
-  childMarkdownRemark___frontmatter___banner___birthtimeMs
-  childMarkdownRemark___frontmatter___banner___blksize
-  childMarkdownRemark___frontmatter___banner___blocks
-  childMarkdownRemark___frontmatter___banner___publicURL
-  childMarkdownRemark___frontmatter___banner___childrenImageSharp
-  childMarkdownRemark___frontmatter___banner___childrenMarkdownRemark
-  childMarkdownRemark___frontmatter___banner___id
-  childMarkdownRemark___frontmatter___banner___children
   childMarkdownRemark___excerpt @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
   childMarkdownRemark___rawMarkdownBody @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
   childMarkdownRemark___fileAbsolutePath @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
@@ -1982,84 +1906,6 @@ enum MarkdownRemarkFieldsEnum {
   frontmatter___thumb___internal___mediaType
   frontmatter___thumb___internal___owner
   frontmatter___thumb___internal___type
-  frontmatter___banner___sourceInstanceName
-  frontmatter___banner___absolutePath
-  frontmatter___banner___relativePath
-  frontmatter___banner___extension
-  frontmatter___banner___size
-  frontmatter___banner___prettySize
-  frontmatter___banner___modifiedTime
-  frontmatter___banner___accessTime
-  frontmatter___banner___changeTime
-  frontmatter___banner___birthTime
-  frontmatter___banner___root
-  frontmatter___banner___dir
-  frontmatter___banner___base
-  frontmatter___banner___ext
-  frontmatter___banner___name
-  frontmatter___banner___relativeDirectory
-  frontmatter___banner___dev
-  frontmatter___banner___mode
-  frontmatter___banner___nlink
-  frontmatter___banner___uid
-  frontmatter___banner___gid
-  frontmatter___banner___rdev
-  frontmatter___banner___ino
-  frontmatter___banner___atimeMs
-  frontmatter___banner___mtimeMs
-  frontmatter___banner___ctimeMs
-  frontmatter___banner___atime
-  frontmatter___banner___mtime
-  frontmatter___banner___ctime
-  frontmatter___banner___birthtime
-  frontmatter___banner___birthtimeMs
-  frontmatter___banner___blksize
-  frontmatter___banner___blocks
-  frontmatter___banner___publicURL
-  frontmatter___banner___childrenImageSharp
-  frontmatter___banner___childrenImageSharp___gatsbyImageData @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  frontmatter___banner___childrenImageSharp___id @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  frontmatter___banner___childrenImageSharp___children @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  frontmatter___banner___childImageSharp___gatsbyImageData @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  frontmatter___banner___childImageSharp___id @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  frontmatter___banner___childImageSharp___children @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  frontmatter___banner___childrenMarkdownRemark
-  frontmatter___banner___childrenMarkdownRemark___id
-  frontmatter___banner___childrenMarkdownRemark___excerpt @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  frontmatter___banner___childrenMarkdownRemark___rawMarkdownBody @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  frontmatter___banner___childrenMarkdownRemark___fileAbsolutePath @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  frontmatter___banner___childrenMarkdownRemark___html @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  frontmatter___banner___childrenMarkdownRemark___htmlAst @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  frontmatter___banner___childrenMarkdownRemark___excerptAst @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  frontmatter___banner___childrenMarkdownRemark___headings @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  frontmatter___banner___childrenMarkdownRemark___timeToRead @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  frontmatter___banner___childrenMarkdownRemark___tableOfContents @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  frontmatter___banner___childrenMarkdownRemark___children @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  frontmatter___banner___childMarkdownRemark___id
-  frontmatter___banner___childMarkdownRemark___excerpt @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  frontmatter___banner___childMarkdownRemark___rawMarkdownBody @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  frontmatter___banner___childMarkdownRemark___fileAbsolutePath @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  frontmatter___banner___childMarkdownRemark___html @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  frontmatter___banner___childMarkdownRemark___htmlAst @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  frontmatter___banner___childMarkdownRemark___excerptAst @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  frontmatter___banner___childMarkdownRemark___headings @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  frontmatter___banner___childMarkdownRemark___timeToRead @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  frontmatter___banner___childMarkdownRemark___tableOfContents @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  frontmatter___banner___childMarkdownRemark___children @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  frontmatter___banner___id
-  frontmatter___banner___parent___id
-  frontmatter___banner___parent___children
-  frontmatter___banner___children
-  frontmatter___banner___children___id
-  frontmatter___banner___children___children
-  frontmatter___banner___internal___content
-  frontmatter___banner___internal___contentDigest
-  frontmatter___banner___internal___description
-  frontmatter___banner___internal___fieldOwners
-  frontmatter___banner___internal___ignoreType
-  frontmatter___banner___internal___mediaType
-  frontmatter___banner___internal___owner
-  frontmatter___banner___internal___type
   excerpt @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
   rawMarkdownBody @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
   fileAbsolutePath @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
@@ -2214,7 +2060,6 @@ type MarkdownRemarkFrontmatter {
   languages: [String]
   dependencies: [String]
   thumb: File
-  banner: File
 }
 
 input MarkdownRemarkFrontmatterFilterInput {
@@ -2227,7 +2072,6 @@ input MarkdownRemarkFrontmatterFilterInput {
   languages: StringQueryOperatorInput
   dependencies: StringQueryOperatorInput
   thumb: FileFilterInput
-  banner: FileFilterInput
 }
 
 type MarkdownRemarkGroupConnection {

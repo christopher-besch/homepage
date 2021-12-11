@@ -7,6 +7,6 @@ priority: 4
 date: 2020-03-08T00:00:00+00:00
 languages: [python]
 dependencies: [gephi]
-thumb: ../images/manim_editor/thumb.png
+thumb: ../images/thumbs/undef.png
 ---
 

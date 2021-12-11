@@ -7,6 +7,6 @@ priority: 3
 date: 2021-03-09T00:00:00+00:00
 languages: [typescript]
 dependencies: [bootstrap]
-thumb: ../images/manim_editor/thumb.png
+thumb: ../images/thumbs/undef.png
 ---
 

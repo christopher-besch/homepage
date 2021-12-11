@@ -7,6 +7,6 @@ priority: 4
 date: 2021-08-29T00:00:00+00:00
 languages: [python]
 dependencies: [ffmpeg, youtube-dl]
-thumb: ../images/manim_editor/thumb.png
+thumb: ../images/thumbs/undef.png
 ---
 
