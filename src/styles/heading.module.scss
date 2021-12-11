@@ -1,6 +1,13 @@
-@import "colors.scss";
+@import "constants.scss";
 
-/* heading */
+.heading {
+    background-color: $back_sec;
+    border-radius: $border-radius;
+    width: 100%;
+    padding: 7px;
+    display: inline-block;
+}
+
 .heading h1 {
     font-size: 50px;
     /* break at word endings */
@@ -16,6 +23,17 @@
     margin-top: 10px;
     margin-bottom: 10px;
     color: $text;
+
+    /* border-top: 2px solid $text; */
+    /* border-bottom: none; */
+    /* border-right: 50px solid transparent; */
+    /* height: 0; */
+}
+
+@media (max-width: 700px) {
+    .heading hr {
+        display: none;
+    }
 }
 
 .icon {

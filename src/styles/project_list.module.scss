@@ -1,4 +1,4 @@
-@import "colors.scss";
+@import "constants.scss";
 
 .projects {
     margin: 8px -16px;
@@ -27,6 +27,7 @@
 .content {
     background-color: $back_sec;
     padding: 10px;
+    border-radius: $border-radius;
 }
 .content h3 {
     font-size: 20px;

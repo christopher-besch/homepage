@@ -1,5 +1,5 @@
 ---
-title: Java Sorting Alorithms
+title: Java Sorting Algorithms
 description: Example Implementation of Quick Sort.
 slug: java_sorting_algorithms
 link: https://github.com/christopher-besch/sorting_algorithms

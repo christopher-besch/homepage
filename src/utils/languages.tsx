@@ -26,7 +26,7 @@ export const languages = new Map<string, Language>([
     }],
     ["java", {
         id: "java",
-        name: "java",
+        name: "Java",
         icon: "/icons/java.svg",
         icon_mono: "/icons/java.svg"
     }],

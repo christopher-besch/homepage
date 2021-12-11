@@ -9,6 +9,7 @@ import * as styles from "src/styles/layout.module.scss";
 
 interface LayoutProps {
     heading?: string;
+    sub_heading?: string;
     icon?: string;
 }
 const Layout: React.FC<LayoutProps> = (props) => {
@@ -43,16 +44,17 @@ query SiteInfo {
     const linkedin = data.site?.siteMetadata?.linkedin?.link as string;
 
     const address = data.site?.siteMetadata?.address as string;
+    const title = props.heading ? `Christopher Besch—${props.heading}` : "Christopher Besch—Software Developer";
 
     return (
         <div>
             <Helmet htmlAttributes={{ lang: "en" }}>
                 <meta charSet="utf-8" />
-                <meta property="og:description" content="Christopher Besch - Software Devoper" />
-                <meta name="description" content="Software Devoper - Problem Solver" />
+                <meta property="og:description" content={title} />
+                <meta name="description" content={title} />
                 {/* TODO: add social preview */}
                 {/* <meta property="og:image" image=""/> */}
-                <title>Christopher Besch</title>
+                <title>{title}</title>
                 <link rel="canonical" href={address} />
                 <link rel="shortcut icon" href="/favicon.png" />
             </Helmet>
@@ -74,7 +76,7 @@ query SiteInfo {
             </nav >
 
             <div className={styles.content}>
-                {props.heading ? <Heading heading={props.heading} icon={props.icon} /> : undefined}
+                {props.heading ? <Heading heading={props.heading} icon={props.icon} sub_heading={props.sub_heading} /> : undefined}
                 {props.children}
             </div>
 

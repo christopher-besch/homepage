@@ -1,4 +1,4 @@
-@import "colors.scss";
+@import "constants.scss";
 
 .contacts {
     margin: 8px -16px;
@@ -22,6 +22,7 @@
     background-color: $back_sec;
     padding: 10px;
     text-align: center;
+    border-radius: $border-radius;
 }
 .content h3 {
     font-size: 20px;

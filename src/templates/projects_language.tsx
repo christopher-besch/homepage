@@ -18,7 +18,7 @@ const ProjectsLanguage: React.FC<ProjectsLanguageProps> = (props) => {
     const selected_language = languages.get(selected_language_id)!;
 
     return (
-        <Layout heading={`${selected_language.name} Projects`} icon={selected_language.icon_mono}>
+        <Layout heading={`${selected_language.name} Projects`} sub_heading={selected_language_id == "java" ? " You found an easter egg!" : ""} icon={selected_language.icon_mono}>
             <ProjectList projects={projects} />
             <Link className={styles.link} to="/projects">Other Projects</Link>
         </Layout >);

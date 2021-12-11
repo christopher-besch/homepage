@@ -1,4 +1,4 @@
-@import "colors.scss";
+@import "constants.scss";
 
 .link {
     display: inline-block;
@@ -6,6 +6,7 @@
     padding: 10px 16px;
     border-radius: 1px;
     font-weight: 500;
+    border-radius: $border-radius;
 }
 
 .link:hover {
