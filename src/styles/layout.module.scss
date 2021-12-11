@@ -37,7 +37,7 @@
 
 .nav_menu {
     display: flex;
-    gap: 1em;
+    gap: 0px;
     font-size: 18px;
 }
 
@@ -45,10 +45,14 @@
     list-style: none;
 }
 
-.nav_menu li:hover {
+.nav_menu a {
+    padding: 7px 10px;
+}
+
+.nav_menu a:hover {
     background-color: $link_hover;
     /* rounded corners */
-    border-radius: 1px;
+    border-radius: $border-radius;
     /* hover changes animated */
     /* transition: 0.3s; */
 }

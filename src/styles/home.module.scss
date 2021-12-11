@@ -7,14 +7,15 @@
 }
 
 .first_con {
-    width: 70%;
+    width: 75%;
     float: left;
 }
 
 .second_con {
-    width: 30%;
+    width: 25%;
     float: left;
-    text-align: center;
+    text-align: right;
+    /* margin-right: 16px; */
 }
 
 @media (max-width: 800px) {
@@ -23,14 +24,15 @@
     }
     .second_con {
         width: 100%;
+        text-align: center;
     }
 }
 
 .languages {
     display: inline-block;
-    margin: 24px -16px;
+    margin: 24px 0;
     padding-top: 20px;
-    width: 80%;
+    width: 95%;
     background-color: $back_sec;
     border-radius: $border-radius;
 }
