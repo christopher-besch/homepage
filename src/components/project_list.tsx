@@ -54,8 +54,8 @@ const ProjectList: React.FC<ProjectListProps> = (props) => {
                 // TODO: can't link same project twice <- non-unique key
                 <a href={project.link} key={`${project.id}`} className={styles.project} style={width_properties}>
                     <div className={styles.content}>
-                        <div className={styles.image}>
-                            <GatsbyImage image={project.thumb} alt="thumbnail" />
+                        <div className={styles.image_wrapper}>
+                            <GatsbyImage className={styles.image} image={project.thumb} alt="thumbnail" />
                             <div className={styles.overlay}>
                                 <div className={styles.heading}>
                                     <h3>{project.title}</h3>

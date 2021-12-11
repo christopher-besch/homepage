@@ -7,6 +7,6 @@ priority: 3
 date: 2021-10-22T00:00:00+00:00
 languages: [typescript]
 dependencies: [webpack, bootstrap]
-thumb: ../images/thumbs/undef.png
+thumb: ../images/thumbs/book_page_converter.png
 ---
 

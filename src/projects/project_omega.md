@@ -7,6 +7,6 @@ priority: 3
 date: 2021-03-27T00:00:00+00:00
 languages: [python, typescript]
 dependencies: [flask, webpack]
-thumb: ../images/thumbs/undef.png
+thumb: ../images/thumbs/project_omega.png
 ---
 

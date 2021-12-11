@@ -7,6 +7,6 @@ priority: 3
 date: 2021-04-09T00:00:00+00:00
 languages: [typescript]
 dependencies: []
-thumb: ../images/thumbs/undef.png
+thumb: ../images/thumbs/lake_visualizer.png
 ---
 

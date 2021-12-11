@@ -46,10 +46,10 @@
     border-radius: $border-radius;
 }
 
-.image {
+.image_wrapper {
     position: relative;
 }
-.image img {
+.image_wrapper img {
     width: 100%;
 }
 .overlay {
@@ -63,6 +63,10 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+.image {
+    aspect-ratio: 16/9;
 }
 
 .heading {
