@@ -7,6 +7,6 @@ priority: 4
 date: 2021-12-01T00:00:00+00:00
 languages: [typescript]
 dependencies: [gatsby]
-thumb: ../images/thumbs/undef.png
+thumb: ../images/thumbs/homepage.png
 ---
 

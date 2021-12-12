@@ -7,6 +7,6 @@ priority: 10
 date: 2020-10-08T00:00:00+00:00
 languages: [java]
 dependencies: [sqllite, spark, maven]
-thumb: ../images/thumbs/undef.png
+thumb: ../images/thumbs/social_blog.png
 ---
 

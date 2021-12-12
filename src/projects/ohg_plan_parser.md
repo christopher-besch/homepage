@@ -7,6 +7,6 @@ priority: 4
 date: 2019-11-23T00:00:00+00:00
 languages: [python]
 dependencies: [flask, bootstrap]
-thumb: ../images/thumbs/undef.png
+thumb: ../images/thumbs/ohg_plan_parser.png
 ---
 

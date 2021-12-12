@@ -7,6 +7,6 @@ priority: 7
 date: 2020-08-28T00:00:00+00:00
 languages: [python]
 dependencies: []
-thumb: ../images/thumbs/undef.png
+thumb: ../images/thumbs/bwinf_39_round1.png
 ---
 

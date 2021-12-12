@@ -7,6 +7,6 @@ priority: 7
 date: 2020-12-22T00:00:00+00:00
 languages: [cpp]
 dependencies: []
-thumb: ../images/thumbs/undef.png
+thumb: ../images/thumbs/bwinf_39_round2.png
 ---
 
