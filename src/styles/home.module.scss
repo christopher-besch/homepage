@@ -1,7 +1,7 @@
 @import "consts.scss";
 
 .container {
-    padding-top: 24px;
+    margin-top: 16px;
 }
 .container::after {
     content: "";
@@ -10,26 +10,17 @@
 }
 
 .first_con {
-    width: 75%;
+    width: 70%;
     float: left;
 }
-
 .second_con {
-    width: 25%;
+    width: 30%;
     float: left;
     text-align: right;
-    padding-left: 7px;
 }
 
-@media (max-width: 800px) {
-    .first_con {
-        width: 100%;
-    }
-    .second_con {
-        width: 100%;
-        text-align: center;
-        padding-left: 0;
-    }
+.projects {
+    margin-bottom: 8px;
 }
 
 .container h2 {
@@ -39,10 +30,9 @@
 
 .languages {
     display: inline-block;
-    margin: 28px 0;
-    margin-top: 24px;
     padding-top: 20px;
-    width: 95%;
+    margin-left: 16px;
+    /* width: 95%; */
     background-color: $back_sec;
     border-radius: $border-radius;
 }
@@ -63,4 +53,19 @@
 
 .icon {
     display: inline-block;
+}
+
+@media (max-width: 800px) {
+    .first_con {
+        width: 100%;
+    }
+    .second_con {
+        width: 100%;
+        text-align: center;
+        padding-left: 0;
+    }
+    .languages {
+        margin-left: 0px;
+        margin-top: 16px;
+    }
 }

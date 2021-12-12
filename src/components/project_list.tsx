@@ -37,6 +37,7 @@ export function gql_to_project(project: any): Project {
 interface ProjectListProps {
     projects: Project[];
     count?: number;
+    className?: string;
 }
 const ProjectList: React.FC<ProjectListProps> = (props) => {
     const count = props.count ? props.count : 4;
@@ -49,7 +50,7 @@ const ProjectList: React.FC<ProjectListProps> = (props) => {
         "--quarter-width": quarter_width,
     } as React.CSSProperties;
     return (
-        <div className={styles.projects}>
+        <div className={`${styles.projects} ${props.className}`}>
             {props.projects.map(project =>
                 // TODO: can't link same project twice <- non-unique key
                 <a href={project.link} target="_blank" key={`${project.id}`} className={styles.project} style={width_properties}>

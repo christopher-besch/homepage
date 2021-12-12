@@ -22,13 +22,12 @@ const Home: React.FC<HomeProps> = (props) => {
             <Heading heading="Hello Smart People!" sub_heading="I'm a Problem Solver." />
             <div className={styles.container}>
                 <div className={styles.first_con}>
-                    <h2 className={util_styles.block}>Flagship Projects</h2>
-                    <ProjectList projects={projects} count={2} />
+                    <ProjectList className={styles.projects} projects={projects} count={2} />
                     <Link className={`${util_styles.block} ${util_styles.link}`} to="/projects">More Projects</Link>
                 </div>
                 <div className={styles.second_con}>
-                    <h2 className={util_styles.block}>Main Languages</h2>
                     <div className={styles.languages}>
+                        {/* <h2 className={styles.language}>Main Languages</h2> */}
                         <Link to="/projects/cpp" className={styles.language}>
                             <HoverIcon className={styles.icon} icon="/icons/c-plusplus.svg" icon_mono="/icons/c-plusplus_mono.svg" alt="C++" />
                         </Link>

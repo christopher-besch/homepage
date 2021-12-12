@@ -19,7 +19,7 @@ const Projects: React.FC<ProjectsProps> = (props) => {
 
     return (
         <Layout heading={max_priority >= max_priority_list_all ? "All Projects" : "Projects"}>
-            <ProjectList projects={projects} />
+            <ProjectList className={styles.projects} projects={projects} />
             {max_priority < max_priority_list_all ? <Link className={`${util_styles.block} ${util_styles.link}`} to={`/projects?max_priority=${max_priority_list_all}`}>Show All</Link> : undefined}
         </Layout >
     );
