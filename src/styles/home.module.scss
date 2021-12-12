@@ -1,5 +1,8 @@
-@import "constants.scss";
+@import "consts.scss";
 
+.container {
+    padding-top: 24px;
+}
 .container::after {
     content: "";
     display: table;
@@ -29,9 +32,15 @@
     }
 }
 
+.container h2 {
+    font-size: 30px;
+    margin-bottom: -30px;
+}
+
 .languages {
     display: inline-block;
-    margin: 24px 0;
+    margin: 28px 0;
+    margin-top: 24px;
     padding-top: 20px;
     width: 95%;
     background-color: $back_sec;

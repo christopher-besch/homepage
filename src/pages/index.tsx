@@ -5,6 +5,7 @@ import { HomePage } from "./__generated__/home-page";
 import Layout from "src/components/layout";
 import ProjectList, { gql_to_project } from "src/components/project_list";
 import * as styles from "src/styles/home.module.scss";
+import * as util_styles from "src/styles/utils.module.scss";
 import Heading from "src/components/heading";
 import HoverIcon from "src/components/hover_icon";
 import { max_priority_highlight } from "src/utils/consts";
@@ -19,20 +20,25 @@ const Home: React.FC<HomeProps> = (props) => {
     return (
         <Layout>
             <Heading heading="Hello Smart People!" sub_heading="I'm a Problem Solver." />
-            <div className={styles.first_con}>
-                <ProjectList projects={projects} count={2} />
-            </div>
-            <div className={styles.second_con}>
-                <div className={styles.languages}>
-                    <Link to="/projects/cpp" className={styles.language}>
-                        <HoverIcon className={styles.icon} icon="/icons/c-plusplus.svg" icon_mono="/icons/c-plusplus_mono.svg" alt="C++" />
-                    </Link>
-                    <Link to="/projects/typescript" className={styles.language}>
-                        <HoverIcon className={styles.icon} icon="/icons/typescript-icon.svg" icon_mono="/icons/typescript-icon_mono.svg" alt="TypeScript" />
-                    </Link>
-                    <Link to="/projects/python" className={styles.language}>
-                        <HoverIcon className={styles.icon} icon="/icons/python.svg" alt="Python" />
-                    </Link>
+            <div className={styles.container}>
+                <div className={styles.first_con}>
+                    <h2 className={util_styles.block}>Flagship Projects</h2>
+                    <ProjectList projects={projects} count={2} />
+                    <Link className={`${util_styles.block} ${util_styles.link}`} to="/projects">More Projects</Link>
+                </div>
+                <div className={styles.second_con}>
+                    <h2 className={util_styles.block}>Main Languages</h2>
+                    <div className={styles.languages}>
+                        <Link to="/projects/cpp" className={styles.language}>
+                            <HoverIcon className={styles.icon} icon="/icons/c-plusplus.svg" icon_mono="/icons/c-plusplus_mono.svg" alt="C++" />
+                        </Link>
+                        <Link to="/projects/typescript" className={styles.language}>
+                            <HoverIcon className={styles.icon} icon="/icons/typescript-icon.svg" icon_mono="/icons/typescript-icon_mono.svg" alt="TypeScript" />
+                        </Link>
+                        <Link to="/projects/python" className={styles.language}>
+                            <HoverIcon className={styles.icon} icon="/icons/python.svg" alt="Python" />
+                        </Link>
+                    </div>
                 </div>
             </div>
         </Layout>

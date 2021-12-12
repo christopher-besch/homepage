@@ -7,9 +7,10 @@ interface HeadingProps {
     heading: string;
     sub_heading?: string;
     icon?: string;
+    className?: string;
 }
 const Heading: React.FC<HeadingProps> = (props) =>
-    <div className={styles.heading}>
+    <div className={`${styles.heading} ${props.className}`}>
         <h1>
             {props.heading}
             {props.icon ? <span className={styles.icon} style={get_mask(props.icon)}></span> : undefined}

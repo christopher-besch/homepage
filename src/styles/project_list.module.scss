@@ -1,4 +1,4 @@
-@import "constants.scss";
+@import "consts.scss";
 
 .projects {
     margin: 8px -16px;
@@ -39,11 +39,14 @@
 .project:hover .icon_mono {
     opacity: 0%;
 }
+.project:hover hr {
+    border-color: $hover_accent;
+}
 
 .content {
     background-color: $back_sec;
     padding: 10px;
-    border-radius: $border-radius;
+    border-radius: $border_radius;
 }
 
 .image_wrapper {
