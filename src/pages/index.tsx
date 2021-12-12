@@ -27,7 +27,7 @@ const Home: React.FC<HomeProps> = (props) => {
                 </div>
                 <div className={styles.second_con}>
                     <div className={styles.languages}>
-                        {/* <h2 className={styles.language}>Main Languages</h2> */}
+                        <h2 className={styles.language}>Main Languages</h2>
                         <Link to="/projects/cpp" className={styles.language}>
                             <HoverIcon className={styles.icon} icon="/icons/c-plusplus.svg" icon_mono="/icons/c-plusplus_mono.svg" alt="C++" />
                         </Link>

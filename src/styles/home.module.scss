@@ -23,14 +23,8 @@
     margin-bottom: 8px;
 }
 
-.container h2 {
-    font-size: 30px;
-    margin-bottom: -30px;
-}
-
 .languages {
     display: inline-block;
-    padding-top: 20px;
     margin-left: 16px;
     /* width: 95%; */
     background-color: $back_sec;
@@ -53,6 +47,12 @@
 
 .icon {
     display: inline-block;
+}
+
+.container h2 {
+    font-size: 35px;
+    margin-top: 10px;
+    margin-bottom: 20px;
 }
 
 @media (max-width: 800px) {
