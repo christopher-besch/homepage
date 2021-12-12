@@ -6,14 +6,18 @@ import Layout from "src/components/layout";
 import ProjectList, { gql_to_project } from "src/components/project_list";
 import * as styles from "src/styles/projects.module.scss";
 import { languages } from "src/utils/languages";
+import { with_location, PropsWithLocation } from "src/utils/with_location";
+import { max_priority_language_default, max_priority_language_all } from "src/utils/consts";
 
-interface ProjectsLanguageProps {
+interface ProjectsLanguageProps extends PropsWithLocation {
     data: ProjectsLanguagePage;
     // TODO: better type
     pageContext: Record<string, any>;
 }
 const ProjectsLanguage: React.FC<ProjectsLanguageProps> = (props) => {
-    const projects = props.data.allMarkdownRemark.edges.map(gql_to_project);
+    const max_priority = props.search.max_priority != null ? parseInt(props.search.max_priority as string) : max_priority_language_default;
+    const all_projects = props.data.allMarkdownRemark.edges.map(gql_to_project);
+    const projects = all_projects.filter(project => project.priority <= max_priority);
     const selected_language_id = props.pageContext.language;
     const selected_language = languages.get(selected_language_id)!;
 
@@ -21,9 +25,10 @@ const ProjectsLanguage: React.FC<ProjectsLanguageProps> = (props) => {
         <Layout heading={`${selected_language.name} Projects`} sub_heading={selected_language_id == "java" ? " You found an easter egg!" : ""} icon={selected_language.icon_mono}>
             <ProjectList projects={projects} />
             <Link className={styles.link} to="/projects">Other Projects</Link>
+            {max_priority < max_priority_language_all ? <Link className={styles.link} to={`/projects/${selected_language.id}?max_priority=${max_priority_language_all}`}>Show All</Link> : undefined}
         </Layout >);
 };
-export default ProjectsLanguage;
+export default with_location(ProjectsLanguage);
 
 export const query = graphql`
 query ProjectsLanguagePage($language: [String]) {

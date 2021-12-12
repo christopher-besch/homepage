@@ -7,12 +7,14 @@ import ProjectList, { gql_to_project } from "src/components/project_list";
 import * as styles from "src/styles/home.module.scss";
 import Heading from "src/components/heading";
 import HoverIcon from "src/components/hover_icon";
+import { max_priority_highlight } from "src/utils/consts";
 
 interface HomeProps {
     data: HomePage
 }
 const Home: React.FC<HomeProps> = (props) => {
-    const projects = props.data.allMarkdownRemark.edges.map(gql_to_project);
+    const all_projects = props.data.allMarkdownRemark.edges.map(gql_to_project);
+    const projects = all_projects.filter(project => project.priority <= max_priority_highlight);
 
     return (
         <Layout>
@@ -40,10 +42,7 @@ export default Home;
 
 export const query = graphql`
 query HomePage {
-  allMarkdownRemark(
-    filter: {frontmatter: {priority: {gte: 0, lte: 1}}}
-    sort: {fields: frontmatter___priority, order: ASC}
-  ) {
+  allMarkdownRemark(sort: {fields: frontmatter___priority, order: ASC}) {
     edges {
       node {
         id
@@ -57,9 +56,7 @@ query HomePage {
           title
           thumb {
             childImageSharp {
-              gatsbyImageData (
-                placeholder: BLURRED
-              )
+              gatsbyImageData(placeholder: BLURRED)
             }
           }
           date(formatString: "MMMM YYYY")
