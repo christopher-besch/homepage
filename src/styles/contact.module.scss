@@ -46,6 +46,7 @@
     mask-size: 90% 90%;
     -webkit-mask-size: 90% 90%;
     transition: mask-size 0.5s;
+    transition: -webkit-mask-size 0.5s;
     mask-repeat: no-repeat;
     -webkit-mask-repeat: no-repeat;
     mask-position: center;
@@ -53,8 +54,8 @@
 }
 
 .content:hover .icon {
-    mask-size: 100% 100%;
-    -webkit-mask-size: 100% 100%;
+    mask-size: 95% 95%;
+    -webkit-mask-size: 95% 95%;
 }
 
 /* responsive layout, only two or one element per row */
