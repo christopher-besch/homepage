@@ -1,1 +1,33 @@
 @import "consts.scss";
+
+.container {
+    margin: 8px auto;
+    max-width: 1000px;
+}
+
+.container::after {
+    /* clear floats afterwards */
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.left, .right {
+    clear: both;
+    display: inline-block;
+    background: $back_sec;
+    padding: 10px 16px;
+    margin: 8px;
+    border-radius: $border-radius;
+    max-width: 80%;
+}
+
+.left {
+    float: right;
+    /* text-align: right; */
+}
+.right {
+    float: left;
+    /* text-align: right; */
+}
+

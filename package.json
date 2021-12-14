@@ -1,9 +1,9 @@
 {
-    "name": "gatsby-starter-hello-world",
+    "name": "chris-besch-homepage",
     "private": true,
-    "description": "A simplified bare-bones starter for Gatsby",
+    "description": "My Personal Homepage.",
     "version": "0.1.0",
-    "license": "0BSD",
+    "license": "MIT",
     "scripts": {
         "build": "node_modules/.bin/gatsby build",
         "develop": "node_modules/.bin/gatsby develop",
@@ -44,9 +44,7 @@
         "react-dom": "^17.0.2",
         "sass": "^1.44.0",
         "ts-graphql-plugin": "^2.1.5",
-        "typescript": "^4.5.2"
-    },
-    "dependencies": {
+        "typescript": "^4.5.2",
         "gatsby-plugin-react-helmet": "^5.3.0",
         "react-helmet": "^6.1.0",
         "types": "^0.1.1"
