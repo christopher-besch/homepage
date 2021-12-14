@@ -23,7 +23,7 @@ const About: React.FC = (props) => {
                 </p>
                 <p className={styles.left}>...6, 5, 4, 3...</p>
                 <p className={styles.right}>
-                    I like people&mdash;a lot.
+                    I like people&mdash;people are great!
                     Whenever possible I work in a team, solving even bigger problems.
                 </p>
                 <p className={styles.left}>...2, 1, zero, all engine running...</p>
