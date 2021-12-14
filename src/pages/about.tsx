@@ -18,7 +18,8 @@ const About: React.FC = (props) => {
                 </p>
                 <p className={styles.left}>12, 11, 10, 9, ignition sequence start...</p>
                 <p className={styles.right}>
-                    When I'm doing my part and others can rely on what I've built, I don't feel so bad for using other people's work as my own foundation.
+                    When I'm doing my part and others can rely on what I've built, I feel fulfilled.
+                    After all I'm using other people's work for my own foundation.
                 </p>
                 <p className={styles.left}>...6, 5, 4, 3...</p>
                 <p className={styles.right}>
