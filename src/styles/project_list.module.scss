@@ -103,6 +103,6 @@
 }
 .content hr {
     border-color: $accent;
-    transition: border-color 0.3s;
+    transition: border-color $transition_time;
     margin: 5px -5px 10px;
 }

@@ -19,7 +19,7 @@ const Home: React.FC<HomeProps> = (props) => {
 
     return (
         <Layout>
-            <Heading heading="Hello Smart People!" sub_heading="I'm a Problem Solver." />
+            <Heading heading="Hello Smart People!" sub_heading="I'm Chris." />
             <div className={styles.container}>
                 <div className={styles.first_con}>
                     <ProjectList className={styles.projects} projects={projects} count={2} />

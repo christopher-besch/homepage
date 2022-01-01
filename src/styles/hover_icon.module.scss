@@ -10,7 +10,7 @@
     width: 100%;
     height: 100%;
     opacity: 0%;
-    transition: opacity 0.3s;
+    transition: opacity $transition_time;
 }
 
 .icon_mono {
@@ -22,7 +22,7 @@
     background: $text;
 
     opacity: 100%;
-    transition: opacity 0.3s;
+    transition: opacity $transition_time;
 
     mask-size: contain;
     -webkit-mask-size: contain;

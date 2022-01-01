@@ -54,7 +54,7 @@
     /* rounded corners */
     border-radius: $border-radius;
     /* hover changes animated */
-    /* transition: 0.3s; */
+    /* transition: $transition_time; */
 }
 
 .hamburger {
@@ -78,7 +78,7 @@
 
         max-height: 0;
         padding: 0 0;
-        transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+        transition: max-height $transition_time ease-out, padding $transition_time ease-out;
         overflow: hidden;
     }
     /* .nav_menu that is preceded by a checked checkbox in .nav */
@@ -86,7 +86,7 @@
         /* grow menu when hamburger clicked */
         max-height: 500px;
         padding: 16px 0;
-        transition: max-height 0.3s ease-in, padding 0.3s ease-in;
+        transition: max-height $transition_time ease-in, padding $transition_time ease-in;
     }
 
     .logo {

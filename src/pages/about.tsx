@@ -9,12 +9,12 @@ const About: React.FC = (props) => {
                 <p className={styles.left}>Twenty seconds and counting.</p>
                 <p className={styles.right}>
                     I'm a problem solver.
-                    Solving problems because we can is amazing, but what really catches my motivation is a user in need&mdash;someone who's problem I can solve.
+                    Solving problems because we can is amazing, but what really catches my motivation is a user who's life I can improve.
                 </p>
                 <p className={styles.left}>T minus 15 seconds, guidance is internal.</p>
                 <p className={styles.right}>
                     The bigger the project, the better; even if it doesn't quite suit my taste.
-                    I don't mind dedicating all my work on the handle of the door to the cockpit of a spacecraft.
+                    I don't mind dedicating all my work to the handle of the door to the cockpit of a spacecraft.
                 </p>
                 <p className={styles.left}>12, 11, 10, 9, ignition sequence start...</p>
                 <p className={styles.right}>

@@ -3,7 +3,6 @@ import React from "react";
 
 import * as styles from "src/styles/project_list.module.scss";
 import { Language, languages } from "src/utils/languages";
-import get_mask from "src/utils/svg_mask";
 import HoverIcon from "./hover_icon";
 
 export type Project = {
@@ -50,39 +49,41 @@ const ProjectList: React.FC<ProjectListProps> = (props) => {
         "--quarter-width": quarter_width,
     } as React.CSSProperties;
     return (
-        <div className={`${styles.projects} ${props.className}`}>
-            {props.projects.map(project =>
-                // TODO: can't link same project twice <- non-unique key
-                <a href={project.link} target="_blank" key={`${project.id}`} className={styles.project} style={width_properties}>
-                    <div className={styles.content}>
-                        <div className={styles.image_wrapper}>
-                            <GatsbyImage className={styles.image} image={project.thumb} alt="thumbnail" />
-                            <div className={styles.overlay}>
-                                <div className={styles.heading}>
-                                    <h3>{project.title}</h3>
-                                </div>
-                                <div className={styles.languages}>
-                                    {project.languages.map(language =>
-                                        <HoverIcon
-                                            className={styles.language_icon}
-                                            key={`${project.id}${language.id}`}
-                                            icon={language.icon}
-                                            icon_mono={language.icon_mono}
-                                            alt={language.id}
-                                            icon_class={styles.icon}
-                                            icon_mono_class={styles.icon_mono}
-                                        />
-                                    )}
+        <div className={styles.projects}>
+            <div className={props.className}>
+                {props.projects.map(project =>
+                    // TODO: can't link same project twice <- non-unique key
+                    <a href={project.link} target="_blank" key={project.id} className={styles.project} style={width_properties}>
+                        <div className={styles.content}>
+                            <div className={styles.image_wrapper}>
+                                <GatsbyImage className={styles.image} image={project.thumb} alt="thumbnail" />
+                                <div className={styles.overlay}>
+                                    <div className={styles.heading}>
+                                        <h3>{project.title}</h3>
+                                    </div>
+                                    <div className={styles.languages}>
+                                        {project.languages.map(language =>
+                                            <HoverIcon
+                                                className={styles.language_icon}
+                                                key={`${project.id}${language.id}`}
+                                                icon={language.icon}
+                                                icon_mono={language.icon_mono}
+                                                alt={language.id}
+                                                icon_class={styles.icon}
+                                                icon_mono_class={styles.icon_mono}
+                                            />
+                                        )}
+                                    </div>
                                 </div>
                             </div>
+                            <hr />
+                            <div className={styles.text}>
+                                <p>{project.description}</p>
+                            </div>
                         </div>
-                        <hr />
-                        <div className={styles.text}>
-                            <p>{project.description}</p>
-                        </div>
-                    </div>
-                </a>
-            )}
+                    </a>
+                )}
+            </div>
         </div>);
 };
 export default ProjectList;
