@@ -1,33 +1,72 @@
 @import "consts.scss";
 
-.container {
-    margin: 8px auto;
-    max-width: 1000px;
-}
-
 .container::after {
-    /* clear floats afterwards */
     content: "";
     display: table;
     clear: both;
 }
 
-.left, .right {
-    clear: both;
-    display: inline-block;
-    background: $back_sec;
-    padding: 10px 16px;
-    margin: 8px;
-    border-radius: $border-radius;
-    max-width: 80%;
-}
-
-.left {
-    float: right;
-    /* text-align: right; */
-}
-.right {
+.left_cont {
+    width: calc(100% - 300px);
     float: left;
-    /* text-align: right; */
+    /* TODO: really should be margin but I can't be bothered */
+    padding: 16px 16px 0px 0px;
 }
 
+.about {
+    width: 100%;
+}
+
+.contacts {
+    width: 300px;
+    float: right;
+}
+
+.content {
+    background-color: $back_sec;
+    padding: 10px;
+    margin: 16px 0px;
+    border-radius: $border_radius;
+}
+
+.content hr {
+    border-color: $accent;
+    transition: border-color $transition_time;
+    margin: 5px -5px 10px;
+}
+
+.icon {
+    display: inline-block;
+    width: 100%;
+    height: 10vh;
+    background-color: $text;
+
+    mask-size: 90% 90%;
+    -webkit-mask-size: 90% 90%;
+    mask-repeat: no-repeat;
+    -webkit-mask-repeat: no-repeat;
+    mask-position: center;
+    -webkit-mask-position: center;
+
+    transition: mask-size $transition_time -webkit-mask-size $transition_time;
+}
+
+.contact:hover .icon {
+    mask-size: 91% 91%;
+    -webkit-mask-size: 91% 91%;
+}
+
+.project:hover hr {
+    border-color: $hover_accent;
+}
+
+@media (max-width: 800px) {
+    .left_cont {
+        width: 100%;
+        /* TODO: really should be margin but I can't be bothered */
+        padding: 16px 0px 0px 0px;
+    }
+    .contacts {
+        width: 100%;
+    }
+}
