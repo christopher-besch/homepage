@@ -24,16 +24,6 @@
     width: var(--full-width);
     text-decoration: none;
 }
-@media (max-width: 1000px) {
-    .project {
-        width: var(--half-width);
-    }
-}
-@media (max-width: 600px) {
-    .project {
-        width: var(--quarter-width);
-    }
-}
 .project:hover .icon {
     opacity: 100%;
 }
@@ -91,7 +81,7 @@
 }
 .text {
     /* used to make all tiles of same height */
-    height: calc(3*25px);
+    height: calc(2*25px);
     font-size: 18px;
 
     /* display: flex; */
@@ -106,4 +96,20 @@
     border-color: $accent;
     transition: border-color $transition_time;
     margin: 5px -5px 10px;
+}
+
+@media (max-width: 1000px) {
+    .project {
+        width: var(--half-width);
+    }
+}
+@media (max-width: 600px) {
+    .project {
+        width: var(--quarter-width);
+    }
+
+    .text {
+        /* used to make all tiles of same height */
+        height: auto;
+    }
 }

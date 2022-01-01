@@ -39,7 +39,7 @@ interface ProjectListProps {
     className?: string;
 }
 const ProjectList: React.FC<ProjectListProps> = (props) => {
-    const count = props.count ? props.count : 4;
+    const count = props.count ? props.count : 3;
     const full_width = `${100 / count}%`;
     const half_width = `${100 / Math.ceil(count / 2)}%`;
     const quarter_width = `${100 / Math.ceil(count / 4)}%`;
