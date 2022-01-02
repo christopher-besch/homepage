@@ -65,7 +65,7 @@ const Privacy: React.FC<PrivacyProps> = (props) => {
                     So if you click on a link to another website, you should read their privacy policy.
                 </p>
 
-                <h1>Changes to our privacy policy</h1>
+                <h1>Changes to my privacy policy</h1>
                 <p>
                     I keep my privacy policy under regular review and place any updates on this web page.
                     This privacy policy was last updated on 2 January 2022.
