@@ -42,22 +42,6 @@ const Privacy: React.FC<PrivacyProps> = (props) => {
                     You should read <a href="https://www.netlify.com/gdpr-ccpa">Netlify's privacy policy</a> as their privacy notice applies.
                 </p>
 
-                <h1>Cookies</h1>
-                <p>
-                    Cookies are text files placed on your computer to collect standard Internet log information and visitor behavior information.
-                </p>
-                <p>
-                    For further information, visit <a href="https://www.allaboutcookies.org">allaboutcookies.org</a>.
-                </p>
-
-                <h1>How do I use cookies?</h1>
-                <p>
-                    This website does not use any cookies or similar technologies.
-                </p>
-                <p>
-                    If you are interested in using cookies yourself, refer to <a href="https://en.m.wikibooks.org/wiki/Cookbook:Chocolate_Chip_Cookies_I">this cookie creation manual</a>.
-                </p>
-
                 <h1>Privacy policies of other websites</h1>
                 <p>
                     My website contains links to other websites.
