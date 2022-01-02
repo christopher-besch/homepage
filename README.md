@@ -28,14 +28,3 @@
 ## Privacy Policy References
 
 - [Writing a GDPR-compliant privacy notice](https://gdpr.eu/privacy-notice)
-
-## About Page
-
-- problem solver
-- real problems
-- bigger projects
-- team
-- backend
-- also frontend
-- Manim
-- many experiments (graphics, LFS)
