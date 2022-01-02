@@ -16,7 +16,7 @@ const Privacy: React.FC<PrivacyProps> = (props) => {
         <Layout heading="Privacy Policy">
             <div className={styles.privacy}>
                 <p>
-                    This privacy policy will explain how I and any necessary third-party services use the personal data we collect from you when you use my website.
+                    This privacy policy will explain how I and any necessary third-party services use the personal data collected from you when you use my website.
                 </p>
 
                 <h1>tl;dr</h1>
@@ -24,7 +24,7 @@ const Privacy: React.FC<PrivacyProps> = (props) => {
                     This website collects your IP address; you should read <a href="https://www.netlify.com/gdpr-ccpa">Netlify's privacy policy</a>.
                 </p>
 
-                <h1>What data do we collect?</h1>
+                <h1>What data do I collect?</h1>
                 <p>
                     I myself don't collect any personal data.
                     Though my hoster <a href="https://www.netlify.com">Netlify</a> does keep an access log required to operate this website.
