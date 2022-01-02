@@ -3,6 +3,7 @@ import { Link, graphql } from "gatsby";
 
 import Layout from "src/components/layout";
 import * as styles from "src/styles/privacy.module.scss";
+import * as util_styles from "src/styles/utils.module.scss";
 import { PrivacyData } from "./__generated__/privacy-data";
 
 interface PrivacyProps {
@@ -14,7 +15,7 @@ const Privacy: React.FC<PrivacyProps> = (props) => {
 
     return (
         <Layout heading="Privacy Policy">
-            <div className={styles.privacy}>
+            <div className={`${styles.privacy} ${util_styles.main_block}`}>
                 <p>
                     This privacy policy will explain how I and any necessary third-party services use the personal data collected from you when you use my website.
                 </p>

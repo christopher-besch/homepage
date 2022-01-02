@@ -1,5 +1,5 @@
 import React from "react";
-import { graphql } from "gatsby";
+import { Link, graphql } from "gatsby";
 import Layout from "src/components/layout";
 import * as styles from "src/styles/about.module.scss";
 import * as util_styles from "src/styles/utils.module.scss";
@@ -33,31 +33,37 @@ const About: React.FC<AboutProps> = (props) => {
                 <div className={styles.left_cont}>
                     <div className={`${util_styles.block} ${styles.about}`}>
                         <p>
-                            I'm a problem solver.
-                            Solving problems because we can is amazing, but what really catches my motivation is a user who's life I can improve.
+                            Hello smart people!
+                            I'm Chris.
                         </p><br />
 
                         <p>
-                            The bigger the project, the better; even if it doesn't quite suit my taste.
-                            I don't mind dedicating all my work to the handle of the door to the cockpit of a spacecraft.
+                            I'm currently one of <a href="https://www.manim.community">Manim's</a> Core Developers where I'm project lead of <a href="https://github.com/ManimCommunity/manim_editor">the Manim Editor</a>.
+                            I really enjoy working in such a diverse community of computer scientists, mathematicians, physicists, astronomers, etc.<br />
+                            The different perspectives those people have of the same project never cease to delight me.
                         </p><br />
 
                         <p>
-                            When I'm doing my part and others can rely on what I've built, I feel fulfilled.
-                            After all I'm using other people's work for my own foundation.
+                            My primary interests lay in tinkering with
+                            <ul>
+                                <li><a href="https://github.com/christopher-besch/maki">renderers</a>,</li>
+                                <li><a href="https://github.com/christopher-besch/time_table_planner">data analysis</a>,</li>
+                                <li><a href="https://github.com/christopher-besch/neural_network">neural networks</a> and</li>
+                                <li><a href="https://github.com/ToddLinux/ToddLinux">Linux</a>.</li>
+                            </ul>
+                            But I also work on the occasional <a href="https://addons.mozilla.org/en-US/firefox/addon/bbb-autostatus">WebDev project</a>.
                         </p><br />
 
                         <p>
-                            I like people&mdash;people are great!
-                            Whenever possible I work in a team, solving even bigger problems.
-                        </p><br />
-
-                        <p>
-                            When it comes to taste, I prefer the Terminal over a GUI, VIM over huge IDEs, backend over frontend, C++ over Python and Linux over Windows.
-                            But those are justs that&mdash;tastes.
-                            When it's absolutely required to work with Visual Studio Code on a frontend for Windows in HTML, I bite the bullet and do it.
-                        </p><br />
-
+                            When it comes to taste, I prefer
+                            <ul>
+                                <li><a href="https://github.com/christopher-besch/miscellaneous_configs">the terminal</a> over a GUI,</li>
+                                <li><a href="https://github.com/christopher-besch/nvim_like_me">VIM</a> over huge IDEs,</li>
+                                <li>backends over frontends, I'm not a good designer by any stretch of the imagination :&gt;,</li>
+                                <li><Link to="/projects/cpp">C++</Link> over <Link to="/projects/python">Python</Link> or <Link to="/projects/typescript">TypeScript</Link> and</li>
+                                <li>Linux over Windows.</li>
+                            </ul>
+                        </p>
                         <p>
                             Have a nice day.
                         </p>

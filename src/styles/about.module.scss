@@ -17,6 +17,28 @@
     width: 100%;
 }
 
+.about p {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    line-height: 18px;
+}
+
+.about h1 {
+    font-size: 40px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.about ul {
+    padding-left: 30px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.about li {
+    list-style-type: disc;
+}
+
 .contacts {
     width: 300px;
     float: right;

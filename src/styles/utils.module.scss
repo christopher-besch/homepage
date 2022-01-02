@@ -1,10 +1,14 @@
 @import "consts.scss";
 
-.block {
+.main_block, .block {
     display: inline-block;
     background: $back_sec;
     padding: 10px 16px;
     border-radius: $border-radius;
+}
+
+main_block {
+    margin-top: 16px;
 }
 
 .link {
