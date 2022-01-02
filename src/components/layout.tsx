@@ -86,6 +86,7 @@ query SiteInfo {
                     <li className={styles.link}><a href={linkedin}>LinkedIn</a></li>
                     <li className={styles.link}><a href={discord}>Discord</a></li>
                     <li className={styles.link}><a href={email}>Mail</a></li>
+                    <li className={styles.link}><Link to="/privacy">Privacy</Link></li>
                     <li><p>&#169; 2022</p></li>
                     <li className={styles.emoji}><p>🔗</p></li>
                 </ul>

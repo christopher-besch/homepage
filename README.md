@@ -22,6 +22,10 @@
 - [Apollo 11 medium.com](https://medium.com/the-machinery-of-the-heavens/ignition-sequence-start-46ddfe40df65)
 - [Public Affairs Speaker Transcript](https://www.history.nasa.gov/afj/ap11fj/01launch.html#f1start)
 
+## Privacy Policy References
+
+- [Writing a GDPR-compliant privacy notice](https://gdpr.eu/privacy-notice)
+
 ## About Page
 
 - problem solver

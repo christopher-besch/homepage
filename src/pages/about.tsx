@@ -89,8 +89,7 @@ const About: React.FC<AboutProps> = (props) => {
                         <div className={styles.content}>
                             <span className={styles.icon} style={get_mask("/icons/email-svgrepo-com.svg")}></span>
                             <hr />
-                            {/* <h3>{email_name}</h3> */}
-                            <h3>chris@chris-besch.com</h3>
+                            <h3>{email_name}</h3>
                         </div>
                     </a>
                 </div>
