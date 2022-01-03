@@ -2402,6 +2402,8 @@ enum SiteFieldsEnum {
   siteMetadata___description
   siteMetadata___email___name
   siteMetadata___email___link
+  siteMetadata___privacy_email___name
+  siteMetadata___privacy_email___link
   siteMetadata___github___name
   siteMetadata___github___link
   siteMetadata___linkedin___name
@@ -3069,6 +3071,7 @@ type SiteSiteMetadata {
   title: String
   description: String
   email: SiteSiteMetadataEmail
+  privacy_email: SiteSiteMetadataPrivacy_email
   github: SiteSiteMetadataGithub
   linkedin: SiteSiteMetadataLinkedin
   discord: SiteSiteMetadataDiscord
@@ -3099,6 +3102,7 @@ input SiteSiteMetadataFilterInput {
   title: StringQueryOperatorInput
   description: StringQueryOperatorInput
   email: SiteSiteMetadataEmailFilterInput
+  privacy_email: SiteSiteMetadataPrivacy_emailFilterInput
   github: SiteSiteMetadataGithubFilterInput
   linkedin: SiteSiteMetadataLinkedinFilterInput
   discord: SiteSiteMetadataDiscordFilterInput
@@ -3121,6 +3125,16 @@ type SiteSiteMetadataLinkedin {
 }
 
 input SiteSiteMetadataLinkedinFilterInput {
+  name: StringQueryOperatorInput
+  link: StringQueryOperatorInput
+}
+
+type SiteSiteMetadataPrivacy_email {
+  name: String
+  link: String
+}
+
+input SiteSiteMetadataPrivacy_emailFilterInput {
   name: StringQueryOperatorInput
   link: StringQueryOperatorInput
 }

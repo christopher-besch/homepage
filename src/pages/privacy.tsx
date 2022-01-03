@@ -10,8 +10,8 @@ interface PrivacyProps {
     data: PrivacyData;
 }
 const Privacy: React.FC<PrivacyProps> = (props) => {
-    const email_name = props.data.site?.siteMetadata?.email?.name as string;
-    const email_link = props.data.site?.siteMetadata?.email?.link as string;
+    const email_name = props.data.site?.siteMetadata?.privacy_email?.name as string;
+    const email_link = props.data.site?.siteMetadata?.privacy_email?.link as string;
 
     return (
         <Layout heading="Privacy Policy">
@@ -76,7 +76,7 @@ export const query = graphql`
 query PrivacyData {
   site {
     siteMetadata {
-      email {
+      privacy_email {
         name
         link
       }

@@ -77,6 +77,10 @@ module.exports = {
             name: "mail@chris-besch.com",
             link: "mailto:mail@chris-besch.com",
         },
+        privacy_email: {
+            name: "privacy@chris-besch.com",
+            link: "mailto:privacy@chris-besch.com",
+        },
         github: {
             name: "christopher-besch",
             link: "https://github.com/christopher-besch",
