@@ -74,8 +74,8 @@ module.exports = {
     // can be loaded from page with GraphQL
     siteMetadata: {
         email: {
-            name: "christopher.besch@manim.community",
-            link: "mailto:christopher.besch@manim.community",
+            name: "mail@chris-besch.com",
+            link: "mailto:mail@chris-besch.com",
         },
         github: {
             name: "christopher-besch",
@@ -89,6 +89,6 @@ module.exports = {
             name: "Stromel#1046",
             link: "https://discord.com/users/455374552352948236",
         },
-        address: "https://dev.chris-besch.codes",
+        address: "https://chris-besch.com",
     },
 }
