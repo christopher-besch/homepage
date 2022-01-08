@@ -1,6 +1,6 @@
 ---
 title: Maki
-description: Experimental Rendering Backend for Manim. Or: How to Time Travel?
+description: "Experimental Rendering Backend for Manim. Or: How to Time Travel?"
 slug: maki
 link: https://github.com/christopher-besch/maki
 priority: 7
