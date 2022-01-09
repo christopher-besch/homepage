@@ -59,7 +59,7 @@ const ProjectList: React.FC<ProjectListProps> = (props) => {
                                 <GatsbyImage className={styles.image} image={project.thumb} alt="thumbnail" />
                                 <div className={styles.overlay}>
                                     <div className={styles.heading}>
-                                        <h3>{project.title}</h3>
+                                        <h2>{project.title}</h2>
                                     </div>
                                     <div className={styles.languages}>
                                         {project.languages.map(language =>
