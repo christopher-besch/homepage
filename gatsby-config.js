@@ -93,6 +93,7 @@ module.exports = {
             name: "Stromel#1046",
             link: "https://discord.com/users/455374552352948236",
         },
+        source: "https://github.com/christopher-besch/homepage",
         address: "https://chris-besch.com",
     },
 }

@@ -17,32 +17,13 @@ const Layout: React.FC<LayoutProps> = (props) => {
 query SiteInfo {
   site {
     siteMetadata {
-      linkedin {
-        name
-        link
-      }
-      email {
-        name
-        link
-      }
-      discord {
-        name
-        link
-      }
-      github {
-        name
-        link
-      }
+      source
       address
     }
   }
 }
     `);
-    const discord = data.site?.siteMetadata?.discord?.link as string;
-    const email = data.site?.siteMetadata?.email?.link as string;
-    const github = data.site?.siteMetadata?.github?.link as string;
-    const linkedin = data.site?.siteMetadata?.linkedin?.link as string;
-
+    const source = data.site?.siteMetadata?.source as string;
     const address = data.site?.siteMetadata?.address as string;
     const title = props.heading ? `Christopher Besch—${props.heading}` : "Christopher Besch—Software Developer";
 
@@ -82,10 +63,8 @@ query SiteInfo {
 
             <footer className={styles.footer}>
                 <ul>
-                    <li className={styles.link}><a href={github} target="_blank">GitHub</a></li>
-                    <li className={styles.link}><a href={linkedin} target="_blank">LinkedIn</a></li>
-                    <li className={styles.link}><a href={discord} target="_blank">Discord</a></li>
-                    <li className={styles.link}><a href={email} target="_blank">Mail</a></li>
+                    <li className={styles.link}><Link to="/about">Contact</Link></li>
+                    <li className={styles.link}><a href={source} target="_blank">Source</a></li>
                     <li className={styles.link}><Link to="/privacy">Privacy</Link></li>
                     <li><p>&#169; 2022</p></li>
                     <li className={styles.emoji}><p>🔗</p></li>
