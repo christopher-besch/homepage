@@ -66,6 +66,7 @@
 .heading {
     margin-left: 15px;
     margin-right: 5px;
+    font-size: 30px;
 }
 .languages {
     display: flex;
@@ -75,10 +76,6 @@
     font-size: 35px;
 }
 
-.content h2 {
-    width:  100%;
-    font-size: 22px;
-}
 .text {
     /* used to make all tiles of same height */
     height: calc(2*25px);

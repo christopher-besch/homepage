@@ -52,15 +52,13 @@ const ProjectList: React.FC<ProjectListProps> = (props) => {
         <div className={styles.projects}>
             <div className={props.className}>
                 {props.projects.map(project =>
-                    // TODO: can't link same project twice <- non-unique key
+                    // TODO: can't link same project twice <- non-unique key; only problem when using two project lists
                     <a href={project.link} target="_blank" key={project.id} className={styles.project} style={width_properties}>
                         <div className={styles.content}>
                             <div className={styles.image_wrapper}>
                                 <GatsbyImage className={styles.image} image={project.thumb} alt="thumbnail" />
                                 <div className={styles.overlay}>
-                                    <div className={styles.heading}>
-                                        <h2>{project.title}</h2>
-                                    </div>
+                                    <h2 className={styles.heading}>{project.title}</h2>
                                     <div className={styles.languages}>
                                         {project.languages.map(language =>
                                             <HoverIcon
