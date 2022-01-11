@@ -1,4 +1,5 @@
 ---
+type: project
 title: OHG Plan Parser
 description: Parser for the Substitution plan of the Otto-Hahn-Gymnasium Gifhorn.
 slug: ohg_plan_parser

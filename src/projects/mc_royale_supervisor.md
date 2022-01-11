@@ -1,4 +1,5 @@
 ---
+type: project
 title: MC Royale Supervisor
 description: Minecraft Battle Royale mode with Supervisor Powers through a Webinterface.
 slug: mc_royale_supervisor

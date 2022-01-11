@@ -1,4 +1,5 @@
 ---
+type: project
 title: Maki
 description: "Experimental Rendering Backend for Manim. Or: How to Time Travel?"
 slug: maki

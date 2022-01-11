@@ -1,6 +1,18 @@
 const path = require("path");
 
 exports.createPages = async ({ graphql, actions }) => {
+    const { data } = await graphql(`
+query Articles {
+  allMarkdownRemark {
+    nodes {
+      frontmatter {
+        slug
+      }
+    }
+  }
+}
+    `);
+
     // TODO: ridiculousness to be removed with typescript
     const languages = ["python", "cpp", "typescript", "java"];
 
@@ -14,15 +26,15 @@ exports.createPages = async ({ graphql, actions }) => {
         })
     });
 
-    // data.allMarkdownRemark.nodes.forEach(node => {
-    //     actions.createPage({
-    //         path: `project/${node.frontmatter.slug}`,
-    //         component: path.resolve("./src/templates/project.tsx"),
-    //         context: {
-    //             slug: node.frontmatter.slug,
-    //         },
-    //     })
+    data.allMarkdownRemark.nodes.forEach(node => {
+        actions.createPage({
+            path: `articles/${node.frontmatter.slug}`,
+            component: path.resolve("./src/templates/article.tsx"),
+            context: {
+                slug: node.frontmatter.slug,
+            },
+        })
 
-    // });
+    });
 
-}
+};

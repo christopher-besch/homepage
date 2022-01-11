@@ -1,4 +1,5 @@
 ---
+type: project
 title: Technik³ Plan
 description: Plan a School Event.
 slug: technik3_plan

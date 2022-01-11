@@ -1,4 +1,5 @@
 ---
+type: project
 title: Manim Editor
 slug: manim_editor
 description: Web Presenter for Mathematical Animations using Manim.

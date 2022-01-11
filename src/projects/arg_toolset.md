@@ -1,4 +1,5 @@
 ---
+type: project
 title: Arg Toolset
 description: Toolkit aiding in solving alternate reality games.
 slug: arg_toolset

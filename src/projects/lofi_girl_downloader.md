@@ -1,4 +1,5 @@
 ---
+type: project
 title: Lofi Girl Downloader
 description: Download and order all music from Lofi Girl.
 slug: lofi_girl_downloader

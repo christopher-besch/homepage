@@ -1,4 +1,5 @@
 ---
+type: project
 title: Social Blog
 description: A little School Project using SQLite and Java.
 slug: social_blog

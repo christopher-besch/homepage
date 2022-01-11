@@ -1,4 +1,5 @@
 ---
+type: project
 title: Cryptography
 slug: cryptography
 description: Cryptography Cracking Tool.

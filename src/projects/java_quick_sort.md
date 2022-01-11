@@ -1,4 +1,5 @@
 ---
+type: project
 title: Java Quick Sort
 description: Example Implementation of Quick Sort.
 slug: java_sorting_algorithms

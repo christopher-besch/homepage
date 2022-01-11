@@ -1,4 +1,5 @@
 ---
+type: project
 title: Book Page Converter
 description: Convert Page Numbers between Different Versions of the same Book.
 slug: book_page_converter

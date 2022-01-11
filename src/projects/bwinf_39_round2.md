@@ -1,4 +1,5 @@
 ---
+type: project
 title: BwInf 39 Round 2
 description: Coding Competition.
 slug: bwinf_39_round2

@@ -28,7 +28,10 @@ export default with_location(Projects);
 
 export const query = graphql`
 query ProjectsPage {
-  allMarkdownRemark(sort: {fields: frontmatter___priority, order: ASC}) {
+  allMarkdownRemark(
+    sort: {fields: frontmatter___priority, order: ASC},
+    filter: {frontmatter: {type: {eq: "project"}}}
+  ) {
     edges {
       node {
         id
