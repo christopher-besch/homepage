@@ -35,3 +35,4 @@ Lighthouse report
 ## Privacy Policy References
 
 - [Writing a GDPR-compliant privacy notice](https://gdpr.eu/privacy-notice)
+
