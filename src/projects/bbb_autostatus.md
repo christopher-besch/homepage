@@ -1,4 +1,5 @@
 ---
+type: project
 title: BBB Autostatus
 slug: bbb_autostatus
 description: Firefox Extension Simulating Human Interaction in Video Conferences.

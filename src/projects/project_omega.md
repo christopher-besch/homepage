@@ -1,4 +1,5 @@
 ---
+type: project
 title: Project Omega
 slug: project_omega
 description: Article Publication Website.

@@ -1,7 +1,6 @@
 const path = require("path");
 
 module.exports = {
-    pathPrefix: "/homepage",
     plugins: [
         // support TypeScript
         {
@@ -39,6 +38,13 @@ module.exports = {
             options: {
                 name: "projects",
                 path: `${__dirname}/src/projects`,
+            }
+        },
+        {
+            resolve: "gatsby-source-filesystem",
+            options: {
+                name: "articles",
+                path: `${__dirname}/src/articles`,
             }
         },
         // image handling

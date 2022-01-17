@@ -63,7 +63,7 @@ const About: React.FC<AboutProps> = (props) => {
                                 <li><Link to="/projects/cpp">C++</Link> over <Link to="/projects/python">Python</Link> or <Link to="/projects/typescript">TypeScript</Link> and</li>
                                 <li>Linux over Windows.</li>
                             </ul>
-                        </p>
+                        </p><br />
                         <p>
                             Have a nice day.
                         </p>

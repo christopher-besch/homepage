@@ -1,4 +1,5 @@
 ---
+type: project
 title: Todd Linux
 description: Experimental Source-Based Linux Distribution.
 slug: todd_linux

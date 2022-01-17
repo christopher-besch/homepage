@@ -861,6 +861,7 @@ enum FileFieldsEnum {
   childrenMarkdownRemark
   childrenMarkdownRemark___id
   childrenMarkdownRemark___frontmatter___title
+  childrenMarkdownRemark___frontmatter___type
   childrenMarkdownRemark___frontmatter___description
   childrenMarkdownRemark___frontmatter___slug
   childrenMarkdownRemark___frontmatter___link
@@ -960,6 +961,7 @@ enum FileFieldsEnum {
   childrenMarkdownRemark___internal___type @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
   childMarkdownRemark___id
   childMarkdownRemark___frontmatter___title
+  childMarkdownRemark___frontmatter___type
   childMarkdownRemark___frontmatter___description
   childMarkdownRemark___frontmatter___slug
   childMarkdownRemark___frontmatter___link
@@ -1821,6 +1823,7 @@ type MarkdownRemarkEdge {
 enum MarkdownRemarkFieldsEnum {
   id
   frontmatter___title
+  frontmatter___type
   frontmatter___description
   frontmatter___slug
   frontmatter___link
@@ -2032,6 +2035,7 @@ input MarkdownRemarkFilterListInput {
 
 type MarkdownRemarkFrontmatter {
   title: String
+  type: String
   description: String
   slug: String
   link: String
@@ -2064,6 +2068,7 @@ type MarkdownRemarkFrontmatter {
 
 input MarkdownRemarkFrontmatterFilterInput {
   title: StringQueryOperatorInput
+  type: StringQueryOperatorInput
   description: StringQueryOperatorInput
   slug: StringQueryOperatorInput
   link: StringQueryOperatorInput

@@ -1,4 +1,5 @@
 ---
+type: project
 title: Homepage
 description: This Homepage.
 slug: homepage

@@ -1,4 +1,5 @@
 ---
+type: project
 title: Lake Visualizer
 description: Interactive Problem Visualizer for the 39th BwInf, 2nd round, 3rd task.
 slug: lake_visualizer

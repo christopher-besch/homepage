@@ -1,4 +1,5 @@
 ---
+type: project
 title: Who Am I
 description: '"Who Am I" Game with Your Friends as Characters.'
 slug: who_am_i

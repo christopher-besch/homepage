@@ -1,4 +1,5 @@
 ---
+type: project
 title: Blender Models
 description: Amateur 3D Models created with Blender.
 slug: blender_models

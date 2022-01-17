@@ -1,4 +1,5 @@
 ---
+type: project
 title: Java Encryption
 description: A Funky Encryption Algorithm no one should ever use.
 slug: java_encryption

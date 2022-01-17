@@ -1,4 +1,5 @@
 ---
+type: project
 title: Time Table Planner
 description: Data Analysis and Visualization Project.
 slug: time_table_planner

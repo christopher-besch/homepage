@@ -1,4 +1,5 @@
 ---
+type: project
 title: Lynton
 slug: lynton
 description: Experimental Game Engine.

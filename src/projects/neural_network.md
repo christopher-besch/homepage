@@ -1,4 +1,5 @@
 ---
+type: project
 title: Neural Network
 slug: neural_network
 description: Experimental Deep-Learning Framework.

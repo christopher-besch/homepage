@@ -35,7 +35,7 @@ export const query = graphql`
 query ProjectsLanguagePage($language: [String]) {
   allMarkdownRemark(
     sort: {fields: frontmatter___priority, order: ASC}
-    filter: {frontmatter: {languages: {in: $language}}}
+    filter: {frontmatter: {type: {eq: "project"}, languages: {in: $language}}}
   ) {
     edges {
       node {

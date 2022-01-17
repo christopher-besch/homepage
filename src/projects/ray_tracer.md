@@ -1,4 +1,5 @@
 ---
+type: project
 title: Ray Tracer
 slug: ray_tracer
 description: Experimental Offline Ray Tracer.
