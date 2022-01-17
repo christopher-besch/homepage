@@ -1,7 +1,7 @@
 # My Homepage
 
 [![Gatsby Dev Build](https://github.com/christopher-besch/homepage/actions/workflows/build_dev.yml/badge.svg)](https://github.com/christopher-besch/homepage/actions/workflows/build_dev.yml)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/d4019205-7938-4358-b65b-1c6f4e20ef8f/deploy-status)](https://app.netlify.com/sites/modest-kepler-516321/deploys)
+[![Netlify Status](https://app.netlify.com)
 
 Lighthouse report
 
