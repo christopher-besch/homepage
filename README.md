@@ -10,6 +10,10 @@ Lighthouse report
 - [Production Deployment](https://chris-besch.com)
 - [Debug Build](https://dev.chris-besch.com)
 
+This is the homepage of a backend dev, who doesn't particularly care about looks.
+Why does the author not mind some barebone styling?
+Read [this](https://motherfuckingwebsite.com).
+
 ## Coding Refereneces
 
 - [Gatsby](https://github.com/christopher-besch/typescript_reference/tree/main/gatsby)
