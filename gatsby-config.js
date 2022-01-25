@@ -59,9 +59,10 @@ module.exports = {
         },
         // load markdown
         {
-            resolve: "gatsby-transformer-remark",
+            resolve: "gatsby-plugin-mdx",
             options: {
-                plugins: [
+                extensions: [".md", ".mdx"],
+                gatsbyRemarkPlugins: [
                     {
                         // load images from markdown
                         resolve: "gatsby-remark-images",

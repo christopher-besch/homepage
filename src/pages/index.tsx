@@ -14,7 +14,7 @@ interface HomeProps {
     data: HomePage
 }
 const Home: React.FC<HomeProps> = (props) => {
-    const all_projects = props.data.allMarkdownRemark.edges.map(gql_to_project);
+    const all_projects = props.data.allMdx.edges.map(gql_to_project);
     const projects = all_projects.filter(project => project.priority <= max_priority_highlight);
 
     return (
@@ -47,7 +47,7 @@ export default Home;
 
 export const query = graphql`
 query HomePage {
-  allMarkdownRemark(
+  allMdx(
     sort: {fields: frontmatter___priority, order: ASC},
     filter: {frontmatter: {type: {eq: "project"}}}
   ) {

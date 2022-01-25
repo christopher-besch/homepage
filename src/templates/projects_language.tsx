@@ -17,7 +17,7 @@ interface ProjectsLanguageProps extends PropsWithLocation {
 }
 const ProjectsLanguage: React.FC<ProjectsLanguageProps> = (props) => {
     const max_priority = props.search.max_priority != null ? parseInt(props.search.max_priority as string) : max_priority_language_default;
-    const all_projects = props.data.allMarkdownRemark.edges.map(gql_to_project);
+    const all_projects = props.data.allMdx.edges.map(gql_to_project);
     const projects = all_projects.filter(project => project.priority <= max_priority);
     const selected_language_id = props.pageContext.language;
     const selected_language = languages.get(selected_language_id)!;
@@ -33,7 +33,7 @@ export default with_location(ProjectsLanguage);
 
 export const query = graphql`
 query ProjectsLanguagePage($language: [String]) {
-  allMarkdownRemark(
+  allMdx(
     sort: {fields: frontmatter___priority, order: ASC}
     filter: {frontmatter: {type: {eq: "project"}, languages: {in: $language}}}
   ) {

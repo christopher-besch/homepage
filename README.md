@@ -23,6 +23,7 @@ Read [this](https://motherfuckingwebsite.com).
 - [reset.css](https://meyerweb.com/eric/tools/css/reset)
 - [Icons](https://css-tricks.com/change-color-of-svg-on-hover)
 - [Query String](https://github.com/chrisfitkin/gatsby-query-string-demo)
+- [MDX with code highlighting](https://malikgabroun.com/blog/syntax-highlighting-in-gatsby-mdx)
 
 ## Styling References
 
