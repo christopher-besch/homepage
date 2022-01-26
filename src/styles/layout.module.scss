@@ -9,6 +9,11 @@
     background-color: $nav;
     color: $text;
 }
+@media print {
+    .nav {
+        display: none !important;
+    }
+}
 
 .nav input[type=checkbox] {
     display: none;
@@ -131,6 +136,11 @@
     padding-bottom: 10px;
     font-family: Menlo, monospace;
     background-color: $nav;
+}
+@media print {
+    .footer {
+        display: none !important;
+    }
 }
 
 .footer ul {

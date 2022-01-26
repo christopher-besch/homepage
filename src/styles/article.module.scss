@@ -7,3 +7,13 @@
     float: right;
     /* width: 100%; */
 }
+.author {
+    float: right;
+    margin-right: 5px;
+    display: none;
+}
+@media print {
+    .author {
+        display: inline !important;
+    }
+}

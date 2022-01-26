@@ -18,6 +18,7 @@ const Project: React.FC<ProjectProps> = (props) => {
         <Layout heading={title}>
             <div className={markdown_styles.markdown_body}>
                 <p className={styles.date}>{date}</p>
+                <p className={styles.author}>Christopher Besch,</p>
                 <MDXRenderer className={styles.article}>{body}</MDXRenderer>
             </div>
         </Layout>
