@@ -3,7 +3,7 @@ const path = require("path");
 exports.createPages = async ({ graphql, actions }) => {
     const { data } = await graphql(`
 query Articles {
-  allMdx {
+  allMdx(filter: {frontmatter: {type: {eq: "article"}}}) {
     nodes {
       frontmatter {
         slug
