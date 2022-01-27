@@ -5,7 +5,7 @@ description: How to implement an efficient time traveling renderer.
 slug: maki_01
 date: 2022-01-26T00:00:00+00:00
 listed: true
-1--
+---
 
 <!-- problem -->
 To create animations for technical concepts, one is advised to use graphics software with a programmatic approach.
