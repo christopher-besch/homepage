@@ -5,7 +5,28 @@ description: How to implement an efficient time traveling renderer.
 slug: maki_01
 date: 2022-01-26T00:00:00+00:00
 listed: true
----
+1--
+
+<!-- problem -->
+To create animations for technical concepts, one is advised to use graphics software with a programmatic approach.
+While these provide the required precision, they suffer from an inherent disconnect between input and output.
+An alternative are WYSIWYG programs, which avoid this detachment with interactivity at the cost of precision.
+
+<!-- purpose and methods -->
+The purpose of this article is to outline how a program for interactive and programmatic animation development can be implemented.
+To experiment with different technologies and programming paradigms, I created a developmental implementation called Maki.
+This article analyses Maki's design and evaluates the feasibility of its inclusion in an already existing animation framework.
+
+<!-- results -->
+
+<!-- conclusion -->
+
+# Maki
+The goal of Maki is to allow the user to develop 3D animations using Python code.
+Maki offers a window with the current animation, while the user is constructing their animation in an interactive shell.
+The user is able to freely move the camera in that window.
+In addition to that, the Maki provides the ability to *jump in time*.
+This can be used to show an arbitrary frame of the animation or even reverse its flow of time.
 
 # Atoms
 Just like how real atoms were thought to be the indivisible unit of the universe `Atom`s are the smallest renderable unit in Maki.

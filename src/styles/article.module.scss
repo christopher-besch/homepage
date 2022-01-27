@@ -3,17 +3,42 @@
 .article {
     /* margin-top: 10px; */
 }
-.date {
+.heading {
+    /* float: right; */
+    text-align: right;
+    padding-left: 20px;
+    margin-bottom: 5px;
+}
+.metadata {
     float: right;
-    /* width: 100%; */
 }
 .author {
-    float: right;
-    margin-right: 5px;
     display: none;
 }
+
 @media print {
+    .heading {
+        width: 100% !important;
+    }
     .author {
         display: inline !important;
+    }
+    .heading::after {
+        /* clear floats afterwards */
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
+
+@media (max-width: 800px) {
+    .heading {
+        width: 100%;
+    }
+    .heading::after {
+        /* clear floats afterwards */
+        content: "";
+        display: table;
+        clear: both;
     }
 }
