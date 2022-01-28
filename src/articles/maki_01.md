@@ -22,10 +22,10 @@ This article analyses Maki's design and evaluates the feasibility of its inclusi
 <!-- conclusion -->
 
 # Maki
-The goal of Maki is to allow the user to develop 3D animations using Python code.
-Maki offers a window with the current animation, while the user is constructing their animation in an interactive shell.
+The goal of Maki is to allow the user to specify 3D animations using Python.
+While the user is constructing their animation in an interactive shell, Maki shows the current status of the animation in a separate window.
 The user is able to freely move the camera in that window.
-In addition to that, the Maki provides the ability to *jump in time*.
+In addition to that, Maki provides the ability to *jump in time*.
 This can be used to show an arbitrary frame of the animation or even reverse its flow of time.
 
 # Atoms

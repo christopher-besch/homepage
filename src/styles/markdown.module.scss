@@ -6,17 +6,12 @@
     border-radius: $border-radius;
     /* background-color: $back_sec; */
 }
-/* .markdown_body ul { */
-/*     list-style-type: disc; */
-/* } */
-/* .markdown_body li { */
-/*     display: list-item; */
-/* } */
-/* .markdown_body ol { */
-/*     list-style-type: decimal; */
-/* } */
 
-// following code from https://github.com/sindresorhus/github-markdown-css
+.markdown_body em {
+  font-style: italic;
+}
+
+// following code copied and slightly modified from https://github.com/sindresorhus/github-markdown-css
 /* MIT License */
 
 /* Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com) */
