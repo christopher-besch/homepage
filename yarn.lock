@@ -5554,7 +5554,7 @@ gatsby-react-router-scroll@^5.3.0, gatsby-react-router-scroll@^5.6.0:
     "@babel/runtime" "^7.15.4"
     prop-types "^15.7.2"
 
-gatsby-remark-images@^6.3.0:
+gatsby-remark-images@^6.6.0:
   version "6.6.0"
   resolved "https://registry.yarnpkg.com/gatsby-remark-images/-/gatsby-remark-images-6.6.0.tgz#4fd5b26715dace7f0308cb356ec9b4a9cf3cacfe"
   integrity sha512-GZTq2fQnTDLOA7O+eoWi8iztLLuoRHFHiu3YTb6ahKZbbKtCM8JumiEOS3m/mZ64GJGjPSA1PCYdeliQiNq3WQ==
