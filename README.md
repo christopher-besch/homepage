@@ -25,6 +25,7 @@ Read [this](https://motherfuckingwebsite.com).
 - [Query String](https://github.com/chrisfitkin/gatsby-query-string-demo)
 - [MDX with code highlighting](https://malikgabroun.com/blog/syntax-highlighting-in-gatsby-mdx)
 - [Social Preview](https://chrisko.io/posts/how-to-preview-your-website-on-social-media-with-meta-tags)
+- [Social Preview Tips](https://www.seoquake.com/blog/open-graph-meta-tags-for-facebook-and-twitter)
 
 ## Styling References
 

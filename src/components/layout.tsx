@@ -3,11 +3,12 @@ import React from "react";
 import { SiteInfo } from "./__generated__/site-info";
 import { Helmet } from "react-helmet";
 
+import { PropsWithLocation, with_location } from "src/utils/with_location";
 import Heading from "src/components/heading";
 import "src/styles/global.scss";
 import * as styles from "src/styles/layout.module.scss";
 
-interface LayoutProps {
+interface LayoutProps extends PropsWithLocation {
     heading?: string;
     sub_heading?: string;
     icon?: string;
@@ -35,11 +36,12 @@ query SiteInfo {
         <div>
             <Helmet htmlAttributes={{ lang: "en" }}>
                 <meta charSet="utf-8" />
+                <meta property="og:url" content={props.location.href} />
                 <meta property="og:title" content={title} />
                 {description ? <meta property="og:description" content={description} /> : undefined}
                 {banner ? <meta property="og:image" content={banner} /> : undefined}
+                <meta name="twitter:card" content={banner ? "summary_large_image" : "summary"} />
                 <meta name="twitter:site" content="@besch_chris" />
-                <meta name="twitter:card" content={banner ? "summary || summary_large_image" : "summary"} />
                 <meta name="twitter:creator" content="@besch_chris" />
 
                 <meta name="author" content="Christopher Besch" />
@@ -82,4 +84,4 @@ query SiteInfo {
         </div>
     );
 }
-export default Layout;
+export default with_location(Layout);
