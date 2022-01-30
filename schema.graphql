@@ -863,8 +863,8 @@ enum FileFieldsEnum {
   childrenMdx___fileAbsolutePath
   childrenMdx___frontmatter___title
   childrenMdx___frontmatter___type
-  childrenMdx___frontmatter___slug
   childrenMdx___frontmatter___description
+  childrenMdx___frontmatter___slug
   childrenMdx___frontmatter___link
   childrenMdx___frontmatter___priority
   childrenMdx___frontmatter___date
@@ -908,6 +908,8 @@ enum FileFieldsEnum {
   childrenMdx___frontmatter___thumb___childrenMdx
   childrenMdx___frontmatter___thumb___id
   childrenMdx___frontmatter___thumb___children
+  childrenMdx___frontmatter___banner
+  childrenMdx___frontmatter___listed
   childrenMdx___slug
   childrenMdx___body
   childrenMdx___excerpt @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
@@ -963,8 +965,8 @@ enum FileFieldsEnum {
   childMdx___fileAbsolutePath
   childMdx___frontmatter___title
   childMdx___frontmatter___type
-  childMdx___frontmatter___slug
   childMdx___frontmatter___description
+  childMdx___frontmatter___slug
   childMdx___frontmatter___link
   childMdx___frontmatter___priority
   childMdx___frontmatter___date
@@ -1008,6 +1010,8 @@ enum FileFieldsEnum {
   childMdx___frontmatter___thumb___childrenMdx
   childMdx___frontmatter___thumb___id
   childMdx___frontmatter___thumb___children
+  childMdx___frontmatter___banner
+  childMdx___frontmatter___listed
   childMdx___slug
   childMdx___body
   childMdx___excerpt @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
@@ -1804,8 +1808,8 @@ enum MdxFieldsEnum {
   fileAbsolutePath
   frontmatter___title
   frontmatter___type
-  frontmatter___slug
   frontmatter___description
+  frontmatter___slug
   frontmatter___link
   frontmatter___priority
   frontmatter___date
@@ -1891,6 +1895,8 @@ enum MdxFieldsEnum {
   frontmatter___thumb___internal___mediaType
   frontmatter___thumb___internal___owner
   frontmatter___thumb___internal___type
+  frontmatter___banner
+  frontmatter___listed
   slug
   body
   excerpt @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
@@ -2018,8 +2024,8 @@ input MdxFilterListInput {
 type MdxFrontmatter {
   title: String!
   type: String
-  slug: String
   description: String
+  slug: String
   link: String
   priority: Int
   date(
@@ -2046,19 +2052,23 @@ type MdxFrontmatter {
   languages: [String]
   dependencies: [String]
   thumb: File
+  banner: String
+  listed: Boolean
 }
 
 input MdxFrontmatterFilterInput {
   title: StringQueryOperatorInput
   type: StringQueryOperatorInput
-  slug: StringQueryOperatorInput
   description: StringQueryOperatorInput
+  slug: StringQueryOperatorInput
   link: StringQueryOperatorInput
   priority: IntQueryOperatorInput
   date: DateQueryOperatorInput
   languages: StringQueryOperatorInput
   dependencies: StringQueryOperatorInput
   thumb: FileFilterInput
+  banner: StringQueryOperatorInput
+  listed: BooleanQueryOperatorInput
 }
 
 type MdxGroupConnection {
