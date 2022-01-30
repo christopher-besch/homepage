@@ -24,6 +24,7 @@ Read [this](https://motherfuckingwebsite.com).
 - [Icons](https://css-tricks.com/change-color-of-svg-on-hover)
 - [Query String](https://github.com/chrisfitkin/gatsby-query-string-demo)
 - [MDX with code highlighting](https://malikgabroun.com/blog/syntax-highlighting-in-gatsby-mdx)
+- [Social Preview](https://chrisko.io/posts/how-to-preview-your-website-on-social-media-with-meta-tags)
 
 ## Styling References
 
