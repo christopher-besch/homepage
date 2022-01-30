@@ -11,6 +11,8 @@ interface LayoutProps {
     heading?: string;
     sub_heading?: string;
     icon?: string;
+    description?: string;
+    banner?: string;
 }
 const Layout: React.FC<LayoutProps> = (props) => {
     const data: SiteInfo = useStaticQuery(graphql`
@@ -25,16 +27,23 @@ query SiteInfo {
     `);
     const source = data.site?.siteMetadata?.source as string;
     const address = data.site?.siteMetadata?.address as string;
-    const title = props.heading ? `Christopher Besch—${props.heading}` : "Christopher Besch—Software Developer";
+    const title = props.heading ? `${props.heading}—Christopher Besch` : "Christopher Besch—Software Developer";
+    const description = props.description;
+    const banner = props.banner;
 
     return (
         <div>
             <Helmet htmlAttributes={{ lang: "en" }}>
                 <meta charSet="utf-8" />
-                <meta property="og:description" content={title} />
+                <meta property="og:title" content={title} />
+                {description ? <meta property="og:description" content={description} /> : undefined}
+                {banner ? <meta property="og:image" content={banner} /> : undefined}
+                <meta name="twitter:site" content="@besch_chris" />
+                <meta name="twitter:card" content={banner ? "summary || summary_large_image" : "summary"} />
+                <meta name="twitter:creator" content="@besch_chris" />
+
+                <meta name="author" content="Christopher Besch" />
                 <meta name="description" content={title} />
-                {/* TODO: add social preview */}
-                {/* <meta property="og:image" image=""/> */}
                 <title>{title}</title>
                 <link rel="canonical" href={address} />
                 <link rel="shortcut icon" href="/favicon.png" />

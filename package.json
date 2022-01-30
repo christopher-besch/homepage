@@ -26,6 +26,7 @@
         "@types/node": "^16.11.11",
         "@types/react": "^17.0.37",
         "@types/react-dom": "^17.0.11",
+        "@types/react-helmet": "^6.1.5",
         "gatsby": "^4.3.0",
         "gatsby-link": "^4.3.0",
         "gatsby-plugin-image": "^2.3.0",

@@ -2,6 +2,7 @@
 type: article
 title: "Maki, Atoms and Time Travel"
 description: "How to implement an efficient time traveling renderer."
+banner: "/social_banner/maki_01.png"
 slug: maki_01
 date: 2022-01-26T00:00:00+00:00
 listed: true

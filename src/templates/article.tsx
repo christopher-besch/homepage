@@ -13,9 +13,10 @@ const Project: React.FC<ProjectProps> = (props) => {
     const body = props.data.mdx?.body as string;
     const title = props.data.mdx?.frontmatter?.title as string;
     const description = props.data.mdx?.frontmatter?.description as string;
+    const banner = props.data.mdx?.frontmatter?.banner as string | undefined;
     const date = props.data.mdx?.frontmatter?.date as string;
     return (
-        <Layout heading={title}>
+        <Layout heading={title} description={description} banner={banner}>
             <div className={markdown_styles.markdown_body}>
                 <div className={styles.heading}>
                     <div className={styles.metadata}>
@@ -37,6 +38,7 @@ query ArticlePage($slug: String) {
       date(formatString: "MMMM YYYY")
       title
       description
+      banner
     }
   }
 }
