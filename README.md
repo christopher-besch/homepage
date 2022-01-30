@@ -26,6 +26,7 @@ Read [this](https://motherfuckingwebsite.com).
 - [MDX with code highlighting](https://malikgabroun.com/blog/syntax-highlighting-in-gatsby-mdx)
 - [Social Preview](https://chrisko.io/posts/how-to-preview-your-website-on-social-media-with-meta-tags)
 - [Social Preview Tips](https://www.seoquake.com/blog/open-graph-meta-tags-for-facebook-and-twitter)
+- [Twitter Card Validator](https://cards-dev.twitter.com/validator)
 
 ## Styling References
 

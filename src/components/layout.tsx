@@ -36,19 +36,45 @@ query SiteInfo {
         <div>
             <Helmet htmlAttributes={{ lang: "en" }}>
                 <meta charSet="utf-8" />
-                <meta property="og:url" content={props.location.href} />
-                <meta property="og:title" content={title} />
-                {description ? <meta property="og:description" content={description} /> : undefined}
-                {banner ? <meta property="og:image" content={banner} /> : undefined}
-                <meta name="twitter:card" content={banner ? "summary_large_image" : "summary"} />
-                <meta name="twitter:site" content="@besch_chris" />
-                <meta name="twitter:creator" content="@besch_chris" />
-
-                <meta name="author" content="Christopher Besch" />
-                <meta name="description" content={title} />
                 <title>{title}</title>
                 <link rel="canonical" href={address} />
                 <link rel="shortcut icon" href="/favicon.png" />
+                <meta
+                    property="og:url"
+                    content={props.location.href}
+                />
+                <meta
+                    property="og:title"
+                    content={title}
+                />
+                {description ? <meta
+                    property="og:description"
+                    content={description} /> : undefined}
+                {banner ? <meta
+                    property="og:image"
+                    content={banner}
+                /> : undefined}
+                <meta
+                    name="twitter:card"
+                    content={banner ? "summary_large_image" : "summary"}
+                />
+                <meta
+                    name="twitter:site"
+                    content="@besch_chris"
+                />
+                <meta
+                    name="twitter:creator"
+                    content="@besch_chris"
+                />
+
+                <meta
+                    name="author"
+                    content="Christopher Besch"
+                />
+                <meta
+                    name="description"
+                    content={title}
+                />
             </Helmet>
             <nav className={styles.nav}>
                 <div className={styles.logo}>
