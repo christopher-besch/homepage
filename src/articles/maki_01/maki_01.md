@@ -7,8 +7,8 @@ slug: maki_01
 date: 2022-01-26T00:00:00+00:00
 listed: true
 ---
-import full_showcase_01 from "./full_showcase_01.mp4";
 import AutoPlayVideo from "src/components/autoplay_video";
+import full_showcase_01 from "./full_showcase_01.mp4";
 
 <AutoPlayVideo src={full_showcase_01} />
 
@@ -27,11 +27,93 @@ This article analyses Maki's design and evaluates the feasibility of its inclusi
 <!-- conclusion -->
 
 # Maki
+<!-- ideals -->
+Extensibility, performance, ease of use, type and thread safety, clear ownership and the fear of loosing type information form Maki's main ideals.
+I chose C++ because it enforces strict rules and offers handy containers, algorithms and many quality-of-life features, aiding in the development of a complex system, without compromising on performance.
+
 The goal of Maki is to allow the user to create 3D animations using Python.
 While the user is constructing their animation in an interactive shell, Maki shows the current status of the animation in a separate window.
 The user is able to freely move the camera in that window.
 In addition to that, Maki provides the ability to *jump in time*;
 The use can decide which frame of the animation should be played.
+
+# Clear Ownership
+
+Shared ownership, where multiple classes or functions own a single resource, facilitates programs where *everything owns everything* and *everything calls everything*.
+This is relatively easy to implement (The programmer doesn't have to consider complicated ownership models.) but easily leads to stack traces resembling hell on earth.
+When instead every resource is owned by only one object, that object's constructor acquires any needed resources and the destructor subsequently frees them.
+This programming technique (called [RAII](https://en.cppreference.com/w/cpp/language/raii) by the C++ committee for silly names) leaves no need for any garbage collection.
+Therefore **clear ownership** is highly performant and safe.
+
+Though in some situations the same resource has to be *used* by multiple objects.
+With an emphasis on *used*;
+these situations don't warrant the use of shared ownership.
+Instead the resource can be *borrowed*.
+For example, without going into detail of what these classes actually do:
+A `RenderDriver` owns a `Renderer` and an `AtomDispenser`.
+The `AtomDispenser` needs the `Renderer` to perform its task, so it *borrows* it from the `RenderDriver`.
+And because both the `AtomDispenser` and the `Renderer` are owned by the same `RenderDriver`; the `AtomDispenser` can rest assured that all its resources haven't been destructed yet.
+
+```cpp
+void AtomDispenser::create_all_atom_renderers(Renderer* renderer)
+{
+    ...
+}
+```
+
+The extensibility aspect is mainly expressed in the [Renderer Abstraction](#renderer-abstraction).
+
+# Renderer Abstraction
+Even though Maki is currently using OpenGL only, different rendering APIs (like Vulcan, Metal or DirectX) can easily be added.
+To achieve this many low-lever rendering concepts are implemented using abstract classes (e.g. `Shader`, `Renderer` and `VertexBuffer`).
+The actual API specific implementations (e.g. `OpenGLShader`) can be found in a subdirectory:
+```
+.
+├── opengl
+│   ├── opengl_buffer.cpp
+│   ├── opengl_buffer.h
+│   ├── opengl_renderer.cpp
+│   ├── opengl_renderer.h
+│   ├── ...
+├── buffer.cpp
+├── buffer.h
+├── renderer.cpp
+├── renderer.h
+├── ...
+```
+The abstract classes define the static function `create` to create an instance of the appropriate class:
+```cpp
+IndexBuffer* IndexBuffer::create(uint32_t count, const uint32_t* indices)
+{
+    switch(Renderer::get_renderer_impl()) {
+
+    ...
+
+    case Renderer::Implementation::opengl:
+        return new OpenGLIndexBuffer(count, indices);
+    default:
+        MAKI_RAISE_CRITICAL("The requested renderer implementation is not supported.");
+        return nullptr;
+    }
+}
+```
+The static function `Renderer::set_renderer_impl` is used to globally define the renderer API at Maki's boot up.
+
+This decision, which renderer API should be used, is performed at runtime.
+That way the user can decide which implementation to use:
+Even so you're on Windows, you might want to use OpenGL instead of DirectX because you have custom shaders written in GLSL.
+
+The situation is different for the platform, i.e. the window handling mechanism, which is selected based on the type of target system.
+GLFW can be used on Linux, Windows and the MacOS;
+WebAssembly might need something else.
+The crucial difference to the renderer API is that the decision, which platform is to be used, can be made at compile time.
+By using preprocessor statements to only compile the required platform, some runtime overhead can be removed.
+```cpp
+#if PROJECT == glfw
+    GLFWwindow* m_handle {nullptr};
+#endif
+```
+This macro can be set using the `-Dplatform=glfw` flag.
 
 # Atoms
 Just like how real atoms were thought to be the indivisible unit of the universe `Atom`s are the smallest renderable unit in Maki.

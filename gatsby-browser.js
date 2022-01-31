@@ -3,7 +3,7 @@ import { MDXProvider } from "@mdx-js/react";
 import Highlight, { defaultProps } from "prism-react-renderer";
 import theme from "prism-react-renderer/themes/oceanicNext";
 
-const component = {
+const components = {
     // enable code highlighting
     pre: props => {
         const class_name = props.children.props.className || "";
@@ -35,5 +35,5 @@ const component = {
     },
 };
 export const wrapRootElement = ({ element }) => {
-    return <MDXProvider components={component}>{element}</MDXProvider>;
+    return <MDXProvider components={components}>{element}</MDXProvider>;
 };

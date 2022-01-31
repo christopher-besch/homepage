@@ -54,3 +54,7 @@ a {
     /* border and padding should also count to element width and height */
     box-sizing: border-box;
 }
+
+a.anchor {
+    fill: $text;
+}
