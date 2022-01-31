@@ -2,14 +2,13 @@
 type: article
 title: "Maki, Atoms and Time Travel"
 description: "
+    Maki showcases how a program for interactive and programmatic animation development can be implemented.
+
     To create animations for technical concepts, one is advised to use graphics software with a programmatic approach.
     While these provide the required precision, they suffer from an inherent disconnect between input and output.
     An alternative are WYSIWYG programs, which avoid this detachment with interactivity at the cost of precision.
 
-
-    The purpose of this article is to outline how a program for interactive and programmatic animation development can be implemented.
-    To experiment with different technologies and programming paradigms, I created a developmental implementation called Maki.
-    This article analyses Maki's design and evaluates the feasibility of its inclusion in an already existing animation framework.
+    Maki combines the best of both worlds.
 "
 banner: /social_banner/maki_01.png
 thumb: ../../../static/social_banner/maki_01.png
@@ -19,8 +18,9 @@ listed: true
 ---
 import AutoPlayVideo from "src/components/autoplay_video";
 import full_showcase_01 from "./full_showcase_01.mp4";
+import full_showcase_01_poster from "./full_showcase_01_poster.png";
 
-<AutoPlayVideo src={full_showcase_01} />
+<AutoPlayVideo src={full_showcase_01} poster={full_showcase_01_poster} />
 
 <!-- problem -->
 To create animations for technical concepts, one is advised to use graphics software with a programmatic approach.
@@ -38,14 +38,16 @@ This article analyses Maki's design and evaluates the feasibility of its inclusi
 
 # Maki
 <!-- ideals -->
-Extensibility, performance, ease of use, type and thread safety, clear ownership and the fear of loosing type information form Maki's main ideals.
-I chose C++ because it enforces strict rules and offers handy containers, algorithms and many light-weight abstractions, aiding in the development of a complex system, without compromising on performance.
+**Extensibility**, **performance**, **ease of use**, **strict type and thread safety**, **clear ownership** and the **fear of loosing type information** form Maki's main ideals.
+I chose C++ because it enforces **strict rules** and offers handy containers, algorithms and many light-weight abstractions, aiding in the development of a complex system, without compromising on **performance**.
 
-The goal of Maki is to allow the user to create 3D animations using Python.
-While the user is constructing their animation in an interactive shell, Maki shows the current status of the animation in a separate window.
+The goal of [Maki](https://github.com/christopher-besch/maki) is to allow the user to create 3D animations using Python;
+while the user is constructing their animation in an interactive shell, Maki shows the current status of the enimation in a separate window.
 The user is able to freely move the camera in that window.
 In addition to that, Maki provides the ability to *jump in time*;
-The use can decide which frame of the animation should be played.
+The user can decide which frame of the animation should be played.
+
+This allows an **easy to use** workflow minimizing the time between defining animations and seeing and playing with the results.
 
 # Clear Ownership
 
@@ -70,8 +72,6 @@ void AtomDispenser::create_all_atom_renderers(Renderer* renderer)
     ...
 }
 ```
-
-The extensibility aspect is mainly expressed in the [Renderer Abstraction](#renderer-abstraction).
 
 # Renderer Abstraction
 Even though Maki is currently using OpenGL only, different rendering APIs (like Vulcan, Metal or DirectX) can easily be added.
@@ -125,6 +125,8 @@ By using preprocessor statements to only compile the required platform, some run
 ```
 This macro can be set using the `-Dplatform=glfw` flag.
 
+As you can see **extensibility** lies at the heart of Maki.
+
 # Atoms
 Just like how real atoms were thought to be the indivisible unit of the universe `Atom`s are the smallest renderable unit in Maki.
 A collection of them form a frame, multiple of which form an entire scene that can be rendered to a video file.
@@ -133,6 +135,51 @@ It cannot display anything as it is used as the foundation for any following fra
 Any subsequent frames can be the target of `AtomDiff`s.
 These `AtomDiff`s alter an atom: for example move the atom, apply a linear transformation, change the color or just change the `render` flag.
 This flag, set to `false`, excludes the atom from the being-rendered-club, which explains why the frame `0` never shows anything.
+
+# Multi Threading
+There are always two things happening at the same time:
+
+1. accepting new or changes to atoms from Python and
+2. rendering the scene or handling user interaction.
+
+It makes sense to use two different threads, a control and a render thread, to tackle this concurrency.
+Since OpenGL doesn't allow multiple threads to use the same context, only the render thread is allowed to perform render calls.
+The control thread on the other hand is the only one Python can directly interface with.
+Therefore data has to safely be exchanged between the two threads.
+In addition to, that each thread should under no circumstances be allowed to perform actions outside of its jurisdiction.
+
+The `RenderDriver` owns all threads and contains the entry point for each.
+When Maki wakes up, the first order of business is to initialize the (main) control thread, after which the render thread is to be created.
+This initialization includes calling `SET_THREAD_TYPE_CONTROL()` and `SET_THREAD_TYPE_RENDER()` from the respective thread.
+These preprocessor macros define a thread local global variable keeping track of the current thread being used.
+
+Every function can then be equipped with a call to `MAKI_ASSERT_CTRL_THREAD()` or `MAKI_ASSERT_RNDR_THREAD()`, which asserts that the correct thread is being used.
+Since these checks are being removed for `Release` mode and are only included in `Debug` builds (which can be specified using the `-DCMAKE_BUILD_TYPE=Release` flag) there is no runtime overhead.
+
+```cpp
+#ifndef NDEBUG
+...
+#define MAKI_ASSERT_CTRL_THREAD()                              \
+    MAKI_ASSERT_CRITICAL(g_thread_type == ThreadType::control, \
+                         "This function can only be called from the control thread.")
+#define MAKI_ASSERT_RNDR_THREAD()                             \
+    MAKI_ASSERT_CRITICAL(g_thread_type == ThreadType::render, \
+                         "This function can only be called from the render thread.")
+#else
+...
+// don't do anything in release mode
+#define MAKI_ASSERT_CTRL_THREAD()
+#define MAKI_ASSERT_RNDR_THREAD()
+
+#endif
+```
+
+To prevent race conditions, no two threads are accessing the same resource concurrently, mutexes are being used.
+These "mutual exclusion objects" allow the locking of a resource for the duration of its use.
+In addition to this locking operation being a rather expensive one, all other threads in need of that resource are being stalled.
+Therefore the use of mutexes should be minimized.
+
+These two precautions, preventing the threads from running wrong functions and accessing resources at the same time, form the basis for Maki's **thread safety**.
 
 ## On the Matter of Frames
 There are two different types of frames when talking about Maki:
@@ -304,30 +351,37 @@ CuboidRenderer* m_cuboid_renderer {nullptr};
 (The `{nullptr}` is not necessary but always a nice touch ^^).
 
 ## Why Templates?
-Why not use the arguably much simpler object-oriented approach?
+Why not use an arguably much simpler object-oriented approach?
 
-An `AtomDiff` can be applied to any `Atom` that provides the used member functions and/or effected data (an atom that doesn't have a color can't be painted red).
+An `AtomDiff` can be applied to any `Atom` that provides the necessary member functions (an atom that doesn't have a color can't be painted red).
 So `AtomDiff`s are templated to suit any such `Atom`.
 Instead of using templates, I could have used an abstract `Atom` base class and make the `AtomDiff`s be applied to an inheritor of such base class.
 
 The problem with that lays in the way the `Atom`s are being accessed.
-`Atom`s are currently stored in an `std::vector`, which is the screwed up C++ way of saying "dynamic size array".
+`Atom`s are currently stored in an `std::vector`, which is the silly C++ way of saying "dynamic size array".
 There is one `std::vector` for each type of `Atom`.
 Memory allocated by an `std::vector` is always contiguous.
 Therefore the atoms lay side by side and the renderer, chewing through all atoms one at a time, gets sped up by the hardware prefetcher.
 
 But this only works since the compiler knows the size of that type of `Atom`.
-If I were to use inheritance, the size of an actual `Atom` isn't always the same.
-For example a Cube needs a lot more data than a triangle and thus requires more data.
-So the way to store multiple different inherited types of `Atom`s in an `std::vector` is by storing pointers to the actual objects.
+If I were to use inheritance and a single `std::vector` of type `Atom`, the size of an actual `Atom` isn't always the same.
+For example a Cube needs a lot more data than a triangle.
+
+This can still be done of course.
+The way to do it is by storing pointers to the actual objects.
 That means that the objects are scattered all over the memory and the hardware prefetcher feels an urge to give up.
-In this case using contiguous memory amounts to a total performance increase of 35 to 60 (!!!) percent.
+In this case using contiguous memory amounts to a total **performance** increase of 35 to 60 (!!!) percent.
 
-<!-- One could argue that I could have stuck to an inheritance based approach and simply use multiple `std::vector`s with that. -->
-<!-- Here another problem comes into play: -->
-<!-- I am horribly afraid of loosing type information. -->
+I could have still used multiple `std::vector`s even with inheritance.
+But that means that all `AtomDiff`s and any other objects need to accept abstract types and potentially cast them down into more specific ones.
+This adds performance overhead because any one function can't be optimized for one type of atom and dynamic casting isn't exactly free.
+To put it in a nutshell, I'm incredibly **afraid of loosing type information**.
 
-## Repo Overview
+## Appendix
+You can find Maki's current status on GitHub at [christopher-besch/maki](https://github.com/christopher-besch/maki).
+Maki's version as of this article's writing can be accessed [here](https://github.com/christopher-besch/maki/tree/0b844480b511a08b81e7f87d50a3b75c4e764d85).
+
+### Directory Overview
 ```
 .
 ├── maki

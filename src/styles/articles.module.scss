@@ -34,6 +34,7 @@
     }
     .body {
         width: 100%;
+        padding-left: 0px;
     }
 }
 
@@ -43,6 +44,7 @@
 
 .article p {
     margin-bottom: 16px;
+    line-height: 1.3em;
 }
 .article p:last-of-type {
     margin-bottom: 0px;
