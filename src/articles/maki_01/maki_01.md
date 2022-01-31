@@ -39,7 +39,7 @@ This article analyses Maki's design and evaluates the feasibility of its inclusi
 # Maki
 <!-- ideals -->
 Extensibility, performance, ease of use, type and thread safety, clear ownership and the fear of loosing type information form Maki's main ideals.
-I chose C++ because it enforces strict rules and offers handy containers, algorithms and many quality-of-life features, aiding in the development of a complex system, without compromising on performance.
+I chose C++ because it enforces strict rules and offers handy containers, algorithms and many light-weight abstractions, aiding in the development of a complex system, without compromising on performance.
 
 The goal of Maki is to allow the user to create 3D animations using Python.
 While the user is constructing their animation in an interactive shell, Maki shows the current status of the animation in a separate window.
