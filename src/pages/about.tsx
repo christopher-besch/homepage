@@ -22,6 +22,9 @@ const About: React.FC<AboutProps> = (props) => {
     const linkedin_name = props.data.site?.siteMetadata?.linkedin?.name as string;
     const linkedin_link = props.data.site?.siteMetadata?.linkedin?.link as string;
 
+    const twitter_name = props.data.site?.siteMetadata?.twitter?.name as string;
+    const twitter_link = props.data.site?.siteMetadata?.twitter?.link as string;
+
     let width_properties = {
         "--full-width": "100%",
         "--half-width": "100%",
@@ -70,6 +73,13 @@ const About: React.FC<AboutProps> = (props) => {
                     </div>
                 </div>
                 <div className={styles.contacts}>
+                    <a href={email_link} target="_blank" className={`${styles.project} ${styles.contact}`} style={width_properties}>
+                        <div className={styles.content}>
+                            <span className={styles.icon} style={get_mask("/icons/email-svgrepo-com.svg")}></span>
+                            <hr />
+                            <h3>{email_name}</h3>
+                        </div>
+                    </a>
                     <a href={github_link} target="_blank" className={`${styles.project} ${styles.contact}`} style={width_properties}>
                         <div className={styles.content}>
                             <span className={styles.icon} style={get_mask("/icons/github.svg")}></span>
@@ -84,18 +94,18 @@ const About: React.FC<AboutProps> = (props) => {
                             <h3>{linkedin_name}</h3>
                         </div>
                     </a>
+                    <a href={twitter_link} target="_blank" className={`${styles.project} ${styles.contact}`} style={width_properties}>
+                        <div className={styles.content}>
+                            <span className={styles.icon} style={get_mask("/icons/twitter.svg")}></span>
+                            <hr />
+                            <h3>{twitter_name}</h3>
+                        </div>
+                    </a>
                     <a href={discord_link} target="_blank" className={`${styles.project} ${styles.contact}`} style={width_properties}>
                         <div className={styles.content}>
                             <span className={styles.icon} style={get_mask("/icons/discord.svg")}></span>
                             <hr />
                             <h3>{discord_name}</h3>
-                        </div>
-                    </a>
-                    <a href={email_link} target="_blank" className={`${styles.project} ${styles.contact}`} style={width_properties}>
-                        <div className={styles.content}>
-                            <span className={styles.icon} style={get_mask("/icons/email-svgrepo-com.svg")}></span>
-                            <hr />
-                            <h3>{email_name}</h3>
                         </div>
                     </a>
                 </div>
@@ -110,6 +120,10 @@ query AboutData {
   site {
     siteMetadata {
       linkedin {
+        name
+        link
+      }
+      twitter {
         name
         link
       }

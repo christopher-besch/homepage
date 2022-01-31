@@ -1,8 +1,18 @@
 ---
 type: article
 title: "Maki, Atoms and Time Travel"
-description: "How to implement an efficient time travelling renderer."
-banner: "/social_banner/maki_01.png"
+description: "
+    To create animations for technical concepts, one is advised to use graphics software with a programmatic approach.
+    While these provide the required precision, they suffer from an inherent disconnect between input and output.
+    An alternative are WYSIWYG programs, which avoid this detachment with interactivity at the cost of precision.
+
+
+    The purpose of this article is to outline how a program for interactive and programmatic animation development can be implemented.
+    To experiment with different technologies and programming paradigms, I created a developmental implementation called Maki.
+    This article analyses Maki's design and evaluates the feasibility of its inclusion in an already existing animation framework.
+"
+banner: /social_banner/maki_01.png
+thumb: ../../../static/social_banner/maki_01.png
 slug: maki_01
 date: 2022-01-26T00:00:00+00:00
 listed: true

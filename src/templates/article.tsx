@@ -13,8 +13,9 @@ const Project: React.FC<ProjectProps> = (props) => {
     const body = props.data.mdx?.body as string;
     const title = props.data.mdx?.frontmatter?.title as string;
     const description = props.data.mdx?.frontmatter?.description as string;
+    // TODO: combine thumb and banner frontmatter (maybe use regex)
     const banner_raw = props.data.mdx?.frontmatter?.banner as string | undefined;
-    const banner = !banner_raw || banner_raw == "none" ? undefined : banner_raw;
+    const banner = !banner_raw || banner_raw == "undefined" ? undefined : banner_raw;
     const date = props.data.mdx?.frontmatter?.date as string;
     return (
         <Layout heading={title} description={description} banner={banner}>

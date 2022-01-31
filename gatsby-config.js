@@ -47,6 +47,13 @@ module.exports = {
                 path: `${__dirname}/src/articles`,
             }
         },
+        {
+            resolve: "gatsby-source-filesystem",
+            options: {
+                name: "static",
+                path: `${__dirname}/static`,
+            }
+        },
         // image handling
         {
             resolve: "gatsby-transformer-sharp",
@@ -101,6 +108,10 @@ module.exports = {
         linkedin: {
             name: "christopher-besch",
             link: "https://www.linkedin.com/in/christopher-besch",
+        },
+        twitter: {
+            name: "@besch_chris",
+            link: "https://twitter.com/besch_chris",
         },
         discord: {
             name: "Stromel#1046",

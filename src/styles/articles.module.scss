@@ -1,2 +1,58 @@
 @import "consts.scss";
 
+.articles {
+}
+
+.article {
+    background-color: $back_sec;
+    padding: 10px;
+    border-radius: $border_radius;
+    width: 100%;
+    display: block;
+    margin-bottom: 16px;
+}
+.article::after {
+    /* clear floats afterwards */
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.image {
+    float: left;
+    width: 30%;
+}
+.body {
+    padding-left: 16px;
+    float: left;
+    width: 70%;
+}
+@media (max-width: 1000px) {
+    .image {
+        width: 100%;
+        margin-bottom: 8px;
+    }
+    .body {
+        width: 100%;
+    }
+}
+
+.heading {
+    font-size: 30px;
+}
+
+.article p {
+    margin-bottom: 16px;
+}
+.article p:last-of-type {
+    margin-bottom: 0px;
+}
+
+.article hr {
+    border-color: $accent;
+    transition: border-color $transition_time;
+    margin: 5px -5px 10px;
+}
+.article:hover hr {
+    border-color: $hover_accent;
+}

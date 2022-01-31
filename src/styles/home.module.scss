@@ -29,6 +29,8 @@
     /* width: 95%; */
     background-color: $back_sec;
     border-radius: $border-radius;
+    /* no idea why this is required but it is */
+    margin-top: -16px;
 }
 
 .languages::after {

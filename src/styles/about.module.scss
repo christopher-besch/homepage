@@ -10,7 +10,7 @@
     width: calc(100% - 300px);
     float: left;
     /* TODO: really should be margin but I can't be bothered */
-    padding: 16px 16px 0px 0px;
+    padding-right: 16px;
 }
 
 .about {
@@ -47,7 +47,7 @@
 .content {
     background-color: $back_sec;
     padding: 10px;
-    margin: 16px 0px;
+    margin-bottom: 16px;
     border-radius: $border_radius;
 }
 
