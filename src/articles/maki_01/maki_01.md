@@ -353,19 +353,22 @@ Since this frame can't contain any atom diffs, the render thread is synchronised
 To get back to where the render atom chain left off, it can use the already explained `set_frame` member function.
 
 ## Templated Memory
-The `AtomDispenser` gives birth to `Atoms` and `AtomDiffs` besides owning one `AtomDiffLifetime` and all `AtomChains` for each type of `Atom`.
-Multiple templated member functions are being used to access the correct ones.
+All functions and classes handling atoms are templated, so that all kinds of atoms can be accepted.
+But that also means that each `AtomDiffLifetime` can only handle one type of atom.
+Therefore multiple `AtomDiffLifetime`s are required to express the entire breadth of atom types.
+To conveniently access the correct `AtomDiffLifetime`, "templated memory" is used:
 ```cpp
 class AtomDispenser {
-
     ...
-
+    // general declaration
     template<typename AtomType>
     AtomDiffLifetime<AtomType>& get_diff_lifetime();
-    
-    ...
+
+    AtomDiffLifetime<CuboidAtom>        m_cuboid_diff_lifetime {};
+    AtomDiffLifetime<QuadrilateralAtom> m_quadrilateral_diff_lifetime {};
 };
 
+// specializations //
 // for CuboidAtoms
 template<>
 inline AtomDiffLifetime<CuboidAtom>& AtomDispenser::get_diff_lifetime<CuboidAtom>()
@@ -379,7 +382,11 @@ inline AtomDiffLifetime<QuadrilateralAtom>& AtomDispenser::get_diff_lifetime<Qua
     return m_quadrilateral_diff_lifetime;
 }
 ```
-<!-- TODO: specialization -->
+The function `AtomDiffLifetime<AtomType>& get_diff_lifetime()` is actually nowhere defined.
+Only the specialized versions are defined, like `AtomDiffLifetime<QuadrilateralAtom>& AtomDispenser::get_diff_lifetime<QuadrilateralAtom>`
+As you can see the general type `AtomType` has been specialized with `QuadrilateralAtom`.
+This way the templating system decides which definition should be called or fails when there is no specialization for the requested type.
+That way templated memory can be implemented.
 
 ## Rendering Atoms
 An `AtomRenderer` uses the underlying rendering abstraction to actually render an `Atom`.
