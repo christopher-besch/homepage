@@ -25,7 +25,7 @@ const Project: React.FC<ProjectProps> = (props) => {
                         <span className={styles.author}>Christopher Besch,</span> {date}
                     </div>
                 </div>
-                <MDXRenderer className={styles.article}>{body}</MDXRenderer>
+                <MDXRenderer>{body}</MDXRenderer>
             </div>
         </Layout>
     );

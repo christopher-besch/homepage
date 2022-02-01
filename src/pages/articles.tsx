@@ -33,22 +33,20 @@ const Articles: React.FC<ArticlesProps> = (props) => {
     const articles = props.data.allMdx.edges.map(gql_to_article);
     return (
         <Layout heading="Articles">
-            <div className={styles.articles}>
-                {articles.map(article =>
-                    <Link to={article.slug} key={article.id} className={styles.article}>
-                        <GatsbyImage className={styles.image} image={article.thumb} alt="thumbnail" />
-                        <div className={styles.body}>
-                            <h2 className={styles.heading}>{article.title}</h2>
-                            <hr />
-                            <div className={styles.text}>
-                                {article.description.split("\n").map(paragraph =>
-                                    <p>{paragraph}</p>
-                                )}
-                            </div>
+            {articles.map(article =>
+                <Link to={article.slug} key={article.id} className={styles.article}>
+                    <GatsbyImage className={styles.image} image={article.thumb} alt="thumbnail" />
+                    <div className={styles.body}>
+                        <h2 className={styles.heading}>{article.title}</h2>
+                        <hr />
+                        <div>
+                            {article.description.split("\n").map(paragraph =>
+                                <p>{paragraph}</p>
+                            )}
                         </div>
-                    </Link>
-                )}
-            </div>
+                    </div>
+                </Link>
+            )}
         </Layout >
     );
 };

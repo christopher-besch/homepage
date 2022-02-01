@@ -17,10 +17,17 @@ date: 2022-01-26T00:00:00+00:00
 listed: true
 ---
 import AutoPlayVideo from "src/components/autoplay_video";
+
 import full_showcase_01 from "./full_showcase_01.mp4";
 import full_showcase_01_poster from "./full_showcase_01_poster.png";
 
-<AutoPlayVideo src={full_showcase_01} poster={full_showcase_01_poster} />
+import init from "./01_init.mp4";
+import create_cube from "./02_create_cube.mp4";
+import show_cube from "./03_show_cube.mp4";
+import colouring from "./04_colouring.mp4";
+import translate_cube from "./05_translate_cube.mp4";
+import smooth_translation from "./06_smooth_translation.mp4";
+import time_travel from "./07_time_travel.mp4";
 
 <!-- problem -->
 To create animations for technical concepts, one is advised to use graphics software with a programmatic approach.
@@ -36,9 +43,17 @@ This article analyses Maki's design and evaluates the feasibility of its inclusi
 
 <!-- conclusion -->
 
+<AutoPlayVideo src={full_showcase_01} poster={full_showcase_01_poster} />
+
 # Maki
 <!-- ideals -->
-**Extensibility**, **performance**, **ease of use**, **strict type and thread safety**, **clear ownership** and the **fear of loosing type information** form Maki's main ideals.
+- **Extensibility**,
+- **performance**,
+- **ease of use**,
+- **strict type and thread safety**,
+- **clear ownership** and the
+- **fear of loosing type information** form Maki's main ideals.
+
 I chose C++ because it enforces **strict rules** and offers handy containers, algorithms and many light-weight abstractions, aiding in the development of a complex system, without compromising on **performance**.
 
 The goal of [Maki](https://github.com/christopher-besch/maki) is to allow the user to create 3D animations using Python;
@@ -48,6 +63,41 @@ In addition to that, Maki provides the ability to *jump in time*;
 The user can decide which frame of the animation should be played.
 
 This allows an **easy to use** workflow minimizing the time between defining animations and seeing and playing with the results.
+
+# Walk Through
+To start working with Maki, one has to initialize it.
+This sets the rendering API to be used and creates a window of the specified size.
+<AutoPlayVideo src={init} />
+
+Once that is done, you can create an atom.
+But you will see...that you don't see anything.
+<AutoPlayVideo src={create_cube} />
+
+That's because you've only created the atom, you still have to tell Maki to actually render it.
+This call to `show_cuboid_atom` orders Maki to start showing the atom at frame `1`.
+<AutoPlayVideo src={show_cube} />
+
+We can also change the colour.
+Each call again needs to know what frame it should be applied to.
+<AutoPlayVideo src={colouring} />
+
+Our Cube can also be moved.
+But Maki currently only supports instant movement.
+<AutoPlayVideo src={translate_cube} />
+
+Smooth transitions have to be implemented on the Python side. 
+This (arguably bad) implementation performs just that; it smoothly shifts the cube from frame `60` to frame `200`.
+<AutoPlayVideo src={smooth_translation} />
+
+As you can see, Maki currently shows the 199th frame.
+Now I'm applying another smooth translation downward from frame `5` to `50`.
+This downward shift lays in the past, so we expect the cube to be in a lower position in the present.
+And that's exactly what we see:
+The moment the shift is being applied, Maki performs a chrono sync (which will be described in more detail later on) and the cube changes it's position.
+The past was altered, and we see the repercussions in the present.
+> "The past was erased, the erasure was forgotten, the lie became truth."
+
+<AutoPlayVideo src={time_travel} />
 
 # Clear Ownership
 
@@ -393,7 +443,7 @@ To put it in a nutshell, I'm incredibly **afraid of loosing type information**.
 
 <!-- TODO: path of an atom -->
 <!-- TODO: conclusion -->
-<!-- TODO: bigger emphasis on time travelling -->
+<!-- TODO: future features -->
 
 ## Appendix
 You can find Maki's current status on GitHub at [christopher-besch/maki](https://github.com/christopher-besch/maki).
