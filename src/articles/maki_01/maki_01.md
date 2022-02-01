@@ -189,7 +189,6 @@ The control thread on the other hand is the only one Python can directly interfa
 Therefore data has to safely be exchanged between the two threads.
 In addition to, that each thread should under no circumstances be allowed to perform actions outside of its jurisdiction.
 
-The `RenderDriver` owns all threads and contains the entry point for each.
 When Maki wakes up, the first order of business is to initialize the (main) control thread, after which the render thread is to be created.
 This initialization includes calling `SET_THREAD_TYPE_CONTROL()` and `SET_THREAD_TYPE_RENDER()` from the respective thread.
 These preprocessor macros define a thread local global variable keeping track of the current thread being used.
@@ -337,7 +336,7 @@ There are always two atom chains in use for any type, a control and a render ato
 - To apply any absolute changes at frame `x` the control thread needs to know what the last state of frame `x` is.
   Otherwise it wouldn't know how to adjust the atoms in frame `x-1` to `x`.
   Thus the control thread needs its own atom chain that can be moved without tampering with the render atom chain.
-  This is not necessary for relative changes.
+  <!-- This is not necessary for relative changes. -->
 
 The first frame is frame `0`.
 It cannot display anything as it is used as the foundation for any following frames.
@@ -448,11 +447,28 @@ But that means that all `AtomDiff`s and any other objects need to accept abstrac
 This adds performance overhead because any one function can't be optimized for one type of atom and dynamic casting isn't exactly free.
 To put it in a nutshell, I'm incredibly **afraid of loosing type information**.
 
-<!-- TODO: path of an atom -->
+## Path of an Atom
+Let's wrap things up by looking at the path an atom takes from the interactive Python shell to the screen.
+
+1. A cuboid gets created from Python using the `add_cuboid_atom` function, which gets redirected to `RenderDriver::add_atom<CuboidAtom>`.
+   This creates a new default constructed `CuboidAtom` in the control and render `AtomChain<CuboidAtom>`s.
+   The atom receives an identifier with which Python can apply changes to it.
+2. Since all default constructed atoms have their `render` flag set to false, our cuboid doesn't get shown.
+   This flag gets checked in the `draw_atom` member functions in the respective `AtomRenderer`.
+3. We perform an operation on the cuboid, we call `show_cuboid_atom` to show the atom in frame `3`.
+   To apply the requested change, the control atom chain is being moved to the 3rd frame.
+4. Now the newly created `ToggleRenderDiff<CuboidAtom>` can be added to the correct `AtomDiffFrame`.
+   Because the control atom chain needs to stay synchronised, it the new `AtomDiff` is being applied to it.
+5. The last task the control thread has to perform is to warn the render thread that something got changed.
+   `m_first_outdated_frame` in the `AtomDiffLifetime` gets set to `3-1=2`.
+6. Say our render atom chain is currently representing frame `5`.
+   Because `5>=2` a chrono sync has to be performed, after which the render atom chain is being moved back to frame `5`.
+7. The `CuboidRenderer` now has a new cube to render, which it does by using the underlying renderer API abstraction.
+
 <!-- TODO: conclusion -->
 <!-- TODO: future features -->
 
-## Appendix
+# Appendix
 You can find Maki's current status on GitHub at [christopher-besch/maki](https://github.com/christopher-besch/maki).
 Maki's version as of this article's writing can be accessed [here](https://github.com/christopher-besch/maki/tree/0b844480b511a08b81e7f87d50a3b7Fc4e764d85).
 Feel free to leave a star ^^
