@@ -127,15 +127,6 @@ This macro can be set using the `-Dplatform=glfw` flag.
 
 As you can see **extensibility** lies at the heart of Maki.
 
-# Atoms
-Just like how real atoms were thought to be the indivisible unit of the universe `Atom`s are the smallest renderable unit in Maki.
-A collection of them form a frame, multiple of which form an entire scene that can be rendered to a video file.
-The first frame is frame `0`.
-It cannot display anything as it is used as the foundation for any following frames.
-Any subsequent frames can be the target of `AtomDiff`s.
-These `AtomDiff`s alter an atom: for example move the atom, apply a linear transformation, change the color or just change the `render` flag.
-This flag, set to `false`, excludes the atom from the being-rendered-club, which explains why the frame `0` never shows anything.
-
 # Multi Threading
 There are always two things happening at the same time:
 
@@ -181,30 +172,19 @@ Therefore the use of mutexes should be minimized.
 
 These two precautions, preventing the threads from running wrong functions and accessing resources at the same time, form the basis for Maki's **thread safety**.
 
-## On the Matter of Frames
-There are two different types of frames when talking about Maki:
-1. Frames building a scene can be stored in an output video file.
-2. The frame rate of the interactive Maki window is detached from that idea.
-   If the user wishes to "freeze" time and show one frame for as long as they like, they can do that while still being able to fly around in the scene.
-   In fact the user can freely choose in which direction the scene's time should flow.
-   This is analogous to any video editing software.
-   There the frames of the video being editing also don't have anything to do with the frame rate of the editor's window.
+# Atoms
+Just like how real atoms were thought to be the indivisible unit of the universe atoms are the smallest renderable unit in Maki.
+A collection of them form a frame, multiple of which form an entire scene that can be rendered to a video file.
 
-## Atom-Classes Overview
-To implement `Atom`s a multitude of different classes is used.
-This chapter briefly summarizes their reason to life.
-
-## `Atom`
-An `Atom` stores all the data required to render that `Atom`.
+An `Atom` stores all the data required to render that atom.
 This mainly includes any vertex data, like position or colour.
 
-Example:
 ```cpp
 struct Atom {
     bool render {false};
 
     // to be defined by implementation:
-    // static constexpr const char* type_name {"AtomType"};
+    // static constexpr const char* type_name {"Atom"};
 };
 
 struct QuadrilateralAtom: public Atom {
@@ -213,21 +193,33 @@ struct QuadrilateralAtom: public Atom {
         vec3 {+1.0f, -1.0f, +0.0f},  // bottom right
         vec3 {-1.0f, +1.0f, +0.0f},  // top    left
         vec3 {+1.0f, +1.0f, +0.0f}}; // top    right
-
     ...
-
     static constexpr const char* type_name {"Quadrilateral"};
 };
 ```
+The `render` flag, set to `false`, excludes the atom from the being-rendered-club.
 
-## `AtomDiff`
-`AtomDiff`s are immutable (always declared `const`).
-They define how an atom has to be altered to cross a frame-border (from one frame to the next, or back from the next to the current).
+Because Maki allows the user to *jump in time*, it needs to keep track of each and every frame.
+The simplest way of implementing this is to store all atoms for each frame.
+This results in a multitude of problems:
+
+1. This way of storing atoms requires a huge (possibly) two-dimensional array, which can quickly drain all available memory.
+2. When the user changes an atom at any frame, all representations of that atom after this frame have to be changed too.
+3. A wait instruction, which simply leaves the scene as is, would consume as much memory as any other instruction.
+   More frames always mean more memory being consumed, no matter how much is actually happening in them.
+4. Adding a new atom means adding it to all frames.
+
+## Difference array
+To solve these problems I'm using a difference array.
+This difference array can be seen as the numerical derivative of the original array;
+instead of storing all atoms for every frame, I'm only storing how the atoms change from frame to frame.
+`AtomDiff`s define how an atom has to be altered to cross a frame-border (from one frame to the next, or back from the next to the current).
+Anything from moving the atom, applying a linear transformation, changing the color or just changing the `render` flag.
+
 This functionality is implemented in the `apply` and `reverse` member functions.
 These take an atom and apply (or reverse) the changes this `AtomDiff` represents.
 Their `m_id` member variable can be used to determine the `Atom` any `AtomDiff` should be used for.
 
-Templating is used to accept any type of `Atom`.
 ```cpp
 template<typename AtomType>
 class ToggleRenderDiff: public AtomDiff<AtomType> {
@@ -245,12 +237,22 @@ public:
     }
 };
 ```
+Templating is used to accept any type of `Atom`.
+`AtomDiff`s are always immutable (always declared `const`).
 
-## `AtomDiffFrame`
-An `AtomDiffFrame` is a container for all `AtomDiff`s belonging to a single frame.
-Templating is again used to specify the type of `Atom` being used.
-In this case the `apply` and `reverse` member functions take an entire list of `Atom`s as a parameter.
-The aforementioned `m_id` member variable is used to apply (or reverse) the correct `AtomDiff` on the correct `Atom`.
+This solves all of the aforementioned problems:
+
+1. Since `AtomDiff`s only contain the data they absolutely need to apply the change they represent, they consume very little memory.
+2. When the user changes an atom at any frame, only an `AtomDiff` for that frame has to be created.
+3. When nothing happens in your scene, no `AtomDiff`s are being stored and basically no memory is consumed;
+   you can wait for as long as you like.
+4. Adding a new atom doesn't change anything about the `AtomDiff`s.
+
+The actual difference array is implemented in the `AtomDiffLifetime`.
+An `AtomDiffLifetime` contains one `AtomDiffFrame` for each frame.
+`AtomDiffFrame`s are a container for all `AtomDiff`s belonging to a single frame.
+The `apply` and `reverse` member functions take an entire list of `Atom`s as a parameter.
+The aforementioned `m_id` member variable is used to apply (or reverse) the correct `AtomDiff`s on the correct `Atom`.
 ```cpp
 void apply(std::vector<AtomType>& atoms) const
 {
@@ -260,18 +262,11 @@ void apply(std::vector<AtomType>& atoms) const
 }
 ```
 
-## `AtomDiffLifetime`
-Multiple `AtomDiffFrame`s are stored in one `AtomDiffLifetime`, one for each frame.
-Thus an `AtomDiffLifetime` represents the entire scene for one type of `Atom`, as it is again templated.
-Their `apply` and `reverse` member functions take an added `frame` and simply call the underlying functions defined in the `AtomDiffFrame` for the specified frame.
-
 ## `AtomChain`
+`AtomChain`s can be seen as pointing to within the `AtomDiffLifetime`.
 Being one of the central classes, an `AtomChain` contains all `Atoms` of one type in a specific state defined by the `AtomDiffLifetime`.
-It can be seen as a pointing to within the `AtomDiffLifetime`.
 This "pointer" can freely be moved around to represent the requested frame.
-<!-- used twice, for renderer and control thread -->
-A `set_frame` member function takes a target frame and an `AtomDiffLifetime`.
-The `AtomDiffLifetime`'s `apply` and `reverse` member functions are then used to adjust all atoms to match the target frame.
+To achieve this the underlying `AtomDiff`s owned by the `AtomDiffLifetime` are being used to reach the target frame.
 ```cpp
 void set_frame(
     uint32_t frame,
@@ -286,9 +281,28 @@ void set_frame(
         prev_frame(atom_diff_lifetime);
 }
 ```
-<!-- chrono sync -->
 
-## `AtomDispenser`
+There are always two atom chains in use for any type, a control and a render atom chain.
+- The render atom chain is needed to render the frame the interactive window requests.
+- To apply any absolute changes at frame `x` the control thread needs to know what the last state of frame `x` is.
+  Otherwise it wouldn't know how to adjust the atoms in frame `x-1` to `x`.
+  Thus the control thread needs its own atom chain that can be moved without tampering with the render atom chain.
+  This is not necessary for relative changes.
+
+The first frame is frame `0`.
+It cannot display anything as it is used as the foundation for any following frames.
+Only subsequent frames can be the target of `AtomDiff`s.
+
+## Chrono Syncs
+One might wonder what happens when the control atom chain changes a frame that lies before the render atom chain.
+In this situation the render atom chain would be outdated, because its *past* changed.
+To fix this Maki performs a chrono sync.
+This means that the render atom chain evicts all of it's data and recreates all atoms.
+Therefore it points at the 0th frame.
+Since this frame can't contain any atom diffs, the render thread is synchronised again.
+To get back to where the render atom chain left off, it can use the already explained `set_frame` member function.
+
+## Templated Memory
 The `AtomDispenser` gives birth to `Atoms` and `AtomDiffs` besides owning one `AtomDiffLifetime` and all `AtomChains` for each type of `Atom`.
 Multiple templated member functions are being used to access the correct ones.
 ```cpp
@@ -315,9 +329,9 @@ inline AtomDiffLifetime<QuadrilateralAtom>& AtomDispenser::get_diff_lifetime<Qua
     return m_quadrilateral_diff_lifetime;
 }
 ```
-<!-- specialization -->
+<!-- TODO: specialization -->
 
-## `AtomRenderer`
+## Rendering Atoms
 An `AtomRenderer` uses the underlying rendering abstraction to actually render an `Atom`.
 The implementation of such may vary wildly as each `Atom` has a different optimal way of being rendered.
 While some may use a common base class (like the `BatchRenderer`) others stand on their own.
@@ -377,9 +391,14 @@ But that means that all `AtomDiff`s and any other objects need to accept abstrac
 This adds performance overhead because any one function can't be optimized for one type of atom and dynamic casting isn't exactly free.
 To put it in a nutshell, I'm incredibly **afraid of loosing type information**.
 
+<!-- TODO: path of an atom -->
+<!-- TODO: conclusion -->
+<!-- TODO: bigger emphasis on time travelling -->
+
 ## Appendix
 You can find Maki's current status on GitHub at [christopher-besch/maki](https://github.com/christopher-besch/maki).
-Maki's version as of this article's writing can be accessed [here](https://github.com/christopher-besch/maki/tree/0b844480b511a08b81e7f87d50a3b75c4e764d85).
+Maki's version as of this article's writing can be accessed [here](https://github.com/christopher-besch/maki/tree/0b844480b511a08b81e7f87d50a3b7Fc4e764d85).
+Feel free to leave a star ^^
 
 ### Directory Overview
 ```
