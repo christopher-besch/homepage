@@ -1,6 +1,17 @@
 @import "consts.scss";
 
-.video {
+.video, .video_no_print {
     max-width: 100%;
     height: auto;
+}
+.removed_warn {
+    display: none !important;
+}
+@media print {
+    .video_no_print {
+        display: none !important;
+    }
+    .removed_warn {
+        display: block !important;
+    }
 }
