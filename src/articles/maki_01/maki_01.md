@@ -467,7 +467,7 @@ To put it in a nutshell, I'm incredibly **afraid of loosing type information**.
 
 <AutoPlayVideo src={fly_around_02} />
 
-# Path of the Atom
+# Path of an Atom
 Let's wrap things up by looking at the path an atom takes, from the interactive Python shell to the screen.
 
 1. A cuboid gets created from Python using the `add_cuboid_atom` function, which gets redirected to `RenderDriver::add_atom<CuboidAtom>`.
