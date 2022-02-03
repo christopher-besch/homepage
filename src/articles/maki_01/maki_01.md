@@ -12,8 +12,8 @@ description: "
 "
 banner: /social_banner/maki_01.png
 thumb: ../../../static/social_banner/maki_01.png
-slug: maki_01
-date: 2022-01-26T00:00:00+00:00
+slug: maki_atoms_and_time_travel
+date: 2022-02-03T00:00:00+00:00
 listed: true
 ---
 import AutoPlayVideo from "src/components/autoplay_video";
@@ -42,15 +42,17 @@ The purpose of this article is to outline how a program for interactive and prog
 To experiment with different technologies and programming paradigms, I created a developmental implementation called Maki.
 This article outlines Maki's design decisions and discusses planned future development.
 
-```toc
-# This code block gets replaced with the TOC
-```
-
 <!-- results -->
 
 <!-- conclusion -->
 
 <AutoPlayVideo src={full_showcase_01} poster={full_showcase_01_poster} />
+
+# Table of Contents
+
+```toc
+exclude: Table of Contents
+```
 
 # Maki
 <!-- ideals -->
@@ -71,7 +73,7 @@ The user can decide which frame of the animation should be played.
 
 This allows an **easy to use** workflow, minimizing the time between defining animations and playing with the results.
 
-# Walkthrough
+## Walkthrough
 To start working with Maki, one has to initialize it.
 This defines the rendering API to be used and creates a window of the specified size.
 <AutoPlayVideo src={init} />
@@ -366,7 +368,40 @@ Since none of the atoms in this frame have been changed, the default atoms curre
 the render thread is synchronised again.
 To get back to where the render atom chain left off, it can use the already explained `set_frame` member function.
 
-## Templated Memory
+## Rendering Atoms
+An `AtomRenderer` uses the underlying rendering abstraction to actually render an `Atom`.
+The implementation of such may vary wildly as each `Atom` has a different optimal way of being rendered.
+While some may use a common base class (like the `BatchRenderer`) others stand on their own.
+
+The `AtomRendererRouter` is unfortunately needed to make these different implementations accessible from the templated world of `Atom`s.
+```cpp
+template<typename AtomType>
+struct AtomRendererRouter {
+    // can't be used unspecialized
+    typedef void type;
+};
+
+template<>
+struct AtomRendererRouter<CuboidAtom> {
+    typedef CuboidRenderer type;
+};
+
+template<>
+struct AtomRendererRouter<QuadrilateralAtom> {
+    typedef QuadrilateralRenderer type;
+};
+```
+This router can be used like this to resolve `Atom` types to their respective renderer:
+```cpp
+typename AtomRendererRouter<CuboidAtom>::type* m_cuboid_renderer {nullptr};
+```
+Being converted to this by the compiler:
+```cpp
+CuboidRenderer* m_cuboid_renderer {nullptr};
+```
+(The `{nullptr}` is not necessary but always a nice touch ^^).
+
+# Templated Memory
 All functions and classes handling atoms are templated, so that all kinds of atoms can be accepted.
 But that also means that each `AtomDiffLifetime` can only handle one type of atom.
 Therefore multiple `AtomDiffLifetime`s are required to express the entire breadth of atom types.
@@ -401,40 +436,8 @@ Only the specialized versions can be found, like `AtomDiffLifetime<Quadrilateral
 As you can see, the general type `AtomType` has been specialized with `QuadrilateralAtom`.
 This way the templating system decides which definition should be called, or fails when there is no specialization for the requested type.
 
-## Rendering Atoms
-An `AtomRenderer` uses the underlying rendering abstraction to actually render an `Atom`.
-The implementation of such may vary wildly as each `Atom` has a different optimal way of being rendered.
-While some may use a common base class (like the `BatchRenderer`) others stand on their own.
 
-The `AtomRendererRouter` is unfortunately needed to make these different implementations accessible from the templated world of `Atom`s.
-```cpp
-template<typename AtomType>
-struct AtomRendererRouter {
-    // can't be used unspecialized
-    typedef void type;
-};
-
-template<>
-struct AtomRendererRouter<CuboidAtom> {
-    typedef CuboidRenderer type;
-};
-
-template<>
-struct AtomRendererRouter<QuadrilateralAtom> {
-    typedef QuadrilateralRenderer type;
-};
-```
-This router can be used like this to resolve `Atom` types to their respective renderer:
-```cpp
-typename AtomRendererRouter<CuboidAtom>::type* m_cuboid_renderer {nullptr};
-```
-Being converted to this by the compiler:
-```cpp
-CuboidRenderer* m_cuboid_renderer {nullptr};
-```
-(The `{nullptr}` is not necessary but always a nice touch ^^).
-
-## Why Templates?
+# Why Templates?
 Why not use an arguably much simpler object-oriented approach?
 
 An `AtomDiff` can be applied to any `Atom` that provides the necessary member functions (an atom that doesn't have a color can't be painted red).
@@ -464,8 +467,8 @@ To put it in a nutshell, I'm incredibly **afraid of loosing type information**.
 
 <AutoPlayVideo src={fly_around_02} />
 
-## Path of an Atom
-Let's wrap things up by looking at the path an atom takes from the interactive Python shell to the screen.
+# Path of the Atom
+Let's wrap things up by looking at the path an atom takes, from the interactive Python shell to the screen.
 
 1. A cuboid gets created from Python using the `add_cuboid_atom` function, which gets redirected to `RenderDriver::add_atom<CuboidAtom>`.
    This creates a new default constructed `CuboidAtom` in the control and render `AtomChain<CuboidAtom>`s.
@@ -482,8 +485,19 @@ Let's wrap things up by looking at the path an atom takes from the interactive P
    Because `5>=2` a chrono sync has to be performed, after which the render atom chain is being moved back to frame `5`.
 7. Now the `CuboidRenderer` has a new cube to render, which it does by using the underlying renderer API abstraction.
 
-<!-- TODO: conclusion -->
-<!-- TODO: future features -->
+# Conclusion and Future Plans
+Currently Maki is a developmental example for the practical use of diff arrays, templates and multi threading.
+At the time being it isn't a usable program, though that might change in the future.
+
+One of the biggest areas of development is adding more atoms.
+This includes bezier curves, spheres and LaTeX rendering.
+Any already implemented atoms can be improved with better shaders.
+Among other features, these would bring shadows and wireframe rendering to Maki.
+A more complicated aspect is morphing, which is required to smoothly transform atoms into different types.
+And lastly the user interface has to be greatly improved.
+The integration or reimplementation of an already existing graphics library is conceivable.
+
+A major question of debate will concern weather any given feature should be implemented in C++ or Python.
 
 # Appendix
 You can find Maki's current status on GitHub at [christopher-besch/maki](https://github.com/christopher-besch/maki).
