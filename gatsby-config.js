@@ -83,6 +83,15 @@ module.exports = {
                             isIconAfterHeader: true,
                         },
                     },
+                    {
+                        resolve: "gatsby-remark-table-of-contents",
+                        options: {
+                            tight: true,
+                            ordered: false,
+                            fromHeading: 1,
+                            toHeading: 2,
+                        },
+                    },
                 ]
             }
         },
