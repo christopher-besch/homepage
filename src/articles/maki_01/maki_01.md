@@ -15,7 +15,7 @@ thumb: ../../../static/social_banner/maki_01.png
 slug: maki_atoms_and_time_travel
 date: 2022-02-03T00:00:00+00:00
 listed: true
-version: 0.1.1
+version: 0.1.2
 ---
 import AutoPlayVideo from "src/components/autoplay_video";
 
@@ -113,7 +113,7 @@ The past was altered, and we see the repercussions in the present.
 # Clear Ownership
 
 Shared ownership, where multiple classes own a single resource, are convenient to implement;
-everything has access to everything, so the optimum of possibilities has been achieved.
+*everything has access to everything*, so the optimum of possibilities has been achieved.
 But those programs, in which *everything owns everything* and *everything calls everything* are very difficult to reason about and tend to be less performant.
 
 When instead every resource is owned by only one object, that object's constructor acquires the resources and the destructor subsequently frees them.
@@ -149,9 +149,9 @@ Knowing in which context what data is being used, allows the programmer to optim
 
 Software runs on hardware, hardware that has certain tastes.
 So if you intend to write fast software, you should base your data layout on the silicon it's supposed to run on.
-Only because two concepts have something in common in some mental model of yours, doesn't mean their data representation has to have anything to do with each other.
+Only because two concepts have something in common in the mental model of yours, doesn't mean their data representation has to have anything to do with each other.
 In fact they may vary wildly.
-That's why the decision, of how to implement a concept, should be made based on the hardware in use, not the mental model of any programmer.
+That's why, what a concept's implementation should be based on, is the hardware in use, not the mental model of any programmer.
 
 Therefore a **clear ownership** model is easier to reason about and the foundation for high performing software.
 Memory layout will also play a major role in [Why Templates?](#why-templates).
