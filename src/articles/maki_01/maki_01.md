@@ -15,6 +15,7 @@ thumb: ../../../static/social_banner/maki_01.png
 slug: maki_atoms_and_time_travel
 date: 2022-02-03T00:00:00+00:00
 listed: true
+version: 0.1.1
 ---
 import AutoPlayVideo from "src/components/autoplay_video";
 
@@ -42,9 +43,7 @@ The purpose of this article is to outline how a program for interactive and prog
 To experiment with different technologies and programming paradigms, I created a developmental implementation called Maki.
 This article outlines Maki's design decisions and discusses planned future development.
 
-<!-- results -->
-
-<!-- conclusion -->
+<!-- TODO: add results/conclusion -->
 
 <AutoPlayVideo src={full_showcase_01} poster={full_showcase_01_poster} />
 
@@ -107,32 +106,55 @@ And that's exactly what we see:
 The moment the shift is being applied, Maki performs a chrono sync (which I'll describe in more detail later on) and the cube changes it's position.
 The past was altered, and we see the repercussions in the present.
 > "The past was erased, the erasure was forgotten, the lie became truth."
+> —1984
 
 <AutoPlayVideo src={time_travel} />
 
 # Clear Ownership
 
-Shared ownership, where multiple classes or functions own a single resource, tends to culminate in programs where *everything owns everything* and *everything calls everything*.
-This is relatively easy to implement (The programmer doesn't have to consider complicated ownership models.) but easily leads to stack traces resembling hell on earth.
+Shared ownership, where multiple classes own a single resource, are convenient to implement;
+everything has access to everything, so the optimum of possibilities has been achieved.
+But those programs, in which *everything owns everything* and *everything calls everything* are very difficult to reason about and tend to be less performant.
+
 When instead every resource is owned by only one object, that object's constructor acquires the resources and the destructor subsequently frees them.
 This programming technique (called [RAII](https://en.cppreference.com/w/cpp/language/raii) by the C++ committee for silly names) leaves no need for any garbage collection.
-Therefore a **clear ownership** model isn't just easier to reason about, but also highly performant.
 
 But in some situations the same resource has to be *used* by multiple objects.
 With an emphasis on *used*;
-these situations don't warrant the use of shared ownership.
+these situations don't necessarily warrant the use of shared ownership.
 Instead the resource can be *borrowed*.
 For example, without going into detail of what these classes actually do:
 A `RenderDriver` owns a `Renderer` and an `AtomDispenser`.
 The `AtomDispenser` needs the `Renderer` to perform its task, so it *borrows* it from the `RenderDriver`.
 And because both the `AtomDispenser` and the `Renderer` are owned by the same `RenderDriver`, the `AtomDispenser` can rest assured that all its resources are (still) available.
 
+This member function lends the `Renderer` to an `AtomDispenser`:
 ```cpp
 void AtomDispenser::create_all_atom_renderers(Renderer* renderer)
 {
     ...
 }
 ```
+
+But not having to garbage collect isn't the only performance advantage.
+A **clear ownership model** also bestows a definitive purpose on each function and object.
+Objects are restricted to the resources they need to fulfill their task:
+Anything they don't need, they don't have access to.
+This reduces side-effects and consequently improves debuggability.
+
+Knowing in which context what data is being used, allows the programmer to optimize memory accesses for just these contexts.
+
+> "Software does not run in a magic fairy aether powered by the fever dreams of CS PhDs."
+> —Mike Acton
+
+Software runs on hardware, hardware that has certain tastes.
+So if you intend to write fast software, you should base your data layout on the silicon it's supposed to run on.
+Only because two concepts have something in common in some mental model of yours, doesn't mean their data representation has to have anything to do with each other.
+In fact they may vary wildly.
+That's why the decision, of how to implement a concept, should be made based on the hardware in use, not the mental model of any programmer.
+
+Therefore a **clear ownership** model is easier to reason about and the foundation for high performing software.
+Memory layout will also play a major role in [Why Templates?](#why-templates).
 
 # Renderer Abstraction
 Even though Maki is currently using OpenGL only, different rendering APIs (like Vulcan, Metal or DirectX) can easily be added.
@@ -501,7 +523,7 @@ A major question of debate will concern weather any given feature should be impl
 
 # Appendix
 You can find Maki's current status on GitHub at [christopher-besch/maki](https://github.com/christopher-besch/maki).
-Maki's version as of this article's writing can be accessed [here](https://github.com/christopher-besch/maki/tree/0b844480b511a08b81e7f87d50a3b7Fc4e764d85).
+Maki's version as of this article's writing can be accessed [here](https://github.com/christopher-besch/maki/tree/2def62cd38b5d8b607b91e3ed9386cdbee0fd335).
 Feel free to leave a star ^^
 
 ### Directory Overview

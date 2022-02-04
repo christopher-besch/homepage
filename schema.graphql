@@ -910,6 +910,7 @@ enum FileFieldsEnum {
   childrenMdx___frontmatter___thumb___children
   childrenMdx___frontmatter___banner
   childrenMdx___frontmatter___listed
+  childrenMdx___frontmatter___version
   childrenMdx___slug
   childrenMdx___body
   childrenMdx___excerpt @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
@@ -1012,6 +1013,7 @@ enum FileFieldsEnum {
   childMdx___frontmatter___thumb___children
   childMdx___frontmatter___banner
   childMdx___frontmatter___listed
+  childMdx___frontmatter___version
   childMdx___slug
   childMdx___body
   childMdx___excerpt @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
@@ -1897,6 +1899,7 @@ enum MdxFieldsEnum {
   frontmatter___thumb___internal___type
   frontmatter___banner
   frontmatter___listed
+  frontmatter___version
   slug
   body
   excerpt @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
@@ -2054,6 +2057,7 @@ type MdxFrontmatter {
   thumb: File
   banner: String
   listed: Boolean
+  version: String
 }
 
 input MdxFrontmatterFilterInput {
@@ -2069,6 +2073,7 @@ input MdxFrontmatterFilterInput {
   thumb: FileFilterInput
   banner: StringQueryOperatorInput
   listed: BooleanQueryOperatorInput
+  version: StringQueryOperatorInput
 }
 
 type MdxGroupConnection {
@@ -2176,7 +2181,7 @@ type Query {
   allFile(filter: FileFilterInput, sort: FileSortInput, skip: Int, limit: Int): FileConnection!
   directory(sourceInstanceName: StringQueryOperatorInput, absolutePath: StringQueryOperatorInput, relativePath: StringQueryOperatorInput, extension: StringQueryOperatorInput, size: IntQueryOperatorInput, prettySize: StringQueryOperatorInput, modifiedTime: DateQueryOperatorInput, accessTime: DateQueryOperatorInput, changeTime: DateQueryOperatorInput, birthTime: DateQueryOperatorInput, root: StringQueryOperatorInput, dir: StringQueryOperatorInput, base: StringQueryOperatorInput, ext: StringQueryOperatorInput, name: StringQueryOperatorInput, relativeDirectory: StringQueryOperatorInput, dev: IntQueryOperatorInput, mode: IntQueryOperatorInput, nlink: IntQueryOperatorInput, uid: IntQueryOperatorInput, gid: IntQueryOperatorInput, rdev: IntQueryOperatorInput, ino: FloatQueryOperatorInput, atimeMs: FloatQueryOperatorInput, mtimeMs: FloatQueryOperatorInput, ctimeMs: FloatQueryOperatorInput, atime: DateQueryOperatorInput, mtime: DateQueryOperatorInput, ctime: DateQueryOperatorInput, birthtime: DateQueryOperatorInput, birthtimeMs: FloatQueryOperatorInput, id: StringQueryOperatorInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput): Directory
   allDirectory(filter: DirectoryFilterInput, sort: DirectorySortInput, skip: Int, limit: Int): DirectoryConnection!
-  site(buildTime: DateQueryOperatorInput, siteMetadata: SiteSiteMetadataFilterInput, port: IntQueryOperatorInput, host: StringQueryOperatorInput, id: StringQueryOperatorInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput): Site
+  site(buildTime: DateQueryOperatorInput, siteMetadata: SiteSiteMetadataFilterInput, port: IntQueryOperatorInput, host: StringQueryOperatorInput, polyfill: BooleanQueryOperatorInput, pathPrefix: StringQueryOperatorInput, jsxRuntime: StringQueryOperatorInput, id: StringQueryOperatorInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput): Site
   allSite(filter: SiteFilterInput, sort: SiteSortInput, skip: Int, limit: Int): SiteConnection!
   siteFunction(functionRoute: StringQueryOperatorInput, pluginName: StringQueryOperatorInput, originalAbsoluteFilePath: StringQueryOperatorInput, originalRelativeFilePath: StringQueryOperatorInput, relativeCompiledFilePath: StringQueryOperatorInput, absoluteCompiledFilePath: StringQueryOperatorInput, matchPath: StringQueryOperatorInput, id: StringQueryOperatorInput, parent: NodeFilterInput, children: NodeFilterListInput, internal: InternalFilterInput): SiteFunction
   allSiteFunction(filter: SiteFunctionFilterInput, sort: SiteFunctionSortInput, skip: Int, limit: Int): SiteFunctionConnection!
@@ -2217,6 +2222,9 @@ type Site implements Node {
   siteMetadata: SiteSiteMetadata
   port: Int
   host: String
+  polyfill: Boolean
+  pathPrefix: String
+  jsxRuntime: String
   id: ID!
   parent: Node
   children: [Node!]!
@@ -2424,6 +2432,9 @@ enum SiteFieldsEnum {
   siteMetadata___address
   port
   host
+  polyfill
+  pathPrefix
+  jsxRuntime
   id
   parent___id
   parent___parent___id
@@ -2517,6 +2528,9 @@ input SiteFilterInput {
   siteMetadata: SiteSiteMetadataFilterInput
   port: IntQueryOperatorInput
   host: StringQueryOperatorInput
+  polyfill: BooleanQueryOperatorInput
+  pathPrefix: StringQueryOperatorInput
+  jsxRuntime: StringQueryOperatorInput
   id: StringQueryOperatorInput
   parent: NodeFilterInput
   children: NodeFilterListInput

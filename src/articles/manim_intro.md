@@ -6,6 +6,7 @@ banner: none
 slug: manim_intro
 date: 2022-01-11T00:00:00+00:00
 listed: false
+version: 1.0.1
 ---
 
 ## Code Explanation
