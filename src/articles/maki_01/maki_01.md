@@ -15,7 +15,7 @@ thumb: ../../../static/social_banner/maki_01.png
 slug: maki_atoms_and_time_travel
 date: 2022-02-05T00:00:00+00:00
 listed: true
-version: 0.1.6
+version: 0.1.7
 ---
 import AutoPlayVideo from "src/components/autoplay_video";
 import Quote from "src/components/quote";
@@ -34,8 +34,6 @@ import time_travel from "./07_time_travel.mp4";
 import fly_around_01 from "./fly_around_01.mp4";
 import fly_around_02 from "./fly_around_02.mp4";
 
-<AutoPlayVideo src={full_showcase_01} poster={full_showcase_01_poster} />
-
 <!-- problem -->
 To create animations for technical concepts, one is advised to use graphics software with a programmatic approach.
 While these provide the required precision, they suffer from an inherent disconnect between input and output.
@@ -47,6 +45,7 @@ To experiment with different technologies and programming paradigms, I created a
 This article outlines Maki's design decisions and discusses planned future development.
 
 # Table of Contents
+<AutoPlayVideo src={full_showcase_01} poster={full_showcase_01_poster} />
 
 ```toc
 exclude: Table of Contents
