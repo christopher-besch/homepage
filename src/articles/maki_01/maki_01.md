@@ -34,9 +34,9 @@ import fly_around_01 from "./fly_around_01.mp4";
 import fly_around_02 from "./fly_around_02.mp4";
 
 <!-- problem -->
-To create animations for technical concepts, one is advised to use graphics software with a programmatic approach.
-While these provide the required precision, they suffer from an inherent disconnect between input and output.
-An alternative are WYSIWYG programs, which avoid this detachment with interactivity at the cost of precision.
+To create animations for technical concepts, one is advised to create them programmatically with software that provides such utilities.  
+While such programs are incredibly precise, they suffer from an inherent disconnection between the input and the output.  
+WYSIWYG programs avoid this detachment with interactivity but at the cost of precision.  
 
 <!-- purpose and methods -->
 The purpose of this article is to outline how a program for interactive and programmatic animation development can be implemented.
@@ -55,14 +55,15 @@ exclude: Table of Contents
 
 # Maki
 <!-- ideals -->
-- **Extensibility**,
-- **performance**,
-- **ease of use**,
-- **strict type and thread safety**,
-- **clear ownership** and the
-- **fear of loosing (type) information** form Maki's main ideals.
+### Maki's main ideals
+- **Extensibility**
+- **Performance**
+- **Ease of Use**
+- **Strict Type and Thread Safety**
+- **Clear Ownership**
+- **Fear of Loosing (type) Information**
 
-I chose C++ because it enforces **strict rules** and offers handy containers, algorithms and many light-weight abstractions, aiding in the development of a complex system, without compromising on **performance**.
+I chose C++ because it enforces **strict rules** and offers handy containers, algorithms and many light-weight abstractions, aiding in the development of a complex system, without compromising on **Performance**.
 
 The goal of [Maki](https://github.com/christopher-besch/maki) is to allow the user to create 3D animations using Python;
 while the user is constructing their animation in an interactive shell, Maki shows the current status of the scene in a separate window.
@@ -103,12 +104,11 @@ As you can see, Maki currently shows the 199th frame.
 But now I'm applying another downward translation from frame `5` to `50`.
 This downward shift lies in the past, so we expect the cube to be in a lower position in the present.
 And that's exactly what we see:
-The moment the shift is being applied, Maki performs a chrono sync (which I'll describe in more detail later on) and the cube changes it's position.
+The moment the shift is being applied, Maki performs a [Chrono Sync](#chrono-sync) and the cube changes it's position.
 The past was altered, and we see the repercussions in the present.
-> "The past was erased, the erasure was forgotten, the lie became truth."
-> —1984
 
 <AutoPlayVideo src={time_travel} />
+<center><figcaption><em>"The past was erased, the erasure was forgotten, the lie became truth."</em>  —1984</figcaption></center>
 
 # Clear Ownership
 
@@ -347,7 +347,7 @@ void apply(std::vector<AtomType>& atoms) const
 }
 ```
 
-## `AtomChain`
+## AtomChain
 Being one of the central classes, an `AtomChain` contains all `Atoms` for one frame `x`.
 They can be seen as pointing to the frame `x` within the `AtomDiffLifetime`.
 To stick with the mathematical terminology, think of it as the integral from frame `0` to frame `x`.
