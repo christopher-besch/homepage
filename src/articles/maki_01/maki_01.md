@@ -15,7 +15,7 @@ thumb: ../../../static/social_banner/maki_01.png
 slug: maki_atoms_and_time_travel
 date: 2022-02-05T00:00:00+00:00
 listed: true
-version: 0.1.4
+version: 0.1.5
 ---
 import AutoPlayVideo from "src/components/autoplay_video";
 import Quote from "src/components/quote";
@@ -34,6 +34,8 @@ import time_travel from "./07_time_travel.mp4";
 import fly_around_01 from "./fly_around_01.mp4";
 import fly_around_02 from "./fly_around_02.mp4";
 
+<AutoPlayVideo src={full_showcase_01} poster={full_showcase_01_poster} />
+
 <!-- problem -->
 To create animations for technical concepts, one is advised to use graphics software with a programmatic approach.
 While these provide the required precision, they suffer from an inherent disconnect between input and output.
@@ -43,10 +45,6 @@ WYSIWYG programs avoid this detachment with interactivity at the cost of precisi
 The purpose of this article is to outline how a program for interactive and programmatic animation development can be implemented.
 To experiment with different technologies and programming paradigms, I created a developmental implementation called Maki.
 This article outlines Maki's design decisions and discusses planned future development.
-
-<!-- TODO: add results/conclusion -->
-
-<AutoPlayVideo src={full_showcase_01} poster={full_showcase_01_poster} />
 
 # Table of Contents
 
@@ -74,31 +72,39 @@ The user can decide which frame of the animation should be played.
 This allows an **easy to use** workflow, minimizing the time between defining animations and playing with the results.
 
 ## Walkthrough
+<AutoPlayVideo src={init} />
+
 To start working with Maki, one has to initialize it.
 This defines the rendering API to be used and creates a window of the specified size.
-<AutoPlayVideo src={init} />
+
+<AutoPlayVideo src={create_cube} />
 
 Once that is done, you can create an atom.
 This call to `add_cuboid_atom` returns a handle to the cuboid.
 But you will see...that you don't see anything.
-<AutoPlayVideo src={create_cube} />
+
+<AutoPlayVideo src={show_cube} />
 
 That's because you've only created the atom;
 you still have to tell Maki to actually render it.
 This call to `show_cuboid_atom` orders Maki to start showing the atom at frame `1`.
-<AutoPlayVideo src={show_cube} />
+
+<AutoPlayVideo src={colouring} />
 
 We can also change the colour.
 Each call again needs to know what frame it should be applied to.
-<AutoPlayVideo src={colouring} />
+
+<AutoPlayVideo src={translate_cube} />
 
 Our cube can also be moved.
 But Maki currently only supports instant movement—"teleporting" from one frame to the next.
-<AutoPlayVideo src={translate_cube} />
+
+<AutoPlayVideo src={smooth_translation} />
 
 Smooth transitions have to be implemented on the Python side. 
 This quick implementation performs just that; it smoothly shifts the cube from frame `60` to frame `200`.
-<AutoPlayVideo src={smooth_translation} />
+
+<AutoPlayVideo src={time_travel} />
 
 As you can see, Maki currently shows the 199th frame.
 But now I'm applying another downward translation from frame `5` to `50`.
@@ -109,7 +115,6 @@ The past was altered, and we see the repercussions in the present.
 
 <Quote text="The past was erased, the erasure was forgotten, the lie became truth." author="1982" />
 
-<AutoPlayVideo src={time_travel} />
 
 # Clear Ownership
 
@@ -253,9 +258,10 @@ Therefore the use of mutexes ought to be minimized.
 
 These two precautions, preventing the threads from running incorrect functions and accessing resources at the same time, form the basis for Maki's **thread safety**.
 
-<AutoPlayVideo src={fly_around_01} />
 
 # Atoms
+<AutoPlayVideo src={fly_around_01} />
+
 Just like how real atoms were thought to be the indivisible unit of the universe, atoms are the smallest renderable unit in Maki.
 A collection of them form a frame, multiple of which form an entire scene, which can be rendered to a video file.
 
@@ -347,7 +353,7 @@ void apply(std::vector<AtomType>& atoms) const
 }
 ```
 
-## AtomChain
+## Atom Chain
 Being one of the central classes, an `AtomChain` contains all `Atoms` for one frame `x`.
 They can be seen as pointing to the frame `x` within the `AtomDiffLifetime`.
 To stick with the mathematical terminology, think of it as the integral from frame `0` to frame `x`.
@@ -490,9 +496,9 @@ This adds performance overhead, because any one function can't be optimized for 
 The main problem is that calling function discards information, which the called function has to painstakingly recreate.
 To put it in a nutshell, I'm incredibly **afraid of loosing type information**.
 
+# Path of an Atom
 <AutoPlayVideo src={fly_around_02} />
 
-# Path of an Atom
 Let's wrap things up by looking at the path an atom takes, from the interactive Python shell to the screen.
 
 1. A cuboid gets created from Python using the `add_cuboid_atom` function, which gets redirected to `RenderDriver::add_atom<CuboidAtom>`.

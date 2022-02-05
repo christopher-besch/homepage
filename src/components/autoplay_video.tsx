@@ -10,7 +10,7 @@ interface AutoPlayVideoProps {
 }
 const AutoPlayVideo: React.FC<AutoPlayVideoProps> = (props) => {
     return (
-        <div>
+        <div className={styles.wrapper}>
             {props.poster ? undefined : <p className={styles.removed_warn}>[video removed from print]</p>}
             {/* show in print version if poster defined */}
             <video
