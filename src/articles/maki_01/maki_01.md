@@ -13,9 +13,9 @@ description: "
 banner: /social_banner/maki_01.png
 thumb: ../../../static/social_banner/maki_01.png
 slug: maki_atoms_and_time_travel
-date: 2022-02-03T00:00:00+00:00
+date: 2022-02-05T00:00:00+00:00
 listed: true
-version: 0.1.2
+version: 0.1.3
 ---
 import AutoPlayVideo from "src/components/autoplay_video";
 
@@ -66,8 +66,8 @@ I chose C++ because it enforces **strict rules** and offers handy containers, al
 
 The goal of [Maki](https://github.com/christopher-besch/maki) is to allow the user to create 3D animations using Python;
 while the user is constructing their animation in an interactive shell, Maki shows the current status of the scene in a separate window.
-The user is able to freely move the camera in that window.
-In addition to that, Maki provides the ability to *jump in time*;
+Here the user is able to freely move the camera.
+In addition to spacial movement, Maki provides the ability to *jump in time*;
 The user can decide which frame of the animation should be played.
 
 This allows an **easy to use** workflow, minimizing the time between defining animations and playing with the results.
@@ -100,7 +100,7 @@ This quick implementation performs just that; it smoothly shifts the cube from f
 <AutoPlayVideo src={smooth_translation} />
 
 As you can see, Maki currently shows the 199th frame.
-Now I'm applying another smooth translation downward from frame `5` to `50`.
+But now I'm applying another downward translation from frame `5` to `50`.
 This downward shift lies in the past, so we expect the cube to be in a lower position in the present.
 And that's exactly what we see:
 The moment the shift is being applied, Maki performs a chrono sync (which I'll describe in more detail later on) and the cube changes it's position.
@@ -214,7 +214,7 @@ There are always two things happening concurrently:
 1. accepting new atoms or changing existing ones and
 2. rendering the scene or handling user interaction.
 
-This is why it makes sense to use two different threads, a control and a render thread.
+This is why it makes sense to use two threads, a control and a render thread.
 Since OpenGL doesn't allow multiple threads to use the same context, only the render thread is allowed to perform render calls.
 The control thread on the other hand is the only one Python can directly interface with.
 Consequently, data has to be safely exchanged between the two threads.
@@ -246,7 +246,7 @@ Since these checks are being removed for `Release` mode and are only included in
 #endif
 ```
 
-To prevent race conditions, no two threads are accessing the same resource concurrently, mutexes are being used.
+To prevent race conditions (uncontrolled, concurrent access to the same resource) mutexes are being used.
 These "mutual exclusion objects" allow the locking of a resource for the duration of its use.
 In addition to this locking operation being a rather expensive one, all other threads in need of that resource are being stalled.
 Therefore the use of mutexes ought to be minimized.
@@ -327,10 +327,11 @@ Templating is used to accept any type of `Atom`.
 This solves all of the aforementioned problems:
 
 1. Since `AtomDiff`s only contain the data absolutely needed to apply the represented change, they consume very little memory.
-2. When the user changes an atom at any frame, only an `AtomDiff` for that frame has to be created.
-3. When nothing happens in your scene, no `AtomDiff`s are being stored and basically no memory is consumed;
+2. When the user changes an atom at any frame, only one `AtomDiff` has to be created for that frame.
+3. When nothing happens in your scene, no `AtomDiff`s are being added and basically no memory is consumed;
    you can wait for as long as you like.
-4. Adding a new atom doesn't change anything about the `AtomDiff`s.
+4. Adding a new atom doesn't add another `AtomDiff`.
+   Only all systems using the `AtomDiff`s should be made aware that a new atom exists.
 
 The actual difference array is implemented in the `AtomDiffLifetime`.
 An `AtomDiffLifetime` contains one `AtomDiffFrame` for each frame.
@@ -347,9 +348,9 @@ void apply(std::vector<AtomType>& atoms) const
 ```
 
 ## `AtomChain`
-`AtomChain`s can be seen as pointing to a frame `x` within the `AtomDiffLifetime`.
+Being one of the central classes, an `AtomChain` contains all `Atoms` for one frame `x`.
+They can be seen as pointing to the frame `x` within the `AtomDiffLifetime`.
 To stick with the mathematical terminology, think of it as the integral from frame `0` to frame `x`.
-Being one of the central classes, an `AtomChain` contains all `Atoms` for one frame.
 This "pointer" can freely be moved around to represent the requested frame.
 To achieve this, the underlying `AtomDiff`s owned by the `AtomDiffLifetime` are being used to approach the target frame.
 ```cpp
@@ -373,7 +374,6 @@ There are always two atom chains in use for any type, a control and a render ato
 - To apply any absolute changes at frame `x` the control thread needs to know what the current state of frame `x` is.
   Otherwise it wouldn't know how to adjust the atoms in frame `x-1` to become the new `x`.
   Thus the control thread needs its own atom chain.
-  <!-- This is not necessary for relative changes. -->
 
 The first frame is frame `0`.
 It cannot display anything as it is used as the foundation for any following frames;
@@ -382,13 +382,52 @@ Only subsequent frames can be the target of `AtomDiff`s.
 
 ## Chrono Syncs
 One might wonder what happens when the control atom chain changes a frame that lies before the render atom chain.
+This is exactly what happened in the [Walkthrough](#walkthrough).
 In this situation the render atom chain would be outdated, because its *past* changed.
 To fix this, Maki performs a chrono sync.
+
 This means that the render atom chain evicts all of it's data and recreates all atoms with default member variables.
 Therefore it points to the 0th frame.
 Since none of the atoms in this frame have been changed, the default atoms currently in the render atom chain are correct—
 the render thread is synchronised again.
 To get back to where the render atom chain left off, it can use the already explained `set_frame` member function.
+
+# Templates
+All functions and classes handling atoms are templated, so that all kinds of atoms can be accepted.
+But that also means that each `AtomDiffLifetime` can only handle one type of atom.
+Therefore multiple `AtomDiffLifetime`s are required to express the entire breadth of atom types.
+
+## Templated Memory
+To conveniently access the correct `AtomDiffLifetime`, "templated memory" is being used:
+```cpp
+class AtomDispenser {
+    ...
+    // general declaration
+    template<typename AtomType>
+    AtomDiffLifetime<AtomType>& get_diff_lifetime();
+
+    AtomDiffLifetime<CuboidAtom>        m_cuboid_diff_lifetime {};
+    AtomDiffLifetime<QuadrilateralAtom> m_quadrilateral_diff_lifetime {};
+};
+
+// specializations //
+// for CuboidAtoms
+template<>
+inline AtomDiffLifetime<CuboidAtom>& AtomDispenser::get_diff_lifetime<CuboidAtom>()
+{
+    return m_cuboid_diff_lifetime;
+}
+// for QuadrilateralAtoms
+template<>
+inline AtomDiffLifetime<QuadrilateralAtom>& AtomDispenser::get_diff_lifetime<QuadrilateralAtom>()
+{
+    return m_quadrilateral_diff_lifetime;
+}
+```
+The function `AtomDiffLifetime<AtomType>& get_diff_lifetime()` is actually nowhere defined.
+Only the specialized versions can be found, like `AtomDiffLifetime<QuadrilateralAtom>& get_diff_lifetime<QuadrilateralAtom>`.
+As you can see, the general type `AtomType` has been specialized with `QuadrilateralAtom`.
+This way the templating system decides which definition should be called, or fails when there is no specialization for the requested type.
 
 ## Rendering Atoms
 An `AtomRenderer` uses the underlying rendering abstraction to actually render an `Atom`.
@@ -423,43 +462,7 @@ CuboidRenderer* m_cuboid_renderer {nullptr};
 ```
 (The `{nullptr}` is not necessary but always a nice touch ^^).
 
-# Templated Memory
-All functions and classes handling atoms are templated, so that all kinds of atoms can be accepted.
-But that also means that each `AtomDiffLifetime` can only handle one type of atom.
-Therefore multiple `AtomDiffLifetime`s are required to express the entire breadth of atom types.
-To conveniently access the correct `AtomDiffLifetime`, "templated memory" is being used:
-```cpp
-class AtomDispenser {
-    ...
-    // general declaration
-    template<typename AtomType>
-    AtomDiffLifetime<AtomType>& get_diff_lifetime();
-
-    AtomDiffLifetime<CuboidAtom>        m_cuboid_diff_lifetime {};
-    AtomDiffLifetime<QuadrilateralAtom> m_quadrilateral_diff_lifetime {};
-};
-
-// specializations //
-// for CuboidAtoms
-template<>
-inline AtomDiffLifetime<CuboidAtom>& AtomDispenser::get_diff_lifetime<CuboidAtom>()
-{
-    return m_cuboid_diff_lifetime;
-}
-// for QuadrilateralAtoms
-template<>
-inline AtomDiffLifetime<QuadrilateralAtom>& AtomDispenser::get_diff_lifetime<QuadrilateralAtom>()
-{
-    return m_quadrilateral_diff_lifetime;
-}
-```
-The function `AtomDiffLifetime<AtomType>& get_diff_lifetime()` is actually nowhere defined.
-Only the specialized versions can be found, like `AtomDiffLifetime<QuadrilateralAtom>& get_diff_lifetime<QuadrilateralAtom>`.
-As you can see, the general type `AtomType` has been specialized with `QuadrilateralAtom`.
-This way the templating system decides which definition should be called, or fails when there is no specialization for the requested type.
-
-
-# Why Templates?
+## Why Templates?
 Why not use an arguably much simpler object-oriented approach?
 
 An `AtomDiff` can be applied to any `Atom` that provides the necessary member functions (an atom that doesn't have a color can't be painted red).
