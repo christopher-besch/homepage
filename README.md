@@ -14,6 +14,22 @@ This is the homepage of a backend dev, who doesn't particularly care about looks
 Why does the author not mind some barebone styling?
 Read [this](https://motherfuckingwebsite.com).
 
+## How to Build?
+
+Install dependencies:
+```
+yarn install
+```
+Run development server:
+```
+yarn run develop
+```
+Build and serve production:
+```
+yarn run build
+yarn run serve
+```
+
 ## Coding Refereneces
 
 - [Gatsby](https://github.com/christopher-besch/typescript_reference/tree/main/gatsby)
