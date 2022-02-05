@@ -33,75 +33,78 @@ const About: React.FC<AboutProps> = (props) => {
     return (
         <Layout heading="About & Contact">
             <div className={styles.container}>
-                <div className={styles.left_cont}>
-                    <div className={`${util_styles.block} ${styles.about}`}>
-                        <p>
-                            Hello smart people!
-                            I'm Chris.
-                        </p><br />
+                <div className={`${util_styles.block} ${styles.about}`}>
+                    <h2>
+                        Hello smart people!
+                        I'm Chris.
+                    </h2>
 
-                        <p>
-                            I'm currently one of <a href="https://www.manim.community">Manim's</a> Core Developers where I'm project lead of <a href="https://github.com/ManimCommunity/manim_editor">the Manim Editor</a>.
-                            I really enjoy working in such a diverse community of computer scientists, mathematicians, physicists, astronomers, etc.<br />
-                            The different perspectives those people have of the same project never cease to delight me.
-                        </p><br />
+                    <p>
+                        I'm currently one of <a href="https://www.manim.community">Manim's</a> Core Developers where I'm project lead of <a href="https://github.com/ManimCommunity/manim_editor">the Manim Editor</a>.
+                        I really enjoy working in such a diverse community of computer scientists, mathematicians, physicists, etc.<br />
+                        The different perspectives those people have never cease to delight me.
+                    </p>
 
-                        <p>
-                            My primary interests lay in tinkering with
-                            <ul>
-                                <li><a href="https://github.com/christopher-besch/maki">renderers</a>,</li>
-                                <li><a href="https://github.com/christopher-besch/time_table_planner">data analysis</a>,</li>
-                                <li><a href="https://github.com/christopher-besch/neural_network">neural networks</a> and</li>
-                                <li><a href="https://github.com/ToddLinux/ToddLinux">Linux</a>.</li>
-                            </ul>
-                            But I also work on the occasional <a href="https://addons.mozilla.org/en-US/firefox/addon/bbb-autostatus">WebDev project</a>.
-                        </p><br />
+                    <p>
+                        My primary interests lay in tinkering with
+                        <ul>
+                            <li><a href="https://github.com/christopher-besch/maki">renderers</a>,</li>
+                            <li><a href="https://github.com/christopher-besch/time_table_planner">data analysis</a>,</li>
+                            <li><a href="https://github.com/christopher-besch/neural_network">neural networks</a> and</li>
+                            <li><a href="https://github.com/ToddLinux/ToddLinux">Linux</a>.</li>
+                        </ul>
+                        But I also work on the occasional <a href="https://addons.mozilla.org/en-US/firefox/addon/bbb-autostatus">WebDev project</a>.
+                    </p>
 
-                        <p>
-                            When it comes to taste, I prefer
-                            <ul>
-                                <li><a href="https://github.com/christopher-besch/miscellaneous_configs">the terminal</a> over a GUI,</li>
-                                <li><a href="https://github.com/christopher-besch/nvim_like_me">VIM</a> over huge IDEs,</li>
-                                <li>backends over frontends, I'm not a good designer by any stretch of the imagination :&gt;,</li>
-                                <li><Link to="/projects/cpp">C++</Link> over <Link to="/projects/python">Python</Link> or <Link to="/projects/typescript">TypeScript</Link> and</li>
-                                <li>Linux over Windows.</li>
-                            </ul>
-                        </p><br />
-                        <p>
-                            Have a nice day.
-                        </p>
-                    </div>
+                    <p>
+                        I generally like to solve problems, some with more some with less passion.
+                        From time to time I also try my hand at writing <Link to="/articles">articles</Link> about some of my work.
+                    </p>
+
+                    <p>
+                        When it comes to taste, I prefer
+                        <ul>
+                            <li><a href="https://github.com/christopher-besch/miscellaneous_configs">the terminal</a> over a GUI,</li>
+                            <li><a href="https://github.com/christopher-besch/nvim_like_me">VIM</a> over huge IDEs,</li>
+                            <li>backends over frontends, I'm not a good designer by any stretch of the imagination :&gt;,</li>
+                            <li><Link to="/projects/cpp">C++</Link> over <Link to="/projects/python">Python</Link> or <Link to="/projects/typescript">TypeScript</Link> and</li>
+                            <li>Linux over Windows.</li>
+                        </ul>
+                    </p>
+                    <p>
+                        Have a nice day.
+                    </p>
                 </div>
                 <div className={styles.contacts}>
-                    <a href={email_link} target="_blank" className={`${styles.project} ${styles.contact}`} style={width_properties}>
+                    <a href={email_link} target="_blank" className={styles.contact} style={width_properties}>
                         <div className={styles.content}>
                             <span className={styles.icon} style={get_mask("/icons/email-svgrepo-com.svg")}></span>
                             <hr />
                             <h3>{email_name}</h3>
                         </div>
                     </a>
-                    <a href={github_link} target="_blank" className={`${styles.project} ${styles.contact}`} style={width_properties}>
+                    <a href={github_link} target="_blank" className={styles.contact} style={width_properties}>
                         <div className={styles.content}>
                             <span className={styles.icon} style={get_mask("/icons/github.svg")}></span>
                             <hr />
                             <h3>{github_name}</h3>
                         </div>
                     </a>
-                    <a href={linkedin_link} target="_blank" className={`${styles.project} ${styles.contact}`} style={width_properties}>
+                    <a href={linkedin_link} target="_blank" className={styles.contact} style={width_properties}>
                         <div className={styles.content}>
                             <span className={styles.icon} style={get_mask("/icons/linkedin.svg")}></span>
                             <hr />
                             <h3>{linkedin_name}</h3>
                         </div>
                     </a>
-                    <a href={twitter_link} target="_blank" className={`${styles.project} ${styles.contact}`} style={width_properties}>
+                    <a href={twitter_link} target="_blank" className={styles.contact} style={width_properties}>
                         <div className={styles.content}>
                             <span className={styles.icon} style={get_mask("/icons/twitter.svg")}></span>
                             <hr />
                             <h3>{twitter_name}</h3>
                         </div>
                     </a>
-                    <a href={discord_link} target="_blank" className={`${styles.project} ${styles.contact}`} style={width_properties}>
+                    <a href={discord_link} target="_blank" className={styles.contact} style={width_properties}>
                         <div className={styles.content}>
                             <span className={styles.icon} style={get_mask("/icons/discord.svg")}></span>
                             <hr />

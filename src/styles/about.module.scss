@@ -6,27 +6,21 @@
     clear: both;
 }
 
-.left_cont {
-    width: calc(100% - 300px);
-    float: left;
-    /* TODO: really should be margin but I can't be bothered */
-    padding-right: 16px;
-}
-
 .about {
-    width: 100%;
+    width: calc(100% - 600px);
+    float: left;
+    margin-bottom: 16px;
 }
 
 .about p {
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 16px;
     line-height: 18px;
 }
 
-.about h1 {
-    font-size: 40px;
-    margin-top: 20px;
-    margin-bottom: 10px;
+.about h2 {
+    font-size: 2em;
+    line-height: 1.25;
+    margin-bottom: 16px;
 }
 
 .about ul {
@@ -40,8 +34,28 @@
 }
 
 .contacts {
-    width: 300px;
+    width: 600px;
     float: right;
+}
+
+.contact {
+    width: 50%;
+    float: left;
+    padding-left: 16px;
+}
+.contact::after {
+    /* clear floats afterwards */
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.contact:hover .icon {
+    mask-size: 91% 91%;
+    -webkit-mask-size: 91% 91%;
+}
+.contact:hover hr {
+    border-color: $hover_accent;
 }
 
 .content {
@@ -73,22 +87,15 @@
     transition: mask-size $transition_time -webkit-mask-size $transition_time;
 }
 
-.contact:hover .icon {
-    mask-size: 91% 91%;
-    -webkit-mask-size: 91% 91%;
-}
-
-.project:hover hr {
-    border-color: $hover_accent;
-}
-
-@media (max-width: 800px) {
-    .left_cont {
+@media (max-width: 1000px) {
+    .about {
         width: 100%;
-        /* TODO: really should be margin but I can't be bothered */
-        padding: 16px 0px 0px 0px;
     }
     .contacts {
         width: 100%;
+    }
+    .contact {
+        width: 100%;
+        padding-left: 0px;
     }
 }

@@ -6,12 +6,6 @@
     margin-bottom: 8px;
     padding: 0px 8px;
 }
-.projects::before {
-    /* clear floats before <- language icon shouldn't move the last element down */
-    content: "";
-    display: table;
-    clear: both;
-}
 .projects::after {
     /* clear floats afterwards */
     content: "";
