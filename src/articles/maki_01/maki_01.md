@@ -15,7 +15,7 @@ thumb: ../../../static/social_banner/maki_01.png
 slug: maki_atoms_and_time_travel
 date: 2022-02-05T00:00:00+00:00
 listed: true
-version: 0.1.5
+version: 0.1.6
 ---
 import AutoPlayVideo from "src/components/autoplay_video";
 import Quote from "src/components/quote";
@@ -214,6 +214,8 @@ This macro has to be set using the `-Dplatform=glfw` flag at compilation.
 As you can see, **extensibility** lies at the heart of Maki.
 
 # Multi Threading
+<AutoPlayVideo src={fly_around_01} />
+
 There are always two things happening concurrently:
 
 1. accepting new atoms or changing existing ones and
@@ -260,8 +262,6 @@ These two precautions, preventing the threads from running incorrect functions a
 
 
 # Atoms
-<AutoPlayVideo src={fly_around_01} />
-
 Just like how real atoms were thought to be the indivisible unit of the universe, atoms are the smallest renderable unit in Maki.
 A collection of them form a frame, multiple of which form an entire scene, which can be rendered to a video file.
 
@@ -469,6 +469,8 @@ CuboidRenderer* m_cuboid_renderer {nullptr};
 (The `{nullptr}` is not necessary but always a nice touch ^^).
 
 ## Why Templates?
+<AutoPlayVideo src={fly_around_02} />
+
 Why not use an arguably much simpler object-oriented approach?
 
 An `AtomDiff` can be applied to any `Atom` that provides the necessary member functions (an atom that doesn't have a color can't be painted red).
@@ -497,8 +499,6 @@ The main problem is that calling function discards information, which the called
 To put it in a nutshell, I'm incredibly **afraid of loosing type information**.
 
 # Path of an Atom
-<AutoPlayVideo src={fly_around_02} />
-
 Let's wrap things up by looking at the path an atom takes, from the interactive Python shell to the screen.
 
 1. A cuboid gets created from Python using the `add_cuboid_atom` function, which gets redirected to `RenderDriver::add_atom<CuboidAtom>`.
