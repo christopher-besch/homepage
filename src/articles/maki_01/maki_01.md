@@ -13,9 +13,9 @@ description: "
 banner: /social_banner/maki_01.png
 thumb: ../../../static/social_banner/maki_01.png
 slug: maki_atoms_and_time_travel
-date: 2022-02-05T00:00:00+00:00
+date: 2022-02-06T00:00:00+00:00
 listed: true
-version: 0.1.7
+version: 1.0.0
 ---
 import AutoPlayVideo from "src/components/autoplay_video";
 import Quote from "src/components/quote";
