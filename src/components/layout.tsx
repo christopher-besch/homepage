@@ -21,24 +21,30 @@ query SiteInfo {
   site {
     siteMetadata {
       source
-      address
+      default_origin
     }
   }
 }
     `);
     const source = data.site?.siteMetadata?.source as string;
-    const root_address = data.site?.siteMetadata?.address as string;
-    const url = props.location.href;
     const title = props.heading ? `${props.heading}—Christopher Besch` : "Christopher Besch—Software Developer";
     const description = props.description;
-    const banner = props.banner;
+
+    const url = props.location.href;
+    const origin = props.location.origin;
+    const deploy_origin = data.site?.siteMetadata?.default_origin as string;
+    const path = props.location.pathname;
+    // replace origin with default one
+    const canonical_url = `${deploy_origin}${path}`;
+
+    const banner = props.banner ? `${origin}${props.banner}` : undefined;
 
     return (
         <div>
             <Helmet htmlAttributes={{ lang: "en" }}>
                 <meta charSet="utf-8" />
                 <title>{title}</title>
-                <link rel="canonical" href={url} />
+                <link rel="canonical" href={canonical_url} />
                 <link rel="shortcut icon" href="/favicon.png" />
                 <meta
                     property="og:url"
