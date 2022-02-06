@@ -44,6 +44,7 @@ yarn run serve
 - [Social Preview](https://chrisko.io/posts/how-to-preview-your-website-on-social-media-with-meta-tags)
 - [Social Preview Tips](https://www.seoquake.com/blog/open-graph-meta-tags-for-facebook-and-twitter)
 - [Twitter Card Validator](https://cards-dev.twitter.com/validator)
+- [Linkedin Card Validator](https://www.linkedin.com/post-inspector/inspect)
 
 ## Styling References
 
@@ -60,4 +61,3 @@ yarn run serve
 ## Privacy Policy References
 
 - [Writing a GDPR-compliant privacy notice](https://gdpr.eu/privacy-notice)
-
