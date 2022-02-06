@@ -15,7 +15,7 @@ thumb: ../../../static/social_banner/maki_01.png
 slug: maki_atoms_and_time_travel
 date: 2022-02-06T00:00:00+00:00
 listed: true
-version: 1.0.0
+version: 1.0.1
 ---
 import AutoPlayVideo from "src/components/autoplay_video";
 import Quote from "src/components/quote";
@@ -531,7 +531,7 @@ A major question of debate will concern weather any given feature should be impl
 
 # Appendix
 You can find Maki's current status on GitHub at [christopher-besch/maki](https://github.com/christopher-besch/maki).
-Maki's version as of this article's writing can be accessed [here](https://github.com/christopher-besch/maki/tree/2def62cd38b5d8b607b91e3ed9386cdbee0fd335).
+Maki's version as of this article's writing can be accessed [here](https://github.com/christopher-besch/maki/tree/30f3d5a358e1b89803a534c666318b14138a6756).
 Feel free to leave a star ^^
 
 ### Directory Overview

@@ -27,7 +27,8 @@ query SiteInfo {
 }
     `);
     const source = data.site?.siteMetadata?.source as string;
-    const address = data.site?.siteMetadata?.address as string;
+    const root_address = data.site?.siteMetadata?.address as string;
+    const url = props.location.href;
     const title = props.heading ? `${props.heading}—Christopher Besch` : "Christopher Besch—Software Developer";
     const description = props.description;
     const banner = props.banner;
@@ -37,11 +38,11 @@ query SiteInfo {
             <Helmet htmlAttributes={{ lang: "en" }}>
                 <meta charSet="utf-8" />
                 <title>{title}</title>
-                <link rel="canonical" href={address} />
+                <link rel="canonical" href={url} />
                 <link rel="shortcut icon" href="/favicon.png" />
                 <meta
                     property="og:url"
-                    content={props.location.href}
+                    content={url}
                 />
                 <meta
                     property="og:title"
