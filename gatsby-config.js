@@ -127,6 +127,9 @@ module.exports = {
             link: "https://discord.com/users/455374552352948236",
         },
         source: "https://github.com/christopher-besch/homepage",
+        // main address
         default_origin: "https://chris-besch.com",
+        // address actually in use
+        origin: "https://dev.chris-besch.com",
     },
 }

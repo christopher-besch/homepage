@@ -21,6 +21,7 @@ query SiteInfo {
   site {
     siteMetadata {
       source
+      origin
       default_origin
     }
   }
@@ -31,14 +32,13 @@ query SiteInfo {
     const description = props.description;
 
     const url = props.location.href;
-    const origin = props.location.origin;
+    const origin = data.site?.siteMetadata?.origin;
     const deploy_origin = data.site?.siteMetadata?.default_origin as string;
     const path = props.location.pathname;
     // replace origin with default one
     const canonical_url = `${deploy_origin}${path}`;
 
-    // const banner = props.banner ? `${origin}${props.banner}` : undefined;
-    const banner = "https://dev.chris-besch.com/social_banner/maki_01.png";
+    const banner = props.banner ? `${origin}${props.banner}` : undefined;
 
     return (
         <div>
