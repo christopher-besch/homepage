@@ -48,7 +48,7 @@ This article outlines Maki's design decisions and discusses planned future devel
 <AutoPlayVideo src={full_showcase_01} poster={full_showcase_01_poster} />
 
 ```toc
-exclude: Table of Contents
+exclude: Table of Contents|Directory Overview
 ```
 
 # Maki
@@ -534,7 +534,7 @@ You can find Maki's current status on GitHub at [christopher-besch/maki](https:/
 Maki's version as of this article's writing can be accessed [here](https://github.com/christopher-besch/maki/tree/30f3d5a358e1b89803a534c666318b14138a6756).
 Feel free to leave a star ^^
 
-### Directory Overview
+## Directory Overview
 ```
 .
 ├── maki
