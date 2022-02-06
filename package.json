@@ -5,10 +5,9 @@
     "version": "0.1.0",
     "license": "UNLICENSED",
     "scripts": {
-        "build": "node_modules/.bin/gatsby build",
-        "develop": "node_modules/.bin/gatsby develop",
-        "format": "node_modules/.bin/gatsby prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
-        "start": "node_modules/.bin/gatsby develop",
+        "build_debug": "DEPLOY_ORIGIN='https://dev.chris-besch.com' node_modules/.bin/gatsby build",
+        "build_deploy": "DEPLOY_ORIGIN='https://chris-besch.com' node_modules/.bin/gatsby build",
+        "develop": "DEPLOY_ORIGIN='http://localhost:8000' node_modules/.bin/gatsby develop",
         "serve": "node_modules/.bin/gatsby serve",
         "clean": "node_modules/.bin/gatsby clean",
         "type-check": "find ./src/ -name __generated__ -type d | xargs rm -r -v || true && node_modules/.bin/tsgql typegen && node_modules/.bin/tsc && echo 'type check ok'",
