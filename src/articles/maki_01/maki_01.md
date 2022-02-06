@@ -10,7 +10,7 @@ description: "
 
     Maki combines the best of both worlds.
 "
-banner: /social_banner/maki_01.png
+banner: https://avatars.githubusercontent.com/u/57909184?v=4?s=400
 thumb: ../../../static/social_banner/maki_01.png
 slug: maki_atoms_and_time_travel
 date: 2022-02-06T00:00:00+00:00
