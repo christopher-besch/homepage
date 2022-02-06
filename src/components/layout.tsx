@@ -37,7 +37,8 @@ query SiteInfo {
     // replace origin with default one
     const canonical_url = `${deploy_origin}${path}`;
 
-    const banner = props.banner ? `${origin}${props.banner}` : undefined;
+    // const banner = props.banner ? `${origin}${props.banner}` : undefined;
+    const banner = "https://dev.chris-besch.com/social_banner/maki_01.png";
 
     return (
         <div>
