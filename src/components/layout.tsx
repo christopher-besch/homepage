@@ -67,6 +67,10 @@ query SiteInfo {
                     name="twitter:creator"
                     content="@besch_chris"
                 />
+                {banner ? <meta
+                    property="twitter:image:src"
+                    content={banner}
+                /> : undefined}
 
                 <meta
                     name="author"
