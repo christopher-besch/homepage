@@ -19,3 +19,9 @@ main_block {
 .link:hover {
     background-color: $link_hover;
 }
+
+.spacer {
+    content: "";
+    display: table;
+    clear: both;
+}

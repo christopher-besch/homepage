@@ -18,6 +18,7 @@ listed: true
 version: 1.0.1
 ---
 import AutoPlayVideo from "src/components/autoplay_video";
+import Spacer from "src/components/spacer";
 import Quote from "src/components/quote";
 
 import full_showcase_01 from "./full_showcase_01.mp4";
@@ -114,6 +115,8 @@ The past was altered, and we see the repercussions in the present.
 
 <Quote text="The past was erased, the erasure was forgotten, the lie became truth." author="1982" />
 
+
+<Spacer />
 
 # Clear Ownership
 
@@ -259,6 +262,7 @@ Therefore the use of mutexes ought to be minimized.
 
 These two precautions, preventing the threads from running incorrect functions and accessing resources at the same time, form the basis for Maki's **thread safety**.
 
+<Spacer />
 
 # Atoms
 Just like how real atoms were thought to be the indivisible unit of the universe, atoms are the smallest renderable unit in Maki.
@@ -496,6 +500,8 @@ But that means that all `AtomDiff`s and any other objects need to accept abstrac
 This adds performance overhead, because any one function can't be optimized for one type of atom, and dynamic casting isn't exactly free.
 The main problem is that calling function discards information, which the called function has to painstakingly recreate.
 To put it in a nutshell, I'm incredibly **afraid of loosing type information**.
+
+<Spacer />
 
 # Path of an Atom
 Let's wrap things up by looking at the path an atom takes, from the interactive Python shell to the screen.

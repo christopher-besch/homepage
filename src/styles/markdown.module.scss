@@ -11,18 +11,6 @@
   font-style: italic;
 }
 
-/* clear floats before any heading */
-.markdown_body h1::before,
-.markdown_body h2::before,
-.markdown_body h3::before,
-.markdown_body h4::before,
-.markdown_body h5::before,
-.markdown_body h6::before {
-    content: "";
-    display: table;
-    clear: both;
-}
-
 // following code copied and slightly modified from https://github.com/sindresorhus/github-markdown-css
 /* MIT License */
 
