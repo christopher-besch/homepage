@@ -13,3 +13,7 @@
 - audio/mic
 - distcc
 - power, fan control?
+- bluetooth
+
+## Steps
+- disable pc speaker: /etc/modprobe.d/blacklist.conf `blacklist pcspkr`
