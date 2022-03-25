@@ -46,6 +46,12 @@ So this article aims to convince you to try Gentoo as a learning experience and 
 - challenges, solutions -> disclaimer!, not static
 - configs (fstab, make.conf)
 - explain Xkbmpa, bash...
+- only set few keybinds with gui -> image
+- set keyboard layout with sddm instead of xfce4
+- os prober config
+- firefox:
+    - copy bookmarks
+    - keyword:enabled
 
 ## Goals
 
@@ -61,6 +67,7 @@ So this article aims to convince you to try Gentoo as a learning experience and 
 - distcc
 - power, fan control?
 - bluetooth
+- os prober
 
 ## Steps
 - disable pc speaker: /etc/modprobe.d/blacklist.conf `blacklist pcspkr`
@@ -98,6 +105,30 @@ So this article aims to convince you to try Gentoo as a learning experience and 
 - compile custom
 - fails to :PackerSync, fixed with new version of Lunarvim
 
-## Tips
+## Configs
+
+- /etc/default/grub
+- /etc/portage/make.conf
+- /usr/share/sddm/scripts/Xsetup
+
+## Packages
 
 - app-shells/bash-completion
+- xfce-extra/xfce4-screenshooter
+- xfce-extra/xfce4-netload-plugin
+- xfce-extra/xfce4-cpugraph-plugin
+- xfce-extra/xfce4-notifyd
+- media-sound/pavucontrol
+- sys-apps/exa
+- sys-apps/fd
+- x11-apps/setxkbmap
+- x11-misc/xclip-0.13
+- app-editors/vim
+- dev-vcs/git
+- media-gfx/imagemagick
+- app-admin/keepass
+
+## Problems
+
+- xfce-extra/xfce4-pulseaudio-plugin doesn't work
+
