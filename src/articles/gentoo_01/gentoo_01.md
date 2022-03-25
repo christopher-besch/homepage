@@ -1,4 +1,21 @@
-# Gentoo Challenge
+---
+type: article
+title: "Surviving Gentoo for a Month"
+description: "
+    [description here]
+"
+banner: /social_banner/gentoo_challenge.png
+thumb: ../../../static/social_banner/gentoo_challenge.png
+slug: gentoo_challenge
+date: 2022-03-20T00:00:00+00:00
+listed: true
+version: 0.0.1
+---
+import Quote from "src/components/quote";
+
+<Quote text="Gentoo is a GNU/Linux distro where everything is compiled from source. However it's not much better than other distros. Whoever installed it must be extremely autistic." author="youtu.be/S8s9uzPIqQ4" />
+
+# Notes
 
 - where am I coming from?
 - what is Gentoo, why Gentoo(advantages, disadvantages)
