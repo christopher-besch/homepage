@@ -56,3 +56,7 @@
 - neovim in Portage too old (0.5.x)
 - compile custom
 - fails to :PackerSync, fixed with new version of Lunarvim
+
+## Tips
+
+- app-shells/bash-completion
