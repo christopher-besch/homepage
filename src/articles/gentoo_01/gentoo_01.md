@@ -122,7 +122,7 @@ So this article aims to convince you to try Gentoo as a learning experience and 
 - sys-apps/exa
 - sys-apps/fd
 - x11-apps/setxkbmap
-- x11-misc/xclip-0.13
+- x11-misc/xclip
 - app-editors/vim
 - dev-vcs/git
 - media-gfx/imagemagick
