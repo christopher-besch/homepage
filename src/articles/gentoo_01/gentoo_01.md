@@ -127,6 +127,10 @@ So this article aims to convince you to try Gentoo as a learning experience and 
 - dev-vcs/git
 - media-gfx/imagemagick
 - app-admin/keepass
+- net-im/discord-bin
+- app-text/tree
+- app-text/pdftk
+- app-text/texlive
 
 ## Problems
 
