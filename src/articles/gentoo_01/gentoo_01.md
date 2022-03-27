@@ -132,6 +132,10 @@ So this article aims to convince you to try Gentoo as a learning experience and 
 - app-text/pdftk
 - app-text/texlive
 
+## ocrmypdf
+
+emerge --ask app-text/ghostscript-gpl media-libs/icc-profiles-openicc app-text/tesseract media-gfx/pngquant dev-libs/libxml2
+
 ## Problems
 
 - xfce-extra/xfce4-pulseaudio-plugin doesn't work
