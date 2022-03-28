@@ -106,13 +106,14 @@ So this article aims to convince you to try Gentoo as a learning experience and 
 - fails to :PackerSync, fixed with new version of Lunarvim
 
 ## Configs
-
 - /etc/default/grub
 - /etc/portage/make.conf
 - /usr/share/sddm/scripts/Xsetup
 
-## Packages
+## Tips
+- don't forget `timedatectl set-net true`
 
+## Packages
 - app-shells/bash-completion
 - xfce-extra/xfce4-screenshooter
 - xfce-extra/xfce4-netload-plugin
