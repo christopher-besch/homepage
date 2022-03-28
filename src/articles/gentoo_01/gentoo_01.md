@@ -133,10 +133,17 @@ So this article aims to convince you to try Gentoo as a learning experience and 
 - app-text/pdftk
 - app-text/texlive
 - media-gfx/gimp
+- app-portage/gentoolkit
 
 ## ocrmypdf
 
-emerge --ask app-text/ghostscript-gpl media-libs/icc-profiles-openicc app-text/tesseract media-gfx/pngquant dev-libs/libxml2
+<!-- TODO: fix -->
+- app-text/ghostscript-gpl
+- media-libs/icc-profiles-openicc
+- app-text/tesseract media-gfx/pngquant
+- dev-libs/libxml2
+
+- L10N="en-GB en de"
 
 ## Problems
 
