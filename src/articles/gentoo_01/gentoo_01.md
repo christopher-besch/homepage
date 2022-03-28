@@ -133,6 +133,7 @@ So this article aims to convince you to try Gentoo as a learning experience and 
 - app-text/pdftk
 - app-text/texlive
 - media-gfx/gimp
+- app-text/pdfgrep
 
 ## ocrmypdf
 
