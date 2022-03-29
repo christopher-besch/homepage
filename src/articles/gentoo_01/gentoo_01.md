@@ -32,9 +32,47 @@ Please don't write me any angry emails when you accidentally deleted your family
 exclude: Table of Contents
 ```
 
-## Choices Along the Way
+# Choices Along the Way
 The [Gentoo Handbook (AMD64)](https://wiki.gentoo.org/wiki/Handbook:AMD64) is such a great tutorial that there is basically nothing left for me to add.
-Instead I'll go through the decisions one has to take to end up with a system to my liking.
+Instead I'll go through the decisions one has to make to end up with a system to my liking.
+When you stumble upon some concepts that aren't explained here but you're unfamiliar with, you should take a look at the handbook or [the Gentoo wiki](https://wiki.gentoo.org).
+
+## Init System
+To install the operating system, a few tools need to be installed first.
+These are the first things your soon to be Linux installation gets to see, or in other words its primordial soup.
+This primordial soup, correctly call stage 3, comes in a few varieties.
+<!-- TODO: add image -->
+
+I want a system with a desktop, so I choose the appropriate desktop profile.
+And then there's the matter of the init system.
+
+On Linux the init system is the first program that starts once the kernel has booted up.
+It has a lot of tasks, one of which being
+
+## Desktop and Display Manager
+
+# Programs I Like
+Installing software on Gentoo is often as simple as installing the appropriate package.
+For me this means installing:
+- `app-admin/keepass`: A local password manager.
+- `net-im/discord-bin`: A 
+- `app-text/tree`: A convenient way of displaying folder structures in the terminal.
+- `app-text/pdftk`: A toolkit for handling PDFs in the terminal.
+- `media-gfx/gimp`: The GNU image manipulation program.
+- `app-text/pdfgrep`: Searching in PDFs with the familiar GREP syntax.
+
+You can install these packages with `emerge --ask media-gfx/gimp`.
+Sometimes this command prompts you to set some USE flags.
+These can either be set in `/etc/portage/make.conf` [to affect all packages](https://wiki.gentoo.org/wiki/etc/portage/make.conf#USE) or in `/etc/portage/package.use` [to not alter the global USE flags](https://wiki.gentoo.org/wiki/etc/portage/package.use).
+
+My `make.conf` looks like this:
+```
+TODO: add
+```
+And my `package.use` like this:
+```
+TODO: add
+```
 
 # Notes
 
@@ -114,7 +152,6 @@ Instead I'll go through the decisions one has to take to end up with a system to
 - don't forget `timedatectl set-net true`
 
 ## Packages
-- app-shells/bash-completion
 - xfce-extra/xfce4-screenshooter
 - xfce-extra/xfce4-netload-plugin
 - xfce-extra/xfce4-cpugraph-plugin
@@ -125,15 +162,11 @@ Instead I'll go through the decisions one has to take to end up with a system to
 - x11-apps/setxkbmap
 - x11-misc/xclip
 - app-editors/vim
-- dev-vcs/git
 - media-gfx/imagemagick
-- app-admin/keepass
-- net-im/discord-bin
-- app-text/tree
-- app-text/pdftk
 - app-text/texlive
-- media-gfx/gimp
-- app-text/pdfgrep
+- dev-vcs/git
+- app-shells/bash-completion
+
 - app-portage/gentoolkit
 
 ## OCRmyPDF
