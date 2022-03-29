@@ -168,6 +168,7 @@ TODO: add
 - app-shells/bash-completion
 
 - app-portage/gentoolkit
+- app-portage/genlop
 
 ## OCRmyPDF
 
