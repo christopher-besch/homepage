@@ -13,19 +13,19 @@ version: 0.0.1
 ---
 import Quote from "src/components/quote";
 
-Gentoo is a Linux distribution that offers as many options as possible while its Portage package manager leverages most of the heavy lifting.
+Gentoo is a Linux distribution that offers as many options as possible while its Portage package manager leverages the heavy lifting.
 In my arguably still very inexperienced opinion the most difficult aspect is the choosing such freedom entails.
 What init system causes the least amount of pain with the software you intend to run, what desktop suits your personal style and what display manager goes best with that?
 
 I installed Gentoo countless times with different decisions along the way.
-While my dysfunctional combinations butchered some of those installations beyond repair with, others became my daily driver for weeks and months.
+While dysfunctional combinations butchered some of those installations beyond repair with, others became my daily driver for weeks and months.
 In the end I might not have become an expert but I surely did learn a lot during this endeavour.
 So this opinionated article documents said endeavour, all choices I made, any problems I encountered and their subsequent solutions.
 
 If you decide to try Gentoo for yourself, I'd recommend doing so in a virtual machine instead of directly on your main PC.
 VMs allow you to save snapshots before each step in the installation.
 So when you screw something up—and trust me you will—you can simply go back.
-Please don't write me any angry emails when you accidentally deleted your family photos lacking a backup.
+Please don't write me any angry emails when you accidentally deleted your family photos lacking a backup ;)
 <!-- TODO: add image -->
 
 ```toc
@@ -37,7 +37,7 @@ The [Gentoo Handbook (AMD64)](https://wiki.gentoo.org/wiki/Handbook:AMD64) is su
 Instead I'll go through the decisions one has to make to end up with a system to my liking.
 When you stumble upon some concepts that aren't explained here but you're unfamiliar with, you should take a look at the handbook or [the Gentoo wiki](https://wiki.gentoo.org).
 
-## Init System
+# Init System and Stage 3
 To install the operating system, a few tools need to be installed first.
 These are the first things your soon to be Linux installation gets to see, or in other words its primordial soup.
 This primordial soup, correctly call stage 3, comes in a few varieties.
@@ -47,9 +47,14 @@ I want a system with a desktop, so I choose the appropriate desktop profile.
 And then there's the matter of the init system.
 
 On Linux the init system is the first program that starts once the kernel has booted up.
-It has a lot of tasks, one of which being
+With Gentoo you can use whatever init system you like but the usual options are OpenRC and systemd.
+OpenRC is Gentoo's default and when you choose to use systemd, you should read the [systemd article](https://wiki.gentoo.org/wiki/Systemd).
 
-## Desktop and Display Manager
+I'm used to systemd and wanted to try something non-default so I went with it on my final installation.
+In my experience the handbook makes a good job at explaining what you have to do differently when using systemd.
+The only thing I noticed to be missing was [NTP to synchronize your clock with `sudo timedatectl set-ntp true`](https://wiki.gentoo.org/wiki/Systemd#Time_and_date)—something you realize very quickly when daylight saving starts.
+
+# Desktop and Display Manager
 
 # Programs I Like
 Installing software on Gentoo is often as simple as installing the appropriate package.
@@ -90,6 +95,7 @@ TODO: add
 
 ## Goals
 
+### Done
 - systemd
 - xfce
 - wifi
@@ -99,14 +105,60 @@ TODO: add
 - discord
 - firefox
 - audio/mic, noisetorch
-- distcc
-- power, fan control?
-- bluetooth
+- power
 - os prober
+
+### Unfished
+- distcc
+- fan control?
+- bluetooth
 - virtual machine
 
 ## Steps
 - disable pc speaker: /etc/modprobe.d/blacklist.conf `blacklist pcspkr`
+
+## Lunarvim
+- neovim in Portage too old (0.5.x)
+- compile custom
+- fails to :PackerSync, fixed with new version of Lunarvim
+- requirements:
+    - sys-apps/fd
+    - x11-misc/xclip
+
+## Missing Configs
+- /etc/default/grub
+- /usr/share/sddm/scripts/Xsetup
+
+## Packages
+
+### xfce
+- xfce-extra/xfce4-screenshooter
+- xfce-extra/xfce4-cpugraph-plugin
+- xfce-extra/xfce4-notifyd
+- x11-apps/setxkbmap
+
+- media-sound/pavucontrol
+- sys-apps/exa
+- app-editors/vim
+- media-gfx/imagemagick
+- app-text/texlive
+- dev-vcs/git
+- app-shells/bash-completion
+
+- app-portage/gentoolkit
+- app-portage/genlop
+
+## OCRmyPDF
+
+- app-text/tesseract
+- media-gfx/pngquant
+
+- L10N="en-GB en de"
+
+## Problems
+
+- xfce-extra/xfce4-pulseaudio-plugin doesn't work
+- xfce-extra/xfce4-netload-plugin doesn't work
 
 ## Attempts
 - VM:
@@ -137,47 +189,4 @@ TODO: add
     - works
 - PC:
     - not arm architecture
-
-## Lunarvim
-- neovim in Portage too old (0.5.x)
-- compile custom
-- fails to :PackerSync, fixed with new version of Lunarvim
-
-## Configs
-- /etc/default/grub
-- /etc/portage/make.conf
-- /usr/share/sddm/scripts/Xsetup
-
-## Tips
-- don't forget `timedatectl set-net true`
-
-## Packages
-- xfce-extra/xfce4-screenshooter
-- xfce-extra/xfce4-netload-plugin
-- xfce-extra/xfce4-cpugraph-plugin
-- xfce-extra/xfce4-notifyd
-- media-sound/pavucontrol
-- sys-apps/exa
-- sys-apps/fd
-- x11-apps/setxkbmap
-- x11-misc/xclip
-- app-editors/vim
-- media-gfx/imagemagick
-- app-text/texlive
-- dev-vcs/git
-- app-shells/bash-completion
-
-- app-portage/gentoolkit
-- app-portage/genlop
-
-## OCRmyPDF
-
-- app-text/tesseract
-- media-gfx/pngquant
-
-- L10N="en-GB en de"
-
-## Problems
-
-- xfce-extra/xfce4-pulseaudio-plugin doesn't work
 
