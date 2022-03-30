@@ -1,0 +1,103 @@
+    1  source /etc/profile
+    2  export PS1="(chroot) $PS1"
+    3  set -o vi
+    4  mount /dev/sdb1 /boot
+    5  emerge-webrsync
+    6  eselect news read
+    7  emerge --sync
+    8  eselect profile list
+    9  emerge --ask --verbose --update --deep --newuse @world
+   10  emerge --depclean
+   11  vi /etc/portage/make.conf
+   12  vim /etc/portage/make.conf
+   13  emerge --help
+   14  esearch
+   15  elist
+   16  emerge --ask vim
+   17  emerge --ask app-editors/vim
+   18  vim /etc/portage/make.conf
+   19  ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime
+   20  vi /etc/locale.gen
+   21  cat /usr/share/i18n/SUPPORTED 
+   22  cat /usr/share/i18n/SUPPORTED | grep en
+   23  vi /etc/locale.gen
+   24  locale-gen
+   25  eselect locale list
+   26  eselect locale set 6
+   27  . /etc/profile
+   28  set -o vi
+   29  export PS1="(chroot) $PS1"
+   30  env-update && . /etc/profile && export PS1="(chroot) $PS1"
+   31  emerge --ask sys-kernel/linux-firmware
+   32  emerge --ask sys-kernel/gentoo-sources
+   33  eselect kernel list
+   34  eselect kernel set 1
+   35  ls -l /usr/src/linux
+   36  vi /etc/portage/make.conf
+   37  emerge -avDN @world
+   38  eselect profile list
+   39  emerge --ask sys-kernel/genkernel
+   40  lsblk
+   41  fdisk -l
+   42  blkid
+   43  vi /etc/fstab
+   44  genkernel all
+   45  ls /boot/vmlinu* /boot/initramfs*
+   46  vi /etc/conf.d/hostname
+   47  vi /etc/conf.d/hostname
+   48  cat /etc/conf.d/hostname
+   49  vi /etc/conf.d/net
+   50  vi /etc/conf.d/net
+   51  file /etc/conf.d/net
+   52  hostnamectl hostname chris-gentoo
+   53  emerge --ask net-misc/dhcpcd
+   54  systemctl enable dhcpcd
+   55  vi /etc/hosts 
+   56  passwd
+   57  systemd-firstboot --prompt --setup-machine-id
+   58  emerge --ask sys-process/cronie
+   59  systemctl enable cronie
+   60  emerge --ask sys-apps/mlocate
+   61  emerge --ask sys-fs/e2fsprogs
+   62  emerge --ask net-misc/dhcpcd
+   63  emerge --ask --verbose sys-boot/gryb
+   64  emerge --ask --verbose sys-boot/grub
+   65  vi /etc/portage/make.conf
+   66  emerge -ask sys-boot/grub
+   67  emerge --ask --update --newuse --verbose sys-boot/grub
+   68  grub-install --target=x86_64-efi --efi-directory=/boot
+   69  vi /etc/default/grub 
+   70  grub-install --target=x86_64-efi --efi-directory=/boot
+   71  grub-mkconfig -o /boot/grub
+   72  emerge --ask sys-boot/os-prober
+   73  emerge --ask sys-boot/os-prober
+   74  vi /etc/portage/make.conf 
+   75  emerge --ask sys-boot/os-prober
+   76  vi /etc/portage/make.conf 
+   77  emerge --ask sys-boot/os-prober
+   78  grub-install --target=x86_64-efi --efi-directory=/boot
+   79  cd boot/
+   80  ls
+   81  cd grub
+   82  ls
+   83  grub-mkconfig -o /boot/grub
+   84  grub-mkconfig -o /boot/grub/grub.cfg
+   85  exit
+   86  ls
+   87  set -o vi
+   88  useradd -m -G users,wheel,audio -s /bin/bash chris
+   89  passwd chris
+   90  vi /etc/locale.gen
+   91  locale-gen
+   92  eselect locale list
+   93  vi /etc/locale.conf
+   94  env-update
+   95  source /etc/profile
+   96  set -o vi
+   97  which init
+   98  file /sbin/init
+   99  vi /etc/vconsole.conf
+  100  reboot
+  101  history
+  102  set -o vi
+  103  history > commands.txt
