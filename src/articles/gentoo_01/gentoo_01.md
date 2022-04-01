@@ -55,12 +55,14 @@ In my experience the handbook makes a good job at explaining what you have to do
 The only thing I noticed to be missing was [NTP to synchronize your clock with `sudo timedatectl set-ntp true`](https://wiki.gentoo.org/wiki/Systemd#Time_and_date)—something you realize very quickly when daylight saving starts.
 
 # Desktop and Display Manager
+I use the terminal emulator for everything I can.
+Besides it and Firefox usually nothing graphical is running
 
 # Programs I Like
 Installing software on Gentoo is often as simple as installing the appropriate package.
 For me this means installing:
 - `app-admin/keepass`: A local password manager.
-- `net-im/discord-bin`: A 
+- `net-im/discord-bin`: A chat program everyone uses and hates.
 - `app-text/tree`: A convenient way of displaying folder structures in the terminal.
 - `app-text/pdftk`: A toolkit for handling PDFs in the terminal.
 - `media-gfx/gimp`: The GNU image manipulation program.
@@ -72,12 +74,26 @@ These can either be set in `/etc/portage/make.conf` [to affect all packages](htt
 
 My `make.conf` looks like this:
 ```
-TODO: add
+[...]
+ACCEPT_LICENSE="*"
+GRUB_PLATFORMS="efi-64"
+USE="mount pulseaudio gtk3"
+L10N="en-GB en de"
+[...]
 ```
 And my `package.use` like this:
 ```
-TODO: add
+# used for Keepass2
+dev-lang/mono minimal
+# install everything
+app-text/texlive *
+app-text/texlive-core xetex
 ```
+
+## Kitty
+My current terminal emulator of choice is Kitty mainly because it supports displaying images directly in the terminal.
+Unfortunately you have to jump through a few hoops to install it on Gentoo.
+Refer to the [Kitty on Gentoo article](https://wiki.gentoo.org/wiki/Kitty) for installation instructions.
 
 # Notes
 

@@ -51,6 +51,7 @@ yarn run serve
 - [Benjamin Hackl](https://benjamin-hackl.at)
 - [Aatish Bhatia](https://aatishb.com)
 - [LEMMiNO](https://www.lemmi.no)
+- [Ty Hopp](https://tyhopp.com/)
 
 ## Content References
 
