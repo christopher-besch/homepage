@@ -37,7 +37,9 @@ The [Gentoo Handbook (AMD64)](https://wiki.gentoo.org/wiki/Handbook:AMD64) is su
 Instead I'll go through the decisions one has to make to end up with a system to my liking.
 When you stumble upon some concepts that aren't explained here but you're unfamiliar with, you should take a look at the handbook or [the Gentoo wiki](https://wiki.gentoo.org).
 
-# Init System and Stage 3
+Generally when this article doesn't explain a choice, I chose the default or non-extra option.
+
+# systemd
 To install the operating system, a few tools need to be installed first.
 These are the first things your soon to be Linux installation gets to see, or in other words its primordial soup.
 This primordial soup, correctly call stage 3, comes in a few varieties.
@@ -54,9 +56,31 @@ I'm used to systemd and wanted to try something non-default so I went with it on
 In my experience the handbook makes a good job at explaining what you have to do differently when using systemd.
 The only thing I noticed to be missing was [NTP to synchronize your clock with `sudo timedatectl set-ntp true`](https://wiki.gentoo.org/wiki/Systemd#Time_and_date)—something you realize very quickly when daylight saving starts.
 
-# Desktop and Display Manager
-I use the terminal emulator for everything I can.
-Besides it and Firefox usually nothing graphical is running
+# Xfce
+I use the terminal emulator for **everything**.
+Usually nothing graphical, besides it and Firefox, is running.
+So my focus lies entirely on making the terminal as pleasant and efficient to use as possible.
+Therefore I'm using the most lightweight and least painful desktop environment I could find, Xfce.
+Out of the box it doesn't look as fancy as your average [r/unixporn](https://www.reddit.com/r/unixporn) post but you can tailor it to your liking—which I promptly didn't do.
+
+So my desktop looks like this:
+<!-- TODO: add image -->
+and not like this:
+<!-- TODO: add image with credit -->
+
+Coming back to Gentoo, there's an article on [installing Xfce](https://wiki.gentoo.org/wiki/Xfce) you should follow.
+This most notably includes selecting an appropriate profile.
+You should do this when [installing the base system](https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Base#Choosing_the_right_profile).
+
+## SDDM
+Without a display manager your newly booted up system presents you only with a terminal—even when Xfce is installed.
+To give you a graphical login prompt and launch Xfce, you need something like [SDDM](https://wiki.gentoo.org/wiki/SDDM).
+It is one of many [display managers](https://wiki.gentoo.org/wiki/Display_manager) out there.
+Feel free to play around with other options, SDDM is only the first one I tried and that fulfills all my simple needs.
+
+(Don't forget to activate its daemon with `systemctl enable sddm.service`.)
+
+[SDDM](https://wiki.gentoo.org/wiki/SDDM)
 
 # Programs I Like
 Installing software on Gentoo is often as simple as installing the appropriate package.
@@ -89,14 +113,15 @@ dev-lang/mono minimal
 app-text/texlive *
 app-text/texlive-core xetex
 ```
+These files change over time;
+you can find the current versions [here](TODO: add).
 
-## Kitty
+### Kitty
 My current terminal emulator of choice is Kitty mainly because it supports displaying images directly in the terminal.
 Unfortunately you have to jump through a few hoops to install it on Gentoo.
 Refer to the [Kitty on Gentoo article](https://wiki.gentoo.org/wiki/Kitty) for installation instructions.
 
 # Notes
-
 - where am I coming from?
 - what is Gentoo, why Gentoo(advantages, disadvantages)
 - challenges, solutions -> disclaimer!, not static
