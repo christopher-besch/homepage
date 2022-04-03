@@ -38,6 +38,14 @@ Instead I'll go through the decisions leading to a system to my liking.
 If a choice is not explained, I chose the default or non-extra option as explained in the handbook.
 When you stumble upon some concepts you are unfamiliar with, you should take a look at the handbook or [Gentoo wiki](https://wiki.gentoo.org).
 
+# GPT, UEFI vs. MBR, Legacy BIOS
+There are two different ways of partitioning your disk, GPT and MBR.
+They are closely tied to the two boot process types, UEFI and legacy BIOS.
+[The handbook](https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Disks) explains the differences more closely so I'll leave at stating that I used the modern GPT, UEFI option.
+
+## fstab
+<!-- TODO: add -->
+
 # systemd
 To install the operating system, a few tools need to be available.
 These are the first things your soon to be Linux installation gets to consist out of, or in other words its primordial soup.
@@ -56,6 +64,40 @@ I'm used to systemd and wanted to try something non-default so I went with it on
 In my experience the handbook makes a good job at explaining what you have to do differently when using systemd but you should still read [the systemd article](https://wiki.gentoo.org/wiki/Systemd).
 The only thing I noticed to be missing was [NTP to synchronize your clock with `sudo timedatectl set-ntp true`](https://wiki.gentoo.org/wiki/Systemd#Time_and_date)—something you realize very quickly when daylight saving starts.
 
+# genkernel and GRUB 2
+At some point you have to decide how you intend to install the Linux kernel.
+My first attempts used the [manual configuration](https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Kernel#Manual_configuration), which always caused trouble but would theoretically result in a very clean build.
+On my final installation I ended up using the much simpler [genkernel](https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Kernel#Alternative:_Using_genkernel), with which I had no problems whatsoever.
+
+Once the kernel is installed and a few other steps in the handbook have been traversed, you get to the stage of choosing a bootloader.
+The bootloader is the piece of software starting the kernel after the power button has been pressed.
+As described in the [systemd article](https://wiki.gentoo.org/wiki/Systemd#GRUB_2) it is crucial to edit `/etc/default/grub` and add this line:
+```
+[...]
+# Append parameters to the linux kernel command line
+GRUB_CMDLINE_LINUX="init=/lib/systemd/systemd"
+[...]
+```
+Otherwise the kernel wouldn't launch systemd.
+
+I also have to add this to my `/etc/portage/make.conf` before emerging `sys-boot/grub` because I'm using the UEFI boot process.
+```
+[...]
+GRUB_PLATFORMS="efi-64"
+[...]
+```
+
+## os-prober
+Because I enjoy playing games from time to time, Windows still does a better job at that and I like separating work and play, I'm running a Gentoo-Windows dual boot.
+To be prompted at every boot which OS you want to boot, you need os-prober.
+You can install it with `emerge --ask sys-boot/os-prober` and have to enable it in `/etc/default/grub`:
+```
+[...]
+GRUB_DISABLE_OS_PROBER=false
+[...]
+```
+os-prober doesn't run at every boot, instead it only looks for any other bootable partitions when you `grub-mkconfig -o /boot/grub/grub.cfg`.
+
 # Xfce
 I use the terminal emulator for **everything**.
 Usually nothing graphical, besides it and Firefox, is running.
@@ -71,14 +113,24 @@ and not like this:
 Coming back to Gentoo, there's an article on [installing Xfce](https://wiki.gentoo.org/wiki/Xfce) you should follow.
 This most notably includes selecting an appropriate profile when [installing the base system](https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Base#Choosing_the_right_profile).
 
-<!-- TODO: finish -->
-There are 
-- `xfce-extra/xfce4-screenshooter`
-- `xfce-extra/xfce4-cpugraph-plugin`
-- `xfce-extra/xfce4-notifyd`
-- `x11-apps/setxkbmap`
-- `media-fonts/fonts-meta`
-<!-- TODO: set correct keymap -->
+There are a few extra packages I like to complement Xfce with.
+- `xfce-extra/xfce4-screenshooter`: A simple screenshot tool.
+- `xfce-extra/xfce4-cpugraph-plugin`: Show your current CPU usage in the task bar.
+<!-- TODO: add image -->
+- `xfce-extra/xfce4-notifyd`: Enable notifications.
+- `media-sound/pavucontrol`: Allow for more fine grained control over your audio devices.
+<!-- TODO: add image -->
+- `media-fonts/fonts-meta`: Install non-Latin character set.
+<!-- TODO: add example -->
+
+Since I use VI as my editor, that requires pressing Escape very often and I never understood why anyone would like to use Caps Lock, I bind my Caps Lock key to Escape.
+On a system using Xorg, which mine is, this can be achieved using an `.Xmodmap` file in your home directory:
+```
+! make caps key perform escape action
+remove Lock = Caps_Lock
+keysym Caps_Lock = Escape
+```
+It is part of my config collection, which contains all following files and will be described at a later point in this article.
 
 ## SDDM
 Without a display manager your newly booted up system presents you only with a terminal—even when Xfce is installed.
@@ -88,9 +140,18 @@ Feel free to play around with other options, SDDM is only the first one I tried 
 
 (Don't forget to activate its daemon with `systemctl enable sddm.service`.)
 
-# Grub
+To set the keyboard layout for the login screen—what Xfce call it's "system defaults"—you have to create the `/usr/share/sddm/scripts/Xsetup` script.
+<!-- TODO: add image -->
+This sets it to the UK keyboard layout.
+```
+#!/bin/sh
+# Xsetup - run as root before the login dialog appears
+setxkbmap "gb"
+```
+(`setxkbmap` is a command you have to install first with `emerge --ask x11-apps/setxkbmap`.)
 
-## os prober
+# WIFI
+<!-- TODO: add -->
 
 # Programs I Like
 Installing software on Gentoo is often as simple as installing the appropriate package.
@@ -101,6 +162,11 @@ For me this means installing:
 - `app-text/pdftk`: A **T**ool**K**it for handling **PDF**s in the terminal.
 - `media-gfx/gimp`: The **G**NU **I**mage **M**anipulation **P**rogram.
 - `app-text/pdfgrep`: Searching in PDFs with the familiar GREP syntax.
+- `sys-apps/exa`: A colourful replacement for `ls`.
+<!-- TODO: test if link works -->
+- `app-editors/vim`: Quite useful when you don't want to go through the hassle of [installing Lunarvim](#Lunarvim) during setup.
+- `app-portage/gentoolkit`: A few useful tools for working with Portage.
+- `app-portage/genlop`: Estimate compilation time with Portage.
 
 You can install these packages with `emerge --ask [package name]`.
 Sometimes this command prompts you to set some USE flags.
@@ -130,49 +196,10 @@ you can find my current version [here](https://github.com/christopher-besch/conf
 My terminal emulator of choice is Kitty, mainly because it supports displaying images directly in the terminal.
 Unfortunately you have to jump through a few hoops to install it on Gentoo.
 Refer to the [Kitty on Gentoo article](https://wiki.gentoo.org/wiki/Kitty) for installation instructions.
-
-### Git
+To be able to show images in the terminal, you also have to install `media-gfx/imagemagick`.
 
 ### Lunarvim
-
-# Notes
-- where am I coming from?
-- what is Gentoo, why Gentoo(advantages, disadvantages)
-- challenges, solutions -> disclaimer!, not static
-- configs (fstab, make.conf)
-- explain Xkbmpa, bash...
-- only set few keybinds with gui -> image
-- set keyboard layout with sddm instead of xfce4
-- os prober config
-- firefox:
-    - copy bookmarks
-    - keyword:enabled
-
-## Goals
-
-### Done
-- systemd
-- xfce
-- wifi
-- kitty
-- bash, git, gdb
-- lunarvim
-- discord
-- firefox
-- audio/mic, noisetorch
-- power
-- os prober
-
-### Unfished
-- distcc
-- fan control?
-- bluetooth
-- virtual machine
-
-## Steps
-- disable pc speaker: /etc/modprobe.d/blacklist.conf `blacklist pcspkr`
-
-## Lunarvim
+<!-- TODO: add -->
 - neovim in Portage too old (0.5.x)
 - compile custom
 - fails to :PackerSync, fixed with new version of Lunarvim
@@ -180,64 +207,74 @@ Refer to the [Kitty on Gentoo article](https://wiki.gentoo.org/wiki/Kitty) for i
     - sys-apps/fd
     - x11-misc/xclip
 
-## Missing Configs
-- /etc/default/grub
-- /usr/share/sddm/scripts/Xsetup
+### Noisetorch
+<!-- TODO: add -->
 
-## Packages
-
-### xfce
-
-- media-sound/pavucontrol
-- sys-apps/exa
-- app-editors/vim
-- media-gfx/imagemagick
-- app-text/texlive
+### Git
+<!-- TODO: add -->
 - dev-vcs/git
 - app-shells/bash-completion
 
-- app-portage/gentoolkit
-- app-portage/genlop
+### LaTeX
+<!-- TODO: add -->
+- app-text/texlive
 
-## OCRmyPDF
-
+### OCRmyPDF
+<!-- TODO: add -->
 - app-text/tesseract
 - media-gfx/pngquant
 
 - L10N="en-GB en de"
 
-## Problems
+### Firefox
+<!-- TODO: add -->
+- copy bookmarks
+- keyword:enabled
 
+# Little Problems
+<!-- TODO: add -->
+- disable pc speaker: /etc/modprobe.d/blacklist.conf `blacklist pcspkr`
+
+# Cheat Sheet
+<!-- TODO: add -->
+- install package
+- update system
+- update USE
+
+# Still Unsolved Problems
 - xfce-extra/xfce4-pulseaudio-plugin doesn't work
 - xfce-extra/xfce4-netload-plugin doesn't work
+- bluetooth
+- virtual machine
+- distcc
 
-## Attempts
-- VM:
-    - no desktop
-    - OpenRC
-    - manual kernel config
-    - Grub2
-    - didn't boot
-- VM:
-    - genkernel
-    - works
-- VM:
-    - xfce
-    - SSDM
-    - systemd
-    - genkernel, Grub2
-- ThinkPad:
-    - xfce
-    - SSDM
-    - genkernel, Grub2
-    - systemd
-    - DHCPCD, wpa_supplicant
-    - wifi not on reboot (has to be called explicitly)
-    - net_setup fine
-    - NetworkManager, nm_appplet -> constant ettempting connection, unstable (probably biting with custom wpa_supplicant config)
-- ThinkPad:
-    - NetworkManager (no DHCPCD, wpa_supplicant directly)
-    - works
-- PC:
-    - not arm architecture
+<!-- ## Attempts -->
+<!-- - VM: -->
+<!--     - no desktop -->
+<!--     - OpenRC -->
+<!--     - manual kernel config -->
+<!--     - Grub2 -->
+<!--     - didn't boot -->
+<!-- - VM: -->
+<!--     - genkernel -->
+<!--     - works -->
+<!-- - VM: -->
+<!--     - xfce -->
+<!--     - SSDM -->
+<!--     - systemd -->
+<!--     - genkernel, Grub2 -->
+<!-- - ThinkPad: -->
+<!--     - xfce -->
+<!--     - SSDM -->
+<!--     - genkernel, Grub2 -->
+<!--     - systemd -->
+<!--     - DHCPCD, wpa_supplicant -->
+<!--     - wifi not on reboot (has to be called explicitly) -->
+<!--     - net_setup fine -->
+<!--     - NetworkManager, nm_appplet -> constant ettempting connection, unstable (probably biting with custom wpa_supplicant config) -->
+<!-- - ThinkPad: -->
+<!--     - NetworkManager (no DHCPCD, wpa_supplicant directly) -->
+<!--     - works -->
+<!-- - PC: -->
+<!--     - not arm architecture -->
 
