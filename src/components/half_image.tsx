@@ -2,10 +2,10 @@ import React from "react";
 
 import * as styles from "src/styles/half_image.module.scss";
 
-interface AutoPlayVideoProps {
+interface HalfImageProps {
     src: string;
 }
-const HalfImage: React.FC<AutoPlayVideoProps> = (props) => {
+const HalfImage: React.FC<HalfImageProps> = (props) => {
     return (
         <div className={styles.wrapper}>
             <img

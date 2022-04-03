@@ -18,7 +18,7 @@
     }
 }
 .wrapper::before {
-    /* clear float after video */
+    /* clear float before video */
     /* needs to be on wrapper <- ::after can't be applied to video */
     content: "";
     display: table;
@@ -28,5 +28,10 @@
 @media (max-width: 1000px) {
     .video, .video_no_print {
         max-width: 100%;
+    }
+    .wrapper::after {
+        content: "";
+        display: table;
+        clear: both;
     }
 }

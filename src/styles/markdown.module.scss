@@ -128,12 +128,13 @@
   top: -0.5em;
 }
 
-.markdown_body img {
-  border-style: none;
-  max-width: 100%;
-  box-sizing: content-box;
-  background-color: #0d1117;
-}
+/* overwritten by custom components */
+/* .markdown_body img { */
+/*   border-style: none; */
+/*   max-width: 100%; */
+/*   box-sizing: content-box; */
+/*   background-color: #0d1117; */
+/* } */
 
 .markdown_body code,
 .markdown_body kbd,

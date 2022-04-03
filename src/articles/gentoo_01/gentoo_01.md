@@ -14,10 +14,15 @@ version: 0.0.1
 ---
 import AutoPlayVideo from "src/components/autoplay_video";
 import HalfImage from "src/components/half_image";
+import NormalImage from "src/components/normal_image";
 import Spacer from "src/components/spacer";
 
 import cpu_usage from "./cpu_usage.png";
 import pavucontrol from "./pavucontrol.png";
+import xfce_system_defaults_keyboard_layout from "./xfce_system_defaults_keyboard_layout.png";
+import firefox_keyword_enabled from "./firefox_keyword_enabled.png";
+import stage3_download from "./stage3_download.png";
+import my_desktop from "./my_desktop.png";
 import bash_completion from "./bash_completion.mp4";
 
 Gentoo is a Linux distribution that offers as many options as possible.
@@ -79,7 +84,7 @@ UUID=0b04fdcc-6d7f-4a88-bf57-1c2965bf8ceb /     ext4 noatime          0 1
 To install the operating system, a few tools need to be available.
 These are the first things your soon to be Linux installation gets to consist out of, or in other words its primordial soup.
 This primordial soup, correctly called stage 3, comes in a few varieties:
-<!-- TODO: add image -->
+<HalfImage src={stage3_download} />
 
 I want a system with a desktop, so I choose the appropriate desktop profile.
 And then there's the matter of the init system.
@@ -92,6 +97,8 @@ When you choose to use systemd, you should read the [systemd article](https://wi
 I'm used to systemd and wanted to try something non-default so I went with it on my final installation.
 In my experience the handbook makes a good job at explaining what you have to do differently when using systemd but you should still read [the systemd article](https://wiki.gentoo.org/wiki/Systemd).
 The only thing I noticed to be missing was [NTP to synchronize your clock with `sudo timedatectl set-ntp true`](https://wiki.gentoo.org/wiki/Systemd#Time_and_date)—something you realize very quickly when daylight saving starts.
+
+<Spacer />
 
 # genkernel and GRUB 2
 At some point you have to decide how you intend to install the Linux kernel.
@@ -135,25 +142,25 @@ Therefore I'm using the most lightweight and least painful desktop environment I
 Out of the box it doesn't look as fancy as your average [r/unixporn](https://www.reddit.com/r/unixporn) post but you can tailor it to your liking—which I promptly didn't do.
 
 So my desktop looks like this:
-<!-- TODO: add image -->
+<NormalImage src={my_desktop} />
+
 and not like this:
 <!-- TODO: add image with credit -->
+
+<Spacer />
 
 Coming back to Gentoo, there's an article on [installing Xfce](https://wiki.gentoo.org/wiki/Xfce) you should follow.
 This most notably includes selecting an appropriate profile when [installing the base system](https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Base#Choosing_the_right_profile).
 
-<Image src={cpu_usage} />
-<Image src={pavucontrol} />
 
 There are a few extra packages I like to complement Xfce with.
 - `xfce-extra/xfce4-screenshooter`: A simple screenshot tool.
+<HalfImage src={cpu_usage} />
 - `xfce-extra/xfce4-cpugraph-plugin`: Show your current CPU usage in the task bar.
 - `xfce-extra/xfce4-notifyd`: Enable notifications.
+<HalfImage src={pavucontrol} />
 - `media-sound/pavucontrol`: Allow for more fine grained control over your audio devices.
-<!-- TODO: add image -->
 - `media-fonts/fonts-meta`: Install non-Latin character set.
-
-<Spacer />
 
 Since I use VI as my editor, that requires pressing Escape very often and I never understood why anyone would like to use Caps Lock, I bind my Caps Lock key to Escape.
 On a system using Xorg, which mine is, this can be achieved using an `.Xmodmap` file in your home directory:
@@ -164,6 +171,8 @@ keysym Caps_Lock = Escape
 ```
 It is part of my [config collection](https://github.com/christopher-besch/configs).
 
+<Spacer />
+
 ## SDDM
 Without a display manager your newly booted up system presents you only with a terminal—even when Xfce is installed.
 To give you a graphical login prompt and launch Xfce, you need something like [SDDM](https://wiki.gentoo.org/wiki/SDDM).
@@ -173,7 +182,7 @@ Feel free to play around with other options, SDDM is only the first one I tried 
 (Don't forget to activate its daemon with `systemctl enable sddm.service`.)
 
 To set the keyboard layout for the login screen—what Xfce call it's "system defaults"—you have to create the `/usr/share/sddm/scripts/Xsetup` script.
-<!-- TODO: add image -->
+<HalfImage src={xfce_system_defaults_keyboard_layout} />
 This sets it to the UK keyboard layout.
 ```bash
 #!/bin/sh
@@ -181,6 +190,8 @@ This sets it to the UK keyboard layout.
 setxkbmap "gb"
 ```
 `setxkbmap` is a command you have to install first with `emerge --ask x11-apps/setxkbmap`.
+
+<Spacer />
 
 # Wi-Fi
 <!-- TODO: write -->
@@ -242,9 +253,7 @@ To make git work the way you're used to, you need two packages:
 - `dev-vcs/git`
 - `app-shells/bash-completion`
 
-The second one is required to give bash the ability to autocomplete.
-
-<Spacer />
+The second one is required to give bash the ability to autocomplete, as you can see in the video.
 
 ### LaTeX
 <!-- TODO: write -->
@@ -266,6 +275,8 @@ So you have to install it using `emerge --ask --autounmask=y --autounmask-write 
 <!-- TODO: write -->
 - copy bookmarks
 - keyword:enabled
+
+<Spacer />
 
 # Little Problems
 <!-- TODO: write -->

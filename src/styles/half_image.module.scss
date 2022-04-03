@@ -1,13 +1,14 @@
 @import "consts.scss";
 
 .image {
-    max-width: 60%;
+    /* to negate markdown style */
+    max-width: 60% !important;
     height: auto;
     float: right;
     margin: 0px 0px 16px 16px;
 }
 .wrapper::before {
-    /* clear float after image */
+    /* clear float before image */
     /* needs to be on wrapper <- ::after probably can't be applied to image */
     content: "";
     display: table;
@@ -17,5 +18,10 @@
 @media (max-width: 1000px) {
     .image {
         max-width: 100%;
+    }
+    .wrapper::after {
+        content: "";
+        display: table;
+        clear: both;
     }
 }
