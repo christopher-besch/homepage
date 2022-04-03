@@ -1,0 +1,21 @@
+@import "consts.scss";
+
+.image {
+    max-width: 60%;
+    height: auto;
+    float: right;
+    margin: 0px 0px 16px 16px;
+}
+.wrapper::before {
+    /* clear float after image */
+    /* needs to be on wrapper <- ::after probably can't be applied to image */
+    content: "";
+    display: table;
+    clear: both;
+}
+
+@media (max-width: 1000px) {
+    .image {
+        max-width: 100%;
+    }
+}

@@ -2,7 +2,8 @@
 type: article
 title: "Surviving Gentoo for a Month"
 description: "
-    [description here]
+    Gentoo is a Linux distribution that offers as many options as possible.
+    This article leads you through the decisions I took to end up with a system that best suits my needs.
 "
 banner: /social_banner/gentoo_challenge.png
 thumb: ../../../static/social_banner/gentoo_challenge.png
@@ -11,7 +12,13 @@ date: 2022-03-20T00:00:00+00:00
 listed: true
 version: 0.0.1
 ---
-import Quote from "src/components/quote";
+import AutoPlayVideo from "src/components/autoplay_video";
+import HalfImage from "src/components/half_image";
+import Spacer from "src/components/spacer";
+
+import cpu_usage from "./cpu_usage.png";
+import pavucontrol from "./pavucontrol.png";
+import bash_completion from "./bash_completion.mp4";
 
 Gentoo is a Linux distribution that offers as many options as possible.
 While its package manager Portage leverages the heavy lifting, you have deal with the choosing such freedom entails.
@@ -28,6 +35,7 @@ Thus when you screw something up—and trust me you will—you can simply go bac
 Please don't write me any angry emails after you accidentally deleted your family photos lacking a backup ;)
 <!-- TODO: add image -->
 
+# Table of Contents
 ```toc
 exclude: Table of Contents
 ```
@@ -54,17 +62,17 @@ And this order can change, for example when adding or replacing disks.
 To convert labels to UUIDs you can use the `blkid` command like this:
 ```bash
 ~ λ blkid
-/dev/sdb1: UUID="A76D-24D1" BLOCK_SIZE="512" TYPE="vfat" PARTUUID="a1dae446-0923-6848-ba62-1f3e3aaaa868"
-/dev/sdb2: UUID="c8211424-0c21-4eec-aa92-9cc4a9c043bf" TYPE="swap" PARTUUID="59816b52-94ad-4740-901f-114ecc4c2108"
-/dev/sdb3: UUID="0b04fdcc-6d7f-4a88-bf57-1c2965bf8ceb" BLOCK_SIZE="4096" TYPE="ext4" PARTUUID="1c4a9d25-fd19-c94e-9ac6-cf82d515fe99"
+/dev/sdb1: UUID="A76D-24D1" [...]
+/dev/sdb2: UUID="c8211424-0c21-4eec-aa92-9cc4a9c043bf" [...]
+/dev/sdb3: UUID="0b04fdcc-6d7f-4a88-bf57-1c2965bf8ceb" [...]
 [...]
 ```
 
 So my fstab looks like this:
-```TOML
-UUID=A76D-24D1                            /boot                              vfat        defaults,noatime                                                          0 2
-UUID=c8211424-0c21-4eec-aa92-9cc4a9c043bf none                               swap        sw                                                                        0 0
-UUID=0b04fdcc-6d7f-4a88-bf57-1c2965bf8ceb /                                  ext4        noatime                                                                   0 1
+```bash
+UUID=A76D-24D1                            /boot vfat defaults,noatime 0 2
+UUID=c8211424-0c21-4eec-aa92-9cc4a9c043bf none  swap sw               0 0
+UUID=0b04fdcc-6d7f-4a88-bf57-1c2965bf8ceb /     ext4 noatime          0 1
 ```
 
 # systemd
@@ -93,7 +101,7 @@ On my final installation I ended up using the much simpler [genkernel](https://w
 Once the kernel is installed and a few other steps in the handbook have been traversed, you get to the stage of choosing a bootloader.
 The bootloader is the piece of software starting the kernel after the power button has been pressed.
 As described in the [systemd article](https://wiki.gentoo.org/wiki/Systemd#GRUB_2) it is crucial to edit `/etc/default/grub` and add this line:
-```TOML
+```bash
 [...]
 # Append parameters to the linux kernel command line
 GRUB_CMDLINE_LINUX="init=/lib/systemd/systemd"
@@ -102,7 +110,7 @@ GRUB_CMDLINE_LINUX="init=/lib/systemd/systemd"
 Otherwise the kernel wouldn't launch systemd.
 
 I also have to add this to my `/etc/portage/make.conf` before emerging `sys-boot/grub` because I'm using the UEFI boot process.
-```TOML
+```bash
 [...]
 GRUB_PLATFORMS="efi-64"
 [...]
@@ -112,7 +120,7 @@ GRUB_PLATFORMS="efi-64"
 Because I enjoy playing games from time to time, Windows still does a better job at that and I like separating work and play, I'm running a Gentoo-Windows dual boot.
 To be prompted at every boot which OS you want to boot, you need os-prober.
 You can install it with `emerge --ask sys-boot/os-prober` and have to enable it in `/etc/default/grub`:
-```TOML
+```bash
 [...]
 GRUB_DISABLE_OS_PROBER=false
 [...]
@@ -134,19 +142,22 @@ and not like this:
 Coming back to Gentoo, there's an article on [installing Xfce](https://wiki.gentoo.org/wiki/Xfce) you should follow.
 This most notably includes selecting an appropriate profile when [installing the base system](https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Base#Choosing_the_right_profile).
 
+<Image src={cpu_usage} />
+<Image src={pavucontrol} />
+
 There are a few extra packages I like to complement Xfce with.
 - `xfce-extra/xfce4-screenshooter`: A simple screenshot tool.
 - `xfce-extra/xfce4-cpugraph-plugin`: Show your current CPU usage in the task bar.
-<!-- TODO: add image -->
 - `xfce-extra/xfce4-notifyd`: Enable notifications.
 - `media-sound/pavucontrol`: Allow for more fine grained control over your audio devices.
 <!-- TODO: add image -->
 - `media-fonts/fonts-meta`: Install non-Latin character set.
-<!-- TODO: add example -->
+
+<Spacer />
 
 Since I use VI as my editor, that requires pressing Escape very often and I never understood why anyone would like to use Caps Lock, I bind my Caps Lock key to Escape.
 On a system using Xorg, which mine is, this can be achieved using an `.Xmodmap` file in your home directory:
-```TOML
+```bash
 ! make caps key perform escape action
 remove Lock = Caps_Lock
 keysym Caps_Lock = Escape
@@ -174,7 +185,7 @@ setxkbmap "gb"
 # Wi-Fi
 <!-- TODO: write -->
 
-# Programs I Like
+# Programs I Use
 Installing software on Gentoo is often as simple as installing the appropriate package.
 For me this means installing:
 
@@ -214,6 +225,7 @@ Lunarvim has a few requirements:
 - `sys-apps/fd`
 - `x11-misc/xclip`
 - Neovim latest
+
 The last one is a problem since the version Portage supplies is too old so you have to [compile Neovim yourself](https://github.com/neovim/neovim/wiki/Building-Neovim#building).
 After Lunarvim has been installed, you can copy my config, which, again, can be found in my [config collection](https://github.com/christopher-besch/configs).
 
@@ -224,11 +236,15 @@ To install it you have to extract a tarball in your home directory.
 This is explained [here](https://github.com/lawl/NoiseTorch#download--install).
 
 ### Git
+<AutoPlayVideo src={bash_completion} width={600} height={280} />
+
 To make git work the way you're used to, you need two packages:
 - `dev-vcs/git`
 - `app-shells/bash-completion`
+
 The second one is required to give bash the ability to autocomplete.
-<!-- TODO: add video -->
+
+<Spacer />
 
 ### LaTeX
 <!-- TODO: write -->
