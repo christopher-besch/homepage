@@ -44,7 +44,28 @@ They are closely tied to the two boot process types, UEFI and legacy BIOS.
 [The handbook](https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Disks) explains the differences more closely so I'll leave at stating that I used the modern GPT, UEFI option.
 
 ## fstab
-<!-- TODO: add -->
+The `/etc/fstab` file defines what partitions should be mounted where and how.
+This is explained in [later chapters of the handbook](https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/System).
+Here you can choose between filesystem labels and UUIDs.
+While labels like `/dev/sdb3` are easier to comprehend than UUIDs (e.g. `0b04fdcc-6d7f-4a88-bf57-1c2965bf8ceb`), UUIDs are a lot less risky.
+This is because labels are defined by the order the devices get detected by the kernel.
+And this order can change, for example when adding or replacing disks.
+
+To convert labels to UUIDs you can use the `blkid` command like this:
+```bash
+~ λ blkid
+/dev/sdb1: UUID="A76D-24D1" BLOCK_SIZE="512" TYPE="vfat" PARTUUID="a1dae446-0923-6848-ba62-1f3e3aaaa868"
+/dev/sdb2: UUID="c8211424-0c21-4eec-aa92-9cc4a9c043bf" TYPE="swap" PARTUUID="59816b52-94ad-4740-901f-114ecc4c2108"
+/dev/sdb3: UUID="0b04fdcc-6d7f-4a88-bf57-1c2965bf8ceb" BLOCK_SIZE="4096" TYPE="ext4" PARTUUID="1c4a9d25-fd19-c94e-9ac6-cf82d515fe99"
+[...]
+```
+
+So my fstab looks like this:
+```TOML
+UUID=A76D-24D1                            /boot                              vfat        defaults,noatime                                                          0 2
+UUID=c8211424-0c21-4eec-aa92-9cc4a9c043bf none                               swap        sw                                                                        0 0
+UUID=0b04fdcc-6d7f-4a88-bf57-1c2965bf8ceb /                                  ext4        noatime                                                                   0 1
+```
 
 # systemd
 To install the operating system, a few tools need to be available.
@@ -72,7 +93,7 @@ On my final installation I ended up using the much simpler [genkernel](https://w
 Once the kernel is installed and a few other steps in the handbook have been traversed, you get to the stage of choosing a bootloader.
 The bootloader is the piece of software starting the kernel after the power button has been pressed.
 As described in the [systemd article](https://wiki.gentoo.org/wiki/Systemd#GRUB_2) it is crucial to edit `/etc/default/grub` and add this line:
-```
+```TOML
 [...]
 # Append parameters to the linux kernel command line
 GRUB_CMDLINE_LINUX="init=/lib/systemd/systemd"
@@ -81,7 +102,7 @@ GRUB_CMDLINE_LINUX="init=/lib/systemd/systemd"
 Otherwise the kernel wouldn't launch systemd.
 
 I also have to add this to my `/etc/portage/make.conf` before emerging `sys-boot/grub` because I'm using the UEFI boot process.
-```
+```TOML
 [...]
 GRUB_PLATFORMS="efi-64"
 [...]
@@ -91,7 +112,7 @@ GRUB_PLATFORMS="efi-64"
 Because I enjoy playing games from time to time, Windows still does a better job at that and I like separating work and play, I'm running a Gentoo-Windows dual boot.
 To be prompted at every boot which OS you want to boot, you need os-prober.
 You can install it with `emerge --ask sys-boot/os-prober` and have to enable it in `/etc/default/grub`:
-```
+```TOML
 [...]
 GRUB_DISABLE_OS_PROBER=false
 [...]
@@ -125,13 +146,12 @@ There are a few extra packages I like to complement Xfce with.
 
 Since I use VI as my editor, that requires pressing Escape very often and I never understood why anyone would like to use Caps Lock, I bind my Caps Lock key to Escape.
 On a system using Xorg, which mine is, this can be achieved using an `.Xmodmap` file in your home directory:
-```
+```TOML
 ! make caps key perform escape action
 remove Lock = Caps_Lock
 keysym Caps_Lock = Escape
 ```
-<!-- TODO: test if link works -->
-It is part of my config collection, which contains all following files and will be described at [a later point](#config-collection) in this article.
+It is part of my [config collection](https://github.com/christopher-besch/configs).
 
 ## SDDM
 Without a display manager your newly booted up system presents you only with a terminal—even when Xfce is installed.
@@ -144,7 +164,7 @@ Feel free to play around with other options, SDDM is only the first one I tried 
 To set the keyboard layout for the login screen—what Xfce call it's "system defaults"—you have to create the `/usr/share/sddm/scripts/Xsetup` script.
 <!-- TODO: add image -->
 This sets it to the UK keyboard layout.
-```
+```bash
 #!/bin/sh
 # Xsetup - run as root before the login dialog appears
 setxkbmap "gb"
@@ -152,7 +172,7 @@ setxkbmap "gb"
 `setxkbmap` is a command you have to install first with `emerge --ask x11-apps/setxkbmap`.
 
 # Wi-Fi
-<!-- TODO: add -->
+<!-- TODO: write -->
 
 # Programs I Like
 Installing software on Gentoo is often as simple as installing the appropriate package.
@@ -170,65 +190,80 @@ For me this means installing:
 | `app-editors/vim`        | Quite useful when you don't want to go through the hassle of [installing Lunarvim](#lunarvim) during setup. |
 | `app-portage/gentoolkit` | A few useful tools for working with Portage.                                                                |
 | `app-portage/genlop`     | Estimate compilation time with Portage.                                                                     |
+| `media-video/vlc`        | You've got some media to play? VLC can handle it.                                                           |
 
 You can install these packages with `emerge --ask [package name]`.
 Sometimes this command prompts you to set some USE flags.
 These can either be set in `/etc/portage/make.conf` [to affect all packages](https://wiki.gentoo.org/wiki/etc/portage/make.conf#USE) or in `/etc/portage/package.use` [to not alter the global USE flags](https://wiki.gentoo.org/wiki/etc/portage/package.use).
+My `make.conf` and `package.use` can be found in my [config collection](https://github.com/christopher-besch/configs) under the Gentoo section.
 
-<!-- TODO: test link -->
-My `make.conf` and `package.use` can be found in my [config collection](#config-collection).
+What follows are a few more programs with more complicated installations.
 
 ### Kitty
 My terminal emulator of choice is Kitty, mainly because it supports displaying images directly in the terminal.
 Unfortunately you have to jump through a few hoops to install it on Gentoo.
 Refer to the [Kitty on Gentoo article](https://wiki.gentoo.org/wiki/Kitty) for installation instructions.
 To be able to show images in the terminal, you also have to install `media-gfx/imagemagick`.
+My kitty config is also part of my [config collection](https://github.com/christopher-besch/configs).
 
 ### Lunarvim
-<!-- TODO: add -->
-- neovim in Portage too old (0.5.x)
-- compile custom
-- fails to :PackerSync, fixed with new version of Lunarvim
-- requirements:
-    - sys-apps/fd
-    - x11-misc/xclip
+Lunarvim forms a configuration layer on top of Neovim and is the text editor I used for writing this article.
+Neovim, in turn, is a fork of vim, which is the **i**mproved of version of **vi**.
+
+Lunarvim has a few requirements:
+- `sys-apps/fd`
+- `x11-misc/xclip`
+- Neovim latest
+The last one is a problem since the version Portage supplies is too old so you have to [compile Neovim yourself](https://github.com/neovim/neovim/wiki/Building-Neovim#building).
+After Lunarvim has been installed, you can copy my config, which, again, can be found in my [config collection](https://github.com/christopher-besch/configs).
 
 ### Noisetorch
-<!-- TODO: add -->
+I spend a lot of time in voice calls so good noise suppression is absolutely vital.
+Noisetorch does an incredibly good job at that and filters out my hammering on the keyboard while leaving my voice untouched.
+To install it you have to extract a tarball in your home directory.
+This is explained [here](https://github.com/lawl/NoiseTorch#download--install).
 
 ### Git
-<!-- TODO: add -->
-- dev-vcs/git
-- app-shells/bash-completion
+To make git work the way you're used to, you need two packages:
+- `dev-vcs/git`
+- `app-shells/bash-completion`
+The second one is required to give bash the ability to autocomplete.
+<!-- TODO: add video -->
 
 ### LaTeX
-<!-- TODO: add -->
+<!-- TODO: write -->
 - app-text/texlive
 
 ### OCRmyPDF
-<!-- TODO: add -->
+<!-- TODO: write -->
 - app-text/tesseract
 - media-gfx/pngquant
 
 - L10N="en-GB en de"
 
+### OBS Studio
+OBS Studio is a very convenient way of recording your screen.
+It can be installed using Portage, but similar to the Kitty, OBS Studio is as of writing this article in the testing branch.
+So you have to install it using `emerge --ask --autounmask=y --autounmask-write media-video/obs-studio`.
+
 ### Firefox
-<!-- TODO: add -->
+<!-- TODO: write -->
 - copy bookmarks
 - keyword:enabled
 
 # Little Problems
-<!-- TODO: add -->
+<!-- TODO: write -->
 - disable pc speaker: /etc/modprobe.d/blacklist.conf `blacklist pcspkr`
 
 # Config Collection
-<!-- TODO: add -->
+As you might have noticed I very often referred to my [config collection](https://github.com/christopher-besch/configs).
+While I won't always keep this article up-to-date, this GitHub repository will always reflect the configs I'm using at the time.
 
 # Cheat Sheet
-<!-- TODO: add -->
+<!-- TODO: write -->
 - install package
-- update system
-- update USE
+- update system: `emerge --sync`
+- update USE: `emerge --ask --update --newuse --deep @world`, `emerge --depclean`
 
 # Still Unsolved Problems
 - xfce-extra/xfce4-pulseaudio-plugin doesn't work
@@ -236,34 +271,4 @@ To be able to show images in the terminal, you also have to install `media-gfx/i
 - bluetooth
 - virtual machine
 - distcc
-
-<!-- ## Attempts -->
-<!-- - VM: -->
-<!--     - no desktop -->
-<!--     - OpenRC -->
-<!--     - manual kernel config -->
-<!--     - Grub2 -->
-<!--     - didn't boot -->
-<!-- - VM: -->
-<!--     - genkernel -->
-<!--     - works -->
-<!-- - VM: -->
-<!--     - xfce -->
-<!--     - SSDM -->
-<!--     - systemd -->
-<!--     - genkernel, Grub2 -->
-<!-- - ThinkPad: -->
-<!--     - xfce -->
-<!--     - SSDM -->
-<!--     - genkernel, Grub2 -->
-<!--     - systemd -->
-<!--     - DHCPCD, wpa_supplicant -->
-<!--     - wifi not on reboot (has to be called explicitly) -->
-<!--     - net_setup fine -->
-<!--     - NetworkManager, nm_appplet -> constant ettempting connection, unstable (probably biting with custom wpa_supplicant config) -->
-<!-- - ThinkPad: -->
-<!--     - NetworkManager (no DHCPCD, wpa_supplicant directly) -->
-<!--     - works -->
-<!-- - PC: -->
-<!--     - not arm architecture -->
 
