@@ -58,7 +58,7 @@ And then there's the matter of the init system.
 On Linux the init system is the first program that starts once the kernel has booted up.
 With Gentoo you can use whatever init system you like but the usual options are OpenRC and systemd.
 OpenRC is Gentoo's default.
-when you choose to use systemd, you should read the [systemd article](https://wiki.gentoo.org/wiki/Systemd).
+When you choose to use systemd, you should read the [systemd article](https://wiki.gentoo.org/wiki/Systemd).
 
 I'm used to systemd and wanted to try something non-default so I went with it on my final installation.
 In my experience the handbook makes a good job at explaining what you have to do differently when using systemd but you should still read [the systemd article](https://wiki.gentoo.org/wiki/Systemd).
@@ -130,7 +130,8 @@ On a system using Xorg, which mine is, this can be achieved using an `.Xmodmap` 
 remove Lock = Caps_Lock
 keysym Caps_Lock = Escape
 ```
-It is part of my config collection, which contains all following files and will be described at a later point in this article.
+<!-- TODO: test if link works -->
+It is part of my config collection, which contains all following files and will be described at [a later point](#config-collection) in this article.
 
 ## SDDM
 Without a display manager your newly booted up system presents you only with a terminal—even when Xfce is installed.
@@ -148,7 +149,7 @@ This sets it to the UK keyboard layout.
 # Xsetup - run as root before the login dialog appears
 setxkbmap "gb"
 ```
-(`setxkbmap` is a command you have to install first with `emerge --ask x11-apps/setxkbmap`.)
+`setxkbmap` is a command you have to install first with `emerge --ask x11-apps/setxkbmap`.
 
 # Wi-Fi
 <!-- TODO: add -->
@@ -157,43 +158,25 @@ setxkbmap "gb"
 Installing software on Gentoo is often as simple as installing the appropriate package.
 For me this means installing:
 
-| Package Name             | Description                                                                                                |
-|:------------------------ |:---------------------------------------------------------------------------------------------------------- |
-| `app-admin/keepass`      | A local password manager                                                                                   |
-| `net-im/discord-bin`     | A chat program everyone uses and hates at the same time                                                    |
-| `app-text/tree`          | A convenient way of displaying folder structures in the terminal                                           |
-| `app-text/pdftk`         | A **T**ool**K**it for handling **PDF**s in the terminal                                                    |
-| `media-gfx/gimp`         | The **G**NU **I**mage **M**anipulation **P**rogram                                                         |
-| `app-text/pdfgrep`       | Searching in PDFs with the familiar GREP syntax                                                            |
-| `sys-apps/exa`           | A colourful replacement for `ls`                                                                           |
-| `app-editors/vim`        | Quite useful when you don't want to go through the hassle of [installing Lunarvim](#lunarvim) during setup |
-| `app-portage/gentoolkit` | A few useful tools for working with Portage                                                                |
-| `app-portage/genlop`     | Estimate compilation time with Portage                                                                     |
-<!-- TODO: test if lunarvim link works -->
+| Package Name             | Description                                                                                                 |
+|:------------------------ |:----------------------------------------------------------------------------------------------------------- |
+| `app-admin/keepass`      | A local password manager.                                                                                   |
+| `net-im/discord-bin`     | A chat program everyone uses and hates at the same time.                                                    |
+| `app-text/tree`          | A convenient way of displaying folder structures in the terminal.                                           |
+| `app-text/pdftk`         | A **T**ool**K**it for handling **PDF**s in the terminal.                                                    |
+| `media-gfx/gimp`         | The **G**NU **I**mage **M**anipulation **P**rogram.                                                         |
+| `app-text/pdfgrep`       | Searching in PDFs with the familiar GREP syntax.                                                            |
+| `sys-apps/exa`           | A colourful replacement for `ls`.                                                                           |
+| `app-editors/vim`        | Quite useful when you don't want to go through the hassle of [installing Lunarvim](#lunarvim) during setup. |
+| `app-portage/gentoolkit` | A few useful tools for working with Portage.                                                                |
+| `app-portage/genlop`     | Estimate compilation time with Portage.                                                                     |
 
 You can install these packages with `emerge --ask [package name]`.
 Sometimes this command prompts you to set some USE flags.
 These can either be set in `/etc/portage/make.conf` [to affect all packages](https://wiki.gentoo.org/wiki/etc/portage/make.conf#USE) or in `/etc/portage/package.use` [to not alter the global USE flags](https://wiki.gentoo.org/wiki/etc/portage/package.use).
 
-My `make.conf` looks like this:
-```
-[...]
-ACCEPT_LICENSE="*"
-GRUB_PLATFORMS="efi-64"
-USE="mount pulseaudio gtk3"
-L10N="en-GB en de"
-[...]
-```
-And my `package.use` like this:
-```
-# used for Keepass2
-dev-lang/mono minimal
-# install everything
-app-text/texlive *
-app-text/texlive-core xetex
-```
-I tweak these files constantly;
-you can find my current version [here](https://github.com/christopher-besch/configs/tree/main/gentoo).
+<!-- TODO: test link -->
+My `make.conf` and `package.use` can be found in my [config collection](#config-collection).
 
 ### Kitty
 My terminal emulator of choice is Kitty, mainly because it supports displaying images directly in the terminal.
@@ -237,6 +220,9 @@ To be able to show images in the terminal, you also have to install `media-gfx/i
 # Little Problems
 <!-- TODO: add -->
 - disable pc speaker: /etc/modprobe.d/blacklist.conf `blacklist pcspkr`
+
+# Config Collection
+<!-- TODO: add -->
 
 # Cheat Sheet
 <!-- TODO: add -->
