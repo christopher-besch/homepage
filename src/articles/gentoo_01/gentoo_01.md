@@ -150,23 +150,26 @@ setxkbmap "gb"
 ```
 (`setxkbmap` is a command you have to install first with `emerge --ask x11-apps/setxkbmap`.)
 
-# WIFI
+# Wi-Fi
 <!-- TODO: add -->
 
 # Programs I Like
 Installing software on Gentoo is often as simple as installing the appropriate package.
 For me this means installing:
-- `app-admin/keepass`: A local password manager.
-- `net-im/discord-bin`: A chat program everyone uses and hates at the same time.
-- `app-text/tree`: A convenient way of displaying folder structures in the terminal.
-- `app-text/pdftk`: A **T**ool**K**it for handling **PDF**s in the terminal.
-- `media-gfx/gimp`: The **G**NU **I**mage **M**anipulation **P**rogram.
-- `app-text/pdfgrep`: Searching in PDFs with the familiar GREP syntax.
-- `sys-apps/exa`: A colourful replacement for `ls`.
-<!-- TODO: test if link works -->
-- `app-editors/vim`: Quite useful when you don't want to go through the hassle of [installing Lunarvim](#Lunarvim) during setup.
-- `app-portage/gentoolkit`: A few useful tools for working with Portage.
-- `app-portage/genlop`: Estimate compilation time with Portage.
+
+| Package Name             | Description                                                                                                |
+|:------------------------ |:---------------------------------------------------------------------------------------------------------- |
+| `app-admin/keepass`      | A local password manager                                                                                   |
+| `net-im/discord-bin`     | A chat program everyone uses and hates at the same time                                                    |
+| `app-text/tree`          | A convenient way of displaying folder structures in the terminal                                           |
+| `app-text/pdftk`         | A **T**ool**K**it for handling **PDF**s in the terminal                                                    |
+| `media-gfx/gimp`         | The **G**NU **I**mage **M**anipulation **P**rogram                                                         |
+| `app-text/pdfgrep`       | Searching in PDFs with the familiar GREP syntax                                                            |
+| `sys-apps/exa`           | A colourful replacement for `ls`                                                                           |
+| `app-editors/vim`        | Quite useful when you don't want to go through the hassle of [installing Lunarvim](#lunarvim) during setup |
+| `app-portage/gentoolkit` | A few useful tools for working with Portage                                                                |
+| `app-portage/genlop`     | Estimate compilation time with Portage                                                                     |
+<!-- TODO: test if lunarvim link works -->
 
 You can install these packages with `emerge --ask [package name]`.
 Sometimes this command prompts you to set some USE flags.
