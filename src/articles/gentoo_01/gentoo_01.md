@@ -195,24 +195,23 @@ setxkbmap "gb"
 
 # Wi-Fi
 <!-- TODO: write -->
+When you don't need Wi-Fi support you can simply [install dhcpcd](https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/System#DHCP_via_dhcpcd_.28any_init_system.29).
 
 # Programs I Use
 Installing software on Gentoo is often as simple as installing the appropriate package.
 For me this means installing:
 
-| Package Name             | Description                                                                                                 |
-|:------------------------ |:----------------------------------------------------------------------------------------------------------- |
-| `app-admin/keepass`      | A local password manager.                                                                                   |
-| `net-im/discord-bin`     | A chat program everyone uses and hates at the same time.                                                    |
-| `app-text/tree`          | A convenient way of displaying folder structures in the terminal.                                           |
-| `app-text/pdftk`         | A **T**ool**K**it for handling **PDF**s in the terminal.                                                    |
-| `media-gfx/gimp`         | The **G**NU **I**mage **M**anipulation **P**rogram.                                                         |
-| `app-text/pdfgrep`       | Searching in PDFs with the familiar GREP syntax.                                                            |
-| `sys-apps/exa`           | A colourful replacement for `ls`.                                                                           |
-| `app-editors/vim`        | Quite useful when you don't want to go through the hassle of [installing Lunarvim](#lunarvim) during setup. |
-| `app-portage/gentoolkit` | A few useful tools for working with Portage.                                                                |
-| `app-portage/genlop`     | Estimate compilation time with Portage.                                                                     |
-| `media-video/vlc`        | You've got some media to play? VLC can handle it.                                                           |
+- `app-admin/keepass`: A local password manager.
+- `net-im/discord-bin`: A chat program everyone uses and hates at the same time.
+- `app-text/tree`: A convenient way of displaying folder structures in the terminal.
+- `app-text/pdftk`: A **T**ool**K**it for handling **PDF**s in the terminal.
+- `media-gfx/gimp`: The **G**NU **I**mage **M**anipulation **P**rogram.
+- `app-text/pdfgrep`: Searching in PDFs with the familiar GREP syntax.
+- `sys-apps/exa`: A colourful replacement for `ls`.
+- `app-editors/vim`: Quite useful when you don't want to go through the hassle of [installing Lunarvim](#lunarvim) during setup.
+- `app-portage/gentoolkit`: A few useful tools for working with Portage.
+- `app-portage/genlop`: Estimate compilation time with Portage.
+- `media-video/vlc`: You've got some media to play? VLC can handle it.
 
 You can install these packages with `emerge --ask [package name]`.
 Sometimes this command prompts you to set some USE flags.
