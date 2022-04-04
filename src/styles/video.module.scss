@@ -28,6 +28,9 @@
 }
 
 @media (max-width: 1000px) {
+    .wrapper {
+        margin: 16px 0px 16px 0px;
+    }
     .video, .video_no_print {
         max-width: 100%;
     }
