@@ -25,7 +25,7 @@ import my_desktop from "./my_desktop.png";
 import bash_completion from "./bash_completion.mp4";
 
 Gentoo is a Linux distribution that offers as many options as possible.
-While its package manager Portage leverages the heavy lifting, you have deal with the choosing such freedom entails.
+While its package manager Portage leverages the heavy lifting, you have to deal with the choosing such freedom entails.
 What init system causes the least amount of pain with the software you intend to run, what desktop suits your personal style and what display manager goes best with that?
 
 I've setup Gentoo countless times with different decisions along the way.
@@ -38,6 +38,7 @@ VMs allow you to save snapshots before each step.
 Thus when you screw something up—and trust me you will—you can simply go back.
 Please don't write me any angry emails after you accidentally deleted your family photos lacking a backup ;)
 <!-- TODO: add image -->
+<!-- TODO: write disclaimer because of time sensitivity -->
 
 # Table of Contents
 ```toc
@@ -194,8 +195,13 @@ setxkbmap "gb"
 <Spacer />
 
 # Wi-Fi
-<!-- TODO: write -->
-When you don't need Wi-Fi support you can simply [install dhcpcd](https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/System#DHCP_via_dhcpcd_.28any_init_system.29).
+When you only use Ethernet, you can simply [install dhcpcd](https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/System#DHCP_via_dhcpcd_.28any_init_system.29).
+If instead you rely on Wi-Fi, you should use NetworkManager.
+
+The installation is described [here](https://wiki.gentoo.org/wiki/NetworkManager); this paragraph only summarizes the most important steps.
+You have to enable the `networkmanager` and `wifi` USE flags, update your system using `emerge --ask --changed-use --deep @world` and install NetworkManager `emerge --ask net-misc/networkmanager`.
+A really useful but not mandatory addition is `gnome-extra/nm-applet`.
+It offers a graphical interface for connecting to networks.
 
 # Programs I Use
 Installing software on Gentoo is often as simple as installing the appropriate package.
@@ -255,13 +261,17 @@ To make git work the way you're used to, you need two packages:
 The second one is required to give bash the ability to autocomplete, as you can see in the video.
 
 ### LaTeX
-<!-- TODO: write -->
-- app-text/texlive
+On Gentoo, the TeX Live compiler lives in the `app-text/texlive` package.
+You should take a look at [its USE flags](https://wiki.gentoo.org/wiki/TeX_Live) as you might need some of them for your particular document.
+I simply include them all with line `app-text/texlive *` in my `package.use`.
 
 ### OCRmyPDF
-<!-- TODO: write -->
-- app-text/tesseract
-- media-gfx/pngquant
+[OCRmyPDF](https://ocrmypdf.readthedocs.io/en/latest) is a Python program that uses Tesseract to convert scanned PDFs to text and make them searchable with Ctrl+F.
+On Gentoo you need these two packages
+- `app-text/tesseract`
+- `media-gfx/pngquant`
+
+and have to install OCRmyPDF itself using `python3 -m pip install`
 
 - L10N="en-GB en de"
 

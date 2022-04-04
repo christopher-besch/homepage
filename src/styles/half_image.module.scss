@@ -1,8 +1,5 @@
 @import "consts.scss";
 
-.wrapper {
-    margin: 16px 0px 16px 0px;
-}
 .image, .full_image {
     margin: 0px 16px 0px 16px;
     height: auto;
@@ -23,6 +20,9 @@
 }
 
 @media (max-width: 1000px) {
+    .wrapper {
+        margin: 16px 0px 16px 0px;
+    }
     .image, .full_image {
         max-width: 100%;
         float: left;
