@@ -1,11 +1,17 @@
 @import "consts.scss";
 
-.image {
-    /* to negate markdown style */
-    max-width: 60% !important;
+.wrapper {
+    margin: 16px 0px 16px 16px;
+}
+.image, .full_image {
     height: auto;
     float: right;
-    margin: 0px 0px 16px 16px;
+}
+.full_image {
+    max-width: 100%;
+}
+.image {
+    max-width: 60%;
 }
 .wrapper::before {
     /* clear float before image */
@@ -16,8 +22,9 @@
 }
 
 @media (max-width: 1000px) {
-    .image {
+    .image, .full_image {
         max-width: 100%;
+        float: left;
     }
     .wrapper::after {
         content: "";
@@ -25,3 +32,4 @@
         clear: both;
     }
 }
+

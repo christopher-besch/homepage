@@ -1,10 +1,12 @@
 @import "consts.scss";
 
+.wrapper {
+    margin: 16px 0px 16px 16px;
+}
 .video, .video_no_print {
     max-width: 60%;
     height: auto;
     float: right;
-    margin: 0px 0px 16px 16px;
 }
 .removed_warn {
     display: none !important;

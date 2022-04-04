@@ -14,7 +14,6 @@ version: 0.0.1
 ---
 import AutoPlayVideo from "src/components/autoplay_video";
 import HalfImage from "src/components/half_image";
-import NormalImage from "src/components/normal_image";
 import Spacer from "src/components/spacer";
 
 import cpu_usage from "./cpu_usage.png";
@@ -142,7 +141,7 @@ Therefore I'm using the most lightweight and least painful desktop environment I
 Out of the box it doesn't look as fancy as your average [r/unixporn](https://www.reddit.com/r/unixporn) post but you can tailor it to your liking—which I promptly didn't do.
 
 So my desktop looks like this:
-<NormalImage src={my_desktop} />
+<HalfImage src={my_desktop} full={true} />
 
 and not like this:
 <!-- TODO: add image with credit -->
@@ -183,7 +182,8 @@ Feel free to play around with other options, SDDM is only the first one I tried 
 
 To set the keyboard layout for the login screen—what Xfce call it's "system defaults"—you have to create the `/usr/share/sddm/scripts/Xsetup` script.
 <HalfImage src={xfce_system_defaults_keyboard_layout} />
-This sets it to the UK keyboard layout.
+
+This sets it to the UK keyboard layout:
 ```bash
 #!/bin/sh
 # Xsetup - run as root before the login dialog appears
@@ -298,4 +298,5 @@ While I won't always keep this article up-to-date, this GitHub repository will a
 - bluetooth
 - virtual machine
 - distcc
+- fstab doesn't mount smb drives on boot
 
