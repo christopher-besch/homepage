@@ -220,6 +220,7 @@ For me this means installing:
 - `app-portage/gentoolkit`: A few useful tools for working with Portage.
 - `app-portage/genlop`: Estimate compilation time with Portage.
 - `media-video/vlc`: You've got some media to play? VLC can handle it.
+- `sys-process/time`: Display resources used by a program.
 
 You can install these packages with `emerge --ask [package name]`.
 Sometimes this command prompts you to set some USE flags.
@@ -303,31 +304,41 @@ Then you can remove search results from the address bar and not leak any urls to
 You can do so in the `about:config` page.
 <HalfImage src={firefox_keyword_enabled} />
 
+### QEMU and Virt-manager
+After a friend made me aware of the huge performance increase KVM (**K**ernel-based **V**irtual **M**achine) entails I switched to QEMU with the Virt-manager frontend.
+And I can agree, that it is much faster than VirtualBox, which I've used before, something around 85% native performance with my crude benchmarks.
+To install it you should read the [QEMU](https://wiki.gentoo.org/wiki/QEMU) and [Virt-manager](https://wiki.gentoo.org/wiki/Virt-manager) articles for Gentoo.
+Only make sure to add this to your `make.conf`:
+```bash
+USE="spice usb usbredir"
+QEMU_SOFTMMU_TARGETS="x86_64"
+```
+
 <Spacer />
 
-# Little Problems
+# Disabling the PC Speaker
 I ran into the weird problem that my pc speaker, that squeaky little piezo thing, just didn't shut up and constantly annoyed me when I mistyped a command.
 A sustainable solution to this problem is to disable the appropriate kernel module with creating the file `/etc/modprobe.d/blacklist.conf` and writing this line:
-```
+```bash
 blacklist pcspkr
 ```
 
 # Config Collection
 As you might have noticed I very often referred to my [config collection](https://github.com/christopher-besch/configs).
 While I won't always keep this article up-to-date, this GitHub repository will always reflect the configs I'm using at the time.
+What exactly it contains is listen in the respective `README.md`s.
 
 # Cheat Sheet
 Take a look at the [official cheat sheet](https://wiki.gentoo.org/wiki/Gentoo_Cheat_Sheet).
 - install package: `emerge --ask [package name]`
 - update system repository: `emerge --sync`
-- propagate USE flag changes: `emerge --ask --update --newuse --deep @world`, `emerge --depclean`
+- propagate USE flag changes: `emerge --ask --update --newuse --deep @world`, `emerge --ask --depclean`
+- uninstall package: `emerge --deseleclt [package name]`, `emerge --ask --depclean`
 
-# Still Unsolved Problems
-<!-- TODO: solve -->
-- xfce-extra/xfce4-pulseaudio-plugin doesn't work
-- xfce-extra/xfce4-netload-plugin doesn't work
-- bluetooth
-- virtual machine
-- distcc
-- fstab doesn't mount smb drives on boot
+<!-- # Still Unsolved Problems -->
+<!-- - xfce-extra/xfce4-pulseaudio-plugin doesn't work -->
+<!-- - xfce-extra/xfce4-netload-plugin doesn't work -->
+<!-- - bluetooth -->
+<!-- - distcc -->
+<!-- - fstab doesn't mount smb drives on boot -->
 
