@@ -20,6 +20,7 @@ import cpu_usage from "./cpu_usage.png";
 import pavucontrol from "./pavucontrol.png";
 import xfce_system_defaults_keyboard_layout from "./xfce_system_defaults_keyboard_layout.png";
 import firefox_keyword_enabled from "./firefox_keyword_enabled.png";
+import firefox_search_bar from "./firefox_search_bar.png";
 import stage3_download from "./stage3_download.png";
 import my_desktop from "./my_desktop.png";
 import bash_completion from "./bash_completion.mp4";
@@ -38,7 +39,6 @@ VMs allow you to save snapshots before each step.
 Thus when you screw something up—and trust me you will—you can simply go back.
 Please don't write me any angry emails after you accidentally deleted your family photos lacking a backup ;)
 <!-- TODO: add image -->
-<!-- TODO: write disclaimer because of time sensitivity -->
 
 # Table of Contents
 ```toc
@@ -50,6 +50,8 @@ The [Gentoo Handbook (AMD64)](https://wiki.gentoo.org/wiki/Handbook:AMD64) is su
 Instead I'll go through the decisions leading to a system to my liking.
 If a choice is not explained, I chose the default or non-extra option as explained in the handbook.
 When you stumble upon some concepts you are unfamiliar with, you should take a look at the handbook or [Gentoo wiki](https://wiki.gentoo.org).
+I should also add that the choices available to you and my opinion themselves change.
+In a few years this article may very well contain a lot of outdated information, so make sure to always look at up-to-date references, like the [Gentoo Handbook](https://wiki.gentoo.org/wiki/Handbook:AMD64).
 
 # GPT, UEFI vs. MBR, Legacy BIOS
 There are two different ways of partitioning your disk, GPT and MBR.
@@ -281,27 +283,47 @@ It can be installed using Portage, but similar to the Kitty, OBS Studio is as of
 So you have to install it using `emerge --ask --autounmask=y --autounmask-write media-video/obs-studio`.
 
 ### Firefox
-<!-- TODO: write -->
-- copy bookmarks
-- keyword:enabled
+You have two main ways of [installing Firefox](https://wiki.gentoo.org/wiki/Firefox), `www-client/firefox` to compile it from source and the precompiled `www-client/firefox-bin`.
+I chose the latter, binary version as Firefox receives very frequent updates and compiling a browser always takes a lot of time.
+Incidentally this is the only program I don't compile from source.
+
+I like using these extensions:
+- [Unhook](https://addons.mozilla.org/en-US/firefox/addon/youtube-recommended-videos): Remove YouTube recommended videos.
+- [Sponser Block](https://addons.mozilla.org/en-US/firefox/addon/sponsorblock): Skip sponsorships on YouTube.
+- [Adblock Plus](https://addons.mozilla.org/en-US/firefox/addon/adblock-plus): Block ads.
+- [Kee](https://addons.mozilla.org/en-US/firefox/addon/keefox): Firefox integration for Keepass.
+- [Google Lighthouse](https://addons.mozilla.org/en-US/firefox/addon/google-lighthouse): Create performance and accessibility reports for any webpage.
+- [Dark Reader](https://addons.mozilla.org/en-US/firefox/addon/darkreader): Add dark mode to every website.
+- [Stylus](https://addons.mozilla.org/en-US/firefox/addon/styl-us): Add prettier dark mode to GitHub with [this StylishTheme](https://github.com/StylishThemes/Github-Dark).
+
+What I also like doing is splitting the address and search bar.
+<HalfImage src={firefox_search_bar} />
+
+Then you can remove search results from the address bar and not leak any urls to your search provider.
+You can do so in the `about:config` page.
+<HalfImage src={firefox_keyword_enabled} />
 
 <Spacer />
 
 # Little Problems
-<!-- TODO: write -->
-- disable pc speaker: /etc/modprobe.d/blacklist.conf `blacklist pcspkr`
+I ran into the weird problem that my pc speaker, that squeaky little piezo thing, just didn't shut up and constantly annoyed me when I mistyped a command.
+A sustainable solution to this problem is to disable the appropriate kernel module with creating the file `/etc/modprobe.d/blacklist.conf` and writing this line:
+```
+blacklist pcspkr
+```
 
 # Config Collection
 As you might have noticed I very often referred to my [config collection](https://github.com/christopher-besch/configs).
 While I won't always keep this article up-to-date, this GitHub repository will always reflect the configs I'm using at the time.
 
 # Cheat Sheet
-<!-- TODO: write -->
-- install package
-- update system: `emerge --sync`
-- update USE: `emerge --ask --update --newuse --deep @world`, `emerge --depclean`
+Take a look at the [official cheat sheet](https://wiki.gentoo.org/wiki/Gentoo_Cheat_Sheet).
+- install package: `emerge --ask [package name]`
+- update system repository: `emerge --sync`
+- propagate USE flag changes: `emerge --ask --update --newuse --deep @world`, `emerge --depclean`
 
 # Still Unsolved Problems
+<!-- TODO: solve -->
 - xfce-extra/xfce4-pulseaudio-plugin doesn't work
 - xfce-extra/xfce4-netload-plugin doesn't work
 - bluetooth
