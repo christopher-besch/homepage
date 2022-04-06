@@ -1,0 +1,49 @@
+@import "consts.scss";
+
+.wrapper {
+    margin: 0;
+}
+.full_wrapper {
+    margin-bottom: 16px;
+}
+
+.element {
+    height: auto;
+    float: right;
+    max-width: 60%;
+    margin-left: 16px;
+}
+.element_full {
+    height: auto;
+    float: left;
+    max-width: 100%;
+}
+.before {
+    /* clear float before element */
+    content: "";
+    display: table;
+    clear: both;
+}
+.after {
+    display: none;
+}
+
+/* when small, make act like normal paragraph */
+@media (max-width: 1100px) {
+    .wrapper {
+        margin-bottom: 16px;
+    }
+    .element {
+        max-width: 100%;
+        float: left;
+        margin-left: 0px;
+    }
+    .before {
+        display: none;
+    }
+    .after {
+        display: table;
+        clear: both;
+    }
+}
+

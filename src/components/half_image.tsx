@@ -1,20 +1,19 @@
 import React from "react";
 
+import HalfElement from "src/components/half_element"
+
 import * as styles from "src/styles/half_image.module.scss";
 
 interface HalfImageProps {
     src: string;
-    // TODO: could also be added to videos
     // should spread entire width?
     full?: boolean;
 }
 const HalfImage: React.FC<HalfImageProps> = (props) => {
     return (
-        <div className={styles.wrapper}>
-            <img
-                className={props.full ? styles.full_image : styles.image}
-                src={props.src} />
-        </div>
+        <HalfElement full={props.full}>
+            <img className={styles.image} src={props.src} />
+        </HalfElement>
     );
 }
 

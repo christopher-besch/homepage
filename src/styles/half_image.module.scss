@@ -1,37 +1,6 @@
 @import "consts.scss";
 
-.image, .full_image {
-    margin-left: 16px;
-    height: auto;
-    float: right;
-}
-.full_image {
-    max-width: 100%;
-}
 .image {
-    max-width: 60%;
-}
-.wrapper::before {
-    /* clear float before image */
-    /* needs to be on wrapper <- ::after probably can't be applied to image */
-    content: "";
-    display: table;
-    clear: both;
-}
-
-@media (max-width: 1000px) {
-    .wrapper {
-        margin: 16px 0px 16px 0px;
-    }
-    .image, .full_image {
-        max-width: 100%;
-        float: left;
-        margin: 0;
-    }
-    .wrapper::after {
-        content: "";
-        display: table;
-        clear: both;
-    }
+    width: 100%;
 }
 

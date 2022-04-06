@@ -1,42 +1,18 @@
 @import "consts.scss";
 
 .video, .video_no_print {
-    margin-left: 16px;
+    width: 100%;
     height: auto;
-    float: right;
-    max-width: 60%;
 }
 .removed_warn {
-    display: none !important;
+    display: none;
 }
 @media print {
     .video_no_print {
-        display: none !important;
+        display: none;
     }
     .removed_warn {
-        display: block !important;
+        display: block;
     }
-}
-.wrapper::before {
-    /* clear float before video */
-    /* needs to be on wrapper <- ::after can't be applied to video */
-    content: "";
-    display: table;
-    clear: both;
 }
 
-@media (max-width: 1000px) {
-    .wrapper {
-        margin: 16px 0px 16px 0px;
-    }
-    .video, .video_no_print {
-        max-width: 100%;
-        float: left;
-        margin: 0;
-    }
-    .wrapper::after {
-        content: "";
-        display: table;
-        clear: both;
-    }
-}
