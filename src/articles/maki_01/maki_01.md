@@ -15,7 +15,7 @@ thumb: ../../../static/social_banner/maki_01.png
 slug: maki_atoms_and_time_travel
 date: 2022-02-06T00:00:00+00:00
 listed: true
-version: 1.0.1
+version: 1.0.2
 ---
 import AutoPlayVideo from "src/components/autoplay_video";
 import Spacer from "src/components/spacer";
@@ -45,7 +45,7 @@ The purpose of this article is to outline how a program for interactive and prog
 To experiment with different technologies and programming paradigms, I created a developmental implementation called Maki.
 This article outlines Maki's design decisions and discusses planned future development.
 
-# Table of Contents
+### Table of Contents
 <AutoPlayVideo src={full_showcase_01} poster={full_showcase_01_poster} />
 
 ```toc

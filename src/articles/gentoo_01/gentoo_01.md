@@ -24,6 +24,7 @@ import firefox_search_bar from "./firefox_search_bar.png";
 import stage3_download from "./stage3_download.png";
 import my_desktop from "./my_desktop.png";
 import bash_completion from "./bash_completion.mp4";
+import vm_snapshots from "./vm_snapshots.png";
 
 Gentoo is a Linux distribution that offers as many options as possible.
 While its package manager Portage leverages the heavy lifting, you have to deal with the choosing such freedom entails.
@@ -34,16 +35,19 @@ While dysfunctional combinations butchered some of those installations beyond re
 In the end I might not have become an expert but I surely did learn a lot during this endeavour.
 So this opinionated article documents said endeavour, all choices I made, any problems I encountered and their subsequent solutions.
 
+<HalfImage src={vm_snapshots} />
+
 If you decide to try Gentoo for yourself, I'd recommend doing so in a virtual machine instead of directly on your hardware.
 VMs allow you to save snapshots before each step.
 Thus when you screw something up—and trust me you will—you can simply go back.
 Please don't write me any angry emails after you accidentally deleted your family photos lacking a backup ;)
-<!-- TODO: add image -->
 
-# Table of Contents
+### Table of Contents
 ```toc
 exclude: Table of Contents
 ```
+
+<Spacer />
 
 # Choices Along the Way
 The [Gentoo Handbook (AMD64)](https://wiki.gentoo.org/wiki/Handbook:AMD64) is such a great tutorial that there is basically nothing left for me to add.
