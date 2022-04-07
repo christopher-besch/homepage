@@ -143,11 +143,8 @@ So my focus lies entirely on making the terminal as pleasant and efficient to us
 Therefore I'm using the most lightweight and least painful desktop environment I could find, Xfce.
 Out of the box it doesn't look as fancy as your average [r/unixporn](https://www.reddit.com/r/unixporn) post but you can tailor it to your liking—which I promptly didn't do.
 
-So my desktop looks like this:
+So my desktop looks as basic as you can get:
 <HalfImage src={my_desktop} full={true} />
-
-and not like this:
-<!-- TODO: add image with credit -->
 
 <Spacer />
 
