@@ -1,14 +1,14 @@
 ---
 type: article
-title: "Surviving Gentoo for a Month"
+title: "Title Here"
 description: "
     Gentoo is a Linux distribution that offers as many options as possible.
     This article leads you through the decisions I took to end up with a system that best suits my needs.
 "
 banner: /social_banner/gentoo_challenge.png
 thumb: ../../../static/social_banner/gentoo_challenge.png
-slug: gentoo_challenge
-date: 2022-03-20T00:00:00+00:00
+slug: gentoo
+date: 2022-04-08T00:00:00+00:00
 listed: true
 version: 0.0.1
 ---

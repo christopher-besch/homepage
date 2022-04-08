@@ -1,8 +1,11 @@
 ---
 type: article
-title: Manim Introduction
-description: From never having touched programming to creating professional graphics with Manim. 
+title: "Manim Introduction"
+description: "
+    From never having touched programming to creating professional graphics with Manim.
+"
 banner: none
+thumb: none
 slug: manim_intro
 date: 2022-01-11T00:00:00+00:00
 listed: false
