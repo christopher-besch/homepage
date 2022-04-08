@@ -1,13 +1,13 @@
 ---
 type: article
-title: "Title Here"
+title: "Installing Gentoo To My Liking"
 description: "
     Gentoo is a Linux distribution that offers as many options as possible.
     This article leads you through the decisions I took to end up with a system that best suits my needs.
 "
-banner: /social_banner/03_gentoo.png
-thumb: ../../../static/social_banner/gentoo_challenge.png
-slug: gentoo
+banner: /social_banner/installing_gentoo.png
+thumb: ../../../static/social_banner/installing_gentoo.png
+slug: installing_gentoo
 date: 2022-04-08T00:00:00+00:00
 listed: true
 version: 0.0.1
@@ -45,6 +45,7 @@ Please don't write me any angry emails after you accidentally deleted your famil
 ### Table of Contents
 ```toc
 exclude: Table of Contents
+to-heading: 3
 ```
 
 <Spacer />
@@ -57,12 +58,14 @@ When you stumble upon some concepts you are unfamiliar with, you should take a l
 I should also add that the choices available to you and my opinion change with time.
 In a few years this article may very well mostly consist of outdated information, so make sure to always consult up-to-date references, like the [Gentoo Handbook](https://wiki.gentoo.org/wiki/Handbook:AMD64).
 
-# GPT, UEFI vs. MBR, Legacy BIOS
+# Installing Gentoo
+
+## GPT, UEFI vs. MBR, Legacy BIOS
 There are two different ways of partitioning your disk, GPT and MBR.
 They are closely tied to the two boot process types, UEFI and legacy BIOS.
 [The handbook](https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Disks) explains the differences more closely so I'll leave it at stating that I used the modern GPT, UEFI option.
 
-## fstab
+### fstab
 The `/etc/fstab` file defines what partitions should be mounted where and how.
 This is explained in [later chapters of the handbook](https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/System).
 
@@ -88,7 +91,7 @@ UUID=c8211424-0c21-4eec-aa92-9cc4a9c043bf none  swap sw               0 0
 UUID=0b04fdcc-6d7f-4a88-bf57-1c2965bf8ceb /     ext4 noatime          0 1
 ```
 
-# systemd
+## systemd
 To install the operating system, a few tools need to be available.
 These are the first things your soon to be Linux installation gets to consist out of, or in other words its primordial soup.
 This primordial soup, correctly called stage 3, comes in a few varieties:
@@ -109,7 +112,7 @@ So you should nevertheless read the [systemd article](https://wiki.gentoo.org/wi
 
 <Spacer />
 
-# genkernel and GRUB 2
+## genkernel and GRUB 2
 At some point you have to decide how you intend to install the Linux kernel.
 My first attempts used the [manual configuration](https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Kernel#Manual_configuration), which always caused trouble but would theoretically result in a very clean build.
 On my final installation I ended up using the much simpler to use [genkernel](https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Kernel#Alternative:_Using_genkernel), with which I had no problems whatsoever.
@@ -132,7 +135,7 @@ GRUB_PLATFORMS="efi-64"
 [...]
 ```
 
-## os-prober
+### os-prober
 Because I enjoy playing games from time to time, Windows still does a better job at that and I like separating work and play, I'm running a Gentoo-Windows dual boot.
 To be prompted at every boot which OS you want to endure at the moment, you need os-prober.
 You can install it with `emerge --ask sys-boot/os-prober` and have to enable it in `/etc/default/grub`:
@@ -143,7 +146,7 @@ GRUB_DISABLE_OS_PROBER=false
 ```
 os-prober doesn't run at every boot, instead it only looks for any other bootable partitions when you `grub-mkconfig -o /boot/grub/grub.cfg` and makes grub aware of them.
 
-# Xfce
+## Xfce
 I use the terminal emulator for **everything**.
 Usually nothing graphical, besides it and Firefox, is running.
 So my focus lies entirely on making the terminal as pleasant and efficient to use as possible.
@@ -178,7 +181,7 @@ It is part of my [config collection](https://github.com/christopher-besch/config
 
 <Spacer />
 
-## SDDM
+### SDDM
 Without a display manager your newly booted up system presents you only with a terminal—even when Xfce is installed.
 To give you a graphical login prompt and launch Xfce, you need something like [SDDM](https://wiki.gentoo.org/wiki/SDDM).
 It is one of many [display managers](https://wiki.gentoo.org/wiki/Display_manager) out there.
@@ -198,7 +201,7 @@ setxkbmap "gb"
 
 <Spacer />
 
-# Wi-Fi
+## Wi-Fi
 When you only use Ethernet, you can simply [install dhcpcd](https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/System#DHCP_via_dhcpcd_.28any_init_system.29).
 If instead you rely on Wi-Fi, you should use NetworkManager.
 
@@ -208,7 +211,7 @@ You have to enable the `networkmanager` and `wifi` USE flags, update your system
 A really useful but not mandatory addition is `gnome-extra/nm-applet`.
 It offers a graphical interface for connecting to networks.
 
-# Programs I Use
+## Programs I Use
 Installing software on Gentoo is often as simple as emerging the appropriate package.
 For me this means installing:
 
@@ -327,29 +330,40 @@ QEMU_SOFTMMU_TARGETS="x86_64"
 
 <Spacer />
 
-# Disabling the PC Speaker
+## Disabling the PC Speaker
 I ran into the weird problem that my pc speaker, that squeaky little piezo thing, just didn't shut up and constantly annoyed me when I mistyped a command.
 A sustainable solution to this problem is to disable the appropriate kernel module by creating the file `/etc/modprobe.d/blacklist.conf` and writing this line:
 ```bash
 blacklist pcspkr
 ```
 
-# Config Collection
+# Wrapping Up
+
+## Config Collection
 As you might have noticed I very often referred to my [config collection](https://github.com/christopher-besch/configs).
 While I won't always keep this article up-to-date, this GitHub repository will always reflect the configs I'm using at the time.
 What exactly it contains is listen in its `README.md`.
 
-# Cheat Sheet
+## Cheat Sheet
 Take a look at the [official cheat sheet](https://wiki.gentoo.org/wiki/Gentoo_Cheat_Sheet).
 - install package: `emerge --ask [package name]`
 - update system repository: `emerge --sync`
 - propagate USE flag changes: `emerge --ask --update --newuse --deep @world`, `emerge --ask --depclean`
 - uninstall package: `emerge --deselect [package name]`, `emerge --ask --depclean`
 
+## What Remains
+There are quite a few more things I would have liked to try but didn't get to.
+This includes Bluetooth support and compiling packages on multiple machines using distcc.
+But this article already took long enough so I'll leave it at that.
+
+Even though installing Gentoo was incredibly tiresome and painful, I learned a lot about Linux and am more content with my current operating system than ever before.
+Sometimes you just have to endure some pain to reach heaven.
+
+Thanks for sticking around and I wish you a splendid day!
+
 <!-- # Still Unsolved Problems -->
 <!-- - xfce-extra/xfce4-pulseaudio-plugin doesn't work -->
 <!-- - xfce-extra/xfce4-netload-plugin doesn't work -->
-<!-- - bluetooth -->
-<!-- - distcc -->
 <!-- - fstab doesn't mount smb drives on boot -->
+<!-- - getsby develop not working -->
 

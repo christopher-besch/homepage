@@ -26,7 +26,7 @@ yarn run develop
 ```
 Build and serve production:
 ```
-yarn run build
+yarn run build_debug
 yarn run serve
 ```
 

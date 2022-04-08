@@ -72,6 +72,7 @@ module.exports = {
                 gatsbyRemarkPlugins: [
                     {
                         // load images from markdown
+                        // TODO: remove, not actually needed
                         resolve: "gatsby-remark-images",
                         options: {
                             maxWidth: 8000,
