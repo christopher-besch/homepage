@@ -3,6 +3,7 @@ import React from "react";
 import * as styles from "src/styles/half_element.module.scss";
 
 interface HalfElementProps {
+    children?: React.ReactNode;
     // should spread entire width?
     full?: boolean;
 }

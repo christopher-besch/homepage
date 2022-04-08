@@ -9,6 +9,7 @@ import "src/styles/global.scss";
 import * as styles from "src/styles/layout.module.scss";
 
 interface LayoutProps extends PropsWithLocation {
+    children?: React.ReactNode;
     heading?: string;
     sub_heading?: string;
     icon?: string;
