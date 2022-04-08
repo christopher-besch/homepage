@@ -146,6 +146,15 @@ GRUB_DISABLE_OS_PROBER=false
 ```
 os-prober doesn't run at every boot, instead it only looks for any other bootable partitions when you `grub-mkconfig -o /boot/grub/grub.cfg` and makes grub aware of them.
 
+## Interjection: Installing Packages with Portage
+On Gentoo the Portage package manager takes care of compiling, installing, cataloging, uninstalling of programs and much much more.
+The slang word for installing something with Portage is to `emerge` that package.
+You can emerge a package with `emerge --ask [package name]`.
+Package names look like this: `media-gfx/gimp`, a category and the name of the program.
+Sometimes this command prompts you to set some USE flags.
+These can either be set in `/etc/portage/make.conf` [to affect all packages](https://wiki.gentoo.org/wiki/etc/portage/make.conf#USE) or in `/etc/portage/package.use` [to not alter the global USE flags](https://wiki.gentoo.org/wiki/etc/portage/package.use).
+My `make.conf` and `package.use` can be found in my [config collection](https://github.com/christopher-besch/configs) under the Gentoo section.
+
 ## Xfce
 I use the terminal emulator for **everything**.
 Usually nothing graphical, besides it and Firefox, is running.
@@ -227,11 +236,6 @@ For me this means installing:
 - `app-portage/genlop`: Estimate compilation time with Portage.
 - `media-video/vlc`: You've got some obscure media format to play? VLC can handle it.
 - `sys-process/time`: Display resources used by a program.
-
-You can install these packages with `emerge --ask [package name]`.
-Sometimes this command prompts you to set some USE flags.
-These can either be set in `/etc/portage/make.conf` [to affect all packages](https://wiki.gentoo.org/wiki/etc/portage/make.conf#USE) or in `/etc/portage/package.use` [to not alter the global USE flags](https://wiki.gentoo.org/wiki/etc/portage/package.use).
-My `make.conf` and `package.use` can be found in my [config collection](https://github.com/christopher-besch/configs) under the Gentoo section.
 
 What follows are a few more programs with more complicated installations.
 
@@ -331,7 +335,7 @@ QEMU_SOFTMMU_TARGETS="x86_64"
 <Spacer />
 
 ## Disabling the PC Speaker
-I ran into the weird problem that my pc speaker, that squeaky little piezo thing, just didn't shut up and constantly annoyed me when I mistyped a command.
+I ran into the weird problem that my pc speaker, that squeaky little piezo thing, just didn't shut up and constantly annoyed me when I mistyped a command or hit some unbound key in Firefox.
 A sustainable solution to this problem is to disable the appropriate kernel module by creating the file `/etc/modprobe.d/blacklist.conf` and writing this line:
 ```bash
 blacklist pcspkr
