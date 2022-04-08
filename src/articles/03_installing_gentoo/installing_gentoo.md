@@ -146,7 +146,7 @@ GRUB_DISABLE_OS_PROBER=false
 ```
 os-prober doesn't run at every boot, instead it only looks for any other bootable partitions when you `grub-mkconfig -o /boot/grub/grub.cfg` and makes grub aware of them.
 
-## Interjection: Installing Packages with Portage
+## Interjection: Installing with Portage
 On Gentoo the Portage package manager takes care of compiling, installing, cataloging, uninstalling of programs and much much more.
 The slang word for installing something with Portage is to `emerge` that package.
 You can emerge a package with `emerge --ask [package name]`.
