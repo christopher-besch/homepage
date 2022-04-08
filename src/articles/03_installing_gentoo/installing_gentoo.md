@@ -10,7 +10,7 @@ thumb: ../../../static/social_banner/installing_gentoo.png
 slug: installing_gentoo
 date: 2022-04-08T00:00:00+00:00
 listed: true
-version: 0.0.1
+version: 0.1.0
 ---
 import AutoPlayVideo from "src/components/autoplay_video";
 import HalfImage from "src/components/half_image";
