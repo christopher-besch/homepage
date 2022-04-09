@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkhomepage=self.webpackChunkhomepage||[]).push([[218],{2224:function(e,t,a){a.r(t);var o=a(7294),n=a(8536),u=a(3595);t.default=function(){return o.createElement(n.Z,{heading:"404 Not Found"},o.createElement("div",{className:u.CH},o.createElement("p",null,"Oopsie Woopsie! Uwu We made a fucky wucky!! A wittle fucko boingo! The code monkeys at our headquarters are working VEWY HAWD to fix this!")))}}}]);
+//# sourceMappingURL=component---src-pages-404-tsx-a2ee354399b4fe6444d7.js.map
