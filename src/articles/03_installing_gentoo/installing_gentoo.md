@@ -323,7 +323,7 @@ You can do so in the `about:config` page.
 <HalfImage src={firefox_keyword_enabled} />
 
 ### QEMU and Virt-manager
-After a friend made me aware of the huge performance increase KVM (**K**ernel-based **V**irtual **M**achine) entails, I switched to QEMU with the Virt-manager frontend.
+After [a friend](https://github.com/RaafatTurki) made me aware of the huge performance increase KVM (**K**ernel-based **V**irtual **M**achine) entails, I switched to QEMU with the Virt-manager frontend.
 And I can confirm, it is much faster than VirtualBox, which I've used before—something around 85% native performance with my crude benchmarks.
 To install it you should read the [QEMU](https://wiki.gentoo.org/wiki/QEMU) and [Virt-manager](https://wiki.gentoo.org/wiki/Virt-manager) articles for Gentoo.
 Only make sure to add this to your `make.conf`:
