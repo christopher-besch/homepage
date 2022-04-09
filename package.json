@@ -10,9 +10,9 @@
         "develop": "DEPLOY_ORIGIN='http://localhost:8000' node_modules/.bin/gatsby develop",
         "serve": "node_modules/.bin/gatsby serve",
         "clean": "node_modules/.bin/gatsby clean",
-        "type-check": "find ./src/ -name __generated__ -type d | xargs rm -r -v || true && node_modules/.bin/tsgql typegen && node_modules/.bin/tsc && echo 'type check ok'",
-        "type-check:watch": "node_modules/.bin/tsc --watch",
-        "load-gql": "node_modules/.bin/get-graphql-schema http://localhost:8000/___graphql > schema.graphql && yarn run type-check"
+        "type_check": "find ./src/ -name __generated__ -type d | xargs rm -r -v || true && node_modules/.bin/tsgql typegen && node_modules/.bin/tsc && echo 'type check ok'",
+        "type_check:watch": "node_modules/.bin/tsc --watch",
+        "load_gql": "node_modules/.bin/get-graphql-schema http://localhost:8000/___graphql > schema.graphql && yarn run type-check"
     },
     "repository": {
         "type": "git",
