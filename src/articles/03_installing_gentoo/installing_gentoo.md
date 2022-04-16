@@ -10,7 +10,7 @@ thumb: ../../../static/social_banner/installing_gentoo.png
 slug: installing_gentoo
 date: 2022-04-08T00:00:00+00:00
 listed: true
-version: 1.0.1
+version: 1.1.0
 ---
 import AutoPlayVideo from "src/components/autoplay_video";
 import HalfImage from "src/components/half_image";
@@ -178,6 +178,7 @@ There are a few extra packages I like to complement Xfce with.
 <HalfImage src={pavucontrol} />
 - `media-sound/pavucontrol`: Allow for more fine grained control over your audio devices.
 - `media-fonts/fonts-meta`: Install non-Latin character set.
+- `media-fonts/noto-emoji`: Install emojis.
 
 Since I use VI as my editor, which requires pressing Escape very often and I never understood why anyone would want to use Caps Lock, I bind my Caps Lock key to Escape.
 On a system using Xorg, which mine is, this can be achieved using an `.Xmodmap` file in your home directory:
