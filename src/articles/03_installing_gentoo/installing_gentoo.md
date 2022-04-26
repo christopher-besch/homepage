@@ -23,6 +23,7 @@ import firefox_keyword_enabled from "./firefox_keyword_enabled.png";
 import firefox_search_bar from "./firefox_search_bar.png";
 import stage3_download from "./stage3_download.png";
 import my_desktop from "./my_desktop.png";
+import unixporn from "./unixporn.png";
 import bash_completion from "./bash_completion.mp4";
 import vm_snapshots from "./vm_snapshots.png";
 
@@ -164,6 +165,9 @@ Out of the box it doesn't look as fancy as your average [r/unixporn](https://www
 
 So my desktop looks as basic as you can get:
 <HalfImage src={my_desktop} full={true} />
+
+But if pretty graphics are your cup of tee, take a look at what [u/linuxscoop](https://www.reddit.com/user/linuxscoop) managed to do with Xfce:
+<HalfImage src={unixporn} full={true} />
 
 <Spacer />
 
