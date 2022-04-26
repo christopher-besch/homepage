@@ -8,7 +8,7 @@ description: "
 banner: /social_banner/installing_gentoo.png
 thumb: ../../../static/social_banner/installing_gentoo.png
 slug: installing_gentoo
-date: 2022-04-08T00:00:00+00:00
+date: 2022-04-26T00:00:00+00:00
 listed: true
 version: 1.1.1
 ---
