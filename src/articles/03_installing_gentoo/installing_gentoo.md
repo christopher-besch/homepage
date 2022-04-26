@@ -10,7 +10,7 @@ thumb: ../../../static/social_banner/installing_gentoo.png
 slug: installing_gentoo
 date: 2022-04-08T00:00:00+00:00
 listed: true
-version: 1.1.0
+version: 1.1.1
 ---
 import AutoPlayVideo from "src/components/autoplay_video";
 import HalfImage from "src/components/half_image";
@@ -56,7 +56,7 @@ Instead I'll go through the decisions leading to a system of my liking.
 If a choice is not explained, I chose the default or non-extra option as explained in the handbook.
 When you stumble upon some concepts you are unfamiliar with, you should take a look at the handbook or [Gentoo wiki](https://wiki.gentoo.org).
 I should also add that the choices available to you and my opinion change with time.
-In a few years this article may very well mostly consist of outdated information, so make sure to always consult up-to-date references, like the [Gentoo Handbook](https://wiki.gentoo.org/wiki/Handbook:AMD64).
+In a few years this article may very well mostly consist of outdated information, so make sure to always consult up-to-date references, like the Gentoo Handbook.
 
 # Installing Gentoo
 
@@ -107,8 +107,8 @@ When you choose to use systemd, you should read the [systemd article](https://wi
 
 I'm used to systemd and wanted to try something non-default so I went with that on my final installation.
 In my experience the handbook makes a good job at explaining what you have to do differently when using systemd.
-The only thing I noticed to be missing was [NTP to synchronize your clock with `sudo timedatectl set-ntp true`](https://wiki.gentoo.org/wiki/Systemd#Time_and_date)—something you realize very quickly when daylight saving starts.
-So you should nevertheless read the [systemd article](https://wiki.gentoo.org/wiki/Systemd).
+The only thing I noticed to be missing was [the NTP to synchronize your clock `sudo timedatectl set-ntp true`](https://wiki.gentoo.org/wiki/Systemd#Time_and_date)—something you realize very quickly when daylight saving starts.
+So you should nevertheless refer to the systemd article.
 
 <Spacer />
 
@@ -347,7 +347,7 @@ blacklist pcspkr
 ## Config Collection
 As you might have noticed I very often referred to my [config collection](https://github.com/christopher-besch/configs).
 While I won't always keep this article up-to-date, this GitHub repository will always reflect the configs I'm using at the time.
-What exactly it contains is listen in its `README.md`.
+What exactly it contains is listed in its `README.md`.
 
 ## Cheat Sheet
 Take a look at the [official cheat sheet](https://wiki.gentoo.org/wiki/Gentoo_Cheat_Sheet).
