@@ -10,7 +10,7 @@ thumb: ../../../static/social_banner/installing_gentoo.png
 slug: installing_gentoo
 date: 2022-04-26T00:00:00+00:00
 listed: true
-version: 1.1.1
+version: 1.2.0
 ---
 import AutoPlayVideo from "src/components/autoplay_video";
 import HalfImage from "src/components/half_image";
@@ -336,6 +336,11 @@ Only make sure to add this to your `make.conf`:
 USE="spice usb usbredir"
 QEMU_SOFTMMU_TARGETS="x86_64"
 ```
+
+### Node.js
+
+I need Node.js for my homepage but ran into an error message complaining about a missing node-inspector.
+To fix this, you have to add the `inspector` USE flag for the `net-libs/nodejs` package.
 
 <Spacer />
 
