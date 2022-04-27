@@ -4,11 +4,7 @@ title: "Maki, Atoms and Time Travel"
 description: "
     Maki showcases how a program for interactive and programmatic animation development can be implemented.
 
-    To create animations for technical concepts, one is advised to use graphics software with a programmatic approach.
-    While these provide the required precision, they suffer from an inherent disconnect between input and output.
-    An alternative are WYSIWYG programs, which avoid this detachment with interactivity at the cost of precision.
-
-    Maki combines the best of both worlds.
+    Its programmatic approach provides the precision technical concepts require, while its interactivity and real-time updates avoid a disconnect between input and output.
 "
 banner: /social_banner/maki_atoms_and_time_travel.png
 thumb: ../../../static/social_banner/maki_atoms_and_time_travel.png
