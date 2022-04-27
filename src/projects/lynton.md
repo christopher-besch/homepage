@@ -9,5 +9,6 @@ date: 2021-05-07T00:00:00+00:00
 languages: [cpp]
 dependencies: [emscripten, cmake, sdl, armadillo, spdlog]
 thumb: ../images/thumbs/lynton.png
+listed: true
 ---
 

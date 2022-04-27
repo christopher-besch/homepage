@@ -4,9 +4,11 @@ import { HomePage } from "./__generated__/home-page";
 
 import Layout from "src/components/layout";
 import ProjectList, { gql_to_project } from "src/components/project_list";
+import ArticleList, { gql_to_article } from "src/components/article_list";
 import * as styles from "src/styles/home.module.scss";
 import * as util_styles from "src/styles/utils.module.scss";
 import Heading from "src/components/heading";
+import SubHeading from "src/components/sub_heading";
 import HoverIcon from "src/components/hover_icon";
 import { max_priority_highlight } from "src/utils/consts";
 
@@ -14,8 +16,11 @@ interface HomeProps {
     data: HomePage
 }
 const Home: React.FC<HomeProps> = (props) => {
-    const all_projects = props.data.allMdx.edges.map(gql_to_project);
+    const all_projects = props.data.allMdx.edges.filter(element => element.node.frontmatter?.type == "project").map(gql_to_project);
     const projects = all_projects.filter(project => project.priority <= max_priority_highlight);
+
+    const all_articles = props.data.allMdx.edges.filter(element => element.node.frontmatter?.type == "article").map(gql_to_article);
+    const articles = all_articles.slice(0, 2);
 
     return (
         <Layout>
@@ -24,6 +29,10 @@ const Home: React.FC<HomeProps> = (props) => {
                 <div className={styles.first_con}>
                     <ProjectList className={styles.projects} projects={projects} count={2} />
                     <Link className={`${util_styles.block} ${util_styles.link}`} to="/projects">More Projects</Link>
+
+                    <SubHeading heading="Recent Articles" />
+                    <ArticleList className={styles.articles} articles={articles} />
+                    <Link className={`${util_styles.block} ${util_styles.link}`} to="/articles">More Articles</Link>
                 </div>
                 <div className={styles.second_con}>
                     <div className={styles.languages}>
@@ -48,13 +57,14 @@ export default Home;
 export const query = graphql`
 query HomePage {
   allMdx(
-    sort: {fields: frontmatter___priority, order: ASC},
-    filter: {frontmatter: {type: {eq: "project"}}}
+    sort: {fields: [frontmatter___priority,frontmatter___date], order: [ASC, DESC]},
+    filter: {frontmatter: {listed: {eq: true}}}
   ) {
     edges {
       node {
         id
         frontmatter {
+          type
           languages
           priority
           dependencies

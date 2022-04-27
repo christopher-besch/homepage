@@ -908,8 +908,8 @@ enum FileFieldsEnum {
   childrenMdx___frontmatter___thumb___childrenMdx
   childrenMdx___frontmatter___thumb___id
   childrenMdx___frontmatter___thumb___children
-  childrenMdx___frontmatter___banner
   childrenMdx___frontmatter___listed
+  childrenMdx___frontmatter___banner
   childrenMdx___frontmatter___version
   childrenMdx___slug
   childrenMdx___body
@@ -1011,8 +1011,8 @@ enum FileFieldsEnum {
   childMdx___frontmatter___thumb___childrenMdx
   childMdx___frontmatter___thumb___id
   childMdx___frontmatter___thumb___children
-  childMdx___frontmatter___banner
   childMdx___frontmatter___listed
+  childMdx___frontmatter___banner
   childMdx___frontmatter___version
   childMdx___slug
   childMdx___body
@@ -1897,8 +1897,8 @@ enum MdxFieldsEnum {
   frontmatter___thumb___internal___mediaType
   frontmatter___thumb___internal___owner
   frontmatter___thumb___internal___type
-  frontmatter___banner
   frontmatter___listed
+  frontmatter___banner
   frontmatter___version
   slug
   body
@@ -2055,8 +2055,8 @@ type MdxFrontmatter {
   languages: [String]
   dependencies: [String]
   thumb: File
-  banner: String
   listed: Boolean
+  banner: String
   version: String
 }
 
@@ -2071,8 +2071,8 @@ input MdxFrontmatterFilterInput {
   languages: StringQueryOperatorInput
   dependencies: StringQueryOperatorInput
   thumb: FileFilterInput
-  banner: StringQueryOperatorInput
   listed: BooleanQueryOperatorInput
+  banner: StringQueryOperatorInput
   version: StringQueryOperatorInput
 }
 

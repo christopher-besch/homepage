@@ -9,5 +9,6 @@ date: 2020-12-09T00:00:00+00:00
 languages: [cpp]
 dependencies: [gcc, premake]
 thumb: ../images/thumbs/cryptography.png
+listed: true
 ---
 

@@ -339,7 +339,7 @@ QEMU_SOFTMMU_TARGETS="x86_64"
 
 ### Node.js
 
-I need Node.js for my homepage but ran into an error message complaining about a missing node-inspector.
+I need Node.js for my homepage but ran into an error message complaining about the node-inspector being missing (`ERR_INSPECTOR_NOT_AVAILABLE`).
 To fix this, you have to add the `inspector` USE flag for the `net-libs/nodejs` package.
 
 <Spacer />

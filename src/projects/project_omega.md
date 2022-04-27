@@ -9,5 +9,6 @@ date: 2021-03-27T00:00:00+00:00
 languages: [python, typescript]
 dependencies: [flask, webpack]
 thumb: ../images/thumbs/project_omega.png
+listed: true
 ---
 

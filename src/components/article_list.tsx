@@ -26,10 +26,11 @@ export function gql_to_article(project: any): Article {
 
 interface ArticleListProps {
     articles: Article[];
+    className?: string;
 }
 const ArticleList: React.FC<ArticleListProps> = (props) => {
     return (
-        <div>
+        <div className={props.className}>
             {props.articles.map(article =>
                 <Link to={article.slug} key={article.id} className={styles.article}>
                     <GatsbyImage className={styles.image} image={article.thumb} alt="thumbnail" />

@@ -9,5 +9,6 @@ date: 2020-05-14T00:00:00+00:00
 languages: []
 dependencies: [blender]
 thumb: ../images/thumbs/blender_models.png
+listed: true
 ---
 

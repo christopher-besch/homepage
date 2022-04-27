@@ -9,5 +9,6 @@ date: 2021-08-29T00:00:00+00:00
 languages: [python]
 dependencies: [ffmpeg, youtube-dl]
 thumb: ../images/thumbs/lofi_girl_downloader.png
+listed: true
 ---
 

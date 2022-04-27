@@ -49,39 +49,37 @@ const ProjectList: React.FC<ProjectListProps> = (props) => {
         "--quarter-width": quarter_width,
     } as React.CSSProperties;
     return (
-        <div className={styles.projects}>
-            <div className={props.className}>
-                {props.projects.map(project =>
-                    // TODO: can't link same project twice <- non-unique key; only problem when using two project lists
-                    <a href={project.link} target="_blank" key={project.id} className={styles.project} style={width_properties}>
-                        <div className={styles.content}>
-                            <div className={styles.image_wrapper}>
-                                <GatsbyImage className={styles.image} image={project.thumb} alt="thumbnail" />
-                                <div className={styles.overlay}>
-                                    <h2 className={styles.heading}>{project.title}</h2>
-                                    <div className={styles.languages}>
-                                        {project.languages.map(language =>
-                                            <HoverIcon
-                                                className={styles.language_icon}
-                                                key={`${project.id}${language.id}`}
-                                                icon={language.icon}
-                                                icon_mono={language.icon_mono}
-                                                alt={language.id}
-                                                icon_class={styles.icon}
-                                                icon_mono_class={styles.icon_mono}
-                                            />
-                                        )}
-                                    </div>
+        <div className={`${styles.projects} ${props.className}`}>
+            {props.projects.map(project =>
+                // TODO: can't link same project twice <- non-unique key; only problem when using two project lists
+                <a href={project.link} target="_blank" key={project.id} className={styles.project} style={width_properties}>
+                    <div className={styles.content}>
+                        <div className={styles.image_wrapper}>
+                            <GatsbyImage className={styles.image} image={project.thumb} alt="thumbnail" />
+                            <div className={styles.overlay}>
+                                <h2 className={styles.heading}>{project.title}</h2>
+                                <div className={styles.languages}>
+                                    {project.languages.map(language =>
+                                        <HoverIcon
+                                            className={styles.language_icon}
+                                            key={`${project.id}${language.id}`}
+                                            icon={language.icon}
+                                            icon_mono={language.icon_mono}
+                                            alt={language.id}
+                                            icon_class={styles.icon}
+                                            icon_mono_class={styles.icon_mono}
+                                        />
+                                    )}
                                 </div>
                             </div>
-                            <hr />
-                            <div className={styles.text}>
-                                <p>{project.description}</p>
-                            </div>
                         </div>
-                    </a>
-                )}
-            </div>
+                        <hr />
+                        <div className={styles.text}>
+                            <p>{project.description}</p>
+                        </div>
+                    </div>
+                </a>
+            )}
         </div>);
 };
 export default ProjectList;

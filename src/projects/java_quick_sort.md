@@ -9,5 +9,6 @@ date: 2020-09-14T00:00:00+00:00
 languages: [java]
 dependencies: []
 thumb: ../images/thumbs/java_quick_sort.png
+listed: true
 ---
 

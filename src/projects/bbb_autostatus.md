@@ -9,5 +9,6 @@ date: 2021-05-23T00:00:00+00:00
 languages: [typescript]
 dependencies: [firefox]
 thumb: ../images/thumbs/bbb_autostatus.png
+listed: true
 ---
 

@@ -9,5 +9,6 @@ date: 2021-03-09T00:00:00+00:00
 languages: [typescript]
 dependencies: [bootstrap]
 thumb: ../images/thumbs/who_am_i.png
+listed: true
 ---
 

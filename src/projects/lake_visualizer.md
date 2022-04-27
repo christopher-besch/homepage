@@ -9,5 +9,6 @@ date: 2021-04-09T00:00:00+00:00
 languages: [typescript]
 dependencies: []
 thumb: ../images/thumbs/lake_visualizer.png
+listed: true
 ---
 

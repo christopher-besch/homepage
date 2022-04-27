@@ -9,5 +9,6 @@ date: 2018-07-16T00:00:00+00:00
 languages: [python]
 dependencies: [flask, bootstrap]
 thumb: ../images/thumbs/ohg_plan_parser.png
+listed: true
 ---
 

@@ -9,5 +9,6 @@ date: 2019-12-27T00:00:00+00:00
 languages: [python]
 dependencies: [flask, bootstrap]
 thumb: ../images/thumbs/mc_royale_supervisor.png
+listed: true
 ---
 

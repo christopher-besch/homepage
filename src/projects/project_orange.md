@@ -9,5 +9,6 @@ date: 2022-02-08T00:00:00+00:00
 languages: [typescript]
 dependencies: [webpack]
 thumb: ../images/thumbs/project_orange.png
+listed: true
 ---
 

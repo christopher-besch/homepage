@@ -9,5 +9,6 @@ date: 2022-01-12T00:00:00+00:00
 languages: [typescript]
 dependencies: [gatsby]
 thumb: ../images/thumbs/quote_rater.png
+listed: true
 ---
 
