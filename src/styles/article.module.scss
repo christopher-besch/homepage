@@ -1,44 +1,24 @@
 @import "consts.scss";
 
-.article {
-    /* margin-top: 10px; */
-}
-.heading {
-    /* float: right; */
-    text-align: right;
-    padding-left: 20px;
-    margin-bottom: 5px;
-}
 .metadata {
+    width: 100%;
+    text-align: right;
+    margin-bottom: 5px;
     float: right;
+}
+.metadata::after {
+    /* clear floats afterwards */
+    content: "";
+    display: table;
+    clear: both;
 }
 .author {
     display: none;
 }
 
 @media print {
-    .heading {
-        width: 100% !important;
-    }
     .author {
         display: inline !important;
     }
-    .heading::after {
-        /* clear floats afterwards */
-        content: "";
-        display: table;
-        clear: both;
-    }
 }
 
-@media (max-width: 800px) {
-    .heading {
-        width: 100%;
-    }
-    .heading::after {
-        /* clear floats afterwards */
-        content: "";
-        display: table;
-        clear: both;
-    }
-}

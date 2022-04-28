@@ -10,7 +10,7 @@ thumb: ../../../static/social_banner/installing_gentoo.png
 slug: installing_gentoo
 date: 2022-04-26T00:00:00+00:00
 listed: true
-version: 1.2.0
+version: 1.2.1
 ---
 import AutoPlayVideo from "src/components/autoplay_video";
 import HalfImage from "src/components/half_image";
@@ -216,8 +216,8 @@ setxkbmap "gb"
 <Spacer />
 
 ## Wi-Fi
-When you only use Ethernet, you can simply [install dhcpcd](https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/System#DHCP_via_dhcpcd_.28any_init_system.29).
-If instead you rely on Wi-Fi, you should use NetworkManager.
+When you only use Ethernet, you can simply [install dhcpcd](https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/System#DHCP_via_dhcpcd_.28any_init_system.29) (among other).
+If you instead rely on Wi-Fi, you should use NetworkManager.
 
 The installation is described [here](https://wiki.gentoo.org/wiki/NetworkManager);
 this paragraph only summarizes the most important steps.
@@ -362,7 +362,7 @@ What exactly it contains is listed in its `README.md`.
 Take a look at the [official cheat sheet](https://wiki.gentoo.org/wiki/Gentoo_Cheat_Sheet).
 - install package: `emerge --ask [package name]`
 - update system repository: `emerge --sync`
-- propagate USE flag changes: `emerge --ask --update --newuse --deep @world`, `emerge --ask --depclean`
+- propagate USE flag changes: `emerge --ask --update --changed-use --deep @world`, `emerge --ask --depclean`
 - uninstall package: `emerge --deselect [package name]`, `emerge --ask --depclean`
 
 ## What Remains

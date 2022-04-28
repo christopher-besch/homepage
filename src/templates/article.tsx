@@ -23,10 +23,8 @@ const Project: React.FC<ProjectProps> = (props) => {
     return (
         <Layout heading={title} sub_heading={sub_heading} description={description} banner={banner}>
             <div className={markdown_styles.markdown_body}>
-                <div className={styles.heading}>
-                    <div className={styles.metadata}>
-                        <span className={styles.author}>Christopher Besch,</span> {date}
-                    </div>
+                <div className={styles.metadata}>
+                    <span className={styles.author}>Christopher Besch,</span> {date}
                 </div>
                 <MDXRenderer>{body}</MDXRenderer>
             </div>

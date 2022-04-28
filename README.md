@@ -17,6 +17,10 @@ This is the homepage of a backend dev, who doesn't particularly care about looks
 Why does the author not mind some barebone styling?
 Read [this](https://motherfuckingwebsite.com).
 
+This homepage is not under any open-source license!
+If you intend to use any of the code or content from it, you have to ask the copyright holder, Christopher Besch, for permission.
+Legitimate uses are usually granted.
+
 ## How to Build?
 
 Install dependencies:
@@ -31,6 +35,14 @@ Build and serve production:
 ```
 yarn run build_deploy
 yarn run serve
+```
+Load GraphQL types and check types (development server has to be running):
+```
+yarn run load_gql
+```
+Check link integrity:
+```
+yarn run check_links
 ```
 
 ## Coding Refereneces
