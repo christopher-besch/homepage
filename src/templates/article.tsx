@@ -22,10 +22,10 @@ const Project: React.FC<ProjectProps> = (props) => {
     const date = props.data.mdx?.frontmatter?.date as string;
     return (
         <Layout heading={title} sub_heading={sub_heading} description={description} banner={banner}>
+            <div className={styles.metadata}>
+                <span className={styles.author}>Written by Christopher Besch, published on </span>{date}
+            </div>
             <div className={markdown_styles.markdown_body}>
-                <div className={styles.metadata}>
-                    <span className={styles.author}>Christopher Besch,</span> {date}
-                </div>
                 <MDXRenderer>{body}</MDXRenderer>
             </div>
         </Layout>
@@ -38,7 +38,7 @@ query ArticlePage($slug: String) {
   mdx(frontmatter: {slug: {eq: $slug}, type: {eq: "article"}}) {
     body
     frontmatter {
-      date(formatString: "MMMM YYYY")
+      date(formatString: "dddd, MMMM D, YYYY")
       title
       description
       banner

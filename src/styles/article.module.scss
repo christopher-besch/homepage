@@ -2,9 +2,8 @@
 
 .metadata {
     width: 100%;
-    text-align: right;
-    margin-bottom: 5px;
-    float: right;
+    margin-left: 10px;
+    margin-bottom: 10px;
 }
 .metadata::after {
     /* clear floats afterwards */
@@ -17,6 +16,10 @@
 }
 
 @media print {
+    .metadata {
+        text-align: right;
+        margin-top: 5px;
+    }
     .author {
         display: inline !important;
     }
