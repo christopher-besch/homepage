@@ -2,9 +2,11 @@
 
 .projects {
     /* no idea why this is required but it is */
-    margin: -24px -16px;
+    margin-top: -24px;
+    margin-right: -16px;
+    margin-left: -16px;
     margin-bottom: 8px;
-    padding: 0px 8px;
+    padding: 16px 8px 0px 8px;
 }
 .projects::after {
     /* clear floats afterwards */

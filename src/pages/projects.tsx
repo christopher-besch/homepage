@@ -5,7 +5,6 @@ import { ProjectsPage } from "./__generated__/projects-page";
 import { PropsWithLocation, with_location } from "src/utils/with_location";
 import Layout from "src/components/layout";
 import ProjectList, { gql_to_project } from "src/components/project_list";
-import * as styles from "src/styles/projects.module.scss";
 import * as util_styles from "src/styles/utils.module.scss";
 import { max_priority_list_default, max_priority_list_all } from "src/utils/consts";
 
@@ -19,7 +18,7 @@ const Projects: React.FC<ProjectsProps> = (props) => {
 
     return (
         <Layout heading={max_priority >= max_priority_list_all ? "All Projects" : "Projects"}>
-            <ProjectList className={styles.projects} projects={projects} />
+            <ProjectList projects={projects} />
             {max_priority < max_priority_list_all ? <Link className={`${util_styles.block} ${util_styles.link}`} to={`/projects?max_priority=${max_priority_list_all}`}>Show All</Link> : undefined}
         </Layout >
     );

@@ -4,7 +4,6 @@ import { ProjectsLanguagePage } from "./__generated__/projects-language-page";
 
 import Layout from "src/components/layout";
 import ProjectList, { gql_to_project } from "src/components/project_list";
-import * as styles from "src/styles/projects.module.scss";
 import * as util_styles from "src/styles/utils.module.scss";
 import { languages } from "src/utils/languages";
 import { with_location, PropsWithLocation } from "src/utils/with_location";
@@ -24,7 +23,7 @@ const ProjectsLanguage: React.FC<ProjectsLanguageProps> = (props) => {
 
     return (
         <Layout heading={`${selected_language.name} Projects`} sub_heading={selected_language_id == "java" ? " You found an easter egg!" : ""} icon={selected_language.icon_mono}>
-            <ProjectList className={styles.projects} projects={projects} />
+            <ProjectList projects={projects} />
             <Link className={`${util_styles.block} ${util_styles.link}`} to="/projects">Other Projects</Link>
             {max_priority < max_priority_language_all ? <Link className={`${util_styles.block} ${util_styles.link}`} to={`/projects/${selected_language.id}?max_priority=${max_priority_language_all}`}>Show All</Link> : undefined}
         </Layout >);
