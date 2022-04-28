@@ -32,7 +32,7 @@ const ArticleList: React.FC<ArticleListProps> = (props) => {
     return (
         <div className={props.className}>
             {props.articles.map(article =>
-                <Link to={article.slug} key={article.id} className={styles.article}>
+                <Link to={`/articles/${article.slug}`} key={article.id} className={styles.article}>
                     <GatsbyImage className={styles.image} image={article.thumb} alt="thumbnail" />
                     <div className={styles.body}>
                         <h2 className={styles.heading}>{article.title}</h2>

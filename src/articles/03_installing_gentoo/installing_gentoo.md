@@ -153,7 +153,7 @@ The slang word for installing something with Portage is to `emerge` that package
 You can emerge a package with `emerge --ask [package name]`.
 Package names look like this: `media-gfx/gimp`, a category and the name of the program.
 Sometimes this command prompts you to set some USE flags.
-These can either be set in `/etc/portage/make.conf` [to affect all packages](https://wiki.gentoo.org/wiki/etc/portage/make.conf#USE) or in `/etc/portage/package.use` [to not alter the global USE flags](https://wiki.gentoo.org/wiki/etc/portage/package.use).
+These can either be set in `/etc/portage/make.conf` [to affect all packages](https://wiki.gentoo.org/wiki//etc/portage/make.conf#USE) or in `/etc/portage/package.use` [to not alter the global USE flags](https://wiki.gentoo.org/wiki//etc/portage/package.use).
 My `make.conf` and `package.use` can be found in my [config collection](https://github.com/christopher-besch/configs) under the Gentoo section.
 
 ## Xfce
@@ -284,7 +284,7 @@ You should take a look at [its USE flags](https://wiki.gentoo.org/wiki/TeX_Live)
 I simply include them all with line `app-text/texlive *` in my `package.use`.
 
 ### OCRmyPDF
-[OCRmyPDF](https://ocrmypdf.readthedocs.io/en/latest) is a Python program that uses Tesseract to convert scanned PDFs to text and make them searchable with Ctrl+F.
+[OCRmyPDF](https://ocrmypdf.readthedocs.io/en/latest/) is a Python program that uses Tesseract to convert scanned PDFs to text and make them searchable with Ctrl+F.
 On Gentoo you need these two packages
 - `app-text/tesseract`
 - `media-gfx/pngquant`

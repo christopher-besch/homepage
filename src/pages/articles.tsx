@@ -1,8 +1,8 @@
 import React from "react";
 import { graphql } from "gatsby";
+import Layout from "src/components/layout";
 import ArticleList, { gql_to_article } from "src/components/article_list";
 import { ArticlesPage } from "./__generated__/articles-page";
-import Layout from "src/components/layout";
 
 interface ArticlesProps {
     data: ArticlesPage;

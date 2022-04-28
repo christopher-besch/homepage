@@ -7,12 +7,14 @@
     "scripts": {
         "build_debug": "DEPLOY_ORIGIN='https://dev.chris-besch.com' node_modules/.bin/gatsby build",
         "build_deploy": "DEPLOY_ORIGIN='https://chris-besch.com' node_modules/.bin/gatsby build",
+        "build_local": "DEPLOY_ORIGIN='http://localhost:8000' node_modules/.bin/gatsby build",
         "develop": "DEPLOY_ORIGIN='http://localhost:8000' node_modules/.bin/gatsby develop",
         "serve": "node_modules/.bin/gatsby serve",
         "clean": "node_modules/.bin/gatsby clean",
         "type_check": "find ./src/ -name __generated__ -type d | xargs rm -r -v || true && node_modules/.bin/tsgql typegen && node_modules/.bin/tsc && echo 'type check ok'",
         "type_check:watch": "node_modules/.bin/tsc --watch",
-        "load_gql": "node_modules/.bin/get-graphql-schema http://localhost:8000/___graphql > schema.graphql && yarn run type_check"
+        "load_gql": "node_modules/.bin/get-graphql-schema http://localhost:8000/___graphql > schema.graphql && yarn run type_check",
+        "check_links": "yarn run build_local && ( yarn run serve & to_kill=$! && sleep 5 && node_modules/.bin/broken-link-checker --filter-leve 3 --input http://localhost:9000 -o -r --user-agent 'Mozilla/5.0 (X11; Linux x86_64; rv:99.0) Gecko/20100101 Firefox/99.0' || true && kill $to_kill )"
     },
     "repository": {
         "type": "git",
@@ -26,6 +28,7 @@
         "@types/react": "^18.0.0",
         "@types/react-dom": "^18.0.0",
         "@types/react-helmet": "^6.1.5",
+        "broken-link-checker": "^0.7.8",
         "gatsby": "^4.11.2",
         "gatsby-link": "^4.11.1",
         "gatsby-plugin-image": "^2.11.1",
