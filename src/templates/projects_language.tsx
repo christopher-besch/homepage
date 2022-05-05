@@ -23,7 +23,7 @@ const ProjectsLanguage: React.FC<ProjectsLanguageProps> = (props) => {
 
     return (
         <Layout heading={`${selected_language.name} Projects`} sub_heading={selected_language_id == "java" ? " You found an easter egg!" : ""} icon={selected_language.icon_mono}>
-            <ProjectList projects={projects} />
+            <ProjectList projects={projects} count={3} />
             <Link className={`${util_styles.block} ${util_styles.link}`} to="/projects">Other Projects</Link>
             {max_priority < max_priority_language_all ? <Link className={`${util_styles.block} ${util_styles.link}`} to={`/projects/${selected_language.id}?max_priority=${max_priority_language_all}`}>Show All</Link> : undefined}
         </Layout >);
