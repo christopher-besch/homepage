@@ -47,12 +47,14 @@ const About: React.FC<AboutProps> = (props) => {
 
                     <p>
                         My primary interests lay in tinkering with
-                        <ul>
-                            <li><a href="https://github.com/christopher-besch/maki">renderers</a>,</li>
-                            <li><a href="https://github.com/christopher-besch/time_table_planner">data analysis</a>,</li>
-                            <li><a href="https://github.com/christopher-besch/neural_network">neural networks</a> and</li>
-                            <li><a href="https://github.com/ToddLinux/ToddLinux">Linux</a>.</li>
-                        </ul>
+                    </p>
+                    <ul>
+                        <li><a href="https://github.com/christopher-besch/maki">renderers</a>,</li>
+                        <li><a href="https://github.com/christopher-besch/time_table_planner">data analysis</a>,</li>
+                        <li><a href="https://github.com/christopher-besch/neural_network">neural networks</a> and</li>
+                        <li><a href="https://github.com/ToddLinux/ToddLinux">Linux</a>.</li>
+                    </ul>
+                    <p>
                         But I also work on the occasional <a href="https://addons.mozilla.org/en-US/firefox/addon/bbb-autostatus">WebDev project</a>.
                     </p>
 
@@ -63,14 +65,14 @@ const About: React.FC<AboutProps> = (props) => {
 
                     <p>
                         When it comes to taste, I prefer
-                        <ul>
-                            <li><a href="https://github.com/christopher-besch/miscellaneous_configs">the terminal</a> over a GUI,</li>
-                            <li><a href="https://github.com/christopher-besch/nvim_like_me">VIM</a> over huge IDEs,</li>
-                            <li>backends over frontends, I'm not a good designer by any stretch of the imagination :&gt;,</li>
-                            <li><Link to="/projects/cpp">C++</Link> over <Link to="/projects/python">Python</Link> or <Link to="/projects/typescript">TypeScript</Link> and</li>
-                            <li>Linux over Windows.</li>
-                        </ul>
                     </p>
+                    <ul>
+                        <li><a href="https://github.com/christopher-besch/miscellaneous_configs">the terminal</a> over a GUI,</li>
+                        <li><a href="https://github.com/christopher-besch/nvim_like_me">VIM</a> over huge IDEs,</li>
+                        <li>backends over frontends, I'm not a good designer by any stretch of the imagination :&gt;,</li>
+                        <li><Link to="/projects/cpp">C++</Link> over <Link to="/projects/python">Python</Link> or <Link to="/projects/typescript">TypeScript</Link> and</li>
+                        <li>Linux over Windows.</li>
+                    </ul>
                     <p>
                         Have a nice day.
                     </p>

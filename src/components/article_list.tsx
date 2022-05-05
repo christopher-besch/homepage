@@ -13,14 +13,14 @@ export type Article = {
     thumb: IGatsbyImageData;
 }
 
-export function gql_to_article(project: any): Article {
+export function gql_to_article(article: any): Article {
     return {
-        id: project.node.id,
-        date: project.node.frontmatter?.date,
-        description: project.node.frontmatter?.description,
-        slug: project.node.frontmatter?.slug,
-        title: project.node.frontmatter?.title,
-        thumb: getImage(project.node.frontmatter?.thumb as ImageDataLike)!,
+        id: article.node.id,
+        date: article.node.frontmatter?.date,
+        description: article.node.frontmatter?.description,
+        slug: article.node.frontmatter?.slug,
+        title: article.node.frontmatter?.title,
+        thumb: getImage(article.node.frontmatter?.thumb as ImageDataLike)!,
     };
 }
 
@@ -38,8 +38,8 @@ const ArticleList: React.FC<ArticleListProps> = (props) => {
                         <h2 className={styles.heading}>{article.title}</h2>
                         <hr />
                         <div>
-                            {article.description.split("\n").map(paragraph =>
-                                <p>{paragraph}</p>
+                            {article.description.split("\n").map((paragraph, idx) =>
+                                <p key={idx}>{paragraph}</p>
                             )}
                         </div>
                     </div>

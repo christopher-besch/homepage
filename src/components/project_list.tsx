@@ -35,11 +35,11 @@ export function gql_to_project(project: any): Project {
 
 interface ProjectListProps {
     projects: Project[];
-    count?: number;
+    count: number;
     className?: string;
 }
 const ProjectList: React.FC<ProjectListProps> = (props) => {
-    const count = props.count ? props.count : 3;
+    const count = props.count;
     const full_width = `${100 / count}%`;
     const half_width = `${100 / Math.ceil(count / 2)}%`;
     const quarter_width = `${100 / Math.ceil(count / 4)}%`;
@@ -51,7 +51,6 @@ const ProjectList: React.FC<ProjectListProps> = (props) => {
     return (
         <div className={`${styles.projects} ${props.className}`}>
             {props.projects.map(project =>
-                // TODO: can't link same project twice <- non-unique key; only problem when using two project lists
                 <a href={project.link} target="_blank" key={project.id} className={styles.project} style={width_properties}>
                     <div className={styles.content}>
                         <div className={styles.image_wrapper}>
