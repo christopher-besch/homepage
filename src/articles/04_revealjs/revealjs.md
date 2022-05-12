@@ -23,7 +23,25 @@ exclude: Table of Contents
 to-heading: 3
 ```
 
-# something
+# Notes
 
-asdf
+- revealjs as is
+- my compilation method + problems
+- all from same site, no CDN
+- template
+- my needs, decisions: interactivity not needed, simple, pretty, animated
+- methods:
+    - title page header
+    - half_part, general alignment
+    - lists
+    - headings
+    - animations
+    - quotes
+    - images (LaTeX with transparent background)
+    - tables
+    - equations (align, not align, drawbacks)
+    - markings in equations
+    - colouring
+    - links
+- what doesn't work, why shouldn't use revealjs
 
