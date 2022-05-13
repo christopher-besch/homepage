@@ -49,8 +49,11 @@ Therefore I don't accept anything that doesn't get loaded from my own site.
 ### My Approach
 So I created a *slightly* different way of using reveal.js:
 I'm using a single Git repository with a custom build script.
-It clones reveal.js into a temporary directory that isn't being tracked by Git (added to `.gitignore`)
+It clones reveal.js into one of many build directories, which aren't being tracked by Git (included in `.gitignore`).
 
+Since I use custom themes, I copy them from the `theme` into the appropriate `reveal/css/theme/source` and `reveal/css/theme/template` directories.
+
+<!-- TODO: verify -->
 ```
 .
 ├── 2022_03_07_termbaeume
@@ -79,14 +82,16 @@ It clones reveal.js into a temporary directory that isn't being tracked by Git (
 │   │   └── katex
 │   ├── plugin
 │   │   ├── ...
+│   ├── static
+│   │   ├── ...
 │   ├── vendor
 │   │   ├── ...
 │   └── index.html
 ├── reveal
 │   ├── ...
+├── static
+│   └── oceanicnext.css
 ├── theme
-│   ├── other
-│   │   └── oceanicnext.css
 │   ├── source
 │   │   ├── custom_black.scss
 │   │   └── custom_white.scss
@@ -102,6 +107,9 @@ It clones reveal.js into a temporary directory that isn't being tracked by Git (
 ├── index.html -> public/index.html
 ```
 <!-- tree --dirsfirst -L 3  | xclip -i -selection clipboard -->
+
+Directory overview:
+- `reveal`: reveal.js repo
 
 # Notes
 
