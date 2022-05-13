@@ -7,13 +7,15 @@ description: "
 banner: /social_banner/revealjs.png
 thumb: ../../../static/social_banner/revealjs.png
 slug: revealjs
-date: 2022-04-26T00:00:00+00:00
+date: 2022-05-13T00:00:00+00:00
 listed: true
 version: 0.0.1
 ---
 import AutoPlayVideo from "src/components/autoplay_video";
 import HalfImage from "src/components/half_image";
 import Spacer from "src/components/spacer";
+
+import resource_loading from "./resource_loading.png";
 
 reveal.js is an open source HTML presentation framework.
 I used it for a couple of presentations, replacing PowerPoint for me.
@@ -32,6 +34,22 @@ You are expected to clone the reveal.js repository, replace the provided example
 When you have multiple presentations you have to store the reveal.js source code multiple times and when you intend to use Git for version control, you have to create a fork of the reveal.js repo over and over again.
 When searching for a workaround I realized that the compilation step doesn't actually depend on the actual presentation you are building.
 This means that you can compile the reveal.js resources once and use them in multiple presentations.
+
+<HalfImage src={resource_loading} />
+
+Additionally my goals include high reliability&mdash;when I'm standing in front of an audience, my presentation **has** to work.
+A tangent to this is the ability to present without an active internet connection.
+If you're hosting your presentation locally, this might sound simple at first.
+But it get's more complicated when you realize just how many typical web solutions load resources from content delivery networks (CDNs).
+These CDNs might not be reachable at all time and are a big privacy concern.
+Therefore I don't accept anything that doesn't get loaded from my own site.
+
+<Spacer />
+
+### My Approach
+So I created a *slightly* different way of using reveal.js:
+I'm using a single Git repository with a custom build script.
+It clones reveal.js into a temporary directory that isn't being tracked by Git (added to `.gitignore`)
 
 ```
 .
@@ -60,16 +78,9 @@ This means that you can compile the reveal.js resources once and use them in mul
 │   ├── dwn_vendor
 │   │   └── katex
 │   ├── plugin
-│   │   ├── highlight
-│   │   ├── markdown
-│   │   ├── math
-│   │   ├── notes
-│   │   ├── other
-│   │   ├── search
-│   │   └── zoom
+│   │   ├── ...
 │   ├── vendor
-│   │   ├── external_code
-│   │   └── mathjax
+│   │   ├── ...
 │   └── index.html
 ├── reveal
 │   ├── ...
@@ -83,20 +94,14 @@ This means that you can compile the reveal.js resources once and use them in mul
 │       └── custom_styles.scss
 ├── vendor
 │   ├── external_code
-│   │   ├── externalcode.js
-│   │   └── README.md
+│   │   ├── ...
 │   └── mathjax
-│       ├── es5
-│       ├── bower.json
-│       ├── composer.json
-│       ├── CONTRIBUTING.md
-│       ├── LICENSE
-│       ├── package.json
-│       └── README.md
+│       ├── ...
 ├── build.sh
 ├── check_links.sh
 ├── index.html -> public/index.html
 ```
+<!-- tree --dirsfirst -L 3  | xclip -i -selection clipboard -->
 
 # Notes
 
