@@ -1,6 +1,6 @@
 ---
 type: article
-title: "Title Name Here"
+title: "Programmatic Presentations with reveal.js"
 description: "
 
 "
@@ -28,7 +28,7 @@ exclude: Table of Contents
 to-heading: 3
 ```
 
-## Installation
+# Installing and Compiling Like Me
 When I went to the installation page on [revealjs.com](https://revealjs.com) I found the recommended method to not suit my taste in the slightest.
 You are expected to clone the reveal.js repository, replace the provided example presentation with you own, compile and call it a day.
 When you have multiple presentations you have to store the reveal.js source code multiple times and when you intend to use Git for version control, you have to create a fork of the reveal.js repo over and over again.
@@ -44,14 +44,91 @@ But it get's more complicated when you realize just how many typical web solutio
 These CDNs might not be reachable at all time and are a big privacy concern.
 Therefore I don't accept anything that doesn't get loaded from my own site.
 
+So I created a *slightly* different way of using reveal.js:
+I'm using a single Git repository for all my presentations, each in their own directory.
+They have access to reveal.js with custom themes, whatever plugins I consider useful and static resources.
+A custom build script `buils.sh` puts everything needed for hosting all presentations in the `public` directory.
+
 <Spacer />
 
-### My Approach
-So I created a *slightly* different way of using reveal.js:
-I'm using a single Git repository with a custom build script.
-It clones reveal.js into one of many build directories, which aren't being tracked by Git (included in `.gitignore`).
+## Build Script
 
-Since I use custom themes, I copy them from the `theme` into the appropriate `reveal/css/theme/source` and `reveal/css/theme/template` directories.
+First of all it clones reveal.js into the build directory `reveal`, which isn't being tracked by Git (included in `.gitignore`).
+After which it checks out a specific version of reveal.js.
+```bash
+echo "cloning reveal.js..."
+git clone https://github.com/hakimel/reveal.js reveal || true
+# change directory
+pushd reveal
+git checkout 4.3.1
+```
+
+Since I use custom themes, I copy them from the `theme` into the `reveal/css/theme/source` and `reveal/css/theme/template` directories.
+```bash
+echo "installing custom themes..."
+cp -v ../theme/source/* ./css/theme/source
+cp -v ../theme/template/* ./css/theme/template
+```
+
+Now the `reveal` directory contains everything required to compile reveal.js just like normal.
+```bash
+echo "installing yarn dependencies..."
+rm -v package-lock.json || true
+yarn install
+
+echo "building reveal.js..."
+yarn run build
+popd
+```
+
+The `reveal/dist` and `reveal/plugin` directories contain all output files and get copied into the `public` folder.
+```bash
+echo "creating public dir..."
+rm -rv public || true
+mkdir -v public
+
+echo "copying reveal output files..."
+cp -rv reveal/{dist,plugin} public
+```
+
+This is also a good time to copy any static files, for example code highlighting themes.
+```bash
+echo "copying static files"
+cp -vr static public/static
+```
+
+### Plugins
+The `vendor` directory contains a few submodules, other git repositories (checked out at a specific commit) contained in a subdirectory.
+These are plugins for reveal.js.
+```bash
+echo "copying vendor dependencies..."
+cp -rv vendor public/vendor
+```
+
+Some plugins are precompiled and can't be loaded using submodules.
+These plugins need to be downloaded and extracted by the build script.
+```bash
+echo "downloading precompiled dependencies..."
+rm -rfv public/dwn_vendor
+mkdir public/dwn_vendor
+wget https://github.com/KaTeX/KaTeX/releases/download/v0.15.3/katex.tar.gz -O public/dwn_vendor/katex.tar.gz
+
+echo "extracting precompiled dependencies..."
+pushd public/dwn_vendor
+tar xfv katex.tar.gz
+rm -v katex.tar.gz
+# katex needs weird dist directory
+mv katex temp
+mkdir katex
+mv temp katex/dist
+popd
+```
+
+The penultimate step is to copy the actual presentations into the `public` directory.
+```bash
+echo "copying presentations..."
+find . -maxdepth 1 -mindepth 1 -type d -not -path "./.*" -not -path "./reveal" -not -path "./public" -not -path "./static" -not -path "./theme" -not -path "./vendor" -exec cp -rv {} public \;
+```
 
 <!-- TODO: verify -->
 ```
@@ -110,6 +187,7 @@ Since I use custom themes, I copy them from the `theme` into the appropriate `re
 
 Directory overview:
 - `reveal`: reveal.js repo
+- `theme`: custom themes, written in SCSS and compiled alongside reveal.js
 
 # Notes
 
@@ -136,5 +214,7 @@ Directory overview:
     - code
     - funky animations (animated stack)
 - what doesn't work, why shouldn't use revealjs
+- rerunning build.sh
+- clean rerun
 - alternatives
 
