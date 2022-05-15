@@ -14,7 +14,7 @@
         "type_check": "find ./src/ -name __generated__ -type d | xargs rm -r -v || true && node_modules/.bin/tsgql typegen && node_modules/.bin/tsc && echo 'type check ok'",
         "type_check:watch": "node_modules/.bin/tsc --watch",
         "load_gql": "node_modules/.bin/get-graphql-schema http://localhost:8000/___graphql > schema.graphql && yarn run type_check",
-        "check_links": "yarn run build_local && ( yarn run serve & to_kill=$! && sleep 5 && node_modules/.bin/broken-link-checker --filter-leve 3 --input http://localhost:9000 -o -r --user-agent 'Mozilla/5.0 (X11; Linux x86_64; rv:99.0) Gecko/20100101 Firefox/99.0' || true && kill $to_kill )"
+        "check_links": "yarn run build_local && ( yarn run serve & to_kill=$! && sleep 5 && node_modules/.bin/broken-link-checker --filter-level 3 --input http://localhost:9000 -o -r --user-agent 'Mozilla/5.0 (X11; Linux x86_64; rv:99.0) Gecko/20100101 Firefox/99.0' || true && kill $to_kill )"
     },
     "repository": {
         "type": "git",
