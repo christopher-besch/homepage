@@ -18,9 +18,10 @@ import Spacer from "src/components/spacer";
 import resource_loading from "./resource_loading.png";
 
 reveal.js is an open source HTML presentation framework.
-I used it for a couple of presentations, replacing PowerPoint for me.
-This article sums up my experiences and gives templates and advice to get you started.
-Generally reveal.js is something for you if you are proficient with web technologies and have a heart for programmatic approaches.
+It can be recommended if you are proficient with web technologies and have a heart for programmatic approaches.
+I used it for a couple of presentations as a PowerPoint replacement.
+This article sums up my experiences shows how the most important tasks can be achieved and then explains my custom method of using reveal.js.
+If you're interested in bash, it also explains the automation scripts used.
 
 ### Table of Contents
 ```toc
@@ -124,16 +125,79 @@ mv temp katex/dist
 popd
 ```
 
-The penultimate step is to copy the actual presentations into the `public` directory.
+The penultimate step is to copy the actual presentations into the `public` directory and create a table of contents `index.html`.
+Such a table of contents won't be very pretty but since I always link directly to specific presentations, it's only purpose is for debugging.
+And everyone knows that software developers don't deserve pretty interfaces.
 ```bash
 echo "copying presentations..."
-find . -maxdepth 1 -mindepth 1 -type d -not -path "./.*" -not -path "./reveal" -not -path "./public" -not -path "./static" -not -path "./theme" -not -path "./vendor" -exec cp -rv {} public \;
+find . \
+    -regex './[0-9][0-9][0-9][0-9]_[0-9][0-9]_[0-9][0-9]_[^/]+' \
+    -exec cp -rv {} public \;
+
+echo "creating table of contents page..."
+find . \
+    -regex './[0-9][0-9][0-9][0-9]_[0-9][0-9]_[0-9][0-9]_[^/]+' \
+    -exec echo "<a href='{}'>{}<a><br />" \; > public/index.html
 ```
 
+### Development Environment
+Because no one wants to build everything over and over when they change a small detail, a few symlinks form a convenient dev environment.
+This allows you to directly open your presentation `index.html` files as if they had already been copied into the `public` directory.
+You can even use `live-server`, which can be installed with `yarn global add live-server`, to automatically reload the page when you change your presentation.
+If you use VSCode, you can check out the [Live Server plugin](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer).
+```bash
+echo "creating symlinks for development..."
+ln -svf public/dist dist
+ln -svf public/plugin plugin
+ln -svf public/dwn_vendor dwn_vendor
+ln -svf public/index.html index.html
+```
+
+Just don't forget to compile right before publishing the `public` directory.
+
+## Clean Script
+If you intend to undo a build or start a clean one&mdash;for example when you've changed the version of a dependency&mdash;you can use the `clean.sh` script.
+```bash
+echo "deleting reveal.js..."
+rm -rvf reveal || true
+
+echo "deleting public dir..."
+rm -rv public || true
+
+echo "deleting development symlinks..."
+rm -v dist || true
+rm -v plugin || true
+rm -v dwn_vendor || true
+rm -v index.html || true
+```
+
+## Integrity Checks
+Automated tests can really give you the confidence you need when standing in front of a crowd.
+So far I have only included the most basic check there is, testing if all referred resources are actually accessible.
+The `check.sh` script does just that.
+```bash
+python3 -m http.server 9329 > /dev/null 2>&1 & \
+    to_kill=$! && \
+    sleep 1 && \
+    broken-link-checker \
+    -or \
+    --filter-level 3 \
+    --input http://localhost:9329 \
+    --user-agent 'Mozilla/5.0 (X11; Linux x86_64; rv:99.0) Gecko/20100101 Firefox/99.0' || true && \
+    kill $to_kill
+```
+This script launches a local web server and silences all output by dumping it into `/dev/null`.
+The single `&` executes this command in the background.
+Everything else is being executed in a separate process, which firstly sets the `to_kill` variable to the PID of the web server in the background.
+Then we wait a moment for the web server to boot up and use the `broken-link-checker` program, which can be installed using `yarn global add broken-link-checker`.
+In the end the web server gets shot down to avoid any zombie processes.
+
 <!-- TODO: verify -->
+# Directory Overview
+Comments are in parenthesis.
 ```
 .
-├── 2022_03_07_termbaeume
+├── 2022_03_07_termbaeume (one folder for each presentation)
 │   ├── index.html
 │   ├── ...
 ├── 2022_03_14_neue_formeln_messunsicherheiten
@@ -142,7 +206,7 @@ find . -maxdepth 1 -mindepth 1 -type d -not -path "./.*" -not -path "./reveal" -
 ├── dist -> public/dist
 ├── dwn_vendor -> public/dwn_vendor
 ├── plugin -> public/plugin
-├── public
+├── public (everything to be published)
 │   ├── 2022_03_07_termbaeume
 │   │   ├── ...
 │   ├── 2022_03_14_neue_formeln_messunsicherheiten
@@ -164,28 +228,28 @@ find . -maxdepth 1 -mindepth 1 -type d -not -path "./.*" -not -path "./reveal" -
 │   ├── vendor
 │   │   ├── ...
 │   └── index.html
-├── reveal
+├── reveal (reveal.js repo)
 │   ├── ...
-├── static
+├── static (files that don't get compiled but are used by multiple presentations)
 │   └── oceanicnext.css
-├── theme
+├── theme (custom themes, written in SCSS and compiled alongside reveal.js)
 │   ├── source
 │   │   ├── custom_black.scss
 │   │   └── custom_white.scss
 │   └── template
 │       └── custom_styles.scss
-├── vendor
-│   ├── external_code
-│   │   ├── ...
-│   └── mathjax
-│       ├── ...
+├── vendor (git subdirectories for plugins)
+│   └── external_code
+│       ├── ...
 ├── build.sh
-├── check_links.sh
-├── index.html -> public/index.html
+├── check.sh
+├── clean.sh
+└── index.html -> public/index.html
 ```
 <!-- tree --dirsfirst -L 3  | xclip -i -selection clipboard -->
 
 Directory overview:
+- `public`: 
 - `reveal`: reveal.js repo
 - `theme`: custom themes, written in SCSS and compiled alongside reveal.js
 
