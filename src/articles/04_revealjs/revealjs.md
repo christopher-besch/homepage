@@ -14,6 +14,7 @@ version: 0.0.1
 import AutoPlayVideo from "src/components/autoplay_video";
 import HalfImage from "src/components/half_image";
 import Spacer from "src/components/spacer";
+import Iframe from "src/components/iframe";
 
 import resource_loading from "./resource_loading.png";
 
@@ -28,6 +29,11 @@ If you're interested in bash, it also explains the automation scripts used.
 exclude: Table of Contents
 to-heading: 3
 ```
+
+# What is reveal.js
+<Iframe src="http://127.0.0.1:8080/2022_03_14_neue_formeln_messunsicherheiten" title="I like cheese" />
+
+hello
 
 # Installing and Compiling Like Me
 When I went to the installation page on [revealjs.com](https://revealjs.com) I found the recommended method to not suit my taste in the slightest.
@@ -248,11 +254,6 @@ Comments are in parenthesis.
 ```
 <!-- tree --dirsfirst -L 3  | xclip -i -selection clipboard -->
 
-Directory overview:
-- `public`: 
-- `reveal`: reveal.js repo
-- `theme`: custom themes, written in SCSS and compiled alongside reveal.js
-
 # Notes
 
 - reveal.js as is
@@ -281,4 +282,5 @@ Directory overview:
 - rerunning build.sh
 - clean rerun
 - alternatives
+- example presentation
 

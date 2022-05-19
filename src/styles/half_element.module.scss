@@ -4,7 +4,6 @@
     margin: 0;
 }
 .full_wrapper {
-    margin-bottom: 16px;
 }
 
 .element {
@@ -17,6 +16,9 @@
     height: auto;
     float: left;
     max-width: 100%;
+    width: 100%;
+    // because margin-bottom in the full_wrapper doesn't work
+    margin-bottom: 16px;
 }
 .before {
     /* clear float before element */
