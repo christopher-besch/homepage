@@ -132,5 +132,7 @@ module.exports = {
         default_origin: "https://chris-besch.com",
         // address actually in use
         origin: process.env.DEPLOY_ORIGIN,
+        // address of presentation site
+        present_url: process.env.PRESENT_URL,
     },
 }

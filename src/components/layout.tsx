@@ -1,6 +1,6 @@
 import { graphql, Link, useStaticQuery } from "gatsby";
 import React from "react";
-import { SiteInfo } from "./__generated__/site-info";
+import { LayoutData } from "./__generated__/layout-data";
 import { Helmet } from "react-helmet";
 
 import { PropsWithLocation, with_location } from "src/utils/with_location";
@@ -17,8 +17,8 @@ interface LayoutProps extends PropsWithLocation {
     banner?: string;
 }
 const Layout: React.FC<LayoutProps> = (props) => {
-    const data: SiteInfo = useStaticQuery(graphql`
-query SiteInfo {
+    const data: LayoutData = useStaticQuery(graphql`
+query LayoutData {
   site {
     siteMetadata {
       source

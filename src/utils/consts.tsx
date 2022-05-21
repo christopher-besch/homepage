@@ -36,3 +36,6 @@ export const max_priority_language_all = 50;
 
 // break url:
 // 51 - broken garbage
+
+export const present_url = "http://127.0.0.1:8080";
+

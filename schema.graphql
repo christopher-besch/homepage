@@ -2432,6 +2432,7 @@ enum SiteFieldsEnum {
   siteMetadata___source
   siteMetadata___default_origin
   siteMetadata___origin
+  siteMetadata___present_url
   port
   host
   polyfill
@@ -3102,6 +3103,7 @@ type SiteSiteMetadata {
   source: String
   default_origin: String
   origin: String
+  present_url: String
 }
 
 type SiteSiteMetadataDiscord {
@@ -3136,6 +3138,7 @@ input SiteSiteMetadataFilterInput {
   source: StringQueryOperatorInput
   default_origin: StringQueryOperatorInput
   origin: StringQueryOperatorInput
+  present_url: StringQueryOperatorInput
 }
 
 type SiteSiteMetadataGithub {
