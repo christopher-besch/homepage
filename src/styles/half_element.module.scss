@@ -3,8 +3,6 @@
 .wrapper {
     margin: 0;
 }
-.full_wrapper {
-}
 
 .element {
     height: auto;
@@ -17,7 +15,7 @@
     float: left;
     max-width: 100%;
     width: 100%;
-    // because margin-bottom in the full_wrapper doesn't work
+    // because margin-bottom in the wrapper doesn't work
     margin-bottom: 16px;
 }
 .before {
