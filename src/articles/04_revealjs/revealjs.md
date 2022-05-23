@@ -31,9 +31,11 @@ to-heading: 3
 ```
 
 # What is reveal.js?
-<Iframe present="2022_05_21_reveal_example/"/>
+<Iframe present="2022_05_21_reveal_example/" fullscreen />
 
 Use the blue arrows in the bottom right corner to jump between slides.
+If you're using a vertical mobile device, consider turning it and reading this article in landscape mode&mdash;presentations aren't made for portrait orientation.
+On desktop you can click on the presentation and then press `F` to enter fullscreen and `Esc` to exit.
 
 # Installing and Compiling Like Me
 When I went to the installation page on [revealjs.com](https://revealjs.com) I found the recommended method to not suit my taste in the slightest.

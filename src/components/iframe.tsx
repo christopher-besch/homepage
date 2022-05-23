@@ -10,6 +10,7 @@ interface IframeProps {
     src?: string;
     present?: string;
     title?: string;
+    fullscreen?: boolean;
 }
 const Iframe: React.FC<IframeProps> = (props) => {
     const data: IframeData = useStaticQuery(graphql`
@@ -28,7 +29,7 @@ query IframeData {
     return (
         <HalfElement full={true}>
             <div className={styles.wrapper}>
-                <iframe className={styles.iframe} src={src} title={props.title}></iframe>
+                <iframe className={styles.iframe} src={src} title={props.title} allowFullScreen={props.fullscreen}></iframe>
             </div>
         </HalfElement>
     );
