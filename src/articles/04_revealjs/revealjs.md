@@ -21,7 +21,7 @@ import resource_loading from "./resource_loading.png";
 reveal.js is an open source HTML presentation framework.
 It can be recommended if you are proficient with web technologies and have a heart for programmatic approaches.
 I used it for a couple of presentations as a PowerPoint replacement.
-This article sums up my experiences shows how the most important tasks can be achieved and then explains my custom method of using reveal.js.
+This article sums up my experiences, shows how the most important tasks can be achieved and then explains my custom method of using reveal.js.
 If you're interested in bash, it also explains the automation scripts used.
 
 ### Table of Contents
@@ -36,6 +36,72 @@ to-heading: 3
 Use the blue arrows in the bottom right corner to jump between slides.
 If you're using a vertical mobile device, consider turning it and reading this article in landscape mode&mdash;presentations aren't made for portrait orientation.
 On desktop you can click on the presentation and then press `F` to enter fullscreen and `Esc` to exit.
+This presenter behaves how a PowerPoint user would expect it.
+
+The creation of such a presentation however isn't anything like PowerPoint.
+Everything that is shown is defined in an `index.html` file, the exact layout of which will be described [later on](#template).
+
+## Slides and Vertical Slides
+You create slides with the `<section>` tag.
+If you insert another `<section>` tag within this, you've created a vertical slide.
+The default transition between horizontal slides is a horizontal swipe, while vertical slides get replaced with a vertical movement.
+```html
+<section>
+    Hello World!
+</section>
+
+<section>
+    <section>
+        Vertical Slide 1
+    </section>
+    <section>
+        Vertical Slide 2
+    </section>
+</section>
+
+<section>
+    <section>
+        Only using a single vertical slide is also fine; this has the same effect as if you'd be using a
+        plain horizontal slide
+    </section>
+</section>
+```
+<Iframe present="2022_05_21_reveal_example/#/1" fullscreen />
+
+I never use plain horizontal slides.
+Instead I use them to group multiple vertical slides into logical groups.
+When there's a horizontal swipe, the viewer knows that I start talking about a new subtopic.
+
+Press `Esc` while you're not in fullscreen.
+Now you see the slide overview and you should be able to make out the individual horizontal slides as columns.
+This overview serves as a quick access menu if you want to jump to a different slide without mashing your poor keyboard.
+
+## Features
+Since reaveal.js is an HTML framework, you can let all your WebDev skills shine and use whatever tricks you've already gotten used to.
+If you've never worked with any web technologies, reveal.js is a great way of getting started.
+
+## General Elements
+You can use the `<h1>` tag for headings, `<h2>`, `<h3>` and so on are subheadings and subsubheadings.
+Lists can be created with the `<ul>` and `<li>` tags as shown below.
+```html
+<section>
+    <section>
+        <h1>This is a heading</h1>
+    </section>
+    <section>
+        <h2>This is a subheading</h2>
+    </section>
+    <section>
+        <ul>
+            <li>First Element</li>
+            <li>Second Element</li>
+        </ul>
+    </section>
+</section>
+```
+<Iframe present="2022_05_21_reveal_example/#/4" fullscreen />
+
+# Template
 
 # Installing and Compiling Like Me
 When I went to the installation page on [revealjs.com](https://revealjs.com) I found the recommended method to not suit my taste in the slightest.
@@ -255,34 +321,4 @@ Comments are in parenthesis.
 └── index.html -> public/index.html
 ```
 <!-- tree --dirsfirst -L 3  | xclip -i -selection clipboard -->
-
-# Notes
-
-- reveal.js as is
-- my compilation method + problems
-- all from same site, no CDN
-- template
-- my needs, decisions: interactivity not needed, simple, pretty, animated
-- markdown or html
-- PDF export doesn't work
-- methods:
-    - title page header
-    - half_part, general alignment
-    - lists
-    - headings
-    - animations
-    - quotes
-    - images (LaTeX with transparent background)
-    - tables
-    - equations (align, not align, drawbacks)
-    - markings in equations
-    - colouring
-    - links
-    - code
-    - funky animations (animated stack)
-- what doesn't work, why shouldn't use revealjs
-- rerunning build.sh
-- clean rerun
-- alternatives
-- example presentation
 
