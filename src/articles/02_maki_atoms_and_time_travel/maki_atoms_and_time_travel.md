@@ -109,7 +109,7 @@ And that's exactly what we see:
 The moment the shift is being applied, Maki performs a [Chrono Sync](#chrono-sync) and the cube changes it's position.
 The past was altered, and we see the repercussions in the present.
 
-<Quote text="The past was erased, the erasure was forgotten, the lie became truth." author="1982" />
+<Quote text="The past was erased, the erasure was forgotten, the lie became truth." author="1984" />
 
 
 <Spacer />
