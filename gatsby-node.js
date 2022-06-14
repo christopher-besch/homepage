@@ -13,7 +13,6 @@ query Articles {
 }
     `);
 
-    // TODO: ridiculousness to be removed with typescript
     const languages = ["python", "cpp", "typescript", "java"];
 
     languages.forEach(language => {

@@ -19,7 +19,7 @@ import Iframe from "src/components/iframe";
 import resource_loading from "./resource_loading.png";
 
 reveal.js is an open source HTML presentation framework.
-It can be recommended if you are proficient with web technologies and have a heart for programmatic approaches.
+It's recommended to those with a heart for programmatic approaches and web technologies.
 I used it for a couple of presentations as a PowerPoint replacement.
 This article sums up my experiences, shows how the most important tasks can be achieved and then explains my custom method of using reveal.js.
 If you're interested in bash, it also explains the automation scripts used.
@@ -76,11 +76,10 @@ Press `Esc` while you're not in fullscreen.
 Now you see the slide overview and you should be able to make out the individual horizontal slides as columns.
 This overview serves as a quick access menu if you want to jump to a different slide without mashing your poor keyboard.
 
-## Features
+## Headings and Lists
 Since reaveal.js is an HTML framework, you can let all your WebDev skills shine and use whatever tricks you've already gotten used to.
 If you've never worked with any web technologies, reveal.js is a great way of getting started.
 
-## General Elements
 You can use the `<h1>` tag for headings, `<h2>`, `<h3>` and so on are subheadings and subsubheadings.
 Lists can be created with the `<ul>` and `<li>` tags as shown below.
 ```html
@@ -101,19 +100,52 @@ Lists can be created with the `<ul>` and `<li>` tags as shown below.
 ```
 <Iframe present="2022_05_21_reveal_example/#/4" fullscreen />
 
+## Quotes
+
+```html
+<blockquote>
+    "Single thread performance [increase] stopped, because we were starting to fry eggs on the chips [...]."
+    <br />
+    <span style="float: right;">—Bjarne Stroustrup</span>
+</blockquote>
+```
+<Iframe present="2022_05_21_reveal_example/#/6" fullscreen />
+
+## Animations
+There are two main ways of animating elements:
+- **Auto-Animate** and
+- **Fragments**.
+
+### Auto-Animate
+Auto-Animate work by transitioning between two similar slides.
+You can find more information in [the official documentation](https://revealjs.com/auto-animate).
+
+### Fragments
+Fragments allo
+
 # Template
+
+To quickly get started you can use [my template](https://github.com/christopher-besch/presentations/blob/main/template/index.html).
+I'll keep it updated with any necessary future fixes.
+Feel free to delete the copyright notice in the top;
+your presentation belongs under **your** copyright, not mine.
+I'd be glad if you could give this article credit but I don't require you to.
+
+The next few paragraphs explain what else you need to make a reveal.js presentation work.
 
 # Installing and Compiling Like Me
 When I went to the installation page on [revealjs.com](https://revealjs.com) I found the recommended method to not suit my taste in the slightest.
 You are expected to clone the reveal.js repository, replace the provided example presentation with you own, compile and call it a day.
 When you have multiple presentations you have to store the reveal.js source code multiple times and when you intend to use Git for version control, you have to create a fork of the reveal.js repo over and over again.
-When searching for a workaround I realized that the compilation step doesn't actually depend on the actual presentation you are building.
-This means that you can compile the reveal.js resources once and use them in multiple presentations.
+While searching for a workaround, I realized that the `index.html` file isn't actually part of the compilation step.
+This means that you can compile the reveal.js resources once and use them in multiple presentations;
+the compiled reveal.js resources are independent of the individual presentations.
 
 <HalfImage src={resource_loading} />
 
-Additionally my goals include high reliability&mdash;when I'm standing in front of an audience, my presentation **has** to work.
-A tangent to this is the ability to present without an active internet connection.
+Additionally my goals include high reliability&mdash;
+when I'm standing in front of an audience, my presentation **has** to work.
+A part of this is the ability to present without an active internet connection.
 If you're hosting your presentation locally, this might sound simple at first.
 But it get's more complicated when you realize just how many typical web solutions load resources from content delivery networks (CDNs).
 These CDNs might not be reachable at all time and are a big privacy concern.
@@ -121,7 +153,7 @@ Therefore I don't accept anything that doesn't get loaded from my own site.
 
 So I created a *slightly* different way of using reveal.js:
 I'm using a single Git repository for all my presentations, each in their own directory.
-They have access to reveal.js with custom themes, whatever plugins I consider useful and static resources.
+They have access to reveal.js, my custom themes, whatever plugins I consider useful and other static resources.
 A custom build script `buils.sh` puts everything needed for hosting all presentations in the `public` directory.
 
 <Spacer />
