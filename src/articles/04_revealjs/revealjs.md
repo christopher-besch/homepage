@@ -79,23 +79,24 @@ This overview serves as a quick access menu if you want to jump to a different s
 ## Headings and Lists
 Since reaveal.js is an HTML framework, you can let all your WebDev skills shine and use whatever tricks you've already gotten used to.
 If you've never worked with any web technologies, reveal.js is a great way of getting started.
+That also means that if you need a specific feature, you can google `HTML numbered list`; these features aren't limited to reveal.js.
 
 You can use the `<h1>` tag for headings, `<h2>`, `<h3>` and so on are subheadings and subsubheadings.
 Lists can be created with the `<ul>` and `<li>` tags as shown below.
 ```html
 <section>
-    <section>
-        <h1>This is a heading</h1>
-    </section>
-    <section>
-        <h2>This is a subheading</h2>
-    </section>
-    <section>
-        <ul>
-            <li>First Element</li>
-            <li>Second Element</li>
-        </ul>
-    </section>
+    <h1>This is a heading</h1>
+</section>
+
+<section>
+    <h2>This is a subheading</h2>
+</section>
+
+<section>
+    <ul>
+        <li>First Element</li>
+        <li>Second Element</li>
+    </ul>
 </section>
 ```
 <Iframe present="2022_05_21_reveal_example/#/4" fullscreen />
@@ -109,7 +110,7 @@ Lists can be created with the `<ul>` and `<li>` tags as shown below.
     <span style="float: right;">—Bjarne Stroustrup</span>
 </blockquote>
 ```
-<Iframe present="2022_05_21_reveal_example/#/6" fullscreen />
+<Iframe present="2022_05_21_reveal_example/#/5" fullscreen />
 
 ## Animations
 There are two main ways of animating elements:
@@ -117,16 +118,69 @@ There are two main ways of animating elements:
 - **Fragments**.
 
 ### Auto-Animate
-Auto-Animate work by transitioning between two similar slides.
+Auto-Animate works by transitioning between two similar slides, which are denoted by the `data-auto-animate` attribute.
+`data-auto-animate-restart` separates different consecutive animations.
+Every element that exists in both slides should have the same `data-id` attribute;
+then reveal.js smoothly transitions between them.
+With this you can cleanly add new or change already existent content.
+When you not only change the content of a tag but also the type of tag you use, you have to use a wrapper-div as shown in the example below.
+
 You can find more information in [the official documentation](https://revealjs.com/auto-animate).
+```html
+<!-- transitioning with same content -->
+<section data-auto-animate>
+    <h1 data-id="hello">Hello</h1>
+</section>
+<section data-auto-animate>
+    <h1 data-id="hello">Hello</h1>
+    <h1>World</h1>
+</section>
+
+<!-- transitioning between different tags -->
+<!-- -> transitioning between wrappers with different content -->
+<section data-auto-animate data-auto-animate-restart>
+    <div data-id="hello_wrapper">
+        <h1>h1 Heading</h1>
+    </div>
+</section>
+<section data-auto-animate>
+    <div data-id="hello_wrapper">
+        <h4>h4 Heading</h4>
+    </div>
+</section>
+```
+<Iframe present="2022_05_21_reveal_example/#/6" fullscreen />
 
 ### Fragments
-Fragments allo
+The main problem with auto-animate is code duplication:
+When you add a new tag you still need to redefine your old tags over and over again.
+Therefore I prefer fragments wherever possible.
+
+When parts of your slide should be revealed bit by bit, assign them the `fragment` class.
+If you need a different order in which to reveal the fragments, use the `data-fragment-index` attribute as shown in the second example.
+```html
+<section>
+    <ul>
+        <li>I</li>
+        <li class="fragment">Like</li>
+        <li class="fragment">Cheese.</li>
+    </ul>
+</section>
+
+<section>
+    <ul>
+        <li class="fragment" data-fragment-index="1">I</li>
+        <li class="fragment" data-fragment-index="2">Like</li>
+        <li>Cheese.</li>
+    </ul>
+</section>
+```
+<Iframe present="2022_05_21_reveal_example/#/7" fullscreen />
 
 # Template
-
 To quickly get started you can use [my template](https://github.com/christopher-besch/presentations/blob/main/template/index.html).
 I'll keep it updated with any necessary future fixes.
+You could also take a look at [the example presentation](https://github.com/christopher-besch/presentations/blob/main/2022_05_21_reveal_example/index.html) I used in this article.
 Feel free to delete the copyright notice in the top;
 your presentation belongs under **your** copyright, not mine.
 I'd be glad if you could give this article credit but I don't require you to.
@@ -152,7 +206,7 @@ These CDNs might not be reachable at all time and are a big privacy concern.
 Therefore I don't accept anything that doesn't get loaded from my own site.
 
 So I created a *slightly* different way of using reveal.js:
-I'm using a single Git repository for all my presentations, each in their own directory.
+I'm using a single [Git repository](https://github.com/christopher-besch/presentations) for all my presentations, each in their own directory.
 They have access to reveal.js, my custom themes, whatever plugins I consider useful and other static resources.
 A custom build script `buils.sh` puts everything needed for hosting all presentations in the `public` directory.
 
