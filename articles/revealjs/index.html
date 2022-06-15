@@ -83,29 +83,74 @@ Instead I use them to group multiple vertical slides into logical groups.
 When there&#x27;s a horizontal swipe, the viewer knows that I start talking about a new subtopic.</p><p>Press <!-- --><code>Esc</code> while you&#x27;re not in fullscreen.
 Now you see the slide overview and you should be able to make out the individual horizontal slides as columns.
 This overview serves as a quick access menu if you want to jump to a different slide without mashing your poor keyboard.<!-- --></p><h2 id="headings-and-lists" style="position:relative">Headings and Lists<!-- --><a href="#headings-and-lists" aria-label="headings and lists permalink" class="anchor after"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a></h2><p>Since reaveal.js is an HTML framework, you can let all your WebDev skills shine and use whatever tricks you&#x27;ve already gotten used to.
-If you&#x27;ve never worked with any web technologies, reveal.js is a great way of getting started.</p><p>You can use the <!-- --><code>&lt;h1&gt;</code> tag for headings, <!-- --><code>&lt;h2&gt;</code>, <!-- --><code>&lt;h3&gt;</code> and so on are subheadings and subsubheadings.
+If you&#x27;ve never worked with any web technologies, reveal.js is a great way of getting started.
+That also means that if you need a specific feature, you can google <!-- --><code>HTML numbered list</code>; these features aren&#x27;t limited to reveal.js.<!-- --></p><p>You can use the <!-- --><code>&lt;h1&gt;</code> tag for headings, <!-- --><code>&lt;h2&gt;</code>, <!-- --><code>&lt;h3&gt;</code> and so on are subheadings and subsubheadings.
 Lists can be created with the <!-- --><code>&lt;ul&gt;</code> and <!-- --><code>&lt;li&gt;</code> tags as shown below.<!-- --></p><pre><code class="language-html">&lt;section&gt;
-    &lt;section&gt;
-        &lt;h1&gt;This is a heading&lt;/h1&gt;
-    &lt;/section&gt;
-    &lt;section&gt;
-        &lt;h2&gt;This is a subheading&lt;/h2&gt;
-    &lt;/section&gt;
-    &lt;section&gt;
-        &lt;ul&gt;
-            &lt;li&gt;First Element&lt;/li&gt;
-            &lt;li&gt;Second Element&lt;/li&gt;
-        &lt;/ul&gt;
-    &lt;/section&gt;
+    &lt;h1&gt;This is a heading&lt;/h1&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+    &lt;h2&gt;This is a subheading&lt;/h2&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+    &lt;ul&gt;
+        &lt;li&gt;First Element&lt;/li&gt;
+        &lt;li&gt;Second Element&lt;/li&gt;
+    &lt;/ul&gt;
 &lt;/section&gt;
 </code></pre><div><div class="half_element-module--full_element--XvIyH"><div class="iframe-module--wrapper--Uwu0s"><iframe class="iframe-module--iframe--29vU7" src="https://dev.present.chris-besch.com/2022_05_21_reveal_example/#/4" allowfullscreen=""></iframe></div></div><div class="utils-module--spacer--VOmJs"></div></div><h2 id="quotes" style="position:relative">Quotes<!-- --><a href="#quotes" aria-label="quotes permalink" class="anchor after"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a></h2><pre><code class="language-html">&lt;blockquote&gt;
     &quot;Single thread performance [increase] stopped, because we were starting to fry eggs on the chips [...].&quot;
     &lt;br /&gt;
     &lt;span style=&quot;float: right;&quot;&gt;—Bjarne Stroustrup&lt;/span&gt;
 &lt;/blockquote&gt;
-</code></pre><div><div class="half_element-module--full_element--XvIyH"><div class="iframe-module--wrapper--Uwu0s"><iframe class="iframe-module--iframe--29vU7" src="https://dev.present.chris-besch.com/2022_05_21_reveal_example/#/6" allowfullscreen=""></iframe></div></div><div class="utils-module--spacer--VOmJs"></div></div><h2 id="animations" style="position:relative">Animations<!-- --><a href="#animations" aria-label="animations permalink" class="anchor after"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a></h2><p>There are two main ways of animating elements:</p><ul><li><strong>Auto-Animate</strong> and<!-- --></li><li><strong>Fragments</strong>.<!-- --></li></ul><h3 id="auto-animate" style="position:relative">Auto-Animate<!-- --><a href="#auto-animate" aria-label="auto animate permalink" class="anchor after"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a></h3><p>Auto-Animate work by transitioning between two similar slides.
-You can find more information in <!-- --><a href="https://revealjs.com/auto-animate">the official documentation</a>.<!-- --></p><h3 id="fragments" style="position:relative">Fragments<!-- --><a href="#fragments" aria-label="fragments permalink" class="anchor after"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a></h3><p>Fragments allo</p><h1 id="template" style="position:relative">Template<!-- --><a href="#template" aria-label="template permalink" class="anchor after"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a></h1><p>To quickly get started you can use <!-- --><a href="https://github.com/christopher-besch/presentations/blob/main/template/index.html">my template</a>.
+</code></pre><div><div class="half_element-module--full_element--XvIyH"><div class="iframe-module--wrapper--Uwu0s"><iframe class="iframe-module--iframe--29vU7" src="https://dev.present.chris-besch.com/2022_05_21_reveal_example/#/5" allowfullscreen=""></iframe></div></div><div class="utils-module--spacer--VOmJs"></div></div><h2 id="animations" style="position:relative">Animations<!-- --><a href="#animations" aria-label="animations permalink" class="anchor after"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a></h2><p>There are two main ways of animating elements:</p><ul><li><strong>Auto-Animate</strong> and<!-- --></li><li><strong>Fragments</strong>.<!-- --></li></ul><h3 id="auto-animate" style="position:relative">Auto-Animate<!-- --><a href="#auto-animate" aria-label="auto animate permalink" class="anchor after"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a></h3><p>Auto-Animate works by transitioning between two similar slides, which are denoted by the <!-- --><code>data-auto-animate</code> attribute.
+<!-- --><code>data-auto-animate-restart</code> separates different consecutive animations.
+Every element that exists in both slides should have the same <!-- --><code>data-id</code> attribute;
+then reveal.js smoothly transitions between them.
+With this you can cleanly add new or change already existent content.
+When you not only change the content of a tag but also the type of tag you use, you have to use a wrapper-div as shown in the example below.<!-- --></p><p>You can find more information in <!-- --><a href="https://revealjs.com/auto-animate">the official documentation</a>.<!-- --></p><pre><code class="language-html">&lt;!-- transitioning with same content --&gt;
+&lt;section data-auto-animate&gt;
+    &lt;h1 data-id=&quot;hello&quot;&gt;Hello&lt;/h1&gt;
+&lt;/section&gt;
+&lt;section data-auto-animate&gt;
+    &lt;h1 data-id=&quot;hello&quot;&gt;Hello&lt;/h1&gt;
+    &lt;h1&gt;World&lt;/h1&gt;
+&lt;/section&gt;
+
+&lt;!-- transitioning between different tags --&gt;
+&lt;!-- -&gt; transitioning between wrappers with different content --&gt;
+&lt;section data-auto-animate data-auto-animate-restart&gt;
+    &lt;div data-id=&quot;hello_wrapper&quot;&gt;
+        &lt;h1&gt;h1 Heading&lt;/h1&gt;
+    &lt;/div&gt;
+&lt;/section&gt;
+&lt;section data-auto-animate&gt;
+    &lt;div data-id=&quot;hello_wrapper&quot;&gt;
+        &lt;h4&gt;h4 Heading&lt;/h4&gt;
+    &lt;/div&gt;
+&lt;/section&gt;
+</code></pre><div><div class="half_element-module--full_element--XvIyH"><div class="iframe-module--wrapper--Uwu0s"><iframe class="iframe-module--iframe--29vU7" src="https://dev.present.chris-besch.com/2022_05_21_reveal_example/#/6" allowfullscreen=""></iframe></div></div><div class="utils-module--spacer--VOmJs"></div></div><h3 id="fragments" style="position:relative">Fragments<!-- --><a href="#fragments" aria-label="fragments permalink" class="anchor after"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a></h3><p>The main problem with auto-animate is code duplication:
+When you add a new tag you still need to redefine your old tags over and over again.
+Therefore I prefer fragments wherever possible.</p><p>When parts of your slide should be revealed bit by bit, assign them the <!-- --><code>fragment</code> class.
+If you need a different order in which to reveal the fragments, use the <!-- --><code>data-fragment-index</code> attribute as shown in the second example.<!-- --></p><pre><code class="language-html">&lt;section&gt;
+    &lt;ul&gt;
+        &lt;li&gt;I&lt;/li&gt;
+        &lt;li class=&quot;fragment&quot;&gt;Like&lt;/li&gt;
+        &lt;li class=&quot;fragment&quot;&gt;Cheese.&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+    &lt;ul&gt;
+        &lt;li class=&quot;fragment&quot; data-fragment-index=&quot;1&quot;&gt;I&lt;/li&gt;
+        &lt;li class=&quot;fragment&quot; data-fragment-index=&quot;2&quot;&gt;Like&lt;/li&gt;
+        &lt;li&gt;Cheese.&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/section&gt;
+</code></pre><div><div class="half_element-module--full_element--XvIyH"><div class="iframe-module--wrapper--Uwu0s"><iframe class="iframe-module--iframe--29vU7" src="https://dev.present.chris-besch.com/2022_05_21_reveal_example/#/7" allowfullscreen=""></iframe></div></div><div class="utils-module--spacer--VOmJs"></div></div><h1 id="template" style="position:relative">Template<!-- --><a href="#template" aria-label="template permalink" class="anchor after"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a></h1><p>To quickly get started you can use <!-- --><a href="https://github.com/christopher-besch/presentations/blob/main/template/index.html">my template</a>.
 I&#x27;ll keep it updated with any necessary future fixes.
+You could also take a look at <!-- --><a href="https://github.com/christopher-besch/presentations/blob/main/2022_05_21_reveal_example/index.html">the example presentation</a> I used in this article.
 Feel free to delete the copyright notice in the top;
 your presentation belongs under <!-- --><strong>your</strong> copyright, not mine.
 I&#x27;d be glad if you could give this article credit but I don&#x27;t require you to.<!-- --></p><p>The next few paragraphs explain what else you need to make a reveal.js presentation work.</p><h1 id="installing-and-compiling-like-me" style="position:relative">Installing and Compiling Like Me<!-- --><a href="#installing-and-compiling-like-me" aria-label="installing and compiling like me permalink" class="anchor after"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a></h1><p>When I went to the installation page on <!-- --><a href="https://revealjs.com">revealjs.com</a> I found the recommended method to not suit my taste in the slightest.
@@ -120,7 +165,7 @@ If you&#x27;re hosting your presentation locally, this might sound simple at fir
 But it get&#x27;s more complicated when you realize just how many typical web solutions load resources from content delivery networks (CDNs).
 These CDNs might not be reachable at all time and are a big privacy concern.
 Therefore I don&#x27;t accept anything that doesn&#x27;t get loaded from my own site.<!-- --></p><p>So I created a <!-- --><em>slightly</em> different way of using reveal.js:
-I&#x27;m using a single Git repository for all my presentations, each in their own directory.
+I&#x27;m using a single <!-- --><a href="https://github.com/christopher-besch/presentations">Git repository</a> for all my presentations, each in their own directory.
 They have access to reveal.js, my custom themes, whatever plugins I consider useful and other static resources.
 A custom build script <!-- --><code>buils.sh</code> puts everything needed for hosting all presentations in the <!-- --><code>public</code> directory.<!-- --></p><div class="utils-module--spacer--VOmJs"></div><h2 id="build-script" style="position:relative">Build Script<!-- --><a href="#build-script" aria-label="build script permalink" class="anchor after"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a></h2><p>First of all it clones reveal.js into the build directory <!-- --><code>reveal</code>, which isn&#x27;t being tracked by Git (included in <!-- --><code>.gitignore</code>).
 After which it checks out a specific version of reveal.js.<!-- --></p><pre><code class="language-bash">echo &quot;cloning reveal.js...&quot;
