@@ -39,32 +39,36 @@ On desktop you can click on the presentation and then press `F` to enter fullscr
 This presenter behaves how a PowerPoint user would expect it.
 
 The creation of such a presentation however isn't anything like PowerPoint.
-Everything that is shown is defined in an `index.html` file, the exact layout of which will be described [later on](#template).
+Everything that is shown is defined in an `index.html` file, a full example of which will be described [later on](#template).
 
 ## Slides and Vertical Slides
-You create slides with the `<section>` tag.
+You create slides inside the `<div class="slides">` environment with one `<section>` tag each.
 If you insert another `<section>` tag within this, you've created a vertical slide.
 The default transition between horizontal slides is a horizontal swipe, while vertical slides get replaced with a vertical movement.
 ```html
-<section>
-    Hello World!
-</section>
+<div class="slides">
+    ...
+    <section>
+        Hello World!
+    </section>
 
-<section>
     <section>
-        Vertical Slide 1
+        <section>
+            Vertical Slide 1
+        </section>
+        <section>
+            Vertical Slide 2
+        </section>
     </section>
-    <section>
-        Vertical Slide 2
-    </section>
-</section>
 
-<section>
     <section>
-        Only using a single vertical slide is also fine; this has the same effect as if you'd be using a
-        plain horizontal slide
+        <section>
+            Only using a single vertical slide is also fine; this has the same effect as if you'd be using a
+            plain horizontal slide
+        </section>
     </section>
-</section>
+    ...
+</div>
 ```
 <Iframe present="2022_05_21_reveal_example/#/1" fullscreen />
 
@@ -102,7 +106,6 @@ Lists can be created with the `<ul>` and `<li>` tags as shown below.
 <Iframe present="2022_05_21_reveal_example/#/4" fullscreen />
 
 ## Quotes
-
 ```html
 <blockquote>
     "Single thread performance [increase] stopped, because we were starting to fry eggs on the chips [...]."
@@ -111,6 +114,8 @@ Lists can be created with the `<ul>` and `<li>` tags as shown below.
 </blockquote>
 ```
 <Iframe present="2022_05_21_reveal_example/#/5" fullscreen />
+
+## Horizontal Partitioning
 
 ## Animations
 There are two main ways of animating elements:
@@ -176,6 +181,51 @@ If you need a different order in which to reveal the fragments, use the `data-fr
 </section>
 ```
 <Iframe present="2022_05_21_reveal_example/#/7" fullscreen />
+
+## Title Page
+At this point you might be wondering how I'm defining the left and right headers on each slide.
+They are custom and heavily inspired by [Benjamin Hackl](https://benjamin-hackl.at)'s reveal.js presentations.
+And when you're already at it, check out [Benjamin's presentations](https://benjamin-hackl.at/talks);
+they inspired me to try out reveal.js in the first place.
+
+```html
+<div class="slides">
+    <div class="header-left">
+        This is <b>reveal.js</b>
+    </div>
+    <div class="header-right">
+        <em>Chris</em> &bullet; 21<sup>st</sup> May 2022
+    </div>
+
+    <section>
+        <section data-state="titleslide" >
+            <h1>
+                This is <b>reveal.js</b>
+            </h1>
+        </section>
+
+        <section>
+            <h1>
+                A normal slide.
+            </h1>
+        </section>
+    </section>
+    ...
+```
+<Iframe present="2022_05_21_reveal_example/#/8" fullscreen />
+
+Contrary to Benjamin Hackl's version, these headers are defined within the `div class="slides">` environment, right before the first slide.
+This makes the headers scale correctly with different screen resolutions.
+The title section(s) should contain the `data-state="titleslide"` attribute;
+these slides won't show the left header.
+Now you can prettily place the title on the first slide and then move it to the top left, so that any laggards joining your audience late know which presentations they are interrupting.
+
+The source code defining the `header-left` and `header-right` classes can be found in [theme/template/custom_styles.scss](https://github.com/christopher-besch/presentations/blob/main/theme/template/custom_styles.scss)
+The build system compiling SCSS to CSS I used is described [below](#installing-and-compiling-like-me);
+but feel free to simply add this code to a `style.css` file and import it like this:
+```html
+<link rel="stylesheet" href="./style.css">
+```
 
 # Template
 To quickly get started you can use [my template](https://github.com/christopher-besch/presentations/blob/main/template/index.html).
