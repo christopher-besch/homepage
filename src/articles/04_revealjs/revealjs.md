@@ -116,6 +116,57 @@ Lists can be created with the `<ul>` and `<li>` tags as shown below.
 <Iframe present="2022_05_21_reveal_example/#/5" fullscreen />
 
 ## Horizontal Partitioning
+I use the custom class `half-part` to horizontally split the slide in two parts.
+```html
+<div class="half-part">
+    <h3>
+        The Rearing of Stones
+    </h3>
+    <ul>
+        <li>Stones only multiple in specific aqueous environments</li>
+        <ul>
+            <li>Aquarium (space to swim)</li>
+            <li>Oxygen supply (asphyxiation is no fun)</li>
+            <li>Ambient light, preferably candles (for the right multiplying-mood)</li>
+        </ul>
+    </ul>
+</div>
+
+<div class="half-part">
+    <img src="./stones.jpg">
+    <ul>
+        <li>This is no legal advice</li>
+    </ul>
+</div>
+```
+<Iframe present="2022_05_21_reveal_example/#/9" fullscreen />
+
+The source code defining the `half-part` class can be found in [theme/template/custom_styles.scss](https://github.com/christopher-besch/presentations/blob/main/theme/template/custom_styles.scss).
+The build system compiling SCSS to CSS I used is described [below](#installing-and-compiling-like-me);
+but feel free to simply add this code to a `style.css` file and import it like this:
+```html
+<link rel="stylesheet" href="./style.css">
+```
+
+## LaTeX
+There are many different ways of rendering LaTeX equations with reveal.js.
+I chose to use KaTeX, which allows me to write equation wherever I want within a `$LaTeX math environment$`.
+If you need multiple lines, use the `aligned` environment.
+
+```html
+This $F = m \cdot a$ was an inline equation.
+<br /><br />
+
+Some bigger equation:
+\[\begin{aligned}
+E &= m \cdot c^2 \\
+h \cdot f &= E
+\end{aligned}\]
+```
+<Iframe present="2022_05_21_reveal_example/#/10" fullscreen />
+
+More complex LaTeX structures, e.g. utilizing TikZ, have to be precompiled into an image with transparent background.
+This article is already nerdy enough so check out [2022_03_14_neue_formeln_messunsicherheiten/stromwaage.tex](https://github.com/christopher-besch/presentations/blob/main/2022_03_14_neue_formeln_messunsicherheiten/stromwaage.tex) if you're interested.
 
 ## Animations
 There are two main ways of animating elements:
@@ -220,20 +271,18 @@ The title section(s) should contain the `data-state="titleslide"` attribute;
 these slides won't show the left header.
 Now you can prettily place the title on the first slide and then move it to the top left, so that any laggards joining your audience late know which presentations they are interrupting.
 
-The source code defining the `header-left` and `header-right` classes can be found in [theme/template/custom_styles.scss](https://github.com/christopher-besch/presentations/blob/main/theme/template/custom_styles.scss)
-The build system compiling SCSS to CSS I used is described [below](#installing-and-compiling-like-me);
-but feel free to simply add this code to a `style.css` file and import it like this:
-```html
-<link rel="stylesheet" href="./style.css">
-```
+The source code defining the `header-left` and `header-right` classes can again be found in [theme/template/custom_styles.scss](https://github.com/christopher-besch/presentations/blob/main/theme/template/custom_styles.scss).
 
 # Template
 To quickly get started you can use [my template](https://github.com/christopher-besch/presentations/blob/main/template/index.html).
 I'll keep it updated with any necessary future fixes.
-You could also take a look at [the example presentation](https://github.com/christopher-besch/presentations/blob/main/2022_05_21_reveal_example/index.html) I used in this article.
 Feel free to delete the copyright notice in the top;
 your presentation belongs under **your** copyright, not mine.
 I'd be glad if you could give this article credit but I don't require you to.
+
+There are a few more features that didn't make it in this article.
+Take a look at [my presentations](https://present.chris-besch.com) and [their source code](https://github.com/christopher-besch/presentations) for some inspiration.
+This also includes the example presentation used in this article.
 
 The next few paragraphs explain what else you need to make a reveal.js presentation work.
 
