@@ -115,6 +115,18 @@ Lists can be created with the `<ul>` and `<li>` tags as shown below.
 ```
 <Iframe present="2022_05_21_reveal_example/#/5" fullscreen />
 
+## Code Blocks
+I'm using [highlight.js](https://highlightjs.org) for code highlighting.
+The actual code get's loaded from a separate file (`code.cpp`).
+```html
+A little bit of code
+<pre>
+    <code class="language-cpp" data-code="./code.cpp">
+    </code>
+</pre>
+```
+<Iframe present="2022_05_21_reveal_example/#/11" fullscreen />
+
 ## Horizontal Partitioning
 I use the custom class `half-part` to horizontally split the slide in two parts.
 ```html
