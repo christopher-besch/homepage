@@ -4,10 +4,10 @@ import { Link, graphql } from "gatsby";
 import Layout from "src/components/layout";
 import * as styles from "src/styles/privacy.module.scss";
 import * as util_styles from "src/styles/utils.module.scss";
-import { PrivacyData } from "./__generated__/privacy-data";
+import { PrivacyPage } from "./__generated__/privacy-page";
 
 interface PrivacyProps {
-    data: PrivacyData;
+    data: PrivacyPage;
 }
 const Privacy: React.FC<PrivacyProps> = (props) => {
     const email_name = props.data.site?.siteMetadata?.privacy_email?.name as string;
@@ -73,7 +73,7 @@ const Privacy: React.FC<PrivacyProps> = (props) => {
 export default Privacy;
 
 export const query = graphql`
-query PrivacyData {
+query PrivacyPage {
   site {
     siteMetadata {
       privacy_email {
