@@ -108,28 +108,6 @@ Lists can be created with the `<ul>` and `<li>` tags as shown below.
 ```
 <Iframe present="2022_05_21_reveal_example/#/4" fullscreen />
 
-## Quotes
-```html
-<blockquote>
-    "Single thread performance [increase] stopped, because we were starting to fry eggs on the chips [...]."
-    <br />
-    <span style="float: right;">—Bjarne Stroustrup</span>
-</blockquote>
-```
-<Iframe present="2022_05_21_reveal_example/#/5" fullscreen />
-
-## Code Blocks
-I'm using [highlight.js](https://highlightjs.org) for code highlighting.
-The actual code get's loaded from a separate file (`code.cpp`).
-```html
-A little bit of code
-<pre>
-    <code class="language-cpp" data-code="./code.cpp">
-    </code>
-</pre>
-```
-<Iframe present="2022_05_21_reveal_example/#/11" fullscreen />
-
 ## Horizontal Partitioning
 I use the custom class `half-part` to horizontally split the slide in two parts.
 ```html
@@ -154,14 +132,7 @@ I use the custom class `half-part` to horizontally split the slide in two parts.
     </ul>
 </div>
 ```
-<Iframe present="2022_05_21_reveal_example/#/9" fullscreen />
-
-The source code defining the `half-part` class can be found in [theme/template/custom_styles.scss](https://github.com/christopher-besch/presentations/blob/main/theme/template/custom_styles.scss).
-The build system compiling SCSS to CSS I used is described [below](#installing-and-compiling-like-me);
-but feel free to simply add this code to a `style.css` file and import it like this:
-```html
-<link rel="stylesheet" href="./style.css">
-```
+<Iframe present="2022_05_21_reveal_example/#/5" fullscreen />
 
 ## LaTeX
 There are many different ways of rendering LaTeX equations with reveal.js.
@@ -178,7 +149,36 @@ E &= m \cdot c^2 \\
 h \cdot f &= E
 \end{aligned}\]
 ```
-<Iframe present="2022_05_21_reveal_example/#/10" fullscreen />
+<Iframe present="2022_05_21_reveal_example/#/6" fullscreen />
+
+## Quotes
+```html
+<blockquote>
+    "Single thread performance [increase] stopped, because we were starting to fry eggs on the chips [...]."
+    <br />
+    <span style="float: right;">—Bjarne Stroustrup</span>
+</blockquote>
+```
+<Iframe present="2022_05_21_reveal_example/#/7" fullscreen />
+
+## Code Blocks
+I'm using [highlight.js](https://highlightjs.org) for code highlighting.
+The actual code get's loaded from a separate file (`code.cpp`).
+```html
+A little bit of code
+<pre>
+    <code class="language-cpp" data-code="./code.cpp">
+    </code>
+</pre>
+```
+<Iframe present="2022_05_21_reveal_example/#/8" fullscreen />
+
+The source code defining the `half-part` class can be found in [theme/template/custom_styles.scss](https://github.com/christopher-besch/presentations/blob/main/theme/template/custom_styles.scss).
+The build system compiling SCSS to CSS I used is described [below](#installing-and-compiling-like-me);
+but feel free to simply add this code to a `style.css` file and import it like this:
+```html
+<link rel="stylesheet" href="./style.css">
+```
 
 More complex LaTeX structures, e.g. utilizing TikZ, have to be precompiled into an image with transparent background.
 This article is already nerdy enough so check out [2022_03_14_neue_formeln_messunsicherheiten/stromwaage.tex](https://github.com/christopher-besch/presentations/blob/main/2022_03_14_neue_formeln_messunsicherheiten/stromwaage.tex) if you're interested.
@@ -220,7 +220,7 @@ You can find more information in [the official documentation](https://revealjs.c
     </div>
 </section>
 ```
-<Iframe present="2022_05_21_reveal_example/#/6" fullscreen />
+<Iframe present="2022_05_21_reveal_example/#/9" fullscreen />
 
 ### Fragments
 The main problem with auto-animate is code duplication:
@@ -246,7 +246,7 @@ If you need a different order in which to reveal the fragments, use the `data-fr
     </ul>
 </section>
 ```
-<Iframe present="2022_05_21_reveal_example/#/7" fullscreen />
+<Iframe present="2022_05_21_reveal_example/#/10" fullscreen />
 
 ## Title Page
 At this point you might be wondering how I'm defining the left and right headers on each slide.
@@ -271,14 +271,14 @@ they inspired me to try out reveal.js in the first place.
         </section>
 
         <section>
-            <h1>
+            <h3>
                 A normal slide.
-            </h1>
+            </h3>
         </section>
     </section>
     ...
 ```
-<Iframe present="2022_05_21_reveal_example/#/8" fullscreen />
+<Iframe present="2022_05_21_reveal_example/#/11" fullscreen />
 
 Contrary to Benjamin Hackl's version, these headers are defined within the `div class="slides">` environment, right before the first slide.
 This makes the headers scale correctly with different screen resolutions.
@@ -317,7 +317,7 @@ This is only a little sneak peek of what can be done.
     taken by an even more beautiful photographer.
 </section>
 ```
-<Iframe present="2022_05_21_reveal_example/#/13" fullscreen />
+<Iframe present="2022_05_21_reveal_example/#/12" fullscreen />
 
 # Template
 To quickly get started you can use [my template](https://github.com/christopher-besch/presentations/blob/main/template/index.html).
