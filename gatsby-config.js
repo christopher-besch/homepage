@@ -124,7 +124,7 @@ module.exports = {
             link: "https://twitter.com/besch_chris",
         },
         discord: {
-            name: "Stromel#1046",
+            name: "Chris#1046",
             link: "https://discord.com/users/455374552352948236",
         },
         source: "https://github.com/christopher-besch/homepage",

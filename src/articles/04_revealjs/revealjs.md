@@ -2,7 +2,7 @@
 type: article
 title: "Programmatic Presentations with reveal.js"
 description: "
-
+    reveal.js is an open source HTML presentation framework.
 "
 banner: /social_banner/revealjs.png
 thumb: ../../../static/social_banner/revealjs.png
