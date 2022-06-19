@@ -20,7 +20,7 @@ import resource_loading from "./resource_loading.png";
 
 reveal.js is an open source HTML presentation framework.
 It's recommended to those with a heart for programmatic approaches and web technologies.
-I used it for a couple of presentations as a PowerPoint replacement.
+I started using it, replacing PowerPoint.
 This article sums up my experiences, shows how the most important tasks can be achieved and then explains my custom method of using reveal.js.
 If you're interested in bash, it also explains the automation scripts used.
 
@@ -34,22 +34,25 @@ to-heading: 3
 <Iframe present="2022_05_21_reveal_example/" fullscreen />
 
 Use the blue arrows in the bottom right corner to jump between slides.
-If you're using a vertical mobile device, consider turning it and reading this article in landscape mode&mdash;presentations aren't made for portrait orientation.
-On desktop you can click on the presentation and then press `F` to enter fullscreen and `Esc` to exit.
+If you're using a vertical mobile device, consider turning it and reading this article in landscape mode&mdash;presentations aren't held on TikTok after all.
+To enter fullscreen you have to use a PC, click on the presentation and press `F` (`Esc` to exit).
 This presenter behaves how a PowerPoint user would expect it.
 
 The creation of such a presentation however isn't anything like PowerPoint.
-Everything that is shown is defined in an `index.html` file, a full example of which will be described [later on](#template).
+Everything that is shown is defined in an `index.html` file, the complete structure of which will be described [later on](#template).
+What follows are the individual elements forming the presentation.
 
 ## Slides and Vertical Slides
 You create slides inside the `<div class="slides">` environment with one `<section>` tag each.
 If you insert another `<section>` tag within this, you've created a vertical slide.
-The default transition between horizontal slides is a horizontal swipe, while vertical slides get replaced with a vertical movement.
+The default transition between horizontal slides is a horizontal swipe, while vertical slides swap places with a vertical movement.
+
+Here is an example, where ellipsis (`...`) indicate omitted parts:
 ```html
 <div class="slides">
     ...
     <section>
-        Hello World!
+        Horizontal Slide
     </section>
 
     <section>
@@ -63,8 +66,8 @@ The default transition between horizontal slides is a horizontal swipe, while ve
 
     <section>
         <section>
-            Only using a single vertical slide is also fine; this has the same effect as if you'd be using a
-            plain horizontal slide
+            Only using a single vertical slide is also fine;<br />
+            this has the same effect as a plain horizontal slide
         </section>
     </section>
     ...
@@ -285,6 +288,37 @@ Now you can prettily place the title on the first slide and then move it to the 
 
 The source code defining the `header-left` and `header-right` classes can again be found in [theme/template/custom_styles.scss](https://github.com/christopher-besch/presentations/blob/main/theme/template/custom_styles.scss).
 
+## Backgrounds
+
+The different options you have for backgrounds can be found in [the official documentation](https://revealjs.com/backgrounds).
+This is only a little sneak peek of what can be done.
+```html
+<section data-auto-animate>
+    <p id="more_things">There are many things reveal.js can use as backgrounds.</p>
+</section>
+
+<section data-background-video="./illusion.mp4" data-background-video-loop data-background-opacity="0.2"
+    data-auto-animate>
+    <p id="more_things">There are many things reveal.js can use as backgrounds.</p>
+    <p>
+        Like videos showing off what
+        <a href="https://github.com/Kiran-Raj-Dev">Kiran</a> can do
+        with <a href="https://www.manim.community">Manim</a>.
+    </p>
+</section>
+
+<section data-background-iframe="https://chris-besch.com" data-background-opacity="0.2">
+    Or an Iframe taking your wherever you please.<br />
+    (Click on this text to unfocus the Iframe again.)
+</section>
+
+<section data-background-image="./duck.jpg" data-background-opacity="0.3">
+    Maybe even the beautiful picture of a duck,<br />
+    taken by an even more beautiful photographer.
+</section>
+```
+<Iframe present="2022_05_21_reveal_example/#/13" fullscreen />
+
 # Template
 To quickly get started you can use [my template](https://github.com/christopher-besch/presentations/blob/main/template/index.html).
 I'll keep it updated with any necessary future fixes.
@@ -464,7 +498,7 @@ Then we wait a moment for the web server to boot up and use the `broken-link-che
 In the end the web server gets shot down to avoid any zombie processes.
 
 <!-- TODO: verify -->
-# Directory Overview
+## Directory Overview
 Comments are in parenthesis.
 ```
 .
