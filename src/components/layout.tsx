@@ -88,7 +88,6 @@ query LayoutData {
                     name="description"
                     content={title}
                 />
-                <script data-host="https://microanalytics.io" data-dnt="false" src="https://microanalytics.io/js/script.js" id="ZwSg9rf6GA" async defer></script>
             </Helmet>
             <nav className={styles.nav}>
                 <div className={styles.logo}>
