@@ -88,6 +88,22 @@ query LayoutData {
                     name="description"
                     content={title}
                 />
+
+                {/* preloading fonts */}
+                <link
+                    rel="preload"
+                    href="/fonts/LiberationSans-Regular-webfont.woff"
+                    as="font"
+                    type="font/woff"
+                    crossOrigin="anonymous"
+                />
+                <link
+                    rel="preload"
+                    href="/fonts/LiberationMono-Regular-webfont.woff"
+                    as="font"
+                    type="font/woff"
+                    crossOrigin="anonymous"
+                />
             </Helmet>
             <nav className={styles.nav}>
                 <div className={styles.logo}>
@@ -100,8 +116,8 @@ query LayoutData {
                     <ul className={styles.nav_menu}>
                         <li><Link to="/">Home</Link></li>
                         <li><Link to="/projects">Projects</Link></li>
-                        <li><Link to="/about">About</Link></li>
                         <li><Link to="/articles">Articles</Link></li>
+                        <li><Link to="/about">About</Link></li>
                     </ul>
                 </div>
             </nav >
