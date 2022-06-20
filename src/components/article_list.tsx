@@ -33,15 +33,21 @@ const ArticleList: React.FC<ArticleListProps> = (props) => {
         <div className={props.className}>
             {props.articles.map(article =>
                 <Link to={`/articles/${article.slug}`} key={article.id} className={styles.article}>
-                    <GatsbyImage className={styles.image} image={article.thumb} alt="thumbnail" />
+                    <div className={styles.image}>
+                        <GatsbyImage image={article.thumb} alt="thumbnail" />
+                    </div>
                     <div className={styles.body}>
-                        <h2 className={styles.heading}>{article.title}</h2>
-                        <hr />
                         <div>
-                            {article.description.split("\n").map((paragraph, idx) =>
-                                <p key={idx}>{paragraph}</p>
-                            )}
+                            <h2 className={styles.heading}>{article.title}</h2>
+                            <hr />
+                            <div>
+                                {article.description.split("\n").map((paragraph, idx) =>
+                                    <p key={idx}>{paragraph}</p>
+                                )}
+                            </div>
                         </div>
+
+                        <p className={styles.date}>{article.date}</p>
                     </div>
                 </Link>
             )}

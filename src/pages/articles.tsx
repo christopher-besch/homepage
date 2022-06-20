@@ -35,7 +35,7 @@ query ArticlesPage {
               gatsbyImageData(placeholder: BLURRED)
             }
           }
-          date(formatString: "MMMM YYYY")
+          date(formatString: "dddd, MMMM D, YYYY")
         }
       }
     }
