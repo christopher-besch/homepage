@@ -329,6 +329,8 @@ I'd be glad if you could give this article credit but I don't require you to.
 There are a few more features that didn't make it in this article.
 Take a look at [my presentations](https://present.chris-besch.com) and [their source code](https://github.com/christopher-besch/presentations) for some inspiration.
 This also includes the example presentation used in this article.
+You should notice that there is a light mode as well.
+Actually there are [many different themes](https://revealjs.com/themes) you can use&mdash;there never is just black and white.
 
 The next few paragraphs explain what else you need to make a reveal.js presentation work.
 
