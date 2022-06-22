@@ -170,7 +170,7 @@ This article is already nerdy enough so check out [2022_03_14_neue_formeln_messu
 ```
 <Iframe present="2022_05_21_reveal_example/#/6" fullscreen />
 
-The `<p>` tag is a simple paragraph.
+The `<p>` tag creates a paragraph and the `<br / >` a newline.
 
 ## Quotes
 ```html
