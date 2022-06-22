@@ -1,13 +1,16 @@
 ---
 type: article
-title: "Programmatic Presentations with reveal.js"
+title: "reveal.js your Presentation"
 description: "
-    reveal.js is an open source HTML presentation framework.
+    reveal.js is a PowerPoint alternative.
+    With it you programmatically define your presentation via HTML.
+
+    This article sums up my experiences, shows how the most important tasks can be achieved and then explains my custom method of using reveal.js.
 "
 banner: /social_banner/revealjs.png
 thumb: ../../../static/social_banner/revealjs.png
 slug: revealjs
-date: 2022-05-13T00:00:00+00:00
+date: 2022-06-22T00:00:00+00:00
 listed: true
 version: 0.0.1
 ---
@@ -18,9 +21,9 @@ import Iframe from "src/components/iframe";
 
 import resource_loading from "./resource_loading.png";
 
-reveal.js is an open source HTML presentation framework.
+[reveal.js](https://revealjs.com/) is an open source HTML presentation framework.
 It's recommended to those with a heart for programmatic approaches and web technologies.
-I started using it, replacing PowerPoint.
+I started using it to replace PowerPoint.
 This article sums up my experiences, shows how the most important tasks can be achieved and then explains my custom method of using reveal.js.
 If you're interested in bash, it also explains the automation scripts used.
 
@@ -76,19 +79,22 @@ Here is an example, where ellipsis (`...`) indicate omitted parts:
 <Iframe present="2022_05_21_reveal_example/#/1" fullscreen />
 
 I never use plain horizontal slides.
-Instead I use them to group multiple vertical slides into logical groups.
+Instead I use the outer `<section>` tags to group multiple vertical slides into logical units.
 When there's a horizontal swipe, the viewer knows that I start talking about a new subtopic.
 
-Press `Esc` while you're not in fullscreen.
+Press `Esc` while you're **not** in fullscreen and on PC.
 Now you see the slide overview and you should be able to make out the individual horizontal slides as columns.
 This overview serves as a quick access menu if you want to jump to a different slide without mashing your poor keyboard.
 
-## Headings and Lists
-Since reaveal.js is an HTML framework, you can let all your WebDev skills shine and use whatever tricks you've already gotten used to.
-If you've never worked with any web technologies, reveal.js is a great way of getting started.
-That also means that if you need a specific feature, you can google `HTML numbered list`; these features aren't limited to reveal.js.
+From this point on, I for simplicity won't always show the outer `<section>` tag in the code examples.
 
-You can use the `<h1>` tag for headings, `<h2>`, `<h3>` and so on are subheadings and subsubheadings.
+## Headings and Lists
+Since reaveal.js is an HTML framework, you may let all your WebDev skills shine.
+If you've never worked with any web technologies, reveal.js is a great way of getting started.
+That also means that if e.g. you need lists with numbers, you can google `HTML numbered list`;
+these features aren't limited to reveal.js.
+
+You can use the `<h1>` tag for headings; `<h2>`, `<h3>` and so on are subheadings and subsubheadings.
 Lists can be created with the `<ul>` and `<li>` tags as shown below.
 ```html
 <section>
@@ -134,22 +140,37 @@ I use the custom class `half-part` to horizontally split the slide in two parts.
 ```
 <Iframe present="2022_05_21_reveal_example/#/5" fullscreen />
 
+`half-part` class is defined in [theme/template/custom_styles.scss](https://github.com/christopher-besch/presentations/blob/main/theme/template/custom_styles.scss).
+The build system compiling SCSS to CSS I used is described [below](#installing-and-compiling-like-me).
+But feel free to simply add the code to a `style.css` file and import it like this in HTML:
+```html
+<link rel="stylesheet" href="./style.css">
+```
+
 ## LaTeX
 There are many different ways of rendering LaTeX equations with reveal.js.
-I chose to use KaTeX, which allows me to write equation wherever I want within a `$LaTeX math environment$`.
+I chose to use KaTeX, which allows me to write equations wherever I want within a `$LaTeX math environment$`.
 If you need multiple lines, use the `aligned` environment.
 
+More complex LaTeX structures, e.g. utilizing TikZ, have to be precompiled into an image with transparent background.
+This article is already nerdy enough so check out [2022_03_14_neue_formeln_messunsicherheiten/stromwaage.tex](https://github.com/christopher-besch/presentations/blob/main/2022_03_14_neue_formeln_messunsicherheiten/stromwaage.tex) if you're interested.
 ```html
-This $F = m \cdot a$ was an inline equation.
-<br /><br />
+<p>
+    This $F = m \cdot a$ was an inline equation.
+</p>
+<br />
 
-Some bigger equation:
-\[\begin{aligned}
-E &= m \cdot c^2 \\
-h \cdot f &= E
-\end{aligned}\]
+<p>
+    Some bigger equation:
+    \[\begin{aligned}
+    E &= m \cdot c^2 \\
+    h \cdot f &= E
+    \end{aligned}\]
+</p>
 ```
 <Iframe present="2022_05_21_reveal_example/#/6" fullscreen />
+
+The `<p>` tag is a simple paragraph.
 
 ## Quotes
 ```html
@@ -173,16 +194,6 @@ A little bit of code
 ```
 <Iframe present="2022_05_21_reveal_example/#/8" fullscreen />
 
-The source code defining the `half-part` class can be found in [theme/template/custom_styles.scss](https://github.com/christopher-besch/presentations/blob/main/theme/template/custom_styles.scss).
-The build system compiling SCSS to CSS I used is described [below](#installing-and-compiling-like-me);
-but feel free to simply add this code to a `style.css` file and import it like this:
-```html
-<link rel="stylesheet" href="./style.css">
-```
-
-More complex LaTeX structures, e.g. utilizing TikZ, have to be precompiled into an image with transparent background.
-This article is already nerdy enough so check out [2022_03_14_neue_formeln_messunsicherheiten/stromwaage.tex](https://github.com/christopher-besch/presentations/blob/main/2022_03_14_neue_formeln_messunsicherheiten/stromwaage.tex) if you're interested.
-
 ## Animations
 There are two main ways of animating elements:
 - **Auto-Animate** and
@@ -194,7 +205,7 @@ Auto-Animate works by transitioning between two similar slides, which are denote
 Every element that exists in both slides should have the same `data-id` attribute;
 then reveal.js smoothly transitions between them.
 With this you can cleanly add new or change already existent content.
-When you not only change the content of a tag but also the type of tag you use, you have to use a wrapper-div as shown in the example below.
+When you not only change the content of a tag but also the type of tag you use, you have to contain the changing tag in a wrapper-div as shown in the example below.
 
 You can find more information in [the official documentation](https://revealjs.com/auto-animate).
 ```html
@@ -254,6 +265,7 @@ They are custom and heavily inspired by [Benjamin Hackl](https://benjamin-hackl.
 And when you're already at it, check out [Benjamin's presentations](https://benjamin-hackl.at/talks);
 they inspired me to try out reveal.js in the first place.
 
+Take another look at the very beginning of the example presentation:
 ```html
 <div class="slides">
     <div class="header-left">
@@ -264,21 +276,30 @@ they inspired me to try out reveal.js in the first place.
     </div>
 
     <section>
-        <section data-state="titleslide" >
+        <section data-state="titleslide" data-auto-animate>
             <h1>
                 This is <b>reveal.js</b>
             </h1>
         </section>
+        <section data-state="titleslide" data-auto-animate>
+            <h1>
+                This is <b>reveal.js</b>
+            </h1>
+            <h4>
+                More precisely: <b>my</b> way of using it
+            </h4>
+        </section>
 
         <section>
-            <h3>
-                A normal slide.
-            </h3>
+            You're viewing the second slide.<br />
+            This example presentation accompanies <a href="https://chris-besch.com/articles/revealjs">the
+                article</a>.<br />
+            Feel free to take a look; each feature will be explained below.
         </section>
     </section>
     ...
 ```
-<Iframe present="2022_05_21_reveal_example/#/11" fullscreen />
+<Iframe present="2022_05_21_reveal_example/" fullscreen />
 
 Contrary to Benjamin Hackl's version, these headers are defined within the `div class="slides">` environment, right before the first slide.
 This makes the headers scale correctly with different screen resolutions.
@@ -290,7 +311,7 @@ The source code defining the `header-left` and `header-right` classes can again 
 
 ## Backgrounds
 
-The different options you have for backgrounds can be found in [the official documentation](https://revealjs.com/backgrounds).
+All the different options you have for backgrounds can be found in [the official documentation](https://revealjs.com/backgrounds).
 This is only a little sneak peek of what can be done.
 ```html
 <section data-auto-animate>
@@ -317,7 +338,7 @@ This is only a little sneak peek of what can be done.
     taken by an even more beautiful photographer.
 </section>
 ```
-<Iframe present="2022_05_21_reveal_example/#/12" fullscreen />
+<Iframe present="2022_05_21_reveal_example/#/11" fullscreen />
 
 # Template
 To quickly get started you can use [my template](https://github.com/christopher-besch/presentations/blob/main/template/index.html).
@@ -328,7 +349,8 @@ I'd be glad if you could give this article credit but I don't require you to.
 
 There are a few more features that didn't make it in this article.
 Take a look at [my presentations](https://present.chris-besch.com) and [their source code](https://github.com/christopher-besch/presentations) for some inspiration.
-This also includes the example presentation used in this article.
+This also includes the example presentation used in this very article.
+
 You should notice that there is a light mode as well.
 Actually there are [many different themes](https://revealjs.com/themes) you can use&mdash;there never is just black and white.
 
