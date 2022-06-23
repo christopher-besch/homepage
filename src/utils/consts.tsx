@@ -1,3 +1,4 @@
+// highgest priority shown on index
 export const max_priority_highlight = 0;
 // highest priority shown in project list
 export const max_priority_list_default = 6;

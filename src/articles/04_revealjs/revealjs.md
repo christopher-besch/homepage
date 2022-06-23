@@ -194,6 +194,8 @@ A little bit of code
 ```
 <Iframe present="2022_05_21_reveal_example/#/8" fullscreen />
 
+To load the required plugins take a look at [my template](https://github.com/christopher-besch/presentations/blob/main/template/index.html) and search for `highlight` and `externalcode` (for loading code from files).
+
 ## Animations
 There are two main ways of animating elements:
 - **Auto-Animate** and
@@ -366,24 +368,28 @@ the compiled reveal.js resources are independent of the individual presentations
 
 <HalfImage src={resource_loading} />
 
-Additionally my goals include high reliability&mdash;
-when I'm standing in front of an audience, my presentation **has** to work.
-A part of this is the ability to present without an active internet connection.
-If you're hosting your presentation locally, this might sound simple at first.
+Additionally I need high reliability&mdash;
+when you're standing in front of an audience, your presentation **has** to work.
+A necessity for this is the ability to present without an active internet connection.
+If you're hosting your presentation locally, this might sound simple enough.
 But it get's more complicated when you realize just how many typical web solutions load resources from content delivery networks (CDNs).
 These CDNs might not be reachable at all time and are a big privacy concern.
 Therefore I don't accept anything that doesn't get loaded from my own site.
+This mostly concerns the plugins I need.
 
 So I created a *slightly* different way of using reveal.js:
 I'm using a single [Git repository](https://github.com/christopher-besch/presentations) for all my presentations, each in their own directory.
 They have access to reveal.js, my custom themes, whatever plugins I consider useful and other static resources.
-A custom build script `buils.sh` puts everything needed for hosting all presentations in the `public` directory.
+A custom build script `buils.sh` puts everything needed for hosting the presentations in the `public` directory.
 
 <Spacer />
 
 ## Build Script
 
-First of all it clones reveal.js into the build directory `reveal`, which isn't being tracked by Git (included in `.gitignore`).
+This section explains in detail what the `build.sh` script needs to do in order for my way of using reveal.js to work.
+It is written for those who are already somewhat familiar with bash scripting and [reveal.js's build process](https://revealjs.com/installation/#full-setup).
+
+First of all it clones reveal.js into the build directory `reveal`, which isn't being tracked by Git (excluded via `.gitignore`).
 After which it checks out a specific version of reveal.js.
 ```bash
 echo "cloning reveal.js..."
@@ -400,7 +406,7 @@ cp -v ../theme/source/* ./css/theme/source
 cp -v ../theme/template/* ./css/theme/template
 ```
 
-Now the `reveal` directory contains everything required to compile reveal.js just like normal.
+Now the `reveal` directory contains everything required to compile reveal.js just like [normal](https://revealjs.com/installation/#full-setup).
 ```bash
 echo "installing yarn dependencies..."
 rm -v package-lock.json || true
@@ -421,7 +427,7 @@ echo "copying reveal output files..."
 cp -rv reveal/{dist,plugin} public
 ```
 
-This is also a good time to copy any static files, for example code highlighting themes.
+This is also a good time to copy any static files; for example code highlighting themes.
 ```bash
 echo "copying static files"
 cp -vr static public/static
@@ -455,8 +461,8 @@ popd
 ```
 
 The penultimate step is to copy the actual presentations into the `public` directory and create a table of contents `index.html`.
-Such a table of contents won't be very pretty but since I always link directly to specific presentations, it's only purpose is for debugging.
-And everyone knows that software developers don't deserve pretty interfaces.
+Such a table of contents won't be very pretty but it is enough for debugging purposes.
+Anyways, everyone knows that software developers don't deserve pretty interfaces ;)
 ```bash
 echo "copying presentations..."
 find . \
@@ -472,7 +478,7 @@ find . \
 ### Development Environment
 Because no one wants to build everything over and over when they change a small detail, a few symlinks form a convenient dev environment.
 This allows you to directly open your presentation `index.html` files as if they had already been copied into the `public` directory.
-You can even use `live-server`, which can be installed with `yarn global add live-server`, to automatically reload the page when you change your presentation.
+You can even use [live-server](https://github.com/tapio/live-server), which can be installed with `yarn global add live-server`, to automatically reload the page when you change your presentation.
 If you use VSCode, you can check out the [Live Server plugin](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer).
 ```bash
 echo "creating symlinks for development..."
@@ -483,6 +489,7 @@ ln -svf public/index.html index.html
 ```
 
 Just don't forget to compile right before publishing the `public` directory.
+Otherwise your changes wouldn't get deployed.
 
 ## Clean Script
 If you intend to undo a build or start a clean one&mdash;for example when you've changed the version of a dependency&mdash;you can use the `clean.sh` script.
@@ -517,37 +524,30 @@ python3 -m http.server 9329 > /dev/null 2>&1 & \
 ```
 This script launches a local web server and silences all output by dumping it into `/dev/null`.
 The single `&` executes this command in the background.
-Everything else is being executed in a separate process, which firstly sets the `to_kill` variable to the PID of the web server in the background.
-Then we wait a moment for the web server to boot up and use the `broken-link-checker` program, which can be installed using `yarn global add broken-link-checker`.
+Everything else is being executed in a separate process, which firstly sets the `to_kill` variable to the PID of the just-launched web server in the background.
+Then we wait a moment for the server to boot up and use the `broken-link-checker` program, which can be installed using `yarn global add broken-link-checker`.
 In the end the web server gets shot down to avoid any zombie processes.
+This is where the `to_kill` variable gets used.
 
-<!-- TODO: verify -->
 ## Directory Overview
+What follows is an entire overview of [my presentations repository](https://github.com/christopher-besch/presentations).
 Comments are in parenthesis.
 ```
 .
 ├── 2022_03_07_termbaeume (one folder for each presentation)
 │   ├── index.html
 │   ├── ...
-├── 2022_03_14_neue_formeln_messunsicherheiten
-│   ├── index.html
-│   ├── ...
-├── dist -> public/dist
+├── ...
+├── dist -> public/dist (symlinks for the dev environment)
 ├── dwn_vendor -> public/dwn_vendor
 ├── plugin -> public/plugin
 ├── public (everything to be published)
-│   ├── 2022_03_07_termbaeume
+│   ├── 2022_03_07_termbaeume (copies of all presentations)
 │   │   ├── ...
-│   ├── 2022_03_14_neue_formeln_messunsicherheiten
-│   │   ├── ...
-│   ├── dist
+│   ├── ...
+│   ├── dist (reveal output files)
 │   │   ├── theme
-│   │   ├── reset.css
-│   │   ├── reveal.css
-│   │   ├── reveal.esm.js
-│   │   ├── reveal.esm.js.map
-│   │   ├── reveal.js
-│   │   └── reveal.js.map
+│   │   ├── ...
 │   ├── dwn_vendor
 │   │   └── katex
 │   ├── plugin
@@ -556,7 +556,7 @@ Comments are in parenthesis.
 │   │   ├── ...
 │   ├── vendor
 │   │   ├── ...
-│   └── index.html
+│   └── index.html (table of contents page)
 ├── reveal (reveal.js repo)
 │   ├── ...
 ├── static (files that don't get compiled but are used by multiple presentations)
@@ -573,7 +573,14 @@ Comments are in parenthesis.
 ├── build.sh
 ├── check.sh
 ├── clean.sh
+├── ...
 └── index.html -> public/index.html
 ```
 <!-- tree --dirsfirst -L 3  | xclip -i -selection clipboard -->
+
+And with that we reach the end.
+I hope you learned something;
+if there're any questions, feel free to reach out via a channel of your liking: [Contact](/about).
+
+Have an above-average day!
 

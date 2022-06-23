@@ -75,6 +75,7 @@ const ProjectList: React.FC<ProjectListProps> = (props) => {
                         <hr />
                         <div className={styles.text}>
                             <p>{project.description}</p>
+                            {/* <p>{project.priority}</p> */}
                         </div>
                     </div>
                 </a>
