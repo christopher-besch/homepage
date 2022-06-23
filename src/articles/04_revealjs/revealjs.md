@@ -5,7 +5,7 @@ description: "
     reveal.js is a PowerPoint alternative.
     With it you programmatically define your presentation via HTML.
 
-    This article sums up my experiences, shows how the most important tasks can be achieved and then explains my custom method of using reveal.js.
+    This article shows how you can use reveal.js for your own presentation.
 "
 banner: /social_banner/revealjs.png
 thumb: ../../../static/social_banner/revealjs.png
