@@ -149,7 +149,8 @@ But feel free to simply add the code to a `style.css` file and import it like th
 
 ## LaTeX
 There are many different ways of rendering LaTeX equations with reveal.js.
-I chose to use KaTeX, which allows me to write equations wherever I want within a `$LaTeX math environment$`.
+I chose to use KaTeX, which is loaded via a plugin (check out [the template section](#template)).
+It allows me to write equations wherever I want within a `$LaTeX math environment$`.
 If you need multiple lines, use the `aligned` environment.
 
 More complex LaTeX structures, e.g. utilizing TikZ, have to be precompiled into an image with transparent background.
@@ -184,7 +185,8 @@ The `<p>` tag creates a paragraph and the `<br / >` a newline.
 
 ## Code Blocks
 I'm using [highlight.js](https://highlightjs.org) for code highlighting.
-The actual code get's loaded from a separate file (`code.cpp`).
+It can again be loaded through a plugin (see [the template section](#template) for more).
+The actual code get's loaded from a separate file (`code.cpp`) using the `external_code` plugin.
 ```html
 A little bit of code
 <pre>
@@ -193,8 +195,6 @@ A little bit of code
 </pre>
 ```
 <Iframe present="2022_05_21_reveal_example/#/8" fullscreen />
-
-To load the required plugins take a look at [my template](https://github.com/christopher-besch/presentations/blob/main/template/index.html) and search for `highlight` and `externalcode` (for loading code from files).
 
 ## Animations
 There are two main ways of animating elements:
