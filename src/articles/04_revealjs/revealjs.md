@@ -10,9 +10,9 @@ description: "
 banner: /social_banner/revealjs.png
 thumb: ../../../static/social_banner/revealjs.png
 slug: revealjs
-date: 2022-06-22T00:00:00+00:00
+date: 2022-06-24T00:00:00+00:00
 listed: true
-version: 0.0.1
+version: 1.0.0
 ---
 import AutoPlayVideo from "src/components/autoplay_video";
 import HalfImage from "src/components/half_image";
@@ -34,7 +34,7 @@ to-heading: 3
 ```
 
 # What is reveal.js?
-<Iframe present="2022_05_21_reveal_example/" fullscreen />
+<Iframe present="2022_06_24_reveal_example/" fullscreen />
 
 Use the blue arrows in the bottom right corner to jump between slides.
 If you're using a vertical mobile device, consider turning it and reading this article in landscape mode&mdash;presentations aren't held on TikTok after all.
@@ -76,7 +76,7 @@ Here is an example, where ellipsis (`...`) indicate omitted parts:
     ...
 </div>
 ```
-<Iframe present="2022_05_21_reveal_example/#/1" fullscreen />
+<Iframe present="2022_06_24_reveal_example/#/1" fullscreen />
 
 I never use plain horizontal slides.
 Instead I use the outer `<section>` tags to group multiple vertical slides into logical units.
@@ -112,7 +112,7 @@ Lists can be created with the `<ul>` and `<li>` tags as shown below.
     </ul>
 </section>
 ```
-<Iframe present="2022_05_21_reveal_example/#/4" fullscreen />
+<Iframe present="2022_06_24_reveal_example/#/4" fullscreen />
 
 ## Horizontal Partitioning
 I use the custom class `half-part` to horizontally split the slide in two parts.
@@ -138,7 +138,7 @@ I use the custom class `half-part` to horizontally split the slide in two parts.
     </ul>
 </div>
 ```
-<Iframe present="2022_05_21_reveal_example/#/5" fullscreen />
+<Iframe present="2022_06_24_reveal_example/#/5" fullscreen />
 
 `half-part` class is defined in [theme/template/custom_styles.scss](https://github.com/christopher-besch/presentations/blob/main/theme/template/custom_styles.scss).
 The build system compiling SCSS to CSS I used is described [below](#installing-and-compiling-like-me).
@@ -169,7 +169,7 @@ This article is already nerdy enough so check out [2022_03_14_neue_formeln_messu
     \end{aligned}\]
 </p>
 ```
-<Iframe present="2022_05_21_reveal_example/#/6" fullscreen />
+<Iframe present="2022_06_24_reveal_example/#/6" fullscreen />
 
 The `<p>` tag creates a paragraph and the `<br / >` a newline.
 
@@ -181,12 +181,12 @@ The `<p>` tag creates a paragraph and the `<br / >` a newline.
     <span style="float: right;">—Bjarne Stroustrup</span>
 </blockquote>
 ```
-<Iframe present="2022_05_21_reveal_example/#/7" fullscreen />
+<Iframe present="2022_06_24_reveal_example/#/7" fullscreen />
 
 ## Code Blocks
 I'm using [highlight.js](https://highlightjs.org) for code highlighting.
 It can again be loaded through a plugin (see [the template section](#template) for more).
-The actual code get's loaded from a separate file (`code.cpp`) using the `external_code` plugin.
+The actual code get's loaded from a separate file (`code.cpp`) using the [external_code](https://github.com/dafrenchyman/reveal.js-extrernal-code) plugin.
 ```html
 A little bit of code
 <pre>
@@ -194,7 +194,7 @@ A little bit of code
     </code>
 </pre>
 ```
-<Iframe present="2022_05_21_reveal_example/#/8" fullscreen />
+<Iframe present="2022_06_24_reveal_example/#/8" fullscreen />
 
 ## Animations
 There are two main ways of animating elements:
@@ -233,7 +233,7 @@ You can find more information in [the official documentation](https://revealjs.c
     </div>
 </section>
 ```
-<Iframe present="2022_05_21_reveal_example/#/9" fullscreen />
+<Iframe present="2022_06_24_reveal_example/#/9" fullscreen />
 
 ### Fragments
 The main problem with auto-animate is code duplication:
@@ -259,7 +259,7 @@ If you need a different order in which to reveal the fragments, use the `data-fr
     </ul>
 </section>
 ```
-<Iframe present="2022_05_21_reveal_example/#/10" fullscreen />
+<Iframe present="2022_06_24_reveal_example/#/10" fullscreen />
 
 ## Title Page
 At this point you might be wondering how I'm defining the left and right headers on each slide.
@@ -301,7 +301,7 @@ Take another look at the very beginning of the example presentation:
     </section>
     ...
 ```
-<Iframe present="2022_05_21_reveal_example/" fullscreen />
+<Iframe present="2022_06_24_reveal_example/" fullscreen />
 
 Contrary to Benjamin Hackl's version, these headers are defined within the `div class="slides">` environment, right before the first slide.
 This makes the headers scale correctly with different screen resolutions.
@@ -340,7 +340,7 @@ This is only a little sneak peek of what can be done.
     taken by an even more beautiful photographer.
 </section>
 ```
-<Iframe present="2022_05_21_reveal_example/#/11" fullscreen />
+<Iframe present="2022_06_24_reveal_example/#/11" fullscreen />
 
 # Template
 To quickly get started you can use [my template](https://github.com/christopher-besch/presentations/blob/main/template/index.html).
