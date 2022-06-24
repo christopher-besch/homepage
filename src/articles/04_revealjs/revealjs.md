@@ -380,7 +380,7 @@ This mostly concerns the plugins I need.
 So I created a *slightly* different way of using reveal.js:
 I'm using a single [Git repository](https://github.com/christopher-besch/presentations) for all my presentations, each in their own directory.
 They have access to reveal.js, my custom themes, whatever plugins I consider useful and other static resources.
-A custom build script `buils.sh` puts everything needed for hosting the presentations in the `public` directory.
+A custom build script `build.sh` puts everything needed for hosting the presentations in the `public` directory.
 
 <Spacer />
 
