@@ -293,7 +293,7 @@ Take another look at the very beginning of the example presentation:
         </section>
 
         <section>
-            You're viewing the second slide.<br />
+            You're viewing the third slide.<br />
             This example presentation accompanies <a href="https://chris-besch.com/articles/revealjs">the
                 article</a>.<br />
             Feel free to take a look; each feature will be explained below.
