@@ -274,7 +274,7 @@ Take another look at the very beginning of the example presentation:
         This is <b>reveal.js</b>
     </div>
     <div class="header-right">
-        <em>Chris</em> &bullet; 21<sup>st</sup> May 2022
+        <em>Chris</em> &bullet; 24<sup>th</sup> June 2022
     </div>
 
     <section>
