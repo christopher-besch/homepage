@@ -104,7 +104,6 @@ query LayoutData {
                     type="font/woff"
                     crossOrigin="anonymous"
                 />
-                <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "6b8a141684454999a13a31003eb0725c"}'></script>
             </Helmet>
             <nav className={styles.nav}>
                 <div className={styles.logo}>
