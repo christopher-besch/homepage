@@ -3657,10 +3657,10 @@ type WebPOptions = {
   readonly quality: InputMaybe<Scalars['Int']>;
 };
 
-type AboutDataQueryVariables = Exact<{ [key: string]: never; }>;
+type AboutQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type AboutDataQuery = { readonly site: { readonly siteMetadata: { readonly linkedin: { readonly name: string | null, readonly link: string | null } | null, readonly twitter: { readonly name: string | null, readonly link: string | null } | null, readonly email: { readonly name: string | null, readonly link: string | null } | null, readonly discord: { readonly name: string | null, readonly link: string | null } | null, readonly github: { readonly name: string | null, readonly link: string | null } | null } | null } | null };
+type AboutQuery = { readonly site: { readonly siteMetadata: { readonly linkedin: { readonly name: string | null, readonly link: string | null } | null, readonly twitter: { readonly name: string | null, readonly link: string | null } | null, readonly email: { readonly name: string | null, readonly link: string | null } | null, readonly discord: { readonly name: string | null, readonly link: string | null } | null, readonly github: { readonly name: string | null, readonly link: string | null } | null } | null } | null };
 
 type ArticlePageQueryVariables = Exact<{
   slug: InputMaybe<Scalars['String']>;
@@ -3669,10 +3669,10 @@ type ArticlePageQueryVariables = Exact<{
 
 type ArticlePageQuery = { readonly mdx: { readonly body: string | null, readonly frontmatter: { readonly date: string | null, readonly title: string | null, readonly description: string | null, readonly banner: string | null, readonly version: string | null } | null } | null };
 
-type ArticlesPageQueryVariables = Exact<{ [key: string]: never; }>;
+type ArticlesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type ArticlesPageQuery = { readonly allMdx: { readonly edges: ReadonlyArray<{ readonly node: { readonly id: string, readonly frontmatter: { readonly slug: string | null, readonly description: string | null, readonly title: string | null, readonly date: string | null, readonly thumb: { readonly childImageSharp: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData } | null } | null } | null } }> } };
+type ArticlesQuery = { readonly allMdx: { readonly edges: ReadonlyArray<{ readonly node: { readonly id: string, readonly frontmatter: { readonly slug: string | null, readonly description: string | null, readonly title: string | null, readonly date: string | null, readonly thumb: { readonly childImageSharp: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData } | null } | null } | null } }> } };
 
 type GatsbyImageSharpFixedFragment = { readonly base64: string | null, readonly width: number, readonly height: number, readonly src: string, readonly srcSet: string };
 
@@ -3700,32 +3700,37 @@ type GatsbyImageSharpFluid_withWebp_tracedSVGFragment = { readonly tracedSVG: st
 
 type GatsbyImageSharpFluidLimitPresentationSizeFragment = { readonly maxHeight: number, readonly maxWidth: number };
 
-type HomePageQueryVariables = Exact<{ [key: string]: never; }>;
+type HomeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type HomePageQuery = { readonly allMdx: { readonly edges: ReadonlyArray<{ readonly node: { readonly id: string, readonly frontmatter: { readonly type: string | null, readonly languages: ReadonlyArray<string | null> | null, readonly priority: number | null, readonly dependencies: ReadonlyArray<string | null> | null, readonly slug: string | null, readonly link: string | null, readonly description: string | null, readonly title: string | null, readonly date: string | null, readonly thumb: { readonly childImageSharp: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData } | null } | null } | null } }> } };
+type HomeQuery = { readonly allMdx: { readonly edges: ReadonlyArray<{ readonly node: { readonly id: string, readonly frontmatter: { readonly type: string | null, readonly languages: ReadonlyArray<string | null> | null, readonly priority: number | null, readonly dependencies: ReadonlyArray<string | null> | null, readonly slug: string | null, readonly link: string | null, readonly description: string | null, readonly title: string | null, readonly date: string | null, readonly thumb: { readonly childImageSharp: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData } | null } | null } | null } }> } };
+
+type IframeDataQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type IframeDataQuery = { readonly site: { readonly siteMetadata: { readonly present_url: string | null } | null } | null };
 
 type LayoutDataQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 type LayoutDataQuery = { readonly site: { readonly siteMetadata: { readonly source: string | null, readonly origin: string | null, readonly default_origin: string | null } | null } | null };
 
-type PrivacyPageQueryVariables = Exact<{ [key: string]: never; }>;
+type PrivacyQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type PrivacyPageQuery = { readonly site: { readonly siteMetadata: { readonly privacy_email: { readonly name: string | null, readonly link: string | null } | null } | null } | null };
+type PrivacyQuery = { readonly site: { readonly siteMetadata: { readonly privacy_email: { readonly name: string | null, readonly link: string | null } | null } | null } | null };
 
-type ProjectsLanguagePageQueryVariables = Exact<{
+type ProjectsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type ProjectsQuery = { readonly allMdx: { readonly edges: ReadonlyArray<{ readonly node: { readonly id: string, readonly frontmatter: { readonly languages: ReadonlyArray<string | null> | null, readonly priority: number | null, readonly dependencies: ReadonlyArray<string | null> | null, readonly slug: string | null, readonly link: string | null, readonly description: string | null, readonly title: string | null, readonly date: string | null, readonly thumb: { readonly childImageSharp: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData } | null } | null } | null } }> } };
+
+type ProjectsLanguageQueryVariables = Exact<{
   language: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>> | InputMaybe<Scalars['String']>>;
 }>;
 
 
-type ProjectsLanguagePageQuery = { readonly allMdx: { readonly edges: ReadonlyArray<{ readonly node: { readonly id: string, readonly frontmatter: { readonly languages: ReadonlyArray<string | null> | null, readonly priority: number | null, readonly dependencies: ReadonlyArray<string | null> | null, readonly slug: string | null, readonly link: string | null, readonly description: string | null, readonly title: string | null, readonly date: string | null, readonly thumb: { readonly childImageSharp: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData } | null } | null } | null } }> } };
-
-type ProjectsPageQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type ProjectsPageQuery = { readonly allMdx: { readonly edges: ReadonlyArray<{ readonly node: { readonly id: string, readonly frontmatter: { readonly languages: ReadonlyArray<string | null> | null, readonly priority: number | null, readonly dependencies: ReadonlyArray<string | null> | null, readonly slug: string | null, readonly link: string | null, readonly description: string | null, readonly title: string | null, readonly date: string | null, readonly thumb: { readonly childImageSharp: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData } | null } | null } | null } }> } };
+type ProjectsLanguageQuery = { readonly allMdx: { readonly edges: ReadonlyArray<{ readonly node: { readonly id: string, readonly frontmatter: { readonly languages: ReadonlyArray<string | null> | null, readonly priority: number | null, readonly dependencies: ReadonlyArray<string | null> | null, readonly slug: string | null, readonly link: string | null, readonly description: string | null, readonly title: string | null, readonly date: string | null, readonly thumb: { readonly childImageSharp: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData } | null } | null } | null } }> } };
 
 
 }

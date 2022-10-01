@@ -1,17 +1,13 @@
 import React from "react";
-import { Link, graphql } from "gatsby";
+import { Link, graphql, PageProps } from "gatsby";
 
 import Layout from "src/components/layout";
 import * as styles from "src/styles/privacy.module.scss";
 import * as util_styles from "src/styles/utils.module.scss";
-import { PrivacyPage } from "./__generated__/privacy-page";
 
-interface PrivacyProps {
-    data: PrivacyPage;
-}
-const Privacy: React.FC<PrivacyProps> = (props) => {
-    const email_name = props.data.site?.siteMetadata?.privacy_email?.name as string;
-    const email_link = props.data.site?.siteMetadata?.privacy_email?.link as string;
+const Privacy = ({ data }: PageProps<Queries.PrivacyQuery>) => {
+    const email_name = data.site?.siteMetadata?.privacy_email?.name as string;
+    const email_link = data.site?.siteMetadata?.privacy_email?.link as string;
 
     return (
         <Layout heading="Privacy Policy">
@@ -73,7 +69,7 @@ const Privacy: React.FC<PrivacyProps> = (props) => {
 export default Privacy;
 
 export const query = graphql`
-query PrivacyPage {
+query Privacy {
   site {
     siteMetadata {
       privacy_email {

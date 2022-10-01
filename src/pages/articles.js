@@ -1,19 +1,14 @@
 import React from "react";
-import { graphql, PageProps } from "gatsby";
+import { graphql } from "gatsby";
 import Layout from "src/components/layout";
 import ArticleList, { gql_to_article } from "src/components/article_list";
-
-const Articles = ({ data }: PageProps<Queries.ArticlesQuery>) => {
+const Articles = ({ data }) => {
     const articles = data.allMdx.edges.map(gql_to_article);
-    return (
-        <Layout heading="Articles">
-            <ArticleList articles={articles} />
-        </Layout >
-    );
+    return (React.createElement(Layout, { heading: "Articles" },
+        React.createElement(ArticleList, { articles: articles })));
 };
 export default Articles;
-
-export const query = graphql`
+export const query = graphql `
 query Articles {
   allMdx(
     sort: {fields: frontmatter___date, order: DESC}

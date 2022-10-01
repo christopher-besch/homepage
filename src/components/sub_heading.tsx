@@ -6,7 +6,7 @@ interface HeadingProps {
     heading: string;
     className?: string;
 }
-const SubHeading: React.FC<HeadingProps> = (props) =>
+const SubHeading = (props: HeadingProps) =>
     <div className={`${styles.sub_heading} ${props.className}`}>
         <h1>
             {props.heading}
@@ -15,3 +15,4 @@ const SubHeading: React.FC<HeadingProps> = (props) =>
     </div>
 
 export default SubHeading;
+

@@ -12,7 +12,7 @@ interface HoverIconProps {
     icon_class?: string;
     icon_mono_class?: string;
 }
-const HoverIcon: React.FC<HoverIconProps> = (props) => {
+const HoverIcon = (props: HoverIconProps) => {
     const icon = props.icon;
     const alt = props.alt ? props.alt : "icon";
     const icon_mono = props.icon_mono ? props.icon_mono : icon;

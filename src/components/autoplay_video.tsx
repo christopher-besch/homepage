@@ -12,7 +12,7 @@ interface AutoPlayVideoProps {
     // should spread entire width?
     full?: boolean;
 }
-const AutoPlayVideo: React.FC<AutoPlayVideoProps> = (props) => {
+const AutoPlayVideo = (props: AutoPlayVideoProps) => {
     return (
         <HalfElement full={props.full}>
             {props.poster ? undefined : <p className={styles.removed_warn}>[video removed from print]</p>}

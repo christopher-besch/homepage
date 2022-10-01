@@ -1,29 +1,25 @@
 import React from "react";
-import { Link, graphql } from "gatsby";
+import { Link, graphql, PageProps } from "gatsby";
 import Layout from "src/components/layout";
 import * as styles from "src/styles/about.module.scss";
 import * as util_styles from "src/styles/utils.module.scss";
-import { AboutData } from "./__generated__/about-data";
 import get_mask from "src/utils/svg_mask";
 
-interface AboutProps {
-    data: AboutData;
-}
-const About: React.FC<AboutProps> = (props) => {
-    const discord_name = props.data.site?.siteMetadata?.discord?.name as string;
-    const discord_link = props.data.site?.siteMetadata?.discord?.link as string;
+const About = ({ data }: PageProps<Queries.AboutQuery>) => {
+    const discord_name = data.site?.siteMetadata?.discord?.name as string;
+    const discord_link = data.site?.siteMetadata?.discord?.link as string;
 
-    const email_name = props.data.site?.siteMetadata?.email?.name as string;
-    const email_link = props.data.site?.siteMetadata?.email?.link as string;
+    const email_name = data.site?.siteMetadata?.email?.name as string;
+    const email_link = data.site?.siteMetadata?.email?.link as string;
 
-    const github_name = props.data.site?.siteMetadata?.github?.name as string;
-    const github_link = props.data.site?.siteMetadata?.github?.link as string;
+    const github_name = data.site?.siteMetadata?.github?.name as string;
+    const github_link = data.site?.siteMetadata?.github?.link as string;
 
-    const linkedin_name = props.data.site?.siteMetadata?.linkedin?.name as string;
-    const linkedin_link = props.data.site?.siteMetadata?.linkedin?.link as string;
+    const linkedin_name = data.site?.siteMetadata?.linkedin?.name as string;
+    const linkedin_link = data.site?.siteMetadata?.linkedin?.link as string;
 
-    const twitter_name = props.data.site?.siteMetadata?.twitter?.name as string;
-    const twitter_link = props.data.site?.siteMetadata?.twitter?.link as string;
+    const twitter_name = data.site?.siteMetadata?.twitter?.name as string;
+    const twitter_link = data.site?.siteMetadata?.twitter?.link as string;
 
     let width_properties = {
         "--full-width": "100%",
@@ -121,7 +117,7 @@ const About: React.FC<AboutProps> = (props) => {
 export default About;
 
 export const query = graphql`
-query AboutData {
+query About {
   site {
     siteMetadata {
       linkedin {

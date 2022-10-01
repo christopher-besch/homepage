@@ -1,6 +1,7 @@
 const path = require("path");
 
 module.exports = {
+    graphqlTypegen: true,
     plugins: [
         // support TypeScript
         {

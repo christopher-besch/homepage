@@ -28,7 +28,7 @@ interface ArticleListProps {
     articles: Article[];
     className?: string;
 }
-const ArticleList: React.FC<ArticleListProps> = (props) => {
+const ArticleList  = (props: ArticleListProps) => {
     return (
         <div className={props.className}>
             {props.articles.map(article =>

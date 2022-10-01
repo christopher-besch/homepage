@@ -9,7 +9,7 @@ interface HeadingProps {
     icon?: string;
     className?: string;
 }
-const Heading: React.FC<HeadingProps> = (props) =>
+const Heading = (props: HeadingProps) =>
     <div className={`${styles.heading} ${props.className}`}>
         <h1>
             {props.heading}
@@ -20,3 +20,4 @@ const Heading: React.FC<HeadingProps> = (props) =>
     </div>
 
 export default Heading;
+

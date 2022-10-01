@@ -1,25 +1,10 @@
 import React from "react";
 import { useStaticQuery, graphql } from "gatsby";
-
-import HalfElement from "src/components/half_element"
-
+import HalfElement from "src/components/half_element";
 import * as styles from "src/styles/iframe.module.scss";
-
-interface IframeProps {
-    src?: string;
-    present?: string;
-    title?: string;
-    fullscreen?: boolean;
-}
-const Iframe = (props: IframeProps) => {
+const Iframe = (props) => {
     // since Gatsby doesn't support a clean way of automatically determining these types, they have to be defined manually
-    const data: {
-        site: {
-            siteMetadata: {
-                present_url: string;
-            }
-        }
-    } = useStaticQuery(graphql`
+    const data = useStaticQuery(graphql `
 query IframeData {
   site {
     siteMetadata {
@@ -34,14 +19,8 @@ query IframeData {
     // TODO: check type
     const present_url = data.site.siteMetadata.present_url;
     const src = props.present ? `${present_url}/${props.present}` : props.src;
-    return (
-        <HalfElement full={true}>
-            <div className={styles.wrapper}>
-                <iframe className={styles.iframe} src={src} title={props.title} allowFullScreen={props.fullscreen}></iframe>
-            </div>
-        </HalfElement>
-    );
-}
-
+    return (React.createElement(HalfElement, { full: true },
+        React.createElement("div", { className: styles.wrapper },
+            React.createElement("iframe", { className: styles.iframe, src: src, title: props.title, allowFullScreen: props.fullscreen }))));
+};
 export default Iframe;
-

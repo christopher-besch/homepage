@@ -1,8 +1,9 @@
+import { PageProps } from "gatsby";
 import React from "react";
 import Layout from "src/components/layout";
 import * as styles from "src/styles/rocket.module.scss";
 
-const About: React.FC = (props) => {
+const Rocket = ({}: PageProps) => {
     return (
         <Layout heading="About">
             <div className={styles.container}>
@@ -40,4 +41,5 @@ const About: React.FC = (props) => {
         </Layout>
     );
 };
-export default About;
+export default Rocket;
+

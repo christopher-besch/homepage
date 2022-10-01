@@ -9,7 +9,7 @@ interface HalfImageProps {
     // should spread entire width?
     full?: boolean;
 }
-const HalfImage: React.FC<HalfImageProps> = (props) => {
+const HalfImage = (props: HalfImageProps) => {
     return (
         <HalfElement full={props.full}>
             <img className={styles.image} src={props.src} />

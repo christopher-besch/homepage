@@ -8,7 +8,7 @@ interface HalfElementProps {
     // should spread entire width?
     full?: boolean;
 }
-const HalfElement: React.FC<HalfElementProps> = (props) => {
+const HalfElement = (props: HalfElementProps) => {
     return (
         <div className={props.full ? undefined : styles.wrapper}>
             {props.full ? undefined : <div className={styles.before}></div>}

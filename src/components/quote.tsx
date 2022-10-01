@@ -4,7 +4,7 @@ interface QuoteProps {
     text: string;
     author: string;
 }
-const Quote: React.FC<QuoteProps> = (props) => {
+const Quote = (props: QuoteProps) => {
     return (
         <blockquote>
             <center>

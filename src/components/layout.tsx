@@ -1,14 +1,13 @@
 import { graphql, Link, useStaticQuery } from "gatsby";
 import React from "react";
-import { LayoutData } from "./__generated__/layout-data";
 import { Helmet } from "react-helmet";
+import { globalHistory } from "@reach/router";
 
-import { PropsWithLocation, with_location } from "src/utils/with_location";
 import Heading from "src/components/heading";
 import "src/styles/global.scss";
 import * as styles from "src/styles/layout.module.scss";
 
-interface LayoutProps extends PropsWithLocation {
+interface LayoutProps {
     children?: React.ReactNode;
     heading?: string;
     sub_heading?: string;
@@ -16,8 +15,16 @@ interface LayoutProps extends PropsWithLocation {
     description?: string;
     banner?: string;
 }
-const Layout: React.FC<LayoutProps> = (props) => {
-    const data: LayoutData = useStaticQuery(graphql`
+const Layout = (props: LayoutProps) => {
+    const data: {
+        site: {
+            siteMetadata: {
+                source: string;
+                origin: string;
+                default_origin: string;
+            }
+        }
+    } = useStaticQuery(graphql`
 query LayoutData {
   site {
     siteMetadata {
@@ -28,14 +35,14 @@ query LayoutData {
   }
 }
     `);
-    const source = data.site?.siteMetadata?.source as string;
+    const source = data.site.siteMetadata.source as string;
     const title = props.heading ? `${props.heading}—Christopher Besch` : "Christopher Besch—Software Developer";
     const description = props.description;
 
-    const url = props.location.href;
-    const origin = data.site?.siteMetadata?.origin;
-    const deploy_origin = data.site?.siteMetadata?.default_origin as string;
-    const path = props.location.pathname;
+    const url = globalHistory.location.href;
+    const origin = data.site.siteMetadata.origin;
+    const deploy_origin = data.site.siteMetadata.default_origin as string;
+    const path = globalHistory.location.pathname;
     // replace origin with default one
     const canonical_url = `${deploy_origin}${path}`;
 
@@ -139,4 +146,5 @@ query LayoutData {
         </div>
     );
 }
-export default with_location(Layout);
+export default Layout;
+
