@@ -1,19 +1,20 @@
 import React from "react";
-import { Link, graphql, PageProps } from "gatsby";
+import { Link, graphql } from "gatsby";
 
 import Layout from "src/components/layout";
 import ProjectList, { gql_to_project } from "src/components/project_list";
 import * as util_styles from "src/styles/utils.module.scss";
 import { languages } from "src/utils/languages";
+import { with_location, PropsWithLocation } from "src/utils/with_location";
 import { max_priority_language_default, max_priority_language_all } from "src/utils/consts";
 
-interface ProjectsLanguageProps extends PageProps<Queries.ProjectsLanguageQuery> {
+interface ProjectsLanguageProps extends PropsWithLocation{
+    data: Queries.ProjectsLanguageQuery;
     // TODO: better type
     pageContext: Record<string, any>;
 }
-const ProjectsLanguage  = ({ data, pageContext, location }: ProjectsLanguageProps) => {
-    const max_priority_raw = new URL(location.href).searchParams.get("max_priority");
-    const max_priority = max_priority_raw != null ? parseInt(max_priority_raw) : max_priority_language_default;
+const ProjectsLanguage = ({ data, pageContext, search }: ProjectsLanguageProps) => {
+    const max_priority = search.max_priority != null ? parseInt(search.max_priority as string) : max_priority_language_default;
 
     const all_projects = data.allMdx.edges.map(gql_to_project);
     const projects = all_projects.filter(project => project.priority <= max_priority);
@@ -27,7 +28,7 @@ const ProjectsLanguage  = ({ data, pageContext, location }: ProjectsLanguageProp
             {max_priority < max_priority_language_all ? <Link className={`${util_styles.block} ${util_styles.link}`} to={`/projects/${selected_language.id}?max_priority=${max_priority_language_all}`}>Show All</Link> : undefined}
         </Layout >);
 };
-export default ProjectsLanguage;
+export default with_location(ProjectsLanguage);
 
 export const query = graphql`
 query ProjectsLanguage($language: [String]) {
