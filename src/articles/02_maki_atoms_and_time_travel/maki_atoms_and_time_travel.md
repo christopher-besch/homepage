@@ -31,12 +31,10 @@ import time_travel from "./07_time_travel.mp4";
 import fly_around_01 from "./fly_around_01.mp4";
 import fly_around_02 from "./fly_around_02.mp4";
 
-<!-- problem -->
 To create animations for technical concepts, one is advised to use graphics software with a programmatic approach.
 While these provide the required precision, they suffer from an inherent disconnect between input and output.
 WYSIWYG programs avoid this detachment with interactivity at the cost of precision.
 
-<!-- purpose and methods -->
 The purpose of this article is to outline how a program for interactive and programmatic animation development can be implemented.
 To experiment with different technologies and programming paradigms, I created a developmental implementation called Maki.
 This article outlines Maki's design decisions and discusses planned future development.

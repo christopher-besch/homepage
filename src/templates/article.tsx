@@ -2,9 +2,19 @@ import React from "react";
 import Layout from "../components/layout";
 import * as styles from "../styles/article.module.scss";
 import * as markdown_styles from "../styles/markdown.module.scss";
-import { graphql, PageProps } from "gatsby";
+import { graphql } from "gatsby";
+import { MDXProvider } from "@mdx-js/react"
 
-const Project = ({ data, children }: PageProps<Queries.ArticlePageQuery>) => {
+const shortcodes = {
+    // TODO: remoe test
+    Layout
+};
+
+interface ArticleProps {
+    data: Queries.ArticleQuery;
+    children?: React.ReactNode;
+}
+const Article = ({ data, children }: ArticleProps) => {
     const version = data.mdx?.frontmatter?.version as string;
     const title = data.mdx?.frontmatter?.title as string;
     const sub_heading = /^0\./.test(version) ? `Draft v${version}` : undefined;
@@ -20,16 +30,18 @@ const Project = ({ data, children }: PageProps<Queries.ArticlePageQuery>) => {
                 <span className={styles.author}>Written by Christopher Besch, published on </span>{date}
             </div>
             <div className={markdown_styles.markdown_body}>
-                {children}
+                <MDXProvider components={shortcodes}>
+                    {children}
+                </MDXProvider>
             </div>
         </Layout>
     );
 }
-export default Project;
+export default Article;
 
 export const query = graphql`
-query ArticlePage($slug: String) {
-  mdx(frontmatter: {slug: {eq: $slug}, type: {eq: "article"}}) {
+query Article($id: String!) {
+  mdx(id: { eq: $id }) {
     body
     frontmatter {
       date(formatString: "dddd, MMMM D, YYYY")
@@ -41,3 +53,4 @@ query ArticlePage($slug: String) {
   }
 }
 `;
+

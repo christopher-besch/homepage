@@ -375,9 +375,9 @@ Sometimes you just have to endure some pain to reach heaven.
 
 Thanks for sticking around and I wish you a splendid day!
 
-<!-- # Still Unsolved Problems -->
-<!-- - xfce-extra/xfce4-pulseaudio-plugin doesn't work -->
-<!-- - xfce-extra/xfce4-netload-plugin doesn't work -->
-<!-- - fstab doesn't mount smb drives on boot -->
-<!-- - getsby develop not working -->
+{ /* # Still Unsolved Problems */ }
+{ /* - xfce-extra/xfce4-pulseaudio-plugin doesn't work */ }
+{ /* - xfce-extra/xfce4-netload-plugin doesn't work */ }
+{ /* - fstab doesn't mount smb drives on boot */ }
+{ /* - getsby develop not working */ }
 

@@ -3662,12 +3662,12 @@ type AboutQueryVariables = Exact<{ [key: string]: never; }>;
 
 type AboutQuery = { readonly site: { readonly siteMetadata: { readonly linkedin: { readonly name: string | null, readonly link: string | null } | null, readonly twitter: { readonly name: string | null, readonly link: string | null } | null, readonly email: { readonly name: string | null, readonly link: string | null } | null, readonly discord: { readonly name: string | null, readonly link: string | null } | null, readonly github: { readonly name: string | null, readonly link: string | null } | null } | null } | null };
 
-type ArticlePageQueryVariables = Exact<{
-  slug: InputMaybe<Scalars['String']>;
+type ArticleQueryVariables = Exact<{
+  id: Scalars['String'];
 }>;
 
 
-type ArticlePageQuery = { readonly mdx: { readonly body: string | null, readonly frontmatter: { readonly date: string | null, readonly title: string | null, readonly description: string | null, readonly banner: string | null, readonly version: string | null } | null } | null };
+type ArticleQuery = { readonly mdx: { readonly body: string | null, readonly frontmatter: { readonly date: string | null, readonly title: string | null, readonly description: string | null, readonly banner: string | null, readonly version: string | null } | null } | null };
 
 type ArticlesQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -3731,6 +3731,11 @@ type ProjectsLanguageQueryVariables = Exact<{
 
 
 type ProjectsLanguageQuery = { readonly allMdx: { readonly edges: ReadonlyArray<{ readonly node: { readonly id: string, readonly frontmatter: { readonly languages: ReadonlyArray<string | null> | null, readonly priority: number | null, readonly dependencies: ReadonlyArray<string | null> | null, readonly slug: string | null, readonly link: string | null, readonly description: string | null, readonly title: string | null, readonly date: string | null, readonly thumb: { readonly childImageSharp: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData } | null } | null } | null } }> } };
+
+type GatsbyNodeQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type GatsbyNodeQuery = { readonly allMdx: { readonly nodes: ReadonlyArray<{ readonly id: string, readonly frontmatter: { readonly slug: string | null } | null, readonly internal: { readonly contentFilePath: string | null } }> } };
 
 
 }

@@ -576,7 +576,7 @@ Comments are in parenthesis.
 ├── ...
 └── index.html -> public/index.html
 ```
-<!-- tree --dirsfirst -L 3  | xclip -i -selection clipboard -->
+{/* tree --dirsfirst -L 3  | xclip -i -selection clipboard */}
 
 And with that we reach the end.
 I hope you learned something;
