@@ -12,10 +12,6 @@ date: 2022-04-26T00:00:00+00:00
 listed: true
 version: 1.2.1
 ---
-import AutoPlayVideo from "src/components/autoplay_video";
-import HalfImage from "src/components/half_image";
-import Spacer from "src/components/spacer";
-
 import cpu_usage from "./cpu_usage.png";
 import pavucontrol from "./pavucontrol.png";
 import xfce_system_defaults_keyboard_layout from "./xfce_system_defaults_keyboard_layout.png";

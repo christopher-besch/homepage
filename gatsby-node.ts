@@ -2,7 +2,7 @@ const path = require("path");
 
 // TODO: fix types
 exports.createPages = async ({ graphql, actions }: any) => {
-    const { data }: Queries.GatsbyNodeQuery = await graphql(`
+    const { data }: { data: Queries.GatsbyNodeQuery } = await graphql(`
 query GatsbyNode {
   allMdx(filter: {frontmatter: {type: {eq: "article"}}}) {
     nodes {

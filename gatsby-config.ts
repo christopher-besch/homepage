@@ -50,31 +50,31 @@ const config: GatsbyConfig = {
             resolve: "gatsby-plugin-mdx",
             options: {
                 extensions: [".md", ".mdx"],
-                // gatsbyRemarkPlugins: [
-                //     {
-                //         // load images from markdown
-                //         // TODO: remove, not actually needed
-                //         resolve: "gatsby-remark-images",
-                //         options: {
-                //             maxWidth: 8000,
-                //         },
-                //     },
-                //     {
-                //         resolve: "gatsby-remark-autolink-headers",
-                //         options: {
-                //             isIconAfterHeader: false,
-                //         },
-                //     },
-                //     {
-                //         resolve: "gatsby-remark-table-of-contents",
-                //         options: {
-                //             tight: true,
-                //             ordered: false,
-                //             fromHeading: 1,
-                //             toHeading: 2,
-                //         },
-                //     },
-                // ]
+                gatsbyRemarkPlugins: [
+                    {
+                        // load images from markdown
+                        // TODO: remove, not actually needed
+                        resolve: "gatsby-remark-images",
+                        options: {
+                            maxWidth: 8000,
+                        },
+                    },
+                    {
+                        resolve: "gatsby-remark-autolink-headers",
+                        options: {
+                            isIconAfterHeader: false,
+                        },
+                    },
+                    {
+                        resolve: "gatsby-remark-table-of-contents",
+                        options: {
+                            tight: true,
+                            ordered: false,
+                            fromHeading: 1,
+                            toHeading: 2,
+                        },
+                    },
+                ]
             },
         },
         // load files from a dir

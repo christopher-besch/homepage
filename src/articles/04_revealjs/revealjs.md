@@ -14,11 +14,6 @@ date: 2022-06-24T00:00:00+00:00
 listed: true
 version: 1.0.0
 ---
-import AutoPlayVideo from "src/components/autoplay_video";
-import HalfImage from "src/components/half_image";
-import Spacer from "src/components/spacer";
-import Iframe from "src/components/iframe";
-
 import resource_loading from "./resource_loading.png";
 
 [reveal.js](https://revealjs.com/) is an open source HTML presentation framework.

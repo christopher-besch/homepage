@@ -5,9 +5,22 @@ import * as markdown_styles from "../styles/markdown.module.scss";
 import { graphql } from "gatsby";
 import { MDXProvider } from "@mdx-js/react"
 
+import AutoPlayVideo from "src/components/autoplay_video";
+import HalfImage from "src/components/half_image";
+import Spacer from "src/components/spacer";
+import Quote from "src/components/quote";
+import Iframe from "src/components/iframe";
+import CompareView from "compare_view";
+import pre from "src/components/code";
+
 const shortcodes = {
-    // TODO: remoe test
-    Layout
+    AutoPlayVideo,
+    HalfImage,
+    Spacer,
+    Quote,
+    Iframe,
+    CompareView,
+    pre,
 };
 
 interface ArticleProps {

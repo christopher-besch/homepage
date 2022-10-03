@@ -13,10 +13,6 @@ date: 2022-02-06T00:00:00+00:00
 listed: true
 version: 1.0.2
 ---
-import AutoPlayVideo from "src/components/autoplay_video";
-import Spacer from "src/components/spacer";
-import Quote from "src/components/quote";
-
 import full_showcase_01 from "./full_showcase_01.mp4";
 import full_showcase_01_poster from "./full_showcase_01_poster.png";
 

@@ -30,3 +30,4 @@ const AutoPlayVideo = (props: AutoPlayVideoProps) => {
 }
 
 export default AutoPlayVideo;
+
