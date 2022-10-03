@@ -35,13 +35,12 @@ query GatsbyNode {
         actions.createPage({
             path: `articles/${node.frontmatter.slug}`,
 
-            // this doesn't render the layout
+            // only render markdown body
             // component: node.internal.contentFilePath,
 
-            // this doesn't render the markdown body
+            // only render layout
             // component: `${article_template}`,
 
-            // this doesn't work
             component: `${article_template}?__contentFilePath=${node.internal.contentFilePath}`,
 
             context: {
