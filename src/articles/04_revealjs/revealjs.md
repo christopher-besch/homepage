@@ -22,12 +22,6 @@ I started using it to replace PowerPoint.
 This article sums up my experiences, shows how the most important tasks can be achieved and then explains my custom method of using reveal.js.
 If you're interested in bash, it also explains the automation scripts used.
 
-### Table of Contents
-```toc
-exclude: Table of Contents
-to-heading: 3
-```
-
 # What is reveal.js?
 <Iframe present="2022_06_24_reveal_example/" fullscreen />
 

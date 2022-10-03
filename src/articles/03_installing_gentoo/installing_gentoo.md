@@ -39,12 +39,6 @@ VMs allow you to save snapshots before each step.
 Thus when you screw something up—and trust me you will—you can simply go back.
 Please don't write me any angry emails after you accidentally deleted your family photos lacking a backup ;)
 
-### Table of Contents
-```toc
-exclude: Table of Contents
-to-heading: 3
-```
-
 <Spacer />
 
 # Choices Along the Way

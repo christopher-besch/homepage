@@ -35,12 +35,7 @@ The purpose of this article is to outline how a program for interactive and prog
 To experiment with different technologies and programming paradigms, I created a developmental implementation called Maki.
 This article outlines Maki's design decisions and discusses planned future development.
 
-### Table of Contents
 <AutoPlayVideo src={full_showcase_01} poster={full_showcase_01_poster} />
-
-```toc
-exclude: Table of Contents|Directory Overview
-```
 
 # Maki
 
