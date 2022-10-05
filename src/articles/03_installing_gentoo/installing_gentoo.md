@@ -39,6 +39,57 @@ VMs allow you to save snapshots before each step.
 Thus when you screw something up—and trust me you will—you can simply go back.
 Please don't write me any angry emails after you accidentally deleted your family photos lacking a backup ;)
 
+### Table of Contents
+{
+<ul>
+<li><a href="#choices-along-the-way">Choices Along the Way</a></li>
+<li><a href="#installing-gentoo">Installing Gentoo</a>
+<ul>
+<li><a href="#gpt-uefi-vs-mbr-legacy-bios">GPT, UEFI vs. MBR, Legacy BIOS</a>
+<ul>
+<li><a href="#fstab">fstab</a></li>
+</ul>
+</li>
+<li><a href="#systemd">systemd</a></li>
+<li><a href="#genkernel-and-grub-2">genkernel and GRUB 2</a>
+<ul>
+<li><a href="#os-prober">os-prober</a></li>
+</ul>
+</li>
+<li><a href="#interjection-installing-with-portage">Interjection: Installing with Portage</a></li>
+<li><a href="#xfce">Xfce</a>
+<ul>
+<li><a href="#sddm">SDDM</a></li>
+</ul>
+</li>
+<li><a href="#wi-fi">Wi-Fi</a></li>
+<li><a href="#programs-i-use">Programs I Use</a>
+<ul>
+<li><a href="#kitty">Kitty</a></li>
+<li><a href="#lunarvim">Lunarvim</a></li>
+<li><a href="#noisetorch">Noisetorch</a></li>
+<li><a href="#git">Git</a></li>
+<li><a href="#latex">LaTeX</a></li>
+<li><a href="#ocrmypdf">OCRmyPDF</a></li>
+<li><a href="#obs-studio">OBS Studio</a></li>
+<li><a href="#firefox">Firefox</a></li>
+<li><a href="#qemu-and-virt-manager">QEMU and Virt-manager</a></li>
+<li><a href="#nodejs">Node.js</a></li>
+</ul>
+</li>
+<li><a href="#disabling-the-pc-speaker">Disabling the PC Speaker</a></li>
+</ul>
+</li>
+<li><a href="#wrapping-up">Wrapping Up</a>
+<ul>
+<li><a href="#config-collection">Config Collection</a></li>
+<li><a href="#cheat-sheet">Cheat Sheet</a></li>
+<li><a href="#what-remains">What Remains</a></li>
+</ul>
+</li>
+</ul>
+}
+
 <Spacer />
 
 # Choices Along the Way

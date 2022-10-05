@@ -22,6 +22,44 @@ I started using it to replace PowerPoint.
 This article sums up my experiences, shows how the most important tasks can be achieved and then explains my custom method of using reveal.js.
 If you're interested in bash, it also explains the automation scripts used.
 
+### Table of Contents
+{
+<ul>
+<li><a href="#what-is-revealjs">What is reveal.js?</a>
+<ul>
+<li><a href="#slides-and-vertical-slides">Slides and Vertical Slides</a></li>
+<li><a href="#headings-and-lists">Headings and Lists</a></li>
+<li><a href="#horizontal-partitioning">Horizontal Partitioning</a></li>
+<li><a href="#latex">LaTeX</a></li>
+<li><a href="#quotes">Quotes</a></li>
+<li><a href="#code-blocks">Code Blocks</a></li>
+<li><a href="#animations">Animations</a>
+<ul>
+<li><a href="#auto-animate">Auto-Animate</a></li>
+<li><a href="#fragments">Fragments</a></li>
+</ul>
+</li>
+<li><a href="#title-page">Title Page</a></li>
+<li><a href="#backgrounds">Backgrounds</a></li>
+</ul>
+</li>
+<li><a href="#template">Template</a></li>
+<li><a href="#installing-and-compiling-like-me">Installing and Compiling Like Me</a>
+<ul>
+<li><a href="#build-script">Build Script</a>
+<ul>
+<li><a href="#plugins">Plugins</a></li>
+<li><a href="#development-environment">Development Environment</a></li>
+</ul>
+</li>
+<li><a href="#clean-script">Clean Script</a></li>
+<li><a href="#integrity-checks">Integrity Checks</a></li>
+<li><a href="#directory-overview">Directory Overview</a></li>
+</ul>
+</li>
+</ul>
+}
+
 # What is reveal.js?
 <Iframe present="2022_06_24_reveal_example/" fullscreen />
 

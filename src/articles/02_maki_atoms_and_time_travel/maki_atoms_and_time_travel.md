@@ -27,8 +27,6 @@ import time_travel from "./07_time_travel.mp4";
 import fly_around_01 from "./fly_around_01.mp4";
 import fly_around_02 from "./fly_around_02.mp4";
 
-<AutoPlayVideo src={full_showcase_01} poster={full_showcase_01_poster} />
-
 To create animations for technical concepts, one is advised to use graphics software with a programmatic approach.
 While these provide the required precision, they suffer from an inherent disconnect between input and output.
 WYSIWYG programs avoid this detachment with interactivity at the cost of precision.
@@ -37,7 +35,38 @@ The purpose of this article is to outline how a program for interactive and prog
 To experiment with different technologies and programming paradigms, I created a developmental implementation called Maki.
 This article outlines Maki's design decisions and discusses planned future development.
 
-<Spacer />
+### Table of Contents
+<AutoPlayVideo src={full_showcase_01} poster={full_showcase_01_poster} />
+
+{
+<ul>
+<li><a href="#maki">Maki</a>
+<ul>
+<li><a href="#walkthrough">Walkthrough</a></li>
+</ul>
+</li>
+<li><a href="#clear-ownership">Clear Ownership</a></li>
+<li><a href="#renderer-abstraction">Renderer Abstraction</a></li>
+<li><a href="#multi-threading">Multi Threading</a></li>
+<li><a href="#atoms">Atoms</a>
+<ul>
+<li><a href="#difference-array">Difference Array</a></li>
+<li><a href="#atom-chain">Atom Chain</a></li>
+<li><a href="#chrono-syncs">Chrono Syncs</a></li>
+</ul>
+</li>
+<li><a href="#templates">Templates</a>
+<ul>
+<li><a href="#templated-memory">Templated Memory</a></li>
+<li><a href="#rendering-atoms">Rendering Atoms</a></li>
+<li><a href="#why-templates">Why Templates?</a></li>
+</ul>
+</li>
+<li><a href="#path-of-an-atom">Path of an Atom</a></li>
+<li><a href="#conclusion-and-future-plans">Conclusion and Future Plans</a></li>
+<li><a href="#appendix">Appendix</a></li>
+</ul>
+}
 
 # Maki
 
