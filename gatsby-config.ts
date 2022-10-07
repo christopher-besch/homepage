@@ -33,6 +33,8 @@ const config: GatsbyConfig = {
         origin: process.env.DEPLOY_ORIGIN,
         // address of presentation site
         present_url: process.env.PRESENT_URL,
+        cloudflare_token: process.env.DEPLOY_ORIGIN == "https://chris-besch.com" ?
+            "df7b6d9ef2174b4d8211c493b0375719" : "6b8a141684454999a13a31003eb0725c",
     },
     graphqlTypegen: true,
     plugins: [

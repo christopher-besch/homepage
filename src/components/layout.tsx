@@ -31,6 +31,7 @@ query LayoutData {
       source
       origin
       default_origin
+      cloudflare_token
     }
   }
 }
@@ -95,6 +96,10 @@ query LayoutData {
                     name="description"
                     content={title}
                 />
+
+                {/* cloudflare analytics */}
+                <script defer src="https://static.cloudflareinsights.com/beacon.min.js"
+                    data-cf-beacon={JSON.stringify({ token: data.site.siteMetadata.cloudflare_token })}></script>
 
                 {/* preloading fonts */}
                 <link
