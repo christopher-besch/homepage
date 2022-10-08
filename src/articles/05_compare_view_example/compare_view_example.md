@@ -3,8 +3,8 @@ type: article
 title: "compare_view Example"
 description: "
 "
-banner: 
-thumb: 
+banner: none
+thumb: none
 slug: compare_view_example
 date: 2022-07-19T00:00:00+00:00
 listed: false
