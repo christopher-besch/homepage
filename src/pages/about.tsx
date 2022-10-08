@@ -36,12 +36,6 @@ const About = ({ data }: PageProps<Queries.AboutQuery>) => {
                     </h2>
 
                     <p>
-                        I'm currently one of <a href="https://www.manim.community">Manim's</a> Core Developers where I'm project lead of <a href="https://github.com/ManimCommunity/manim_editor">the Manim Editor</a>.
-                        I really enjoy working in such a diverse community of computer scientists, mathematicians, physicists, etc.<br />
-                        The different perspectives those people have never cease to delight me.
-                    </p>
-
-                    <p>
                         My primary interests lay in tinkering with
                     </p>
                     <ul>

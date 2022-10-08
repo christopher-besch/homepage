@@ -2731,6 +2731,7 @@ type SiteFieldsEnum =
   | 'pathPrefix'
   | 'polyfill'
   | 'port'
+  | 'siteMetadata.cloudflare_token'
   | 'siteMetadata.default_origin'
   | 'siteMetadata.description'
   | 'siteMetadata.discord.link'
@@ -3537,6 +3538,7 @@ type SitePluginSortInput = {
 };
 
 type SiteSiteMetadata = {
+  readonly cloudflare_token: Maybe<Scalars['String']>;
   readonly default_origin: Maybe<Scalars['String']>;
   readonly description: Maybe<Scalars['String']>;
   readonly discord: Maybe<SiteSiteMetadataDiscord>;
@@ -3572,6 +3574,7 @@ type SiteSiteMetadataEmailFilterInput = {
 };
 
 type SiteSiteMetadataFilterInput = {
+  readonly cloudflare_token: InputMaybe<StringQueryOperatorInput>;
   readonly default_origin: InputMaybe<StringQueryOperatorInput>;
   readonly description: InputMaybe<StringQueryOperatorInput>;
   readonly discord: InputMaybe<SiteSiteMetadataDiscordFilterInput>;
@@ -3703,7 +3706,7 @@ type GatsbyImageSharpFluidLimitPresentationSizeFragment = { readonly maxHeight: 
 type HomeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type HomeQuery = { readonly allMdx: { readonly edges: ReadonlyArray<{ readonly node: { readonly id: string, readonly frontmatter: { readonly type: string | null, readonly languages: ReadonlyArray<string | null> | null, readonly priority: number | null, readonly dependencies: ReadonlyArray<string | null> | null, readonly slug: string | null, readonly link: string | null, readonly description: string | null, readonly title: string | null, readonly date: string | null, readonly thumb: { readonly childImageSharp: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData } | null } | null } | null } }> } };
+type HomeQuery = { readonly articles: { readonly edges: ReadonlyArray<{ readonly node: { readonly id: string, readonly frontmatter: { readonly slug: string | null, readonly description: string | null, readonly title: string | null, readonly date: string | null, readonly thumb: { readonly childImageSharp: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData } | null } | null } | null } }> }, readonly projects: { readonly edges: ReadonlyArray<{ readonly node: { readonly id: string, readonly frontmatter: { readonly languages: ReadonlyArray<string | null> | null, readonly priority: number | null, readonly dependencies: ReadonlyArray<string | null> | null, readonly slug: string | null, readonly link: string | null, readonly description: string | null, readonly title: string | null, readonly date: string | null, readonly thumb: { readonly childImageSharp: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData } | null } | null } | null } }> } };
 
 type IframeDataQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -3713,7 +3716,7 @@ type IframeDataQuery = { readonly site: { readonly siteMetadata: { readonly pres
 type LayoutDataQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type LayoutDataQuery = { readonly site: { readonly siteMetadata: { readonly source: string | null, readonly origin: string | null, readonly default_origin: string | null } | null } | null };
+type LayoutDataQuery = { readonly site: { readonly siteMetadata: { readonly source: string | null, readonly origin: string | null, readonly default_origin: string | null, readonly cloudflare_token: string | null } | null } | null };
 
 type PrivacyQueryVariables = Exact<{ [key: string]: never; }>;
 
