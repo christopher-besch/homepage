@@ -12,10 +12,10 @@ import HoverIcon from "src/components/hover_icon";
 import { max_priority_highlight } from "src/utils/consts";
 
 const Home = ({ data }: PageProps<Queries.HomeQuery>) => {
-    const all_projects = data.allMdx.edges.filter(element => element.node.frontmatter?.type == "project").map(gql_to_project);
+    const all_projects = data.projects.edges.map(gql_to_project);
     const projects = all_projects.filter(project => project.priority <= max_priority_highlight);
 
-    const all_articles = data.allMdx.edges.filter(element => element.node.frontmatter?.type == "article").map(gql_to_article);
+    const all_articles = data.articles.edges.map(gql_to_article);
     const articles = all_articles.slice(0, 2);
 
     return (
@@ -52,15 +52,35 @@ export default Home;
 
 export const query = graphql`
 query Home {
-  allMdx(
-    sort: {fields: [frontmatter___priority,frontmatter___date], order: [ASC, DESC]},
-    filter: {frontmatter: {listed: {eq: true}}}
+  articles: allMdx(
+    sort: {fields: frontmatter___date, order: DESC}
+    filter: {frontmatter: {type: {eq: "article"}, listed: {eq: true}}}
   ) {
     edges {
       node {
         id
         frontmatter {
-          type
+          slug
+          description
+          title
+          thumb {
+            childImageSharp {
+              gatsbyImageData(placeholder: BLURRED)
+            }
+          }
+          date(formatString: "MMMM YYYY")
+        }
+      }
+    }
+  }
+  projects: allMdx(
+    sort: {fields: frontmatter___priority, order: ASC},
+    filter: {frontmatter: {type: {eq: "project"}}}
+  ) {
+    edges {
+      node {
+        id
+        frontmatter {
           languages
           priority
           dependencies
@@ -80,3 +100,4 @@ query Home {
   }
 }
 `;
+
