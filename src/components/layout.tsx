@@ -16,16 +16,8 @@ interface LayoutProps {
     banner?: string;
 }
 const Layout = (props: LayoutProps) => {
-    const data: {
-        site: {
-            siteMetadata: {
-                source: string;
-                origin: string;
-                default_origin: string;
-            }
-        }
-    } = useStaticQuery(graphql`
-query LayoutData {
+    const data: Queries.LayoutQuery = useStaticQuery(graphql`
+query Layout {
   site {
     siteMetadata {
       source
@@ -36,13 +28,13 @@ query LayoutData {
   }
 }
     `);
-    const source = data.site.siteMetadata.source as string;
+    const source = data.site?.siteMetadata?.source as string;
     const title = props.heading ? `${props.heading}—Christopher Besch` : "Christopher Besch—Software Developer";
     const description = props.description;
 
     const url = globalHistory.location.href;
-    const origin = data.site.siteMetadata.origin;
-    const deploy_origin = data.site.siteMetadata.default_origin as string;
+    const origin = data.site?.siteMetadata?.origin;
+    const deploy_origin = data.site?.siteMetadata?.default_origin as string;
     const path = globalHistory.location.pathname;
     // replace origin with default one
     const canonical_url = `${deploy_origin}${path}`;
@@ -99,7 +91,7 @@ query LayoutData {
 
                 {/* cloudflare analytics */}
                 <script defer src="https://static.cloudflareinsights.com/beacon.min.js"
-                    data-cf-beacon={JSON.stringify({ token: data.site.siteMetadata.cloudflare_token })}></script>
+                    data-cf-beacon={JSON.stringify({ token: data.site?.siteMetadata?.cloudflare_token })}></script>
 
                 {/* preloading fonts */}
                 <link

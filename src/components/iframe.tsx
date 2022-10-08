@@ -13,14 +13,8 @@ interface IframeProps {
 }
 const Iframe = (props: IframeProps) => {
     // since Gatsby doesn't support a clean way of automatically determining these types, they have to be defined manually
-    const data: {
-        site: {
-            siteMetadata: {
-                present_url: string;
-            }
-        }
-    } = useStaticQuery(graphql`
-query IframeData {
+    const data: Queries.IframeQuery = useStaticQuery(graphql`
+query Iframe {
   site {
     siteMetadata {
       present_url
@@ -32,7 +26,7 @@ query IframeData {
     if ((props.src == undefined) == (props.present == undefined))
         throw new Error("Iframe needs src or present parameter");
     // TODO: check type
-    const present_url = data.site.siteMetadata.present_url;
+    const present_url = data.site?.siteMetadata?.present_url;
     const src = props.present ? `${present_url}/${props.present}` : props.src;
     return (
         <HalfElement full={true}>
