@@ -2,7 +2,7 @@ import React from "react";
 import Layout from "../components/layout";
 import * as styles from "../styles/article.module.scss";
 import * as markdown_styles from "../styles/markdown.module.scss";
-import { graphql } from "gatsby";
+import { graphql, Link } from "gatsby";
 import { MDXProvider } from "@mdx-js/react"
 
 import AutoPlayVideo from "src/components/autoplay_video";
@@ -21,6 +21,7 @@ const shortcodes = {
     Iframe,
     CompareView,
     pre,
+    Link,
 };
 
 interface ArticleProps {
