@@ -2,6 +2,7 @@ import React from "react";
 import { Link, graphql, PageProps } from "gatsby";
 
 import Layout from "src/components/layout";
+import SEO from "src/components/seo";
 import * as styles from "src/styles/privacy.module.scss";
 import * as util_styles from "src/styles/utils.module.scss";
 
@@ -80,3 +81,7 @@ query Privacy {
   }
 }
 `;
+
+export const Head = () => (
+    <SEO />
+)

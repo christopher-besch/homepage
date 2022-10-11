@@ -1,9 +1,10 @@
 import { PageProps } from "gatsby";
 import React from "react";
 import Layout from "src/components/layout";
+import SEO from "src/components/seo";
 import * as styles from "src/styles/rocket.module.scss";
 
-const Rocket = ({}: PageProps) => {
+const Rocket = ({ }: PageProps) => {
     return (
         <Layout heading="About">
             <div className={styles.container}>
@@ -43,3 +44,6 @@ const Rocket = ({}: PageProps) => {
 };
 export default Rocket;
 
+export const Head = () => (
+    <SEO />
+)

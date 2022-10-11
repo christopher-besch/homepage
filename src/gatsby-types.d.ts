@@ -3716,7 +3716,7 @@ type IframeQuery = { readonly site: { readonly siteMetadata: { readonly present_
 type LayoutQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type LayoutQuery = { readonly site: { readonly siteMetadata: { readonly source: string | null, readonly origin: string | null, readonly default_origin: string | null, readonly cloudflare_token: string | null } | null } | null };
+type LayoutQuery = { readonly site: { readonly siteMetadata: { readonly source: string | null } | null } | null };
 
 type PrivacyQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -3734,6 +3734,11 @@ type ProjectsLanguageQueryVariables = Exact<{
 
 
 type ProjectsLanguageQuery = { readonly allMdx: { readonly edges: ReadonlyArray<{ readonly node: { readonly id: string, readonly frontmatter: { readonly languages: ReadonlyArray<string | null> | null, readonly priority: number | null, readonly dependencies: ReadonlyArray<string | null> | null, readonly slug: string | null, readonly link: string | null, readonly description: string | null, readonly title: string | null, readonly date: string | null, readonly thumb: { readonly childImageSharp: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData } | null } | null } | null } }> } };
+
+type SEOQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type SEOQuery = { readonly site: { readonly siteMetadata: { readonly origin: string | null, readonly default_origin: string | null, readonly cloudflare_token: string | null } | null } | null };
 
 type GatsbyNodeQueryVariables = Exact<{ [key: string]: never; }>;
 

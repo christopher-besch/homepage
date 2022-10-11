@@ -2,6 +2,7 @@ import React from "react";
 import { Link, graphql, PageProps } from "gatsby";
 
 import Layout from "src/components/layout";
+import SEO from "src/components/seo";
 import ProjectList, { gql_to_project } from "src/components/project_list";
 import * as util_styles from "src/styles/utils.module.scss";
 import { max_priority_list_default, max_priority_list_all } from "src/utils/consts";
@@ -54,3 +55,6 @@ query Projects {
 }
 `;
 
+export const Head = () => (
+    <SEO />
+)

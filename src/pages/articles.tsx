@@ -1,6 +1,7 @@
 import React from "react";
 import { graphql, PageProps } from "gatsby";
 import Layout from "src/components/layout";
+import SEO from "src/components/seo";
 import ArticleList, { gql_to_article } from "src/components/article_list";
 
 const Articles = ({ data }: PageProps<Queries.ArticlesQuery>) => {
@@ -38,3 +39,7 @@ query Articles {
   }
 }
 `;
+
+export const Head = () => (
+    <SEO />
+)

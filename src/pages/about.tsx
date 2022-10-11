@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, graphql, PageProps } from "gatsby";
 import Layout from "src/components/layout";
+import SEO from "src/components/seo";
 import * as styles from "src/styles/about.module.scss";
 import * as util_styles from "src/styles/utils.module.scss";
 import get_mask from "src/utils/svg_mask";
@@ -138,3 +139,7 @@ query About {
   }
 }
 `;
+
+export const Head = () => (
+    <SEO />
+)

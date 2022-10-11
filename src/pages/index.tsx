@@ -2,6 +2,7 @@ import React from "react";
 import { graphql, Link, PageProps } from "gatsby";
 
 import Layout from "src/components/layout";
+import SEO from "src/components/seo";
 import ProjectList, { gql_to_project } from "src/components/project_list";
 import ArticleList, { gql_to_article } from "src/components/article_list";
 import * as styles from "src/styles/home.module.scss";
@@ -101,3 +102,6 @@ query Home {
 }
 `;
 
+export const Head = () => (
+    <SEO />
+)
