@@ -45,11 +45,22 @@ query SEO {
                 property="og:title"
                 content={title}
             />
+            <meta
+                property="twitter:title"
+                content={title}
+            />
             {description ? <meta
                 property="og:description"
                 content={description} /> : undefined}
+            {description ? <meta
+                property="twitter:description"
+                content={description} /> : undefined}
             {banner ? <meta
                 property="og:image"
+                content={banner}
+            /> : undefined}
+            {banner ? <meta
+                property="twitter:image"
                 content={banner}
             /> : undefined}
             <meta
@@ -64,10 +75,6 @@ query SEO {
                 name="twitter:creator"
                 content="@besch_chris"
             />
-            {banner ? <meta
-                property="twitter:image:src"
-                content={banner}
-            /> : undefined}
 
             <meta
                 name="author"
