@@ -3,7 +3,6 @@ import React from "react";
 import { globalHistory } from "@reach/router";
 
 interface SEOProps {
-    icon?: string;
     heading?: string;
     description?: string;
     banner?: string;

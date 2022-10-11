@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, graphql, PageProps } from "gatsby";
+import { Link, graphql } from "gatsby";
 
 import Layout from "src/components/layout";
 import SEO from "src/components/seo";
@@ -56,5 +56,5 @@ query Projects {
 `;
 
 export const Head = () => (
-    <SEO />
-)
+    <SEO heading="Projects" />
+);

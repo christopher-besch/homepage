@@ -41,5 +41,5 @@ query Articles {
 `;
 
 export const Head = () => (
-    <SEO />
-)
+    <SEO heading="Articles" />
+);

@@ -12,6 +12,7 @@ import Quote from "src/components/quote";
 import Iframe from "src/components/iframe";
 import CompareView from "compare_view";
 import pre from "src/components/code";
+import SEO from "src/components/seo";
 
 const shortcodes = {
     AutoPlayVideo,
@@ -33,13 +34,9 @@ const Article = ({ data, children }: ArticleProps) => {
     const title = data.mdx?.frontmatter?.title as string;
     const sub_heading = /^0\./.test(version) ? `Draft v${version}` : undefined;
 
-    const description = data.mdx?.frontmatter?.description as string;
-    // TODO: combine thumb and banner frontmatter (maybe use regex)
-    const banner_raw = data.mdx?.frontmatter?.banner as string | undefined;
-    const banner = !banner_raw || banner_raw == "undefined" ? undefined : banner_raw;
     const date = data.mdx?.frontmatter?.date as string;
     return (
-        <Layout heading={title} sub_heading={sub_heading} description={description} banner={banner}>
+        <Layout heading={title} sub_heading={sub_heading}>
             <div className={styles.metadata}>
                 <span className={styles.author}>Written by Christopher Besch, published on </span>{date}
             </div>
@@ -67,4 +64,16 @@ query Article($id: String!) {
   }
 }
 `;
+
+export const Head = ({ data }: { data: Queries.ArticleQuery }) => {
+    const title = data.mdx?.frontmatter?.title as string;
+    const description = data.mdx?.frontmatter?.description as string;
+    // TODO: combine thumb and banner frontmatter (maybe use regex)
+    const banner_raw = data.mdx?.frontmatter?.banner as string | undefined;
+    const banner = !banner_raw || banner_raw == "undefined" ? undefined : banner_raw;
+
+    return (
+        <SEO heading={title} description={description} banner={banner} />
+    );
+};
 

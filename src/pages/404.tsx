@@ -21,5 +21,5 @@ const NotFound = ({ }: PageProps) =>
 export default NotFound;
 
 export const Head = () => (
-    <SEO />
-)
+    <SEO heading="404 Not Found" />
+);

@@ -104,4 +104,4 @@ query Home {
 
 export const Head = () => (
     <SEO />
-)
+);

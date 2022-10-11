@@ -45,5 +45,5 @@ const Rocket = ({ }: PageProps) => {
 export default Rocket;
 
 export const Head = () => (
-    <SEO />
-)
+    <SEO heading="About" />
+);

@@ -7,8 +7,9 @@ import * as util_styles from "src/styles/utils.module.scss";
 import { languages } from "src/utils/languages";
 import { with_location, PropsWithLocation } from "src/utils/with_location";
 import { max_priority_language_default, max_priority_language_all } from "src/utils/consts";
+import SEO from "src/components/seo";
 
-interface ProjectsLanguageProps extends PropsWithLocation{
+interface ProjectsLanguageProps extends PropsWithLocation {
     data: Queries.ProjectsLanguageQuery;
     // TODO: better type
     pageContext: Record<string, any>;
@@ -59,3 +60,7 @@ query ProjectsLanguage($language: [String]) {
   }
 }
 `;
+
+export const Head = () => (
+    <SEO heading="Projects" />
+);

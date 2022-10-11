@@ -83,5 +83,5 @@ query Privacy {
 `;
 
 export const Head = () => (
-    <SEO />
-)
+    <SEO heading="Privacy Policy" />
+);

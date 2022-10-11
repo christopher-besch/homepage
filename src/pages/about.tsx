@@ -141,5 +141,5 @@ query About {
 `;
 
 export const Head = () => (
-    <SEO />
-)
+    <SEO heading="About & Contact" />
+);
