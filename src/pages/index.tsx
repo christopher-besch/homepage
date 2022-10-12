@@ -17,19 +17,20 @@ const Home = ({ data }: PageProps<Queries.HomeQuery>) => {
     const projects = all_projects.filter(project => project.priority <= max_priority_highlight);
 
     const all_articles = data.articles.edges.map(gql_to_article);
-    const articles = all_articles.slice(0, 2);
+    const articles = all_articles.slice(0, 5);
 
     return (
         <Layout>
             <Heading heading="Hello Smart People!" sub_heading="I'm Chris." />
             <div className={styles.container}>
                 <div className={styles.first_con}>
-                    <ProjectList className={styles.projects} projects={projects} count={2} />
-                    <Link className={`${util_styles.block} ${util_styles.link}`} to="/projects">More Projects</Link>
-
-                    <SubHeading heading="Recent Articles" />
+                    {/* <SubHeading heading="Recent Articles" /> */}
                     <ArticleList className={styles.articles} articles={articles} />
                     <Link className={`${util_styles.block} ${util_styles.link}`} to="/articles">More Articles</Link>
+
+                    <SubHeading heading="Some Projects" />
+                    <ProjectList className={styles.projects} projects={projects} count={2} />
+                    <Link className={`${util_styles.block} ${util_styles.link}`} to="/projects">More Projects</Link>
                 </div>
                 <div className={styles.second_con}>
                     <div className={styles.languages}>
