@@ -25,7 +25,7 @@ Ok, let me break this down for you:
 ```bash
 find . -name '*.mp3' -printf '%p'
 ```
-get's all files ending with `.mp3` (and directories too but I didn't bother adding `-type f`).
+get's all files ending with `.mp3` (and directories too but I didn't bother adding `-type f` to exclude them).
 Then it prints something for each file (without adding newlines between the files).
 `%p` gets replaced by the file's path.
 
