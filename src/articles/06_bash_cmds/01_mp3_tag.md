@@ -7,7 +7,7 @@ Why do it properly when a Bash one-liner does it too?
 banner: /social_banner/bash_cmds.png
 thumb: ../../../static/social_banner/bash_cmds.png
 slug: bash_cmds/mp3_tag
-date: 2022-10-11T00:00:00+00:00
+date: 2022-10-12T00:00:00+00:00
 listed: true
 version: 1.0.0
 ---
