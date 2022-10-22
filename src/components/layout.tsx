@@ -26,10 +26,10 @@ query Layout {
     return (
         <div>
             <nav className={styles.nav}>
-                <div className={styles.logo}>
+                <Link className={styles.logo} to="/">
                     <h1>Christopher Besch</h1>
                     <h2>Software Developer</h2>
-                </div>
+                </Link>
                 <div>
                     <input type="checkbox" id="nav_toggle" />
                     <label htmlFor="nav_toggle" className={styles.hamburger}>&#9776;</label>

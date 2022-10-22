@@ -17,7 +17,7 @@ const Home = ({ data }: PageProps<Queries.HomeQuery>) => {
     const projects = all_projects.filter(project => project.priority <= max_priority_highlight);
 
     const all_articles = data.articles.edges.map(gql_to_article);
-    const articles = all_articles.slice(0, 3);
+    const articles = all_articles.slice(0, 4);
 
     return (
         <Layout>
