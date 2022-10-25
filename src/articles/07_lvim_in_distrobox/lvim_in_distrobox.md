@@ -8,8 +8,8 @@ This article explains how to do that with the example of installing LunarVim on 
 "
 banner: /social_banner/lvim.png
 thumb: ../../../static/social_banner/lvim.png
-slug: bash_cmds/mp3_tag
-date: 2022-10-22T00:00:00+00:00
+slug: lvim_in_distrobox
+date: 2022-10-25T00:00:00+00:00
 listed: true
 version: 1.0.0
 ---
