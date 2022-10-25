@@ -1,40 +1,48 @@
 @import "consts.scss";
 
-.container::after {
+.container {
+    display: flex;
+}
+
+
+.rocket {
+    margin: -8px;
+    display: flex;
+    justify-content: center;
+}
+.rocket_elements {
+    max-width: 800px;
+}
+
+.rocket::after {
+    /* clear floats afterwards */
     content: "";
     display: table;
     clear: both;
 }
 
-.about {
-    width: calc(100% - 600px);
+.left, .right {
+    clear: both;
+    display: inline-block;
+    background: $back_sec;
+    padding: 10px 16px;
+    margin: 8px;
+    border-radius: $border-radius;
+    max-width: 80%;
+}
+
+.left {
+    float: right;
+    /* text-align: right; */
+}
+.right {
     float: left;
-    margin-bottom: 16px;
+    /* text-align: right; */
 }
 
-.about p {
-    margin-bottom: 16px;
-    line-height: 18px;
-}
-
-.about h2 {
-    font-size: 2em;
-    line-height: 1.25;
-    margin-bottom: 16px;
-}
-
-.about ul {
-    padding-left: 30px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-.about li {
-    list-style-type: disc;
-}
 
 .contacts {
-    width: 600px;
+    width: 50%;
     float: right;
 }
 
@@ -88,11 +96,16 @@
     transition: mask-size $transition_time -webkit-mask-size $transition_time;
 }
 
-@media (max-width: 1000px) {
-    .about {
+@media (max-width: 1200px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .rocket {
         width: 100%;
     }
     .contacts {
+        margin-top: 16px;
         width: 100%;
     }
     .contact {

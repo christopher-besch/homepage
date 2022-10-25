@@ -1,20 +1,6 @@
 const path = require("path");
 const cloneDeep = require(`lodash/cloneDeep`);
 
-// TODO: remove workaround for https://github.com/gatsbyjs/gatsby/issues/36728
-exports.onCreatePage = ({ page, actions }: any) => {
-    if (page?.context?.frontmatter && !page?.context?.didCreateClone) {
-        actions.createPage({
-            ...page,
-            context: {
-                ...page.context,
-                frontmatter: cloneDeep(page.context.frontmatter),
-                didCreateClone: true,
-            },
-        });
-    }
-};
-
 // TODO: fix types
 exports.createPages = async ({ graphql, actions }: any) => {
     const { data }: { data: Queries.GatsbyNodeQuery } = await graphql(`
