@@ -6,8 +6,8 @@ You're missing that one program that isn't available in your Linux distro?
 With Distrobox, the 'Linux Subsystem for Linux', you can install it anyways.
 This article explains how to do that with the example of installing LunarVim on Red Hat.
 "
-banner: /social_banner/bash_cmds.png
-thumb: ../../../static/social_banner/bash_cmds.png
+banner: /social_banner/lvim.png
+thumb: ../../../static/social_banner/lvim.png
 slug: bash_cmds/mp3_tag
 date: 2022-10-22T00:00:00+00:00
 listed: true
