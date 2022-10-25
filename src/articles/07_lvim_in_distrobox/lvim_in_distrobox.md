@@ -31,7 +31,8 @@ Both Distrobox and Podman are part of [the Extra Packages for Enterprise Linux (
 Follow the instructions on the official page linked above to install the repo.
 Now you can install what you need:
 ```bash
-yum install podman distrobox
+yum install podman-docker
+yum install distrobox
 ```
 
 ### Creating the Container
