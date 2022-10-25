@@ -46,7 +46,7 @@ const About = ({ data }: PageProps<Queries.AboutQuery>) => {
                         <li><a href="https://github.com/ToddLinux/ToddLinux">Linux</a>.</li>
                     </ul>
                     <p>
-                        But I also work on the occasional <a href="https://addons.mozilla.org/en-US/firefox/addon/bbb-autostatus">WebDev project</a>.
+                        But I also work on the occasional <a href="https://github.com/christopher-besch/bbb_autostatus">WebDev project</a>.
                     </p>
 
                     <p>
