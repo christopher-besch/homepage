@@ -3,7 +3,7 @@ type: article
 title: "LunarVim in Distrobox"
 description: "
 You're missing that one program that isn't available in your Linux distro?
-With Distrobox, the 'Linux Subsystem for Linux', you can install it anyways.
+With Distrobox, the 'Linux Subsystem for Linux,' you can install it anyways.
 This article explains how to do that with the example of installing LunarVim on Red Hat.
 "
 banner: /social_banner/lvim.png
@@ -15,7 +15,7 @@ version: 1.0.0
 ---
 
 You're missing that one program that isn't available in your Linux distro?
-With [Distrobox](https://distrobox.privatedns.org), the 'Linux Subsystem for Linux', you can install it anyways.
+With [Distrobox](https://distrobox.privatedns.org), the 'Linux Subsystem for Linux,' you can install it anyways.
 This article explains how to do that with the example of installing [LunarVim](https://www.lunarvim.org) on Red Hat.
 
 LunarVim's dependencies aren't part of Red Hat's official repositories.
@@ -36,7 +36,7 @@ yum install distrobox
 ```
 
 ### Creating the Container
-You first have to create an Arch container using Distrobox.
+First you have to create an Arch container using Distrobox.
 Because LunarVim installs many files in the home directory, you should create such a directory specifically for your Arch container.
 Otherwise your host's home directory would get bloated.
 ```bash
