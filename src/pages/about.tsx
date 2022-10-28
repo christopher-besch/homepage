@@ -55,7 +55,7 @@ const About = ({ data }: PageProps<Queries.AboutQuery>) => {
                         <p className={styles.left}>...2, 1, zero, all engine running...</p>
                         <p className={styles.right}>
                             When it comes to taste, I prefer the Terminal over a GUI, VIM over huge IDEs, backend over frontend, C++ over Python and Linux over Windows.
-                            But those are justs that&mdash;tastes.
+                            But those are just that&mdash;tastes.
                             When it's absolutely required to work with Visual Studio Code on a frontend for Windows in HTML, I bite the bullet and do it.
                         </p>
                         <p className={styles.left}>LIFT-OFF! We have a lift-off, 32 minutes past the hour. Lift-off on Apollo 11.</p>
