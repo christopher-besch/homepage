@@ -26,7 +26,7 @@ To allow LunarVim to access your host's files, you have to mount your host's roo
 To make these mounts, starting the container and launching its programs from your host easier, Distrobox has been created.
 
 ### Installing Requirements on Host
-Distrobox required Docker or Podman (a fork of Docker that runs containers rootlessly).
+Distrobox requires Docker or Podman (a fork of Docker that runs containers rootlessly).
 Both Distrobox and Podman are part of [the Extra Packages for Enterprise Linux (EPEL)](https://docs.fedoraproject.org/en-US/epel), an official repository you can add to Red Hat.
 Follow the instructions on the official page linked above to install the repo.
 Now you can install what you need:
