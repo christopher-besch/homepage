@@ -28,7 +28,7 @@ export default with_location(Projects);
 export const query = graphql`
 query Projects {
   allMdx(
-    sort: {fields: frontmatter___priority, order: ASC},
+    sort: {frontmatter: {priority: ASC}}
     filter: {frontmatter: {type: {eq: "project"}}}
   ) {
     edges {

@@ -34,7 +34,7 @@ export default with_location(ProjectsLanguage);
 export const query = graphql`
 query ProjectsLanguage($language: [String]) {
   allMdx(
-    sort: {fields: frontmatter___priority, order: ASC}
+    sort: {frontmatter: {priority: ASC}}
     filter: {frontmatter: {type: {eq: "project"}, languages: {in: $language}}}
   ) {
     edges {

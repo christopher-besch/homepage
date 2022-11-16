@@ -17,7 +17,7 @@ export default Articles;
 export const query = graphql`
 query Articles {
   allMdx(
-    sort: {fields: frontmatter___date, order: DESC}
+    sort: {frontmatter: {date: DESC}}
     filter: {frontmatter: {type: {eq: "article"}, listed: {eq: true}}}
   ) {
     edges {

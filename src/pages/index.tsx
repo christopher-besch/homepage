@@ -55,7 +55,7 @@ export default Home;
 export const query = graphql`
 query Home {
   articles: allMdx(
-    sort: {fields: frontmatter___date, order: DESC}
+    sort: {frontmatter: {date: DESC}}
     filter: {frontmatter: {type: {eq: "article"}, listed: {eq: true}}}
   ) {
     edges {
@@ -76,7 +76,7 @@ query Home {
     }
   }
   projects: allMdx(
-    sort: {fields: frontmatter___priority, order: ASC},
+    sort: {frontmatter: {priority: ASC}}
     filter: {frontmatter: {type: {eq: "project"}}}
   ) {
     edges {
