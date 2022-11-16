@@ -1,7 +1,7 @@
 // highgest priority shown on index
 export const max_priority_highlight = 1;
 // highest priority shown in project list
-export const max_priority_list_default = 6;
+export const max_priority_list_default = 3;
 // highest priority shown in language specific project list
 export const max_priority_language_default = 30;
 // highest priority shown in project list when "show all" has been selected
