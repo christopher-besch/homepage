@@ -9,6 +9,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 19
+
       - name: Clone Repo
         uses: actions/checkout@v1
 
