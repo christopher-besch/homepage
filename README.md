@@ -5,10 +5,6 @@
 [![pages-build-deployment](https://github.com/christopher-besch/homepage/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/christopher-besch/homepage/actions/workflows/pages/pages-build-deployment)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/d4019205-7938-4358-b65b-1c6f4e20ef8f/deploy-status)](https://app.netlify.com/sites/chris-besch/deploys)
 
-Lighthouse report
-
-![image](https://user-images.githubusercontent.com/57909184/148825710-88f139c9-6c9f-4bc6-bf9f-b5906834b091.png)
-
 - [Production Deployment](https://chris-besch.com)
 - [Debug Build](https://dev.chris-besch.com)
 
