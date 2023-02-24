@@ -92,7 +92,7 @@ lvim "$@"
 ```
 Mark this file executable
 ```bash
-$ lvim chmod +x ~/lvim
+$ chmod +x ~/lvim
 ```
 and export it to be usable from your host using Distrobox (still from within your container).
 ```bash
