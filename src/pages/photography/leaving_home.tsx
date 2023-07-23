@@ -48,5 +48,5 @@ query LeavingHome {
 `;
 
 export const Head = () => (
-    <SEO heading="To Vanish" />
+    <SEO heading="Leaving Home" />
 );

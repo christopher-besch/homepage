@@ -48,5 +48,5 @@ query Transient {
 `;
 
 export const Head = () => (
-    <SEO heading="To Vanish" />
+    <SEO heading="Transient" />
 );
