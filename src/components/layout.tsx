@@ -9,6 +9,7 @@ interface LayoutProps {
     icon?: string;
     children?: React.ReactNode;
     heading?: string;
+    keep_heading_line?: boolean;
     sub_heading?: string;
 }
 const Layout = (props: LayoutProps) => {
@@ -35,15 +36,16 @@ query Layout {
                     <label htmlFor="nav_toggle" className={styles.hamburger}>&#9776;</label>
                     <ul className={styles.nav_menu}>
                         <li><Link to="/">Home</Link></li>
-                        <li><Link to="/projects">Projects</Link></li>
                         <li><Link to="/articles">Articles</Link></li>
+                        <li><Link to="/projects">Projects</Link></li>
+                        <li><Link to="/photography">Photography</Link></li>
                         <li><Link to="/about">About</Link></li>
                     </ul>
                 </div>
             </nav >
 
             <div className={styles.content}>
-                {props.heading ? <Heading heading={props.heading} icon={props.icon} sub_heading={props.sub_heading} /> : undefined}
+                {props.heading ? <Heading heading={props.heading} keep_line={props.keep_heading_line} icon={props.icon} sub_heading={props.sub_heading} /> : undefined}
                 {props.children}
             </div>
 
@@ -52,7 +54,7 @@ query Layout {
                     <li className={styles.link}><Link to="/about">Contact</Link></li>
                     <li className={styles.link}><a href={source} target="_blank">Source</a></li>
                     <li className={styles.link}><Link to="/privacy">Privacy</Link></li>
-                    <li><p>&#169; 2022</p></li>
+                    <li><p>&#169; 2023 | All rights reserved</p></li>
                     <li className={styles.emoji}><p>🔗</p></li>
                 </ul>
             </footer>

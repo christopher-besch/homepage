@@ -2,6 +2,7 @@ import React from "react";
 import Layout from "../components/layout";
 import * as styles from "../styles/article.module.scss";
 import * as markdown_styles from "../styles/markdown.module.scss";
+import * as util_styles from "src/styles/utils.module.scss";
 import { graphql, Link } from "gatsby";
 import { MDXProvider } from "@mdx-js/react"
 
@@ -45,6 +46,7 @@ const Article = ({ data, children }: ArticleProps) => {
                     {children}
                 </MDXProvider>
             </div>
+            <Link className={`${util_styles.block} ${util_styles.link}`} to="/articles">More Articles</Link>
         </Layout>
     );
 }

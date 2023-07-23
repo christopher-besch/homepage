@@ -1,0 +1,23 @@
+.photos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 64px;
+    margin-top: 48px;
+    margin-bottom: 16px;
+}
+
+.photo_wrapper {
+    background: white;
+    padding: 2%;
+}
+
+.photo {
+    max-width: 50vh;
+}
+
+.slim_photo {
+    margin-left: 8px;
+    margin-right: 8px;
+    margin-bottom: 16px;
+}

@@ -6,11 +6,12 @@ import get_mask from "src/utils/svg_mask";
 interface HeadingProps {
     heading: string;
     sub_heading?: string;
+    keep_line?: boolean;
     icon?: string;
     className?: string;
 }
 const Heading = (props: HeadingProps) =>
-    <div className={`${styles.heading} ${props.className}`}>
+    <div className={`${styles.heading} ${props.className} ${!props.keep_line ? styles.remove_line : undefined}`}>
         <h1>
             {props.heading}
             {props.icon ? <span className={styles.icon} style={get_mask(props.icon)}></span> : undefined}

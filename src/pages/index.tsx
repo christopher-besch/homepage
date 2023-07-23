@@ -1,5 +1,6 @@
 import React from "react";
 import { graphql, Link, PageProps } from "gatsby";
+import { getImage, GatsbyImage, IGatsbyImageData, ImageDataLike } from "gatsby-plugin-image";
 
 import Layout from "src/components/layout";
 import SEO from "src/components/seo";
@@ -7,6 +8,7 @@ import ProjectList, { gql_to_project } from "src/components/project_list";
 import ArticleList, { gql_to_article } from "src/components/article_list";
 import * as styles from "src/styles/home.module.scss";
 import * as util_styles from "src/styles/utils.module.scss";
+import * as photography_styles from "src/styles/photography.module.scss";
 import Heading from "src/components/heading";
 import SubHeading from "src/components/sub_heading";
 import HoverIcon from "src/components/hover_icon";
@@ -31,6 +33,11 @@ const Home = ({ data }: PageProps<Queries.HomeQuery>) => {
                     <SubHeading heading="Some Projects" />
                     <ProjectList className={styles.projects} projects={projects} count={2} />
                     <Link className={`${util_styles.block} ${util_styles.link}`} to="/projects">More Projects</Link>
+
+                    <SubHeading heading="Photography" />
+
+                    <Link to="/photography"><GatsbyImage className={photography_styles.slim_photo} image={getImage(data.photo as ImageDataLike)!} alt="alpha_mike" /></Link>
+                    <Link className={`${util_styles.block} ${util_styles.link}`} to="/photography">More Photos</Link>
                 </div>
                 <div className={styles.second_con}>
                     <div className={styles.languages}>
@@ -98,6 +105,11 @@ query Home {
           date(formatString: "MMMM YYYY")
         }
       }
+    }
+  }
+  photo: file(sourceInstanceName: {eq: "photography"}, name: {eq: "alpha_mike"}) {
+    childImageSharp {
+      gatsbyImageData(placeholder: BLURRED)
     }
   }
 }
