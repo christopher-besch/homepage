@@ -14,7 +14,6 @@ Read [this](https://motherfuckingwebsite.com).
 
 This homepage is not under any open-source license!
 If you intend to use any of the code or content from it, you have to ask the copyright holder, Christopher Besch, for permission.
-Legitimate uses are usually granted.
 
 ## How to Build?
 Install dependencies:
