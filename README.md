@@ -8,12 +8,9 @@
 - [Production Deployment](https://chris-besch.com)
 - [Debug Build](https://dev.chris-besch.com)
 
-This is the homepage of a backend dev, who doesn't particularly care about looks.
-Why does the author not mind some barebone styling?
-Read [this](https://motherfuckingwebsite.com).
-
-This homepage is not under any open-source license!
-If you intend to use any of the code or content from it, you have to ask the copyright holder, Christopher Besch, for permission.
+This homepage is under Christopher Besch's copyright!
+Even though it is on GitHub it is not under an open-source license!
+If you intend to use any of the code or content from it, you have to ask the copyright holder for permission.
 
 ## How to Build?
 Install dependencies:

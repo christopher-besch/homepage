@@ -11,13 +11,13 @@ const Photography = ({ data }: PageProps<Queries.PhotographyQuery>) => {
     return (
         <Layout heading="Photography">
             <Link to="/photography/to_vanish"><GatsbyImage className={photography_styles.slim_photo} image={getImage(data.to_vanish as ImageDataLike)!} alt="alpha_mike" /></Link>
-            <Link className={`${util_styles.block} ${util_styles.link}`} to="/photography/to_vanish">To Vanish</Link>
+            <Link className={`${util_styles.block} ${util_styles.link}`} to="/photography/to_vanish">⇢ To Vanish</Link>
 
             <Link to="/photography/leaving_home"><GatsbyImage className={photography_styles.slim_photo} image={getImage(data.leaving_home as ImageDataLike)!} alt="alpha_mike" /></Link>
-            <Link className={`${util_styles.block} ${util_styles.link}`} to="/photography/leaving_home">Leaving Home</Link>
+            <Link className={`${util_styles.block} ${util_styles.link}`} to="/photography/leaving_home">⇢ Leaving Home</Link>
 
             <Link to="/photography/transient"><GatsbyImage className={photography_styles.slim_photo} image={getImage(data.transient as ImageDataLike)!} alt="alpha_mike" /></Link>
-            <Link className={`${util_styles.block} ${util_styles.link}`} to="/photography/transient">Transient</Link>
+            <Link className={`${util_styles.block} ${util_styles.link}`} to="/photography/transient">⇢ Transient</Link>
         </Layout >
     );
 };
