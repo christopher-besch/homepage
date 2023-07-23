@@ -118,6 +118,13 @@ const config: GatsbyConfig = {
         {
             resolve: "gatsby-plugin-image",
         },
+        // set lang
+        {
+            resolve: 'gatsby-plugin-html-attributes',
+            options: {
+                lang: 'en-GB'
+            }
+        },
     ]
 };
 
