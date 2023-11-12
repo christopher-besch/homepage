@@ -7,20 +7,11 @@ import * as util_styles from "src/styles/utils.module.scss";
 import get_mask from "src/utils/svg_mask";
 
 const About = ({ data }: PageProps<Queries.AboutQuery>) => {
-    const discord_name = data.site?.siteMetadata?.discord?.name as string;
-    const discord_link = data.site?.siteMetadata?.discord?.link as string;
-
     const email_name = data.site?.siteMetadata?.email?.name as string;
     const email_link = data.site?.siteMetadata?.email?.link as string;
 
     const github_name = data.site?.siteMetadata?.github?.name as string;
     const github_link = data.site?.siteMetadata?.github?.link as string;
-
-    const linkedin_name = data.site?.siteMetadata?.linkedin?.name as string;
-    const linkedin_link = data.site?.siteMetadata?.linkedin?.link as string;
-
-    const twitter_name = data.site?.siteMetadata?.twitter?.name as string;
-    const twitter_link = data.site?.siteMetadata?.twitter?.link as string;
 
     let width_properties = {
         "--full-width": "100%",
@@ -78,27 +69,6 @@ const About = ({ data }: PageProps<Queries.AboutQuery>) => {
                             <span className={styles.icon} style={get_mask("/icons/github.svg")}></span>
                             <hr />
                             <h3>{github_name}</h3>
-                        </div>
-                    </a>
-                    <a href={linkedin_link} target="_blank" className={styles.contact} style={width_properties}>
-                        <div className={styles.content}>
-                            <span className={styles.icon} style={get_mask("/icons/linkedin.svg")}></span>
-                            <hr />
-                            <h3>{linkedin_name}</h3>
-                        </div>
-                    </a>
-                    <a href={twitter_link} target="_blank" className={styles.contact} style={width_properties}>
-                        <div className={styles.content}>
-                            <span className={styles.icon} style={get_mask("/icons/twitter.svg")}></span>
-                            <hr />
-                            <h3>{twitter_name}</h3>
-                        </div>
-                    </a>
-                    <a href={discord_link} target="_blank" className={styles.contact} style={width_properties}>
-                        <div className={styles.content}>
-                            <span className={styles.icon} style={get_mask("/icons/discord.svg")}></span>
-                            <hr />
-                            <h3>{discord_name}</h3>
                         </div>
                     </a>
                 </div>
