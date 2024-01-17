@@ -96,6 +96,33 @@
     transition: mask-size $transition_time -webkit-mask-size $transition_time;
 }
 
+.pgp_container {
+    float: left;
+    padding-left: 16px;
+    width: 100%;
+}
+
+.pgp {
+    font-size: 0.8vw;
+    padding: 10px;
+    font-family: 'liberation_mono', 'Courier New', monospace;
+    background-color: $back_sec;
+    margin-bottom: 16px;
+    border-radius: $border_radius;
+    overflow: scroll;
+}
+
+.music_container {
+    background-color: $back_sec;
+    margin-bottom: 16px;
+    border-radius: $border_radius;
+}
+
+.music {
+    padding: 10px;
+    font-family: 'liberation_mono', 'Courier New', monospace;
+}
+
 @media (max-width: 1200px) {
     .container {
         flex-direction: column;
@@ -112,4 +139,9 @@
         width: 100%;
         padding-left: 0px;
     }
+
+    .pgp {
+        font-size: 2.35vw;
+    }
 }
+
