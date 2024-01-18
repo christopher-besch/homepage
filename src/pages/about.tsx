@@ -133,152 +133,153 @@ const About = ({ data }: PageProps<Queries.AboutQuery>) => {
             <SubHeading heading="The Music I Own" />
             <div className={styles.music_container}>
                 <pre className={styles.music}>
-                    Air<br />
-                    └── Moon Safari<br />
-                    Anna Ternheim<br />
-                    ├── All the Way to Rio<br />
-                    ├── Naked Versions II<br />
-                    └── Separation Road<br />
-                    C418<br />
-                    ├── 0x10c<br />
-                    ├── 148<br />
-                    ├── 2 years of failure<br />
-                    ├── 72 Minutes Of Fame<br />
-                    ├── A Cobblers Tee Thug<br />
-                    ├── bps<br />
-                    ├── Bushes and Marshmallows<br />
-                    ├── circle<br />
-                    ├── Cookie Clicker<br />
-                    ├── Dief<br />
-                    ├── Excursions<br />
-                    ├── I forgot something- didn't I<br />
-                    ├── life changing moments seem minor in pictures<br />
-                    ├── little things<br />
-                    ├── Mixes<br />
-                    ├── one<br />
-                    ├── Seven Years of Server Data<br />
-                    ├── sine<br />
-                    ├── The Driver - Savlonic (C418 Remix)<br />
-                    └── zweitonegoismus<br />
-                    Castlecomer<br />
-                    └── Castlecomer<br />
-                    Detektivbyrån<br />
-                    ├── E18<br />
-                    └── Wermland<br />
-                    Epic Mountain<br />
-                    └── Kurzgesagt Vol. 6<br />
-                    HOME<br />
-                    ├── Odyssey<br />
-                    └── Resting State<br />
-                    Kraftwerk<br />
-                    ├── Die Mensch·Maschine<br />
-                    └── Trans Europa Express<br />
-                    Lena Raine<br />
-                    ├── Celeste<br />
-                    ├── Celeste-Farewell<br />
-                    └── Singularity<br />
-                    Lifeformed<br />
-                    ├── Immerse<br />
-                    └── Umbra<br />
-                    LoFi<br />
-                    └── [...]<br />
-                    Ludovico Einaudi<br />
-                    ├── Elements<br />
-                    └── Stanze<br />
-                    LÜNE<br />
-                    └── Rêve Lucide<br />
-                    Moby<br />
-                    └── Wait for Me<br />
-                    Nolram<br />
-                    ├── The Search<br />
-                    └── Town Of Broken Ambitions<br />
-                    Peter Sandberg<br />
-                    └── String Works<br />
-                    Philip Ayers<br />
-                    └── Juncture<br />
-                    Pink Floyd<br />
-                    ├── The Dark Side of the Moon<br />
-                    └── The Wall<br />
-                    Radiohead<br />
-                    ├── Amnesiac<br />
-                    └── Kid A<br />
-                    Seal<br />
-                    ├── Seal<br />
-                    ├── Seal Hits<br />
-                    └── System<br />
-                    Solar Fields<br />
-                    ├── Earthshine (remastered)<br />
-                    ├── Leaving Home<br />
-                    └── Versions<br />
-                    Soundtrack<br />
-                    ├── Astroneer<br />
-                    ├── Beyondium<br />
-                    ├── BONETONES<br />
-                    ├── DEFCON<br />
-                    ├── Deus Ex<br />
-                    │   ├── Deus Ex Human Revolution<br />
-                    │   └── Deus Ex Mankind Divided<br />
-                    ├── Factorio<br />
-                    ├── Fastfall<br />
-                    │   └── extras<br />
-                    ├── Half-Life<br />
-                    │   ├── Half-Life<br />
-                    │   ├── Half-Life 2<br />
-                    │   ├── Half-Life 2 Episode One<br />
-                    │   ├── Half-Life 2 Episode Two<br />
-                    │   ├── Half-Life 3 Unofficial<br />
-                    │   ├── Half-Life Alyx<br />
-                    │   │   ├── 10. Breaking And Entering<br />
-                    │   │   ├── 11. Point Extraction<br />
-                    │   │   ├── 1. Entanglement<br />
-                    │   │   ├── 2. The Quarantine Zone<br />
-                    │   │   ├── 3. Is Or Will Be<br />
-                    │   │   ├── 4. Super Weapon<br />
-                    │   │   ├── 5. The Northern Star<br />
-                    │   │   ├── 6. Arms Race<br />
-                    │   │   ├── 7. Jeff<br />
-                    │   │   ├── 8. Captivity<br />
-                    │   │   └── 9. Revelations<br />
-                    │   └── Project Borealis<br />
-                    ├── ibb & obb<br />
-                    ├── Layers of Fear<br />
-                    ├── Minecraft<br />
-                    │   ├── Minecraft - Caves & Cliffs<br />
-                    │   ├── Minecraft Extract<br />
-                    │   ├── Minecraft - Volume Alpha<br />
-                    │   └── Minecraft - Volume Beta<br />
-                    ├── OBSERVER<br />
-                    ├── Outer Wilds<br />
-                    ├── Plants vs. Zombies<br />
-                    ├── Portal<br />
-                    │   ├── Aperture Tag<br />
-                    │   ├── Portal<br />
-                    │   ├── Portal 2<br />
-                    │   └── Portal Stories Mel<br />
-                    ├── Prey<br />
-                    ├── Shift Happens<br />
-                    ├── Smash Hit<br />
-                    ├── Stray<br />
-                    │   ├── Extradiegetic Music<br />
-                    │   └── Intradiegetic Music<br />
-                    ├── Subnautica<br />
-                    ├── Teardown Part 1<br />
-                    ├── The Talos Principle<br />
-                    └── We Were Here<br />
-                    ├── We Were Here<br />
-                    ├── We Were Here Forever<br />
-                    ├── We Were Here Together<br />
-                    └── We Were Here Too<br />
-                    STRFKR<br />
-                    ├── Being No One, Going Nowhere<br />
-                    ├── Future Past Life<br />
-                    └── Reptilians<br />
-                    The Album Leaf<br />
-                    ├── Between Waves<br />
-                    └── Into The Blue Again<br />
-                    The City Substrings<br />
-                    └── The Day Will Come<br />
-                    Wintergatan<br />
+                    . <br />
+                    ├── Air <br />
+                    │   └── Moon Safari <br />
+                    ├── Anna Ternheim <br />
+                    │   ├── All the Way to Rio <br />
+                    │   ├── Naked Versions II <br />
+                    │   └── Separation Road <br />
+                    ├── C418 <br />
+                    │   ├── 0x10c <br />
+                    │   ├── 148 <br />
+                    │   ├── 2 years of failure <br />
+                    │   ├── 72 Minutes Of Fame <br />
+                    │   ├── A Cobblers Tee Thug <br />
+                    │   ├── bps <br />
+                    │   ├── Bushes and Marshmallows <br />
+                    │   ├── circle <br />
+                    │   ├── Cookie Clicker <br />
+                    │   ├── Dief <br />
+                    │   ├── Excursions <br />
+                    │   ├── I forgot something- didn't I <br />
+                    │   ├── life changing moments seem minor in pictures <br />
+                    │   ├── little things <br />
+                    │   ├── Mixes <br />
+                    │   ├── one <br />
+                    │   ├── Seven Years of Server Data <br />
+                    │   ├── sine <br />
+                    │   ├── The Driver - Savlonic (C418 Remix) <br />
+                    │   └── zweitonegoismus <br />
+                    ├── Castlecomer <br />
+                    │   └── Castlecomer <br />
+                    ├── Detektivbyrån <br />
+                    │   ├── E18 <br />
+                    │   └── Wermland <br />
+                    ├── Epic Mountain <br />
+                    │   └── Kurzgesagt Vol. 6 <br />
+                    ├── HOME <br />
+                    │   ├── Odyssey <br />
+                    │   └── Resting State <br />
+                    ├── Kraftwerk <br />
+                    │   ├── Die Mensch·Maschine <br />
+                    │   └── Trans Europa Express <br />
+                    ├── Lena Raine <br />
+                    │   ├── Celeste <br />
+                    │   ├── Celeste-Farewell <br />
+                    │   └── Singularity <br />
+                    ├── Lifeformed <br />
+                    │   ├── Immerse <br />
+                    │   └── Umbra <br />
+                    ├── LoFi <br />
+                    │   └── [...] <br />
+                    ├── Ludovico Einaudi <br />
+                    │   ├── Elements <br />
+                    │   └── Stanze <br />
+                    ├── LÜNE <br />
+                    │   └── Rêve Lucide <br />
+                    ├── Moby <br />
+                    │   └── Wait for Me <br />
+                    ├── Nolram <br />
+                    │   ├── The Search <br />
+                    │   └── Town Of Broken Ambitions <br />
+                    ├── Peter Sandberg <br />
+                    │   └── String Works <br />
+                    ├── Philip Ayers <br />
+                    │   └── Juncture <br />
+                    ├── Pink Floyd <br />
+                    │   ├── The Dark Side of the Moon <br />
+                    │   └── The Wall <br />
+                    ├── Radiohead <br />
+                    │   ├── Amnesiac <br />
+                    │   └── Kid A <br />
+                    ├── Seal <br />
+                    │   ├── Seal <br />
+                    │   ├── Seal Hits <br />
+                    │   └── System <br />
+                    ├── Solar Fields <br />
+                    │   ├── Earthshine <br />
+                    │   ├── Leaving Home <br />
+                    │   └── Versions <br />
+                    ├── Soundtrack <br />
+                    │   ├── Astroneer <br />
+                    │   ├── Beyondium <br />
+                    │   ├── BONETONES <br />
+                    │   ├── DEFCON <br />
+                    │   ├── Deus Ex <br />
+                    │   │   ├── Deus Ex Human Revolution <br />
+                    │   │   └── Deus Ex Mankind Divided <br />
+                    │   ├── Factorio <br />
+                    │   ├── Fastfall <br />
+                    │   │   └── extras <br />
+                    │   ├── Half-Life <br />
+                    │   │   ├── Half-Life <br />
+                    │   │   ├── Half-Life 2 <br />
+                    │   │   ├── Half-Life 2 Episode One <br />
+                    │   │   ├── Half-Life 2 Episode Two <br />
+                    │   │   ├── Half-Life 3 Unofficial <br />
+                    │   │   ├── Half-Life Alyx <br />
+                    │   │   │   ├── 10. Breaking And Entering <br />
+                    │   │   │   ├── 11. Point Extraction <br />
+                    │   │   │   ├── 1. Entanglement <br />
+                    │   │   │   ├── 2. The Quarantine Zone <br />
+                    │   │   │   ├── 3. Is Or Will Be <br />
+                    │   │   │   ├── 4. Super Weapon <br />
+                    │   │   │   ├── 5. The Northern Star <br />
+                    │   │   │   ├── 6. Arms Race <br />
+                    │   │   │   ├── 7. Jeff <br />
+                    │   │   │   ├── 8. Captivity <br />
+                    │   │   │   └── 9. Revelations <br />
+                    │   │   └── Project Borealis <br />
+                    │   ├── ibb & obb <br />
+                    │   ├── Layers of Fear <br />
+                    │   ├── Minecraft <br />
+                    │   │   ├── Minecraft - Caves & Cliffs <br />
+                    │   │   ├── Minecraft Extract <br />
+                    │   │   ├── Minecraft - Volume Alpha <br />
+                    │   │   └── Minecraft - Volume Beta <br />
+                    │   ├── OBSERVER <br />
+                    │   ├── Outer Wilds <br />
+                    │   ├── Plants vs. Zombies <br />
+                    │   ├── Portal <br />
+                    │   │   ├── Aperture Tag <br />
+                    │   │   ├── Portal <br />
+                    │   │   ├── Portal 2 <br />
+                    │   │   └── Portal Stories Mel <br />
+                    │   ├── Prey <br />
+                    │   ├── Shift Happens <br />
+                    │   ├── Smash Hit <br />
+                    │   ├── Stray <br />
+                    │   │   ├── Extradiegetic Music <br />
+                    │   │   └── Intradiegetic Music <br />
+                    │   ├── Subnautica <br />
+                    │   ├── Teardown Part 1 <br />
+                    │   ├── The Talos Principle <br />
+                    │   └── We Were Here <br />
+                    │       ├── We Were Here <br />
+                    │       ├── We Were Here Forever <br />
+                    │       ├── We Were Here Together <br />
+                    │       └── We Were Here Too <br />
+                    ├── STRFKR <br />
+                    │   ├── Being No One, Going Nowhere <br />
+                    │   ├── Future Past Life <br />
+                    │   └── Reptilians <br />
+                    ├── The Album Leaf <br />
+                    │   ├── Between Waves <br />
+                    │   └── Into The Blue Again <br />
+                    ├── The City Substrings <br />
+                    │   └── The Day Will Come <br />
+                    └── Wintergatan <br />
                     └── Wintergatan
                 </pre>
             </div>
