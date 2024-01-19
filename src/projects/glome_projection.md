@@ -1,7 +1,7 @@
 ---
 type: project
 title: glome_projection
-description: "Project 4D sphere onto 2D screen."
+description: "Interactively Project 4D Sphere onto 2D Screen."
 slug: glome_projection
 link: https://github.com/christopher-besch/glome_projection
 priority: 9
