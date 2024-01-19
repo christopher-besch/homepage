@@ -45,6 +45,9 @@ const Home = ({ data }: PageProps<Queries.HomeQuery>) => {
                         <Link to="/projects/cpp" className={styles.language}>
                             <HoverIcon className={styles.icon} icon="/icons/c-plusplus.svg" icon_mono="/icons/c-plusplus_mono.svg" alt="C++" />
                         </Link>
+                        <Link to="/projects/rust" className={styles.language}>
+                            <HoverIcon className={styles.icon} icon="/icons/rust.svg" alt="Rust" />
+                        </Link>
                         <Link to="/projects/typescript" className={styles.language}>
                             <HoverIcon className={styles.icon} icon="/icons/typescript-icon.svg" icon_mono="/icons/typescript-icon_mono.svg" alt="TypeScript" />
                         </Link>
