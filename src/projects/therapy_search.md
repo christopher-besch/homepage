@@ -1,7 +1,7 @@
 ---
 type: project
 title: therapy_search
-description: "Compute call times into a calendar."
+description: "Compute Call Times into a Calendar."
 slug: therapy_search
 link: https://github.com/christopher-besch/therapy_search
 priority: 9
