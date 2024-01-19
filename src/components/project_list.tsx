@@ -75,7 +75,7 @@ const ProjectList = (props: ProjectListProps) => {
                         <hr />
                         <div className={styles.text}>
                             <p>{project.description}</p>
-                            <p>{project.priority}</p>
+                            {/* <p>{project.priority}</p> */}
                         </div>
                     </div>
                 </a>
