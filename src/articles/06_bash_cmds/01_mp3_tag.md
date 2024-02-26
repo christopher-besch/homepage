@@ -2,7 +2,7 @@
 type: article
 title: "Bodging MP3 Names in Bash"
 description: "
-Why do it properly when a Bash one-liner does it too?
+Why do it complicated when a Bash one-liner does it too?
 "
 banner: /social_banner/bash_cmds.png
 thumb: ../../../static/social_banner/bash_cmds.png
