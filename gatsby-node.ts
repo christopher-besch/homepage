@@ -1,5 +1,4 @@
 const path = require("path");
-const cloneDeep = require(`lodash/cloneDeep`);
 
 // TODO: fix types
 exports.createPages = async ({ graphql, actions }: any) => {
@@ -19,7 +18,7 @@ query GatsbyNode {
 }
     `);
 
-    const languages = ["python", "cpp", "typescript", "java", "rust"];
+    const languages = ["python", "cpp", "typescript", "java", "rust", "c"];
 
     languages.forEach(language => {
         actions.createPage({

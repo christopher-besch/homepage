@@ -7,7 +7,7 @@ link: https://github.com/christopher-besch/docker_borg_backup
 priority: 6
 date: 2022-09-04T00:00:00+00:00
 languages: []
-dependencies: []
+dependencies: [docker, borg]
 thumb: ../images/thumbs/docker_borg_backup.png
 listed: true
 ---
