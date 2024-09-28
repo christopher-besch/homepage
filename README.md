@@ -13,6 +13,8 @@ Even though it is on GitHub it is not under an open-source license!
 If you intend to use any of the code or content from it, you have to ask the copyright holder for permission.
 
 ## How to Build?
+Ensure you use node version `20.17.0`.
+
 Install dependencies:
 ```
 yarn install
