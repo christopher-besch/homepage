@@ -52,6 +52,10 @@ const About = ({ data }: PageProps<Queries.AboutQuery>) => {
 ├── HOME
 │   ├── Odyssey
 │   └── Resting State
+├── Jamie xx
+│   └── In Waves
+├── Kettel
+│   └── Wingtip
 ├── Kraftwerk
 │   ├── Die Mensch·Maschine
 │   └── Trans Europa Express
@@ -64,6 +68,8 @@ const About = ({ data }: PageProps<Queries.AboutQuery>) => {
 │   └── Umbra
 ├── LoFi
 │   └── [...]
+├── loscil
+│   └── Plume
 ├── Ludovico Einaudi
 │   ├── Elements
 │   └── Stanze
@@ -79,11 +85,15 @@ const About = ({ data }: PageProps<Queries.AboutQuery>) => {
 ├── Philip Ayers
 │   └── Juncture
 ├── Pink Floyd
+│   ├── A Momentary Lapse of Reason
 │   ├── The Dark Side of the Moon
+│   ├── The Division Bell
 │   └── The Wall
 ├── Radiohead
 │   ├── Amnesiac
 │   └── Kid A
+├── R.E.M.
+│   └── Automatic for the People
 ├── Seal
 │   ├── Seal
 │   ├── Seal Hits
@@ -149,6 +159,8 @@ const About = ({ data }: PageProps<Queries.AboutQuery>) => {
 │   ├── Subnautica
 │   ├── Teardown Part 1
 │   ├── The Talos Principle
+│   ├── The Vanishing of Ethan Carter
+│   ├── Undertale
 │   └── We Were Here
 │       ├── We Were Here
 │       ├── We Were Here Forever
@@ -163,8 +175,14 @@ const About = ({ data }: PageProps<Queries.AboutQuery>) => {
 │   └── Into The Blue Again
 ├── The City Substrings
 │   └── The Day Will Come
-└── Wintergatan
-    └── Wintergatan`;
+├── Wintergatan
+│   └── Wintergatan
+└── Wolfgang Amadeus Mozart
+    ├── Complete Mozart Edition, Volume 16: Music for 2 Pianos Piano Duets
+    ├── Die Hornkonzerte
+    ├── The Great Piano Concertos 1: Nos. 19, 20, 21, 23, 24 2 Concert Rondos
+    ├── Violin Concertos Nº 1, 2 & 3
+    └── Violin Concertos No. 4 & No. 5 Adagio in E major Rondo in C major`;
 
     let width_properties = {
         "--full-width": "100%",
