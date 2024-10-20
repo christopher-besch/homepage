@@ -7,7 +7,7 @@ link: https://github.com/christopher-besch/chore_planner
 priority: 2
 date: 2024-08-14T00:00:00+00:00
 languages: [rust]
-dependencies: [docker, tokio, telegram, clap]
+dependencies: [docker, tokio, telegram, clap, signal]
 thumb: ../images/thumbs/chore_planner.png
 listed: true
 ---
