@@ -56,7 +56,7 @@ Cool, why is that bad?
 
 `grub-install` wants to make the UEFI aware of the new bootloader.
 It does so by storing the bootloader's location in non-volatile RAM of the motherboard.
-Then your shiny-new bootloader appears in the EUFI boot options and you can boot.
+Then your shiny-new bootloader appears in the UEFI boot options and you can boot.
 
 That doesn't work here, so what now?
 
