@@ -7,7 +7,7 @@ Install Debian on a device with a broken NVRAM.
 banner: /social_banner/debian_grub.png
 thumb: ../../../static/social_banner/debian_grub.png
 slug: grub_install_removable
-date: 2024-11-02T00:00:00+00:00
+date: 2024-11-08T00:00:00+00:00
 listed: true
 version: 1.0.0
 ---
