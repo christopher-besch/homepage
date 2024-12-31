@@ -55,6 +55,8 @@ const About = ({ data }: PageProps<Queries.AboutQuery>) => {
 ├── Jamie xx
 │   └── In Waves
 ├── Kettel
+│   ├── [AF008] Alacasa EP
+│   ├── Myam James 2 (10th Anniversary Edition)
 │   └── Wingtip
 ├── Kraftwerk
 │   ├── Die Mensch·Maschine
@@ -114,6 +116,7 @@ const About = ({ data }: PageProps<Queries.AboutQuery>) => {
 │   ├── Factorio
 │   ├── Fastfall
 │   │   └── extras
+│   ├── FEZ
 │   ├── Half-Life
 │   │   ├── Black Mesa Terra
 │   │   ├── Black Mesa Xen
@@ -160,6 +163,7 @@ const About = ({ data }: PageProps<Queries.AboutQuery>) => {
 │   ├── Teardown Part 1
 │   ├── The Talos Principle
 │   ├── The Vanishing of Ethan Carter
+│   ├── TUNIC
 │   ├── Undertale
 │   └── We Were Here
 │       ├── We Were Here
