@@ -4,7 +4,7 @@ title: magnesia
 description: "Extensible OPC UA Client"
 slug: magnesia
 link: https://github.com/christopher-besch/magnesia
-priority: 9
+priority: 2
 date: 2024-04-15T00:00:00+00:00
 languages: [cpp]
 dependencies: [cmake, qt]
