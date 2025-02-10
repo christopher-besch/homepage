@@ -100,6 +100,9 @@ sed -E 's/(<svg [^>]+>)/\1\ncI0WWZKD2UKEj\n/' input_svg.svg | \
 3. replace `cI0WWZKD2UKEj` and
 4. pipe the output where it is needed.
 
+You don't need that ginormous web framework for simple things—some CSS and sed does the trick just fine.
+Perhaps, first take a look at what the GNU toolbox offers when solving the next challenge you come across.
+
 ## [The Final Script](https://github.com/SelinaStrobel/homepage/blob/main/fonts_loader/load_fonts_in_css.sh)
 ```bash
 #!/bin/bash
