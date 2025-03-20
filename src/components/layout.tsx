@@ -54,7 +54,7 @@ query Layout {
                     <li className={styles.link}><Link to="/about">Contact</Link></li>
                     <li className={styles.link}><a href={source} target="_blank">Source</a></li>
                     <li className={styles.link}><Link to="/privacy">Privacy</Link></li>
-                    <li><p>&#169; 2023 | All rights reserved</p></li>
+                    <li><p>&#169; 2025 | All rights reserved</p></li>
                     <li className={styles.emoji}><p>🔗</p></li>
                 </ul>
             </footer>
