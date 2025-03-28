@@ -53,24 +53,20 @@ const ProjectList = (props: ProjectListProps) => {
             {props.projects.map(project =>
                 <a href={project.link} target="_blank" key={project.id} className={styles.project} style={width_properties}>
                     <div className={styles.content}>
-                        <div className={styles.image_wrapper}>
-                            <GatsbyImage className={styles.image} image={project.thumb} alt="thumbnail" />
-                            <div className={styles.overlay}>
-                                <h2 className={styles.heading}>{project.title}</h2>
-                                <div className={styles.languages}>
-                                    {project.languages.map(language =>
-                                        <HoverIcon
-                                            className={styles.language_icon}
-                                            key={`${project.id}${language.id}`}
-                                            icon={language.icon}
-                                            icon_mono={language.icon_mono}
-                                            alt={language.id}
-                                            icon_class={styles.icon}
-                                            icon_mono_class={styles.icon_mono}
-                                        />
-                                    )}
-                                </div>
-                            </div>
+                        <GatsbyImage className={styles.image} image={project.thumb} alt="thumbnail" />
+                        <div className={styles.title}>
+                            <h2 className={styles.heading}>{project.title}</h2>
+                            {project.languages.map(language =>
+                                <HoverIcon
+                                    className={styles.language_icon}
+                                    key={`${project.id}${language.id}`}
+                                    icon={language.icon}
+                                    icon_mono={language.icon_mono}
+                                    alt={language.id}
+                                    icon_class={styles.icon}
+                                    icon_mono_class={styles.icon_mono}
+                                />
+                            )}
                         </div>
                         <hr />
                         <div className={styles.text}>
