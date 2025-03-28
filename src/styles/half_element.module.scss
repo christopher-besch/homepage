@@ -10,6 +10,7 @@
     max-width: 60%;
     margin-left: 16px;
 }
+
 .full_element {
     height: auto;
     float: left;
@@ -18,12 +19,14 @@
     // because margin-bottom in the wrapper doesn't work
     margin-bottom: 16px;
 }
+
 .before {
     /* clear float before element */
     content: "";
     display: table;
     clear: both;
 }
+
 .after {
     display: none;
 }
@@ -33,17 +36,19 @@
     .wrapper {
         margin-bottom: 16px;
     }
+
     .element {
         max-width: 100%;
         float: left;
         margin-left: 0px;
     }
+
     .before {
         display: none;
     }
+
     .after {
         display: table;
         clear: both;
     }
 }
-

@@ -10,6 +10,7 @@
     display: flex;
     justify-content: center;
 }
+
 .rocket_elements {
     max-width: 800px;
 }
@@ -21,7 +22,8 @@
     clear: both;
 }
 
-.left, .right {
+.left,
+.right {
     clear: both;
     display: inline-block;
     background: consts.$back_sec;
@@ -35,6 +37,7 @@
     float: right;
     /* text-align: right; */
 }
+
 .right {
     float: left;
     /* text-align: right; */
@@ -52,6 +55,7 @@
     padding-left: 16px;
     text-decoration: none;
 }
+
 .contact::after {
     /* clear floats afterwards */
     content: "";
@@ -63,6 +67,7 @@
     mask-size: 91% 91%;
     -webkit-mask-size: 91% 91%;
 }
+
 .contact:hover hr {
     border-color: consts.$hover_accent;
 }
@@ -132,10 +137,12 @@
     .rocket {
         width: 100%;
     }
+
     .contacts {
         margin-top: 16px;
         width: 100%;
     }
+
     .contact {
         width: 100%;
         padding-left: 0px;
@@ -144,8 +151,8 @@
     .pgp_container {
         padding-left: 0px;
     }
+
     .pgp {
         font-size: 2.35vw;
     }
 }
-

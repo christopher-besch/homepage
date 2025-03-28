@@ -5,12 +5,14 @@
     margin-left: 10px;
     margin-bottom: 10px;
 }
+
 .metadata::after {
     /* clear floats afterwards */
     content: "";
     display: table;
     clear: both;
 }
+
 .author {
     display: none;
 }
@@ -20,8 +22,8 @@
         text-align: right;
         margin-top: 5px;
     }
+
     .author {
         display: inline !important;
     }
 }
-

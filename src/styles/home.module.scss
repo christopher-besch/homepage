@@ -3,6 +3,7 @@
 .container {
     /* margin-top: 16px; */
 }
+
 .container::after {
     content: "";
     display: table;
@@ -14,6 +15,7 @@
     float: left;
     /* margin-top: 8px; */
 }
+
 .second_con {
     width: 20%;
     float: left;
@@ -68,11 +70,13 @@
     .first_con {
         width: 100%;
     }
+
     .second_con {
         width: 100%;
         text-align: center;
         padding-left: 0;
     }
+
     .languages {
         margin-left: 0px;
         margin-top: 16px;

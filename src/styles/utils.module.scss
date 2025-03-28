@@ -1,6 +1,7 @@
 @use "consts.scss";
 
-.main_block, .block {
+.main_block,
+.block {
     display: inline-block;
     background: consts.$back_sec;
     padding: 10px 16px;

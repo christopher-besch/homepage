@@ -9,6 +9,7 @@
     background-color: consts.$nav;
     color: consts.$text;
 }
+
 @media print {
     .nav {
         display: none !important;
@@ -29,9 +30,11 @@
     font-family: liberation_mono, monospace;
     text-decoration: none;
 }
+
 .logo h1 {
     font-size: 24px;
 }
+
 .logo h2 {
     margin-top: 5px;
     font-size: 18px;
@@ -87,8 +90,9 @@
         transition: max-height consts.$transition_time ease-out, padding consts.$transition_time ease-out;
         overflow: hidden;
     }
+
     /* .nav_menu that is preceded by a checked checkbox in .nav */
-    .nav input[type=checkbox]:checked ~ .nav_menu {
+    .nav input[type=checkbox]:checked~.nav_menu {
         /* grow menu when hamburger clicked */
         max-height: 500px;
         padding: 16px 0;
@@ -107,14 +111,16 @@
     .nav_menu li:hover {
         display: inline-block;
     }
+
     /* all lis except first one */
-    .nav_menu li + li {
+    .nav_menu li+li {
         margin-top: 12px;
     }
 
     .hamburger {
         display: block;
     }
+
     .hamburger:hover {
         cursor: pointer;
     }
@@ -139,6 +145,7 @@
     font-family: liberation_mono, monospace;
     background-color: consts.$nav;
 }
+
 @media print {
     .footer {
         display: none !important;
@@ -178,20 +185,23 @@
     grid-row: 1 / 2;
 }
 
-.link:hover ~ .emoji p {
+.link:hover~.emoji p {
     animation: wave-animation 0.5s infinite;
 }
 
 @keyframes wave-animation {
     0% {
-    transform: rotate(0deg);
+        transform: rotate(0deg);
     }
+
     100% {
         transform: rotate(0deg);
     }
+
     25% {
         transform: rotate(10deg);
     }
+
     75% {
         transform: rotate(-7deg);
     }

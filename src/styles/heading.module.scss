@@ -15,6 +15,7 @@
     /* break at word endings */
     word-break: break-word;
 }
+
 @media print {
     .heading h1 {
         font-size: 30px !important;
@@ -51,4 +52,3 @@
     font-size: 40px;
     text-align: right;
 }
-

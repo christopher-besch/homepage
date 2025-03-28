@@ -16,6 +16,7 @@
 .image {
     width: 30%;
 }
+
 .body {
     padding-left: 16px;
     width: 70%;
@@ -24,14 +25,17 @@
     flex-direction: column;
     justify-content: space-between;
 }
+
 @media (max-width: 1000px) {
     .article {
         flex-direction: column;
     }
+
     .image {
         width: 100%;
         margin-bottom: 8px;
     }
+
     .body {
         width: 100%;
         padding-left: 0px;
@@ -46,6 +50,7 @@
     margin-bottom: 16px;
     line-height: 1.3em;
 }
+
 .article p:last-of-type {
     margin-bottom: 0px;
 }
@@ -55,6 +60,7 @@
     transition: border-color consts.$transition_time;
     margin: 5px -5px 10px;
 }
+
 .article:hover hr {
     border-color: consts.$hover_accent;
 }
@@ -62,4 +68,3 @@
 .date {
     margin-top: 8px;
 }
-
