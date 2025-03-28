@@ -5,25 +5,31 @@ import * as markdown_styles from "../styles/markdown.module.scss";
 import * as util_styles from "src/styles/utils.module.scss";
 import { graphql, Link } from "gatsby";
 import { MDXProvider } from "@mdx-js/react"
+import { MDXComponents } from "mdx/types.js";
+import CompareView from "compare_view";
 
 import AutoPlayVideo from "src/components/autoplay_video";
 import HalfImage from "src/components/half_image";
 import Spacer from "src/components/spacer";
 import Quote from "src/components/quote";
 import Iframe from "src/components/iframe";
-import CompareView from "compare_view";
-import pre from "src/components/code";
 import SEO from "src/components/seo";
+import PrismSyntaxHighlight from "src/components/code";
 
-const shortcodes = {
+const shortcodes: MDXComponents = {
     AutoPlayVideo,
     HalfImage,
     Spacer,
     Quote,
     Iframe,
-    CompareView,
-    pre,
     Link,
+    CompareView,
+    pre: ({ children, className }) => { return (<div className="code-container" > <pre>{children}</pre></div>) },
+    code: ({ children, className }) => {
+        return className ? (
+            <PrismSyntaxHighlight className={className}>{children}</PrismSyntaxHighlight>
+        ) : <code className="language-text">{children}</code>
+    }
 };
 
 interface ArticleProps {
