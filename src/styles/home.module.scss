@@ -1,4 +1,4 @@
-@import "consts.scss";
+@use "consts.scss";
 
 .container {
     /* margin-top: 16px; */
@@ -34,8 +34,8 @@
     display: inline-block;
     margin-left: 16px;
     /* width: 95%; */
-    background-color: $back_sec;
-    border-radius: $border-radius;
+    background-color: consts.$back_sec;
+    border-radius: consts.$border-radius;
     /* no idea why this is required but it is */
     margin-top: -16px;
 }

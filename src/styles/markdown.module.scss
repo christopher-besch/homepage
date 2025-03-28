@@ -1,9 +1,9 @@
-@import "consts.scss";
+@use "consts.scss";
 
 .markdown_body {
     width: 100%;
     padding: 10px 16px;
-    border-radius: $border-radius;
+    border-radius: consts.$border-radius;
     /* background-color: $back_sec; */
     margin-bottom: 16px;
 }

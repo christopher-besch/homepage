@@ -1,10 +1,10 @@
-@import "consts.scss";
+@use "consts.scss";
 
 .main_block, .block {
     display: inline-block;
-    background: $back_sec;
+    background: consts.$back_sec;
     padding: 10px 16px;
-    border-radius: $border-radius;
+    border-radius: consts.$border-radius;
 }
 
 main_block {
@@ -18,7 +18,7 @@ main_block {
 }
 
 .link:hover {
-    background-color: $link_hover;
+    background-color: consts.$link_hover;
 }
 
 .spacer {

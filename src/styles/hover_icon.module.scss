@@ -1,4 +1,4 @@
-@import "consts.scss";
+@use "consts.scss";
 
 .icon_wrapper {
     position: relative;
@@ -10,7 +10,7 @@
     width: 100%;
     height: 100%;
     opacity: 0%;
-    transition: opacity $transition_time;
+    transition: opacity consts.$transition_time;
 }
 
 .icon_mono {
@@ -19,10 +19,10 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: $text;
+    background: consts.$text;
 
     opacity: 100%;
-    transition: opacity $transition_time;
+    transition: opacity consts.$transition_time;
 
     mask-size: contain;
     -webkit-mask-size: contain;

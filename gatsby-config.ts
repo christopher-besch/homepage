@@ -46,7 +46,15 @@ const config: GatsbyConfig = {
             },
         },
         // styling
-        "gatsby-plugin-sass",
+        {
+            resolve:
+                "gatsby-plugin-sass",
+            options: {
+                sassOptions: {
+                    api: "modern",
+                },
+            },
+        },
         // markdown
         {
             resolve: "gatsby-plugin-mdx",

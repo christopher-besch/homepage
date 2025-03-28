@@ -1,9 +1,9 @@
-@import "consts.scss";
+@use "consts.scss";
 
 .article {
-    background-color: $back_sec;
+    background-color: consts.$back_sec;
     padding: 10px;
-    border-radius: $border_radius;
+    border-radius: consts.$border_radius;
     width: 100%;
     display: block;
     margin-bottom: 16px;
@@ -51,12 +51,12 @@
 }
 
 .article hr {
-    border-color: $accent;
-    transition: border-color $transition_time;
+    border-color: consts.$accent;
+    transition: border-color consts.$transition_time;
     margin: 5px -5px 10px;
 }
 .article:hover hr {
-    border-color: $hover_accent;
+    border-color: consts.$hover_accent;
 }
 
 .date {
