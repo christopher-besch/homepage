@@ -23,6 +23,7 @@ const shortcodes: MDXComponents = {
     Quote,
     Iframe,
     Link,
+    // @ts-ignore
     CompareView,
     pre: ({ children, className }) => { return (<div className="code-container" > <pre>{children}</pre></div>) },
     code: ({ children, className }) => {
