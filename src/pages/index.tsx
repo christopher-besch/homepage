@@ -26,8 +26,24 @@ const Home = ({ data }: PageProps<Queries.HomeQuery>) => {
             <div className={styles.banner_content}>
                 <h1>Hello Smart People, I'm Chris!</h1>
                 <p>What are you interested in?</p>
+
+                <div className={styles.languages}>
+                    <Link to="/projects/cpp" className={styles.language}>
+                        <HoverIcon className={styles.icon} icon="/icons/c-plusplus.svg" icon_mono="/icons/c-plusplus_mono.svg" alt="C++" />
+                    </Link>
+                    <Link to="/projects/rust" className={styles.language}>
+                        <HoverIcon className={styles.icon} icon="/icons/rust.svg" alt="Rust" />
+                    </Link>
+                    <Link to="/projects/typescript" className={styles.language}>
+                        <HoverIcon className={styles.icon} icon="/icons/typescript-icon.svg" icon_mono="/icons/typescript-icon_mono.svg" alt="TypeScript" />
+                    </Link>
+                    <Link to="/projects/python" className={styles.language}>
+                        <HoverIcon className={styles.icon} icon="/icons/python.svg" alt="Python" />
+                    </Link>
+                </div>
             </div>
         }>
+            hi
         </Layout>
     );
 };

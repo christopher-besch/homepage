@@ -5,10 +5,17 @@
 }
 
 .banner_content {
-    position: absolute;
-    bottom: 30px;
-    left: 30px;
     font-size: 30px;
     --color-text: #ffffff;
     --color-icon-mono: #ffffff;
+}
+
+.languages {
+    display: flex;
+    flex-direction: row;
+}
+
+.language {
+    margin: 10px;
+    font-size: 35px;
 }

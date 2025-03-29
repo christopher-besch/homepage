@@ -53,7 +53,11 @@ query Layout {
                     ? <div></div>
                     : <div className={styles.banner_container}>
                         <GatsbyImage className={`${styles.banner_image} ${props.banner_image_style || ''}`} image={getImage(props.banner_image)!} alt="banner_image" />
-                        {props.banner_content}
+                        <div className={styles.banner_content_container}>
+                            <div className={styles.banner_content}>
+                                {props.banner_content}
+                            </div>
+                        </div>
                     </div>
             }
 
