@@ -5,18 +5,28 @@
 }
 
 .banner_content {
+    padding-bottom: 10vh;
     font-size: 40px;
+    font-family: liberation_mono;
     --color-text: #ffffff;
+    --color-link: #ffffff;
     --color-icon-mono: #ffffff;
 }
 
-.banner_content h1 {
-    font-size: 70px;
+.banner_content pre a {
+    /* TODO: this doesn't work! */
+    text-decoration: none;
+    border-bottom: 1px solid #ffffff;
 }
 
-.banner_content p {
-    font-size: 40px;
+.banner_content h1 {
+    font-size: 50px;
 }
+
+.banner_content pre {
+    font-size: 30px;
+}
+
 
 .languages {
     margin-top: 20px;

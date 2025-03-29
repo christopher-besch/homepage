@@ -21,11 +21,32 @@ const Home = ({ data }: PageProps<Queries.HomeQuery>) => {
     const all_articles = data.articles.edges.map(gql_to_article);
     const articles = all_articles.slice(0, 4);
 
+    const mono_text = `
+I like Heavy Compute.
+       Heavy Compute.
+`;
+
     return (
         <Layout banner_image={data.photo as ImageDataLike} banner_image_style={styles.banner_image} banner_content={
             <div className={styles.banner_content}>
-                <h1>I'm Chris!</h1>
-                <p>What are you interested in?</p>
+                {/* <h1>chris@place λ</h1> */}
+                {/* <p>Danger: Heavy Calculation</p> */}
+                {/* <p>I like Heavy Compute.</p> */}
+                <pre>
+                    <Link to="/about">chris</Link>@place λ neofetch<br />
+                    <br />
+                    I like Solving Problems<br />
+                    {'       '}Writing <Link to="/articles">Articles</Link><br />
+                    {'       '}Taking  <Link to="/photography">Photos</Link><br />
+                    {'       '}Playing with Data<br />
+                    {/* <li><Link to="/projects">Projects</Link></li> */}
+                    {/* <li><Link to="/photography">Photography</Link></li> */}
+                    {/* <li><Link to="/about">About</Link></li> */}
+                    <br />
+                    What are you here for?
+                </pre>
+                {/* <p>Solving Problems, Writing Articles, Playing with Data.</p> */}
+                {/* <p>What are you interested in?</p> */}
 
                 <div className={styles.languages}>
                     <Link to="/projects/cpp" className={styles.language}>

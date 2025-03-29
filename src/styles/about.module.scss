@@ -110,7 +110,7 @@
 .pgp {
     font-size: 0.8vw;
     padding: 10px;
-    font-family: 'liberation_mono', 'Courier New', monospace;
+    font-family: 'liberation_mono';
     background-color: consts.$back_sec;
     margin-bottom: 16px;
     border-radius: consts.$border_radius;
@@ -125,7 +125,7 @@
 
 .music {
     padding: 10px;
-    font-family: 'liberation_mono', 'Courier New', monospace;
+    font-family: 'liberation_mono';
     overflow: scroll;
 }
 
