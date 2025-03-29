@@ -74,7 +74,7 @@
 
 @media (max-width: 768px) {
     .hamburger {
-        margin-bottom: 35px;
+        margin-bottom: 20px;
     }
 
     .nav_menu {
@@ -124,6 +124,16 @@
     .hamburger:hover {
         cursor: pointer;
     }
+}
+
+.banner_container {
+    position: relative;
+}
+
+.banner_image {
+    // subtract the height of the nav bar
+    // The nav bar only uses pixel measurements so this is fine.
+    height: calc(100vh - 47px - 2*20px);
 }
 
 /* content */

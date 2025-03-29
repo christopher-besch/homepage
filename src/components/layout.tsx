@@ -1,4 +1,5 @@
 import { graphql, Link, useStaticQuery } from "gatsby";
+import { getImage, GatsbyImage, IGatsbyImageData, ImageDataLike } from "gatsby-plugin-image";
 import React from "react";
 
 import Heading from "src/components/heading";
@@ -11,6 +12,9 @@ interface LayoutProps {
     heading?: string;
     keep_heading_line?: boolean;
     sub_heading?: string;
+    banner_image?: ImageDataLike;
+    banner_image_style?: string;
+    banner_content?: React.ReactNode;
 }
 const Layout = (props: LayoutProps) => {
     const data: Queries.LayoutQuery = useStaticQuery(graphql`
@@ -43,6 +47,15 @@ query Layout {
                     </ul>
                 </div>
             </nav >
+
+            {
+                (props.banner_image == undefined)
+                    ? <div></div>
+                    : <div className={styles.banner_container}>
+                        <GatsbyImage className={`${styles.banner_image} ${props.banner_image_style || ''}`} image={getImage(props.banner_image)!} alt="banner_image" />
+                        {props.banner_content}
+                    </div>
+            }
 
             <div className={styles.content}>
                 {props.heading ? <Heading heading={props.heading} keep_line={props.keep_heading_line} icon={props.icon} sub_heading={props.sub_heading} /> : undefined}

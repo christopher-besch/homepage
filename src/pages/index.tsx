@@ -22,41 +22,12 @@ const Home = ({ data }: PageProps<Queries.HomeQuery>) => {
     const articles = all_articles.slice(0, 4);
 
     return (
-        <Layout>
-            <Heading heading="Hello Smart People!" sub_heading="I'm Chris." />
-            <div className={styles.container}>
-                <div className={styles.first_con}>
-                    {/* <SubHeading heading="Recent Articles" /> */}
-                    <ArticleList className={styles.articles} articles={articles} />
-                    <Link className={`${util_styles.block} ${util_styles.link}`} to="/articles">More Articles</Link>
-
-                    <SubHeading heading="Some Projects" />
-                    <ProjectList className={styles.projects} projects={projects} count={2} />
-                    <Link className={`${util_styles.block} ${util_styles.link}`} to="/projects">More Projects</Link>
-
-                    <SubHeading heading="Photography" />
-
-                    <Link to="/photography"><GatsbyImage className={photography_styles.slim_photo} image={getImage(data.photo as ImageDataLike)!} alt="alpha_mike" /></Link>
-                    <Link className={`${util_styles.block} ${util_styles.link}`} to="/photography">More Photos</Link>
-                </div>
-                <div className={styles.second_con}>
-                    <div className={styles.languages}>
-                        <div className={styles.language}><h2>Main Languages</h2></div>
-                        <Link to="/projects/cpp" className={styles.language}>
-                            <HoverIcon className={styles.icon} icon="/icons/c-plusplus.svg" icon_mono="/icons/c-plusplus_mono.svg" alt="C++" />
-                        </Link>
-                        <Link to="/projects/rust" className={styles.language}>
-                            <HoverIcon className={styles.icon} icon="/icons/rust.svg" alt="Rust" />
-                        </Link>
-                        <Link to="/projects/typescript" className={styles.language}>
-                            <HoverIcon className={styles.icon} icon="/icons/typescript-icon.svg" icon_mono="/icons/typescript-icon_mono.svg" alt="TypeScript" />
-                        </Link>
-                        <Link to="/projects/python" className={styles.language}>
-                            <HoverIcon className={styles.icon} icon="/icons/python.svg" alt="Python" />
-                        </Link>
-                    </div>
-                </div>
+        <Layout banner_image={data.photo as ImageDataLike} banner_image_style={styles.banner_image} banner_content={
+            <div className={styles.banner_content}>
+                <h1>Hello Smart People, I'm Chris!</h1>
+                <p>What are you interested in?</p>
             </div>
+        }>
         </Layout>
     );
 };
@@ -110,7 +81,7 @@ query Home {
       }
     }
   }
-  photo: file(sourceInstanceName: {eq: "photography"}, name: {eq: "alpha_mike"}) {
+  photo: file(sourceInstanceName: {eq: "photography"}, name: {eq: "alpha_quebec"}) {
     childImageSharp {
       gatsbyImageData(placeholder: BLURRED)
     }

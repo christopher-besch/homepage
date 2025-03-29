@@ -1,85 +1,14 @@
 @use "consts.scss";
 
-.container {
-    /* margin-top: 16px; */
+.banner_image img {
+    object-position: 65% 30%;
 }
 
-.container::after {
-    content: "";
-    display: table;
-    clear: both;
-}
-
-.first_con {
-    width: 80%;
-    float: left;
-    /* margin-top: 8px; */
-}
-
-.second_con {
-    width: 20%;
-    float: left;
-    text-align: right;
-    margin-top: 8px;
-    padding-top: 8px;
-}
-
-.projects {
-    margin-bottom: 8px;
-}
-
-.articles {
-    margin-bottom: 8px;
-}
-
-.languages {
-    display: inline-block;
-    margin-left: 16px;
-    /* width: 95%; */
-    background-color: consts.$back_sec;
-    border-radius: consts.$border_radius;
-    /* no idea why this is required but it is */
-    margin-top: -16px;
-}
-
-.languages::after {
-    /* clear floats afterwards */
-    content: "";
-    display: table;
-    clear: both;
-}
-
-.language {
-    float: left;
-    width: 100%;
-    font-size: 15vh;
-    text-align: center;
-}
-
-.icon {
-    display: inline-block;
-}
-
-.language h2 {
-    font-size: 35px;
-    margin-top: 10px;
-    margin-bottom: 20px;
-}
-
-@media (max-width: 800px) {
-    .first_con {
-        width: 100%;
-    }
-
-    .second_con {
-        width: 100%;
-        text-align: center;
-        padding-left: 0;
-    }
-
-    .languages {
-        margin-left: 0px;
-        margin-top: 16px;
-        width: 100%;
-    }
+.banner_content {
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
+    font-size: 30px;
+    --color-text: #ffffff;
+    --color-icon-mono: #ffffff;
 }
