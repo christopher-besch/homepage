@@ -24,7 +24,7 @@ const Home = ({ data }: PageProps<Queries.HomeQuery>) => {
     return (
         <Layout banner_image={data.photo as ImageDataLike} banner_image_style={styles.banner_image} banner_content={
             <div className={styles.banner_content}>
-                <h1>Hello Smart People, I'm Chris!</h1>
+                <h1>I'm Chris!</h1>
                 <p>What are you interested in?</p>
 
                 <div className={styles.languages}>

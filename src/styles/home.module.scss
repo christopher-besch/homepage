@@ -5,17 +5,26 @@
 }
 
 .banner_content {
-    font-size: 30px;
+    font-size: 40px;
     --color-text: #ffffff;
     --color-icon-mono: #ffffff;
 }
 
+.banner_content h1 {
+    font-size: 70px;
+}
+
+.banner_content p {
+    font-size: 40px;
+}
+
 .languages {
+    margin-top: 20px;
     display: flex;
     flex-direction: row;
 }
 
 .language {
     margin: 10px;
-    font-size: 35px;
+    font-size: 70px;
 }
