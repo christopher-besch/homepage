@@ -5,6 +5,7 @@
         --color-heading: #ffffff;
         --color-nav: #e0e0e0;
         --color-text: #000000;
+        --color-icon-mono: #a4a4a4;
         --color-link: #fffcf2;
         --color-link-hover: rgba(100%, 100%, 100%, 0.4);
         --color-accent: #ffa500;
@@ -20,6 +21,7 @@
         --color-heading: #343a40;
         --color-nav: #212529;
         --color-text: #ffffff;
+        --color-icon-mono: #ffffff;
         --color-link: #fffcf2;
         --color-link-hover: rgba(100%, 100%, 100%, 0.4);
         --color-accent: #ffa500;
@@ -35,6 +37,7 @@ $back_heading: var(--color-heading);
 $back_tile_title: var(--color-tile-title);
 $nav: var(--color-nav);
 $text: var(--color-text);
+$icon_mono: var(--color-icon-mono);
 $link: var(--color-link);
 $link_hover: var(--color-link-hover);
 $accent: var(--color-accent);
