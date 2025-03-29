@@ -57,6 +57,7 @@
 
 .article hr {
     border-color: consts.$accent;
+    border-style: solid;
     transition: border-color consts.$transition_time;
     margin: 5px -5px 10px;
 }
