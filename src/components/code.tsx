@@ -27,7 +27,7 @@ const PrismSyntaxHighlight = ({ children, className }: React.DetailedHTMLProps<R
 
     // children are not a string but TypeScript is unhappy...
     return (
-        <Highlight prism={Prism} code={children as string} language={language}>
+        <Highlight prism={Prism} code={children as string} language={language} theme={{ plain: {}, styles: [] }}>
             {({ className, tokens, getLineProps, getTokenProps }) =>
                 <code className={className}>
                     {tokens.slice(0, -1).map((line, i) =>
