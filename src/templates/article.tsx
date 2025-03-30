@@ -64,7 +64,7 @@ query Article($id: String!) {
   mdx(id: { eq: $id }) {
     body
     frontmatter {
-      date(formatString: "dddd, MMMM D, YYYY")
+      date(formatString: "dddd, Do MMMM, YYYY")
       title
       description
       banner
