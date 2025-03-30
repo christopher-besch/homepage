@@ -104,6 +104,9 @@ query SEO {
                 type="font/woff"
                 crossOrigin="anonymous"
             />
+
+            {/* Samsung Internet likes to be special: https://developer.samsung.com/internet/blog/en/2020/12/15/dark-mode-in-samsung-internet */}
+            <meta name="color-scheme" content="light dark" />
         </>
     );
 }
