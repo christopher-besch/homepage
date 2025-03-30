@@ -19,15 +19,10 @@ const Home = ({ data }: PageProps<Queries.HomeQuery>) => {
     const projects = all_projects.filter(project => project.priority <= max_priority_highlight);
 
     const all_articles = data.articles.edges.map(gql_to_article);
-    const articles = all_articles.slice(0, 4);
-
-    const mono_text = `
-I like Heavy Compute.
-       Heavy Compute.
-`;
+    const articles = all_articles.slice(0, 3);
 
     return (
-        <Layout banner_image={data.photo as ImageDataLike} banner_image_style={styles.banner_image} banner_content={
+        <Layout banner_image={data.banner_photo as ImageDataLike} banner_image_style={styles.banner_image} banner_content={
             <div className={styles.banner_content}>
                 <h1>Welcome to Chris'&nbsp;Place!</h1>
                 <p>What are you here for?</p>
@@ -48,7 +43,19 @@ I like Heavy Compute.
                 </div>
             </div>
         }>
-            hi
+
+            <SubHeading heading="Recent Articles" />
+            <ArticleList articles={articles} />
+            <Link className={`${util_styles.block} ${util_styles.link}`} to="/articles">More Articles</Link>
+
+            <SubHeading heading="Some Projects" />
+            <ProjectList className={styles.projects} projects={projects} count={2} />
+            <Link className={`${util_styles.block} ${util_styles.link}`} to="/projects">More Projects</Link>
+
+            <SubHeading heading="Photography" />
+
+            <Link to="/photography"><GatsbyImage className={photography_styles.slim_photo} image={getImage(data.photo as ImageDataLike)!} alt="alpha_mike" /></Link>
+            <Link className={`${util_styles.block} ${util_styles.link}`} to="/photography">More Photos</Link>
         </Layout>
     );
 };
@@ -102,7 +109,12 @@ query Home {
       }
     }
   }
-  photo: file(sourceInstanceName: {eq: "photography"}, name: {eq: "alpha_quebec"}) {
+  banner_photo: file(sourceInstanceName: {eq: "photography"}, name: {eq: "alpha_quebec"}) {
+    childImageSharp {
+      gatsbyImageData(placeholder: BLURRED)
+    }
+  }
+  photo: file(sourceInstanceName: {eq: "photography"}, name: {eq: "alpha_mike"}) {
     childImageSharp {
       gatsbyImageData(placeholder: BLURRED)
     }
