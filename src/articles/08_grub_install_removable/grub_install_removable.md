@@ -60,7 +60,7 @@ Then your shiny-new bootloader appears in the UEFI boot options and you can boot
 
 That doesn't work here, so what now?
 
-## `grub-install --removable` to the Rescue
+## `--removable` to the Rescue
 
 Thing is, not all installation can rely on the NVRAM—for example a live-USB.
 When plugging in a live-USB the UEFI needs to be able to boot from it even though it has never seen it before.
