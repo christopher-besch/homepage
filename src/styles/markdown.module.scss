@@ -1134,6 +1134,12 @@
 
 @media (prefers-color-scheme: dark) {
     // following code copied and slightly modified with `:%s/markdown_body/markdown_body/g` from https://github.com/sindresorhus/github-markdown-css
+    // modifications:
+    // .markdown_body pre {
+    //     // changed this manually
+    //     background-color: rgb(40, 44, 52);
+    // }
+
     /* MIT License */
 
     /* Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com) */
@@ -1887,7 +1893,8 @@
         font-size: 85%;
         line-height: 1.45;
         color: #f0f6fc;
-        background-color: #151b23;
+        // changed this manually
+        background-color: rgb(40, 44, 52);
         border-radius: 6px;
     }
 

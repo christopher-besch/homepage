@@ -1,7 +1,11 @@
 import React from "react";
 import Prism from "prismjs";
 // import loadLanguages from "prismjs/components";
-import { Highlight, themes } from "prism-react-renderer";
+import { Highlight } from "prism-react-renderer";
+
+// don't use scss for this becuase the prismjs themes would need to be converted first
+// don't use prim-react-renderer themes as they can't light/dark mode switch
+import "../styles/code.css";
 
 // this doesn't work for some reason
 // import loadLanguages from "prismjs/components/";
@@ -19,12 +23,11 @@ require("prismjs/components/prism-python");
 
 // reference: https://coffeeaddict.dev/gatsby-mdx-prism/
 const PrismSyntaxHighlight = ({ children, className }: React.DetailedHTMLProps<React.HTMLAttributes<HTMLPreElement>, HTMLPreElement>) => {
-    console.log(Prism.languages);
     const language = className!.replace(/language-/gm, "");
 
     // children are not a string but TypeScript is unhappy...
     return (
-        <Highlight prism={Prism} code={children as string} language={language} theme={themes.oceanicNext}>
+        <Highlight prism={Prism} code={children as string} language={language}>
             {({ className, tokens, getLineProps, getTokenProps }) =>
                 <code className={className}>
                     {tokens.slice(0, -1).map((line, i) =>
