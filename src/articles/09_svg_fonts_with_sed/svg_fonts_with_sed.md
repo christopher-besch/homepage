@@ -124,4 +124,8 @@ sed -E 's/(<svg [^>]+>)/\1\ncI0WWZKD2UKEj\n/' "$1" | \
     sed 's/cI0WWZKD2UKEj//' \
     > "$2"
 ```
-Save this as `load_fonts_in_css.sh`, run `chmod +x ./load_fonts_in_css.sh` and `./load_fonts_in_css.sh input_svg.svg output_svg.svg`.
+Save this as `load_fonts_in_css.sh`, run:
+```bash
+chmod +x ./load_fonts_in_css.sh
+./load_fonts_in_css.sh input_svg.svg output_svg.svg
+```
