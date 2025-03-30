@@ -39,9 +39,6 @@
     background-color: consts.$back_sec;
     padding: 10px;
     border-radius: consts.$border_radius;
-
-    /* used to make all tiles of same height */
-    height: 18em;
 }
 
 .image_wrapper img {
@@ -51,6 +48,11 @@
 .image {
     // TODO: crop images properly in GIMP
     aspect-ratio: 21/9;
+}
+
+.text {
+    /* used to make all tiles of same height */
+    height: 8em;
 }
 
 .heading {
@@ -71,7 +73,7 @@
     align-self: flex-end;
 }
 
-.text {
+.description {
     /* used to make all tiles of same height */
     font-size: 18px;
 
@@ -80,7 +82,7 @@
     /* justify-content: center; */
 }
 
-.text p {
+.description p {
     line-height: 25px;
     vertical-align: middle;
 }
@@ -103,7 +105,7 @@
         width: var(--quarter-width);
     }
 
-    .content {
+    .text {
         /* used to make all tiles of same height */
         height: auto;
     }
