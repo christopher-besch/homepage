@@ -106,7 +106,7 @@ query SEO {
             />
 
             {/* Samsung Internet likes to be special: https://developer.samsung.com/internet/blog/en/2020/12/15/dark-mode-in-samsung-internet */}
-            <meta name="color-scheme" content="light dark" />
+            <meta name="color-scheme" content="light dark only" />
         </>
     );
 }
