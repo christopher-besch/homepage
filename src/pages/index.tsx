@@ -30,25 +30,7 @@ I like Heavy Compute.
         <Layout banner_image={data.photo as ImageDataLike} banner_image_style={styles.banner_image} banner_content={
             <div className={styles.banner_content}>
                 <h1>Welcome to Chris'&nbsp;Place!</h1>
-                {/* <p>I like Heavy Compute.</p> */}
-                <pre>
-                    {/* <Link to="/about">chris</Link>@place λ neofetch<br /> */}
-                    {/* λ ssh chris-besch.com<br /> */}
-                    {/* <br /> */}
-                    {/* Welcome to Chris' Place<br /> */}
-                    {/* <p>Danger: Heavy Calculation</p> */}
-                    {/* <br /> */}
-                    {/* I like Solving Problems<br /> */}
-                    {/* {'       '}Writing <Link to="/articles">Articles</Link><br /> */}
-                    {/* {'       '}Taking  <Link to="/photography">Photos</Link> */}
-                    {/* {'       '}Playing with Data<br /> */}
-                    {/* <li><Link to="/projects">Projects</Link></li> */}
-                    {/* <li><Link to="/photography">Photography</Link></li> */}
-                    {/* <li><Link to="/about">About</Link></li> */}
-                </pre>
                 <p>What are you here for?</p>
-                {/* <p>Solving Problems, Writing Articles, Playing with Data.</p> */}
-                {/* <p>What are you interested in?</p> */}
 
                 <div className={styles.languages}>
                     <Link to="/projects/cpp" className={styles.language}>
