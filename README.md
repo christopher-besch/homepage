@@ -63,6 +63,7 @@ yarn run check_links
 - [Ty Hopp](https://tyhopp.com/)
 - [abl](https://ablspacesystems.com)
 - https://www.smashingmagazine.com/2023/08/designing-accessible-text-over-images-part2/
+- https://rmoff.net/
 
 ## Content References
 - [Apollo 11 Transcript](https://www.hq.nasa.gov/alsj/a11/a11transcript_tec.html)
