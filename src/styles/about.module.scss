@@ -79,8 +79,14 @@
     border-radius: consts.$border_radius;
 }
 
+.content h3 {
+    height: 3em;
+    font-family: liberation_mono;
+}
+
 .content hr {
     border-color: consts.$accent;
+    border-style: solid;
     transition: border-color consts.$transition_time;
     margin: 5px -5px 10px;
 }
@@ -99,34 +105,6 @@
     -webkit-mask-position: center;
 
     transition: mask-size consts.$transition_time -webkit-mask-size consts.$transition_time;
-}
-
-.pgp_container {
-    float: left;
-    padding-left: 16px;
-    width: 100%;
-}
-
-.pgp {
-    font-size: 0.8vw;
-    padding: 10px;
-    font-family: 'liberation_mono';
-    background-color: consts.$back_sec;
-    margin-bottom: 16px;
-    border-radius: consts.$border_radius;
-    overflow: scroll;
-}
-
-.music_container {
-    background-color: consts.$back_sec;
-    margin-bottom: 16px;
-    border-radius: consts.$border_radius;
-}
-
-.music {
-    padding: 10px;
-    font-family: 'liberation_mono';
-    overflow: scroll;
 }
 
 @media (max-width: 1200px) {
@@ -148,11 +126,7 @@
         padding-left: 0px;
     }
 
-    .pgp_container {
-        padding-left: 0px;
-    }
-
-    .pgp {
-        font-size: 2.35vw;
+    .content h3 {
+        height: auto;
     }
 }

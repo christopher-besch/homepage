@@ -6,6 +6,11 @@ const config: GatsbyConfig = {
             name: "mail@chris-besch.com",
             link: "mailto:mail@chris-besch.com",
         },
+        pgp: {
+            fingerprint: "9393 2AD1 1DCC 2CCB 4852 AE70 D610 18FF A38E 5AFA",
+            name: "Christopher Besch mail@chris-besch.com-(0xD61018FFA38E5AFA)-public.asc",
+            link: "/pgp_pub_key.asc",
+        },
         privacy_email: {
             name: "privacy@chris-besch.com",
             link: "mailto:privacy@chris-besch.com",
@@ -13,6 +18,10 @@ const config: GatsbyConfig = {
         github: {
             name: "christopher-besch",
             link: "https://github.com/christopher-besch",
+        },
+        codeberg: {
+            name: "christopher-besch",
+            link: "https://codeberg.org/christopher-besch",
         },
         linkedin: {
             name: "christopher-besch",

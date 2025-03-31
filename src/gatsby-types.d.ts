@@ -2547,6 +2547,7 @@ type SitePluginSortInput = {
 
 type SiteSiteMetadata = {
   readonly cloudflare_token: Maybe<Scalars['String']>;
+  readonly codeberg: Maybe<SiteSiteMetadataCodeberg>;
   readonly default_origin: Maybe<Scalars['String']>;
   readonly description: Maybe<Scalars['String']>;
   readonly discord: Maybe<SiteSiteMetadataDiscord>;
@@ -2554,11 +2555,32 @@ type SiteSiteMetadata = {
   readonly github: Maybe<SiteSiteMetadataGithub>;
   readonly linkedin: Maybe<SiteSiteMetadataLinkedin>;
   readonly origin: Maybe<Scalars['String']>;
+  readonly pgp: Maybe<SiteSiteMetadataPgp>;
   readonly present_url: Maybe<Scalars['String']>;
   readonly privacy_email: Maybe<SiteSiteMetadataPrivacy_email>;
   readonly source: Maybe<Scalars['String']>;
   readonly title: Maybe<Scalars['String']>;
   readonly twitter: Maybe<SiteSiteMetadataTwitter>;
+};
+
+type SiteSiteMetadataCodeberg = {
+  readonly link: Maybe<Scalars['String']>;
+  readonly name: Maybe<Scalars['String']>;
+};
+
+type SiteSiteMetadataCodebergFieldSelector = {
+  readonly link: InputMaybe<FieldSelectorEnum>;
+  readonly name: InputMaybe<FieldSelectorEnum>;
+};
+
+type SiteSiteMetadataCodebergFilterInput = {
+  readonly link: InputMaybe<StringQueryOperatorInput>;
+  readonly name: InputMaybe<StringQueryOperatorInput>;
+};
+
+type SiteSiteMetadataCodebergSortInput = {
+  readonly link: InputMaybe<SortOrderEnum>;
+  readonly name: InputMaybe<SortOrderEnum>;
 };
 
 type SiteSiteMetadataDiscord = {
@@ -2603,6 +2625,7 @@ type SiteSiteMetadataEmailSortInput = {
 
 type SiteSiteMetadataFieldSelector = {
   readonly cloudflare_token: InputMaybe<FieldSelectorEnum>;
+  readonly codeberg: InputMaybe<SiteSiteMetadataCodebergFieldSelector>;
   readonly default_origin: InputMaybe<FieldSelectorEnum>;
   readonly description: InputMaybe<FieldSelectorEnum>;
   readonly discord: InputMaybe<SiteSiteMetadataDiscordFieldSelector>;
@@ -2610,6 +2633,7 @@ type SiteSiteMetadataFieldSelector = {
   readonly github: InputMaybe<SiteSiteMetadataGithubFieldSelector>;
   readonly linkedin: InputMaybe<SiteSiteMetadataLinkedinFieldSelector>;
   readonly origin: InputMaybe<FieldSelectorEnum>;
+  readonly pgp: InputMaybe<SiteSiteMetadataPgpFieldSelector>;
   readonly present_url: InputMaybe<FieldSelectorEnum>;
   readonly privacy_email: InputMaybe<SiteSiteMetadataPrivacy_emailFieldSelector>;
   readonly source: InputMaybe<FieldSelectorEnum>;
@@ -2619,6 +2643,7 @@ type SiteSiteMetadataFieldSelector = {
 
 type SiteSiteMetadataFilterInput = {
   readonly cloudflare_token: InputMaybe<StringQueryOperatorInput>;
+  readonly codeberg: InputMaybe<SiteSiteMetadataCodebergFilterInput>;
   readonly default_origin: InputMaybe<StringQueryOperatorInput>;
   readonly description: InputMaybe<StringQueryOperatorInput>;
   readonly discord: InputMaybe<SiteSiteMetadataDiscordFilterInput>;
@@ -2626,6 +2651,7 @@ type SiteSiteMetadataFilterInput = {
   readonly github: InputMaybe<SiteSiteMetadataGithubFilterInput>;
   readonly linkedin: InputMaybe<SiteSiteMetadataLinkedinFilterInput>;
   readonly origin: InputMaybe<StringQueryOperatorInput>;
+  readonly pgp: InputMaybe<SiteSiteMetadataPgpFilterInput>;
   readonly present_url: InputMaybe<StringQueryOperatorInput>;
   readonly privacy_email: InputMaybe<SiteSiteMetadataPrivacy_emailFilterInput>;
   readonly source: InputMaybe<StringQueryOperatorInput>;
@@ -2673,6 +2699,30 @@ type SiteSiteMetadataLinkedinSortInput = {
   readonly name: InputMaybe<SortOrderEnum>;
 };
 
+type SiteSiteMetadataPgp = {
+  readonly fingerprint: Maybe<Scalars['String']>;
+  readonly link: Maybe<Scalars['String']>;
+  readonly name: Maybe<Scalars['String']>;
+};
+
+type SiteSiteMetadataPgpFieldSelector = {
+  readonly fingerprint: InputMaybe<FieldSelectorEnum>;
+  readonly link: InputMaybe<FieldSelectorEnum>;
+  readonly name: InputMaybe<FieldSelectorEnum>;
+};
+
+type SiteSiteMetadataPgpFilterInput = {
+  readonly fingerprint: InputMaybe<StringQueryOperatorInput>;
+  readonly link: InputMaybe<StringQueryOperatorInput>;
+  readonly name: InputMaybe<StringQueryOperatorInput>;
+};
+
+type SiteSiteMetadataPgpSortInput = {
+  readonly fingerprint: InputMaybe<SortOrderEnum>;
+  readonly link: InputMaybe<SortOrderEnum>;
+  readonly name: InputMaybe<SortOrderEnum>;
+};
+
 type SiteSiteMetadataPrivacy_email = {
   readonly link: Maybe<Scalars['String']>;
   readonly name: Maybe<Scalars['String']>;
@@ -2695,6 +2745,7 @@ type SiteSiteMetadataPrivacy_emailSortInput = {
 
 type SiteSiteMetadataSortInput = {
   readonly cloudflare_token: InputMaybe<SortOrderEnum>;
+  readonly codeberg: InputMaybe<SiteSiteMetadataCodebergSortInput>;
   readonly default_origin: InputMaybe<SortOrderEnum>;
   readonly description: InputMaybe<SortOrderEnum>;
   readonly discord: InputMaybe<SiteSiteMetadataDiscordSortInput>;
@@ -2702,6 +2753,7 @@ type SiteSiteMetadataSortInput = {
   readonly github: InputMaybe<SiteSiteMetadataGithubSortInput>;
   readonly linkedin: InputMaybe<SiteSiteMetadataLinkedinSortInput>;
   readonly origin: InputMaybe<SortOrderEnum>;
+  readonly pgp: InputMaybe<SiteSiteMetadataPgpSortInput>;
   readonly present_url: InputMaybe<SortOrderEnum>;
   readonly privacy_email: InputMaybe<SiteSiteMetadataPrivacy_emailSortInput>;
   readonly source: InputMaybe<SortOrderEnum>;
@@ -2774,7 +2826,7 @@ type WebPOptions = {
 type AboutQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type AboutQuery = { readonly site: { readonly siteMetadata: { readonly linkedin: { readonly name: string | null, readonly link: string | null } | null, readonly twitter: { readonly name: string | null, readonly link: string | null } | null, readonly email: { readonly name: string | null, readonly link: string | null } | null, readonly discord: { readonly name: string | null, readonly link: string | null } | null, readonly github: { readonly name: string | null, readonly link: string | null } | null } | null } | null };
+type AboutQuery = { readonly site: { readonly siteMetadata: { readonly linkedin: { readonly name: string | null, readonly link: string | null } | null, readonly twitter: { readonly name: string | null, readonly link: string | null } | null, readonly email: { readonly name: string | null, readonly link: string | null } | null, readonly pgp: { readonly fingerprint: string | null, readonly name: string | null, readonly link: string | null } | null, readonly discord: { readonly name: string | null, readonly link: string | null } | null, readonly github: { readonly name: string | null, readonly link: string | null } | null, readonly codeberg: { readonly name: string | null, readonly link: string | null } | null } | null } | null, readonly banner_photo: { readonly childImageSharp: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData } | null } | null };
 
 type ArticleQueryVariables = Exact<{
   id: Scalars['String'];
