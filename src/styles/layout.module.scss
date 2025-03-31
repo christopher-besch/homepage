@@ -136,11 +136,14 @@
     // This is a problem on mobile because of the address bar.
     // Using dvh scales everything very strangely when you scroll.
     height: calc(100vh - 47px - 2*20px);
-    z-index: -1;
 }
 
 .small_banner_image {
-    height: calc(100vh - 400px);
+    height: calc(60vh);
+}
+
+.small_banner_image,
+.banner_image {
     z-index: -1;
 }
 
