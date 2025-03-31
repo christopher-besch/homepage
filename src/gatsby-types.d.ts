@@ -1352,6 +1352,8 @@ type MdxFrontmatter = {
   readonly thumb: Maybe<File>;
   readonly title: Maybe<Scalars['String']>;
   readonly title_banner: Maybe<File>;
+  readonly title_banner_horizontal_position: Maybe<Scalars['String']>;
+  readonly title_banner_vertical_position: Maybe<Scalars['String']>;
   readonly type: Maybe<Scalars['String']>;
   readonly version: Maybe<Scalars['String']>;
 };
@@ -1377,6 +1379,8 @@ type MdxFrontmatterFieldSelector = {
   readonly thumb: InputMaybe<FileFieldSelector>;
   readonly title: InputMaybe<FieldSelectorEnum>;
   readonly title_banner: InputMaybe<FileFieldSelector>;
+  readonly title_banner_horizontal_position: InputMaybe<FieldSelectorEnum>;
+  readonly title_banner_vertical_position: InputMaybe<FieldSelectorEnum>;
   readonly type: InputMaybe<FieldSelectorEnum>;
   readonly version: InputMaybe<FieldSelectorEnum>;
 };
@@ -1394,6 +1398,8 @@ type MdxFrontmatterFilterInput = {
   readonly thumb: InputMaybe<FileFilterInput>;
   readonly title: InputMaybe<StringQueryOperatorInput>;
   readonly title_banner: InputMaybe<FileFilterInput>;
+  readonly title_banner_horizontal_position: InputMaybe<StringQueryOperatorInput>;
+  readonly title_banner_vertical_position: InputMaybe<StringQueryOperatorInput>;
   readonly type: InputMaybe<StringQueryOperatorInput>;
   readonly version: InputMaybe<StringQueryOperatorInput>;
 };
@@ -1411,6 +1417,8 @@ type MdxFrontmatterSortInput = {
   readonly thumb: InputMaybe<FileSortInput>;
   readonly title: InputMaybe<SortOrderEnum>;
   readonly title_banner: InputMaybe<FileSortInput>;
+  readonly title_banner_horizontal_position: InputMaybe<SortOrderEnum>;
+  readonly title_banner_vertical_position: InputMaybe<SortOrderEnum>;
   readonly type: InputMaybe<SortOrderEnum>;
   readonly version: InputMaybe<SortOrderEnum>;
 };
@@ -2773,7 +2781,7 @@ type ArticleQueryVariables = Exact<{
 }>;
 
 
-type ArticleQuery = { readonly mdx: { readonly body: string | null, readonly frontmatter: { readonly date: string | null, readonly title: string | null, readonly description: string | null, readonly banner: string | null, readonly version: string | null, readonly title_banner: { readonly childImageSharp: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData } | null } | null } | null } | null };
+type ArticleQuery = { readonly mdx: { readonly body: string | null, readonly frontmatter: { readonly date: string | null, readonly title: string | null, readonly description: string | null, readonly banner: string | null, readonly title_banner_horizontal_position: string | null, readonly title_banner_vertical_position: string | null, readonly version: string | null, readonly title_banner: { readonly childImageSharp: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData } | null } | null } | null } | null };
 
 type ArticlesQueryVariables = Exact<{ [key: string]: never; }>;
 

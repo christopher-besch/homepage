@@ -1,6 +1,6 @@
 import React from "react";
 import { graphql, Link, PageProps } from "gatsby";
-import { getImage, GatsbyImage, IGatsbyImageData, ImageDataLike } from "gatsby-plugin-image";
+import { getImage, GatsbyImage, ImageDataLike } from "gatsby-plugin-image";
 
 import Layout from "src/components/layout";
 import SEO from "src/components/seo";
@@ -9,7 +9,6 @@ import ArticleList, { gql_to_article } from "src/components/article_list";
 import * as styles from "src/styles/home.module.scss";
 import * as util_styles from "src/styles/utils.module.scss";
 import * as photography_styles from "src/styles/photography.module.scss";
-import Heading from "src/components/heading";
 import SubHeading from "src/components/sub_heading";
 import HoverIcon from "src/components/hover_icon";
 import { max_priority_highlight } from "src/utils/consts";
@@ -21,8 +20,12 @@ const Home = ({ data }: PageProps<Queries.HomeQuery>) => {
     const all_articles = data.articles.edges.map(gql_to_article);
     const articles = all_articles.slice(0, 3);
 
+    const banner_image_style = {
+        "--banner-image-horizontal-position": "65%",
+        "--banner-image-vertical-position": "30%",
+    } as React.CSSProperties;
     return (
-        <Layout banner_image={data.banner_photo as ImageDataLike} banner_image_style={styles.banner_image} banner_content={
+        <Layout banner_image={data.banner_photo as ImageDataLike} banner_image_style={banner_image_style} banner_content={
             <div className={styles.banner_content}>
                 <h1>Welcome to Chris'&nbsp;Place!</h1>
                 <p>What are you here for?</p>

@@ -45,8 +45,13 @@ const Article = ({ data, children }: ArticleProps) => {
 
     const date = data.mdx?.frontmatter?.date as string;
     const use_banner_image = data.mdx?.frontmatter?.title_banner != undefined;
+
+    const banner_image_style = {
+        "--banner-image-horizontal-position": data.mdx?.frontmatter?.title_banner_horizontal_position,
+        "--banner-image-vertical-position": data.mdx?.frontmatter?.title_banner_vertical_position,
+    } as React.CSSProperties;
     return (
-        <Layout heading={title} sub_heading={sub_heading} banner_image={use_banner_image ? data.mdx?.frontmatter?.title_banner as ImageDataLike : undefined} small_banner={true} banner_content={
+        <Layout heading={title} sub_heading={sub_heading} banner_image={use_banner_image ? data.mdx?.frontmatter?.title_banner as ImageDataLike : undefined} banner_image_style={banner_image_style} small_banner={true} banner_content={
             <div className={`${styles.metadata} ${use_banner_image ? styles.banner_metadata : undefined}`}>
                 <span className={styles.author}>Written by Christopher Besch, published on </span>{date}
             </div>
@@ -76,6 +81,8 @@ query Article($id: String!) {
           gatsbyImageData(placeholder: BLURRED)
         }
       }
+      title_banner_horizontal_position
+      title_banner_vertical_position
       version
     }
   }

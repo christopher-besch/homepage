@@ -144,6 +144,11 @@
     z-index: -1;
 }
 
+.banner_image img,
+.small_banner_image img {
+    object-position: var(--banner-image-horizontal-position) var(--banner-image-vertical-position);
+}
+
 .banner_content_container {
     position: absolute;
     bottom: 0px;

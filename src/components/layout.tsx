@@ -13,8 +13,8 @@ interface LayoutProps {
     keep_heading_line?: boolean;
     sub_heading?: string;
     banner_image?: ImageDataLike;
-    banner_image_style?: string;
     banner_content?: React.ReactNode;
+    banner_image_style?: React.CSSProperties;
     small_banner?: boolean;
 }
 const Layout = (props: LayoutProps) => {
@@ -67,7 +67,7 @@ query Layout {
             {
                 use_banner_image
                     ? <div className={styles.banner_container}>
-                        <GatsbyImage className={`${props.small_banner ? styles.small_banner_image : styles.banner_image} ${props.banner_image_style}`} image={getImage(props.banner_image!)!} alt="banner_image" />
+                        <GatsbyImage style={props.banner_image_style} className={`${props.small_banner ? styles.small_banner_image : styles.banner_image}`} image={getImage(props.banner_image!)!} alt="banner_image" />
                         {page_header_text}
                     </div>
                     : undefined
