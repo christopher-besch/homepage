@@ -1,6 +1,10 @@
 @use "consts.scss";
 
-.article {
+.link {
+    text-decoration: none;
+}
+
+.tile {
     background-color: consts.$back_sec;
     padding: 10px;
     border-radius: consts.$border_radius;
@@ -10,7 +14,6 @@
 
     display: flex;
     flex-direction: row;
-    text-decoration: none;
 }
 
 .image {
@@ -27,7 +30,7 @@
 }
 
 @media (max-width: 1000px) {
-    .article {
+    .tile {
         flex-direction: column;
     }
 
@@ -46,23 +49,23 @@
     font-size: 30px;
 }
 
-.article p {
+.tile p {
     margin-bottom: 16px;
     line-height: 1.3em;
 }
 
-.article p:last-of-type {
+.tile p:last-of-type {
     margin-bottom: 0px;
 }
 
-.article hr {
+.tile hr {
     border-color: consts.$accent;
     border-style: solid;
     transition: border-color consts.$transition_time;
     margin: 5px -5px 10px;
 }
 
-.article:hover hr {
+.tile:hover hr {
     border-color: consts.$hover_accent;
 }
 

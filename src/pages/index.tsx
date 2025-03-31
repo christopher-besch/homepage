@@ -5,7 +5,7 @@ import { getImage, GatsbyImage, ImageDataLike } from "gatsby-plugin-image";
 import Layout from "src/components/layout";
 import SEO from "src/components/seo";
 import ProjectList, { gql_to_project } from "src/components/project_list";
-import ArticleList, { gql_to_article } from "src/components/article_list";
+import TileList, { gql_article_to_tile } from "src/components/tile_list";
 import * as styles from "src/styles/home.module.scss";
 import * as util_styles from "src/styles/utils.module.scss";
 import * as photography_styles from "src/styles/photography.module.scss";
@@ -17,7 +17,7 @@ const Home = ({ data }: PageProps<Queries.HomeQuery>) => {
     const all_projects = data.projects.edges.map(gql_to_project);
     const projects = all_projects.filter(project => project.priority <= max_priority_highlight);
 
-    const all_articles = data.articles.edges.map(gql_to_article);
+    const all_articles = data.articles.edges.map(gql_article_to_tile);
     const articles = all_articles.slice(0, 3);
 
     const banner_image_style = {
@@ -48,7 +48,7 @@ const Home = ({ data }: PageProps<Queries.HomeQuery>) => {
         }>
 
             <SubHeading heading="Recent Articles" />
-            <ArticleList articles={articles} />
+            <TileList tiles={articles} />
             <Link className={`${util_styles.block} ${util_styles.link}`} to="/articles">More Articles</Link>
 
             <SubHeading heading="Some Projects" />

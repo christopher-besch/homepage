@@ -2,31 +2,31 @@ import React from "react";
 import { graphql, PageProps } from "gatsby";
 import Layout from "src/components/layout";
 import SEO from "src/components/seo";
-import TileList, { gql_article_to_tile } from "src/components/tile_list";
+import TileList, { gql_talk_to_tile } from "src/components/tile_list";
 
-const Articles = ({ data }: PageProps<Queries.ArticlesQuery>) => {
-    const tiles = data.allMdx.edges.map(gql_article_to_tile);
+const Talks = ({ data }: PageProps<Queries.TalksQuery>) => {
+    const talks = data.allMdx.edges.map(gql_talk_to_tile);
     return (
-        <Layout heading="Articles">
-            <TileList tiles={tiles} />
+        <Layout heading="Talks">
+            <TileList tiles={talks} />
         </Layout >
     );
 };
-export default Articles;
+export default Talks;
 
 export const query = graphql`
-query Articles {
+query Talks {
   allMdx(
     sort: {frontmatter: {date: DESC}}
-    filter: {frontmatter: {type: {eq: "article"}, listed: {eq: true}}}
+    filter: {frontmatter: {type: {eq: "talk"}, listed: {eq: true}}}
   ) {
     edges {
       node {
         id
         frontmatter {
-          slug
           description
           title
+          link
           thumb {
             childImageSharp {
               gatsbyImageData(placeholder: BLURRED)
@@ -41,5 +41,5 @@ query Articles {
 `;
 
 export const Head = () => (
-    <SEO heading="Articles" />
+    <SEO heading="Talks" />
 );

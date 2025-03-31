@@ -1,5 +1,5 @@
 import { graphql, Link, useStaticQuery } from "gatsby";
-import { getImage, GatsbyImage, IGatsbyImageData, ImageDataLike } from "gatsby-plugin-image";
+import { getImage, GatsbyImage, ImageDataLike } from "gatsby-plugin-image";
 import React from "react";
 
 import Heading from "src/components/heading";
@@ -58,6 +58,7 @@ query Layout {
                         <li><Link to="/">Home</Link></li>
                         <li><Link to="/articles">Articles</Link></li>
                         <li><Link to="/projects">Projects</Link></li>
+                        <li><Link to="/talks">Talks</Link></li>
                         <li><Link to="/photography">Photography</Link></li>
                         <li><Link to="/about">About</Link></li>
                     </ul>

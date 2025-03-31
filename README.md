@@ -40,6 +40,7 @@ yarn run check_links
 ## Image resolutions
 - projects: 16:9
 - article: 1280:640
+- talks: 2:1
 
 ## Coding Refereneces
 - [Gatsby](https://github.com/christopher-besch/typescript_reference/tree/main/gatsby)

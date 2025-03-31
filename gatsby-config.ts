@@ -114,6 +114,13 @@ const config: GatsbyConfig = {
         {
             resolve: "gatsby-source-filesystem",
             options: {
+                name: "talk_thumbs",
+                path: `${__dirname}/src/images/talk_thumbs`,
+            }
+        },
+        {
+            resolve: "gatsby-source-filesystem",
+            options: {
                 name: "projects",
                 path: `${__dirname}/src/projects`,
             }
@@ -123,6 +130,13 @@ const config: GatsbyConfig = {
             options: {
                 name: "articles",
                 path: `${__dirname}/src/articles`,
+            }
+        },
+        {
+            resolve: "gatsby-source-filesystem",
+            options: {
+                name: "talks",
+                path: `${__dirname}/src/talks`,
             }
         },
         {
