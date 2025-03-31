@@ -68,7 +68,7 @@ query Layout {
             {
                 use_banner_image
                     ? <div className={styles.banner_container}>
-                        <GatsbyImage style={props.banner_image_style} className={`${props.small_banner ? styles.small_banner_image : styles.banner_image}`} image={getImage(props.banner_image!)!} alt="banner_image" />
+                        <GatsbyImage style={props.banner_image_style} className={`${props.small_banner ? styles.small_banner_image : styles.banner_image}`} image={getImage(props.banner_image!)!} alt="" />
                         {page_header_text}
                     </div>
                     : undefined
