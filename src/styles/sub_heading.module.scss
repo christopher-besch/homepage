@@ -1,8 +1,7 @@
-@import "consts.scss";
+@use "consts.scss";
 
 .sub_heading {
-    background-color: $back_heading;
-    border-radius: $border-radius;
+    border-radius: consts.$border-radius;
     width: 100%;
     padding: 9px 7px;
     /* padding: 7px 15px; */
@@ -19,6 +18,5 @@
 .sub_heading hr {
     margin-top: 10px;
     margin-bottom: 10px;
-    border-color: $text;
+    border-color: consts.$text;
 }
-

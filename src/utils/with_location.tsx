@@ -9,6 +9,7 @@ export interface PropsWithLocation {
 }
 // add location related info to props
 export const with_location = (ComponentToWrap: React.FC<any>) => (props: any) =>
+    // @ts-ignore
     <Location>
         {({ location, navigate }) => (
             <ComponentToWrap
@@ -19,4 +20,3 @@ export const with_location = (ComponentToWrap: React.FC<any>) => (props: any) =>
             />
         )}
     </Location>;
-

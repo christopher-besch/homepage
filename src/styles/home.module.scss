@@ -1,81 +1,61 @@
-@import "consts.scss";
+@use "consts.scss";
 
-.container {
-    /* margin-top: 16px; */
-}
-.container::after {
-    content: "";
-    display: table;
-    clear: both;
-}
-
-.first_con {
-    width: 80%;
-    float: left;
-    /* margin-top: 8px; */
-}
-.second_con {
-    width: 20%;
-    float: left;
-    text-align: right;
-    margin-top: 8px;
-    padding-top: 8px;
+.banner_content {
+    padding-bottom: 8vh;
+    font-size: 40px;
+    font-family: liberation_mono;
+    --color-text: #ffffff;
+    --color-link: #ffffff;
+    --color-icon-mono: #ffffff;
 }
 
-.projects {
-    margin-bottom: 8px;
+.banner_content pre a {
+    /* TODO: this doesn't work! */
+    /* text-decoration: none; */
+    /* border-bottom: 1px solid #ffffff; */
+    line-height: 1.3;
+    background: rgba(255, 255, 255, 0.3);
 }
 
-.articles {
-    margin-bottom: 8px;
+.banner_content h1 {
+    font-size: 12vw;
 }
+
+.banner_content pre,
+.banner_content p {
+    margin-top: 25px;
+    font-size: 6.4vw;
+}
+
 
 .languages {
-    display: inline-block;
-    margin-left: 16px;
-    /* width: 95%; */
-    background-color: $back_sec;
-    border-radius: $border-radius;
-    /* no idea why this is required but it is */
-    margin-top: -16px;
-}
-
-.languages::after {
-    /* clear floats afterwards */
-    content: "";
-    display: table;
-    clear: both;
+    margin-top: 25px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 
 .language {
-    float: left;
-    width: 100%;
-    font-size: 15vh;
-    text-align: center;
+    margin: 2.5vw;
+    font-size: 17vw;
 }
 
-.icon {
-    display: inline-block;
-}
-
-.language h2 {
-    font-size: 35px;
-    margin-top: 10px;
-    margin-bottom: 20px;
-}
-
-@media (max-width: 800px) {
-    .first_con {
-        width: 100%;
+@media (min-width: 440px) {
+    .banner_content h1 {
+        font-size: 50px;
     }
-    .second_con {
-        width: 100%;
-        text-align: center;
-        padding-left: 0;
+
+    .banner_content pre,
+    .banner_content p {
+        font-size: 30px;
     }
+
     .languages {
-        margin-left: 0px;
-        margin-top: 16px;
-        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .language {
+        margin: 10px;
+        font-size: 70px;
     }
 }

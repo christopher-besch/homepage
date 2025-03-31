@@ -40,6 +40,7 @@ yarn run check_links
 ## Image resolutions
 - projects: 16:9
 - article: 1280:640
+- talks: 2:1
 
 ## Coding Refereneces
 - [Gatsby](https://github.com/christopher-besch/typescript_reference/tree/main/gatsby)
@@ -61,6 +62,9 @@ yarn run check_links
 - [Aatish Bhatia](https://aatishb.com)
 - [LEMMiNO](https://www.lemmi.no)
 - [Ty Hopp](https://tyhopp.com/)
+- [abl](https://ablspacesystems.com)
+- https://www.smashingmagazine.com/2023/08/designing-accessible-text-over-images-part2/
+- https://rmoff.net/
 
 ## Content References
 - [Apollo 11 Transcript](https://www.hq.nasa.gov/alsj/a11/a11transcript_tec.html)

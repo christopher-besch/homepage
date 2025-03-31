@@ -1,4 +1,4 @@
-@import "consts.scss";
+@use "consts.scss";
 
 .container {
     display: flex;
@@ -10,6 +10,7 @@
     display: flex;
     justify-content: center;
 }
+
 .rocket_elements {
     max-width: 800px;
 }
@@ -21,23 +22,31 @@
     clear: both;
 }
 
-.left, .right {
+.left,
+.right {
     clear: both;
     display: inline-block;
-    background: $back_sec;
+    background: consts.$back_sec;
     padding: 10px 16px;
     margin: 8px;
-    border-radius: $border-radius;
+    border-radius: consts.$border-radius;
     max-width: 80%;
 }
 
-.left {
+.right {
     float: right;
     /* text-align: right; */
 }
-.right {
+
+.left {
     float: left;
     /* text-align: right; */
+}
+
+.chris_head {
+    width: calc(100% - 16px);
+    margin: 8px;
+    border-radius: consts.$border-radius;
 }
 
 
@@ -52,6 +61,7 @@
     padding-left: 16px;
     text-decoration: none;
 }
+
 .contact::after {
     /* clear floats afterwards */
     content: "";
@@ -63,20 +73,28 @@
     mask-size: 91% 91%;
     -webkit-mask-size: 91% 91%;
 }
+
 .contact:hover hr {
-    border-color: $hover_accent;
+    border-color: consts.$hover_accent;
 }
 
 .content {
-    background-color: $back_sec;
+    background-color: consts.$back_sec;
     padding: 10px;
     margin-bottom: 16px;
-    border-radius: $border_radius;
+    border-radius: consts.$border_radius;
+    // manually measured because...
+    height: 165px;
+}
+
+.content h3 {
+    font-family: liberation_mono;
 }
 
 .content hr {
-    border-color: $accent;
-    transition: border-color $transition_time;
+    border-color: consts.$accent;
+    border-style: solid;
+    transition: border-color consts.$transition_time;
     margin: 5px -5px 10px;
 }
 
@@ -84,7 +102,7 @@
     display: inline-block;
     width: 100%;
     height: 10vh;
-    background-color: $text;
+    background-color: consts.$text;
 
     mask-size: 90% 90%;
     -webkit-mask-size: 90% 90%;
@@ -93,59 +111,32 @@
     mask-position: center;
     -webkit-mask-position: center;
 
-    transition: mask-size $transition_time -webkit-mask-size $transition_time;
+    transition: mask-size consts.$transition_time -webkit-mask-size consts.$transition_time;
 }
 
-.pgp_container {
-    float: left;
-    padding-left: 16px;
-    width: 100%;
-}
-
-.pgp {
-    font-size: 0.8vw;
-    padding: 10px;
-    font-family: 'liberation_mono', 'Courier New', monospace;
-    background-color: $back_sec;
-    margin-bottom: 16px;
-    border-radius: $border_radius;
-    overflow: scroll;
-}
-
-.music_container {
-    background-color: $back_sec;
-    margin-bottom: 16px;
-    border-radius: $border_radius;
-}
-
-.music {
-    padding: 10px;
-    font-family: 'liberation_mono', 'Courier New', monospace;
-    overflow: scroll;
-}
-
-@media (max-width: 1200px) {
+@media (max-width: 1280px) {
     .container {
         flex-direction: column;
     }
 
     .rocket {
-        width: 100%;
+        width: calc(100% + 16px);
     }
+
     .contacts {
         margin-top: 16px;
         width: 100%;
+        max-width: calc(800px - 16px);
+        margin-left: auto;
+        margin-right: auto;
     }
+
     .contact {
         width: 100%;
         padding-left: 0px;
     }
 
-    .pgp_container {
-        padding-left: 0px;
-    }
-    .pgp {
-        font-size: 2.35vw;
+    .content {
+        height: auto;
     }
 }
-

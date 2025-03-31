@@ -1,21 +1,25 @@
-@import "consts.scss";
+@use "consts.scss";
 
-.article {
-    background-color: $back_sec;
+.link {
+    text-decoration: none;
+}
+
+.tile {
+    background-color: consts.$back_sec;
     padding: 10px;
-    border-radius: $border_radius;
+    border-radius: consts.$border_radius;
     width: 100%;
     display: block;
     margin-bottom: 16px;
 
     display: flex;
     flex-direction: row;
-    text-decoration: none;
 }
 
 .image {
     width: 30%;
 }
+
 .body {
     padding-left: 16px;
     width: 70%;
@@ -24,14 +28,17 @@
     flex-direction: column;
     justify-content: space-between;
 }
+
 @media (max-width: 1000px) {
-    .article {
+    .tile {
         flex-direction: column;
     }
+
     .image {
         width: 100%;
         margin-bottom: 8px;
     }
+
     .body {
         width: 100%;
         padding-left: 0px;
@@ -42,24 +49,26 @@
     font-size: 30px;
 }
 
-.article p {
+.tile p {
     margin-bottom: 16px;
     line-height: 1.3em;
 }
-.article p:last-of-type {
+
+.tile p:last-of-type {
     margin-bottom: 0px;
 }
 
-.article hr {
-    border-color: $accent;
-    transition: border-color $transition_time;
+.tile hr {
+    border-color: consts.$accent;
+    border-style: solid;
+    transition: border-color consts.$transition_time;
     margin: 5px -5px 10px;
 }
-.article:hover hr {
-    border-color: $hover_accent;
+
+.tile:hover hr {
+    border-color: consts.$hover_accent;
 }
 
 .date {
     margin-top: 8px;
 }
-

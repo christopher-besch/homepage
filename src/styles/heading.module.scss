@@ -1,8 +1,7 @@
-@import "consts.scss";
+@use "consts.scss";
 
 .heading {
-    background-color: $back_heading;
-    border-radius: $border-radius;
+    border-radius: consts.$border-radius;
     width: 100%;
     padding: 9px 7px;
     /* padding: 7px 15px; */
@@ -15,6 +14,7 @@
     /* break at word endings */
     word-break: break-word;
 }
+
 @media print {
     .heading h1 {
         font-size: 30px !important;
@@ -24,12 +24,13 @@
 .heading hr {
     margin-top: 10px;
     margin-bottom: 10px;
-    border-color: $text;
+    border-color: consts.$text;
+    border-style: solid;
 }
 
 @media (max-width: 700px) {
     .remove_line hr {
-        display: none;
+        /* display: none; */
     }
 }
 
@@ -37,7 +38,7 @@
     margin-left: 10px;
     height: 2em;
     width: 2em;
-    background: $text;
+    background: consts.$text;
     float: right;
 
     mask-size: contain;
@@ -51,4 +52,3 @@
     font-size: 40px;
     text-align: right;
 }
-

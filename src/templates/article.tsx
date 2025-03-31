@@ -5,25 +5,33 @@ import * as markdown_styles from "../styles/markdown.module.scss";
 import * as util_styles from "src/styles/utils.module.scss";
 import { graphql, Link } from "gatsby";
 import { MDXProvider } from "@mdx-js/react"
+import { MDXComponents } from "mdx/types.js";
+import CompareView from "compare_view";
 
 import AutoPlayVideo from "src/components/autoplay_video";
 import HalfImage from "src/components/half_image";
 import Spacer from "src/components/spacer";
 import Quote from "src/components/quote";
 import Iframe from "src/components/iframe";
-import CompareView from "compare_view";
-import pre from "src/components/code";
 import SEO from "src/components/seo";
+import PrismSyntaxHighlight from "src/components/code";
+import { ImageDataLike } from "gatsby-plugin-image";
 
-const shortcodes = {
+const shortcodes: MDXComponents = {
     AutoPlayVideo,
     HalfImage,
     Spacer,
     Quote,
     Iframe,
-    CompareView,
-    pre,
     Link,
+    // @ts-ignore
+    CompareView,
+    pre: ({ children }) => { return (<div className="code-container" > <pre>{children}</pre></div>) },
+    code: ({ children, className }) => {
+        return className ? (
+            <PrismSyntaxHighlight className={className}>{children}</PrismSyntaxHighlight>
+        ) : <code className="language-text">{children}</code>
+    }
 };
 
 interface ArticleProps {
@@ -36,11 +44,18 @@ const Article = ({ data, children }: ArticleProps) => {
     const sub_heading = /^0\./.test(version) ? `Draft v${version}` : undefined;
 
     const date = data.mdx?.frontmatter?.date as string;
+    const use_banner_image = data.mdx?.frontmatter?.title_banner != undefined;
+
+    const banner_image_style = {
+        "--banner-image-horizontal-position": data.mdx?.frontmatter?.title_banner_horizontal_position,
+        "--banner-image-vertical-position": data.mdx?.frontmatter?.title_banner_vertical_position,
+    } as React.CSSProperties;
     return (
-        <Layout heading={title} sub_heading={sub_heading}>
-            <div className={styles.metadata}>
+        <Layout heading={title} sub_heading={sub_heading} banner_image={use_banner_image ? data.mdx?.frontmatter?.title_banner as ImageDataLike : undefined} banner_image_style={banner_image_style} small_banner={true} banner_content={
+            <div className={`${styles.metadata} ${use_banner_image ? styles.banner_metadata : undefined}`}>
                 <span className={styles.author}>Written by Christopher Besch, published on </span>{date}
             </div>
+        }>
             <div className={markdown_styles.markdown_body}>
                 <MDXProvider components={shortcodes}>
                     {children}
@@ -57,10 +72,17 @@ query Article($id: String!) {
   mdx(id: { eq: $id }) {
     body
     frontmatter {
-      date(formatString: "dddd, MMMM D, YYYY")
+      date(formatString: "dddd, Do MMMM, YYYY")
       title
       description
       banner
+      title_banner {
+        childImageSharp {
+          gatsbyImageData(placeholder: BLURRED)
+        }
+      }
+      title_banner_horizontal_position
+      title_banner_vertical_position
       version
     }
   }

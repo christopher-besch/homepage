@@ -6,6 +6,9 @@ Add font-loading CSS to SVGs with a sed script.
 "
 banner: /social_banner/web_svgs.png
 thumb: ../../../static/social_banner/web_svgs.png
+title_banner: ../../images/photography/alpha_romeo.jpg
+title_banner_horizontal_position: 30%
+title_banner_vertical_position: 25%
 slug: svg_fonts_with_sed
 date: 2025-02-10T00:00:00+00:00
 listed: true
@@ -124,4 +127,8 @@ sed -E 's/(<svg [^>]+>)/\1\ncI0WWZKD2UKEj\n/' "$1" | \
     sed 's/cI0WWZKD2UKEj//' \
     > "$2"
 ```
-Save this as `load_fonts_in_css.sh`, run `chmod +x ./load_fonts_in_css.sh` and `./load_fonts_in_css.sh input_svg.svg output_svg.svg`.
+Save this as `load_fonts_in_css.sh`, run:
+```bash
+chmod +x ./load_fonts_in_css.sh
+./load_fonts_in_css.sh input_svg.svg output_svg.svg
+```
