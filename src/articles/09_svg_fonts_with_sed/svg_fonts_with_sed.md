@@ -6,9 +6,9 @@ Add font-loading CSS to SVGs with a sed script.
 "
 banner: /social_banner/web_svgs.png
 thumb: ../../../static/social_banner/web_svgs.png
-title_banner: ../../images/photography/alpha_echo.jpg
-title_banner_horizontal_position: 50%
-title_banner_vertical_position: 50%
+title_banner: ../../images/photography/alpha_romeo.jpg
+title_banner_horizontal_position: 30%
+title_banner_vertical_position: 25%
 slug: svg_fonts_with_sed
 date: 2025-02-10T00:00:00+00:00
 listed: true
