@@ -165,7 +165,7 @@
     max-width: 1280px;
     /* center horizontally */
     margin: auto;
-    margin-bottom: 5vh;
+    margin-bottom: calc(100lvh - 100svh);
 }
 
 .white_heading h1,
