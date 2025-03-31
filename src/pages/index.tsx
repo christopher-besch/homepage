@@ -49,7 +49,7 @@ const Home = ({ data }: PageProps<Queries.HomeQuery>) => {
             <Link className={`${util_styles.block} ${util_styles.link}`} to="/articles">More Articles</Link>
 
             <SubHeading heading="Some Projects" />
-            <ProjectList className={styles.projects} projects={projects} count={2} />
+            <ProjectList projects={projects} count={2} />
             <Link className={`${util_styles.block} ${util_styles.link}`} to="/projects">More Projects</Link>
 
             <SubHeading heading="Photography" />

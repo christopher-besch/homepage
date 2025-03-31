@@ -2,7 +2,6 @@
     :root {
         --color-back-pri: #ffffff;
         --color-back-sec: #eeeeee;
-        --color-heading: #ffffff;
         --color-nav: #e0e0e0;
         --color-text: #000000;
         --color-icon-mono: #a4a4a4;
@@ -18,7 +17,6 @@
     :root {
         --color-back-pri: #343a40;
         --color-back-sec: #212529;
-        --color-heading: #343a40;
         --color-nav: #212529;
         --color-text: #ffffff;
         --color-icon-mono: #ffffff;
@@ -33,7 +31,6 @@
 $back_pri: var(--color-back-pri);
 /* background of blocks */
 $back_sec: var(--color-back-sec);
-$back_heading: var(--color-heading);
 $back_tile_title: var(--color-tile-title);
 $nav: var(--color-nav);
 $text: var(--color-text);

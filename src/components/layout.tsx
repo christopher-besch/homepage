@@ -15,6 +15,7 @@ interface LayoutProps {
     banner_image?: ImageDataLike;
     banner_image_style?: string;
     banner_content?: React.ReactNode;
+    small_banner?: boolean;
 }
 const Layout = (props: LayoutProps) => {
     const data: Queries.LayoutQuery = useStaticQuery(graphql`
@@ -27,6 +28,21 @@ query Layout {
 }
     `);
     const source = data.site?.siteMetadata?.source as string;
+
+    const use_banner_image = props.banner_image != undefined;
+
+    const page_heading = props.heading ? <Heading className={use_banner_image ? styles.white_heading : undefined} heading={props.heading} keep_line={props.keep_heading_line} icon={props.icon} sub_heading={props.sub_heading} /> : undefined;
+    const page_header_text = use_banner_image ?
+        <div className={styles.banner_content_container}>
+            <div className={styles.banner_content}>
+                {page_heading}
+                {props.banner_content}
+            </div>
+        </div>
+        : <div>
+            {page_heading}
+            {props.banner_content}
+        </div>;
 
     return (
         <div>
@@ -49,20 +65,20 @@ query Layout {
             </nav >
 
             {
-                (props.banner_image == undefined)
-                    ? <div></div>
-                    : <div className={styles.banner_container}>
-                        <GatsbyImage className={`${styles.banner_image} ${props.banner_image_style || ''}`} image={getImage(props.banner_image)!} alt="banner_image" />
-                        <div className={styles.banner_content_container}>
-                            <div className={styles.banner_content}>
-                                {props.banner_content}
-                            </div>
-                        </div>
+                use_banner_image
+                    ? <div className={styles.banner_container}>
+                        <GatsbyImage className={`${props.small_banner ? styles.small_banner_image : styles.banner_image} ${props.banner_image_style}`} image={getImage(props.banner_image!)!} alt="banner_image" />
+                        {page_header_text}
                     </div>
+                    : undefined
             }
 
             <div className={styles.content}>
-                {props.heading ? <Heading heading={props.heading} keep_line={props.keep_heading_line} icon={props.icon} sub_heading={props.sub_heading} /> : undefined}
+                {
+                    use_banner_image
+                        ? undefined
+                        : page_header_text
+                }
                 {props.children}
             </div>
 

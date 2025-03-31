@@ -1,7 +1,6 @@
 @use "consts.scss";
 
 .heading {
-    background-color: consts.$back_heading;
     border-radius: consts.$border-radius;
     width: 100%;
     padding: 9px 7px;
@@ -26,11 +25,12 @@
     margin-top: 10px;
     margin-bottom: 10px;
     border-color: consts.$text;
+    border-style: solid;
 }
 
 @media (max-width: 700px) {
     .remove_line hr {
-        display: none;
+        /* display: none; */
     }
 }
 

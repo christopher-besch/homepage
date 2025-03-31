@@ -15,6 +15,7 @@ import Quote from "src/components/quote";
 import Iframe from "src/components/iframe";
 import SEO from "src/components/seo";
 import PrismSyntaxHighlight from "src/components/code";
+import { ImageDataLike } from "gatsby-plugin-image";
 
 const shortcodes: MDXComponents = {
     AutoPlayVideo,
@@ -25,7 +26,7 @@ const shortcodes: MDXComponents = {
     Link,
     // @ts-ignore
     CompareView,
-    pre: ({ children, className }) => { return (<div className="code-container" > <pre>{children}</pre></div>) },
+    pre: ({ children }) => { return (<div className="code-container" > <pre>{children}</pre></div>) },
     code: ({ children, className }) => {
         return className ? (
             <PrismSyntaxHighlight className={className}>{children}</PrismSyntaxHighlight>
@@ -43,11 +44,13 @@ const Article = ({ data, children }: ArticleProps) => {
     const sub_heading = /^0\./.test(version) ? `Draft v${version}` : undefined;
 
     const date = data.mdx?.frontmatter?.date as string;
+    const use_banner_image = data.mdx?.frontmatter?.title_banner != undefined;
     return (
-        <Layout heading={title} sub_heading={sub_heading}>
-            <div className={styles.metadata}>
+        <Layout heading={title} sub_heading={sub_heading} banner_image={use_banner_image ? data.mdx?.frontmatter?.title_banner as ImageDataLike : undefined} small_banner={true} banner_content={
+            <div className={`${styles.metadata} ${use_banner_image ? styles.banner_metadata : undefined}`}>
                 <span className={styles.author}>Written by Christopher Besch, published on </span>{date}
             </div>
+        }>
             <div className={markdown_styles.markdown_body}>
                 <MDXProvider components={shortcodes}>
                     {children}
@@ -68,6 +71,11 @@ query Article($id: String!) {
       title
       description
       banner
+      title_banner {
+        childImageSharp {
+          gatsbyImageData(placeholder: BLURRED)
+        }
+      }
       version
     }
   }
