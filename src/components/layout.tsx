@@ -34,7 +34,7 @@ query Layout {
     const page_heading = props.heading ? <Heading className={use_banner_image ? styles.white_heading : undefined} heading={props.heading} keep_line={props.keep_heading_line} icon={props.icon} sub_heading={props.sub_heading} /> : undefined;
     const page_header_text = use_banner_image ?
         <div className={styles.banner_content_container}>
-            <div className={styles.banner_content}>
+            <div className={props.small_banner ? styles.small_banner_content : styles.banner_content}>
                 {page_heading}
                 {props.banner_content}
             </div>

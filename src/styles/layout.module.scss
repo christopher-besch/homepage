@@ -160,12 +160,20 @@
     width: 100%;
 }
 
-.banner_content {
+.banner_content,
+.small_banner_content {
     padding: 15px;
     max-width: 1280px;
     /* center horizontally */
     margin: auto;
+}
+
+.banner_content {
     margin-bottom: calc(100lvh - 100svh);
+}
+
+.small_banner_content {
+    margin-bottom: 20px;
 }
 
 .white_heading h1,
