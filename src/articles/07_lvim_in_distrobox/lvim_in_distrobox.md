@@ -8,6 +8,9 @@ This article explains how to do that with the example of installing LunarVim on 
 "
 banner: /social_banner/lvim.png
 thumb: ../../../static/social_banner/lvim.png
+title_banner: ../../images/photography/alpha_tango.jpg
+title_banner_horizontal_position: 40%
+title_banner_vertical_position: 70%
 slug: lvim_in_distrobox
 date: 2022-10-25T00:00:00+00:00
 listed: true

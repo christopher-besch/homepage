@@ -6,6 +6,9 @@ Install Debian on a device with a broken NVRAM.
 "
 banner: /social_banner/debian_grub.png
 thumb: ../../../static/social_banner/debian_grub.png
+title_banner: ../../images/photography/alpha_sierra.jpg
+title_banner_horizontal_position: 40%
+title_banner_vertical_position: 60%
 slug: grub_install_removable
 date: 2024-11-08T00:00:00+00:00
 listed: true
