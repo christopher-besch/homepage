@@ -27,3 +27,13 @@ main_block {
     display: table;
     clear: both;
 }
+
+@media print {
+    .block {
+        display: none;
+    }
+
+    .link {
+        display: none;
+    }
+}
