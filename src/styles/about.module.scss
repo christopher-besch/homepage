@@ -33,14 +33,20 @@
     max-width: 80%;
 }
 
-.left {
+.right {
     float: right;
     /* text-align: right; */
 }
 
-.right {
+.left {
     float: left;
     /* text-align: right; */
+}
+
+.chris_head {
+    width: calc(100% - 16px);
+    margin: 8px;
+    border-radius: consts.$border-radius;
 }
 
 
@@ -77,10 +83,11 @@
     padding: 10px;
     margin-bottom: 16px;
     border-radius: consts.$border_radius;
+    // manually measured because...
+    height: 165px;
 }
 
 .content h3 {
-    height: 3em;
     font-family: liberation_mono;
 }
 
@@ -107,18 +114,21 @@
     transition: mask-size consts.$transition_time -webkit-mask-size consts.$transition_time;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1280px) {
     .container {
         flex-direction: column;
     }
 
     .rocket {
-        width: 100%;
+        width: calc(100% + 16px);
     }
 
     .contacts {
         margin-top: 16px;
         width: 100%;
+        max-width: calc(800px - 16px);
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .contact {
@@ -126,7 +136,7 @@
         padding-left: 0px;
     }
 
-    .content h3 {
+    .content {
         height: auto;
     }
 }
