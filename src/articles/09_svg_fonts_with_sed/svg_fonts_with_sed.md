@@ -88,7 +88,7 @@ sed "/OHtFGivqhAswi/e cat fonts.css" fonts_css_template.txt | \
 2. the second deletes `OHtFGivqhAswi`.
     This only works because `OHtFGivqhAswi` is on its own line.
 3. We pipe the output into `final_text_to_include_in_svg.txt`.
-    This is what needs to be injected in the SVG.
+    This is what needs to be injected into the SVG.
 
 ## Commence the Injection
 
