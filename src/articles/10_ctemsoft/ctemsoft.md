@@ -121,8 +121,9 @@ proc.communicate(input=str.encode(input_str))
 ```
 
 You can even start multiple renderings at the same time and properly parallelize this baby — if you've already burned four hours on this maybe save two minutes twiddling your thumbs?
+lens.f90 creates a bunch of Postscript files as a result.
 
-With Ghostscript you convert the Postscript files to PNGs.
+With Ghostscript you convert these Postscript files to PNGs.
 
 ```py
 subprocess.Popen(
