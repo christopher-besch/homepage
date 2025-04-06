@@ -57,7 +57,7 @@ In the end you'll have this *Dockerfile*, split into two stages:
     All you do is copy the source code over into the *container* and run `make all` to compile.
     The final binary will be in `/code/exe/lens`.
 2.  You need that binary in the second container so you copy it over and install some runtime dependencies.
-    This includes Python which we'll get to later.
+    This includes Python which we'll get to just below.
 ```dockerfile
 # compilation stage
 FROM debian AS builder
@@ -95,10 +95,7 @@ WORKDIR /python_src
 ENTRYPOINT ["/bin/python3", "/python_src/main.py"]
 ```
 
-With the (patched) source code and this *Dockerfile* everyone can reproduce the compilation.
-So when you're creating something of your own consider creating a *Dockerfile* for it and people will be able to use it for decades to come.
-
-# Let's make it move!
+# Let's make it twirl!
 
 <AutoPlayVideo src={lens_video} />
 
@@ -170,8 +167,21 @@ subprocess.Popen(
 If you'd been especially fancy you could've used more than two configuration vectors and a spline interpolation instead of the lerp.
 But you already consumed all your fancyness on some over-engineered application-design with way too many structs, so you don't.
 
-And now you have made an animated video out of decades old code in a language you don't understand for something you don't understand.
-Check out the [Git Repo](https://github.com/christopher-besch/ctemsoft) if you want to try this for yourself.
+# Conclusion
+
+With the (patched) Fortran code, the *Dockerfile* and the Python script everyone can reproduce the compilation:
+Check out the [Git Repo](https://github.com/christopher-besch/ctemsoft) and run Docker:
+```bash
+git clone https://github.com/christopher-besch/ctemsoft
+cd ctemsoft
+# [edit python_src/main.py to your liking]
+docker build -t chrisbesch/ctemsoft .
+docker run -v ./out:/python_src/out chrisbesch/ctemsoft
+vlc out/lens.mp4
+```
+And now you have made an animated video out of decades old code in a language you don't know in a way people will be able to understand for decades to come.
+
+So when you're creating something of your own consider creating a *Dockerfile* for that, too.
 
 {/* ffmpeg -i lens.mp4 -vf 'crop=1026:1437:144:187' lens_cropped.mp4 */}
 {/* ffmpeg -i lens_3_5.png -vf 'crop=1026:1437:144:187' lens_3_5_cropped.png */}
