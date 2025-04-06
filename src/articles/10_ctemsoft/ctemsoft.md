@@ -37,7 +37,7 @@ docker run --name ctemsoft -ti -v .:/code debian
 
 This creates a new Docker *container* off of the Debian *image* and jumps you into a bash shell inside that *container*.
 Once you've figured out what commands make that Fortran code compile you can write them to <del>your diary</del> a *Dockerfile*.
-A *Dockerfile* specifies how an *image* is to be built allowing someone else to pick up your work where you left if off.
+A *Dockerfile* specifies how an *image* is to be built allowing someone else to pick up your work where you left it off.
 
 Docker, if you don't already know, is great for these sorts of things.
 When you need a reproducible environment a virtual machine is too big a gun most of the time.
