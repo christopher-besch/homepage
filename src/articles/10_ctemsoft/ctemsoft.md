@@ -29,7 +29,12 @@ The code is two decades old and the documentation slim.
 
 So what do you do?
 You spin up a new Docker *container* and start hacking.
-Naturally, you like Debian so go with that and download the [original code](https://ctem.web.cmu.edu) into the current working directory: `docker run --name ctemsoft -ti -v .:/code debian`
+Naturally, you like Debian so go with that and download the [original code](https://ctem.web.cmu.edu) into the current working directory:
+
+```bash
+docker run --name ctemsoft -ti -v .:/code debian
+```
+
 This creates a new Docker *container* off of the Debian *image* and jumps you into a bash shell inside that *container*.
 Once you've figured out what commands make that Fortran code compile you can write them to <del>your diary</del> a *Dockerfile*.
 A *Dockerfile* specifies how an *image* is to be built allowing someone else to pick up your work where you left if off.
@@ -39,7 +44,7 @@ When you need a reproducible environment a virtual machine is too big a gun most
 Docker is a lot more efficient and offers more rapid turnaround times.
 And still, when "it works on my machine" using Docker, it'll work on yours too, using Docker.
 
-Unfortunately this amazing tool doesn't save you from compilation errors and figuring out what dependencies you need and how to get them.
+Unfortunately, this amazing tool doesn't save you from compilation errors and figuring out what dependencies you need and how to get them.
 Some [stackoverflow](https://stackoverflow.com/questions/19916119/how-do-i-find-where-a-symbol-is-defined-among-static-libraries) might help:
 
 ```bash
