@@ -21,7 +21,7 @@ import lens_3_5 from "./lens_3_5_cropped.png";
 
 <HalfImage src={lens_3_5} />
 
-The other day a friend came by: "Do you know some Fotran90?"
+The other day a friend came by: "Do you know some Fortran90?"
 She was reading "Introduction to Conventional Transmission Electron Microscopy" by Prof. Marc De Graef and wanted to reproduce Fig.3.5 on the right (or above on mobile).
 That figure is rendered by [lens.f90](https://github.com/christopher-besch/ctemsoft/blob/main/src/lens.f90).
 Thing is, I don't have any experience with Fortran or electron microscopy for that matter.
