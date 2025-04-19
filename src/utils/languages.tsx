@@ -42,4 +42,10 @@ export const languages = new Map<string, Language>([
         icon: "/icons/c.svg",
         icon_mono: "/icons/c.svg"
     }],
+    ["dart", {
+        id: "dart",
+        name: "Dart",
+        icon: "/icons/dart.svg",
+        icon_mono: "/icons/dart.svg"
+    }],
 ]);
