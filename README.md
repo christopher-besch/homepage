@@ -73,3 +73,20 @@ yarn run check_links
 
 ## Privacy Policy References
 - [Writing a GDPR-compliant privacy notice](https://gdpr.eu/privacy-notice)
+
+# Ideas for About
+- wearing head phones
+- work in co-working space, can't work from home
+- I'd like to get into: embedded, high-risk, autonomous, realtime applications
+- big dream: space!
+- team work
+- I like it when people tell me I do good.
+
+## TODO:
+- other about pages I like
+- define target audience: future employers, fellow developers, younger generation
+- tone: friendly, likable (maybe talk about some stuff I'm not good at), sympathetic, maybe a little quirky
+- most meaningful feedback? do it personal
+- core driving factors
+- anecdotes for co-working space
+- best team experience?

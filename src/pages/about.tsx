@@ -1,5 +1,5 @@
 import React from "react";
-import { graphql, PageProps } from "gatsby";
+import { graphql, Link, PageProps } from "gatsby";
 import Layout from "src/components/layout";
 import SEO from "src/components/seo";
 import * as styles from "src/styles/about.module.scss";
@@ -37,33 +37,54 @@ const About = ({ data }: PageProps<Queries.AboutQuery>) => {
                         <GatsbyImage className={`${styles.chris_head}`} image={getImage(data.chris_head as ImageDataLike)!} alt="chris head" />
                         <p className={styles.right}>Twenty seconds and counting.</p>
                         <p className={styles.left}>
-                            I'm a problem solver.
-                            Solving problems because we can is amazing, but what really catches my motivation is a user who's life I can improve.
+                            Hi, welcome to my place on the web!
+                            This is where I post random personal projects and crave positive feedback.
+                            <br />
+                            <i>
+                                Do so via <a href={email_link}>mail</a> or with hearts and stars on <a href={github_link} target="_blank">GitHub</a>/<a href={codeberg_link} target="_blank">Codeberg</a>, thank you :)
+                            </i>
+                            <br />
+                            No seriously, do reach out if you have something cool to share or just to say 'hi'!
                         </p>
                         <p className={styles.right}>T minus 15 seconds, guidance is internal.</p>
                         <p className={styles.left}>
-                            The bigger the project, the better; even if it doesn't quite suit my taste.
-                            I don't mind dedicating all my work to the handle of the door to the cockpit of a spacecraft.
+                            I like bolting things together until they don't fall apart anymore.
+                            Whenever I can, I do so in groups — watching things go kaput is always more fun with company!
                         </p>
                         <p className={styles.right}>12, 11, 10, 9, ignition sequence start...</p>
                         <p className={styles.left}>
-                            When I'm doing my part and others can rely on what I've built, I feel fulfilled.
-                            After all I'm using other people's work for my own foundation.
+                            What are the things I'm interested in?
+                            <br />
+                            Everything, kinda.
+                            Somehow it's very easy for me to find motivation for all sorts of things — just take a look at my <Link to="/projects">projects</Link> and you'll see where that got me.
+                            <br />
+                            That's fun and all but In the long run I'd like to work on:
+                            <ul>
+                                <li>autonomous</li>
+                                <li>embedded systems</li>
+                                <li>with real-time constraints</li>
+                                <li>in a high-risk environment.</li>
+                            </ul>
+                            You get that I like rockets, right?
                         </p>
                         <p className={styles.right}>...6, 5, 4, 3...</p>
                         <p className={styles.left}>
-                            I like people&mdash;people are great!
-                            Whenever possible I work in a team, solving even bigger problems.
+                            What's more, I love working in public.
+                            Open-Source is quite amazing — I try publishing as much as possible.
+                            I hope you can find some use for it.
                         </p>
                         <p className={styles.right}>...2, 1, zero, all engine running...</p>
                         <p className={styles.left}>
-                            When it comes to taste, I prefer the Terminal over a GUI, VIM over huge IDEs, backend over frontend, C++ over Python and Linux over Windows.
-                            But those are just that&mdash;tastes.
-                            When it's absolutely required to work with Visual Studio Code on a frontend for Windows in HTML, I bite the bullet and do it.
+                            Oh and I love the black abyss that is the Linux terminal.
+                            Whenever I feel down, things just fell apart or something else, it is always there for me and greets me with it's blinking cursor.
                         </p>
                         <p className={styles.right}>LIFT-OFF! We have a lift-off, 32 minutes past the hour. Lift-off on Apollo 11.</p>
                         <p className={styles.left}>
-                            Have a nice day.
+                            Thank you and have a very safe and productive day.
+                            <br />
+                            <i>
+                                Do you get the <a href="https://combineoverwiki.net/wiki/Black_Mesa_Transit_System/Quotes#Half-Life" target="_blank">quote</a>?
+                            </i>
                         </p>
                     </div>
                 </div>
