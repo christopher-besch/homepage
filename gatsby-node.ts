@@ -18,7 +18,7 @@ query GatsbyNode {
 }
     `);
 
-    const languages = ["python", "cpp", "typescript", "java", "rust", "c", "dart"];
+    const languages = ["python", "cpp", "typescript", "java", "rust", "c", "dart", "go"];
 
     languages.forEach(language => {
         actions.createPage({
