@@ -16,6 +16,7 @@ import Iframe from "src/components/iframe";
 import SEO from "src/components/seo";
 import PrismSyntaxHighlight from "src/components/code";
 import { ImageDataLike } from "gatsby-plugin-image";
+import MDXLink from "src/components/mdx_link";
 
 const shortcodes: MDXComponents = {
     AutoPlayVideo,
@@ -23,7 +24,6 @@ const shortcodes: MDXComponents = {
     Spacer,
     Quote,
     Iframe,
-    Link,
     // @ts-ignore
     CompareView,
     pre: ({ children }) => { return (<div className="code-container" > <pre>{children}</pre></div>) },
@@ -31,7 +31,8 @@ const shortcodes: MDXComponents = {
         return className ? (
             <PrismSyntaxHighlight className={className}>{children}</PrismSyntaxHighlight>
         ) : <code className="language-text">{children}</code>
-    }
+    },
+    a: MDXLink,
 };
 
 interface ArticleProps {
