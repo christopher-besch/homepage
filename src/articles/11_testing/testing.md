@@ -2,7 +2,7 @@
 type: article
 title: "Saving Time with Tests"
 description: "
-Using tests not to increase quality but to the more quickly get things done.
+Using tests not to increase quality but to more quickly get things done.
 
 Or: How I started to enjoy writing tests.
 "
@@ -12,7 +12,7 @@ title_banner: ../../images/photography/alpha_whiskey.jpg
 title_banner_horizontal_position: 20%
 title_banner_vertical_position: 80%
 slug: testing
-date: 2025-05-13T00:00:00+00:00
+date: 2025-05-14T00:00:00+00:00
 listed: true
 version: 1.0.0
 ---
@@ -20,8 +20,8 @@ version: 1.0.0
 Writing tests is awful!
 When I program I often think,
 "I don't need tests.
-Tests are for other people's code that doesn't work.
-[I'm built different](https://www.youtube.com/watch?v=5TTcbMv5tDc&t=144s) — my code will work."
+Tests are for broken code only.
+[I'm built different](https://www.youtube.com/watch?v=5TTcbMv5tDc&t=144s) — my code isn't broken."
 
 And then I spend an hour in gdb...
 
@@ -30,25 +30,26 @@ Take a look at this C code.
 ```c
 size_t last_size = 1;
 for(size_t i = 0; i < num_allocators; ++i) {
+    // this crashes the program when the condition is not met
     ASSERT(allocators[i].size >= last_size,
            "allocators must be ordered by size");
     last_size = allocators[i].size;
 }
 ```
 It asserts an invariant of a toy allocator I wrote.
-More specifically it asserts that the `allocators` list is ordered by the `size` attribute of each allocator — that's the invariant that must hold.
+More specifically it asserts that the `allocators` list is ordered by the `size` attribute — that's the invariant that must hold.
 This code is very quick to write and easy to manually verify.
 
 All the places that touch the `allocators` list, on the other hand, are quite complex and potentially break the invariant.
 Verifying those is way more difficult.
-And when there is a bug in one of these places that bug will likely become visible some other place — a segfault, wrong output, ....
-Figuring out that this bug has something to do with `allocators`' order takes time.
+And when there is a mistake in one of these places this bug will likely be visible as a crash or wrong output.
+Figuring out that this bug has something to do with `allocators`' order takes a lot of time.
 And I often spend that time writing debugging or `printf` statements.
-Those statements could have been asserts in the first place.
+Those statements could have been asserts in the first place!
 
-What's more, this declares intent.
+What's more, asserting invariants declares intent:
 Reading through all the actual code is a lot easier when you already know that `allocators` is sorted.
-Additionally, you can clarify that these invariants don't hold in specific sections by writing a comment on why you don't check the invariant.
+Additionally, you can mark special sections where this invariant is allowed to not hold by commenting why you don't check it.
 
 # Example Usage
 Here's another one:
@@ -81,16 +82,18 @@ Using more than one perspective makes sure you actually understand your problem.
 
 I write these asserts not to create a higher quality product.
 I use other things for that: exhaustive unit tests, stress tests, end-to-end tests, user tests, contracts, ...
-Sometimes I don't care about quality and I just want my script to not crash.
+And sometimes I don't care about quality and I just want my script to not crash.
+In all cases these asserts and invariants I talked about make sense.
+They are only for getting the job done more quickly.
 
-These tests and asserts and invariants I talked about are only so that I get my job done more quickly.
 As such, every assert I write helps.
 When you're aiming for quality your tests need to be somewhat exhaustive and actually ensure they catch everything that's wrong.
-When you're aiming for a speed-up your test only need to help pinpoint the origin when something is wrong.
-I invite you to try this perspective — it's fun!
+When you're aiming for a speed-up they only need to help pinpoint the origin of something going wrong.
+I invite you to try this way of looking at writing tests — it's fun!
 
-You can write these tests in whatever language for whatever project.
-Just leave them out for the final release build and you don't loose any performance, too.
+Btw, you can write these tests in whatever language, whatever framework and for whatever project:
+In C I like asserting I'm not holding a `nullptr` when I don't believe it to and in Python/numpy I check my [ndarray](https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html) has the shape I expect it to.
+Oh, and when you configure them to be stripped from the final release build and you don't loose any performance, too.
 
 # Concluding
 These sorts of tests are
@@ -112,14 +115,15 @@ fix:  handle nullptr in dealloc gracefully - christopher-besch
 fix:  alloc with size 0 - christopher-besch
 fix:  forgot to multiply with BLOCKS_PER_SLAB - christopher-besch
 ```
-If I had to find all those bugs without my asserts I wouldn't have had as much fun.
+Without my asserts I would have found these bugs much later and wouldn't have had as much fun getting rid of them.
 
 # PS
 All the code in this article has been heavily abbreviated and was part of an assignment to write fast but correct code.
 I really tried to maximize my use of asserts and ended up with every fifth line being an assert.
-Was my code particularly fast?
-No, quite definitely not.
+Was my code particularly fast in the end?
+Kinda, but it wasn't the fastest.
 Was it still fun, yeah!
+And that's what matters to me.
 
 # PPS
-Yes, my commit messages could use some work but committing often is more important I think.
+Yes, my commit messages could use some work but committing as often as possible is more important I think.
