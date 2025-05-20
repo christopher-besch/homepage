@@ -200,7 +200,7 @@ In this menu screen we select **Scheduler controlled preemption model** mode und
 You might also want to set in case you want multiple kernels of the same version
 In my case I also had to set this in the `.config` file in order to differentiate this kernel from a `PREEMPT_DYNAMIC` build.
 ```
-CONFIG_LOCALVERSION="preempt_rt"
+CONFIG_LOCALVERSION="preempt-rt"
 ```
 
 Back to the documentation and we start the compilation:
@@ -213,6 +213,7 @@ sudo dpkg -i \
     linux-image-6.12.5*_riscv64.deb \
     linux-libc-dev_6.12.5*_riscv64.deb
 ```
+When doing so more than once I had to uninstall an old kernel, probably because the there isn't enough space for the rgx firmware on initrd but I'm really not sure.
 
 This takes a while — some time to do the toilet, nice.
 Still not done?
