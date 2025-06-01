@@ -1,4 +1,9 @@
 import type { GatsbyConfig } from "gatsby";
+// this doesn't work, somehow...
+// import remarkMath from "remark-math";
+// import rehypeKatex from "rehype-katex";
+// const remarkMath = require('remark-math')
+// const rehypeKatex = require('rehype-katex')
 
 const config: GatsbyConfig = {
     siteMetadata: {
@@ -69,7 +74,19 @@ const config: GatsbyConfig = {
             resolve: "gatsby-plugin-mdx",
             options: {
                 extensions: [".md", ".mdx"],
+                mdxOptions: {
+                    // this doesn't work, somehow...
+                    // remarkPlugins: [remarkMath],
+                    // rehypePlugins: [rehypeKatex],
+                },
                 gatsbyRemarkPlugins: [
+                    {
+                        resolve: "gatsby-remark-katex",
+                        options: {
+                            // Add any KaTeX options from https://github.com/KaTeX/KaTeX/blob/master/docs/options.md here
+                            strict: "ignore",
+                        }
+                    },
                     {
                         // load images from markdown
                         // TODO: remove, not actually needed
@@ -96,6 +113,20 @@ const config: GatsbyConfig = {
                 ]
             },
         },
+        // {
+        //     resolve: "gatsby-transformer-remark",
+        //     options: {
+        //         plugins: [
+        //             {
+        //                 resolve: "gatsby-remark-katex",
+        //                 options: {
+        //                     // Add any KaTeX options from https://github.com/KaTeX/KaTeX/blob/master/docs/options.md here
+        //                     strict: "ignore",
+        //                 }
+        //             }
+        //         ],
+        //     },
+        // },
         // load files from a dir
         {
             resolve: "gatsby-source-filesystem",

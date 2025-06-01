@@ -1,5 +1,6 @@
 import React from "react";
 import Layout from "../components/layout";
+import "katex/dist/katex.min.css";
 import * as styles from "../styles/article.module.scss";
 import * as markdown_styles from "../styles/markdown.module.scss";
 import * as util_styles from "src/styles/utils.module.scss";
