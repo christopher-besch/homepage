@@ -21,9 +21,6 @@ Cue [Soothing Minecraft — Relaxing Farm Morning](https://youtu.be/xLo-BrCh7JQ)
 I'm tending the fields, watching the river flow.
 My brother walks by, saying hi.
 What's missing?
-$$
-\frac{a}{b}
-$$
 
 A brother-seeking missile with an explosive warhead enough to crack his cute Netherite armor, of course!
 This is my journey of developing such a thing with the [mc_missile](https://github.com/christopher-besch/mc_missile) Minecraft mod.
@@ -42,7 +39,7 @@ The missile has a position
 $$
 p = \begin{pmatrix} p_1 \\ p_2 \\ p_3 \end{pmatrix} \in \mathbb{R}^3
 $$
-(with the height $$p_2$$), velocity
+(with the elevation $$p_2$$), velocity
 $$
 v = \begin{pmatrix} v_1 \\ v_2 \\ v_3 \end{pmatrix} \in \mathbb{R}^3
 $$
@@ -57,34 +54,72 @@ $$
 .
 These [angles](https://minecraft.wiki/w/Rotation) are in degrees and there's no roll.
 
-These are updated every tick (20 times a second).
-This update is separated into three stages:
-1. apply guidance rotation input:
-    The guidance code produces a change in rotation that is applied.
-    There's a lot of random noise applied here.
-    $$
-    \theta \rightarrow \theta + \theta_in + R \\
-    \psi \rightarrow \psi + \theta_in + R \\
-    $$
-    $$R$$ is normally distributed noise with a variance that depends on the air frame used by the missile.
-2. apply acceleration:
-    first the 
-    $$
-    r = 
-    $$
-    The velocity is updated based on the current rotation and thrust.
-    TODO: formula
-3. apply velocity:
-    The position is updated based on the velocity.
-    TODO: formula
-4. apply drag:
+Minecraft updates this states every tick (20 times a second).
+Such an update for the tick $t \in \mathbb{N}_0$ is separated into three stages:
+1.  Receive the control input:
+    The missile's only input method is an unrealisticly beefy [control moment gyroscope](https://en.wikipedia.org/wiki/Control_moment_gyroscope).
+    So the player's guidance code produces a requested change in pitch $\theta_{in}$ and yaw $\psi_{in}$.
+    It has no direct control over the missiles position, velocity, or thrust — only the rotation.
 
-After this update the current missile state is sent to the guidance server, which has a little less than 50ms to send the next rotation change for the next tick.
+2.  Update the missile's state:
+    The gyroscope is powerful but not overly powerful.
+    When the control input is too large (larger than $M_r$ defined by the airframe), it is scaled down linearly:
+    $$
+    \begin{aligned}
+    l & = \sqrt{\theta_{in}^2 + \psi_{in}^2} \\
+    \begin{pmatrix} \theta_{in} \\ \psi_{in} \end{pmatrix} &\rightarrow 
+    \max{\left\{\frac{M_r}{l}, 1\right\}} \begin{pmatrix} \theta_{in} \\ \psi_{in} \end{pmatrix}.
+    \end{aligned}
+    $$
+    With this, Minecraft applies the adjusted control input plus some random noise.
+    $$
+    \begin{aligned}
+    \theta &\rightarrow \theta + \theta_{in} + N_r \\
+    \psi &\rightarrow \psi + \psi_{in} + N_r \\
+    \end{aligned}
+    $$
+    $$N_r$$ is normally distributed noise dependent on the air frame used by the missile.
+
+    Now the acceleration $a \in \mathbb{R}^3$ can be calculated from the rotation vector $r \in \mathbb{R}^3$ and the current thrust $T(t) \in \mathbb{R}$.
+    $$
+    \begin{aligned}
+    r & =
+    \begin{pmatrix}
+        \sin(-\psi) \cos(\theta) \\
+        -\sin(\theta) \\
+        \cos(-\psi) \cos(\theta)
+    \end{pmatrix} \\
+    a & = \left(T(t) + N_T \right) \cdot r
+    \end{aligned}
+    $$
+    $$N_T$$ is normally distributed noise and like the thrust function $T$ defined by the rocket motor.
+
+    Lastly, the velocity and position are updated with the airframe defined drag $d$.
+    $$
+    \begin{aligned}
+    v &\rightarrow (1 - d) \cdot (v + a) \\
+    p &\rightarrow p + v
+    \end{aligned}
+    $$
+
+3.  Send the missile's state to the player's guidance code.
+    All these values contain some variance, too — depending on the missile's [inertial measurement unit](https://en.wikipedia.org/wiki/Inertial_measurement_unit).
+    The guidance server has a little less than 50ms to send the next rotation change for the next tick.
 
 In the first tick, the missile doesn't have guidance input yet and thus flies straight ahead with the velocity and rotation of the shooter.
 No variance is applied here.
 
+So what happens when we write the simplest guidance code we can think of: doing nothing.
+We all like oxidized weapons so let's use Rust for this:
+```rust
+let mut control_input = ControlInput {
+    pitch_turn: 0.0,
+    yaw_turn: 0.0,
+    // --snip--
+};
+```
 
+TODO:
 
 # Flying a Straight Line
 
