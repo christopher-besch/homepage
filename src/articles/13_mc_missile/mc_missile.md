@@ -12,7 +12,7 @@ title_banner: ../../images/photography/alpha_xray.jpg
 title_banner_horizontal_position: 80%
 title_banner_vertical_position: 100%
 slug: mc_missile
-date: 2025-05-31T00:00:00+00:00
+date: 2025-06-06T00:00:00+00:00
 listed: true
 version: 1.0.0
 ---
