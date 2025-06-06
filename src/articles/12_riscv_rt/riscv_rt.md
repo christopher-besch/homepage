@@ -8,9 +8,9 @@ Also: How to setup your Linux laptop as a simple NAT router.
 "
 banner: /social_banner/riscv_rt.png
 thumb: ../../../static/social_banner/riscv_rt.png
-title_banner: ../../images/photography/alpha_victor.jpg
+title_banner: ../../images/photography/alpha_yankee.jpg
 title_banner_horizontal_position: 20%
-title_banner_vertical_position: 80%
+title_banner_vertical_position: 40%
 slug: riscv_rt
 date: 2025-05-19T00:00:00+00:00
 listed: true
