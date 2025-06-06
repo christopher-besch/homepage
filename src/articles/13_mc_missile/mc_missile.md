@@ -368,14 +368,15 @@ Anything cheaper wouldn't work like this.
 
 There's a lot you could improve upon.
 A few of my ideas:
-1. Implement a boost phase where the missile clears the trees and buildings the shooter stands under before rising into the sky.
-2. Guess the target's position based on the current direction (works without top-attack).
+1. Use a different war head, the mc_missile mod offers many options.
+2. Implement a boost phase where the missile clears the trees and buildings the shooter stands under before rising into the sky.
+3. Guess the target's position based on the current direction (works without top-attack).
    Then you can save on the expensive seeker.
-3. Do some parabola calculation and use a cheaper rocket motor that only has a short burn duration in the beginning.
-4. Implement [Proportional navigation](https://en.wikipedia.org/wiki/Proportional_navigation) to shoot down moving and aerial targets.
-5. Use [lock-on after launch](https://en.wikipedia.org/wiki/Lock-on_after_launch) to fire at targets without visual contact.
-7. Generally use cheaper components and deal with the implications.
-8. much, much more...
+4. Do some parabola calculation and use a cheaper rocket motor that only has a short burn duration in the beginning.
+5. Implement [Proportional navigation](https://en.wikipedia.org/wiki/Proportional_navigation) to shoot down moving and aerial targets.
+6. Use [lock-on after launch](https://en.wikipedia.org/wiki/Lock-on_after_launch) to fire at targets without visual contact.
+8. Generally use cheaper components and deal with the implications.
+9. much, much more...
 
 I encourage you to give the [mc_missile](https://github.com/christopher-besch/mc_missile) Minecraft mod a go — it's real fun!
 
