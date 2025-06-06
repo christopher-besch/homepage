@@ -201,7 +201,7 @@ $$
 There's no closed-form solution for $\theta$.
 The best we can do is rewrite it like this and use a numerical root-finding approach like [Newton's method](https://en.wikipedia.org/wiki/Newton's_method):
 $$
-\frac{\|g\|}{T(t)} + \cos(\theta) \cdot \tan(\alpha) - \sin(\theta) = 0.
+\frac{\|g\|}{T(t)} + \cos(\theta) \tan(\alpha) - \sin(\theta) = 0.
 $$
 
 <HalfImage src={compensate_gravity_theta_plot} />
@@ -309,11 +309,11 @@ So we're asking for a line-sphere intersection.
 You could either do the math yourself or use [Wikipedia](https://en.wikipedia.org/wiki/Line%E2%80%93sphere_intersection) and come up with
 $$
 \begin{aligned}
-r_{rad} &= (2u^Tv)^2 - 4\|u\|^2 \left(\|v\|^2 - T(t)^2\right) \\
-r_{1,2}       &= \frac{2u^Tv \pm \sqrt{r_{rad}}}
-                      {2\|u\|^2}
+r_{rad} &=&& (2u^Tv)^2 - \\
+        & && 4\|u\|^2 \left(\|v\|^2 - T(t)^2\right) \\
+r_{1,2} &=&& \frac{2u^Tv \pm \sqrt{r_{rad}}}
+                {2\|u\|^2}.
 \end{aligned}
-.
 $$
 I use the larger $r_{1,2}$ because then we're also accelerating towards the target while keeping our velocity correctly pointed.
 (You could also use the smaller one and accelerate away from the target in case you want to break.)
