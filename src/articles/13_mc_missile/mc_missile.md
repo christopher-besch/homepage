@@ -308,8 +308,11 @@ You might already notice that $r \cdot u$ defines a line in direction $u$ (from 
 So we're asking for a line-sphere intersection.
 You could either do the math yourself or use [Wikipedia](https://en.wikipedia.org/wiki/Line%E2%80%93sphere_intersection) and come up with
 $$
-r_{1,2} = \frac{2u^Tv \pm \sqrt{(2u^Tv)^2 - 4\|u\|^2 (\|v\|^2 - T(t)^2)}}
-               {2\|u\|^2}
+\begin{aligned}
+r_{rad} &= (2u^Tv)^2 - 4\|u\|^2 \left(\|v\|^2 - T(t)^2\right) \\
+r_{1,2}       &= \frac{2u^Tv \pm \sqrt{r_{rad}}}
+                      {2\|u\|^2}
+\end{aligned}
 .
 $$
 I use the larger $r_{1,2}$ because then we're also accelerating towards the target while keeping our velocity correctly pointed.
@@ -323,7 +326,7 @@ We again need to compensate for gravity to calculate the right missile rotation.
 <HalfImage src={sphere_ray_projection_diagram} />
 
 One last problem:
-When the above radical is negative we can't calculate the square-root.
+When the above radical $r_{rad}$ is negative we can't calculate the square-root.
 This is the case when the sphere and line don't intersect at all.
 For us that means our current velocity is so far off and our thrust so weak there's no way we could reach the requested velocity this tick.
 In this case the best we can do is take the point of our circle closest to our line.
