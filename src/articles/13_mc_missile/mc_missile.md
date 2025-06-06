@@ -19,6 +19,8 @@ version: 1.0.0
 
 import compensate_gravity_diagram from "./compensate_gravity_diagram.png";
 import compensate_gravity_theta_plot from "./compensate_gravity_theta_plot.png";
+import sphere_ray_intersection_diagram from "./sphere_ray_intersection_diagram.png";
+import sphere_ray_projection_diagram from "./sphere_ray_projection_diagram.png";
 
 import buchel_air_strike_on_end_city from "./buchel_air_strike_on_end_city.mp4";
 import buchel_air_strike_on_enderman_enderman_view from "./buchel_air_strike_on_enderman_enderman_view.mp4";
@@ -55,7 +57,7 @@ p = \begin{pmatrix} p_1 \\ p_2 \\ p_3 \end{pmatrix} \in \mathbb{R}^3
 $$
 (with the elevation $$p_2$$), velocity
 $$
-v = \begin{pmatrix} v_1 \\ v_2 \\ v_3 \end{pmatrix} \in \mathbb{R}^3
+v \in \mathbb{R}^3
 $$
 , pitch
 $$
@@ -82,7 +84,7 @@ The update in tick $t \in \mathbb{N}_0$ is separated into three stages:
     When the control input is too large (larger than $M_r$ defined by the airframe), it is scaled down linearly:
     $$
     \begin{aligned}
-    l & = \sqrt{\theta_{in}^2 + \psi_{in}^2} \\
+    l &= \sqrt{\theta_{in}^2 + \psi_{in}^2} \\
     \begin{pmatrix} \theta_{in} \\ \psi_{in} \end{pmatrix} &\rightarrow 
     \max{\left\{\frac{M_r}{l}, 1\right\}} \begin{pmatrix} \theta_{in} \\ \psi_{in} \end{pmatrix}.
     \end{aligned}
@@ -91,12 +93,12 @@ The update in tick $t \in \mathbb{N}_0$ is separated into three stages:
     $$
     \begin{aligned}
     \theta &\rightarrow \theta + \theta_{in} + N_r \\
-    \psi &\rightarrow \psi + \psi_{in} + N_r \\
+    \psi   &\rightarrow \psi + \psi_{in} + N_r \\
     \end{aligned}
     $$
     $$N_r$$ is normally distributed noise dependent on the air frame used by the missile.
 
-    Now the acceleration $a \in \mathbb{R}^3$ can be calculated from the rotation vector $r \in \mathbb{R}^3$, the current thrust $T(t) \in [0, \infty)$ and gravity $g = \begin{pmatrix} 0 \\ -|g| \\ 0 \end{pmatrix}$.
+    Now the acceleration $a \in \mathbb{R}^3$ can be calculated from the rotation vector $r \in \mathbb{R}^3$, the current thrust $T(t) \in [0, \infty)$ and gravity $g = \begin{pmatrix} 0 \\ -||g|| \\ 0 \end{pmatrix}$.
     $$
     \begin{aligned}
     r & =
@@ -182,12 +184,12 @@ There's no gravity messing with our yaw.
 Given the pitch $\alpha \in [-90, 90]$ of a desired acceleration (towards my brother) what pitch $\theta$ should the rocket point in?
 
 Assume, without loss of generality, $\psi = 90$ and ignore thrust variance.
-Also, assume $T(t) > |g|$ (otherwise we'd have to calculate a parabola when our initial velocity suffices).
+Also, assume $T(t) > ||g||$ (otherwise we'd have to calculate a parabola when our initial velocity suffices).
 Then $a_3 = 0$ and we can write:
 $$
 \begin{aligned}
 \tilde{a} &= \begin{pmatrix} a_1 \\ a_2 \end{pmatrix} \\
-          &= |g| \cdot \begin{pmatrix} 0 \\ -1 \end{pmatrix} +
+          &= ||g|| \cdot \begin{pmatrix} 0 \\ -1 \end{pmatrix} +
              T(t) \cdot \begin{pmatrix} \cos(\theta) \\ \sin(\theta) \end{pmatrix}
 \end{aligned}
 $$
@@ -196,20 +198,20 @@ and with some trigonometry:
 $$
 \begin{aligned}
 \tan(\alpha) &= \frac{a_2}{a_1} \\
-       &= \frac{T(t) \cdot \sin(\theta) - |g|}{T(t) \cdot \cos(\theta)}.
+             &= \frac{T(t) \cdot \sin(\theta) - ||g||}{T(t) \cdot \cos(\theta)}.
 \end{aligned}
 $$
 
 There's no closed-form solution for $\theta$.
 The best we can do is rewrite it like this and use a numerical root-finding approach like [Newton's method](https://en.wikipedia.org/wiki/Newton's_method):
 $$
-\frac{|g|}{T(t)} + \cos(\theta) \cdot \tan(\alpha) - \sin(\theta) = 0.
+\frac{||g||}{T(t)} + \cos(\theta) \cdot \tan(\alpha) - \sin(\theta) = 0.
 $$
 
 <HalfImage src={compensate_gravity_theta_plot} />
 
 How do we do that with Rust?
-We use Python, calculate a lookup-table resolving $\frac{|g|}{T(t)}$ and $\alpha$ to $\theta$ and use that in Rust.
+We use Python, calculate a lookup-table resolving $\frac{||g||}{T(t)}$ and $\alpha$ to $\theta$ and use that in Rust.
 ```python
 import numpy as np
 from scipy import optimize
@@ -283,18 +285,82 @@ Why is that?
 <Spacer />
 
 # Velocity-Aware
+
+<HalfImage src={sphere_ray_intersection_diagram} />
+
 The issue is that accelerating towards my brother isn't actually what we want:
 We want to align our velocity $v$ so that it moves us closer towards the target.
-When the $|v| = 0$ or $v$ is already pointing in the right direction our previous calculation is correct, which is why it worked without top-attacks.
-But now our missile is flying in some other direction at it's highest point in the sky.
+Our previous calculation simply points our acceleration vector towards the target.
+When $||v|| = 0$ or $v$ is already pointing in the right direction that is correct.
+But at the apogee of a top-attack our missile's velocity is pointing towards the sky, not the target; so we miss.
 
-TODO: text
+Say our target is at $y$ and we are at $p$.
+Then we're asking for our new velocity $\tilde{v} = v + a$ to fulfil
+$$
+\begin{aligned}
+\tilde{v} &= r \cdot u \\
+\end{aligned}
+$$
+with $r \in (0, \infty)$ and $u = y - p$.
+
+The exact length of $a$ is unfortunately dependant on the direction because of gravity.
+A good approximation is to ignore gravity for now and use
+$$
+||a|| \approx T(t).
+$$
+
+You might already notice that $r \cdot u$ defines a line in direction $u$ (from the missile towards my brother) and $v + a$ a sphere around $v$ with radius $T(t)$.
+So we're asking for a line-sphere intersection.
+You could either do the math yourself or use [Wikipedia](https://en.wikipedia.org/wiki/Line%E2%80%93sphere_intersection) and come up with
+$$
+r_{1,2} = \frac{2u^Tv \pm \sqrt{(2u^Tv)^2 - 4||u||^2 (||v||^2 - T(t)^2)}}
+               {2||u||^2}
+.
+$$
+I use the larger $r_{1,2}$ because then we're also accelerating towards the target while keeping our velocity correctly pointed.
+(You could also use the smaller one and accelerate away from the target in case you want to break.)
+With this I know where to accelerate:
+$$
+\frac{a}{||a||} = \frac{r \cdot u - v}{||r \cdot u - v||}.
+$$
+We again need to compensate for gravity like we did above and then know where the missile should point.
+
+<HalfImage src={sphere_ray_projection_diagram} />
+
+One last problem:
+When the above radical is negative we can't calculate the square-root.
+This is the case when the sphere and line don't intersect at all.
+For us that means our current velocity is so far off and our thrust so weak there's no way we could reach the requested velocity this tick.
+In this case the best we can do is take the point of our circle closest to our line.
+That's equivalent to projecting $v$ orthographically onto $u$:
+$$
+\begin{aligned}
+u_p               &= \frac{v^Tu}{||u||^2} \cdot u \\
+\frac{a}{||a||}   &= \frac{u_p - v}{||u_p - v||}
+\end{aligned}
+$$
+
+Again we need to compensate for gravity just like before.
+Doing this for a few ticks should hopefully be enough to at some point have a positive radical and use the line-sphere intersection then.
+Fun fact:
+In this situation we aren't accelerating towards the target at all.
+We're completely focused on getting us on course, first.
 
 <AutoPlayVideo src={top_true_presentation} width={1920} height={1080} />
 
+Now our top attack works all the time.
+(Minus that one time the proximity fuse triggered too early, whoops.)
+
 <AutoPlayVideo src={direct_presentation} width={1920} height={1080} />
 
+And direct attacks work, too.
+
 <AutoPlayVideo src={direct_aerial_presentation} width={1920} height={1080} />
+
+Even aerial brothers can be engaged.
+This only works with this design because the rocket motor is so crazily powerful.
+It costs something like five diamonds per rocket alone!
+Anything cheaper wouldn't work.
 
 <Spacer />
 
@@ -310,7 +376,10 @@ A few of my ideas:
 3. Do some parabola calculation and use a cheaper rocket motor that only has a short burn duration in the beginning.
 4. Implement [Proportional navigation](https://en.wikipedia.org/wiki/Proportional_navigation) to shoot down moving and aerial targets.
 5. Use [lock-on after launch](https://en.wikipedia.org/wiki/Lock-on_after_launch) to fire at targets without visual contact.
-6. much, much more...
+7. Generally use cheaper components and deal with the implications.
+8. much, much more...
+
+I encourage you to give the [mc_missile](https://github.com/christopher-besch/mc_missile) Minecraft mod a go — it's real fun!
 
 <Spacer />
 
@@ -324,4 +393,3 @@ Psst, my [entire guidance code](https://github.com/christopher-besch/mc_missile_
 
 My brother is actually really cool.
 Thanks for *testing* my missiles!
-
