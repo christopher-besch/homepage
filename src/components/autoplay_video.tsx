@@ -19,7 +19,7 @@ const AutoPlayVideo = (props: AutoPlayVideoProps) => {
             {/* show in print version if poster defined */}
             <video
                 className={props.poster ? styles.video : styles.video_no_print}
-                controls loop muted autoPlay
+                controls loop muted autoPlay playsInline
                 poster={props.poster}
                 width={props.width ? props.width : 1920}
                 height={props.height ? props.height : 1080}>
