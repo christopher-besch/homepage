@@ -6,11 +6,11 @@ I'm having a stab at designing an enitity seeking missile in Minecraft with the 
 
 Or: How I blew up my brother.
 "
-banner: /social_banner/riscv_rt.png
-thumb: ../../../static/social_banner/riscv_rt.png
-title_banner: ../../images/photography/alpha_victor.jpg
-title_banner_horizontal_position: 20%
-title_banner_vertical_position: 80%
+banner: /social_banner/mc_missile.png
+thumb: ../../../static/social_banner/mc_missile.png
+title_banner: ../../images/photography/alpha_xray.jpg
+title_banner_horizontal_position: 80%
+title_banner_vertical_position: 100%
 slug: mc_missile
 date: 2025-05-31T00:00:00+00:00
 listed: true
