@@ -55,7 +55,7 @@ For us only the *rocket motor*, *air frame* and *seeker head* matter.
 
 Like the player (including my brother) the missile is an [entity](https://minecraft.wiki/w/Entity) in Minecraft.
 The missile has
--   a position $p = \begin{pmatrix} p_1 \\ p_2 \\ p_3 \end{pmatrix} \in \mathbb{R}^3$ (with the elevation $$p_2$$),
+-   a position $p = \begin{pmatrix} p_1 \\ p_2 \\ p_3 \end{pmatrix} \in \mathbb{R}^3$ (with the elevation $p_2$),
 -   velocity $v \in \mathbb{R}^3$,
 -   pitch $\theta \in [-90, 90]$ and
 -   yaw $\psi \in [-180, 180]$.
@@ -90,7 +90,7 @@ The update in tick $t \in \mathbb{N}_0$ is separated into three stages:
     \psi   &\rightarrow \psi + \psi_{in} + N_r \\
     \end{aligned}
     $$
-    each $$N_r$$ is normally distributed noise dependent on the air frame used by the missile.
+    each $N_r$ is normally distributed noise dependent on the air frame used by the missile.
     So you don't have perfect control over the missiles rotation, there is always some variance.
 
     Now the acceleration $a \in \mathbb{R}^3$ can be calculated from the rotation vector $r \in \mathbb{R}^3$, the current thrust $T(t) \in [0, \infty)$ and gravity $g = \begin{pmatrix} 0 \\ -\|g\| \\ 0 \end{pmatrix} \in \mathbb{R}^3$.
@@ -106,7 +106,7 @@ The update in tick $t \in \mathbb{N}_0$ is separated into three stages:
       & = \left(T(t) + N_T \right) \cdot r + g
     \end{aligned}
     $$
-    $$N_T$$ is normally distributed noise and like the thrust function $T$ defined by the rocket motor.
+    $N_T$ is normally distributed noise and like the thrust function $T$ defined by the rocket motor.
 
     Lastly, the velocity and position are updated with the airframe defined drag $d \in [0, 1)$.
     $$
