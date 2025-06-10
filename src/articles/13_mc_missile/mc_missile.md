@@ -41,13 +41,13 @@ My brother walks by, saying hi.
 What's missing?
 
 A brother-seeking missile with an explosive warhead enough to crack his cute Netherite armor, of course!
-This is my journey of developing such a thing with the [mc_missile](https://github.com/christopher-besch/mc_missile) Minecraft mod.
+This is my journey of developing such a thing with the [mc_missile](https://codeberg.org/christopher-besch/mc_missile) Minecraft mod.
 Follow this article and you too will have a [fire-and-forget](https://en.wikipedia.org/wiki/Fire-and-forget), [top-attack](https://en.wikipedia.org/wiki/Top-attack), [Infrared-homing](https://en.wikipedia.org/wiki/Infrared_homing) missile at your disposal.
 
 <Spacer />
 
 # The Starting Point
-The server we're playing on runs the [mc_missile](https://github.com/christopher-besch/mc_missile) Minecraft mod.
+The server we're playing on runs the [mc_missile](https://codeberg.org/christopher-besch/mc_missile) Minecraft mod.
 It allows all players to program guided missiles and fire them from a [crossbow](https://minecraft.wiki/w/Crossbow) or [dispenser](https://minecraft.wiki/w/Dispenser).
 
 A missile is built from components, each with a price tag and effects on the missile.
@@ -378,7 +378,7 @@ A few of my ideas:
 8. Generally use cheaper components and deal with the implications.
 9. much, much more...
 
-I encourage you to give the [mc_missile](https://github.com/christopher-besch/mc_missile) Minecraft mod a go — it's real fun!
+I encourage you to give the [mc_missile](https://codeberg.org/christopher-besch/mc_missile) Minecraft mod a go — it's real fun!
 
 <Spacer />
 
@@ -386,7 +386,7 @@ I encourage you to give the [mc_missile](https://github.com/christopher-besch/mc
 
 <AutoPlayVideo src={buchel_air_strike_on_enderman_enderman_view} width={1920} height={1080} />
 
-Psst, my [entire guidance code](https://github.com/christopher-besch/mc_missile_guidance) is open-source; just don't tell my brother.
+Psst, my [entire guidance code](https://codeberg.org/christopher-besch/mc_missile_guidance) is open-source; just don't tell my brother.
 
 ### PPS
 
