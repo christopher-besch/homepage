@@ -12,7 +12,7 @@ title_banner: ../../images/photography/alpha_yankee.jpg
 title_banner_horizontal_position: 20%
 title_banner_vertical_position: 40%
 slug: riscv_rt
-date: 2025-05-19T00:00:00+00:00
+date: 2025-06-27T00:00:00+00:00
 listed: true
 version: 1.0.0
 ---
@@ -22,6 +22,8 @@ import general_setup_config from "./general_setup_config.png";
 import preemption_model_config from "./preemption_model_config.png";
 
 I got access to a StarFive VisionFive 2 and wanted to play around with Real-Time Linux on it.
+This article goes into excruciating detail on how I set that machine up to with `PREEMPT_RT`.
+
 The first mainline Kernel with PREEMPT_RT is v6.12.
 At the time of writing v6.15 is the newest kernel and my Debian laptop runs on v6.1.0.
 For the Debian user that I am v6.12 is pretty new.
@@ -29,7 +31,7 @@ For the Debian user that I am v6.12 is pretty new.
 So, how do we get this single board computer (SBC) to work and run on such a new kernel?
 There is no StarFive Debian release with a Linux kernel v6.12 or newer.
 So we need to make due with engineering release 202409 and kernel v6.6.20 and get to v6.12 later.
-(that's still newer than my Debian laptop...)
+(That's still newer than my Debian laptop...)
 
 # Installing the Initial Image
 I just stick to the [official installation guide for Debian on the VisionFive 2](https://rvspace.org/en/project/VisionFive2_Debian_User_Guide).
@@ -38,34 +40,35 @@ I chose to boot off of an SD card, pop it in my laptop and run:
 bzip2 -d starfive-jh7110-202409-SD-minimal-desktop-wayland.img.bz2
 sudo dd if=starfive-jh7110-202409-SD-minimal-desktop-wayland.img of=/dev/sda conv=fsync bs=4M status=progress
 ```
-Now we can insert the SD card in the SBC and watch it boot for the first time.
+Now we can insert the SD card into the SBC and watch it boot for the first time.
 
 # UART
-I have a USB to UART adapter attached to the my laptop and the SBC respectively.
+I have a USB to UART adapter attached to my laptop and the SBC.
 After having added myself to the dialout group on my laptop I rebooted (a relogin would have done it as well):
 ```bash
 sudo usermod -a -G dialout chris
 sudo reboot
 ```
 
-Now I plug in the adapter to my laptop and check what tty adapter is on:
+Now I plug in the adapter to my laptop and check what tty adapter it is on:
 ```bash
 sudo dmesg
 ```
-
+This should print something including the tty path.
+I use this path to attach a terminal to that adapter.
 ```bash
 screen -U /dev/ttyUSB0 -b 115200
 ```
 Exit with `Ctrl+a d`.
 
-There is this magic of the LEDs on the UART adapter blinking as you type.
+There is this magic of LEDs on a UART adapter blinking as you type.
 
 # Setting up Networking
 
-Linux is running on the SBC but we I'd like to have network access.
-I have my Linux Laptop right here and want to share its network connection with SBC.
+Linux is running on the SBC but I'd like to have network access.
+I have my Linux Laptop right here and want to share its network connection with the SBC.
 
-## On Laptop
+## On the Laptop
 First we need to know what network cards we're dealing with:
 ```bash
 ~ λ ip link
@@ -143,6 +146,8 @@ sudo ip route add default via 192.168.10.1
 With this we have added the ip `192.168.10.2` to the SBC's `eth0` interface.
 DHCP would have done that automatically but we didn't setup a DHCP server on the laptop so we have to do this manually.
 
+### DNS
+
 ```bash
 sudo vi /etc/resolv.conf
 ```
@@ -177,8 +182,8 @@ I presume that's because the NetworkManager on my laptop interferes but I'm not 
 I often have to run the commands multiple times until they stick.
 
 ### SSH
-There is already an SSH server installed and running on the SBC.
-All I have to do to connect from the host is:
+There already is an SSH server installed and running on the SBC.
+All I have to do is connect to it from the host:
 ```bash
 ssh user@192.168.10.2
 ```
@@ -186,7 +191,7 @@ So much faster than UART, damn!
 No blinking lights, though `:<`
 
 # Building the Kernel
-Again we refer to the [VisionFive 2](https://rvspace.org/en/project/VisionFive2_Debian_User_Guide#h-46-compiling-and-updating-linux-kernel).
+Again we refer to the [VisionFive 2 docs](https://rvspace.org/en/project/VisionFive2_Debian_User_Guide#h-46-compiling-and-updating-linux-kernel).
 ```bash
 sudo apt-get -y install build-essential linux-source bc kmod cpio flex libncurses5-dev libelf-dev libssl-dev dwarves bison git debhelper
 git clone --depth 1 --single-branch --branch JH7110_VisionFive2_6.12.y_devel https://github.com/starfive-tech/linux
@@ -203,8 +208,7 @@ make ARCH=riscv menuconfig
 <HalfImage src={preemption_model_config} />
 
 In this menu screen we select **Scheduler controlled preemption model** mode under **General setup** then **Preemption Model**.
-You might also want to set in case you want multiple kernels of the same version
-In my case I also had to set this in the `.config` file in order to differentiate this kernel from a `PREEMPT_DYNAMIC` build.
+In my case I also had to set this in the `.config` file in order to differentiate this kernel from a `PREEMPT_DYNAMIC` build I also created.
 ```
 CONFIG_LOCALVERSION="preempt-rt"
 ```
@@ -219,7 +223,7 @@ sudo dpkg -i \
     linux-image-6.12.5*_riscv64.deb \
     linux-libc-dev_6.12.5*_riscv64.deb
 ```
-When doing so more than once I had to uninstall an old kernel, probably because the there isn't enough space for the rgx firmware on initrd but I'm really not sure.
+When doing so more than once, I had to uninstall an old kernel; probably because there isn't enough space for the rgx firmware on initrd but I'm really not sure.
 
 This takes a while — some time to do the toilet, nice.
 Still not done?
@@ -233,13 +237,14 @@ The documentation warns about the dtbs not being synced but for me they were, so
 Installing `debhelper` was missing in the documentation.
 
 ## Dealing with Multiple Kernels
-I ended up having two v6.12.5 kernels installed: a PREEMPT_RT and a PREEMPT_DYNAMIC one.
-To choose which one to boot I edited this file with the nice warning not to edit it.
+I ended up having two v6.12.5 kernels installed: a `PREEMPT_RT` and a `PREEMPT_DYNAMIC` one.
+To choose which one to boot I edited `/boot/extlinux/extlinux.conf`.
+It has such a nice warning not to edit it.
 Here I just renamed the `l0` and `l0r` labels to `l1` and `l1r` and the other way around.
 I also rearranged the labels to be a little nicer; I have no idea if that was needed.
 
 I did try using a *proper* method of changing the kernel to boot but this was the only thing I came up with and it works.
-I left the `l2` and `l2` labels in case I screwed something up.
+I left the `l2` and `l2r` labels in case I screwed something up.
 
 ```bash
 sudo vi /boot/extlinux/extlinux.conf
@@ -307,10 +312,8 @@ label l2r
         append root=/dev/mmcblk1p4 root=/dev/mmcblk1p4 rw console=tty0 console=ttyS0,115200 earlycon rootwait stmmaceth=chain_mode:1 selinux=0 single
 ```
 
-### Configs
-https://unix.stackexchange.com/questions/94490/bash-doesnt-read-bashrc-unless-manually-started
-
 # Testing
+Now we can do some testing of our real-time performance with cyclictest:
 ```bash
 sudo apt install rt-tests stress-ng
 sudo echo performance > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
@@ -321,10 +324,9 @@ stress-ng --vm 4
 sudo cyclictest --mlockall --smp --priority=99 --interval=200 --quiet --duration=10m --histofall=200 > out.txt
 ```
 
-```
-ideas:
-disable CONFIG_NO_HZ_IDLE
+# Some Ideas for Further Investigation
+- disable `CONFIG_NO_HZ_IDLE`
+- use `CONFIG_HZ_1000` instead of `CONFIG_HZ_100`
 
--CONFIG_HZ_100=y
-+CONFIG_HZ_1000=y
-```
+# Other Things
+To get my custom configs to work I had to edit my `.bash_profile`: [unix.stackexchange.com/questions/94490/bash-doesnt-read-bashrc-unless-manually-started](https://unix.stackexchange.com/questions/94490/bash-doesnt-read-bashrc-unless-manually-started)
