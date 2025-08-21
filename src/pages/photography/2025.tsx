@@ -13,19 +13,25 @@ const ToVanish = ({ data }: PageProps<Queries.ToVanishQuery>) => {
         images.set(node.name, getImage(node as ImageDataLike)!);
 
     return (
-        <Layout heading="To Vanish" keep_heading_line={true}>
+        <Layout heading="2025" keep_heading_line={true}>
             <div className={photography_styles.photos} >
                 <div className={photography_styles.photo_wrapper}>
-                    <GatsbyImage className={photography_styles.photo} image={images.get("alpha_bravo")!} alt="alpha_bravo" />
+                    <GatsbyImage className={photography_styles.photo} image={images.get("2025_alpha")!} alt="" />
                 </div>
                 <div className={photography_styles.photo_wrapper}>
-                    <GatsbyImage className={photography_styles.photo} image={images.get("alpha_alpha")!} alt="alpha_alpha" />
+                    <GatsbyImage className={photography_styles.photo} image={images.get("2025_bravo")!} alt="" />
                 </div>
                 <div className={photography_styles.photo_wrapper}>
-                    <GatsbyImage className={photography_styles.photo} image={images.get("alpha_charlie")!} alt="alpha_charlie" />
+                    <GatsbyImage className={photography_styles.photo} image={images.get("2025_charlie")!} alt="" />
                 </div>
                 <div className={photography_styles.photo_wrapper}>
-                    <GatsbyImage className={photography_styles.photo} image={images.get("alpha_delta")!} alt="alpha_delta" />
+                    <GatsbyImage className={photography_styles.photo} image={images.get("2025_delta")!} alt="" />
+                </div>
+                <div className={photography_styles.photo_wrapper}>
+                    <GatsbyImage className={photography_styles.photo} image={images.get("2025_echo")!} alt="" />
+                </div>
+                <div className={photography_styles.photo_wrapper}>
+                    <GatsbyImage className={photography_styles.photo} image={images.get("2025_foxtrot")!} alt="" />
                 </div>
             </div>
             <Link className={`${util_styles.block} ${util_styles.link}`} to="/photography">More Photos</Link>

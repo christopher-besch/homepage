@@ -7,35 +7,29 @@ import SEO from "src/components/seo";
 import * as util_styles from "src/styles/utils.module.scss";
 import * as photography_styles from "src/styles/photography.module.scss";
 
-const Transient = ({ data }: PageProps<Queries.TransientQuery>) => {
+const ToVanish = ({ data }: PageProps<Queries.ToVanishQuery>) => {
     let images = new Map<string, IGatsbyImageData>();
     for (let node of data.allFile.nodes)
         images.set(node.name, getImage(node as ImageDataLike)!);
 
     return (
-        <Layout heading="Transient" keep_heading_line={true}>
+        <Layout heading="Before" keep_heading_line={true}>
             <div className={photography_styles.photos} >
                 <div className={photography_styles.photo_wrapper}>
-                    <GatsbyImage className={photography_styles.photo} image={images.get("alpha_india")!} alt="alpha_india" />
+                    <GatsbyImage className={photography_styles.photo} image={images.get("2018_alpha")!} alt="" />
                 </div>
                 <div className={photography_styles.photo_wrapper}>
-                    <GatsbyImage className={photography_styles.photo} image={images.get("alpha_hotel")!} alt="alpha_hotel" />
-                </div>
-                <div className={photography_styles.photo_wrapper}>
-                    <GatsbyImage className={photography_styles.photo} image={images.get("alpha_golf")!} alt="alpha_golf" />
-                </div>
-                <div className={photography_styles.photo_wrapper}>
-                    <GatsbyImage className={photography_styles.photo} image={images.get("alpha_juliett")!} alt="alpha_juliett" />
+                    <GatsbyImage className={photography_styles.photo} image={images.get("2019_alpha")!} alt="" />
                 </div>
             </div>
             <Link className={`${util_styles.block} ${util_styles.link}`} to="/photography">More Photos</Link>
         </Layout >
     );
 };
-export default Transient;
+export default ToVanish;
 
 export const query = graphql`
-query Transient {
+query ToVanish {
   allFile(filter: {sourceInstanceName: {eq: "photography"}}) {
     nodes {
       childImageSharp {
@@ -48,5 +42,5 @@ query Transient {
 `;
 
 export const Head = () => (
-    <SEO heading="Transient" />
+    <SEO heading="To Vanish" />
 );
