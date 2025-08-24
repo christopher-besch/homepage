@@ -6,7 +6,7 @@ Links to web pages I enjoyed reading.
 You might like them, too.
 "
 banner: /social_banner/mc_missile.png
-thumb: ../../../static/social_banner/mc_missile.png
+thumb: ../../../static/social_banner/bookmarks.png
 title_banner: ../../images/photography/alpha_zulu.jpg
 title_banner_horizontal_position: 0%
 title_banner_vertical_position: 60%
@@ -83,10 +83,13 @@ If you have something to recommend, feel free to tell me at [mail@chris-besch.co
 ### Philosophy
 - [Reality has a surprising amount of detail](http://johnsalvatier.org/blog/2017/reality-has-a-surprising-amount-of-detail) by John Salvatier
 
+### Outdoors
+- [North Sweden 2024](https://leonbruns.de/hiking/sweden2024.html) by Leon Bruns
+
 ### Blogs under Construction
 - [teccheck.xyz](https://teccheck.xyz) knows a butt-ton of Android reverse-engineering.
-    He has so much to share and just needs a few more kicks in the arse to write it up.
-    I'm specifically thinking about his endeavours with the Samsung Gear 360.
+    He has so much to share and just needs a kick in the arse to put it into words.
+    I'm specifically thinking about his work on the Samsung Gear 360.
     Oh, and what was that with the Oculus Quest?
 
 This is a developing story...
