@@ -7,41 +7,46 @@ import SEO from "src/components/seo";
 import * as util_styles from "src/styles/utils.module.scss";
 import * as photography_styles from "src/styles/photography.module.scss";
 
-const ToVanish = ({ data }: PageProps<Queries.ToVanishQuery>) => {
+const Photography2024 = ({ data }: PageProps<Queries.ToVanishQuery>) => {
     let images = new Map<string, IGatsbyImageData>();
-    for (let node of data.allFile.nodes)
-        images.set(node.name, getImage(node as ImageDataLike)!);
+    let image_sources = new Map<string, string>();
+    for (let node of data.allFile.nodes) {
+        let image = getImage(node as ImageDataLike)!;
+        images.set(node.name, image);
+        // This is super ugly but I can't be bothered doing this properly before getting away from Gatsby.
+        image_sources.set(node.name, image.images.sources?.at(0)?.srcSet.replaceAll("\n", " ").split(" ").at(-2)!);
+    }
 
     return (
         <Layout heading="2024" keep_heading_line={true}>
             <div className={photography_styles.photos} >
-                <div className={photography_styles.photo_wrapper}>
+                <a href={image_sources.get("2024_alpha")} target="_blank" className={photography_styles.photo_wrapper}>
                     <GatsbyImage className={photography_styles.photo} image={images.get("2024_alpha")!} alt="" />
-                </div>
-                <div className={photography_styles.photo_wrapper}>
+                </a>
+                <a href={image_sources.get("2024_bravo")} target="_blank" className={photography_styles.photo_wrapper}>
                     <GatsbyImage className={photography_styles.photo} image={images.get("2024_bravo")!} alt="" />
-                </div>
-                <div className={photography_styles.photo_wrapper}>
+                </a>
+                <a href={image_sources.get("2024_charlie")} target="_blank" className={photography_styles.photo_wrapper}>
                     <GatsbyImage className={photography_styles.photo} image={images.get("2024_charlie")!} alt="" />
-                </div>
-                <div className={photography_styles.photo_wrapper}>
+                </a>
+                <a href={image_sources.get("2024_delta")} target="_blank" className={photography_styles.photo_wrapper}>
                     <GatsbyImage className={photography_styles.photo} image={images.get("2024_delta")!} alt="" />
-                </div>
-                <div className={photography_styles.photo_wrapper}>
+                </a>
+                <a href={image_sources.get("2024_echo")} target="_blank" className={photography_styles.photo_wrapper}>
                     <GatsbyImage className={photography_styles.photo} image={images.get("2024_echo")!} alt="" />
-                </div>
-                <div className={photography_styles.photo_wrapper}>
+                </a>
+                <a href={image_sources.get("2024_foxtrot")} target="_blank" className={photography_styles.photo_wrapper}>
                     <GatsbyImage className={photography_styles.photo} image={images.get("2024_foxtrot")!} alt="" />
-                </div>
-                <div className={photography_styles.photo_wrapper}>
+                </a>
+                <a href={image_sources.get("2024_golf")} target="_blank" className={photography_styles.photo_wrapper}>
                     <GatsbyImage className={photography_styles.photo} image={images.get("2024_golf")!} alt="" />
-                </div>
+                </a>
             </div>
             <Link className={`${util_styles.block} ${util_styles.link}`} to="/photography">More Photos</Link>
         </Layout >
     );
 };
-export default ToVanish;
+export default Photography2024;
 
 export const query = graphql`
 query ToVanish {
@@ -57,5 +62,5 @@ query ToVanish {
 `;
 
 export const Head = () => (
-    <SEO heading="To Vanish" />
+    <SEO heading="Photography 2024" />
 );
