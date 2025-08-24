@@ -120,7 +120,7 @@ query Home {
       gatsbyImageData(placeholder: BLURRED)
     }
   }
-  photo: file(sourceInstanceName: {eq: "photography"}, name: {eq: "alpha_mike"}) {
+  photo: file(sourceInstanceName: {eq: "photography"}, name: {eq: "2023_delta_slim"}) {
     childImageSharp {
       gatsbyImageData(placeholder: BLURRED)
     }
