@@ -60,6 +60,7 @@ query Layout {
                         <li><Link to="/projects">Projects</Link></li>
                         <li><Link to="/talks">Talks</Link></li>
                         <li><Link to="/photography">Photography</Link></li>
+                        <li><Link to="/articles/bookmarks">Bookmarks</Link></li>
                         <li><Link to="/about">About</Link></li>
                     </ul>
                 </div>
