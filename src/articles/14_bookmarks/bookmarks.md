@@ -84,7 +84,9 @@ If you have something to recommend, feel free to tell me at [mail@chris-besch.co
 - [Reality has a surprising amount of detail](http://johnsalvatier.org/blog/2017/reality-has-a-surprising-amount-of-detail) by John Salvatier
 
 ### Outdoors
-- [North Sweden 2024](https://leonbruns.de/hiking/sweden2024.html) by Leon Bruns
+- [North Sweden 2024](https://leonbruns.de/hiking/sweden2024.html) by Leon Bruns shows how combining text with pictures and interactive maps goes a long way to immerse the reader.
+    I love a good structure and extra detail the reader can but doesn't have to interact with.
+    It makes the archivist in me tingle.
 
 ### Blogs under Construction
 - [teccheck.xyz](https://teccheck.xyz) knows a butt-ton of Android reverse-engineering.
