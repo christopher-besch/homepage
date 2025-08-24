@@ -21,7 +21,7 @@ Everyone tends to their own plot of shared knowledge.
 Here I'm linking to some of what I enjoyed visiting.
 I invite you to try out this form of socializing, too.
 Read, write, link — all without a corporation pulling it down in a few years.
-If you have something to recommend, feel free to tell me at [mail@chris-besch.com](mailto:mail@chris-besch.com) or create a page like this.
+If you have something to recommend, feel free to tell me at [mail@chris-besch.com](mailto:mail@chris-besch.com) or create a page like this yourself.
 
 ### Blogging and Writing
 - [Blogging and me](https://ohhelloana.blog/blogging-and-me/) by Ana Rodrigues
