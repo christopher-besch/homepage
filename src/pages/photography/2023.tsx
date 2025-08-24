@@ -38,9 +38,6 @@ const Photography2023 = ({ data }: PageProps<Queries.ToVanishQuery>) => {
                 <a href={image_sources.get("2023_foxtrot")} target="_blank" className={photography_styles.photo_wrapper}>
                     <GatsbyImage className={photography_styles.photo} image={images.get("2023_foxtrot")!} alt="" />
                 </a>
-                <a href={image_sources.get("2023_golf")} target="_blank" className={photography_styles.photo_wrapper}>
-                    <GatsbyImage className={photography_styles.photo} image={images.get("2023_golf")!} alt="" />
-                </a>
             </div>
             <Link className={`${util_styles.block} ${util_styles.link}`} to="/photography">More Photos</Link>
         </Layout >
