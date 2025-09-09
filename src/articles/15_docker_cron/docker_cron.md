@@ -2,8 +2,6 @@
 type: article
 title: "Bookmarks"
 description: "
-Links to web pages I enjoyed reading.
-You might like them, too.
 "
 banner: /social_banner/mc_missile.png
 thumb: ../../../static/social_banner/bookmarks.png
@@ -17,8 +15,14 @@ version: 1.0.0
 ---
 
 I have this voice in my head.
-When I create, it notifies me about things I shouldn't do or use.
-The below article is about that voice.
+When I create, it highlights things I should be cautious of using.
+It is on high alert when some dependency relies on external servers;
+external servers that could go dark at any moment.
+Or when I consider something hacky that will fall apart too soon.
+Or in those situations I feel too smart and come up with too clever a solution when.
+That voice is basically the gegenspieler of not simple enough things.
+
+The below article is about when to quell that voice.
 
 The other day I set up [Renovate](https://docs.renovatebot.com), a bot that continuously scans my code for outdated dependencies.
 I chose to deploy it via Docker.
