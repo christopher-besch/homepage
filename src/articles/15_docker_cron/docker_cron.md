@@ -1,6 +1,6 @@
 ---
 type: article
-title: "The Bitter Feeling of Technial Compromises"
+title: "The Bitter Feeling of Technical Compromises"
 description: "
 My very personal troubles dealing with compromises,
 explained at an example of docker_cron with Renovate.
