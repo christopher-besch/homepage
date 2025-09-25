@@ -126,4 +126,4 @@ Was it still fun, yeah!
 And that's what matters to me.
 
 # PPS
-Yes, my commit messages could use some work but committing as often as possible is more important I think.
+Yes, my commit messages could use some work but committing as often as possible is more important, I think.
