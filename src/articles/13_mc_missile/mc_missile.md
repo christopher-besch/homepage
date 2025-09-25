@@ -90,7 +90,7 @@ The update in tick $t \in \mathbb{N}_0$ is separated into three stages:
     \psi   &\rightarrow \psi + \psi_{in} + N_r \\
     \end{aligned}
     $$
-    each $N_r$ is normally distributed noise dependent on the air frame used by the missile.
+    Each $N_r$ is normally distributed noise dependent on the air frame used by the missile.
     So you don't have perfect control over the missiles rotation, there is always some variance.
 
     Now the acceleration $a \in \mathbb{R}^3$ can be calculated from the rotation vector $r \in \mathbb{R}^3$, the current thrust $T(t) \in [0, \infty)$ and gravity $g = \begin{pmatrix} 0 \\ -\|g\| \\ 0 \end{pmatrix} \in \mathbb{R}^3$.
@@ -298,7 +298,7 @@ $$
 $$
 with $r \in (0, \infty)$ and $u = y - p$.
 
-Because of gravity exact length of $a$ is unfortunately not known at this point.
+Because of gravity the exact length of $a$ is unfortunately not known at this point.
 A good approximation is to ignore gravity for now and use
 $$
 \|a\| \approx T(t).
