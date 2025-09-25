@@ -87,7 +87,7 @@ external servers that could go dark at any moment.
 Or when I consider something hacky that will fall apart too soon or just waits to be exploited.
 This feeling fights for the simplest, cleanest solution possible and no less.
 
-Now this time I indulged it and again looked for a simpler solution:
+Now, this time I indulged it and again looked for a simpler solution:
 I tried integrating cron in the container itself.
 So instead of an entrypoint script I'm using cron inside the Renovate container directly.
 That sounds a lot simpler than the docker_cron solution, right? <br />
