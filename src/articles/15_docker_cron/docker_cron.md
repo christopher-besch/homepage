@@ -18,6 +18,10 @@ listed: true
 version: 1.0.0
 ---
 
+Heads up:
+You should get this article's gist even without any technical knowledge.
+Just replace all technical concepts with `Black Box blabla` and you'll be fine.
+
 The other day I set up [Renovate](https://docs.renovatebot.com), a bot that scans my code for outdated dependencies.
 There is a [Renovate Docker image](https://hub.docker.com/r/renovate/renovate) and my [personal server](https://codeberg.org/christopher-besch/docker_setups) runs everything else in Docker containers, too.
 So I chose that deployment and was only looking for a way to initiate scans at regular intervals.
