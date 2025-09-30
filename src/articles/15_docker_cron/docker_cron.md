@@ -53,7 +53,7 @@ services:
 ```
 
 You only need one docker_cron container for the entire host.
-Then all you have to do is place the `entrypoint.sh` file next to the `docker-compose.yml`.
+Then all you have to do is place this `entrypoint.sh` file next to the `docker-compose.yml`.
 ```bash
 #!/bin/bash
 
@@ -116,7 +116,7 @@ Though you could argue both ways, personally I prefer docker_cron and will keep 
 I find the security implications acceptable considering how easy to review docker_cron is. <br />
 Unfortunately, this Renovate-endeavour of mine didn't rid myself of that bitter feeling.
 After all I didn't actually improve docker_cron, I only showed that the alternative is worse.
-In a perfect world Docker itself offers some form of cron support.
+In a perfect world Docker itself would offer some form of cron support.
 My docker_cron solution, right now, is the next best thing and all it's problems originate from a carefully weighted trade-off.
 Now it's on me to accept that and keep going.
 
