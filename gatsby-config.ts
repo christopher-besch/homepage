@@ -198,6 +198,77 @@ const config: GatsbyConfig = {
                 lang: 'en-GB'
             }
         },
+        // rss feed
+        // This plugin's documentation appears to be for the old allMarkdownRemark.
+        // I'm using allMdx, though.
+        {
+            resolve: "gatsby-plugin-feed",
+            options: {
+                // the default causes this problem:
+                // Error: Cannot query field "siteUrl" on type "SiteSiteMetadata".
+                //   GraphQL request:7:11
+                //   6 |           description
+                //   7 |           siteUrl
+                //     |           ^
+                //   8 |           site_url: siteUrl, Cannot query field "siteUrl" on type "SiteSiteMetadata".
+                //   GraphQL request:8:11
+                //   7 |           siteUrl
+                //   8 |           site_url: siteUrl
+                //     |           ^
+                //   9 |         }
+
+                //   - internals.js:12
+                //     [homepage]/[gatsby-plugin-feed]/internals.js:12:13
+                query: `
+{
+  site {
+    siteMetadata {
+      title
+      description
+      siteUrl: default_origin
+      site_url: default_origin
+    }
+  }
+}
+`,
+                feeds: [
+                    {
+                        serialize: ({ query: { site, allMdx } }: any) => {
+                            return allMdx.edges.map((edge: any) => {
+                                return Object.assign({}, edge.node.frontmatter, {
+                                    title: edge.node.frontmatter.title,
+                                    description: edge.node.frontmatter.description,
+                                    date: edge.node.frontmatter.date,
+                                    url: `${site.siteMetadata.siteUrl}/articles/${edge.node.frontmatter.slug}`,
+                                    guid: `${site.siteMetadata.siteUrl}/articles/${edge.node.frontmatter.slug}`,
+                                })
+                            })
+                        },
+                        query: `
+query RSSFeed{
+  allMdx(
+    sort: {frontmatter: {date: DESC}}
+    filter: {frontmatter: {type: {eq: "article"}, listed: {eq: true}}}
+  ) {
+    edges {
+      node {
+        frontmatter {
+          slug
+          description
+          title
+          date
+        }
+      }
+    }
+  }
+}
+`,
+                        output: "/rss.xml",
+                        title: "Chris's RSS Feed",
+                    },
+                ],
+            },
+        },
     ]
 };
 
