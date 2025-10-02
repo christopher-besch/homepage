@@ -244,6 +244,11 @@
     grid-row: 1 / 2;
 }
 
+.rssSVG {
+    /* the icon has a white border, remove that */
+    margin: -5px;
+}
+
 .link:hover~.emoji p {
     animation: wave-animation 0.5s infinite;
 }
