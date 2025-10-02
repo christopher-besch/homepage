@@ -32,8 +32,8 @@ query SEO {
     const path = globalHistory.location.pathname;
     // replace origin with default one
     const canonical_url = `${deploy_origin}${path}`;
-    const mastodon_name = data.site?.siteMetadata?.mastodon.name;
-    const mastodon_link = data.site?.siteMetadata?.mastodon.link;
+    const mastodon_name = data.site?.siteMetadata?.mastodon?.name as string;
+    const mastodon_link = data.site?.siteMetadata?.mastodon?.link as string;
 
     const banner = props.banner ? `${origin}${props.banner}` : undefined;
 
@@ -119,9 +119,9 @@ query SEO {
             {/* mastodon things */}
             <link
                 rel="me"
-                href={{ mastodon_link }}
+                href={mastodon_link}
             />
-            <meta name="fediverse:creator" content={{ mastodon_name }} />
+            <meta name="fediverse:creator" content={mastodon_name} />
         </>
     );
 }
