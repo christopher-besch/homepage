@@ -109,6 +109,13 @@ query SEO {
             {/* this doesn't actually work: https://forum.developer.samsung.com/t/websites-dark-mode-gets-overridden-by-samsung-internets-dark-mode/22937/11 */}
             {/* the user has to set this: Internet → Settings → Labs → "Use website dark theme" */}
             <meta name="color-scheme" content="light dark" />
+
+            {/* mastodon things */}
+            <link
+                rel="me"
+                href="https://mastodon.social/@christopher_besch"
+            />
+            <meta name="fediverse:creator" content="@christopher_besch@mastodon.social">
         </>
     );
 }
