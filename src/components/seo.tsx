@@ -15,6 +15,10 @@ query SEO {
       origin
       default_origin
       cloudflare_token
+      mastodon {
+        name
+        link
+      }
     }
   }
 }
@@ -28,6 +32,8 @@ query SEO {
     const path = globalHistory.location.pathname;
     // replace origin with default one
     const canonical_url = `${deploy_origin}${path}`;
+    const mastodon_name = data.site?.siteMetadata?.mastodon.name;
+    const mastodon_link = data.site?.siteMetadata?.mastodon.link;
 
     const banner = props.banner ? `${origin}${props.banner}` : undefined;
 
@@ -113,9 +119,9 @@ query SEO {
             {/* mastodon things */}
             <link
                 rel="me"
-                href="https://mastodon.social/@christopher_besch"
+                href={{ mastodon_link }}
             />
-            <meta name="fediverse:creator" content="@christopher_besch@mastodon.social" />
+            <meta name="fediverse:creator" content={{ mastodon_name }} />
         </>
     );
 }

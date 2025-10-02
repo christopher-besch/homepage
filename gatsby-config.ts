@@ -36,6 +36,10 @@ const config: GatsbyConfig = {
             name: "@besch_chris",
             link: "https://twitter.com/besch_chris",
         },
+        mastodon: {
+            name: "@christopher_besch@mastodon.social",
+            link: "https://mastodon.social/@christopher_besch",
+        },
         discord: {
             name: "Stromel#1046",
             link: "https://discord.com/users/455374552352948236",

@@ -2554,6 +2554,7 @@ type SiteSiteMetadata = {
   readonly email: Maybe<SiteSiteMetadataEmail>;
   readonly github: Maybe<SiteSiteMetadataGithub>;
   readonly linkedin: Maybe<SiteSiteMetadataLinkedin>;
+  readonly mastodon: Maybe<SiteSiteMetadataMastodon>;
   readonly origin: Maybe<Scalars['String']>;
   readonly pgp: Maybe<SiteSiteMetadataPgp>;
   readonly present_url: Maybe<Scalars['String']>;
@@ -2632,6 +2633,7 @@ type SiteSiteMetadataFieldSelector = {
   readonly email: InputMaybe<SiteSiteMetadataEmailFieldSelector>;
   readonly github: InputMaybe<SiteSiteMetadataGithubFieldSelector>;
   readonly linkedin: InputMaybe<SiteSiteMetadataLinkedinFieldSelector>;
+  readonly mastodon: InputMaybe<SiteSiteMetadataMastodonFieldSelector>;
   readonly origin: InputMaybe<FieldSelectorEnum>;
   readonly pgp: InputMaybe<SiteSiteMetadataPgpFieldSelector>;
   readonly present_url: InputMaybe<FieldSelectorEnum>;
@@ -2650,6 +2652,7 @@ type SiteSiteMetadataFilterInput = {
   readonly email: InputMaybe<SiteSiteMetadataEmailFilterInput>;
   readonly github: InputMaybe<SiteSiteMetadataGithubFilterInput>;
   readonly linkedin: InputMaybe<SiteSiteMetadataLinkedinFilterInput>;
+  readonly mastodon: InputMaybe<SiteSiteMetadataMastodonFilterInput>;
   readonly origin: InputMaybe<StringQueryOperatorInput>;
   readonly pgp: InputMaybe<SiteSiteMetadataPgpFilterInput>;
   readonly present_url: InputMaybe<StringQueryOperatorInput>;
@@ -2695,6 +2698,26 @@ type SiteSiteMetadataLinkedinFilterInput = {
 };
 
 type SiteSiteMetadataLinkedinSortInput = {
+  readonly link: InputMaybe<SortOrderEnum>;
+  readonly name: InputMaybe<SortOrderEnum>;
+};
+
+type SiteSiteMetadataMastodon = {
+  readonly link: Maybe<Scalars['String']>;
+  readonly name: Maybe<Scalars['String']>;
+};
+
+type SiteSiteMetadataMastodonFieldSelector = {
+  readonly link: InputMaybe<FieldSelectorEnum>;
+  readonly name: InputMaybe<FieldSelectorEnum>;
+};
+
+type SiteSiteMetadataMastodonFilterInput = {
+  readonly link: InputMaybe<StringQueryOperatorInput>;
+  readonly name: InputMaybe<StringQueryOperatorInput>;
+};
+
+type SiteSiteMetadataMastodonSortInput = {
   readonly link: InputMaybe<SortOrderEnum>;
   readonly name: InputMaybe<SortOrderEnum>;
 };
@@ -2752,6 +2775,7 @@ type SiteSiteMetadataSortInput = {
   readonly email: InputMaybe<SiteSiteMetadataEmailSortInput>;
   readonly github: InputMaybe<SiteSiteMetadataGithubSortInput>;
   readonly linkedin: InputMaybe<SiteSiteMetadataLinkedinSortInput>;
+  readonly mastodon: InputMaybe<SiteSiteMetadataMastodonSortInput>;
   readonly origin: InputMaybe<SortOrderEnum>;
   readonly pgp: InputMaybe<SiteSiteMetadataPgpSortInput>;
   readonly present_url: InputMaybe<SortOrderEnum>;
@@ -2906,7 +2930,7 @@ type ProjectsLanguageQuery = { readonly allMdx: { readonly edges: ReadonlyArray<
 type SEOQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type SEOQuery = { readonly site: { readonly siteMetadata: { readonly origin: string | null, readonly default_origin: string | null, readonly cloudflare_token: string | null } | null } | null };
+type SEOQuery = { readonly site: { readonly siteMetadata: { readonly origin: string | null, readonly default_origin: string | null, readonly cloudflare_token: string | null, readonly mastodon: { readonly name: string | null, readonly link: string | null } | null } | null } | null };
 
 type TalksQueryVariables = Exact<{ [key: string]: never; }>;
 
