@@ -115,7 +115,7 @@ query SEO {
                 rel="me"
                 href="https://mastodon.social/@christopher_besch"
             />
-            <meta name="fediverse:creator" content="@christopher_besch@mastodon.social">
+            <meta name="fediverse:creator" content="@christopher_besch@mastodon.social" />
         </>
     );
 }
