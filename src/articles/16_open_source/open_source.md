@@ -103,6 +103,7 @@ Remember the differences between source code and executable as they are crucial 
 - On the other hand, you cannot convert an executable back into its source code.
 
 ### Software License and Open-Source
+TODO: overhaul this, some didn't get it right away
 (This is no legal advice.)
 Source code falls under the law of copyright:
 Because the developer wrote the source code, she can decide what to do with it.
@@ -132,13 +133,121 @@ Closed-Source software generally doesn't allow the user to see the source code.
 As stated above, you need the source code to understand and modify the software.
 Without the source code, the user isn't able to do any of that.
 
-## The Reality of Open-Source/Closed-Source
+## The User of Open/Closed-Source
 Okay, this has been all long and windy.
-Let's get to the point.
+Let's get to the point:
+Say you want to write a document with your laptop.
+You already have the hardware and are missing the software.
+What you need is a text processing program, something like LibreOffice Writer or Word.
+You choose one of them, pay the manufacturer and receive an executable.
+Your laptop feeds on the executable and you can write your document and everything is well.
+Word is a Closed-Source product by Microsoft.
+LibreOffice Writer is an Open-Source product by the Document Foundation.
+Now, what does that mean to you, the user?
 
-### Open-Source Case Study: Linux
+Say you bought Word 2019.
+Then you only receive the executable and no more.
+You have no insight into how the thing you bought works because Microsoft keeps the source code private.
+There's no way of modifying the product you bought in any way.
+Only Microsoft can change Word.<br />
+What if you got Open-Source LibreOffice Writer instead?
+You receive not just the executable, with which you can write your document, no.
+Instead, you and everyone else has access to its source code, too.
+This is the form of LibreOffice Writer in which the (original) programmers modify it.
+Therefore, you can look into LibreOffice Writer and make sense of all its functions.
+Perhaps you're interested in what happens to your document when you hit `Ctrl+S` and save your document.
+Maybe you're concerned about who might read your <del>smut</del>confidential information.
+Then you can just take a look at the source code and see exactly what happens to your data.
+Nothing is hidden from you, because Open-Source means **Insight**.
 
-## The Problem with Closed-Source
+Or, if there's a button (maybe the "Insert Comment" button) you're specifically interested in, you can look at the source code that belongs to that button.
+You can figure out exactly what that button does and how.
+Perhaps you have some very specific use-case.
+Maybe you're color blind and want to change the color of the comments.
+Then you can implement that change yourself, because Open-Source means **Modifiability**.
+
+Let's come back to what happens when you `Ctrl+S` your document.
+Some versions of Word suddenly started sending the document to a Microsoft server per default.
+Data on such a server can be accessed by, among others, Microsoft personnel and the government the data resides in.
+That is probably not the country you're living in, btw.<br />
+The Open-Source LibreOffice Writer doesn't suddenly start doing that.
+After all you and everyone else is reading the source code so you'd notice a change like this out.
+And even if such a change did happen, you could change the source code back.
+There are so many companies trying to sell their product under the name of privacy.
+The companies that truly deliver on privacy work on Open-Source software, because Open-Source means **Privacy**.
+
+What's more, you probably don't just want to write documents but also read documents written by other people.
+When you download a document from the internet and open it in Word or LibreOffice Writer you might get hacked!
+Okay, how's that?
+Well, software is never perfect.
+Developers make mistakes and some of these mistakes allow people to create documents that hack you, to e.g., steal your banking login.
+Such mistakes are called *vulnerabilities* and they are, obviously, bad.
+What you need is *security support*, which is someone hunting for vulnerabilities and fixing them.
+In the case of Word, Microsoft provides that service.
+Whenever they find a vulnerability they remove it and release a new executable.
+No one else can do that because only Microsoft has access to the source code.
+So if you're using Word 2019 you're out of luck:
+Microsoft stops supporting Word 2019 after 14th October 2025.
+They recommend you to use Microsoft 365 instead for a monthly fee.<br />
+Because LibreOffice Writer is Open-Source, heaps of people read through its source code all the time, search for vulnerabilities and publish fixes.
+Furthermore, any company with the technical abilities can provide support — not just the original manufacturer, because Open-Source means **Security**.
+
+There's one more important aspect to the debate: Interoperability.
+LibreOffice Writer stores documents in the Open-Source OpenDocument format by default.
+This format is supported by dozens of text processors, including LibreOffice Writer and Word.
+Why do so many text processors fully support that file format?
+Because it is Open-Source and thus those other manufacturers can make their software understand this format.
+Therefore, when you've written a bunch of documents in LibreOffice Writer, you can switch to any other text processor whenever you like.
+After all, you can easily open your documents with that new software, too.<br />
+This is a different story with Word.
+Word only fully supports a Closed-Source document format.
+No other text processor fully supports that file format.
+Though there are some ways of converting Word documents to the OpenDocument format, that process does not support all features (e.g., text might be misaligned).
+This is called *vendor lock-in*:
+The vendor, i.e., Microsoft, locks you into using Word because switching is harder than it should be.
+When you use Open-Source software, on the other hand, you can easily switch to a competitor — even back to a Closed-Source one.
+Open-Source means **Autonomy**.
+
+There's another facet of this autonomy:
+Microsoft doesn't just sell Word.
+They also want to sell the operating system Windows, OneDrive and a bunch of other software.
+They disallow using Word in conjunction with competitors to the software, they also want to sell.
+For example, you may not use the Word executable on a laptop using the Linux operating system.
+If Word were Open-Source, people could enable support for other operating systems.
+Closed-source means being locket into not just one software, but a manufacturer's entire ecosystem.
+
+To me, these are the main selling points of Open-Source:
+
+- **Insight**: the software doesn't hide anything from you.
+- **Modifiability**: you can change whatever you want about the software.
+- **Privacy**: you know and control what the software does with your data.
+- **Security**: the software doesn't allow other people to hack you.
+- **Autonomy**: you are free to choose what software you use.
+
+As you can see there is a lot of "you" in that list.
+Personally, that's why Open-Source gives you a sense of ownership that you can't get any other way.
+We'll get back to this point, though.
+First let me address a few counterpoints.
+
+### But I Don't Want / Know How to Touch Source Code.
+That's perfectly fine.
+But trust me, there are plenty of people who do.
+Actually, there are entire communities of people looking at Open-Source source code and improving it.
+And Open-Source software benefits from that — you benefit from that.
+Because everyone can read the source code of Open-Source software, you can pay everyone with the technical abilities to implement whatever specific feature you need.
+This is what the [Austrian military](https://blog.documentfoundation.org/blog/2025/09/30/austrias-military-switches-from-microsoft-office-to-libreoffice) did.
+They needed certain features in LibreOffice and contracted a local company to do so.
+It is very important to them, and to me, to clarify that Open-Source does not mean cheap, it means *free* as in *free*dom.
+The Austrian military very much cares for the data they handle and mainly seek the privacy LibreOffice Writer provides.
+That's why they chose Open-Source.
+
+### So you're just Bashing Word and Microsoft.
+No, I don't, not at all!
+I'm only using LibreOffice Writer and Word as an example for a bigger concept.
+All of the above points apply to Open-Source in general.
+Also, Microsoft is no more or less evil than any other corporation.
+They actually do work on some Open-Source software, too.
+And I think that's pretty cool!
 
 ## The Horrific Security Implications
 
@@ -162,8 +271,10 @@ How German, I suppose...
 Furthermore, I've simplified one thing:
 You actually can take a closer look at an executable and undo the compilation.
 This process of converting an executable back into source code is called `reverse-engineering`.
-It is often incredibly tedious and unfeasable.
-
+It is often incredibly tedious and unfeasible.
+Additionally, technically not all programming languages produce executables.
+Though, those compilation results are captured by the concepts explained in this article, too.
+I just used *executable* as an example for a bigger class of things.
 
 
 Take a look at this typewriter.
@@ -354,3 +465,7 @@ https://netzpolitik.org/2024/open-source-bundestag-staerkt-sovereign-tech-fund/
 - RiscV
 democratization
 
+- creating a standard
+
+https://www.neowin.net/news/microsoft-warns-office-20162019-users-to-switch-to-the-cloud-as-support-ends-soon/
+https://opensource.google/documentation/reference/why/
