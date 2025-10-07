@@ -5,9 +5,9 @@ description: "
 I love Open-Source.
 Somehow I never got to sort my reasons for that feeling.
 This article does just that and tries to sell Open-Source to you.
-Find out the price and what you get in return; regardless if you are a developer, user, corporation, the government or just a citizen.
+Find out its price and what you get in return; regardless if you are a developer, user, corporation, the government or just a citizen.
 
-I argue that Open-Source is a quality mark, a form of democratization and the response to a world in which software exists.
+I argue that Open-Source is a quality mark, a form of democratization and ownership, capitalism at its best and thus the response to a world in which software exists.
 "
 banner: /social_banner/open_source.png
 thumb: ../../../static/social_banner/open_source.png
@@ -24,10 +24,10 @@ import eniac from "./eniac.jpg";
 
 I won't hide my love for Open-Source.
 I love it so much it aches whenever I'm not allowed to work with Open-Source.
-For me, Open-Source is a quality mark, a form of democratization and the response to a world in which software exists.
+For me, Open-Source is a quality mark, a form of democratization and ownership, capitalism at its best and thus the response to a world in which software exists.
 This article gets to that conclusion without requiring any prior technical knowledge.
 
-### Background
+## Background
 Nevertheless, you'll need the following concepts, which I'll explain blow: *hardware*, *software*, *executable*, *compilation*, *source code* and *software license*.
 Firstly, I'll start with an example.
 Take a look at your smartphone:
@@ -79,7 +79,7 @@ This executable is pretty obnoxious to even look at.
 So you might wonder how you create this executable in the first place.
 Nowadays you don't do so directly, but write source code instead.
 Just like an executable, source code is a form of software, too.
-Here is an example piece of source code:
+Here is the source code that belongs to the executable you've already seen above:
 ```c
 #include <printf.h>
 #include <stdio.h>
@@ -96,10 +96,11 @@ Source code is understandable and editable by humans.
 The developer uses a tool called the *compiler* to compile her source code into an executable.
 
 Remember the differences between source code and executable as they are crucial for this article:
-- The user needs an executable to use a piece of software.
+- The user needs only an executable to use a piece of software.
 - A human cannot understand or edit an executable.
-- A human can understand and edit source code.
-- The compiler converts source code into an executable.
+- However, a human can understand and edit source code.
+- The compiler easily converts source code into an executable.
+- On the other hand, you cannot convert an executable back into its source code.
 
 ### Software License and Open-Source
 (This is no legal advice.)
@@ -111,18 +112,59 @@ For example he might not be allowed to sell the software himself.
 The developer lays out conditions in a legal document called the *software license*, which the user must accept.
 *Open-Source software* is software under a license that give the user specific rights.
 The Open Source Initiative (OSI) keeps a list of OSI approved licenses that fulfil the [definition of Open-Source](https://opensource.org/osd).
-
 To me, the most important aspects of Open-Source software are:
+
 1. Everyone has free access to the source code.
 2. Everyone may modify the software.
-3. Everyone is allowed to sell and redistribute the (modified) software, both as an executable and as software.
+3. Everyone is allowed to sell and redistribute the (modified) software, both as an executable and as source code.
 
-## Why wasn't this a problem back in the day?
+Note how this does not mean that the executable must be free.
+It also doesn't mean the developers waives her copyright.
+Actually, she still very much has the copyright and, within the definition of Open-Source, may define restrictions on using the software.
+For example, some Open-Source licenses require you to publish any modified source code under the same license.
+Such licenses (e.g., GPLv3) are *copyleft* licenses.
+Others, like the MIT license, don't have such a copyleft clause.
+So while the concept of Open-Source might sound radical to some, it leaves a surprising amount of power to the software developer.
+This will become important when we talk about one of the main issues with Open-Source: monetization.
 
-Sidenote:
+*Closed-Source*, as you might imagine, is the opposite of Open-Source.
+Closed-Source software generally doesn't allow the user to see the source code.
+As stated above, you need the source code to understand and modify the software.
+Without the source code, the user isn't able to do any of that.
+
+## The Reality of Open-Source/Closed-Source
+Okay, this has been all long and windy.
+Let's get to the point.
+
+### Open-Source Case Study: Linux
+
+## The Problem with Closed-Source
+
+## The Horrific Security Implications
+
+### Closed-Source Case Study: Tetra
+
+### Why wasn't this a problem back in the day?
+
+## Monetization
+
+## The bigger picture
+- Democratization
+- Ownership
+- Capitalism
+- never repeat, except for when you want to
+
+## Sidenote
 So I was looking to get my hand on an actual typewriter and searched for "Stuttgart Schreibmaschine".
 The first result was an official wiki on the matter of [how to properly discard a typewriter](https://www.stuttgart.de/service/entsorgung/abfall-abc/abfall-abc/schreibmaschine).
 How German, I suppose...
+
+Furthermore, I've simplified one thing:
+You actually can take a closer look at an executable and undo the compilation.
+This process of converting an executable back into source code is called `reverse-engineering`.
+It is often incredibly tedious and unfeasable.
+
+
 
 Take a look at this typewriter.
 Sure, you can write your document with it but there's more.
