@@ -103,15 +103,17 @@ Remember the differences between source code and executable as they are crucial 
 - On the other hand, you cannot convert an executable back into its source code.
 
 ### Software License and Open-Source
-TODO: overhaul this, some didn't get it right away
 (This is no legal advice.)
 Source code falls under the law of copyright:
 Because the developer wrote the source code, she can decide what to do with it.
-Typically, the developer wants people to use her software so she compiles an executable and gives that to the user.
+Of course, the developer gives the user an executable.
 However, she might not allow the user to do whatever he wants with her software.
-For example he might not be allowed to sell the software himself.
+For example, he might not be allowed to sell the software himself.
 The developer lays out conditions in a legal document called the *software license*, which the user must accept.
-*Open-Source software* is software under a license that give the user specific rights.
+There are different kinds of such licenses.
+In this article we are concerned about *Open-Source licenses*.
+An Open-Source license makes a software Open-Source.
+Technically, there are multiple different Open-Source licenses.
 The Open Source Initiative (OSI) keeps a list of OSI approved licenses that fulfil the [definition of Open-Source](https://opensource.org/osd).
 To me, the most important aspects of Open-Source software are:
 
@@ -248,6 +250,8 @@ All of the above points apply to Open-Source in general.
 Also, Microsoft is no more or less evil than any other corporation.
 They actually do work on some Open-Source software, too.
 And I think that's pretty cool!
+
+# TODO: Keep Writing
 
 ## The Horrific Security Implications
 
