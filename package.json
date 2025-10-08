@@ -9,6 +9,7 @@
         "gatsby"
     ],
     "scripts": {
+        "build_private": "DEPLOY_ORIGIN='https://christopher-besch.github.io/private_homepage/suLo9aF9YkKzAEQEdgTRNBsQyTmC65qdru0B7ueQ' PRESENT_URL='https://dev.present.chris-besch.com' node_modules/.bin/gatsby build --prefix-paths",
         "build_debug": "DEPLOY_ORIGIN='https://dev.chris-besch.com' PRESENT_URL='https://dev.present.chris-besch.com' node_modules/.bin/gatsby build",
         "build_deploy": "DEPLOY_ORIGIN='https://chris-besch.com' PRESENT_URL='https://present.chris-besch.com' node_modules/.bin/gatsby build",
         "build_local": "DEPLOY_ORIGIN='http://localhost:8000' PRESENT_URL='https://dev.present.chris-besch.com' node_modules/.bin/gatsby build",
