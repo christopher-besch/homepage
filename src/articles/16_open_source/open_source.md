@@ -29,7 +29,7 @@ For me, Open-Source is a quality mark, a form of democracy and ownership, capita
 This article gets to that conclusion without requiring any prior technical knowledge.
 
 ## Background
-Nevertheless, you'll need the following concepts, which I'll explain blow: *hardware*, *software*, *executable*, *compilation*, *source code* and *software license*.
+Nevertheless, you'll need the following concepts, which I'll explain below: *hardware*, *software*, *executable*, *compilation*, *source code* and *software license*.
 Firstly, I'll start with an example.
 Take a look at your smartphone:
 The thing you can hold in your hand is *hardware*, the calendar app you use on it is *software*.
@@ -429,18 +429,22 @@ Wrapping this up, know that Open-Source requires a different business model than
 But notice that there is a business model for this and your developers and customers benefit hugely from your product being Open-Source.
 
 ## Conclusion
-I have talked at length about why a user benefits from Open-Source software.
+I have talked at length about why users benefit from Open-Source software.
 Then I used those benefits to describe the bigger role Open-Source can and does play in a society.
 Lastly, I talked about the developer perspective and why they benefit from Open-Source.
 There are a few points I want to stress:
 
-- Open-Source is no charity.
+- Open-Source is no charity, though it can be.
 - Open-Source does not mean *for free* or cheap.
+- Open-Source also isn't a utopia.
+  It's a world that already very much exists and we can have more of.
+  Every little piece of Open-Source software makes the world a better place.
 
-After all this maybe you understand why I love Open-Source so much and don't want to use anything that isn't Open-Source.
-To me the most important point is that I truly own the product I bought.
-No one can take my way of experiencing that product away from me.
-Also, I love this world of Open-Source.
+After all I hope you understand why I love Open-Source so much.
+To me, the ownership aspect is the most important.
+No one can take my way of experiencing an Open-Source product away from me.
+I really want to own what I bought and that simply isn't possible with Closed-Source software.
+Also, I just love this world of Open-Source.
 It's a world in which you are invited to be curious, in which more and more people understand the technology they use.
 It warms my heart to see that world being as huge as it already is and only seeing it grow.
 
@@ -455,7 +459,7 @@ I've simplified a few things:
   I just used *executable* as an example for a bigger concept.
 - There are more flavours of Open-Source.
   For example there's Open-Hardware and Open-Data.
-  In some places and for simplicity I called things Open-Source that are actually Open-Data.
+  In some places I called things Open-Source that are actually Open-Data.
   But the characteristics I described apply to all.
 
 ### P.P.S.
