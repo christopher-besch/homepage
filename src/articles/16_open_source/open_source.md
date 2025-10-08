@@ -71,7 +71,7 @@ This is such a truncated representation of an example executable:
 ```
 You won't understand any of this, in fact basically no-one will.
 If, instead, you give it to a computer, it will execute this executable and perform the action defined in the software.
-In this example's case, the computer would simple say `Hello World!`.
+In this example's case, the computer would simply say `Hello World!`.
 As you hopefully notice, even if I gave you the entire executable, you can't simply figure out what the executable does.
 For all intents and purposes you can think of an executable as a black-box that does something but doesn't let you know how.
 
@@ -142,7 +142,7 @@ Say you want to write a document with your laptop.
 You already have the hardware and are missing the software.
 What you need is a text processing program, something like LibreOffice Writer or Word.
 You choose one of them, pay the manufacturer and receive an executable.
-Your laptop feeds on the executable and you can write your document and everything is well.
+Your laptop feeds on the executable, you can write your document and everything is well.
 Word is a Closed-Source product by Microsoft.
 LibreOffice Writer is an Open-Source product by the Document Foundation.
 Now, what does that mean to you, the user?
@@ -173,7 +173,7 @@ Some versions of Word suddenly started sending the document to a Microsoft serve
 Data on such a server can be accessed by, among others, Microsoft personnel and the government the data resides in.
 That is probably not the country you're living in, btw.<br />
 The Open-Source LibreOffice Writer doesn't suddenly start doing that.
-After all you and everyone else is reading the source code so you'd notice a change like this out.
+After all you and everyone else is reading the source code so you'd notice a change like this.
 And even if such a change did happen, you could change the source code back.
 There are so many companies trying to sell their product under the name of privacy.
 The companies that truly deliver on privacy work on Open-Source software, because Open-Source means **Privacy**.
@@ -188,7 +188,7 @@ What you need is *security support*, which is someone hunting for vulnerabilitie
 In the case of Word, Microsoft provides that service.
 Whenever they find a vulnerability they remove it and release a new executable.
 No one else can do that because only Microsoft has access to the source code.
-So if you're using Word 2019 you're out of luck:
+But if you're using Word 2019 you're out of luck:
 Microsoft stops supporting Word 2019 after 14th October 2025.
 They recommend you to use Microsoft 365 instead for a monthly fee.<br />
 Because LibreOffice Writer is Open-Source, heaps of people read through its source code all the time, search for vulnerabilities and publish fixes.
@@ -197,8 +197,7 @@ Furthermore, any company with the technical abilities can provide support — no
 There's one more important aspect to the debate: Interoperability.
 LibreOffice Writer stores documents in the Open-Source OpenDocument format by default.
 This format is supported by dozens of text processors, including LibreOffice Writer and Word.
-Why do so many text processors fully support that file format?
-Because it is Open-Source and thus those other manufacturers can make their software understand this format.
+Because it is Open-Source, those other manufacturers know how to make their software understand this format.
 Therefore, when you've written a bunch of documents in LibreOffice Writer, you can switch to any other text processor whenever you like.
 After all, you can easily open your documents with that new software, too.<br />
 This is a different story with Word.
