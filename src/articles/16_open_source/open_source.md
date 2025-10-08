@@ -21,6 +21,7 @@ version: 1.0.0
 ---
 
 import eniac from "./eniac.jpg";
+import typewriter from "./typewriter.jpg";
 
 I won't hide my love for Open-Source.
 I love it so much it aches whenever I'm not allowed to work with Open-Source.
@@ -215,7 +216,7 @@ They also want to sell the operating system Windows, OneDrive and a bunch of oth
 They disallow using Word in conjunction with competitors to the software, they also want to sell.
 For example, you may not use the Word executable on a laptop using the Linux operating system.
 If Word were Open-Source, people could enable support for other operating systems.
-Closed-source means being locket into not just one software, but a manufacturer's entire ecosystem.
+Closed-Source means being locket into not just one software, but a manufacturer's entire ecosystem.
 
 To me, these are the main selling points of Open-Source:
 
@@ -242,7 +243,7 @@ It is very important to them, and to me, to clarify that Open-Source does not me
 The Austrian military very much cares for the data they handle and mainly seek the privacy LibreOffice Writer provides.
 That's why they chose Open-Source.
 
-### So you're just Bashing Word and Microsoft.
+### So you're just Bashing Word and Microsoft?
 No, I don't, not at all!
 I'm only using LibreOffice Writer and Word as an example for a bigger concept.
 All of the above points apply to Open-Source in general.
@@ -250,27 +251,166 @@ Also, Microsoft is no more or less evil than any other corporation.
 They actually do work on some Open-Source software, too.
 And I think that's pretty cool!
 
-# TODO: Keep Writing
+### Why wasn't Closed-Source a Problem Back in the Day?
+<HalfImage src={typewriter} />
 
-## The Horrific Security Implications
+Let's buy a typewriter (picture by [GodeNehler](https://commons.wikimedia.org/wiki/File:MEK_II-371.jpg))!
+Sure, you can write your document with it but there's more.
+Open it up; just pop off the metal panels and you get a good look at its internals.
+Perhaps all the metallic pieces don't make much sense at first but you can still look at them.
+You bought this view alongside this typewriter.
+You bought the ability to understand this typewriter.
+These two things are linked together in a way software just isn't.
+To understand software you need more than just the executable required for using it, you need the source code.
+From this perspective, the old way of technology is much closer to Open-source than to Closed-Source.
+However, if the manufacturer just kept giving the user only the minimum to write a document, you end up with Closed-Source software like Word.
+I argue, Open-Source is the response to a world in which software exists.
 
-### Closed-Source Case Study: Tetra
+Let me spin this along a little more:
+Press a key on the typewriter and follow the mechanics that result in some ink on the page.
+You follow the ribbon unspooling on the left, getting hit by the hammer and collecting on the other spool.
+On some typewriters you can still see the typed letters on the ink ribbon.
+Maybe you've written something confidential and that's a security concern for you.
+Because the typewriter is not a black-box like Word is, you can look inside and realize that yourself.
+Now, go dispose of your spent ribbon responsibly.
 
-### Why wasn't this a problem back in the day?
+I'm only using this typewriter as an example but I believe the problem to be fundamental.
+Theoretical computer science tells us that software is inherently difficult to reason about.
+Even the original developers of software can't foresee most of what the software will do.
+Actually, that's one of the reasons there are so many vulnerabilities in software.
+Consequently, with the arrival of software, we need more curious people than ever.
+And those curious people need a chance at understanding the technology surrounding us.
+This is the only way we can tame this beast.
+We cannot delegate that understanding to a few select people and treat technology as black-boxes; we all need to participate in some way.
+Open-Source is the way that is possible.
+When you're surrounded by Open-Source software you are invited, encouraged, to interact with the world more intimately.
+You realize that *you* are the one to understand, change and improve.
+This resulsts in an inherently more secure world.
+When, instead, something is Closed-Source that means the manufacturer doesn't want you, the customer, to understand the product.
+It means they don't see the potential in you or even fear it.
+So much is lost when we just wait for others to do things.
+Also, in a more poetic way, we are a species of curious animals.
+What life is this when we all walk among devices we can't touch or open or tinker with?
+Therefore, I consider Open-Source a form of **enlightenment**.
+
+### So I've changed some source code. What do I do with it?
+Say you implemented a new feature to the source code of LibreOffice Writer.
+Very cool!
+What do you do with this feature?
+There are two options:
+
+1. *Upstreaming* it.
+2. Creating a *fork*.
+
+Firstly you can go to the original LibreOffice Writer developers and offer them the features you have made.
+They then discuss your changes and, if they like them, *upstream* the changes.
+If that happens, your new feature will be in all new versions of LibreOffice Writer.
+This is the best-case scenario, because you aren't the only user of your new feature.
+Those other users might improve your new feature further.
+You, of course, benefit from that.<br />
+What if the LibreOffice Writer developers refuse to upstream your feature, however?
+Then you can use the second option and create your own version of LibreOffice Writer.
+This would be a *fork* of LibreOffice Writer.
+Now it's up to the users to choose which version of LibreOffice Writer they want to use; the original or your fork?
+This is actually very common in Open-Source.
+People come up with all sorts of crazy ideas that are sometimes so radical the original developers doesn't want to upstream them.
+LibreOffice Writer itself is actually a fork of OpenOffice Writer, btw.
+The LibreOffice Writer implemented such cool new features they gathered so many people around them, they dwarfed the older OpenOffice Writer.
+
+In contrast to Closed-Source software, there isn't just a single corporation deciding how things should be.
+The power lies with the people.
+Everyone with the technical abilities or is just curious enough can incur change.
+Therefore, I consider Open-Source a form of **democratization**.
+
+### But isn't Open-Source Incompatible with Capitalism?
+Some might argue that Open-Source doesn't work well with capitalism.
+They argue capitalism works so well because of all the competition.
+Say, three companies develop the same thing and fight for the user's favor.
+If one of these options is Open-Source, the other two companies could simply copy that software and sell it, too.
+Then there'd only be a single piece of software, not three.
+Where's the competition?
+
+Firstly are completely right, capitalism is quite the efficient machine and competition lies at its heart.
+Secondly, we'll talk about how to monetize Open-Source software [later](#monetization).
+Thirdly, that conclusion is wrong.
+Open-Source does not lead to less competition, it leads to more.
+Firstly, if you've read the [above section](#so-ive-changed-some-source-code-what-do-i-do-with-it) about forks you know how these forks of the same software compete for users.
+There always are different ways of solving the same problem and the different forks reflect that.
+Actually, the bigger problem in Open-Source is fragmentation where there is too much competition.
+However, I won't get into that in this article.
+Though, rest assured, there are ways of dealing with fragmentation, too.
+
+TODO: vendor lock-in
+
+Open-Source is **capitalism at its best**.
+
+## The Developer of Open/Closed-Source
+You don't have to develop the entire application yourself.
+Instead you can take some Open-Source project that already implements the basic functionality.
+Again, you might need some special features or maybe even some major ones.
+But you can simply implement these features and contribute them back to the Open-Source project.
+Then everyone else profits from your contribution and you profit from everyone elses contribution.
+Open-Source is not an act of charity, it simply makes sense for your own goals.
+
+## Capitalism
+Some might argue that companies need to keep their source code a trade secret to remain competitive.
+If the first company creates an Open-Source product, why should any other company develop the same thing again?
+Instead, couldn't they just copy that software and sell it themselves?
+Yes they could, but:
+Firstly, 
+
+Providing support is not easy.
+You need both the source code and the technical expertise specific to the specific software.
+Guess who is best qualified for that?
+Of course, the programmers who originally developed the software, that's you.
+Some companies make that their business model.
+TODO: example
+The Android app DAVx⁵ takes a different approach.
+If the user wants to easily install this app, they have to pay on the Google Play store.
+They could also download the source code for free and compile an executable themselves.
+But a most users want the ease of simply hitting the download button and thus pay for that.
+
+Establishing a standard.
+There are a lot of standards based on Open-Source.
+If you create an Open-Source product you might *establish a standard*.
+That means that other people create more things around your product.
+
+I hold against that, pointing to the vendor lock-in of Closed-Source products.
+As I've explained above, when a someone uses Closed-Source software, he has a much
+
+What is the main selling point of Windows?
+It's not its user interface or performance or battery efficiency.
+The main selling point is the vast ecosystem of software developed to only work with Windows.
+So even if there is a much greater operating system out there, because of the vendor lock-in it has a much harder task on the market.
+Open-Source software, like the operating system Linux.
+
+If Windows were so great it didn't need all that vendor lock-in to remain successful on the market.
+
+
+
+
+I get that Open-Source requires a different business model, you can't just Open-Source your products and keep going as before.
+I simply argue that there is a business model for Open-Source and you and your customers receive the benefits of having an Open-Source product.
+
+### Monetization
+
+## The Horrific Security Implications of Closed-Source Tetra
 
 ## Monetization
 
-## The bigger picture
+## When not to Open-Source
+
+## Conclusion
+Open-Source is huge and every-increasing.
+Open-Source is an entirely different world.
+A world in which you are invited to be curious in which we ask for more and more people to understand the technology they use.
 - Democratization
 - Ownership
 - Capitalism
 - never repeat, except for when you want to
+- personal hate with pop-ups
 
-## Sidenote
-So I was looking to get my hand on an actual typewriter and searched for "Stuttgart Schreibmaschine".
-The first result was an official wiki on the matter of [how to properly discard a typewriter](https://www.stuttgart.de/service/entsorgung/abfall-abc/abfall-abc/schreibmaschine).
-How German, I suppose...
-
+### P.S.
 Furthermore, I've simplified one thing:
 You actually can take a closer look at an executable and undo the compilation.
 This process of converting an executable back into source code is called `reverse-engineering`.
@@ -279,93 +419,21 @@ Additionally, technically not all programming languages produce executables.
 Though, those compilation results are captured by the concepts explained in this article, too.
 I just used *executable* as an example for a bigger class of things.
 
-
-Take a look at this typewriter.
-Sure, you can write your document with it but there's more.
-You can open it up; just pop off the metal panels and you get a good look at its internals.
-Perhaps all the metallic pieces don't make much sense at first to you but you can still look at them.
-You bought this view alongside the typewriter.
-And you can use this view to let your curiosity feast.
-Perhaps you press a key and follow the mechanics that result in some ink on the page.
-You follow the ribbon unspooling on the left, getting hit by the hammer in the middle and collecting on the other spool on the right.
-You get a chance to understand all there is about this typewriter.
-You get to unroll the spent ribbon and see the letters you pressed through it.
-Now, on some typewriters you can see the typed letters on the ink ribbon.
-Maybe you've written something confidential and that's a security concern for you.
-You know about that because you're so close to the technology.
-You're the one replacing the ink and thus know that this is a security concern.
-
-Compare this to the modern text processor.
+### P.P.S.
+So I was looking to get my hand on an actual typewriter and searched for "Stuttgart Schreibmaschine".
+The first result was an official wiki on the matter of [how to properly discard a typewriter](https://www.stuttgart.de/service/entsorgung/abfall-abc/abfall-abc/schreibmaschine).
+How German, I suppose...
 
 
-You understand the security implications of writing on a typewriter, perhaps a shared typewriter.
-
-You know exactly what the ink is for and how it is used.
-Yes, if you only want to write that one document none of this matters at all.
 
 
-- ownership
 
 
-So, how did things use to work.
-Picture a mechanical kitchen scale.
-You know, the thing you weigh flour with.
-And now consider a mechanical one, without batteries, without microprocessors, just metal, gears and springs.
-You want to own a mechanical kitchen scale because you need it.
-When you go to the manufacturer, money in-hand, what do you expect to receive?
-A scale, of course.
-Let's look at it.
-
-What if you want to modify it in some way?
-Maybe you want to change it's color or replace the keycaps.
-What do you need to do that?
-
-Now fast-forward half a century and now we don't use typewriters any more.
-We use personal computers, machines capable of all kinds of work.
-You can use the same computer for different tasks by installing a different application on it.
-All they need is 
-
-Let's look at a different thing:
-A text processing program, something like LibreOffice Writer or Word or Google Docs.
-You have some document to write and go to a manufacturer, money in-hand.
-What do you expect to receive.
-You already have a personal computer running an operating system like Linux or Windows or macOS.
-To use your text processor you need a piece a binary executable.
-A binary executable is a piece of compiled source code.
-
-I argue this is a fundamentally different situation.
-What we've been doing before, receive the thing that we need right now, i.e., the executable is not enough.
-
-Also, what world is this?
-What life is this when we all walk among things we can't touch or open or tinker with.
-
-When you're surrounded by Open-Source systems you are invited, encouraged, to interact with the world differently.
-You aren't waiting for some corporation approving your access request and giving you the secret source code.
-You can just grab the source of the things you love and look at how they work, you can discuss how they work, you can discuss how safe they are.
-And, of course, you can change them, create your own or improve.
-From this perspective, Open-Source really is just an entirely different mind-set, a mind-set of openness, that **you** are the one to change things.
-Everyone is.
-Everyone is!
-Damn, EDM is pretty great.
-I have no idea how I should pour this into something more coherent but typing is fun!
+# TODO: Keep Writing
 
 Thank goodness, we don't do this in the military sector.
 Just imagine what power the manufacturer, and the manufacturer's country, would have over the customer.
 Wait a moment!
-
-When something is closed-source that means the manufacturer doesn't want you, the customer, to understand the product.
-It means their business model somehow depends on everyone else not understanding this, not grasping it, not being allowed to play with it, work with it, tinker with it.
-I think, in the world that we and software live in, that is horrible and doomed to failure.
-Especially security requires as many people (users) to understand as much of the world as possible.
-That's why we need as much Open-Source as possible.
-
-Let's start by stating that software is fundamentally different to everything that has come before.
-
-Fundamentally, 
-
-If you don't do that, if you don't pick up the developer hat and take a look behind the scenes, you still benefit from others doing so.
-
-You get safer, cheaper, higher-quality, sovereign products.
 
 Sometimes people, more specifically my bosses at IBM, ask me why the hell we should open-source something.
 Who would ever want to look at the code for this server application.
@@ -374,22 +442,12 @@ It has always been about the principle, the mind-set, the society.
 That's all about the principles.
 And the principle is to publish as a default and, maybe, keep things private if there are really good reasons not to.
 
-The arrival of software changed things.
-Open-Source is the response to that change.
-
-While I've structured this article to only come to the conclusion that Open-Source is amazing, it's been more the other way around.
-
 - easy to change (i.e. satellite)
 - easy to do yourself
 - look **and** touch
 - security -> ongoing support
 - final product inherently opaque
 - 
-
-Furthermore, the final software product is inherently opaque.
-You cannot easily look into a binary and figure out what it does or change it.
-There's an entire science dedicated to trying anyways, reverse engineering.
-
 
 https://netzpolitik.org/2024/open-source-bundestag-staerkt-sovereign-tech-fund/
 
@@ -472,3 +530,7 @@ democratization
 
 https://www.neowin.net/news/microsoft-warns-office-20162019-users-to-switch-to-the-cloud-as-support-ends-soon/
 https://opensource.google/documentation/reference/why/
+
+Take for example the xz vulnerability.
+That was detected because a curious user realized the new version of xz took a little longer to do its job.
+He then dug into the source code and found the vulnerability.
