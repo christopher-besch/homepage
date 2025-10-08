@@ -75,6 +75,7 @@ If you have something to recommend, feel free to tell me at [mail@chris-besch.co
 
 ### Photography
 - [Line scan camera image processing](https://daniel.lawrence.lu/blog/y2025m09d21/) by Daniel Lawrence Lu
+- [I will personally dropkick the next person to send me photos via WhatsApp](https://teccheck.xyz/blog/whatsapp-photos) by Christoph Wolf
 
 ### Games
 - [What never lived cannot die: Alienation, architecture, and NaissanceE](https://caneandrinse.com/alienation-architecture-and-naissancee/) by Jacob Geller
@@ -87,11 +88,5 @@ If you have something to recommend, feel free to tell me at [mail@chris-besch.co
 - [Nordkalottleden 2025](https://leonbruns.de/hiking/nordkalottleden2025.html) by Leon Bruns shows how combining text with pictures and interactive maps goes a long way to immerse the reader.
     I love a good structure and extra detail the reader can but doesn't have to interact with.
     It makes the archivist in me tingle.
-
-### Blogs under Construction
-- [teccheck.xyz](https://teccheck.xyz) knows a butt-ton of Android reverse-engineering.
-    He has so much to share and just needs a kick in the arse to put it into words.
-    I'm specifically thinking about his work on the Samsung Gear 360.
-    Oh, and what was that with the Oculus Quest?
 
 This is a developing story...
