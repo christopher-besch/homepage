@@ -270,11 +270,12 @@ You bought the ability to understand this typewriter.
 These two things are linked together in a way software just isn't.
 To understand software you need more than just the executable required for using it, you need the source code.
 From this perspective, the old way of technology is much closer to Open-source than to Closed-Source.
-However, if the manufacturer just kept giving the user only the minimum to write a document, you end up with Closed-Source software like Word.
+However, if the manufacturer switched from mechanical typewriters to software and kept giving the user only the minimum to write a document, you end up with Closed-Source software like Word.
+That's a loss.
 I argue, Open-Source is the response to a world in which software exists.
 
 Let me spin this along a little more:
-Press a key on the typewriter and follow the mechanics that result in some ink on the page.
+Press a key on the typewriter and follow the mechanism producing some ink on the page.
 You follow the ribbon unspooling on the left, getting hit by the hammer and collecting on the other spool.
 On some typewriters you can still see the typed letters on the ink ribbon.
 Maybe you've written something confidential and that's a security concern for you.
@@ -290,9 +291,9 @@ And those curious people need a chance at understanding the technology surroundi
 This is the only way we can tame this beast.
 We cannot delegate that understanding to a few select people and treat technology as black-boxes; we all need to participate in some way.
 Open-Source is the way that is possible.
-When you're surrounded by Open-Source software you are invited, encouraged, to interact with the world more intimately.
+When you're surrounded with Open-Source software you are invited, encouraged, to interact with the world more intimately.
 You realize that *you* are the one to understand, change and improve.
-This resulsts in an inherently more secure world.
+This results in an inherently more secure world.
 When, instead, something is Closed-Source that means the manufacturer doesn't want you, the customer, to understand the product.
 It means they don't see the potential in you or even fear it.
 So much is lost when we just wait for others to do things.
@@ -310,7 +311,7 @@ There are two options:
 2. Creating a *fork*.
 
 Firstly you can go to the original LibreOffice Writer developers and offer them the features you have made.
-They then discuss your changes and, if they like them, *upstream* the changes.
+They then discuss your changes and, if they like them, *upstream* them.
 If that happens, your new feature will be in all new versions of LibreOffice Writer.
 This is the best-case scenario, because you aren't the only user of your new feature.
 Those other users might improve your new feature further.
@@ -320,7 +321,7 @@ Then you can use the second option and create your own version of LibreOffice Wr
 This would be a *fork* of LibreOffice Writer.
 Now it's up to the users to choose which version of LibreOffice Writer they want to use; the original or your fork?
 This is actually very common in Open-Source.
-People come up with all sorts of crazy ideas that are sometimes so radical the original developers doesn't want to upstream them.
+People come up with all sorts of crazy ideas that are sometimes so radical the original developers don't want to upstream them.
 LibreOffice Writer itself is actually a fork of OpenOffice Writer, btw.
 (And OpenOffice Writer is a fork of StarOffice Writer.)
 The LibreOffice Writer implemented such cool new features they gathered so many people around them, they dwarfed the older OpenOffice and StarOffice Writer.
@@ -361,14 +362,14 @@ Hence, Open-Source is **capitalism at its best**.
 
 ## The Developer of Open/Closed-Source
 Say you want to create a text processor yourself for some reason.
-If you choose to do so Open-Source you don't have to develop the entire software yourself.
+If you choose to make your software Open-Source, you don't have to develop the entire software yourself.
 Instead, you can take LibreOffice Writer and use it as a basis for your idea of what a text processor should be.
 This is a lot easier than starting from scratch and having to reinvent the wheel.
-For you personally this has another facet when you're changing companies.
-Make your work Open-Source and you never have to implement it again unless.
+For you, personally, this has another facet when you're changing companies.
+Make your work Open-Source and you never have to implement it again.
 Open-Source is not an act of charity, it simply makes you **not repeat yourself**.
 
-I've already talked about sheer amount of text processors that support the OpenDocument file format.
+I've already talked about the sheer amount of text processors that support the OpenDocument file format.
 You know how that came to be?
 Well the developers of StarOffice Writer developed that file format and made it Open-Source.
 Then other people developing text processors simply used that file format.
@@ -378,48 +379,41 @@ There, actually, are a lot of Open-Source standards.
 So when you create an Open-Source product you might *establish a standard*.
 
 Of course there's another point to this:
-When you're keeping your software Closed-Source no one can see all the crimes you've committed in the code.
-If, however, you create Open-Source software, that means you're so proud of your
-It means you're so proud of your source code that you want people to look at it.
+When you're keeping your software Closed-Source no one can see the crimes you've committed in the code.
+If, however, you create Open-Source software, that means you're so proud of your source code, you want people to look at it.
 Therefore, Open-Source is a form of **advertisement**.
-
-I've already talked about how I think Open-Source gives people insight into technology.
-You can use this to inspire and teach people about technology you create, use and like.
-That's why even software that no one realistically will ever use makes sense to be Open-Source.
-More users for the software you yourself use is good for you.
-Open-Source always **inspires and teaches**.
 
 To me, these are the main selling points of Open-Source for a developer:
 
 - **Don't repeat yourself**, never have to implement something twice in your life.
 - **Establish a standard** and thus an ecosystem around your product.
 - **Advertise** yourself and your products.
-- **Inspire and teach** people.
 
 ### How do you Monetize Open-Source software?
 Monetizing Closed-Source software is pretty straight-forward; you just sell the executable.
 There's no one else who can do that.
 Some might argue that companies need to keep their source code a trade secret to remain competitive.
-Otherwise other companies could just copy the source code and sell it themselves, driving you out of business.
+Otherwise, other companies could just copy the source code and sell it themselves, driving you out of business.
 I'll quickly go over a few ways you can monetize Open-Source, regardless of that threat.
 
 Firstly, consider that **providing support** isn't easy.
 You need both the source code and the technical expertise specific to the software in question.
 Guess who is best qualified for that?
 Of course, the programmers who originally developed the software; that's you.
-Some companies make that their business model and sell support for their Open-Source software.
+Some companies make that their business model and sell support for their Open-Source software.<br />
 Then there's another thing that isn't easy: **compilation and distribution**.
-The Android app DAVx⁵ uses this different approach, for example.
-If the user wants to easily install this app, they have to pay on the Google Play store.
+The Open-Source Android app DAVx⁵, for example, uses this approach.
+If the user wants to easily install this app, they have to pay on the Google Play Store.
 Instead, they could download the source code for free and compile an executable themselves.
 But most users want the ease of simply hitting a download button and thus pay for that.
-DAVx⁵ provide you with an up-to-date version of the executable.
-Maybe you're Open-Source software goes nicely with some **hardware** you produce.
-Then you can sell that.
+DAVx⁵ provides you with an up-to-date version of the executable.
+The definition of Open-Source might force them to publish the source code but they are very well allowed to keep the executable private.<br />
+Or, maybe you're Open-Source software goes nicely with some **hardware** you produce.
+Then you can sell that.<br />
 Or, instead, you take your product and make most of it Open-Source and some secret sauce **Closed-Source**.
-Then you can sell that and still get most of the benefits of Open-Source (though some people frown upon that approach).
+Then you can sell that and still get most of the benefits of Open-Source (though some people frown upon that approach).<br />
 Alternatively you can use the Open-Source software to establish a standard and then write some Closed-Source software for that standard.
-You're the one who understand the standard the best, after all.
+You're the one who understand the standard the best, after all.<br />
 Or, if you want to remain fully Open-Source, you can always **implement people feature requests** for some coin.
 
 Those options are all possible and done by players in the industry.
@@ -431,7 +425,7 @@ But notice that there is a business model for this and your developers and custo
 ## Conclusion
 I have talked at length about why users benefit from Open-Source software.
 Then I used those benefits to describe the bigger role Open-Source can and does play in a society.
-Lastly, I talked about the developer perspective and why they benefit from Open-Source.
+Lastly, I talked about the developer perspective and why they benefit from Open-Source, too.
 There are a few points I want to stress:
 
 - Open-Source is no charity, though it can be.
@@ -440,11 +434,11 @@ There are a few points I want to stress:
   It's a world that already very much exists and we can have more of.
   Every little piece of Open-Source software makes the world a better place.
 
-After all I hope you understand why I love Open-Source so much.
+I hope you understand why I love Open-Source so much.
 To me, the ownership aspect is the most important.
 No one can take my way of experiencing an Open-Source product away from me.
 I really want to own what I bought and that simply isn't possible with Closed-Source software.
-Also, I just love this world of Open-Source.
+Also, I just love this world.
 It's a world in which you are invited to be curious, in which more and more people understand the technology they use.
 It warms my heart to see that world being as huge as it already is and only seeing it grow.
 
@@ -455,7 +449,7 @@ I've simplified a few things:
   This process of converting an executable back into source code is called `reverse-engineering`.
   It is often incredibly tedious and unfeasible.
 - Technically not all programming languages produce executables.
-  Though, those compilation results are captured by the concepts explained in this article, too.
+  Though, the characteristics laid out in this article capture those compilation results, too.
   I just used *executable* as an example for a bigger concept.
 - There are more flavours of Open-Source.
   For example there's Open-Hardware and Open-Data.
