@@ -446,7 +446,7 @@ It warms my heart to see that world being as huge as it already is and only seei
 I've simplified a few things:
 
 - You actually can take a closer look at an executable and undo the compilation.
-  This process of converting an executable back into source code is called `reverse-engineering`.
+  This process of converting an executable back into source code is called *reverse-engineering*.
   It is often incredibly tedious and unfeasible.
 - Technically not all programming languages produce executables.
   Though, the characteristics laid out in this article capture those compilation results, too.
