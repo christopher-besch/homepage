@@ -15,6 +15,10 @@ listed: true
 version: 1.0.0
 ---
 
+- architecture of Forgejo notifications
+- importance of tests, what tests I wrote
+- testing setup
+
 A while back I started contributing to Forgejo.
 
 Right now that happens to be Forgejo Action notifications.
