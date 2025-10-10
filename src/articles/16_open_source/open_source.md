@@ -32,11 +32,10 @@ This article gets to that conclusion without requiring any prior technical knowl
 
 ## Background
 Nevertheless, you'll need the following concepts, which I'll explain below: *hardware*, *software*, *executable*, *compilation*, *source code* and *software license*.
-Firstly, I'll start with an example.
-Take a look at your smartphone:
-The thing you can hold in your hand is *hardware*, the calendar app you use on it is *software*.
-To use this calender app you need to give your smartphone an *executable*.
-The developer of that calendar app wrote *source code* and converted (i.e., *compiled*) that into the executable.
+Firstly, I'll start with an example, your laptop:
+The thing you can hold in your hand is *hardware*, the text editor you use on it is *software*.
+To use this text editor you need to give your laptop an *executable*.
+The developer of that text editor wrote *source code* and converted (i.e., *compiled*) that into the executable.
 
 <HalfImage src={eniac} />
 
@@ -47,11 +46,10 @@ This is *hardware*, something you can touch.
 Now at some time smart people created hardware that didn't just fulfil any single specific purpose.
 They invented the general purpose computer (the image on the right or above), a machine that executes an *executable*.
 An executable instructs the computer exactly what to do and is a form of *software*.
-And this is what your smartphone is:
-A joker card that performs different specific purposes depending on what software you execute on it.
+Your laptop is such a general purpose computer — a joker card that performs different specific purposes depending on what software you execute on it.
 You can't touch software, you can only touch the hardware you feed the software into.
 
-Though an executable is an abstract piece of data you can represent it using `0` and `1` characters.
+Though an executable is an abstract piece of data, you can represent it using `0` and `1` characters.
 This is such a truncated representation of an example executable:
 ```
 01111111 01000101 01001100 01000110 00000010 00000001
@@ -72,8 +70,8 @@ This is such a truncated representation of an example executable:
 00000000 00000000 00000000 00000000 00000000 00000000
 ...
 ```
-You won't understand any of this, in fact basically no-one will.
-If, instead, you give it to a computer, it will execute this executable and perform the action defined in the software.
+You won't understand any of this, in fact no-one will.
+If, instead, you give it to a computer, it will execute this executable and perform the action defined in it.
 In this example's case, the computer would simply say `Hello World!`.
 As you hopefully notice, even if I gave you the entire executable, you can't simply figure out what the executable does.
 For all intents and purposes you can think of an executable as a black-box that does something but doesn't let you know how.
@@ -101,7 +99,7 @@ The developer uses a tool called the *compiler* to compile her source code into 
 Remember the differences between source code and executable as they are crucial for this article:
 - The user needs only an executable to use a piece of software.
 - A human cannot understand or edit an executable.
-- However, a human can understand and edit source code.
+- However, a human can very well understand and edit source code.
 - The compiler easily converts source code into an executable.
 - On the other hand, you cannot convert an executable back into its source code.
 
@@ -124,14 +122,14 @@ To me, the most important aspects of Open-Source software are:
 2. Everyone may modify the software.
 3. Everyone is allowed to sell and redistribute the (modified) software, both as an executable and as source code.
 
-Note how this does not mean that the executable must be free.
+Note how this does not mean that the executable must be free, too.
 It also doesn't mean the developers waives her copyright.
 Actually, she still very much has the copyright and, within the definition of Open-Source, may define restrictions on using the software.
 For example, some Open-Source licenses require you to publish any modified source code under the same license.
 Such licenses (e.g., GPLv3) are *copyleft* licenses.
 Others, like the MIT license, don't have such a copyleft clause.
 So while the concept of Open-Source might sound radical to some, it leaves a surprising amount of power to the software developer.
-This will become important when we talk about one of the main issues with Open-Source: monetization.
+This will become important when we talk about one of the main issues with Open-Source: [monetization](#how-do-you-monetize-open-source-software).
 
 *Closed-Source*, as you might imagine, is the opposite of Open-Source.
 Closed-Source software generally doesn't allow the user to see the source code.
@@ -143,7 +141,7 @@ Okay, this has been all long and windy.
 Let's get to the point:
 Say you want to write a document with your laptop.
 You already have the hardware and are missing the software.
-What you need is a text processing program, something like LibreOffice Writer or Word.
+What you need is a text editing program, something like LibreOffice Writer or Word.
 You choose one of them, pay the manufacturer and receive an executable.
 Your laptop feeds on the executable, you can write your document and everything is well.
 Word is a Closed-Source product by Microsoft.
@@ -165,10 +163,10 @@ Maybe you're concerned about who might read your <del>smut</del>confidential inf
 Then you can just take a look at the source code and see exactly what happens to your data.
 Nothing is hidden from you, because Open-Source means **Insight**.
 
-Or, if there's a button (maybe the "Insert Comment" button) you're specifically interested in, you can look at the source code that belongs to that button.
+Or, if there's a button in the user interface you're specifically interested in, you can look at the source code that belongs to that button.
 You can figure out exactly what that button does and how.
 Perhaps you have some very specific use-case.
-Maybe you're color blind and want to change the color of the comments.
+Maybe you're color blind and want to change the color of the button.
 Then you can implement that change yourself, because Open-Source means **Modifiability**.
 
 Let's come back to what happens when you `Ctrl+S` your document.
@@ -179,9 +177,9 @@ The Open-Source LibreOffice Writer doesn't suddenly start doing that.
 After all you and everyone else is reading the source code so you'd notice a change like this.
 And even if such a change did happen, you could change the source code back.
 There are so many companies trying to sell their product under the name of privacy.
-The companies that truly deliver on privacy work on Open-Source software, because Open-Source means **Privacy**.
+The companies that truly deliver on that create Open-Source software, because Open-Source means **Privacy**.
 
-What's more, you probably don't just want to write documents but also read documents written by other people.
+What's more, you probably don't just want to write documents but also read some written by other people.
 When you download a document from the internet and open it in Word or LibreOffice Writer you might get hacked!
 Okay, how's that?
 Well, software is never perfect.
@@ -198,7 +196,7 @@ Because LibreOffice Writer is Open-Source, heaps of people read through its sour
 Furthermore, any company with the technical abilities can provide support — not just the original manufacturer.
 This most dearly matters to security critical applications like telecommunication encryption.
 Tetra, for example, is a Closed-Source method of encrypted radio communication.
-Unfortunately because it's source code is kept secret very few people ever looked through it.
+Unfortunately because it's source code is kept secret, very few people ever looked at it.
 Therefore, it is ungodly insecure and has been [hacked](https://www.midnightblue.nl/research/tetraburst) many times in colorfully different ways.
 Too bad, a lot of police and military use it.
 TLS, on the other hand, is an Open-Source encryption software and powers most of the internet.
@@ -207,13 +205,13 @@ Hence, it is one of the most secure encryption methods in existence, because Ope
 
 There's one more important aspect to the debate: Interoperability.
 LibreOffice Writer stores documents in the Open-Source OpenDocument format by default.
-This format is supported by dozens of text processors, including LibreOffice Writer and Word.
+This format is supported by dozens of text editor, including LibreOffice Writer and Word.
 Because it is Open-Source, those other manufacturers know how to make their software understand this format.
-Therefore, when you've written a bunch of documents in LibreOffice Writer, you can switch to any other text processor whenever you like.
+Therefore, when you've written a bunch of documents in LibreOffice Writer, you can switch to any other text editor whenever you like.
 After all, you can easily open your documents with that new software, too.<br />
 This is a different story with Word.
 Word only fully supports a Closed-Source document format.
-No other text processor fully supports that file format.
+No other text editor fully supports that file format.
 Though there are some ways of converting Word documents to the OpenDocument format, that process does not support all features (e.g., text might be misaligned).
 This is called *vendor lock-in*:
 The vendor, i.e., Microsoft, locks you into using Word because switching is harder than it should be.
@@ -223,7 +221,7 @@ Open-Source means **Autonomy**.
 There's another facet of this autonomy:
 Microsoft doesn't just sell Word.
 They also want to sell the operating system Windows, OneDrive and a bunch of other software.
-They disallow using Word in conjunction with competitors to the software, they also want to sell.
+They disallow using Word in conjunction with competitors to the software they also want to sell.
 For example, you may not use the Word executable on a laptop using the Linux operating system.
 If Word were Open-Source, people could enable support for other operating systems.
 Closed-Source means being locket into not just one software, but a manufacturer's entire ecosystem.
@@ -237,7 +235,7 @@ To me, these are the main selling points of Open-Source for a user:
 - **Autonomy**: you are free to choose what software you use.
 
 As you can see there is a lot of "you" in that list.
-Personally, that's why Open-Source gives you a sense of ownership that you can't get any other way.
+Personally, that's why Open-Source gives me a sense of ownership that I can't get any other way.
 We'll get back to this point, though.
 First let me address a few counterpoints.
 
@@ -366,18 +364,18 @@ The autonomy Open-Source provides enables that.
 Hence, Open-Source is **capitalism at its best**.
 
 ## The Developer of Open/Closed-Source
-Say you want to create a text processor yourself for some reason.
+Say you want to create a text editor yourself for some reason.
 If you choose to make your software Open-Source, you don't have to develop the entire software yourself.
-Instead, you can take LibreOffice Writer and use it as a basis for your idea of what a text processor should be.
+Instead, you can take LibreOffice Writer and use it as a basis for your idea of what a text editor should be.
 This is a lot easier than starting from scratch and having to reinvent the wheel.
 For you, personally, this has another facet when you're changing companies.
 Make your work Open-Source and you never have to implement it again.
 Open-Source is not an act of charity, it simply makes you **not repeat yourself**.
 
-I've already talked about the sheer amount of text processors that support the OpenDocument file format.
+I've already talked about the sheer amount of text editor that support the OpenDocument file format.
 You know how that came to be?
 Well the developers of StarOffice Writer developed that file format and made it Open-Source.
-Then other people developing text processors simply used that file format.
+Then other people developing text editors simply used that file format.
 Why develop a new standard, when there is already one you're free to use?
 And that, in turn, benefited the developers of StarOffice because users of their file format can do more with it.
 There, actually, are a lot of Open-Source standards.
