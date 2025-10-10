@@ -21,7 +21,9 @@ version: 1.0.0
 ---
 
 import eniac from "./eniac.jpg";
-import typewriter from "./typewriter.jpg";
+import chrisw_typewriter_article from "./chrisw_typewriter_article.jpg";
+import chrisw_typewriter from "./chrisw_typewriter.jpg";
+import chrisw_typewriter_open from "./chrisw_typewriter_open.jpg";
 
 I won't hide my love for Open-Source.
 I love it so much it aches whenever I'm not allowed to work with Open-Source.
@@ -39,7 +41,7 @@ The developer of that calendar app wrote *source code* and converted (i.e., *com
 <HalfImage src={eniac} />
 
 With this example in mind, enjoy the general explanation:
-For centuries we humans have been hard at working creating technology.
+For centuries we humans have been hard at work creating technology.
 For most of that history, technology has been pieces of physical machinery designed to fulfil a specific purpose.
 This is *hardware*, something you can touch.
 Now at some time smart people created hardware that didn't just fulfil any single specific purpose.
@@ -92,7 +94,7 @@ int main() {
 ```
 In contrast to the executable from before, you can already make sense of this.
 For example, you can see the text `Hello World!` in there.
-You could probably figure out how to modify this software so that is says `Hello Anna!` instead, right?.
+You could probably figure out how to modify this software so that is says `Hello Anna!` instead, right?
 Source code is understandable and editable by humans.
 The developer uses a tool called the *compiler* to compile her source code into an executable.
 
@@ -150,7 +152,7 @@ Now, what does that mean to you, the user?
 
 Say you bought Word 2019.
 Then you only receive the executable and no more.
-You have no insight into how the thing you bought works because Microsoft keeps the source code private.
+You have no insight into how the thing you bought works because Microsoft keeps the source code secret.
 There's no way of modifying the product you bought in any way.
 Only Microsoft can change Word.<br />
 What if you got Open-Source LibreOffice Writer instead?
@@ -198,6 +200,7 @@ This most dearly matters to security critical applications like telecommunicatio
 Tetra, for example, is a Closed-Source method of encrypted radio communication.
 Unfortunately because it's source code is kept secret very few people ever looked through it.
 Therefore, it is ungodly insecure and has been [hacked](https://www.midnightblue.nl/research/tetraburst) many times in colorfully different ways.
+Too bad, a lot of police and military use it.
 TLS, on the other hand, is an Open-Source encryption software and powers most of the internet.
 Consequently, incredibly many people comb through its source code.
 Hence, it is one of the most secure encryption methods in existence, because Open-Source means **Security**.
@@ -259,9 +262,9 @@ They actually do work on some Open-Source software, too.
 And I think that's pretty cool!
 
 ### Why wasn't Closed-Source a Problem Back in the Day?
-<HalfImage src={typewriter} />
+<HalfImage src={chrisw_typewriter} />
 
-Let's buy a typewriter (picture by [GodeNehler](https://commons.wikimedia.org/wiki/File:MEK_II-371.jpg))!
+Let's buy a typewriter (picture by [Christoph Wolf](https://teccheck.xyz))!
 Sure, you can write your document with it but there's more.
 Open it up; just pop off the metal panels and you get a good look at its internals.
 Perhaps all the metallic pieces don't make much sense at first but you can still look at them.
@@ -273,6 +276,8 @@ From this perspective, the old way of technology is much closer to Open-source t
 However, if the manufacturer switched from mechanical typewriters to software and kept giving the user only the minimum to write a document, you end up with Closed-Source software like Word.
 That's a loss.
 I argue, Open-Source is the response to a world in which software exists.
+
+<HalfImage src={chrisw_typewriter_open} />
 
 Let me spin this along a little more:
 Press a key on the typewriter and follow the mechanism producing some ink on the page.
@@ -407,14 +412,14 @@ If the user wants to easily install this app, they have to pay on the Google Pla
 Instead, they could download the source code for free and compile an executable themselves.
 But most users want the ease of simply hitting a download button and thus pay for that.
 DAVx⁵ provides you with an up-to-date version of the executable.
-The definition of Open-Source might force them to publish the source code but they are very well allowed to keep the executable private.<br />
-Or, maybe you're Open-Source software goes nicely with some **hardware** you produce.
+The definition of Open-Source might force them to publish the source code but they are very well allowed to keep the executable secret.<br />
+Or, maybe your Open-Source software goes nicely with some **hardware** you produce.
 Then you can sell that.<br />
 Or, instead, you take your product and make most of it Open-Source and some secret sauce **Closed-Source**.
 Then you can sell that and still get most of the benefits of Open-Source (though some people frown upon that approach).<br />
 Alternatively you can use the Open-Source software to establish a standard and then write some Closed-Source software for that standard.
 You're the one who understand the standard the best, after all.<br />
-Or, if you want to remain fully Open-Source, you can always **implement people feature requests** for some coin.
+Or, if you want to remain fully Open-Source, you can always **implement other people's feature requests** for some coin.
 
 Those options are all possible and done by players in the industry.
 You're free to mix and match them however you like and, of course, always just ask for **donations**.
@@ -460,3 +465,6 @@ I've simplified a few things:
 So I was looking to get my hand on an actual typewriter and searched for "Stuttgart Schreibmaschine".
 The first result was an official wiki on the matter of [how to properly discard a typewriter](https://www.stuttgart.de/service/entsorgung/abfall-abc/abfall-abc/schreibmaschine).
 How German, I suppose...
+Instead, [Christoph Wolf](https://teccheck.xyz) helped out, tracked down a typewriter and took a few pictures for me.
+He even typed down this article's introduction on it, how cute!
+<HalfImage src={chrisw_typewriter_article} full={true}/>
