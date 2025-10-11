@@ -15,7 +15,7 @@ title_banner: ../../images/photography/bravo_bravo.jpg
 title_banner_horizontal_position: 40%
 title_banner_vertical_position: 0%
 slug: open_source
-date: 2025-10-12T00:00:00+00:00
+date: 2025-10-11T00:00:00+00:00
 listed: true
 version: 1.0.0
 ---
@@ -266,14 +266,14 @@ Let's buy a typewriter (picture by [Christoph Wolf](https://teccheck.xyz))!
 Sure, you can write your document with it but there's more.
 Open it up; just pop off the metal panels and you get a good look at its internals.
 Perhaps all the metallic pieces don't make much sense at first but you can still look at them.
-You bought this view alongside this typewriter.
-You bought the ability to understand this typewriter.
+You bought this view alongside the typewriter.
+You bought the ability to understand the typewriter.
 These two things are linked together in a way software just isn't.
 To understand software you need more than just the executable required for using it, you need the source code.
 From this perspective, the old way of technology is much closer to Open-source than to Closed-Source.
 However, if the manufacturer switched from mechanical typewriters to software and kept giving the user only the minimum to write a document, you end up with Closed-Source software like Word.
 That's a loss.
-I argue, Open-Source is the response to a world in which software exists.
+I argue, Open-Source is the **response to a world in which software exists**.
 
 <HalfImage src={chrisw_typewriter_open} />
 
@@ -304,7 +304,7 @@ Also, in a more poetic way, we are a species of curious animals.
 What life is this when we all walk among devices we can't touch or open or tinker with?
 Therefore, I consider Open-Source a form of **enlightenment**.
 
-### So I've changed some source code. What do I do with it?
+### So I've Changed some Source Code. What do I Do With It?
 Say you implemented a new feature to the source code of LibreOffice Writer.
 Very cool!
 What do you do with this feature?
@@ -324,10 +324,10 @@ Then you can use the second option and create your own version of LibreOffice Wr
 This would be a *fork* of LibreOffice Writer.
 Now it's up to the users to choose which version of LibreOffice Writer they want to use; the original or your fork?
 This is actually very common in Open-Source.
-People come up with all sorts of crazy ideas that are sometimes so radical the original developers don't want to upstream them.
+People come up with all sorts of crazy ideas that are sometimes, so radical the original developers don't want to upstream them.
 LibreOffice Writer itself is actually a fork of OpenOffice Writer, btw.
 (And OpenOffice Writer is a fork of StarOffice Writer.)
-The LibreOffice Writer implemented such cool new features they gathered so many people around them, they dwarfed the older OpenOffice and StarOffice Writer.
+The LibreOffice Writer developers implemented such cool new features they gathered so many people around them, they dwarfed the older OpenOffice and StarOffice Writer.
 
 In contrast to Closed-Source software, there isn't just a single corporation deciding how things should be.
 The power lies with the people.
@@ -346,7 +346,7 @@ Firstly, they are completely right, capitalism is quite the efficient machine an
 Secondly, we'll talk about how to monetize Open-Source software [later](#how-do-you-monetize-open-source-software).
 Thirdly, that conclusion is wrong.
 Open-Source does not lead to less competition; it leads to more.
-Firstly, if you've read the [above section](#so-ive-changed-some-source-code-what-do-i-do-with-it) about forks you know how they compete for users.
+Firstly, if you've read the [section above](#so-ive-changed-some-source-code-what-do-i-do-with-it) about forks you know how they compete for users.
 There always are different ways of solving the same problem and the different forks reflect that.
 Actually, the bigger problem in Open-Source is fragmentation where there is too much competition.
 While I won't get into that in this article, rest assured, there are ways of dealing with fragmentation, too.
@@ -372,14 +372,14 @@ For you, personally, this has another facet when you're changing companies.
 Make your work Open-Source and you never have to implement it again.
 Open-Source is not an act of charity, it simply makes you **not repeat yourself**.
 
-I've already talked about the sheer amount of text editor that support the OpenDocument file format.
+I've already talked about the sheer amount of text editors that support the OpenDocument file format.
 You know how that came to be?
-Well the developers of StarOffice Writer developed that file format and made it Open-Source.
+Well, the developers of StarOffice Writer developed that file format and made it Open-Source.
 Then other people developing text editors simply used that file format.
-Why develop a new standard, when there is already one you're free to use?
+Why develop a new standard, when there already is one you're free to use?
 And that, in turn, benefited the developers of StarOffice because users of their file format can do more with it.
 There, actually, are a lot of Open-Source standards.
-So when you create an Open-Source product you might *establish a standard*.
+So when you create an Open-Source product you might **establish a standard**.
 
 Of course there's another point to this:
 When you're keeping your software Closed-Source no one can see the crimes you've committed in the code.
@@ -419,9 +419,9 @@ Alternatively you can use the Open-Source software to establish a standard and t
 You're the one who understand the standard the best, after all.<br />
 Or, if you want to remain fully Open-Source, you can always **implement other people's feature requests** for some coin.
 
-Those options are all possible and done by players in the industry.
+Those options, while they are not exhaustive, are all possible and done by players in the industry 
 You're free to mix and match them however you like and, of course, always just ask for **donations**.
-Sometimes that suffices already.
+Sometimes that already suffices.
 Wrapping this up, know that Open-Source requires a different business model than Closed-Source.
 But notice that there is a business model for this and your developers and customers benefit hugely from your product being Open-Source.
 
@@ -462,7 +462,7 @@ I've simplified a few things:
 ### P.P.S.
 So I was looking to get my hand on an actual typewriter and searched for "Stuttgart Schreibmaschine".
 The first result was an official wiki on the matter of [how to properly discard a typewriter](https://www.stuttgart.de/service/entsorgung/abfall-abc/abfall-abc/schreibmaschine).
-How German, I suppose...
+How German, I suppose...<br />
 Instead, [Christoph Wolf](https://teccheck.xyz) helped out, tracked down a typewriter and took a few pictures for me.
 He even typed down this article's introduction on it, how cute!
 <HalfImage src={chrisw_typewriter_article} full={true}/>
