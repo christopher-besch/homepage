@@ -6,6 +6,7 @@ import type { GatsbyConfig } from "gatsby";
 // const rehypeKatex = require('rehype-katex')
 
 const config: GatsbyConfig = {
+    pathPrefix: "/private_homepage/suLo9aF9YkKzAEQEdgTRNBsQyTmC65qdru0B7ueQ",
     siteMetadata: {
         email: {
             name: "mail@chris-besch.com",

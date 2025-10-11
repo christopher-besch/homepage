@@ -69,8 +69,9 @@ const About = ({ data }: PageProps<Queries.AboutQuery>) => {
                         </p>
                         <p className={styles.right}>...6, 5, 4, 3...</p>
                         <p className={styles.left}>
-                            What's more, I love working in public.
-                            Open-Source is quite amazing — I try publishing as much as possible.
+                            {/* The space is required because the link on the next line fudges things up. */}
+                            What's more, I love working in public.&nbsp;
+                            <Link to="/articles/open_source">Open-Source is quite amazing</Link> — I try publishing as much as possible.
                             I hope you can find some use for it.
                         </p>
                         <p className={styles.right}>...2, 1, zero, all engine running...</p>
