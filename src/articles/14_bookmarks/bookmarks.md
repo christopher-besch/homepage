@@ -76,6 +76,7 @@ If you have something to recommend, feel free to tell me at [mail@chris-besch.co
 ### Photography
 - [Line scan camera image processing](https://daniel.lawrence.lu/blog/y2025m09d21/) by Daniel Lawrence Lu
 - [I will personally dropkick the next person to send me photos via WhatsApp](https://teccheck.xyz/blog/whatsapp-photos) by Christoph Wolf
+- [Sakura](https://aegir.org/words/sakura) by Aegir
 
 ### Games
 - [What never lived cannot die: Alienation, architecture, and NaissanceE](https://caneandrinse.com/alienation-architecture-and-naissancee/) by Jacob Geller
