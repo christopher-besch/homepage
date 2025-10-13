@@ -41,6 +41,8 @@ Let's start with just getting a Forgejo test instance up and running.
 2. [Install node and npm](https://github.com/nvm-sh/nvm?tab=readme-ov-file#install--update-script).
 3. [Install go](https://go.dev/doc/install).
 4. Install [gotestsum](https://github.com/gotestyourself/gotestsum).
+   This is entirely optional.
+   If you don't install gotestsum, ignore all the `USE_GOTESTSUM=yes` statements below.
 5. Download the [Forgejo Repo](https://codeberg.org/forgejo/forgejo) with `git clone https://codeberg.org/forgejo/forgejo ~/forgejo && cd ~/forgejo`.
 6. Build an executable with `STRIP="0" EXTRA_GOFLAGS='-gcflags="all=-N -l"' TAGS="sqlite sqlite_unlock_notify" make build`.
    It took me a while to realize that `go build` enables optimization by default but keeps all debug symbols present.
@@ -137,8 +139,35 @@ Furthermore, we want to test webhooks.
    Enable either *All events* or *Custom events*, selecting the *Action Run events*.
 5. Start the workflow, let it fail and watch the sent webhook in the node terminal.
 
-### Running Tests
+### Running All Tests
+Forejeo has are different types of tests.
+I was concerned with these types.
+- Run all unit tests with `TAGS='sqlite sqlite_unlock_notify' USE_GOTESTSUM=yes make test`.
+- Run all integration tests with `TAGS='sqlite sqlite_unlock_notify' USE_GOTESTSUM=yes make test-sqlite`.
+
+There are other types of tests, namely frontend tests and the End-to-End tests in a special repo.
+I didn't work with these yet so I direct you to the [testing docs](https://forgejo.org/docs/latest/contributor/testing).
+
+### Running Specific Tests
+Say you only want to run this unit test in `~/forgejo/models/actions/run_test.go`:
+```go
+func TestGetRunBefore(t *testing.T) {
+  // --snip--
+}
+```
+Then you can execute `USE_GOTESTSUM=yes TAGS='sqlite sqlite_unlock_notify' GO_TEST_PACKAGES='forgejo.org/models/actions' make 'test#TestGetRunBefore'`.
+
+If you are concerned with this integration test in `~/forgejo/tests/integration/actions_notifications_test.go`:
+```go
+func TestActionNotifications(t *testing.T) {
+  // --snip--
+}
+```
+Then you can run `USE_GOTESTSUM=yes TAGS='sqlite sqlite_unlock_notify' make 'test-sqlite#TestActionNotifications'`.
+
+### Debugging Tests
 TODO
+`break forgejo.org/tests/integration.TestActionNotification`
 
 ### Debugging
 I like the terminal and am used to GDB.
