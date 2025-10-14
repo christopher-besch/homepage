@@ -322,9 +322,9 @@ You, of course, benefit from that.<br />
 What if the LibreOffice Writer developers refuse to upstream your feature, however?
 Then you can use the second option and create your own version of LibreOffice Writer.
 This would be a *fork* of LibreOffice Writer.
-Now it's up to the users to choose which version of LibreOffice Writer they want to use; the original or your fork?
+Now it's up to the users to choose which version of LibreOffice Writer they want to use: the original or your fork?
 This is actually very common in Open-Source.
-People come up with all sorts of crazy ideas that are sometimes, so radical the original developers don't want to upstream them.
+People come up with all sorts of crazy ideas that are sometimes so radical, the original developers don't want to upstream them.
 LibreOffice Writer itself is actually a fork of OpenOffice Writer, btw.
 (And OpenOffice Writer is a fork of StarOffice Writer.)
 The LibreOffice Writer developers implemented such cool new features they gathered so many people around them, they dwarfed the older OpenOffice and StarOffice Writer.
@@ -358,7 +358,7 @@ Because of that, people aren't able to easily use anything else.
 That doesn't sound much like competition, does it?
 Closed-Source is the real culprit here.
 As discussed [above](#the-user-of-openclosed-source) Closed-Source tends to lock users into a single manufacturer's products.
-In order for real competition to exists, users must be able to choose what restaurant they go to, what brand of toilet paper they buy.
+In order for real competition to exist, users must be able to choose what restaurant they go to, what brand of toilet paper they buy.
 And, of course, users must be able to easily choose what software they use.
 The autonomy Open-Source provides enables that.
 Hence, Open-Source is **capitalism at its best**.
@@ -416,7 +416,7 @@ Then you can sell that.<br />
 Or, instead, you take your product and make most of it Open-Source and some secret sauce **Closed-Source**.
 Then you can sell that and still get most of the benefits of Open-Source (though some people frown upon that approach).<br />
 Alternatively you can use the Open-Source software to establish a standard and then write some Closed-Source software for that standard.
-You're the one who understand the standard the best, after all.<br />
+You're the one who understands the standard the best, after all.<br />
 Or, if you want to remain fully Open-Source, you can always **implement other people's feature requests** for some coin.
 
 Those options, while they are not exhaustive, are all possible and done by players in the industry 
