@@ -85,7 +85,7 @@ It provides an SMTP server, which Forgejo connects to, and a webinterface for me
 2. Run `docker run --network host -p 1080:1080 -p 1025:1025 maildev/maildev`.
 3. Open [http://localhost:1080](http://localhost:1080) in a webbrowser.
 4. Shutdown Forgejo and edit it's config (in `~/forgejo/custom/conf/app.ini`).
-   ```
+   ```ini
    [mailer]
    ENABLED = true
    PROTOCOL = smtp
