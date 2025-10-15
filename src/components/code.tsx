@@ -24,6 +24,7 @@ require("prismjs/components/prism-docker");
 require("prismjs/components/prism-rust");
 require("prismjs/components/prism-yaml");
 require("prismjs/components/prism-ini");
+require("prismjs/components/prism-go");
 
 // reference: https://coffeeaddict.dev/gatsby-mdx-prism/
 const PrismSyntaxHighlight = ({ children, className }: React.DetailedHTMLProps<React.HTMLAttributes<HTMLPreElement>, HTMLPreElement>) => {
