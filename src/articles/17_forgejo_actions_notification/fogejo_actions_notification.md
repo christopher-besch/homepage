@@ -165,11 +165,6 @@ func TestActionNotifications(t *testing.T) {
 ```
 Then you can run `USE_GOTESTSUM=yes TAGS='sqlite sqlite_unlock_notify' make 'test-sqlite#TestActionNotifications'`.
 
-### Debugging Tests
-TODO
-
-`break forgejo.org/tests/integration.TestActionNotification`
-
 ### Debugging
 I like the terminal and am used to GDB.
 Therefore I'm using the terminal debugger [Delve](https://github.com/go-delve/delve).
@@ -180,6 +175,13 @@ Let's set things up for that:
 4. Now we can use the Delve console.
    For example you can do `break forgejo.org/services/mailer.(*mailNotifier).ActionRunNowDone`, `break forgejo.org/services/notify.ActionRunNowDone` and `continue`.
    Hit `Ctrl+C` to enter a Delve command and type `quit` to exit.
+
+### Debugging Tests
+Say you want to debug the unit test from above.
+Then you can use Delve with this command: `dlv test --build-flags "-tags='sqlite,sqlite_unlock_notify' -run TestGetRunBefore" forgejo.org/models/actions`
+If you want to debug something else, take a look at Forgejo's Makefile and find what command make the things you want to debug run.
+Just replace `go test` with `delve` and place all `go test` arguments in the `--build_flags` Delve argument.
+You can break on line numbers, too: `break ./models/actions/run_test.go:19`
 
 ## Forgejo's Observer Pattern
 TODO
