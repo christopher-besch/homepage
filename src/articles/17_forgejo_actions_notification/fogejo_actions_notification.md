@@ -15,15 +15,15 @@ listed: true
 version: 1.0.0
 ---
 
-Forgejo is a code forge:
+This article is about Forgejo, a code forge:
 Just like GitHub or GitLab it's a place to (collaboratively) develop software.
-Because Forgejo is incredibly easy to self-host and I love it's Open-Source community, I chose it for my private code forge.
-I've already explained at length [why I love Open-Source](/articles/open_source) so much.
-
-With my new code forge up and running there were a few features my team needed.
-Specifically we needed to receive email notifications and webhooks when a CI Workflow failed.
+I've already explained at length [why we benefit greatly from Open-Source](/articles/open_source).
+Motivated by that concept, Forgejo's amazing community and perhaps because it's incredibly easy to set up, you select it for your private code forge.
+Though, with your Forgejo instance up and running you might miss a few features.
+I, for example, needed to receive email notifications and webhooks when a CI Workflow failed.
 Forgejo didn't offer that feature so I started contributing to Forgejo.
-Through this article I want to give back as much of what I've learned in doing so.
+You might find yourself in those shoes, too.
+In this article I want to help you and give my experience contributing to Forgejo.
 The parts that took the most effort where
 - setting up a development environment,
 - understanding Forgejo's notification architecture,
@@ -183,7 +183,7 @@ Let's set things up for that:
    Hit `Ctrl+C` to enter a Delve command and type `quit` to exit.
 
 Say you want to debug the above unit test.
-Then you can use Delve with this command: `dlv test --build-flags "-tags='sqlite,sqlite_unlock_notify' -run TestGetRunBefore" forgejo.org/models/actions`
+Then you can use Delve with this command: `dlv test --build-flags "-tags='sqlite,sqlite_unlock_notify' -run TestGetRunBefore" forgejo.org/models/actions`.
 If, instead,  you want to debug the above integration test, run `make integrations.sqlite.test generate-ini-sqlite && GITEA_ROOT="$(pwd)" GITEA_CONF=tests/sqlite.ini dlv exec ./integrations.sqlite.test -- -test.run TestActionNotifications`.
 Here you can break on some line number, too: `break ./tests/integration/actions_notifications_test.go:22`
 To debug something else, take a look at Forgejo's Makefile and find what command make the things you want to debug run.
@@ -191,9 +191,19 @@ Just replace `go test` with `delve` and place all `go test` arguments in the `--
 You can break on line numbers, too: `break ./models/actions/run_test.go:19`
 
 ## Forgejo's Observer Pattern
+Let's talk about Forgejo's architecture.
+Firstly, the directory structure.
+- `models`: SQL helper stuff, access to nothing
+- `modules`: Things that don't need database or git access.
+- `services`: Things that do need database and/or git access.
+- `routers`: 
+
+Forgejos
+[Forgejo's architecture overview](https://forgejo.org/docs/next/contributor/architecture) is quite helpful.
+
+
 TODO
 
-- [Forgejo's architecture overview](https://forgejo.org/docs/next/contributor/architecture) is quite helpful.
 - duplicity of structs
 
 ## My Changes
