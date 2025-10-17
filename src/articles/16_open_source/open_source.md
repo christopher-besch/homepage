@@ -2,12 +2,11 @@
 type: article
 title: "Why I love Open-Source"
 description: "
-I love Open-Source.
-Somehow I never got to sort my reasons for that feeling.
-This article does just that and tries to sell Open-Source to you.
-Find out its price and what you get in return; regardless if you are a developer, user, corporation, the government or just a citizen.
-
-I argue that Open-Source is a quality mark, a form of democracy and ownership, capitalism at its best and thus the response to a world in which software exists.
+We all live in a world of immensely complex technology.
+The concept of Open-Source might seem radical at first but it's indispensable in our world.
+Regardless if you are a user, developer or simply interested in a healthy society, you benefit from Open-Source and we should fight for every bit of it.
+Open-Source is a quality mark, a form of democracy and ownership, capitalism at its best and thus the response to this world, a world in which software exists.
+This article gets to that conclusion without requiring any prior technical knowledge.
 "
 banner: /social_banner/open_source.png
 thumb: ../../../static/social_banner/open_source.png
@@ -25,9 +24,10 @@ import chrisw_typewriter_article from "./chrisw_typewriter_article.jpg";
 import chrisw_typewriter from "./chrisw_typewriter.jpg";
 import chrisw_typewriter_open from "./chrisw_typewriter_open.jpg";
 
-I won't hide my love for Open-Source.
-I love it so much it aches whenever I'm not allowed to work with Open-Source.
-For me, Open-Source is a quality mark, a form of democracy and ownership, capitalism at its best and thus the response to a world in which software exists.
+We all live in a world of immensely complex technology.
+The concept of Open-Source might seem radical at first but it's indispensable in our world.
+Regardless if you are a user, developer or simply interested in a healthy society, you benefit from Open-Source and we should fight for every bit of it.
+Open-Source is a quality mark, a form of democracy and ownership, capitalism at its best and thus the response to this world, a world in which software exists.
 This article gets to that conclusion without requiring any prior technical knowledge.
 
 ## Background
@@ -426,10 +426,14 @@ Wrapping this up, know that Open-Source requires a different business model than
 But notice that there is a business model for this and your developers and customers benefit hugely from your product being Open-Source.
 
 ## Conclusion
-I have talked at length about why users benefit from Open-Source software.
-Then I used those benefits to describe the bigger role Open-Source can and does play in a society.
-Lastly, I talked about the developer perspective and why they benefit from Open-Source, too.
-There are a few points I want to stress:
+I won't hide my love for Open-Source.
+I love it so much it aches whenever I'm not allowed to work with it.
+Somehow I never got to sort my reasons for that feeling.
+This article has been my attempt at doing just that.
+We've seen why users benefit from Open-Source software.
+Then we found those benefits to be vital in Open-Source's bigger role in society.
+Lastly, we put on the shoes of a developer and found Open-Source to have many benefits here, too.
+After all this, there are a few points I want to stress:
 
 - Open-Source is no charity, though it can be.
 - Open-Source does not mean *for free* or cheap.
