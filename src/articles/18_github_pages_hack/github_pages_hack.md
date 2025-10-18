@@ -42,7 +42,7 @@ That other day when someone else apparently got control over my domain.
 
 ### What Happened?
 A few days ago I accidentally deleted the git branch GitHub Pages feeds on.
-Although I recreated the branch shortly after and unbeknown to me, that disabled my GitHub Pages deployment.
+Although I recreated the branch shortly after and unbeknown to me, that permanently disabled my GitHub Pages deployment.
 Therefore, my domain forwarded to GitHub's infrastructure but wasn't used by any GitHub Page anymore.
 Someone realized that and chose the domain for their malicious website.
 Luckily I realized the malicious website fairly quickly.
@@ -61,7 +61,7 @@ Still, browsers don't really differentiate between the validation types in the u
 <HalfImage src={github_verified_domains} />
 
 I didn't forward to a generic GitHub domain, I forwarded to `christopher-besch.github.io`.
-So, GitHub could have checked my DNS record and realized that I don't want someone else hosting GitHub Pages on my domain.
+So, GitHub could have checked my DNS record and realized that I, `christopher-besch`, don't want someone else hosting GitHub Pages on my domain.
 Though, GitHub doesn't do that.
 Instead, it needs a specific TXT DNS record to understand that that's my domain.
 They call this feature ["verified domains"](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/verifying-your-custom-domain-for-github-pages).
