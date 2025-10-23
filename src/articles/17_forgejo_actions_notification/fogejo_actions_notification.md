@@ -192,25 +192,198 @@ To debug something else, take a look at Forgejo's Makefile and find what command
 Just replace `go test` with `delve` and place all `go test` arguments in the `--build_flags` Delve argument.
 You can break on line numbers, too: `break ./models/actions/run_test.go:19`
 
-## Forgejo's Observer Pattern
-Let's talk about Forgejo's architecture.
-Firstly, the directory structure.
-- `models`: SQL helper stuff, access to nothing
-- `modules`: Things that don't need database or git access.
-- `services`: Things that do need database and/or git access.
-- `routers`: 
+## Any Go Project's Directory Structure
+Forgejo uses Go for its backend and Go html templates for its frontend.
+I didn't dabble much with the frontend but there's JavaScript, too.
+(Of course there is...)
+I've always found Go's module system illusive, especially its' use of domains as module paths.
+Also, Go does a lot of things implicitly, for example:
+How do you tell Go that some function is a unit test?
+You place it in a file with the `_test.go` suffix.
+Or another one:
+How do you declare a symbol exported or not-exported (analogous to public or private in other languages)?
+There's no keyword for that.
+Symbols with a leading capital letter are implicitly exported, otherwise not.
+Those things are hard to figure out if you haven't inhaled the Go docs and just read through a project for the first time.
 
-Forgejos
-[Forgejo's architecture overview](https://forgejo.org/docs/next/contributor/architecture) is quite helpful.
+Okay, so Forgejo's binary is built from a module, the `forgejo.org` module.
+We can figure that out by looking at its [`go.mod`](https://codeberg.org/forgejo/forgejo/src/branch/forgejo/go.mod) file.
+```go
+// /go.mod
+module forgejo.org
+// --snip--
+require (
+    code.forgejo.org/f3/gof3/v3 v3.11.1
+// --snip--
+```
+As we've seen every bit of Go code is inside a module but there's another level of granularity: packages.
+Go uses packages to isolate code into neat, contained, well, packages.
+Every Go file declares what package they are in.
+Go code can use exported and not-exported symbols (i.e., the functions, values, etc.) inside its own package.
+To use symbols in other packages, however, those symbols must be exported you need to import that package.
+The package `main` is special, that's where the entrypoint is.
+Take a look at Forgejo's [`main.go`](https://codeberg.org/forgejo/forgejo/src/branch/forgejo/main.go):
+```go
+// /main.go
+// --snip--
+package main
+import (
+    // [standard library imports]
+    "os"
+    "runtime"
+    // --snip--
+
+    // [import some other package from the Forgejo source code repo]
+    "forgejo.org/cmd"
+// --snip--
+```
+Now, this is what really confused me at first:
+`forgejo.org` is a domain you can visit with your browser but that's more or less just a coincidence.
+Go only uses it to identify Forgejo's main package's path.
+Therefore, `forgejo.org/cmd` is not a web endpoint at all, even though it might look like one.
+Instead, it refers to the package `cmd` located in the [`/cmd` directory](https://codeberg.org/forgejo/forgejo/src/branch/forgejo/cmd).
+```go
+// /cmd/main.go
+// --snip--
+package cmd
+
+import (
+    // --snip--
+    "forgejo.org/modules/log"
+    // --snip--
+    "github.com/urfave/cli/v3"
+// --snip--
+```
+When you read this you need to be aware you're in the source code of the `forgejo.org` module, thus `forgejo.org/modules/log` refers to a package in [`/modules/log`](https://codeberg.org/forgejo/forgejo/src/branch/forgejo/modules/log).
+`github.com/urfave/cli/v3`, however, refers to a dependency Go will download from GitHub during a build.
+Notice that these the Go files in the `forgejo.org/modules/log` package declare their package without the full path:
+```go
+// /modules/log/init.go
+// --snip--
+package log
+// --snip--
+```
+
+Remember how the directory Go code lies in influences any package's path.
+
+## Forgejo's Layered Architecture
+This article is about implementing one specific feature, actions notifications.
+Therefore, I'll only talk about the parts of Forgjeo's architecture that matter for this feature.
+Firstly, we need to take a look at Forgjeo's layered architecture.
+I've created a visualization of [Forgejo's architecture overview](https://forgejo.org/docs/next/contributor/architecture).
 
 <HalfImage full={true} src={architecture} />
 
-TODO
+`\routers`, `\services`, `\models`, `\modules` and `\templates` are the *main directories* where most of Forgejo's Go code lives.
+As we can see, there are three layers.
+Firstly, code in the bottom layers may only access packages inside their respective main directory.
+So for example, code in `\modules` may not access the Forgejo-specific database models defined in `\models`.
+(The Go compiler doesn't enforce this, code reviewers do.)
+Packages in `\modules` could theoretically be used as a library outside of Forgejo.
+Secondly, the `\services` module may access both `\models` and `\modules` but not the `\routers` above.
+Lastly, the `\routers` code may use everything below it.<br />
+There are other main directories that we don't care about.
+Furthermore, I've only drawn examples packages, files and structs inside the main directories.
+They contain a lot more things; things we'll look at later.
+The `api` package inside `\routers` doesn't actually contain any Go code directly.
+Instead it is the parent-package of packages like `forgejo.org/services/api/actions/runner`.
+
+## Forgejo's Observer Pattern
+We've seen how Go packages may include other Go packages.
+There's 
+
+TODO: cyclic stuff -> solution observer pattern
 
 - duplicity of structs
 
 ## My Changes
 TODO
+```
+~/forgejo λ vit lg | grep -P '\(#(7510|7491|7697|7509|7508|8066|8250|8227|8242)\)'
+cf4d0e6c34 b2c4fc9f94 9e6f722f94 2529923dea d17aa98262 386e7f8208 95ad7d6201 05273fa8d2 a783a72d6b
+
+(git log --pretty=format: --name-only cf4d0e6c34~..cf4d0e6c34 ; \
+git log --pretty=format: --name-only b2c4fc9f94~..b2c4fc9f94 ; \
+git log --pretty=format: --name-only 9e6f722f94~..9e6f722f94 ; \
+git log --pretty=format: --name-only 2529923dea~..2529923dea ; \
+git log --pretty=format: --name-only d17aa98262~..d17aa98262 ; \
+git log --pretty=format: --name-only 386e7f8208~..386e7f8208 ; \
+git log --pretty=format: --name-only 95ad7d6201~..95ad7d6201 ; \
+git log --pretty=format: --name-only 05273fa8d2~..05273fa8d2 ; \
+git log --pretty=format: --name-only a783a72d6b~..a783a72d6b) | sort -u | uniq
+
+
+models/actions/main_test.go
+models/actions/run.go
+models/actions/run_job.go
+models/actions/run_test.go
+models/actions/schedule.go
+models/actions/task.go
+models/forgejo_migrations/migrate.go
+models/forgejo_migrations/v34.go
+models/user/user_system.go
+models/webhook/webhook.go
+models/webhook/webhook_test.go
+modules/structs/action.go
+modules/structs/hook.go
+modules/structs/repo_actions.go
+modules/webhook/structs.go
+modules/webhook/type.go
+options/locale/locale_en-US.ini
+options/locale_next/locale_en-US.json
+routers/api/actions/runner/runner.go
+routers/api/v1/repo/action.go
+routers/api/v1/repo/repo.go
+routers/api/v1/swagger/repo.go
+routers/web/repo/actions/view.go
+routers/web/repo/issue.go
+routers/web/repo/setting/setting.go
+routers/web/repo/setting/webhook.go
+services/actions/clear_tasks.go
+services/actions/job_emitter.go
+services/actions/notifier.go
+services/actions/notifier_helper.go
+services/actions/schedule_tasks.go
+services/actions/schedule_tasks_test.go
+services/actions/task.go
+services/actions/workflows.go
+services/convert/action.go
+services/convert/convert.go
+services/forms/repo_form.go
+services/mailer/mail_actions.go
+services/mailer/mail_actions_now_done_test.go
+services/mailer/mail_admin_new_user_test.go
+services/mailer/main_test.go
+services/mailer/notify.go
+services/notify/notifier.go
+services/notify/notify.go
+services/notify/null.go
+services/repository/branch.go
+services/repository/setting.go
+services/webhook/dingtalk.go
+services/webhook/discord.go
+services/webhook/feishu.go
+services/webhook/general.go
+services/webhook/general_test.go
+services/webhook/matrix.go
+services/webhook/msteams.go
+services/webhook/notifier.go
+services/webhook/notifier_test.go
+services/webhook/shared/payloader.go
+services/webhook/slack.go
+services/webhook/sourcehut/builds.go
+services/webhook/telegram.go
+services/webhook/webhook.go
+services/webhook/wechatwork.go
+templates/mail/actions/now_done.tmpl
+templates/swagger/v1_json.tmpl
+templates/webhook/shared-settings.tmpl
+tests/integration/actions_notifications_test.go
+tests/integration/actions_runner_test.go
+tests/integration/actions_run_now_done_notification_test.go
+tests/integration/api_repo_actions_test.go
+tests/integration/repo_webhook_test.go
+```
 
 - [#7510: Refactoring](https://codeberg.org/forgejo/forgejo/pulls/7510)
 - [#7491: Actions Done Notification](https://codeberg.org/forgejo/forgejo/pulls/7491)
