@@ -174,24 +174,156 @@ Here you can break on some line number, too: <code class="language-text">break .
 To debug something else, take a look at Forgejo&#x27;s Makefile and find what command make the things you want to debug run.
 Just replace <code class="language-text">go test</code> with <code class="language-text">delve</code> and place all <code class="language-text">go test</code> arguments in the <code class="language-text">--build_flags</code> Delve argument.
 You can break on line numbers, too: <code class="language-text">break ./models/actions/run_test.go:19</code></p>
+<h2 id="any-go-projects-directory-structure" style="position:relative"><a href="#any-go-projects-directory-structure"><span><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></span></a>Any Go Project&#x27;s Directory Structure</h2>
+<p>Forgejo uses Go for its backend and Go html templates for its frontend.
+I didn&#x27;t dabble much with the frontend but there&#x27;s JavaScript, too.
+(Of course there is...)
+I&#x27;ve always found Go&#x27;s module system illusive, especially its&#x27; use of domains as module paths.
+Also, Go does a lot of things implicitly, for example:
+How do you tell Go that some function is a unit test?
+You place it in a file with the <code class="language-text">_test.go</code> suffix.
+Or another one:
+How do you declare a symbol exported or not-exported (analogous to public or private in other languages)?
+There&#x27;s no keyword for that.
+Symbols with a leading capital letter are implicitly exported, otherwise not.
+Those things are hard to figure out if you haven&#x27;t inhaled the Go docs and just read through a project for the first time.</p>
+<p>Okay, so Forgejo&#x27;s binary is built from a module, the <code class="language-text">forgejo.org</code> module.
+We can figure that out by looking at its <a href="https://codeberg.org/forgejo/forgejo/src/branch/forgejo/go.mod" target="_blank"><code class="language-text">go.mod</code></a> file.</p>
+<div class="code-container"> <pre><code class="prism-code language-go"><div class="token-line"><span class="token comment">// /go.mod</span><span class="token plain"></span></div><div class="token-line"><span class="token plain">module forgejo</span><span class="token punctuation">.</span><span class="token plain">org</span></div><div class="token-line"><span class="token plain"></span><span class="token comment">// --snip--</span><span class="token plain"></span></div><div class="token-line"><span class="token plain">require </span><span class="token punctuation">(</span><span class="token plain"></span></div><div class="token-line"><span class="token plain">    code</span><span class="token punctuation">.</span><span class="token plain">forgejo</span><span class="token punctuation">.</span><span class="token plain">org</span><span class="token operator">/</span><span class="token plain">f3</span><span class="token operator">/</span><span class="token plain">gof3</span><span class="token operator">/</span><span class="token plain">v3 v3</span><span class="token punctuation">.</span><span class="token number">11.1</span><span class="token plain"></span></div><div class="token-line"><span class="token plain"></span><span class="token comment">// --snip--</span><span class="token plain"></span></div></code></pre></div>
+<p>As we&#x27;ve seen every bit of Go code is inside a module but there&#x27;s another level of granularity: packages.
+Go uses packages to isolate code into neat, contained, well, packages.
+Every Go file declares what package they are in.
+Go code can use exported and not-exported symbols (i.e., the functions, values, etc.) inside its own package.
+To use symbols in other packages, however, those symbols must be exported you need to import that package.
+The package <code class="language-text">main</code> is special, that&#x27;s where the entrypoint is.
+Take a look at Forgejo&#x27;s <a href="https://codeberg.org/forgejo/forgejo/src/branch/forgejo/main.go" target="_blank"><code class="language-text">main.go</code></a>:</p>
+<div class="code-container"> <pre><code class="prism-code language-go"><div class="token-line"><span class="token comment">// /main.go</span><span class="token plain"></span></div><div class="token-line"><span class="token plain"></span><span class="token comment">// --snip--</span><span class="token plain"></span></div><div class="token-line"><span class="token plain"></span><span class="token keyword">package</span><span class="token plain"> main</span></div><div class="token-line"><span class="token plain"></span><span class="token keyword">import</span><span class="token plain"> </span><span class="token punctuation">(</span><span class="token plain"></span></div><div class="token-line"><span class="token plain">    </span><span class="token comment">// [standard library imports]</span><span class="token plain"></span></div><div class="token-line"><span class="token plain">    </span><span class="token string">&quot;os&quot;</span><span class="token plain"></span></div><div class="token-line"><span class="token plain">    </span><span class="token string">&quot;runtime&quot;</span><span class="token plain"></span></div><div class="token-line"><span class="token plain">    </span><span class="token comment">// --snip--</span><span class="token plain"></span></div><div class="token-line"><span class="token plain" style="display:inline-block">
+</span></div><div class="token-line"><span class="token plain">    </span><span class="token comment">// [import some other package from the Forgejo source code repo]</span><span class="token plain"></span></div><div class="token-line"><span class="token plain">    </span><span class="token string">&quot;forgejo.org/cmd&quot;</span><span class="token plain"></span></div><div class="token-line"><span class="token plain"></span><span class="token comment">// --snip--</span><span class="token plain"></span></div></code></pre></div>
+<p>Now, this is what really confused me at first:
+<code class="language-text">forgejo.org</code> is a domain you can visit with your browser but that&#x27;s more or less just a coincidence.
+Go only uses it to identify Forgejo&#x27;s main package&#x27;s path.
+Therefore, <code class="language-text">forgejo.org/cmd</code> is not a web endpoint at all, even though it might look like one.
+Instead, it refers to the package <code class="language-text">cmd</code> located in the <a href="https://codeberg.org/forgejo/forgejo/src/branch/forgejo/cmd" target="_blank"><code class="language-text">/cmd</code> directory</a>.</p>
+<div class="code-container"> <pre><code class="prism-code language-go"><div class="token-line"><span class="token comment">// /cmd/main.go</span><span class="token plain"></span></div><div class="token-line"><span class="token plain"></span><span class="token comment">// --snip--</span><span class="token plain"></span></div><div class="token-line"><span class="token plain"></span><span class="token keyword">package</span><span class="token plain"> cmd</span></div><div class="token-line"><span class="token plain" style="display:inline-block">
+</span></div><div class="token-line"><span class="token plain"></span><span class="token keyword">import</span><span class="token plain"> </span><span class="token punctuation">(</span><span class="token plain"></span></div><div class="token-line"><span class="token plain">    </span><span class="token comment">// --snip--</span><span class="token plain"></span></div><div class="token-line"><span class="token plain">    </span><span class="token string">&quot;forgejo.org/modules/log&quot;</span><span class="token plain"></span></div><div class="token-line"><span class="token plain">    </span><span class="token comment">// --snip--</span><span class="token plain"></span></div><div class="token-line"><span class="token plain">    </span><span class="token string">&quot;github.com/urfave/cli/v3&quot;</span><span class="token plain"></span></div><div class="token-line"><span class="token plain"></span><span class="token comment">// --snip--</span><span class="token plain"></span></div></code></pre></div>
+<p>When you read this you need to be aware you&#x27;re in the source code of the <code class="language-text">forgejo.org</code> module, thus <code class="language-text">forgejo.org/modules/log</code> refers to a package in <a href="https://codeberg.org/forgejo/forgejo/src/branch/forgejo/modules/log" target="_blank"><code class="language-text">/modules/log</code></a>.
+<code class="language-text">github.com/urfave/cli/v3</code>, however, refers to a dependency Go will download from GitHub during a build.
+Notice that these the Go files in the <code class="language-text">forgejo.org/modules/log</code> package declare their package without the full path:</p>
+<div class="code-container"> <pre><code class="prism-code language-go"><div class="token-line"><span class="token comment">// /modules/log/init.go</span><span class="token plain"></span></div><div class="token-line"><span class="token plain"></span><span class="token comment">// --snip--</span><span class="token plain"></span></div><div class="token-line"><span class="token plain"></span><span class="token keyword">package</span><span class="token plain"> log</span></div><div class="token-line"><span class="token plain"></span><span class="token comment">// --snip--</span><span class="token plain"></span></div></code></pre></div>
+<p>Remember how the directory Go code lies in influences any package&#x27;s path.</p>
+<h2 id="forgejos-layered-architecture" style="position:relative"><a href="#forgejos-layered-architecture"><span><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></span></a>Forgejo&#x27;s Layered Architecture</h2>
+<p>This article is about implementing one specific feature, actions notifications.
+Therefore, I&#x27;ll only talk about the parts of Forgjeo&#x27;s architecture that matter for this feature.
+Firstly, we need to take a look at Forgjeo&#x27;s layered architecture.
+I&#x27;ve created a visualization of <a href="https://forgejo.org/docs/next/contributor/architecture" target="_blank">Forgejo&#x27;s architecture overview</a>.</p>
+<div><div class="half_element-module--full_element--5ef23"><img class="half_image-module--image--945b6" src="/static/architecture-135bd4c3bb930c106756393be8b8b304.svg"/></div><div class="utils-module--spacer--54e98"></div></div>
+<p><code class="language-text">\routers</code>, <code class="language-text">\services</code>, <code class="language-text">\models</code>, <code class="language-text">\modules</code> and <code class="language-text">\templates</code> are the <em>main directories</em> where most of Forgejo&#x27;s Go code lives.
+As we can see, there are three layers.
+Firstly, code in the bottom layers may only access packages inside their respective main directory.
+So for example, code in <code class="language-text">\modules</code> may not access the Forgejo-specific database models defined in <code class="language-text">\models</code>.
+(The Go compiler doesn&#x27;t enforce this, code reviewers do.)
+Packages in <code class="language-text">\modules</code> could theoretically be used as a library outside of Forgejo.
+Secondly, the <code class="language-text">\services</code> module may access both <code class="language-text">\models</code> and <code class="language-text">\modules</code> but not the <code class="language-text">\routers</code> above.
+Lastly, the <code class="language-text">\routers</code> code may use everything below it.<br/>
+There are other main directories that we don&#x27;t care about.
+Furthermore, I&#x27;ve only drawn examples packages, files and structs inside the main directories.
+They contain a lot more things; things we&#x27;ll look at later.
+The <code class="language-text">api</code> package inside <code class="language-text">\routers</code> doesn&#x27;t actually contain any Go code directly.
+Instead it is the parent-package of packages like <code class="language-text">forgejo.org/services/api/actions/runner</code>.</p>
 <h2 id="forgejos-observer-pattern" style="position:relative"><a href="#forgejos-observer-pattern"><span><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></span></a>Forgejo&#x27;s Observer Pattern</h2>
-<p>Let&#x27;s talk about Forgejo&#x27;s architecture.
-Firstly, the directory structure.</p>
-<ul>
-<li><code class="language-text">models</code>: SQL helper stuff, access to nothing</li>
-<li><code class="language-text">modules</code>: Things that don&#x27;t need database or git access.</li>
-<li><code class="language-text">services</code>: Things that do need database and/or git access.</li>
-<li><code class="language-text">routers</code>:</li>
-</ul>
-<p>Forgejos
-<a href="https://forgejo.org/docs/next/contributor/architecture" target="_blank">Forgejo&#x27;s architecture overview</a> is quite helpful.</p>
-<div><div class="half_element-module--full_element--5ef23"><img class="half_image-module--image--945b6" src="/static/architecture-ed280b7f3aa25aa2b01fa3d4c364a61d.svg"/></div><div class="utils-module--spacer--54e98"></div></div>
-<p>TODO</p>
+<p>We&#x27;ve seen how Go packages may include other Go packages.
+There&#x27;s</p>
+<p>TODO: cyclic stuff -&gt; solution observer pattern</p>
 <ul>
 <li>duplicity of structs</li>
 </ul>
 <h2 id="my-changes" style="position:relative"><a href="#my-changes"><span><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></span></a>My Changes</h2>
 <p>TODO</p>
+<div class="code-container"> <pre><code class="language-text">~/forgejo λ vit lg | grep -P &#x27;\(#(7510|7491|7697|7509|7508|8066|8250|8227|8242)\)&#x27;
+cf4d0e6c34 b2c4fc9f94 9e6f722f94 2529923dea d17aa98262 386e7f8208 95ad7d6201 05273fa8d2 a783a72d6b
+
+(git log --pretty=format: --name-only cf4d0e6c34~..cf4d0e6c34 ; \
+git log --pretty=format: --name-only b2c4fc9f94~..b2c4fc9f94 ; \
+git log --pretty=format: --name-only 9e6f722f94~..9e6f722f94 ; \
+git log --pretty=format: --name-only 2529923dea~..2529923dea ; \
+git log --pretty=format: --name-only d17aa98262~..d17aa98262 ; \
+git log --pretty=format: --name-only 386e7f8208~..386e7f8208 ; \
+git log --pretty=format: --name-only 95ad7d6201~..95ad7d6201 ; \
+git log --pretty=format: --name-only 05273fa8d2~..05273fa8d2 ; \
+git log --pretty=format: --name-only a783a72d6b~..a783a72d6b) | sort -u | uniq
+
+
+models/actions/main_test.go
+models/actions/run.go
+models/actions/run_job.go
+models/actions/run_test.go
+models/actions/schedule.go
+models/actions/task.go
+models/forgejo_migrations/migrate.go
+models/forgejo_migrations/v34.go
+models/user/user_system.go
+models/webhook/webhook.go
+models/webhook/webhook_test.go
+modules/structs/action.go
+modules/structs/hook.go
+modules/structs/repo_actions.go
+modules/webhook/structs.go
+modules/webhook/type.go
+options/locale/locale_en-US.ini
+options/locale_next/locale_en-US.json
+routers/api/actions/runner/runner.go
+routers/api/v1/repo/action.go
+routers/api/v1/repo/repo.go
+routers/api/v1/swagger/repo.go
+routers/web/repo/actions/view.go
+routers/web/repo/issue.go
+routers/web/repo/setting/setting.go
+routers/web/repo/setting/webhook.go
+services/actions/clear_tasks.go
+services/actions/job_emitter.go
+services/actions/notifier.go
+services/actions/notifier_helper.go
+services/actions/schedule_tasks.go
+services/actions/schedule_tasks_test.go
+services/actions/task.go
+services/actions/workflows.go
+services/convert/action.go
+services/convert/convert.go
+services/forms/repo_form.go
+services/mailer/mail_actions.go
+services/mailer/mail_actions_now_done_test.go
+services/mailer/mail_admin_new_user_test.go
+services/mailer/main_test.go
+services/mailer/notify.go
+services/notify/notifier.go
+services/notify/notify.go
+services/notify/null.go
+services/repository/branch.go
+services/repository/setting.go
+services/webhook/dingtalk.go
+services/webhook/discord.go
+services/webhook/feishu.go
+services/webhook/general.go
+services/webhook/general_test.go
+services/webhook/matrix.go
+services/webhook/msteams.go
+services/webhook/notifier.go
+services/webhook/notifier_test.go
+services/webhook/shared/payloader.go
+services/webhook/slack.go
+services/webhook/sourcehut/builds.go
+services/webhook/telegram.go
+services/webhook/webhook.go
+services/webhook/wechatwork.go
+templates/mail/actions/now_done.tmpl
+templates/swagger/v1_json.tmpl
+templates/webhook/shared-settings.tmpl
+tests/integration/actions_notifications_test.go
+tests/integration/actions_runner_test.go
+tests/integration/actions_run_now_done_notification_test.go
+tests/integration/api_repo_actions_test.go
+tests/integration/repo_webhook_test.go
+</code></pre></div>
 <ul>
 <li><a href="https://codeberg.org/forgejo/forgejo/pulls/7510" target="_blank">#7510: Refactoring</a></li>
 <li><a href="https://codeberg.org/forgejo/forgejo/pulls/7491" target="_blank">#7491: Actions Done Notification</a></li>
@@ -220,6 +352,6 @@ Firstly, the directory structure.</p>
           <script
             id="gatsby-chunk-mapping"
           >
-            window.___chunkMapping="{\"app\":[\"/app-a1d4c62803783a54f9be.js\"],\"component---src-pages-404-tsx\":[\"/component---src-pages-404-tsx-d007187a6b676c0ac8e2.js\"],\"component---src-pages-about-tsx\":[\"/component---src-pages-about-tsx-b57a8dcb76a892fa56dc.js\"],\"component---src-pages-articles-tsx\":[\"/component---src-pages-articles-tsx-d666b7eb7fe5f357183c.js\"],\"component---src-pages-index-tsx\":[\"/component---src-pages-index-tsx-20f7219759e3605fa7ae.js\"],\"component---src-pages-photography-2023-tsx\":[\"/component---src-pages-photography-2023-tsx-81a30f0764ac471d3972.js\"],\"component---src-pages-photography-2024-tsx\":[\"/component---src-pages-photography-2024-tsx-432f7ff4c469f356b8ad.js\"],\"component---src-pages-photography-2025-tsx\":[\"/component---src-pages-photography-2025-tsx-3fa54d3c3ea22cf9b576.js\"],\"component---src-pages-photography-before-tsx\":[\"/component---src-pages-photography-before-tsx-fa83de653fa1a6b7989f.js\"],\"component---src-pages-photography-index-tsx\":[\"/component---src-pages-photography-index-tsx-f6ab34f8b599af981a16.js\"],\"component---src-pages-privacy-tsx\":[\"/component---src-pages-privacy-tsx-f03e1c63f61151dd7233.js\"],\"component---src-pages-projects-tsx\":[\"/component---src-pages-projects-tsx-8b36f3d6c787e50eb79d.js\"],\"component---src-pages-talks-tsx\":[\"/component---src-pages-talks-tsx-50ae5d8907a1cf71bd32.js\"],\"component---src-templates-article-tsx-content-file-path-src-articles-01-manim-intro-manim-intro-md\":[\"/component---src-templates-article-tsx-content-file-path-src-articles-01-manim-intro-manim-intro-md-60707c596fc0d5b00a6e.js\"],\"component---src-templates-article-tsx-content-file-path-src-articles-02-maki-atoms-and-time-travel-maki-atoms-and-time-travel-md\":[\"/component---src-templates-article-tsx-content-file-path-src-articles-02-maki-atoms-and-time-travel-maki-atoms-and-time-travel-md-4adbf14701e937425ac1.js\"],\"component---src-templates-article-tsx-content-file-path-src-articles-03-installing-gentoo-installing-gentoo-md\":[\"/component---src-templates-article-tsx-content-file-path-src-articles-03-installing-gentoo-installing-gentoo-md-4a9f1aa188f43eb85953.js\"],\"component---src-templates-article-tsx-content-file-path-src-articles-04-revealjs-revealjs-md\":[\"/component---src-templates-article-tsx-content-file-path-src-articles-04-revealjs-revealjs-md-47a248dc33ca67a6ad2a.js\"],\"component---src-templates-article-tsx-content-file-path-src-articles-05-compare-view-example-compare-view-example-md\":[\"/component---src-templates-article-tsx-content-file-path-src-articles-05-compare-view-example-compare-view-example-md-2160d737fa99dbd033cc.js\"],\"component---src-templates-article-tsx-content-file-path-src-articles-06-bash-cmds-01-mp-3-tag-md\":[\"/component---src-templates-article-tsx-content-file-path-src-articles-06-bash-cmds-01-mp-3-tag-md-6ea72d9483716623c74b.js\"],\"component---src-templates-article-tsx-content-file-path-src-articles-07-lvim-in-distrobox-lvim-in-distrobox-md\":[\"/component---src-templates-article-tsx-content-file-path-src-articles-07-lvim-in-distrobox-lvim-in-distrobox-md-80a40923ec6a26333f16.js\"],\"component---src-templates-article-tsx-content-file-path-src-articles-08-grub-install-removable-grub-install-removable-md\":[\"/component---src-templates-article-tsx-content-file-path-src-articles-08-grub-install-removable-grub-install-removable-md-21830aaa5cb47971e31a.js\"],\"component---src-templates-article-tsx-content-file-path-src-articles-09-svg-fonts-with-sed-svg-fonts-with-sed-md\":[\"/component---src-templates-article-tsx-content-file-path-src-articles-09-svg-fonts-with-sed-svg-fonts-with-sed-md-02f7a847528883003836.js\"],\"component---src-templates-article-tsx-content-file-path-src-articles-10-ctemsoft-ctemsoft-md\":[\"/component---src-templates-article-tsx-content-file-path-src-articles-10-ctemsoft-ctemsoft-md-a7b4dd02fdb272e971c1.js\"],\"component---src-templates-article-tsx-content-file-path-src-articles-11-testing-testing-md\":[\"/component---src-templates-article-tsx-content-file-path-src-articles-11-testing-testing-md-c60f75813bd4160469ac.js\"],\"component---src-templates-article-tsx-content-file-path-src-articles-12-riscv-rt-riscv-rt-md\":[\"/component---src-templates-article-tsx-content-file-path-src-articles-12-riscv-rt-riscv-rt-md-d3bc0db6823629950c3e.js\"],\"component---src-templates-article-tsx-content-file-path-src-articles-13-mc-missile-mc-missile-md\":[\"/component---src-templates-article-tsx-content-file-path-src-articles-13-mc-missile-mc-missile-md-4e1c83f327888c7041f1.js\"],\"component---src-templates-article-tsx-content-file-path-src-articles-14-bookmarks-bookmarks-md\":[\"/component---src-templates-article-tsx-content-file-path-src-articles-14-bookmarks-bookmarks-md-b92a4bd9849719405935.js\"],\"component---src-templates-article-tsx-content-file-path-src-articles-15-docker-cron-docker-cron-md\":[\"/component---src-templates-article-tsx-content-file-path-src-articles-15-docker-cron-docker-cron-md-1a1e9b85d13e5b365cee.js\"],\"component---src-templates-article-tsx-content-file-path-src-articles-16-open-source-open-source-md\":[\"/component---src-templates-article-tsx-content-file-path-src-articles-16-open-source-open-source-md-4b66bdac2d049c9ad6ab.js\"],\"component---src-templates-article-tsx-content-file-path-src-articles-17-forgejo-actions-notification-fogejo-actions-notification-md\":[\"/component---src-templates-article-tsx-content-file-path-src-articles-17-forgejo-actions-notification-fogejo-actions-notification-md-30063d0fc8c0f8da7950.js\"],\"component---src-templates-article-tsx-content-file-path-src-articles-18-github-pages-hack-github-pages-hack-md\":[\"/component---src-templates-article-tsx-content-file-path-src-articles-18-github-pages-hack-github-pages-hack-md-2bcf05317e992d52624e.js\"],\"component---src-templates-projects-language-tsx\":[\"/component---src-templates-projects-language-tsx-2dd1db943dc6bba3081c.js\"]}";
+            window.___chunkMapping="{\"app\":[\"/app-a1d4c62803783a54f9be.js\"],\"component---src-pages-404-tsx\":[\"/component---src-pages-404-tsx-d007187a6b676c0ac8e2.js\"],\"component---src-pages-about-tsx\":[\"/component---src-pages-about-tsx-b57a8dcb76a892fa56dc.js\"],\"component---src-pages-articles-tsx\":[\"/component---src-pages-articles-tsx-d666b7eb7fe5f357183c.js\"],\"component---src-pages-index-tsx\":[\"/component---src-pages-index-tsx-20f7219759e3605fa7ae.js\"],\"component---src-pages-photography-2023-tsx\":[\"/component---src-pages-photography-2023-tsx-81a30f0764ac471d3972.js\"],\"component---src-pages-photography-2024-tsx\":[\"/component---src-pages-photography-2024-tsx-432f7ff4c469f356b8ad.js\"],\"component---src-pages-photography-2025-tsx\":[\"/component---src-pages-photography-2025-tsx-3fa54d3c3ea22cf9b576.js\"],\"component---src-pages-photography-before-tsx\":[\"/component---src-pages-photography-before-tsx-fa83de653fa1a6b7989f.js\"],\"component---src-pages-photography-index-tsx\":[\"/component---src-pages-photography-index-tsx-f6ab34f8b599af981a16.js\"],\"component---src-pages-privacy-tsx\":[\"/component---src-pages-privacy-tsx-f03e1c63f61151dd7233.js\"],\"component---src-pages-projects-tsx\":[\"/component---src-pages-projects-tsx-8b36f3d6c787e50eb79d.js\"],\"component---src-pages-talks-tsx\":[\"/component---src-pages-talks-tsx-50ae5d8907a1cf71bd32.js\"],\"component---src-templates-article-tsx-content-file-path-src-articles-01-manim-intro-manim-intro-md\":[\"/component---src-templates-article-tsx-content-file-path-src-articles-01-manim-intro-manim-intro-md-60707c596fc0d5b00a6e.js\"],\"component---src-templates-article-tsx-content-file-path-src-articles-02-maki-atoms-and-time-travel-maki-atoms-and-time-travel-md\":[\"/component---src-templates-article-tsx-content-file-path-src-articles-02-maki-atoms-and-time-travel-maki-atoms-and-time-travel-md-4adbf14701e937425ac1.js\"],\"component---src-templates-article-tsx-content-file-path-src-articles-03-installing-gentoo-installing-gentoo-md\":[\"/component---src-templates-article-tsx-content-file-path-src-articles-03-installing-gentoo-installing-gentoo-md-4a9f1aa188f43eb85953.js\"],\"component---src-templates-article-tsx-content-file-path-src-articles-04-revealjs-revealjs-md\":[\"/component---src-templates-article-tsx-content-file-path-src-articles-04-revealjs-revealjs-md-47a248dc33ca67a6ad2a.js\"],\"component---src-templates-article-tsx-content-file-path-src-articles-05-compare-view-example-compare-view-example-md\":[\"/component---src-templates-article-tsx-content-file-path-src-articles-05-compare-view-example-compare-view-example-md-2160d737fa99dbd033cc.js\"],\"component---src-templates-article-tsx-content-file-path-src-articles-06-bash-cmds-01-mp-3-tag-md\":[\"/component---src-templates-article-tsx-content-file-path-src-articles-06-bash-cmds-01-mp-3-tag-md-6ea72d9483716623c74b.js\"],\"component---src-templates-article-tsx-content-file-path-src-articles-07-lvim-in-distrobox-lvim-in-distrobox-md\":[\"/component---src-templates-article-tsx-content-file-path-src-articles-07-lvim-in-distrobox-lvim-in-distrobox-md-80a40923ec6a26333f16.js\"],\"component---src-templates-article-tsx-content-file-path-src-articles-08-grub-install-removable-grub-install-removable-md\":[\"/component---src-templates-article-tsx-content-file-path-src-articles-08-grub-install-removable-grub-install-removable-md-21830aaa5cb47971e31a.js\"],\"component---src-templates-article-tsx-content-file-path-src-articles-09-svg-fonts-with-sed-svg-fonts-with-sed-md\":[\"/component---src-templates-article-tsx-content-file-path-src-articles-09-svg-fonts-with-sed-svg-fonts-with-sed-md-02f7a847528883003836.js\"],\"component---src-templates-article-tsx-content-file-path-src-articles-10-ctemsoft-ctemsoft-md\":[\"/component---src-templates-article-tsx-content-file-path-src-articles-10-ctemsoft-ctemsoft-md-a7b4dd02fdb272e971c1.js\"],\"component---src-templates-article-tsx-content-file-path-src-articles-11-testing-testing-md\":[\"/component---src-templates-article-tsx-content-file-path-src-articles-11-testing-testing-md-c60f75813bd4160469ac.js\"],\"component---src-templates-article-tsx-content-file-path-src-articles-12-riscv-rt-riscv-rt-md\":[\"/component---src-templates-article-tsx-content-file-path-src-articles-12-riscv-rt-riscv-rt-md-d3bc0db6823629950c3e.js\"],\"component---src-templates-article-tsx-content-file-path-src-articles-13-mc-missile-mc-missile-md\":[\"/component---src-templates-article-tsx-content-file-path-src-articles-13-mc-missile-mc-missile-md-4e1c83f327888c7041f1.js\"],\"component---src-templates-article-tsx-content-file-path-src-articles-14-bookmarks-bookmarks-md\":[\"/component---src-templates-article-tsx-content-file-path-src-articles-14-bookmarks-bookmarks-md-b92a4bd9849719405935.js\"],\"component---src-templates-article-tsx-content-file-path-src-articles-15-docker-cron-docker-cron-md\":[\"/component---src-templates-article-tsx-content-file-path-src-articles-15-docker-cron-docker-cron-md-1a1e9b85d13e5b365cee.js\"],\"component---src-templates-article-tsx-content-file-path-src-articles-16-open-source-open-source-md\":[\"/component---src-templates-article-tsx-content-file-path-src-articles-16-open-source-open-source-md-4b66bdac2d049c9ad6ab.js\"],\"component---src-templates-article-tsx-content-file-path-src-articles-17-forgejo-actions-notification-fogejo-actions-notification-md\":[\"/component---src-templates-article-tsx-content-file-path-src-articles-17-forgejo-actions-notification-fogejo-actions-notification-md-92f50a5cdcb0d3b165fe.js\"],\"component---src-templates-article-tsx-content-file-path-src-articles-18-github-pages-hack-github-pages-hack-md\":[\"/component---src-templates-article-tsx-content-file-path-src-articles-18-github-pages-hack-github-pages-hack-md-2bcf05317e992d52624e.js\"],\"component---src-templates-projects-language-tsx\":[\"/component---src-templates-projects-language-tsx-2dd1db943dc6bba3081c.js\"]}";
           </script>
-        <script>window.___webpackCompilationHash="7303cd9e3c13d28ffd91";</script><script src="/webpack-runtime-223b860f694cfd83d603.js" async></script><script src="/framework-3e048da9e31218195b49.js" async></script><script src="/app-a1d4c62803783a54f9be.js" async></script><!-- slice-end id="_gatsby-scripts-1" --></body></html>
+        <script>window.___webpackCompilationHash="f0000a7b64d484d9bb74";</script><script src="/webpack-runtime-83afc4a8effd6d3fedb1.js" async></script><script src="/framework-3e048da9e31218195b49.js" async></script><script src="/app-a1d4c62803783a54f9be.js" async></script><!-- slice-end id="_gatsby-scripts-1" --></body></html>
