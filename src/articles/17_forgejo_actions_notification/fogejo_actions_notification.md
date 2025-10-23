@@ -6,14 +6,16 @@ Some stories of how I work on Forgejo.
 "
 banner: /social_banner/testing.png
 thumb: ../../../static/social_banner/testing.png
-title_banner: ../../images/photography/alpha_whiskey.jpg
-title_banner_horizontal_position: 20%
-title_banner_vertical_position: 80%
+title_banner: ../../images/photography/bravo_delta.jpg
+title_banner_horizontal_position: 85%
+title_banner_vertical_position: 60%
 slug: forgejo_actions_notification
-date: 2025-10-16T00:00:00+00:00
+date: 2025-11-21T00:00:00+00:00
 listed: true
 version: 1.0.0
 ---
+
+import architecture from "./architecture.svg";
 
 This article is about Forgejo, a code forge:
 Just like GitHub or GitLab it's a place to (collaboratively) develop software.
@@ -201,6 +203,7 @@ Firstly, the directory structure.
 Forgejos
 [Forgejo's architecture overview](https://forgejo.org/docs/next/contributor/architecture) is quite helpful.
 
+<HalfImage full={true} src={architecture} />
 
 TODO
 
