@@ -193,20 +193,35 @@ Just replace `go test` with `delve` and place all `go test` arguments in the `--
 You can break on line numbers, too: `break ./models/actions/run_test.go:19`
 
 ## Any Go Project's Directory Structure
-Forgejo uses Go for its backend and Go html templates for its frontend.
-I didn't dabble much with the frontend but there's JavaScript, too.
-(Of course there is...)
+Forgejo uses Go for its backend.
 I've always found Go's module system illusive, especially its' use of domains as module paths.
 Also, Go does a lot of things implicitly, for example:
 How do you tell Go that some function is a unit test?
 You place it in a file with the `_test.go` suffix.
 Or another one:
-How do you declare a symbol exported or not-exported (analogous to public or private in other languages)?
+How do you declare a symbol to be exported or not-exported (analogous to public or private in other languages)?
 There's no keyword for that.
-Symbols with a leading capital letter are implicitly exported, otherwise not.
+Instead, symbols with a leading capital letter are implicitly exported, otherwise not.
 Those things are hard to figure out if you haven't inhaled the Go docs and just read through a project for the first time.
+Therefore, I want to quickly explain how Go handles dependency.
+There also is an [official generic explanation](https://go.dev/doc/modules/managing-dependencies) if you prefer that.
 
-Okay, so Forgejo's binary is built from a module, the `forgejo.org` module.
+Okay, so, you find Forgejo's source code on [codeberg.org/forgejo/forgejo](https://codeberg.org/forgejo/forgejo).
+In this section we'll concern ourself with this subsection of Forgejo's files:
+```
+/
+├── go.mod
+├── main.go
+├── cmd
+│   └─ main.go
+└── modules
+    └─ log
+       └─ init.go
+```
+Firstly, there are modules.
+A Go library is a module, a Go executable too.
+Typically one git repo houses a single Go module.
+Forgejo is a binary Go module with the module path `forgejo.org`.
 We can figure that out by looking at its [`go.mod`](https://codeberg.org/forgejo/forgejo/src/branch/forgejo/go.mod) file.
 ```go
 // /go.mod
@@ -216,11 +231,12 @@ require (
     code.forgejo.org/f3/gof3/v3 v3.11.1
 // --snip--
 ```
-As we've seen every bit of Go code is inside a module but there's another level of granularity: packages.
+We notice that Forgejo uses the `code.forgejo.org/f3/gof3/v3` Go module; that's a dependency.
+As we've seen, Go code is grouped in modules but there's another level of granularity: packages.
 Go uses packages to isolate code into neat, contained, well, packages.
 Every Go file declares what package they are in.
-Go code can use exported and not-exported symbols (i.e., the functions, values, etc.) inside its own package.
-To use symbols in other packages, however, those symbols must be exported you need to import that package.
+Go code can use exported and not-exported symbols inside its own package (i.e., functions, values, etc.).
+To use symbols in other packages, however, they must be exported and you need to import that other package.<br />
 The package `main` is special, that's where the entrypoint is.
 Take a look at Forgejo's [`main.go`](https://codeberg.org/forgejo/forgejo/src/branch/forgejo/main.go):
 ```go
@@ -236,6 +252,10 @@ import (
     // [import some other package from the Forgejo source code repo]
     "forgejo.org/cmd"
 // --snip--
+)
+// --snip--
+func main() {
+    // --snip--
 ```
 Now, this is what really confused me at first:
 `forgejo.org` is a domain you can visit with your browser but that's more or less just a coincidence.
@@ -254,23 +274,25 @@ import (
     "github.com/urfave/cli/v3"
 // --snip--
 ```
-When you read this you need to be aware you're in the source code of the `forgejo.org` module, thus `forgejo.org/modules/log` refers to a package in [`/modules/log`](https://codeberg.org/forgejo/forgejo/src/branch/forgejo/modules/log).
+And the `forgejo.org/cmd` package imports some more packages.
+When you read this, be aware of the to-be-imported package's location in the directory structure.
+The package lies in the [`/modules/log`](https://codeberg.org/forgejo/forgejo/src/branch/forgejo/modules/log) directory of the `forgejo.org` module, thus `forgejo.org/modules/log` refers to it.
 `github.com/urfave/cli/v3`, however, refers to a dependency Go will download from GitHub during a build.
-Notice that these the Go files in the `forgejo.org/modules/log` package declare their package without the full path:
+The includes look so similar but one is resolved locally and the other from the internet.<br />
+Notice that the Go files in the `forgejo.org/modules/log` package declare their package without its full path:
 ```go
 // /modules/log/init.go
 // --snip--
 package log
 // --snip--
 ```
-
+It only says `log` but the full package path required to import the package is `forgejo.org/modules/log`.
 Remember how the directory Go code lies in influences any package's path.
 
 ## Forgejo's Layered Architecture
 This article is about implementing one specific feature, actions notifications.
 Therefore, I'll only talk about the parts of Forgjeo's architecture that matter for this feature.
-Firstly, we need to take a look at Forgjeo's layered architecture.
-I've created a visualization of [Forgejo's architecture overview](https://forgejo.org/docs/next/contributor/architecture).
+Firstly, we take a look at Forgjeo's layered [architecture](https://forgejo.org/docs/next/contributor/architecture), which I've created a visualization of:
 
 <HalfImage full={true} src={architecture} />
 
@@ -281,16 +303,21 @@ So for example, code in `\modules` may not access the Forgejo-specific database 
 (The Go compiler doesn't enforce this, code reviewers do.)
 Packages in `\modules` could theoretically be used as a library outside of Forgejo.
 Secondly, the `\services` module may access both `\models` and `\modules` but not the `\routers` above.
-Lastly, the `\routers` code may use everything below it.<br />
+Finally, the `\routers` code may use everything below it.<br />
 There are other main directories that we don't care about.
-Furthermore, I've only drawn examples packages, files and structs inside the main directories.
+Furthermore, I've only drawn example packages, files and structs inside the main directories.
 They contain a lot more things; things we'll look at later.
-The `api` package inside `\routers` doesn't actually contain any Go code directly.
+Lastly, the `api` package inside `\routers` doesn't actually contain any Go code directly.
 Instead it is the parent-package of packages like `forgejo.org/services/api/actions/runner`.
+
+Naturally, we want as little code as possible in the upper layers.
+Code in such layers is a lot harder to reason about.
+After all it has access to so much stuff with so many effects and side-effects.
+This will become important when I talk about the refactoring my feature required.
 
 ## Forgejo's Observer Pattern
 We've seen how Go packages may include other Go packages.
-There's 
+There's one problem with that:
 
 TODO: cyclic stuff -> solution observer pattern
 
@@ -397,6 +424,20 @@ tests/integration/repo_webhook_test.go
 - [#8242: (not mine) actions mail opt-in](https://codeberg.org/forgejo/forgejo/pulls/8242)
 
 ## Testing my Features
+They say testing is the hardest part.
+Maybe not the *hardest* but the most important and *dullest*.
+I'd like to argue system design is the most important but so what.
+Why you might ask?
+Besides ensuring regression, another perspective explain code
+That detailed perspective make the code author find a lot of her mistakes, too.
+
+- find mistakes themselves
+- prevent regressions through other peoples causing
+- record intention, another perspective on code after contributor left.
+
+When something should work, test it does.
+When something should be forbidden, test it is.
+
 TODO
 
 ## Conclusion and Lessons Learned
