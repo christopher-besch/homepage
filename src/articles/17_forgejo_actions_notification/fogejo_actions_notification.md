@@ -72,10 +72,24 @@ We can figure that out by looking at its [`go.mod`](https://codeberg.org/forgejo
 module forgejo.org
 // --snip--
 require (
-    code.forgejo.org/f3/gof3/v3 v3.11.1
+    // --snip--
+	github.com/hashicorp/go-version v1.7.0
+// --snip--
+replace github.com/hashicorp/go-version => github.com/6543/go-version v1.3.1
 // --snip--
 ```
-We notice that Forgejo uses the `code.forgejo.org/f3/gof3/v3` Go module; that's a dependency.
+We notice that Forgejo uses the `github.com/hashicorp/go-version` Go module.
+That's a dependency, which the Go tools will download directly from GitHub.
+We notice that Go uses a decentralized system for publishing modules:
+There isn't some central package index like NPM, crates.io or PyPI.
+Because Go identifies a module with these URL-like paths, you also need to use statements like `import github.com/hashicorp/go-version` to include the dependency.
+Consequently, Forgejo's code is full of domains where dependencies should be pulled from.
+And that really annoyed me at first.
+Do you really have to touch possibly hundreds of files only when the dependency's git repo changes?
+While I'm still not entirely onboard, I'm slowly warming up to this decentralized system; mainly because of the `replace` statement above.
+It states that while the Forgejo's Go source code will `import github.com/hashicorp/go-version`, the go tooling should download it from `github.com/6543/go-version` instead.
+In this case Forgejo uses `replace` to switch to a fork.
+
 As we've seen, Go code is grouped in modules but there's another level of granularity: packages.
 Go uses packages to isolate code into neat, contained, well, packages.
 Every Go file declares what package they are in.
@@ -135,8 +149,8 @@ Remember how the directory Go code lies in influences any package's path.
 
 ## Forgejo's Layered Architecture
 This article is about implementing one specific feature, actions notifications.
-Therefore, I'll only talk about the parts of Forgjeo's architecture that matter for this feature.
-Firstly, we take a look at Forgjeo's layered [architecture](https://forgejo.org/docs/next/contributor/architecture), which I've created a visualization of:
+Therefore, I'll only talk about the parts of Forgejo's architecture that matter for this feature.
+Firstly, we take a look at Forgejo's layered [architecture](https://forgejo.org/docs/next/contributor/architecture), which I've created a visualization of:
 
 <HalfImage full={true} src={architecture} />
 
@@ -285,7 +299,7 @@ When something should be forbidden, test it is.
 TODO
 
 ## Development Setup
-To test the features I developed I don't just need the Forgjeo executable.
+To test the features I developed I don't just need the Forgejo executable.
 No, I also need an action runner, a mail server and some place to send webhooks to.
 
 ### Forgejo itself
