@@ -40,9 +40,10 @@ If you have something to recommend, feel free to tell me at [mail@chris-besch.co
 - [Differential Coverage for Debugging](https://research.swtch.com/diffcover) by Russ Cox
 - [Australia/Lord_Howe is the weirdest timezone](https://ssoready.com/blog/engineering/truths-programmers-timezones/) by Ulysse Carion
 
-### Hacking
+### Hacking and Networking
 - [Everyone knows your location: tracking myself down through in-app ads](https://timsh.org/tracking-myself-down-through-in-app-ads/) by Tim Sh
 - [Someone’s Been Messing With My Subnormals!](https://moyix.blogspot.com/2022/09/someones-been-messing-with-my-subnormals.html) by Brendan Dolan-Gavitt
+- [Unlocking free WiFi on British Airways](https://www.saxrag.com/tech/reversing/2025/06/01/BAWiFi.html) by Raghu Saxena
 
 ### Computer Hardware
 - [Architecture of Consoles](https://www.copetti.org/writings/consoles/) by Rodrigo Copetti
