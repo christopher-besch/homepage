@@ -28,7 +28,7 @@ What I'm interested in is Forgejo's [publish-subscribe pattern](https://en.wikip
 It allows packages to publish messages grouped by topics.
 Other packages subscribe to those topics and get called when a message for a topic of interest arrives.
 `forgejo.org/services/notify.Notify` is the broker, which facilitating all this.
-I've created a visualization this pub-sub pattern.
+I've created a visualization of this pub-sub pattern.
 Packages are Forgejo-orange and topics Codeberg-blue.
 Every arrow goes in the direction messages flow; from sender to receiver.
 Please use a device with a large screen like a laptop; it doesn't work on a smartphone.
