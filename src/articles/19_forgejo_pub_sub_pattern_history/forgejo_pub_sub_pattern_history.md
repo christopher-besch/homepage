@@ -23,7 +23,7 @@ Well, I didn't actually leave my cellar and instead stood before Forgejo's git h
 But still, with the 24 thousand commits Forgejo's history felt just as opaque.<br />
 Forgejo is a code forge like GitHub or GitLab.
 Forgejo is a place to (collaboratively) develop software and is itself fully Open-Source, so of course I love it!
-I've already explained at length [why we benefit greatly from Open-Source](https://github.com/christopher-besch/homepage/blob/dev/articles/open_source).
+I've already explained at length [why we benefit greatly from Open-Source](https://chris-besch.com/articles/open_source).
 What I'm interested in is Forgejo's [publish-subscribe pattern](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern).
 It allows packages to publish messages grouped by topics.
 Other packages subscribe to those topics and get called when a message for a topic of interest arrives.
