@@ -11,7 +11,7 @@ import "../styles/code.css";
 // import loadLanguages from "prismjs/components/";
 // Prism.plugins.autoloader.loadLanguages(["bash", "cpp", "css", "html", "xml", "svg", "python"]);
 
-// see for dependencies: https://raw.githubusercontent.com/PrismJS/prism/master/components.js
+// see for dependencies: https://raw.githubusercontent.com/PrismJS/prism/v1.30.0/components.js
 require("prismjs/components/prism-bash");
 // required by cpp
 require("prismjs/components/prism-c");
@@ -23,6 +23,8 @@ require("prismjs/components/prism-python");
 require("prismjs/components/prism-docker");
 require("prismjs/components/prism-rust");
 require("prismjs/components/prism-yaml");
+require("prismjs/components/prism-ini");
+require("prismjs/components/prism-go");
 
 // reference: https://coffeeaddict.dev/gatsby-mdx-prism/
 const PrismSyntaxHighlight = ({ children, className }: React.DetailedHTMLProps<React.HTMLAttributes<HTMLPreElement>, HTMLPreElement>) => {
