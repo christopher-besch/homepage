@@ -40,12 +40,7 @@
         text-align: left;
         white-space: pre;
         word-spacing: normal;
-        /* word-break: normal; */
-
-        /* We want to wrap inline code everywhere. */
-        overflow-wrap: anywhere;
-        word-break: break-all;
-
+        word-break: normal;
         line-height: 1.5;
         -moz-tab-size: 2;
         -o-tab-size: 2;
@@ -458,11 +453,7 @@ Generated with Base16 Builder (https://github.com/base16-builder/base16-builder)
         text-align: left;
         white-space: pre;
         word-spacing: normal;
-        /* word-break: normal; */
-
-        /* We want to wrap inline code everywhere. */
-        overflow-wrap: anywhere;
-        word-break: break-all;
+        word-break: normal;
 
         -moz-tab-size: 4;
         -o-tab-size: 4;
