@@ -498,6 +498,8 @@ Generated with Base16 Builder (https://github.com/base16-builder/base16-builder)
     :not(pre)>code[class*="language-"] {
         padding: .1em;
         border-radius: .3em;
+        /* This already existed in light mode but somehow not in dark mode. */
+        white-space: normal;
     }
 
     .token.comment,
