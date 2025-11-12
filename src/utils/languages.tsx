@@ -54,4 +54,10 @@ export const languages = new Map<string, Language>([
         icon: "/icons/go.svg",
         icon_mono: "/icons/go.svg"
     }],
+    ["javascript", {
+        id: "javascript",
+        name: "JavaScript",
+        icon: "/icons/javascript.svg",
+        icon_mono: "/icons/javascript_mono.svg"
+    }],
 ]);
