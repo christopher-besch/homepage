@@ -5,7 +5,7 @@ description: "
 Some stories of how I work on Forgejo.
 "
 banner: /social_banner/testing.png
-thumb: ../../../static/social_banner/testing.png
+thumb: ../../../static/social_banner/forgejo_actions_notification.png
 title_banner: ../../images/photography/bravo_delta.jpg
 title_banner_horizontal_position: 85%
 title_banner_vertical_position: 60%
@@ -38,7 +38,7 @@ Some of this information may be outdated by the time you read it.
 
 ## Any Go Project's Directory Structure
 Forgejo uses Go for its backend.
-I've always found Go's module system illusive, especially its' use of domains as module paths.
+I've always found Go's module system illusive, especially its use of domains as module paths.
 Also, Go does a lot of things implicitly, for example:
 How do you tell Go that some function is a unit test?
 You place it in a file with the `_test.go` suffix.
@@ -47,7 +47,7 @@ How do you declare a symbol to be exported or not-exported (analogous to public 
 There's no keyword for that.
 Instead, symbols with a leading capital letter are implicitly exported, otherwise not.
 Those things are hard to figure out if you haven't inhaled the Go docs and just read through a project for the first time.
-Therefore, I want to quickly explain how Go handles dependency.
+Therefore, I want to quickly explain how Go handles dependencies.
 There also is an [official generic explanation](https://go.dev/doc/modules/managing-dependencies) if you prefer that.
 
 Okay, so, you find Forgejo's source code on [codeberg.org/forgejo/forgejo](https://codeberg.org/forgejo/forgejo).
@@ -73,7 +73,7 @@ module forgejo.org
 // --snip--
 require (
     // --snip--
-	github.com/hashicorp/go-version v1.7.0
+    github.com/hashicorp/go-version v1.7.0
 // --snip--
 replace github.com/hashicorp/go-version => github.com/6543/go-version v1.3.1
 // --snip--
@@ -82,12 +82,12 @@ We notice that Forgejo uses the `github.com/hashicorp/go-version` Go module.
 That's a dependency, which the Go tools will download directly from GitHub.
 We notice that Go uses a decentralized system for publishing modules:
 There isn't some central package index like NPM, crates.io or PyPI.
-Because Go identifies a module with these URL-like paths, you also need to use statements like `import github.com/hashicorp/go-version` to include the dependency.
+Because Go identifies a module with these URL-like paths, you also need to use statements like `import github.com/hashicorp/go-version` to import the dependency.
 Consequently, Forgejo's code is full of domains where dependencies should be pulled from.
 And that really annoyed me at first.
 Do you really have to touch possibly hundreds of files only when the dependency's git repo changes?
 While I'm still not entirely onboard, I'm slowly warming up to this decentralized system; mainly because of the `replace` statement above.
-It states that while the Forgejo's Go source code will `import github.com/hashicorp/go-version`, the go tooling should download it from `github.com/6543/go-version` instead.
+It states that while the Forgejo's Go source code will `import github.com/hashicorp/go-version`, the go tooling should download it from `github.com/6543/go-version`, instead.
 In this case Forgejo uses `replace` to switch to a fork.
 
 As we've seen, Go code is grouped in modules but there's another level of granularity: packages.
@@ -136,7 +136,7 @@ And the `forgejo.org/cmd` package imports some more packages.
 When you read this, be aware of the to-be-imported package's location in the directory structure.
 The package lies in the [`/modules/log`](https://codeberg.org/forgejo/forgejo/src/branch/forgejo/modules/log) directory of the `forgejo.org` module, thus `forgejo.org/modules/log` refers to it.
 `github.com/urfave/cli/v3`, however, refers to a dependency Go will download from GitHub during a build.
-The includes look so similar but one is resolved locally and the other from the internet.<br />
+The imports look so similar but one is resolved locally and the other from the internet.<br />
 Notice that the Go files in the `forgejo.org/modules/log` package declare their package without its full path:
 ```go
 // /modules/log/init.go
@@ -156,11 +156,12 @@ Firstly, we take a look at Forgejo's layered [architecture](https://forgejo.org/
 
 `\routers`, `\services`, `\models`, `\modules` and `\templates` are the *main directories* where most of Forgejo's Go code lives.
 As we can see, there are three layers.
-Firstly, code in the bottom layers may only access packages inside their respective main directory.
+Firstly, all code may access packages inside their respective main directory.
+The code in the bottom layer, however, don't have access to anything else.
 So for example, code in `\modules` may not access the Forgejo-specific database models defined in `\models`.
 (The Go compiler doesn't enforce this, code reviewers do.)
 Packages in `\modules` could theoretically be used as a library outside of Forgejo.
-Secondly, the `\services` module may access both `\models` and `\modules` but not the `\routers` above.
+Secondly, the `\services` module may access other `\services` and both `\models` and `\modules` but not the `\routers` above.
 Finally, the `\routers` code may use everything below it.<br />
 There are other main directories that we don't care about.
 Furthermore, I've only drawn example packages, files and structs inside the main directories.
@@ -174,10 +175,22 @@ After all it has access to so much stuff with so many effects and side-effects.
 This will become important when I talk about the refactoring my feature required.
 
 ## Forgejo's Observer Pattern
-We've seen how Go packages may include other Go packages.
-There's one problem with that:
+We've seen how Go packages may import other Go packages.
+There's a problem with that:<br />
+`forgejo.org/services/automerge` imports `forgejo.org/services/pull` to check if a pull request is mergeable.
+But when there has been a pull request review, `forgjeo.org/services/automerge` needs to realize that.
+Who knows there has been a pull request?
+`forgejo.org/services/pull` of course.
+So one package needs the other and the other needs the one; a cyclical dependency.
+Simply importing the respective package doesn't work because Go forbids cyclical imports.
+What does work is importing a third package, `forgejo.org/services/notify`, which doesn't need either.
+
+<Iframe src="https://christopher-besch.github.io/go_observer_pattern_visualizer/viewer" fullscreen />
+
+If you're interested in this visualization and what the commit history on the right has to do with it, take a look at my new article: [The History of Forgejo's Pub-Sub Pattern](/articles/forgejo_pub_sub_pattern_history)
 
 TODO: cyclic stuff -> solution observer pattern
+[The History of Forgejo's Pub-Sub Pattern](/articles/forgejo_pub_sub_pattern_history)
 
 - duplicity of structs
 
@@ -466,3 +479,6 @@ TODO
 - break things up into multiple PRs
 - less code is better
 - understand as much as possible, then make the minimal change that is needed (knock someone out with your pinky)
+
+## P.S.
+I created the talk [Forgejo Architecture Deep Dive](https://present.chris-besch.com/2025_11_21_ibm_forgejo/) around this article.
