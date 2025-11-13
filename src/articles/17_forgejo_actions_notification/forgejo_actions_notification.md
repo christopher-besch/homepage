@@ -201,14 +201,24 @@ TODO
 cf4d0e6c34 b2c4fc9f94 9e6f722f94 2529923dea d17aa98262 386e7f8208 95ad7d6201 05273fa8d2 a783a72d6b
 
 (git log --pretty=format: --name-only cf4d0e6c34~..cf4d0e6c34 ; \
-git log --pretty=format: --name-only b2c4fc9f94~..b2c4fc9f94 ; \
-git log --pretty=format: --name-only 9e6f722f94~..9e6f722f94 ; \
-git log --pretty=format: --name-only 2529923dea~..2529923dea ; \
-git log --pretty=format: --name-only d17aa98262~..d17aa98262 ; \
-git log --pretty=format: --name-only 386e7f8208~..386e7f8208 ; \
-git log --pretty=format: --name-only 95ad7d6201~..95ad7d6201 ; \
-git log --pretty=format: --name-only 05273fa8d2~..05273fa8d2 ; \
-git log --pretty=format: --name-only a783a72d6b~..a783a72d6b) | sort -u | uniq
+ git log --pretty=format: --name-only b2c4fc9f94~..b2c4fc9f94 ; \
+ git log --pretty=format: --name-only 9e6f722f94~..9e6f722f94 ; \
+ git log --pretty=format: --name-only 2529923dea~..2529923dea ; \
+ git log --pretty=format: --name-only d17aa98262~..d17aa98262 ; \
+ git log --pretty=format: --name-only 386e7f8208~..386e7f8208 ; \
+ git log --pretty=format: --name-only 95ad7d6201~..95ad7d6201 ; \
+ git log --pretty=format: --name-only 05273fa8d2~..05273fa8d2 ; \
+ git log --pretty=format: --name-only a783a72d6b~..a783a72d6b) | sort -u | uniq
+
+(git diff --shortstat cf4d0e6c34~..cf4d0e6c34 ; \
+ git diff --shortstat b2c4fc9f94~..b2c4fc9f94 ; \
+ git diff --shortstat 9e6f722f94~..9e6f722f94 ; \
+ git diff --shortstat 2529923dea~..2529923dea ; \
+ git diff --shortstat d17aa98262~..d17aa98262 ; \
+ git diff --shortstat 386e7f8208~..386e7f8208 ; \
+ git diff --shortstat 95ad7d6201~..95ad7d6201 ; \
+ git diff --shortstat 05273fa8d2~..05273fa8d2 ; \
+ git diff --shortstat a783a72d6b~..a783a72d6b) | cut -d ' ' -f4 -f6
 
 
 models/actions/main_test.go
@@ -481,4 +491,4 @@ TODO
 - understand as much as possible, then make the minimal change that is needed (knock someone out with your pinky)
 
 ## P.S.
-I created the talk [Forgejo Architecture Deep Dive](https://present.chris-besch.com/2025_11_21_ibm_forgejo/) around this article.
+I created the talk [Contributing to Forgejo](https://present.chris-besch.com/2025_11_21_ibm_forgejo/) around this article.
