@@ -174,27 +174,62 @@ Code in such layers is a lot harder to reason about.
 After all it has access to so much stuff with so many effects and side-effects.
 This will become important when I talk about the refactoring my feature required.
 
-## Forgejo's Observer Pattern
+## Forgejo's Pub-Sub Pattern
 We've seen how Go packages may import other Go packages.
-There's a problem with that:<br />
+Take a look at this situation where simple imports don't work:<br />
 `forgejo.org/services/automerge` imports `forgejo.org/services/pull` to check if a pull request is mergeable.
 But when there has been a pull request review, `forgjeo.org/services/automerge` needs to realize that.
-Who knows there has been a pull request?
+Who knows there has been a pull request review?
 `forgejo.org/services/pull` of course.
 So one package needs the other and the other needs the one; a cyclical dependency.
 Simply importing the respective package doesn't work because Go forbids cyclical imports.
-What does work is importing a third package, `forgejo.org/services/notify`, which doesn't need either.
+What does work is importing a third package, `forgejo.org/services/notify`.
+`forgejo.org/services/notify` is a broker and relays messages grouped into topics to interested code.
+An example topic is `PullRequestReview`.
+`forgejo.org/services/pull` sends a message to that topic whenever there is a new review for a pull request.
+Because `forgejo.org/services/automerge` is interested in such messages, it creates a struct abiding by the `Notifier` interface.
+The notifier implements the `PullRequestReview` function and registers itself with the broker.
+Therefore the broker doesn't have to import the `forgejo.org/services/automerge` package.
+This is called dependency injection and resolved the cyclic dependency.
+Here is some example code:
+
+```go
+// in /services/automerge
+import notify_service "forgejo.org/services/notify"
+
+// Define the notifier.
+type automergeNotifier struct {
+	notify_service.NullNotifier
+}
+
+// Ensure that this struct fulfills the Notifier interface.
+var _ notify_service.Notifier = &automergeNotifier{}
+
+// Declare functions for all topics the package is interested in.
+func (n *automergeNotifier) PullRequestReview(/* --snip-- */) {
+// --snip--
+
+// Tell the broker there's a new notifier to be notified.
+notify_service.RegisterNotifier(&automergeNotifier{})
+```
+
+```go
+// in /services/pull
+
+// send a message to some topic
+notify_service.PullRequestReview(/* --snip-- */)
+```
+
+Because code and publish messages and subscribe to topics this pattern is called the pub-sub pattern.
+I find this pub-sub pattern highly intuitive topics and messages are a concept we're confronted with in our everyday lives.
+Additionally, it allows you to get a quick overview over what code is interested in what change.
+For example, if you give this interactive visualization a brief look, you can figure out that the code related to Forgjeo packages is quite separate from everything else.
 
 <Iframe src="https://christopher-besch.github.io/go_observer_pattern_visualizer/viewer" fullscreen />
 
 If you're interested in this visualization and what the commit history on the right has to do with it, take a look at my new article: [The History of Forgejo's Pub-Sub Pattern](/articles/forgejo_pub_sub_pattern_history)
 
-TODO: cyclic stuff -> solution observer pattern
-[The History of Forgejo's Pub-Sub Pattern](/articles/forgejo_pub_sub_pattern_history)
-
-- duplicity of structs
-
-## My Changes
+## My Contribution
 TODO
 ```
 ~/forgejo λ vit lg | grep -P '\(#(7510|7491|7697|7509|7508|8066|8250|8227|8242)\)'
