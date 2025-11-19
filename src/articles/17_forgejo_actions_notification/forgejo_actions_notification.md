@@ -4,7 +4,7 @@ title: "Forgejo Actions Notification Development"
 description: "
 Some stories of how I work on Forgejo.
 "
-banner: /social_banner/testing.png
+banner: /social_banner/forgejo_actions_notification.png
 thumb: ../../../static/social_banner/forgejo_actions_notification.png
 title_banner: ../../images/photography/bravo_delta.jpg
 title_banner_horizontal_position: 85%
@@ -16,6 +16,8 @@ version: 1.0.0
 ---
 
 import architecture from "./architecture.svg";
+import release_notes from "./release_notes.png";
+import webhook_settings from "./webhook_settings.png";
 
 This article is about Forgejo, a code forge:
 Just like GitHub or GitLab it's a place to (collaboratively) develop software.
@@ -23,20 +25,20 @@ I've already explained at length [why we benefit greatly from Open-Source](/arti
 Motivated by that concept, Forgejo's amazing community and perhaps because it's incredibly easy to set up, you select it for your private code forge.
 Though, with your Forgejo instance up and running you might miss a few features.
 I, for example, needed to receive email notifications and webhooks when a CI Workflow failed.
-Forgejo didn't offer that feature so I started contributing to Forgejo.
+Forgejo didn't offer that feature so I started contributing.
 You might find yourself in those shoes, too.
-In this article I want to help you and give my experience contributing to Forgejo.
+In this article I want to help you on that journey and give my experience contributing to Forgejo.
 The parts that took the most effort where
 - setting up a development environment,
 - understanding Forgejo's notification architecture,
 - actually implementing the features and
 - writing exhaustive tests for the features I implemented.
 
-Though I argue my development setup specifics are highly valuable to anyone getting into this, I'll move that part to the end for reasons of presentation.
-Also, be aware that I'm describing all of this as of commit `b2c4fc9f94` from 21st July 2025.
+Be aware that I'm describing all of this as of commit `b2c4fc9f94` from 21st July 2025.
 Some of this information may be outdated by the time you read it.
 
 ## Any Go Project's Directory Structure
+Firstly we need to take a look behind Forgejo's pretty curtain:
 Forgejo uses Go for its backend.
 I've always found Go's module system illusive, especially its use of domains as module paths.
 Also, Go does a lot of things implicitly, for example:
@@ -230,131 +232,78 @@ For example, if you give this interactive visualization a brief look, you can fi
 If you're interested in this visualization and what the commit history on the right has to do with it, take a look at my new article: [The History of Forgejo's Pub-Sub Pattern](/articles/forgejo_pub_sub_pattern_history)
 
 ## My Contribution
-TODO
-```
-~/forgejo λ vit lg | grep -P '\(#(7510|7491|7697|7509|7508|8066|8250|8227|8242)\)'
-cf4d0e6c34 b2c4fc9f94 9e6f722f94 2529923dea d17aa98262 386e7f8208 95ad7d6201 05273fa8d2 a783a72d6b
+Forgejo features Actions, enabling continuous integrations.
+One can configure an Action to compile or test code e.g., whenever there is a new commit or pull request.
+A failed Action Run indicates a problem with the just introduced code.
+Thus, the developer must change her code in this situation.
+But how does she notice something went amiss?
+Before my Contribution the only option was Forgejo's web UI.
+This is a *pull notification* because the developer must open the UI and *pull* the notification from the server.
+I desired *push notifications* in the form of email and webhooks.
+With email notifications the developer receives a friendly notice mail that her Action Run failed and a webhook sends a machine readable web request to some automated system.
+I wanted to develop those features.
+But where do you even start?
+Firstly, it makes sense to add a new topic to the pub-sub pattern, `ActionRunNowDone`.
+`forgejo.org/services/mailer` and `forgejo.org/services/webhook` are responsible for sending mails and webhooks so they should listen to that new topic.
+Then we only need something to send a message to that topic whenever an Action Run completes.
+`forgejo.org/models/actions` provides the database abstraction for Action Runs.
+It's `UpdateRunJob` function performs all changes including those indicating a completed Action Run.
+Therefore, that function should send the message.
+However, there's a problem:
+When we think back to Forgejo's layered architecture we realize that
+`forgejo.org/models/actions` is not allowed to import `forgejo.org/services/notify`, because it lies in a lower layer.
 
-(git log --pretty=format: --name-only cf4d0e6c34~..cf4d0e6c34 ; \
- git log --pretty=format: --name-only b2c4fc9f94~..b2c4fc9f94 ; \
- git log --pretty=format: --name-only 9e6f722f94~..9e6f722f94 ; \
- git log --pretty=format: --name-only 2529923dea~..2529923dea ; \
- git log --pretty=format: --name-only d17aa98262~..d17aa98262 ; \
- git log --pretty=format: --name-only 386e7f8208~..386e7f8208 ; \
- git log --pretty=format: --name-only 95ad7d6201~..95ad7d6201 ; \
- git log --pretty=format: --name-only 05273fa8d2~..05273fa8d2 ; \
- git log --pretty=format: --name-only a783a72d6b~..a783a72d6b) | sort -u | uniq
+### PR [#7510](https://codeberg.org/forgejo/forgejo/pulls/7510): Refactoring
+This is where my first pull request comes in.
+I had to move some code from `forgejo.org/models/actions` up a layer into `forgejo.org/services/actions`.
+That's where Actions-related code lives that needs to import more things.
+In order to make my PR as easy to review (and approve) as possible, I tried to move only as much as was absolutely needed.
+Of course I had to move `UpdateRunJob` but e.g., `CleanRepoScheduleTasks` calls `UpdateRunJob`.
+If I had only moved `UpdateRunJob`, `CleanRepoScheduleTasks` would require an import of `forgejo.org/services/actions`.
+But that is again not possible because of the layered architecture.
+Therefore, I also had to move all the function transitively changing the Actions Run's status.
 
-(git diff --shortstat cf4d0e6c34~..cf4d0e6c34 ; \
- git diff --shortstat b2c4fc9f94~..b2c4fc9f94 ; \
- git diff --shortstat 9e6f722f94~..9e6f722f94 ; \
- git diff --shortstat 2529923dea~..2529923dea ; \
- git diff --shortstat d17aa98262~..d17aa98262 ; \
- git diff --shortstat 386e7f8208~..386e7f8208 ; \
- git diff --shortstat 95ad7d6201~..95ad7d6201 ; \
- git diff --shortstat 05273fa8d2~..05273fa8d2 ; \
- git diff --shortstat a783a72d6b~..a783a72d6b) | cut -d ' ' -f4 -f6
+### PR [#7491](https://codeberg.org/forgejo/forgejo/pulls/7491): `ActionRunNowDone` Topic
+Now `UpdateRunJob` calls the `sendActionRunNowDoneNotificationIfNeeded` function, which I just implemented.
+It sends a message to the new `ActionRunNowDone` topic whenever an Action Run is now done.
+Finally, I added a bunch of tests ensuring that in all cases the `ActionRunNowDone` topic is used.
 
+### PR [#7509](https://codeberg.org/forgejo/forgejo/pulls/7509): Actions Done Mail
+`forgejo.org/services/mailer`'s notifier received interest in the `ActionRunNowDone` topic in this PR.
+I made it send out a mail whenever a Run failed or recovered (i.e., succeeded after a prior failure).
+Again, I added a bunch of tests ensuring whenever an `ActionRunNowDone` message requires it a mail is sent.
 
-models/actions/main_test.go
-models/actions/run.go
-models/actions/run_job.go
-models/actions/run_test.go
-models/actions/schedule.go
-models/actions/task.go
-models/forgejo_migrations/migrate.go
-models/forgejo_migrations/v34.go
-models/user/user_system.go
-models/webhook/webhook.go
-models/webhook/webhook_test.go
-modules/structs/action.go
-modules/structs/hook.go
-modules/structs/repo_actions.go
-modules/webhook/structs.go
-modules/webhook/type.go
-options/locale/locale_en-US.ini
-options/locale_next/locale_en-US.json
-routers/api/actions/runner/runner.go
-routers/api/v1/repo/action.go
-routers/api/v1/repo/repo.go
-routers/api/v1/swagger/repo.go
-routers/web/repo/actions/view.go
-routers/web/repo/issue.go
-routers/web/repo/setting/setting.go
-routers/web/repo/setting/webhook.go
-services/actions/clear_tasks.go
-services/actions/job_emitter.go
-services/actions/notifier.go
-services/actions/notifier_helper.go
-services/actions/schedule_tasks.go
-services/actions/schedule_tasks_test.go
-services/actions/task.go
-services/actions/workflows.go
-services/convert/action.go
-services/convert/convert.go
-services/forms/repo_form.go
-services/mailer/mail_actions.go
-services/mailer/mail_actions_now_done_test.go
-services/mailer/mail_admin_new_user_test.go
-services/mailer/main_test.go
-services/mailer/notify.go
-services/notify/notifier.go
-services/notify/notify.go
-services/notify/null.go
-services/repository/branch.go
-services/repository/setting.go
-services/webhook/dingtalk.go
-services/webhook/discord.go
-services/webhook/feishu.go
-services/webhook/general.go
-services/webhook/general_test.go
-services/webhook/matrix.go
-services/webhook/msteams.go
-services/webhook/notifier.go
-services/webhook/notifier_test.go
-services/webhook/shared/payloader.go
-services/webhook/slack.go
-services/webhook/sourcehut/builds.go
-services/webhook/telegram.go
-services/webhook/webhook.go
-services/webhook/wechatwork.go
-templates/mail/actions/now_done.tmpl
-templates/swagger/v1_json.tmpl
-templates/webhook/shared-settings.tmpl
-tests/integration/actions_notifications_test.go
-tests/integration/actions_runner_test.go
-tests/integration/actions_run_now_done_notification_test.go
-tests/integration/api_repo_actions_test.go
-tests/integration/repo_webhook_test.go
-```
+### [#7508](https://codeberg.org/forgejo/forgejo/pulls/7508): Actions Done Webhook
 
-- [#7510: Refactoring](https://codeberg.org/forgejo/forgejo/pulls/7510)
-- [#7491: Actions Done Notification](https://codeberg.org/forgejo/forgejo/pulls/7491)
-- [#7697: After the Fact Cleanup](https://codeberg.org/forgejo/forgejo/pulls/7697)
-- [#7509: Actions Done Mail](https://codeberg.org/forgejo/forgejo/pulls/7509)
-- [#7508: Actions Done Webhook](https://codeberg.org/forgejo/forgejo/pulls/7508)
-- at same time to #7508 [#7699: (not mine) introduce ActionRun, too](https://codeberg.org/forgejo/forgejo/pulls/7508)
-- [#8066: (not mine) rename #7699's struct to RepoActionRun](https://codeberg.org/forgejo/forgejo/pulls/8066)
-- [#8250: (not mine) unify ActionRun and RepoActionRun](https://codeberg.org/forgejo/forgejo/pulls/8250)
-- [#8227: (not mine) Only single user receives mail](https://codeberg.org/forgejo/forgejo/pulls/8227)
-- [#8242: (not mine) actions mail opt-in](https://codeberg.org/forgejo/forgejo/pulls/8242)
+<HalfImage full={false} src={webhook_settings} />
 
-## Testing my Features
-They say testing is the hardest part.
-Maybe not the *hardest* but the most important and *dullest*.
-I'd like to argue system design is the most important but so what.
-Why you might ask?
-Besides ensuring regression, another perspective explain code
-That detailed perspective make the code author find a lot of her mistakes, too.
+In this PR `forgejo.org/services/webhook` got interested in the `ActionRunNowDone` topic, too.
+It sends out HTTP requests to the webhooks configured in the new settings.
+I had to introduce the `ActionRun` struct, which allows serialising an action to be sent to the webhook.
+Of course, I added a bunch of tests ensuring whenever an `ActionRunNowDone` message requires it a webhook is sent.
 
-- find mistakes themselves
-- prevent regressions through other peoples causing
-- record intention, another perspective on code after contributor left.
+<Spacer />
 
-When something should work, test it does.
-When something should be forbidden, test it is.
+### `RepoActionRun` and `ActionRun` Structs
+While I got [#7508](https://codeberg.org/forgejo/forgejo/pulls/7508) merged, [klausfyhn](https://codeberg.org/klausfyhn)'s [#7699](https://codeberg.org/forgejo/forgejo/pulls/7699) extended Forgejo's API.
+The new endpoints allow for retrieving Action runs programmatically and, which, of course, needed an `ActionRun` struct for serialisation.
+So his and my PR introduced the same struct at the same time and broke the main `forgejo` branch, ups.
+[Earl Warren](https://codeberg.org/earl-warren) quickly resolved the merge conflict in [#8066](https://codeberg.org/forgejo/forgejo/pulls/8066) by renaming [#7699](https://codeberg.org/forgejo/forgejo/pulls/7699)'s struct to `RepoActionRun`.
+Then, because having two structs for the same purpose is bad, he removed the `RepoActionRun`, leaving only `ActionRun` in [#8250](https://codeberg.org/forgejo/forgejo/pulls/8250).
+Both the webhook and the API use the same struct now.
 
-TODO
+### Other PRs
+
+<HalfImage full={false} src={release_notes} />
+
+A few more PRs accompanied this feature, which I won't get into detail:
+- [#7697](https://codeberg.org/forgejo/forgejo/pulls/7697): After the Fact Cleanup
+- [#8227](https://codeberg.org/forgejo/forgejo/pulls/8227): (Earl Warren) Only single user receives mail
+- [#8242](https://codeberg.org/forgejo/forgejo/pulls/8242): (Earl Warren) actions mail opt-in
+
+With all that work done Action notification got into the v12.0 release of Forgejo!
+
+<Spacer />
 
 ## Development Setup
 To test the features I developed I don't just need the Forgejo executable.
@@ -513,17 +462,19 @@ To debug something else, take a look at Forgejo's Makefile and find what command
 Just replace `go test` with `delve` and place all `go test` arguments in the `--build_flags` Delve argument.
 You can break on line numbers, too: `break ./models/actions/run_test.go:19`
 
-
 ## Conclusion and Lessons Learned
-TODO
+We've seen the structure of any Go project, Forgejos layered architecture and pub-sub pattern, how I contributed and with what development setup.
+Now I understand better just how valuable a deep understanding of the project you're working on is.
+This really allows you to make the least invasive change to the code and still implement your feature.
+And a smaller change is much easier to understand, review and approve.
+We all benefit from that.
+Breaking things up into multiple PRs goes along nicely with that, too.
+Even though I didn't go in-depth in this article, I spent a lot of time writing tests.
+Those tests are really important and not just a side-gig you slap onto the "real" code.
+They enable the maintainers to check things still work as they should when new code comes along and you might have gone somewhere else.
 
-- architecture of Forgejo notifications
-- importance of tests, what tests I wrote
-- testing setup, I didn't have that much time directly after all PRs -> tests vital
-- think of testing not as a side-gig!
-- break things up into multiple PRs
-- less code is better
-- understand as much as possible, then make the minimal change that is needed (knock someone out with your pinky)
+And lastly, of course, the Forgejo maintainers are absolutely amazing.
+Especially [Earl Warren](https://codeberg.org/earl-warren) did a great job helping me on my journey.
 
 ## P.S.
 I created the talk [Contributing to Forgejo](https://present.chris-besch.com/2025_11_21_ibm_forgejo/) around this article.
