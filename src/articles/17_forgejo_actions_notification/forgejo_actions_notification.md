@@ -3,6 +3,9 @@ type: article
 title: "Forgejo Actions Notification Development"
 description: "
 Some stories of how I work on Forgejo.
+How is a Go project structured?
+What's the point of Forgejo's layered architecture and what's that pub-sub pattern?
+Additionally, I exhaustively explain how to setup a development environment for Forgejo.
 "
 banner: /social_banner/forgejo_actions_notification.png
 thumb: ../../../static/social_banner/forgejo_actions_notification.png
@@ -150,38 +153,38 @@ It only says `log` but the full package path required to import the package is `
 Remember how the code's directory influences the package's path.
 
 ## Forgejo's Layered Architecture
-TODO: start with motivation
-This article is about implementing one specific feature, actions notifications.
-Therefore, I'll only talk about the parts of Forgejo's architecture that matter for this feature.
-Firstly, we take a look at Forgejo's layered [architecture](https://forgejo.org/docs/next/contributor/architecture), which I've created a visualization of:
+We have seen that packages can import each other.
+They import the functionality of those other packages but also their complexity.
+It is much easier to reason about a package that is as self-contained as possible, that doesn't import as many other packages.
+If every package imports every other package, the code-base turns into soup.
+Forgejo tackle this issue by introducing a layered [architecture](https://forgejo.org/docs/next/contributor/architecture).
+It groups packages into layers and forbids packages from importing code in higher layers.
+I've drawn an overview over this structure:
 
 <HalfImage full={true} src={architecture} />
 
-`\routers`, `\services`, `\models`, `\modules` and `\templates` are the *main directories* where most of Forgejo's Go code lives.
+`/routers`, `/services`, `/models` and `/modules` are some of the *main directories* where most of Forgejo's Go code lives.
 As we can see, there are three layers.
 Firstly, all code may access packages inside their respective main directory.
-The code in the bottom layer, however, don't have access to anything else.
-So for example, code in `\modules` may not access the Forgejo-specific database models defined in `\models`.
+The code in the bottom layer, however, doesn't have access to besides that.
+So for example, code in `/modules` may not access the Forgejo-specific database models defined in `/models`.
 (The Go compiler doesn't enforce this, code reviewers do.)
-Packages in `\modules` could theoretically be used as a library outside of Forgejo.
-Secondly, the `\services` module may access other `\services` and both `\models` and `\modules` but not the `\routers` above.
-Finally, the `\routers` code may use everything below it.<br />
-There are other main directories that we don't care about.
-Furthermore, I've only drawn example packages, files and structs inside the main directories.
-They contain a lot more things; things we'll look at later.
-Lastly, the `api` package inside `\routers` doesn't actually contain any Go code directly.
-Instead it is the parent-package of packages like `forgejo.org/services/api/actions/runner`.
+This code in `/modules` could theoretically be used as a library outside of Forgejo and is, thus, highly encapsulated.<br />
+Thirdly, code in `/services` may access other code in `/services` and both the below `/models` and `/modules` but not the `/routers` above.
+The `/services` directory we find Forgejo's *logic*.
+It describes what should happen when something else happens.<br />
+Finally, the `/routers` code may use everything below it.
+Here reside Forgejo's input/output to the outside world, its API and web UI.
 
-Naturally, we want as little code as possible in the upper layers.
-Code in such layers is a lot harder to reason about.
+Naturally, we want as little code as possible in the upper layers because it is more difficult to reason about.
 After all it has access to so much stuff with so many effects and side-effects.
 This will become important when I talk about the refactoring my feature required.
 
 ## Forgejo's Pub-Sub Pattern
 We've seen how Go packages may import other Go packages.
-Take a look at this situation where simple imports don't work:<br />
+Now take a look at this situation where simple imports don't work:<br />
 `forgejo.org/services/automerge` imports `forgejo.org/services/pull` to check if a pull request is mergeable.
-But when there has been a pull request review, `forgjeo.org/services/automerge` needs to realize that.
+But when there has been a pull request review, `forgejo.org/services/automerge` needs to realize that.
 Who knows there has been a pull request review?
 `forgejo.org/services/pull` of course.
 So one package needs the other and the other needs the one; a cyclical dependency.
@@ -193,7 +196,7 @@ An example topic is `PullRequestReview`.
 Because `forgejo.org/services/automerge` is interested in such messages, it creates a struct abiding by the `Notifier` interface.
 The notifier implements the `PullRequestReview` function and registers itself with the broker.
 Therefore the broker doesn't have to import the `forgejo.org/services/automerge` package.
-This is called dependency injection and resolved the cyclic dependency.
+This is called dependency injection and resolves the cyclic dependency.
 Here is some example code:
 
 ```go
@@ -223,14 +226,14 @@ notify_service.RegisterNotifier(&automergeNotifier{})
 notify_service.PullRequestReview(/* --snip-- */)
 ```
 
-Because code and publish messages and subscribe to topics this pattern is called the pub-sub pattern.
-I find this pub-sub pattern highly intuitive topics and messages are a concept we're confronted with in our everyday lives.
+Because code can publish messages and subscribe to topics, this pattern is called the pub-sub pattern.
+I find this pub-sub pattern pretty intuitive because topics and messages are a concept we're confronted with in our everyday lives.
 Additionally, it allows you to get a quick overview over what code is interested in what change.
-For example, if you give this interactive visualization a brief look, you can figure out that the code related to Forgjeo packages is quite separate from everything else.
+For example, if you give this interactive visualization a brief look, you can figure out that the code related to Forgejo packages is quite separate from everything else.
 
 <Iframe src="https://christopher-besch.github.io/go_observer_pattern_visualizer/viewer" fullscreen />
 
-If you're interested in this visualization and what the commit history on the right has to do with it, take a look at my new article: [The History of Forgejo's Pub-Sub Pattern](/articles/forgejo_pub_sub_pattern_history)
+If you're interested in this visualization and what the commit history on the right has to do with it, take a look at my new article: [The History of Forgejo's Pub-Sub Pattern](/articles/forgejo_pub_sub_pattern_history).
 
 ## My Contribution
 Forgejo features Actions, enabling continuous integrations.
@@ -246,7 +249,7 @@ I wanted to develop those features.
 But where do you even start?
 Firstly, it makes sense to add a new topic to the pub-sub pattern, `ActionRunNowDone`.
 `forgejo.org/services/mailer` and `forgejo.org/services/webhook` are responsible for sending mails and webhooks so they should listen to that new topic.
-Then we only need something to send a message to that topic whenever an Action Run completes.
+We only need something to send a message to that topic whenever an Action Run completes.
 `forgejo.org/models/actions` provides the database abstraction for Action Runs.
 It's `UpdateRunJob` function performs all changes including those indicating a completed Action Run.
 Therefore, that function should send the message.
@@ -258,10 +261,10 @@ When we think back to Forgejo's layered architecture we realize that
 This is where my first pull request comes in.
 I had to move some code from `forgejo.org/models/actions` up a layer into `forgejo.org/services/actions`.
 That's where Actions-related code lives that needs to import more things.
-In order to make my PR as easy to review (and approve) as possible, I tried to move only as much as was absolutely needed.
-Of course I had to move `UpdateRunJob` but e.g., `CleanRepoScheduleTasks` calls `UpdateRunJob`.
+In order to make my PR as easy to review (and approve) as possible, I tried to move as little code as was absolutely necessary.
+Of course, I had to move `UpdateRunJob` but e.g., `CleanRepoScheduleTasks` calls `UpdateRunJob`.
 If I had only moved `UpdateRunJob`, `CleanRepoScheduleTasks` would require an import of `forgejo.org/services/actions`.
-But that is again not possible because of the layered architecture.
+But that is, again, not possible because of the layered architecture.
 Therefore, I also had to move all the function transitively changing the Actions Run's status.
 
 ### PR [#7491](https://codeberg.org/forgejo/forgejo/pulls/7491): `ActionRunNowDone` Topic
@@ -272,22 +275,22 @@ Finally, I added a bunch of tests ensuring that in all cases the `ActionRunNowDo
 ### PR [#7509](https://codeberg.org/forgejo/forgejo/pulls/7509): Actions Done Mail
 `forgejo.org/services/mailer`'s notifier received interest in the `ActionRunNowDone` topic in this PR.
 I made it send out a mail whenever a Run failed or recovered (i.e., succeeded after a prior failure).
-Again, I added a bunch of tests ensuring whenever an `ActionRunNowDone` message requires it a mail is sent.
+Again, I added many tests ensuring whenever an `ActionRunNowDone` message requires it, a mail is sent.
 
 ### [#7508](https://codeberg.org/forgejo/forgejo/pulls/7508): Actions Done Webhook
 
 <HalfImage full={false} src={webhook_settings} />
 
 In this PR `forgejo.org/services/webhook` got interested in the `ActionRunNowDone` topic, too.
-It sends out HTTP requests to the webhooks configured in the new settings.
-I had to introduce the `ActionRun` struct, which allows serialising an action to be sent to the webhook.
-Of course, I added a bunch of tests ensuring whenever an `ActionRunNowDone` message requires it a webhook is sent.
+It sends out HTTP requests to the webhooks configured in the new settings.<br />
+For this I had to introduce the `ActionRun` struct, which allows serialising an action to be sent to the webhook.
+Of course, I added tests ensuring whenever an `ActionRunNowDone` message requires it, a webhook is sent.
 
 <Spacer />
 
 ### `RepoActionRun` and `ActionRun` Structs
 While I got [#7508](https://codeberg.org/forgejo/forgejo/pulls/7508) merged, [klausfyhn](https://codeberg.org/klausfyhn)'s [#7699](https://codeberg.org/forgejo/forgejo/pulls/7699) extended Forgejo's API.
-The new endpoints allow for retrieving Action runs programmatically and, which, of course, needed an `ActionRun` struct for serialisation.
+The new API endpoints allow for retrieving Action Runs programmatically, which, of course, needed an `ActionRun` struct for serialisation.
 So his and my PR introduced the same struct at the same time and broke the main `forgejo` branch, ups.
 [Earl Warren](https://codeberg.org/earl-warren) quickly resolved the merge conflict in [#8066](https://codeberg.org/forgejo/forgejo/pulls/8066) by renaming [#7699](https://codeberg.org/forgejo/forgejo/pulls/7699)'s struct to `RepoActionRun`.
 Then, because having two structs for the same purpose is bad, he removed the `RepoActionRun`, leaving only `ActionRun` in [#8250](https://codeberg.org/forgejo/forgejo/pulls/8250).
@@ -302,13 +305,18 @@ A few more PRs accompanied this feature, which I won't get into detail:
 - [#8227](https://codeberg.org/forgejo/forgejo/pulls/8227): (Earl Warren) Only single user receives mail
 - [#8242](https://codeberg.org/forgejo/forgejo/pulls/8242): (Earl Warren) actions mail opt-in
 
-With all that work done Action notification got into the v12.0 release of Forgejo!
+With all that work done, Action notification got into the v12.0 release of Forgejo!
 You can go back up to the visualization and see if you can find my PRs.
+And because I got my features upstreamed into Forgejo, Forgejo's maintainers take care of it now.
+I don't have to maintain my own custom fork.
+Having your features upstreamed really is the best thing that could happen to you.
 
 <Spacer />
 
 ## Development Setup
-To test the features I developed I don't just need the Forgejo executable.
+Here I want to an in-depth technical explanation of my development setup.
+After all, I quickly got into the situation where I changed some of Forgejo's code and wanted to test it.
+For this I don't just need the Forgejo executable.
 No, I also need an action runner, a mail server and some place to send webhooks to.
 
 ### Forgejo itself
@@ -319,7 +327,7 @@ Let's start with just getting a Forgejo test instance up and running.
 4. Install [gotestsum](https://github.com/gotestyourself/gotestsum).
    This is entirely optional.
    If you don't install gotestsum, ignore all the `USE_GOTESTSUM=yes` statements below.
-5. Download the [Forgejo Repo](https://codeberg.org/forgejo/forgejo) with `git clone https://codeberg.org/forgejo/forgejo ~/forgejo && cd ~/forgejo`.
+5. Download the [Forgejo repo](https://codeberg.org/forgejo/forgejo) with `git clone https://codeberg.org/forgejo/forgejo ~/forgejo && cd ~/forgejo`.
 6. Build an executable with `STRIP="0" EXTRA_GOFLAGS='-gcflags="all=-N -l"' TAGS="sqlite sqlite_unlock_notify" make build`.
    It took me a while to realize that `go build` enables optimization by default but keeps all debug symbols present.
    We change that with the `gsflags` by neither optimizing or inlining.
@@ -351,7 +359,7 @@ Let's start with just getting a Forgejo test instance up and running.
     I'm using password login, btw.
 
 ### Forgejo Runner
-To test workflow I need a runner.
+To test a workflow I need a runner.
 1. Download the [Forgejo runner binary](https://code.forgejo.org/forgejo/runner/releases) into `~/forgejo_runner`.
 2. Register the runner with `./forgejo-runner-11.1.2-linux-amd64 register`, give the instance URL `http://localhost:3000`, the runner token you get from the repo settings in the web interface, choose a name like `test-runner` and select the label `self-hosted:host`.
 3. Run `./forgejo-runner-11.1.2-linux-amd64 daemon` and click the workflow trigger button in the web interface.
@@ -360,7 +368,7 @@ To test workflow I need a runner.
 ### Mail Server
 Okay, that works fine but we also want to test sending emails.
 I use [MailDev](https://github.com/maildev/maildev) to create a development email server.
-It provides an SMTP server, which Forgejo connects to, and a webinterface for me, the developer.
+It provides an SMTP server, which Forgejo connects to, and a web interface for me, the developer.
 1. [Install Docker](https://docs.docker.com/engine/install).
 2. Run `docker run --network host -p 1080:1080 -p 1025:1025 maildev/maildev`.
 3. Open [http://localhost:1080](http://localhost:1080) in a webbrowser.
@@ -377,7 +385,7 @@ It provides an SMTP server, which Forgejo connects to, and a webinterface for me
    [service]
    ENABLE_NOTIFY_MAIL = true
    ```
-5. Now, when the workflow fails you should get a mail in the MailDev web interface.
+5. Now, when the workflow fails you should receive a mail in the MailDev web interface.
 
 ### Webhook
 Furthermore, we want to test webhooks.
@@ -421,9 +429,11 @@ Furthermore, we want to test webhooks.
 5. Start the workflow, let it fail and watch the sent webhook in the node terminal.
 
 Now we have everything to play with the features I implemented.
+Notice that many of the settings I showed you are awfully insecure for a productive deployment.
+They just make things easier for development.
 
 ## Running Tests
-Forejeo has different types of tests.
+Forgejo has many different types of tests.
 I was concerned with these types.
 - Run all unit tests with `TAGS='sqlite sqlite_unlock_notify' USE_GOTESTSUM=yes make test`.
 - Run all integration tests with `TAGS='sqlite sqlite_unlock_notify' USE_GOTESTSUM=yes make test-sqlite`.
@@ -471,12 +481,13 @@ This really allows you to make the least invasive change to the code and still i
 And a smaller change is much easier to understand, review and approve.
 We all benefit from that.
 Breaking things up into multiple PRs goes along nicely with that, too.
-Even though I didn't go in-depth in this article, I spent a lot of time writing tests.
-Those tests are really important and not just a side-gig you slap onto the "real" code.
-They enable the maintainers to check things still work as they should when new code comes along and you might have gone somewhere else.
+Furthermore and even though I didn't go in-depth in this article, I spent a lot of time writing tests.
+Those tests are really important and not just a side-gig you slap onto the *"real"* code.
+They enable the maintainers to check things still work as they should when new code comes along and you might have left the project.
 
 And lastly, of course, the Forgejo maintainers are absolutely amazing.
-Especially [Earl Warren](https://codeberg.org/earl-warren) did a great job helping me on my journey.
+Especially [Earl Warren](https://codeberg.org/earl-warren) did a lovely job helping me on my journey.
+Thank you!
 
 ## P.S.
 I created the talk [Contributing to Forgejo](https://present.chris-besch.com/2025_11_21_ibm_forgejo/) around this article.
