@@ -257,6 +257,11 @@ However, there's a problem:
 When we think back to Forgejo's layered architecture we realize that
 `forgejo.org/models/actions` is not allowed to import `forgejo.org/services/notify`, because it lies in a lower layer.
 
+At this point I already compiled everything I figured out and planned to do into issue [#3719](https://codeberg.org/forgejo/forgejo/issues/3719).
+That gave Forgejo's maintainers the option to share their opinion.
+After all, perhaps I didn't understand Forgejo's structure well enough.
+It's better to find that out before spending hours implementing something no one needs.
+
 ### PR [#7510](https://codeberg.org/forgejo/forgejo/pulls/7510): Refactoring
 This is where my first pull request comes in.
 I had to move some code from `forgejo.org/models/actions` up a layer into `forgejo.org/services/actions`.
