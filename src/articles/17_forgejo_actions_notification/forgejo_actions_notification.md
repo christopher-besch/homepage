@@ -314,7 +314,7 @@ Having your features upstreamed really is the best thing that could happen to yo
 <Spacer />
 
 ## Development Setup
-Here I want to an in-depth technical explanation of my development setup.
+Here I want to give an in-depth technical explanation of my development setup.
 After all, I quickly got into the situation where I changed some of Forgejo's code and wanted to test it.
 For this I don't just need the Forgejo executable.
 No, I also need an action runner, a mail server and some place to send webhooks to.
