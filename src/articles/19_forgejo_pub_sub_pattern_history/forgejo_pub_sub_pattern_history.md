@@ -242,6 +242,9 @@ And there are few general things I learned:
   Though, I really shouldn't have used my production server and got separate hardware.
 
 ## P.S.
+I created this visualization for my [Forgejo Actions Notification Development](/articles/forgejo_actions_notification) article and [Forgejo Architecture Deep Dive](https://present.chris-besch.com/2025_11_21_ibm_forgejo/) talk.
+
+## P.P.S.
 I used these commands to generate the *"depth"* and date for each commit:
 ```bash
 TZ=UTC0 git show --no-patch --date=local '--format=%ci' 16dbc0efd350cdc15760c2e40346c1e9fbb0bd01
