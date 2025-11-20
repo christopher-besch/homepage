@@ -32,9 +32,9 @@ Forgejo didn't offer that feature so I started contributing.
 You might find yourself in those shoes, too.
 In this article I want to help you on that journey and give my experience contributing to Forgejo.
 The parts that took the most effort where
-- setting up a development environment,
-- understanding Forgejo's notification architecture,
-- actually implementing the features and
+- [setting up a development environment](#development-setup),
+- understanding [Forgejo's layered architecture](#forgejos-layered-architecture) and [pub-sub pattern](#forgejos-pub-sub-pattern),
+- [actually implementing the features](#my-contribution) and
 - writing exhaustive tests.
 
 Be aware that I'm describing all of this as of commit `b2c4fc9f94` from 21st July 2025.
