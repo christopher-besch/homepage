@@ -10,7 +10,7 @@ title_banner: ../../images/photography/bravo_delta.jpg
 title_banner_horizontal_position: 85%
 title_banner_vertical_position: 60%
 slug: forgejo_actions_notification
-date: 2025-11-21T00:00:00+00:00
+date: 2025-11-20T00:00:00+00:00
 listed: true
 version: 1.0.0
 ---
@@ -23,7 +23,7 @@ This article is about Forgejo, a code forge:
 Just like GitHub or GitLab it's a place to (collaboratively) develop software.
 I've already explained at length [why we benefit greatly from Open-Source](/articles/open_source).
 Motivated by that concept, Forgejo's amazing community and perhaps because it's incredibly easy to set up, you select it for your private code forge.
-Though, with your Forgejo instance up and running you might miss a few features.
+With your Forgejo instance up and running you might, however, miss a few features.
 I, for example, needed to receive email notifications and webhooks when a CI Workflow failed.
 Forgejo didn't offer that feature so I started contributing.
 You might find yourself in those shoes, too.
@@ -32,7 +32,7 @@ The parts that took the most effort where
 - setting up a development environment,
 - understanding Forgejo's notification architecture,
 - actually implementing the features and
-- writing exhaustive tests for the features I implemented.
+- writing exhaustive tests.
 
 Be aware that I'm describing all of this as of commit `b2c4fc9f94` from 21st July 2025.
 Some of this information may be outdated by the time you read it.
@@ -48,7 +48,7 @@ Or another one:
 How do you declare a symbol to be exported or not-exported (analogous to public or private in other languages)?
 There's no keyword for that.
 Instead, symbols with a leading capital letter are implicitly exported, otherwise not.
-Those things are hard to figure out if you haven't inhaled the Go docs and just read through a project for the first time.
+Those things are hard to figure out if you haven't inhaled the Go docs and for the first time read through a project.
 Therefore, I want to quickly explain how Go handles dependencies.
 There also is an [official generic explanation](https://go.dev/doc/modules/managing-dependencies) if you prefer that.
 
@@ -147,9 +147,10 @@ package log
 // --snip--
 ```
 It only says `log` but the full package path required to import the package is `forgejo.org/modules/log`.
-Remember how the directory Go code lies in influences any package's path.
+Remember how the code's directory influences the package's path.
 
 ## Forgejo's Layered Architecture
+TODO: start with motivation
 This article is about implementing one specific feature, actions notifications.
 Therefore, I'll only talk about the parts of Forgejo's architecture that matter for this feature.
 Firstly, we take a look at Forgejo's layered [architecture](https://forgejo.org/docs/next/contributor/architecture), which I've created a visualization of:
@@ -302,6 +303,7 @@ A few more PRs accompanied this feature, which I won't get into detail:
 - [#8242](https://codeberg.org/forgejo/forgejo/pulls/8242): (Earl Warren) actions mail opt-in
 
 With all that work done Action notification got into the v12.0 release of Forgejo!
+You can go back up to the visualization and see if you can find my PRs.
 
 <Spacer />
 
