@@ -1,0 +1,26 @@
+{
+    "name": "chris_homepage",
+    "version": "1.0.0",
+    "description": "Chris' Homepage",
+    "repository": {
+        "type": "git",
+        "url": "codeberg.org/christopher-besch/homepage"
+    },
+    "license": "",
+    "author": "Christopher Besch <mail@chris-besch.com>",
+    "type": "module",
+    "main": "src/build.ts",
+    "scripts": {
+        "build": "tsc && node --enable-source-maps build/build.js"
+    },
+    "devDependencies": {
+        "@types/node": "^24.10.1",
+        "@types/react": "^19.2.6",
+        "@types/react-dom": "^19.2.3",
+        "typescript": "^5.9.3"
+    },
+    "dependencies": {
+        "react": "^19.2.0",
+        "react-dom": "^19.2.0"
+    }
+}
