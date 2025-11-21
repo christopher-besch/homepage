@@ -9,9 +9,10 @@
     "license": "",
     "author": "Christopher Besch <mail@chris-besch.com>",
     "type": "module",
-    "main": "src/build.ts",
+    "main": "src/build.tsx",
     "scripts": {
-        "build": "tsc && node --enable-source-maps build/build.js"
+        "build": "tsc && node --enable-source-maps build/build.js",
+        "clean": "rm -rf build deploy"
     },
     "devDependencies": {
         "@types/node": "^24.10.1",
@@ -20,6 +21,7 @@
         "typescript": "^5.9.3"
     },
     "dependencies": {
+        "@mdx-js/mdx": "^3.1.1",
         "react": "^19.2.0",
         "react-dom": "^19.2.0"
     }
