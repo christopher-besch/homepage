@@ -12,7 +12,8 @@
     "main": "src/build.tsx",
     "scripts": {
         "build": "tsc && node --enable-source-maps build/build.js",
-        "clean": "rm -rf build deploy"
+        "clean": "rm -rf build deploy",
+        "watch": "fswatch --event Updated -r -0 ./articles/ ./src/ ./styles/ | xargs -0 -I {} -n 1 npm run build"
     },
     "devDependencies": {
         "@types/node": "^24.10.1",

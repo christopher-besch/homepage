@@ -1,0 +1,35 @@
+.layout_navbar {
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.layout_navbar_left {}
+
+.layout_navbar_right {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.layout_navbar_right input {
+    display: none;
+}
+
+/* check: https://codepen.io/alvarotrigo/pen/poWRrQW */
+.layout_navbar_hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.layout_navbar_hamburger div {
+    width: 3em;
+    height: 7px;
+    border-radius: 3px;
+    background-color: black;
+}

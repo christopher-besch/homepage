@@ -7,6 +7,9 @@ const sourceMap = {
         "layout.module.css",
         "markdown.module.css"
     ],
+    "reset.css": [
+        "reset.css",
+    ]
 }
 
 export function buildStyles() {
