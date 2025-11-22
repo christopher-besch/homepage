@@ -49,7 +49,7 @@ In real life, however, we don't have that luxury.
 We're dependent on the likes of Sony, Canon and Nikon to build a real-life counterpart of the video games' `F12` key.
 I want my photography to be as independent as possible, as much mine as possible.
 I want to be independent of my tools.
-Give me a Pentax, Olympus, analog, digital, mirrorless, smartphone or the `F21` key and I want to be good at creating.
+Give me a Pentax, Olympus, analog, digital, mirrorless, smartphone or the `F12` key and I want to be good at creating.
 
 When I was shopping for my new, bigger camera, I asked online what camera would fulfill my wishes.
 And, to my surprise, a lot of what I wanted (better low-light performance, *better* colors) I could achieve with my previous camera.
