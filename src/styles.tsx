@@ -3,6 +3,7 @@ import * as fs from "fs";
 
 const sourceMap = {
     "default.css": [
+        "colors.css",
         "index.module.css",
         "layout.module.css",
         "markdown.module.css"

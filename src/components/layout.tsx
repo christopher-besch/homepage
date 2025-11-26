@@ -11,6 +11,14 @@ export default function Layout(props: React.PropsWithChildren<LayoutProps>): Rea
     const styleSheetLinks = props.styleSheets.map((styleSheet, i) =>
         <link key={i} rel="stylesheet" type="text/css" href={`/styles/${styleSheet}`} />
     );
+    const nav_links = [
+        <a href="/articles">Articles</a>,
+        <a href="/photography">Photos</a>,
+        <a href="/projects">Projects</a>,
+        <a href="/talks">Talks</a>,
+        <a href="/articles/bookmarks">Bookmarks</a>,
+        <a href="/about">About</a>,
+    ];
     return (
         <html>
             <head>
@@ -23,8 +31,8 @@ export default function Layout(props: React.PropsWithChildren<LayoutProps>): Rea
             </head>
 
             <body>
-                <div id="layout_navbar">
-                    <a id="layout_navbar_left" href="/">Christopher Besch</a>
+                <div className="layout_navbar">
+                    <a className="layout_navbar_left" href="/">Christopher Besch</a>
                     <div className="layout_navbar_right">
                         <input id="layout_navbar_toggle" type="checkbox"></input>
                         <label htmlFor="layout_navbar_toggle" className="layout_navbar_hamburger">
@@ -32,15 +40,20 @@ export default function Layout(props: React.PropsWithChildren<LayoutProps>): Rea
                             <div></div>
                             <div></div>
                         </label>
-                        <a href="/articles">Articles</a>
-                        <a href="/photography">Photos</a>
-                        <a href="/projects">Projects</a>
-                        <a href="/talks">Talks</a>
-                        <a href="/articles/bookmarks">Bookmarks</a>
-                        <a href="/about">About</a>
+                        {nav_links}
                     </div>
                 </div>
-                {props.children}
+
+                <div className="layout_transient_space">
+                    <div className="layout_transient_navigation">
+                        {nav_links}
+                    </div>
+                    <p>This is a transient space.</p>
+                </div>
+
+                <div className="layout_children">
+                    {props.children}
+                </div>
             </body>
         </html>
     );
