@@ -1,4 +1,4 @@
-import { createStyleDeployPath } from "../paths.js";
+import { createStyleLoadPath } from "../paths.js";
 import Image from "./image.js";
 
 interface LayoutProps {
@@ -12,7 +12,7 @@ export default function Layout(props: React.PropsWithChildren<LayoutProps>): Rea
     }
     props.styleSheets.push("reset.css");
     const styleSheetLinks = props.styleSheets.map((styleSheet, i) =>
-        <link key={i} rel="stylesheet" type="text/css" href={createStyleDeployPath(styleSheet)} />
+        <link key={i} rel="stylesheet" type="text/css" href={createStyleLoadPath(styleSheet)} />
     );
     const nav_links = <div className="layout_nav_links">
         <a href="/articles">Articles</a>

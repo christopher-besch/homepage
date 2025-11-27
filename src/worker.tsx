@@ -22,8 +22,13 @@ export async function convertImage(props: { input: string, widths: number[] }): 
     let map = new Map<number, string>();
     actual_widths.forEach((width) => {
         map.set(width, createImageLoadPath(hash, width));
-        // We don't need to await this.
-        image.clone().resize(width, undefined).toFile(createImageDeployPath(hash, width));
+        const deployPath = createImageDeployPath(hash, width);
+        // If the path already exists, the hashes match and we can use the cache.
+        if (!fs.existsSync(deployPath)) {
+            // We don't need to await this.
+            // This can happen in the background
+            image.clone().resize(width, undefined).toFile(deployPath);
+        }
     });
     return map;
 }
