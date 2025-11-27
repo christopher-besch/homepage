@@ -1,3 +1,6 @@
+import { createStyleDeployPath } from "../paths.js";
+import Image from "./image.js";
+
 interface LayoutProps {
     title: string,
     description?: string,
@@ -9,7 +12,7 @@ export default function Layout(props: React.PropsWithChildren<LayoutProps>): Rea
     }
     props.styleSheets.push("reset.css");
     const styleSheetLinks = props.styleSheets.map((styleSheet, i) =>
-        <link key={i} rel="stylesheet" type="text/css" href={`/styles/${styleSheet}`} />
+        <link key={i} rel="stylesheet" type="text/css" href={createStyleDeployPath(styleSheet)} />
     );
     const nav_links = <div className="layout_nav_links">
         <a href="/articles">Articles</a>
@@ -47,6 +50,10 @@ export default function Layout(props: React.PropsWithChildren<LayoutProps>): Rea
                 <div className="layout_transient_space">
                     {nav_links}
                     <p>This is a transient space.</p>
+                </div>
+
+                <div className="layout_above_fold">
+                    <Image input="/home/chris/IMG_0026.jpg" />
                 </div>
 
                 <div className="layout_children">

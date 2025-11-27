@@ -168,3 +168,6 @@ body {
         flex-direction: column;
     }
 }
+
+/* object-fit: cover; */
+/* object-position: hp vp; */

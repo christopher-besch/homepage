@@ -1,14 +1,23 @@
-import * as react_renderer from "react-dom/server";
-import Index from "./components/index.js";
 import * as fs from "fs";
+import { renderToPipeableStream } from "react-dom/server";
 import { buildStyles } from "./styles.js";
-import { createRoute } from "./paths.js";
+import { createRouteDeployPath } from "./paths.js";
+import { startPool } from "./worker_pool.js";
+
+import Index from "./components/index.js";
 
 function buildRoute(route: string, element: React.ReactNode) {
-    const html = `<!DOCTYPE html>${react_renderer.renderToStaticMarkup(element)}`;
-    const path = createRoute(route);
-    fs.writeFileSync(path, html);
+    const path = createRouteDeployPath(route);
+    let stream = fs.createWriteStream(path);
+    stream.write("<!DOCTYPE html>");
+    // We cannot ues renderToStaticMarkup because that doesn't support async components.
+    let out = renderToPipeableStream(element, {
+        onAllReady: () => {
+            out.pipe(stream);
+        }
+    });
 }
 
+startPool();
 buildStyles();
 buildRoute("/", <Index />);

@@ -1,9 +1,13 @@
 import * as fs from "fs";
 
-const stylesPath = `./styles`;
+// Load paths are for html loading the resource.
+// Deploy paths are for javascript to put data there.
+// Source paths are where javascript load the data from.
 
+const stylesPath = `./styles`;
+const buildPath = `./build`;
+export const workerPath = `${buildPath}/worker.js`;
 const deployPath = `./deploy`;
-const deployStylesPath = `${deployPath}/styles`;
 
 function ensureDirExists(dir: string) {
     if (!fs.existsSync(dir)) {
@@ -11,17 +15,39 @@ function ensureDirExists(dir: string) {
     }
 }
 
-export function createRoute(route: string): string {
+// routes //
+export function createRouteDeployPath(route: string): string {
     const dir = `${deployPath}/${route}`;
     ensureDirExists(dir);
     return `${dir}/index.html`;
 }
 
-export function createStyles(): string {
-    ensureDirExists(deployStylesPath);
-    return deployStylesPath;
+// styles //
+const loadStylesPath = `/styles`;
+const deployStylesPath = `${deployPath}${loadStylesPath}`;
+
+export function createStyleLoadPath(style: string): string {
+    return `${loadStylesPath}/${style}`;
 }
 
-export function getStyleSource(style: string): string {
+export function createStyleDeployPath(style: string): string {
+    ensureDirExists(deployStylesPath);
+    return `${deployStylesPath}/${style}`;
+}
+
+export function getStyleSourcePath(style: string): string {
     return `${stylesPath}/${style}`;
+}
+
+// images //
+const loadImagesPath = `/images`;
+const deployImagesPath = `${deployPath}${loadImagesPath}`;
+
+export function createImageLoadPath(hash: string, width: number): string {
+    return `${loadImagesPath}/${hash}_${width}.webp`;
+}
+
+export function createImageDeployPath(hash: string, width: number): string {
+    ensureDirExists(deployImagesPath);
+    return `${deployImagesPath}/${hash}_${width}.webp`;
 }

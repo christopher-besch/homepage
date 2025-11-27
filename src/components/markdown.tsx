@@ -6,6 +6,7 @@ interface MarkdownProps {
     path: string,
 }
 export default function Markdown(props: MarkdownProps): React.ReactNode {
+    // TODO: make async
     const file = fs.readFileSync(props.path);
     const { default: Markdown } = mdx.evaluateSync(file, runtime);
     return <Markdown />;
