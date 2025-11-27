@@ -1,4 +1,6 @@
 :root {
-    --color-navbar-bg: green;
-    --color-navbar-text: red;
+    --color-navbar-bg: darkgrey;
+    --color-navbar-text: black;
+    --color-navbar-highlight: lightgrey;
+    --color-body-bg: white;
 }

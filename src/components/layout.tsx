@@ -11,14 +11,14 @@ export default function Layout(props: React.PropsWithChildren<LayoutProps>): Rea
     const styleSheetLinks = props.styleSheets.map((styleSheet, i) =>
         <link key={i} rel="stylesheet" type="text/css" href={`/styles/${styleSheet}`} />
     );
-    const nav_links = [
-        <a href="/articles">Articles</a>,
-        <a href="/photography">Photos</a>,
-        <a href="/projects">Projects</a>,
-        <a href="/talks">Talks</a>,
-        <a href="/articles/bookmarks">Bookmarks</a>,
-        <a href="/about">About</a>,
-    ];
+    const nav_links = <div className="layout_nav_links">
+        <a href="/articles">Articles</a>
+        <a href="/photography">Photos</a>
+        <a href="/projects">Projects</a>
+        <a href="/talks">Talks</a>
+        <a href="/articles/bookmarks">Bookmarks</a>
+        <a href="/about">About</a>
+    </div>;
     return (
         <html>
             <head>
@@ -45,14 +45,19 @@ export default function Layout(props: React.PropsWithChildren<LayoutProps>): Rea
                 </div>
 
                 <div className="layout_transient_space">
-                    <div className="layout_transient_navigation">
-                        {nav_links}
-                    </div>
+                    {nav_links}
                     <p>This is a transient space.</p>
                 </div>
 
                 <div className="layout_children">
                     {props.children}
+                </div>
+
+                <div className="layout_footer">
+                    <a href="/about">Contact</a>
+                    <a href="/rss.xml">RSS</a>
+                    <a href="/privacy">Privacy</a>
+                    <div>© 2025 | All rights reserved</div>
                 </div>
             </body>
         </html>
