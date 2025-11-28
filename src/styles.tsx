@@ -4,6 +4,7 @@ import * as fs from "fs";
 // TODO: make this a Map
 const sourceMap = {
     "default.css": [
+        "image.module.css",
         "colors.css",
         "index.module.css",
         "layout.module.css",
