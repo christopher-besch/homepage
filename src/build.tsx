@@ -9,8 +9,7 @@ import Index from "./components/index.js";
 function buildRoute(route: string, element: React.ReactNode) {
     const path = createRouteDeployPath(route);
     let stream = fs.createWriteStream(path);
-    stream.write("<!DOCTYPE html>");
-    // We cannot ues renderToStaticMarkup because that doesn't support async components.
+    // We cannot use renderToStaticMarkup because that doesn't support async components.
     let out = renderToPipeableStream(element, {
         onAllReady: () => {
             out.pipe(stream);
