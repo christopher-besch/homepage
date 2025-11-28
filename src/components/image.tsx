@@ -5,17 +5,16 @@ const widths = [400, 800, 1200, 1600];
 interface ImageProps {
     input: string,
     alt?: string,
+    // TODO: lazy img?
 }
 export default async function Image(props: ImageProps): Promise<React.ReactNode> {
-    const loadPaths = await convertImageOnPool(props.input, widths);
-    console.log(loadPaths);
-
-    const fallbackWidth = Math.min(...loadPaths.keys());
+    const sizes = await convertImageOnPool(props.input, widths);
+    console.log(sizes);
 
     return <picture>
-        {Array.from(loadPaths.entries().map(([width, path], _) =>
-            <source key={width} media={`(max-width: ${width}px)`} srcSet={path} />
+        {Array.from(sizes.map((size, _) =>
+            <source key={size.width} type="image/webp" width={size.width} height={size.height} media={`(max-width: ${size.width}px)`} srcSet={size.loadPath} />
         ))}
-        <img src={loadPaths.get(fallbackWidth)} alt={props.alt} />
+        <img src={sizes[0]!.loadPath} width={sizes[0]!.width} height={sizes[0]!.height} alt={props.alt} />
     </picture>;
 }
