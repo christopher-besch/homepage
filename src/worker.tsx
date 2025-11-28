@@ -4,8 +4,11 @@ import * as fs from "fs";
 import * as crypto from "crypto";
 import type React from "react";
 
+// Represent one size of the image.
 export class ImageSize {
+    // The width in pixels of this size.
     width: number;
+    // The height in pixels of this size.
     height: number;
     loadPath: string;
     lqip: React.CSSProperties;
@@ -18,17 +21,17 @@ export class ImageSize {
     }
 };
 
-async function getLqip(image: sharp.Sharp): Promise<React.CSSProperties> {
-    function colorToCss(r: number, g: number, b: number, a: number): string {
-        if (a === 255) {
-            return `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)}`;
-        } else {
-            const af = (a / 255).toFixed(3);
-            return `rgba(${r}, ${g}, ${b}, ${af})`;
-        }
+function colorToCss(r: number, g: number, b: number, a: number): string {
+    if (a === 255) {
+        return `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)}`;
+    } else {
+        const af = (a / 255).toFixed(3);
+        return `rgba(${r}, ${g}, ${b}, ${af})`;
     }
-    const width = 3;
-    const height = 3;
+}
+
+// Create a blurry background for the img tag so that there's something while the picture hasn't arrived yet.
+async function getLqip(image: sharp.Sharp, width: number, height: number): Promise<React.CSSProperties> {
     const { data, info } = await image.resize(width, height, { fit: "fill" }).raw().ensureAlpha().toBuffer({ resolveWithObject: true });
     if (info.channels != 4) {
         throw new Error("channels is not 4");
@@ -37,7 +40,6 @@ async function getLqip(image: sharp.Sharp): Promise<React.CSSProperties> {
         throw new Error("number of pixels doesn't match");
     }
 
-    console.log(data.length)
     const pixels: string[] = [];
     for (let i = 0; i < width * height; i++) {
         const base = i * 4;
@@ -51,20 +53,21 @@ async function getLqip(image: sharp.Sharp): Promise<React.CSSProperties> {
     const singleImage = await image.resize(1, 1, { fit: "fill" }).raw().ensureAlpha().toBuffer({ resolveWithObject: true });
     const background = colorToCss(singleImage.data[0]!, singleImage.data[1]!, singleImage.data[2]!, singleImage.data[3]!);
 
-    const gradients = [
-        `radial-gradient(50% 50% at 25% 25%, ${pixels[0]}, transparent)`,
-        `radial-gradient(50% 50% at 50% 25%, ${pixels[1]}, transparent)`,
-        `radial-gradient(50% 50% at 75% 25%, ${pixels[2]}, transparent)`,
-
-        `radial-gradient(50% 50% at 25% 50%, ${pixels[3]}, transparent)`,
-        `radial-gradient(50% 50% at 50% 50%, ${pixels[4]}, transparent)`,
-        `radial-gradient(50% 50% at 75% 50%, ${pixels[5]}, transparent)`,
-
-        `radial-gradient(50% 50% at 25% 75%, ${pixels[6]}, transparent)`,
-        `radial-gradient(50% 50% at 50% 75%, ${pixels[7]}, transparent)`,
-        `radial-gradient(50% 50% at 75% 75%, ${pixels[8]}, transparent)`,
-        `linear-gradient(${background})`,
-    ];
+    // Somewhat decrease the elipse size with higher width and height.
+    const elipseWidth = 200 / width;
+    const elipseHeight = 200 / height;
+    let gradients: string[] = [];
+    for (let y = 0; y < height; ++y) {
+        for (let x = 0; x < width; ++x) {
+            // One gradient for each pixel.
+            const i = y * width + x;
+            // Where should the center of the gradient be?
+            const percentX = Math.round(100 / (width + 1) * (x + 1));
+            const percentY = Math.round(100 / (height + 1) * (y + 1));
+            gradients.push(`radial-gradient(${elipseWidth}% ${elipseHeight}% at ${percentX}% ${percentY}%, ${pixels[i]}, transparent)`);
+        }
+    }
+    gradients.push(`linear-gradient(${background})`);
 
     return {
         backgroundImage: gradients.join(","),
@@ -77,7 +80,7 @@ async function getLqip(image: sharp.Sharp): Promise<React.CSSProperties> {
 // Return a map from width to static resource path of the image with that width.
 // widths shall contain all wished for widths.
 // If the image is smaller than any of them, that width won't be used.
-export async function convertImage(props: { input: string, widths: number[] }): Promise<ImageSize[]> {
+export async function convertImage(props: { input: string, widths: number[], lqipWidth: number, lqipHeight: number }): Promise<ImageSize[]> {
     const file = await fs.promises.readFile(props.input);
     const hash = crypto.hash("md5", file);
     const image = sharp(file).autoOrient().webp({ quality: 80, effort: 6 });
@@ -89,7 +92,7 @@ export async function convertImage(props: { input: string, widths: number[] }): 
         // This is a tiny image.
         actualWidths.push(metadata.width);
     }
-    const lqip = await getLqip(image.clone());
+    const lqip = await getLqip(image.clone(), props.lqipWidth, props.lqipHeight);
 
     let sizes: ImageSize[] = [];
     for (const width of actualWidths) {

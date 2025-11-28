@@ -169,5 +169,10 @@ body {
     }
 }
 
-/* object-fit: cover; */
-/* object-position: hp vp; */
+.layout_above_fold img {
+    width: 100%;
+    height: calc(100vh - var(--layout-nav-height));
+    object-fit: cover;
+    /* TODO: make this proper */
+    object-position: 50% 50%;
+}

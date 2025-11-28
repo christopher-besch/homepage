@@ -5,6 +5,7 @@ interface LayoutProps {
     title: string,
     description?: string,
     styleSheets?: string[],
+    aboveFoldImage?: string,
 }
 export default function Layout(props: React.PropsWithChildren<LayoutProps>): React.ReactNode {
     if (props.styleSheets == undefined) {

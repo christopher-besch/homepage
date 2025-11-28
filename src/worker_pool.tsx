@@ -8,6 +8,6 @@ export function startPool() {
     pool = new Piscina({ filename: workerPath });
 }
 
-export async function convertImageOnPool(input: string, widths: number[]): Promise<ImageSize[]> {
-    return await pool.run({ input, widths }, { name: "convertImage" });
+export async function convertImageOnPool(input: string, widths: number[], lqipWidth: number, lqipHeight: number): Promise<ImageSize[]> {
+    return await pool.run({ input, widths, lqipWidth, lqipHeight }, { name: "convertImage" });
 }
