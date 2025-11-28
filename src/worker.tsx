@@ -54,8 +54,8 @@ async function getLqip(image: sharp.Sharp, width: number, height: number): Promi
     const background = colorToCss(singleImage.data[0]!, singleImage.data[1]!, singleImage.data[2]!, singleImage.data[3]!);
 
     // Somewhat decrease the elipse size with higher width and height.
-    const elipseWidth = 200 / width;
-    const elipseHeight = 200 / height;
+    const elipseWidth = Math.round(200 / width);
+    const elipseHeight = Math.round(200 / height);
     let gradients: string[] = [];
     for (let y = 0; y < height; ++y) {
         for (let x = 0; x < width; ++x) {
