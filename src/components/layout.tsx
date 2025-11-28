@@ -5,7 +5,13 @@ interface LayoutProps {
     title: string,
     description?: string,
     styleSheets?: string[],
-    aboveFoldImage?: string,
+    heroImage?: {
+        loadPath: string,
+        heightFraction?: number,
+        objectFitHorizontal: string,
+        objectFitVertical: string,
+        children?: React.ReactNode,
+    },
 }
 export default function Layout(props: React.PropsWithChildren<LayoutProps>): React.ReactNode {
     if (props.styleSheets == undefined) {
@@ -53,11 +59,21 @@ export default function Layout(props: React.PropsWithChildren<LayoutProps>): Rea
                     <p>This is a transient space.</p>
                 </div>
 
-                <div className="layout_above_fold">
-                    <Image input="/home/chris/IMG_0026.jpg" />
-                </div>
+                <div className="layout_content">
+                    {props.heroImage != undefined ?
+                        <div className="layout_hero"
+                            style={{
+                                "--layout-object-fit-h": props.heroImage.objectFitHorizontal,
+                                "--layout-object-fit-v": props.heroImage.objectFitVertical,
+                                "--layout-hero-fraction": props.heroImage.heightFraction != undefined ? props.heroImage.heightFraction : 1,
+                            } as React.CSSProperties}>
+                            <Image input={props.heroImage.loadPath} />
+                            <div className="layout_hero_children">
+                                {props.heroImage.children}
+                            </div>
+                        </div>
+                        : undefined}
 
-                <div className="layout_children">
                     {props.children}
                 </div>
 

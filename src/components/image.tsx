@@ -10,7 +10,6 @@ interface ImageProps {
 }
 export default async function Image(props: ImageProps): Promise<React.ReactNode> {
     const sizes = await convertImageOnPool(props.input, widths, 3, 3);
-    // console.log(sizes);
 
     return <picture className="image_picture" >
         {Array.from(sizes.map((size, _) =>

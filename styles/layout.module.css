@@ -99,7 +99,7 @@
         display: block;
     }
 
-    body:has(#layout_navbar_toggle:checked) .layout_children {
+    body:has(#layout_navbar_toggle:checked) .layout_content {
         display: none;
     }
 
@@ -130,7 +130,7 @@ body {
     background-color: var(--color-body-bg);
 }
 
-.layout_children {
+.layout_content {
     max-width: 1200px;
     margin: auto;
     min-height: calc(100vh - var(--layout-nav-height) - var(--layout-footer-height));
@@ -169,10 +169,19 @@ body {
     }
 }
 
-.layout_above_fold img {
+.layout_hero {
+    position: relative;
+}
+
+.layout_hero img {
     width: 100%;
-    height: calc(100vh - var(--layout-nav-height));
+    height: calc(var(--layout-hero-fraction) * (100vh - var(--layout-nav-height)));
     object-fit: cover;
-    /* TODO: make this proper */
-    object-position: 50% 50%;
+    object-position: var(--layout-object-fit-h) var(--layout-object-fit-v);
+}
+
+.layout_hero_children {
+    position: absolute;
+    bottom: 0;
+    left: 0;
 }
