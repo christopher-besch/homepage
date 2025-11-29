@@ -6,6 +6,7 @@ const sourceMap = {
     "default.css": [
         "image.module.css",
         "colors.css",
+        "fonts.css",
         "index.module.css",
         "layout.module.css",
         "markdown.module.css"

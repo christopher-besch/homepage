@@ -1,9 +1,15 @@
 :root {
-    --layout-nav-height: 50px;
+    font-family: LiberationSans, sans-serif;
 
-    --layout-burger-gap: 8px;
-    --layout-burger-width: 30px;
-    --layout-burger-height: 5px;
+    --layout-nav-height: 80px;
+    --layout-nav-padding-right: calc((var(--layout-nav-height) - var(--layout-nav-burger-height)) / 2);
+    --layout-nav-padding-left: 20px;
+
+    /* --layout-nav-burger-height: calc(var(--layout-nav-height) - 2 * var(--layout-nav-padding)); */
+    --layout-nav-burger-height: 25px;
+    --layout-burger-gap: calc((var(--layout-nav-burger-height) - 3 * var(--layout-burger-height)) / 2);
+    --layout-burger-width: 25px;
+    --layout-burger-height: 3px;
 
     --layout-footer-height: 30px;
 }
@@ -12,9 +18,11 @@
     height: calc(var(--layout-nav-height));
     display: flex;
     flex-direction: row;
+    gap: var(--layout-nav-padding-right);
     justify-content: space-between;
     align-items: center;
-    padding: 0 10px;
+    padding-left: var(--layout-nav-padding-left);
+    padding-right: var(--layout-nav-padding-right);
 
     background-color: var(--color-navbar-bg);
 }
@@ -22,9 +30,21 @@
 .layout_navbar_left {
     color: var(--color-navbar-text);
     text-decoration: none;
+    font-family: LiberationMono, monospace;
+}
+
+.layout_navbar_left h1 {
+    font-size: clamp(0px, 6.5vw, 30px);
+}
+
+.layout_navbar_left h2 {
+    margin-top: 3px;
+    font-size: clamp(0px, 3.5vw, 16px);
 }
 
 .layout_navbar_right {
+    font-size: 18px;
+
     flex-direction: row;
     justify-content: space-between;
     gap: 5px;
@@ -86,7 +106,7 @@
     text-decoration: none;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
     .layout_navbar_hamburger {
         display: flex;
     }
@@ -126,14 +146,15 @@
     }
 }
 
-body {
+/* We use layout_content_container because we can't overwrite values on body. */
+.layout_content_container {
     background-color: var(--color-body-bg);
+    min-height: calc(100vh - var(--layout-nav-height) - var(--layout-footer-height));
 }
 
 .layout_content {
     max-width: 1200px;
     margin: auto;
-    min-height: calc(100vh - var(--layout-nav-height) - var(--layout-footer-height));
 }
 
 .layout_footer {
@@ -159,7 +180,7 @@ body {
     background: var(--color-navbar-highlight);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
     :root {
         --layout-footer-height: 140px;
     }

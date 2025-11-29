@@ -42,7 +42,10 @@ export default function Layout(props: React.PropsWithChildren<LayoutProps>): Rea
 
             <body>
                 <div className="layout_navbar">
-                    <a className="layout_navbar_left" href="/">Christopher Besch</a>
+                    <a className="layout_navbar_left" href="/">
+                        <h1>Christopher&nbsp;Besch</h1>
+                        <h2>Developer&bull;Writer&bull;Photographer</h2>
+                    </a>
                     <div className="layout_navbar_right">
                         <input id="layout_navbar_toggle" type="checkbox"></input>
                         <label htmlFor="layout_navbar_toggle" className="layout_navbar_hamburger">
@@ -59,7 +62,7 @@ export default function Layout(props: React.PropsWithChildren<LayoutProps>): Rea
                     <p>This is a transient space.</p>
                 </div>
 
-                <div className="layout_content">
+                <div className="layout_content_container">
                     {props.heroImage != undefined ?
                         <div className="layout_hero"
                             style={{
@@ -74,7 +77,9 @@ export default function Layout(props: React.PropsWithChildren<LayoutProps>): Rea
                         </div>
                         : undefined}
 
-                    {props.children}
+                    <div className="layout_content">
+                        {props.children}
+                    </div>
                 </div>
 
                 <div className="layout_footer">

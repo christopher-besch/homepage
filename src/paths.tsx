@@ -4,6 +4,7 @@ import * as fs from "fs";
 // Deploy paths are for javascript to put data there.
 // Source paths are where javascript load the data from.
 
+const staticPath = `./static`;
 const stylesPath = `./styles`;
 const buildPath = `./build`;
 export const workerPath = `${buildPath}/worker.js`;
@@ -50,4 +51,9 @@ export function createImageLoadPath(hash: string, width: number): string {
 export function createImageDeployPath(hash: string, width: number): string {
     ensureDirExists(deployImagesPath);
     return `${deployImagesPath}/${hash}_${width}.webp`;
+}
+
+// static //
+export function copyStatic() {
+    fs.cp(staticPath, deployPath, { recursive: true }, (err) => { if (err != null) { throw err; } });
 }
