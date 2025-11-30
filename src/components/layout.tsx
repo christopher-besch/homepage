@@ -8,8 +8,8 @@ interface LayoutProps {
     heroImage?: {
         loadPath: string,
         heightFraction?: number,
-        objectFitHorizontal: string,
-        objectFitVertical: string,
+        objectFitHorizontal: number,
+        objectFitVertical: number,
         children?: React.ReactNode,
     },
 }
@@ -66,11 +66,11 @@ export default function Layout(props: React.PropsWithChildren<LayoutProps>): Rea
                     {props.heroImage != undefined ?
                         <div className="layout_hero"
                             style={{
-                                "--layout-object-fit-h": props.heroImage.objectFitHorizontal,
-                                "--layout-object-fit-v": props.heroImage.objectFitVertical,
+                                "--layout-object-fit-h": `${props.heroImage.objectFitHorizontal}%`,
+                                "--layout-object-fit-v": `${props.heroImage.objectFitVertical}%`,
                                 "--layout-hero-fraction": props.heroImage.heightFraction != undefined ? props.heroImage.heightFraction : 1,
                             } as React.CSSProperties}>
-                            <Image input={props.heroImage.loadPath} />
+                            <Image input={props.heroImage.loadPath} portraitVersion={{ objectFitPositionH: props.heroImage.objectFitHorizontal }} />
                             <div className="layout_hero_children">
                                 {props.heroImage.children}
                             </div>

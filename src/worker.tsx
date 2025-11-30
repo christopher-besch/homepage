@@ -74,18 +74,18 @@ export interface ConvertImageProps {
     lqipHeight: number,
     // When we use object-fit: cover and we use a landscape photo on a portrait device, we might want to create a separate image for this purpose.
     // The other direction (using a portrait image on a landscape device) would be possible, too, but isn't implemented.
-    portraitVersion?: {
+    portraitVersion: {
         // the first value in object-position
         objectFitPositionH: number,
         // the aspect ratio of the cropped image
         aspectRatio: number,
         // the requested widths of the output images
         widths: number[],
-    }
+    } | undefined
 };
 
 // Represent one size of the image.
-interface ImageSize {
+export interface ImageSize {
     // The width in pixels of this size.
     width: number;
     // The height in pixels of this size.
@@ -103,7 +103,8 @@ function resizeImage(
     width: number,
     lqip: React.CSSProperties
 ): ImageSize {
-    const deployPath = createImageDeployPath(hash, width);
+    const height = Math.floor(width / originalWidth * originalHeight);
+    const deployPath = createImageDeployPath(hash, width, height);
     // If the path already exists, the hashes match and we can use the cache.
     if (!fs.existsSync(deployPath)) {
         // We don't need to await this.
@@ -112,15 +113,65 @@ function resizeImage(
     }
     return {
         width: width,
-        height: Math.round(width / originalWidth * originalHeight),
-        loadPath: createImageLoadPath(hash, width),
+        height: height,
+        loadPath: createImageLoadPath(hash, width, height),
         lqip: lqip
     };
 }
 
+// This function doesn't change the image but creates its own clone.
+function cropImageHorizontally(image: sharp.Sharp,
+    originalWidth: number,
+    originalHeight: number,
+    aspectRatio: number,
+    objectFitPositionH: number
+): {
+    image: sharp.Sharp,
+    // Return the output width and height because image.metadata() always reads the header of the input file.
+    width: number,
+    height: number
+} {
+    const targetHeight = originalHeight;
+    const targetWidth = targetHeight * aspectRatio;
+    // This replicates CSS' behaviour with object-fit: cover and object-position.
+    const cropLeft = 0 * (1 - objectFitPositionH / 100) + (originalWidth - targetWidth) * (objectFitPositionH / 100);
+    const cropRight = (originalWidth - targetWidth) * (1 - objectFitPositionH / 100) + 0 * (objectFitPositionH / 100);
+    if (Math.round(cropLeft + targetWidth + cropRight) != Math.round(originalWidth)) {
+        throw new Error(`Widths don't add up: left: ${cropLeft} target: ${targetWidth} right: ${cropRight} actual: ${originalWidth}`);
+    }
+    return {
+        image: image.clone().extract({ left: Math.round(cropLeft), width: Math.round(targetWidth), top: 0, height: targetHeight }),
+        width: targetWidth,
+        height: targetHeight,
+    };
+}
+
+// This function doesn't change the image but creates its own clone if needed.
+function resizeImageMultiple(
+    image: sharp.Sharp,
+    originalWidth: number,
+    originalHeight: number,
+    hash: string,
+    widths: number[],
+    lqip: React.CSSProperties
+): ImageSize[] {
+    let actualWidths = widths.filter((width) => { return width <= originalWidth; });
+    if (actualWidths.length == 0) {
+        // None of the target widths are small enough.
+        // This is a tiny image.
+        actualWidths.push(originalWidth);
+    }
+
+    let sizes: ImageSize[] = [];
+    for (const width of actualWidths) {
+        sizes.push(resizeImage(hash, image, originalWidth, originalHeight, width, lqip));
+    };
+    return sizes;
+}
+
 export interface ExportedImage {
     sizes: ImageSize[];
-    portraitSizes?: ImageSize[];
+    portraitSizes: ImageSize[] | undefined;
 };
 
 // Return a map from width to static resource path of the image with that width.
@@ -132,18 +183,16 @@ export async function convertImage(props: ConvertImageProps): Promise<ExportedIm
     const image = sharp(file).autoOrient().webp({ quality: 80, effort: 6 });
     const metadata = await image.metadata();
 
-    let actualWidths = props.widths.filter((width) => { return width <= metadata.width; });
-    if (actualWidths.length == 0) {
-        // None of the target widths are small enough.
-        // This is a tiny image.
-        actualWidths.push(metadata.width);
-    }
     // For now we set the same lqip for all sizes and only the lqip for the smallest size later.
     const lqip = await getLqip(image, props.lqipWidth, props.lqipHeight);
 
-    let sizes: ImageSize[] = [];
-    for (const width of actualWidths) {
-        sizes.push(resizeImage(hash, image, metadata.width, metadata.height, width, lqip));
-    };
-    return { sizes: sizes };
+    let portraitSizes: ImageSize[] | undefined = undefined;
+    if (props.portraitVersion != undefined) {
+        const crop = cropImageHorizontally(image, metadata.width, metadata.height, props.portraitVersion.aspectRatio, props.portraitVersion.objectFitPositionH);
+        // Add the objectFitPositionH to the hash so that when we change that, the cache doesn't bother us.
+        // The aspect ratio is already part of the final file because of it's width and height.
+        portraitSizes = resizeImageMultiple(crop.image, crop.width, crop.height, `${hash}_${props.portraitVersion.objectFitPositionH}`, props.portraitVersion.widths, lqip)
+    }
+
+    return { sizes: resizeImageMultiple(image, metadata.width, metadata.height, hash, props.widths, lqip), portraitSizes: portraitSizes };
 }

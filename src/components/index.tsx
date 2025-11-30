@@ -10,8 +10,8 @@ export default function Index(_props: IndexProps): React.ReactNode {
             styleSheets={["default.css"]}
             heroImage={{
                 loadPath: "/home/chris/IMG_0026.jpg",
-                objectFitHorizontal: "0%",
-                objectFitVertical: "50%",
+                objectFitHorizontal: 65,
+                objectFitVertical: 30,
                 // heightFraction: 0.5,
                 children: <div>Hello World</div>,
             }}>

@@ -44,13 +44,13 @@ export function getStyleSourcePath(style: string): string {
 const loadImagesPath = `/images`;
 const deployImagesPath = `${deployPath}${loadImagesPath}`;
 
-export function createImageLoadPath(hash: string, width: number): string {
-    return `${loadImagesPath}/${hash}_${width}.webp`;
+export function createImageLoadPath(hash: string, width: number, height: number): string {
+    return `${loadImagesPath}/${hash}_${width}_${height}.webp`;
 }
 
-export function createImageDeployPath(hash: string, width: number): string {
+export function createImageDeployPath(hash: string, width: number, height: number): string {
     ensureDirExists(deployImagesPath);
-    return `${deployImagesPath}/${hash}_${width}.webp`;
+    return `${deployImagesPath}/${hash}_${width}_${height}.webp`;
 }
 
 // static //
