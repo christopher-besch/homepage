@@ -91,33 +91,7 @@ export interface ImageSize {
     // The height in pixels of this size.
     height: number;
     loadPath: string;
-    lqip: React.CSSProperties;
 };
-
-// This function doesn't change the image but creates its own clone.
-function resizeImage(
-    hash: string,
-    image: sharp.Sharp,
-    originalWidth: number,
-    originalHeight: number,
-    width: number,
-    lqip: React.CSSProperties
-): ImageSize {
-    const height = Math.floor(width / originalWidth * originalHeight);
-    const deployPath = createImageDeployPath(hash, width, height);
-    // If the path already exists, the hashes match and we can use the cache.
-    if (!fs.existsSync(deployPath)) {
-        // We don't need to await this.
-        // This can happen in the background.
-        image.clone().resize(width, null).toFile(deployPath);
-    }
-    return {
-        width: width,
-        height: height,
-        loadPath: createImageLoadPath(hash, width, height),
-        lqip: lqip
-    };
-}
 
 // This function doesn't change the image but creates its own clone.
 function cropImageHorizontally(image: sharp.Sharp,
@@ -146,6 +120,29 @@ function cropImageHorizontally(image: sharp.Sharp,
     };
 }
 
+// This function doesn't change the image but creates its own clone.
+function resizeImage(
+    hash: string,
+    image: sharp.Sharp,
+    originalWidth: number,
+    originalHeight: number,
+    width: number,
+): ImageSize {
+    const height = Math.floor(width / originalWidth * originalHeight);
+    const deployPath = createImageDeployPath(hash, width, height);
+    // If the path already exists, the hashes match and we can use the cache.
+    if (!fs.existsSync(deployPath)) {
+        // We don't need to await this.
+        // This can happen in the background.
+        image.clone().resize(width, null).toFile(deployPath);
+    }
+    return {
+        width: width,
+        height: height,
+        loadPath: createImageLoadPath(hash, width, height),
+    };
+}
+
 // This function doesn't change the image but creates its own clone if needed.
 function resizeImageMultiple(
     image: sharp.Sharp,
@@ -153,7 +150,6 @@ function resizeImageMultiple(
     originalHeight: number,
     hash: string,
     widths: number[],
-    lqip: React.CSSProperties
 ): ImageSize[] {
     let actualWidths = widths.filter((width) => { return width <= originalWidth; });
     if (actualWidths.length == 0) {
@@ -164,35 +160,40 @@ function resizeImageMultiple(
 
     let sizes: ImageSize[] = [];
     for (const width of actualWidths) {
-        sizes.push(resizeImage(hash, image, originalWidth, originalHeight, width, lqip));
+        sizes.push(resizeImage(hash, image, originalWidth, originalHeight, width));
     };
     return sizes;
 }
 
 export interface ExportedImage {
+    // a map from width to static resource path of the image with that width
+    // Widths shall contain all wished for widths.
+    // If the image is smaller than any of them, that width won't be used.
     sizes: ImageSize[];
+    // Same as sizes but with the portrait version of the image if requested.
     portraitSizes: ImageSize[] | undefined;
+    // The low quality image preview.
+    // There's only one lqip for the entire image.
+    lqip: React.CSSProperties;
 };
 
-// Return a map from width to static resource path of the image with that width.
-// widths shall contain all wished for widths.
-// If the image is smaller than any of them, that width won't be used.
 export async function convertImage(props: ConvertImageProps): Promise<ExportedImage> {
     const file = await fs.promises.readFile(props.input);
     const hash = crypto.hash("md5", file);
     const image = sharp(file).autoOrient().webp({ quality: 80, effort: 6 });
     const metadata = await image.metadata();
 
-    // For now we set the same lqip for all sizes and only the lqip for the smallest size later.
-    const lqip = await getLqip(image, props.lqipWidth, props.lqipHeight);
-
     let portraitSizes: ImageSize[] | undefined = undefined;
     if (props.portraitVersion != undefined) {
         const crop = cropImageHorizontally(image, metadata.width, metadata.height, props.portraitVersion.aspectRatio, props.portraitVersion.objectFitPositionH);
         // Add the objectFitPositionH to the hash so that when we change that, the cache doesn't bother us.
         // The aspect ratio is already part of the final file because of it's width and height.
-        portraitSizes = resizeImageMultiple(crop.image, crop.width, crop.height, `${hash}_${props.portraitVersion.objectFitPositionH}`, props.portraitVersion.widths, lqip)
+        portraitSizes = resizeImageMultiple(crop.image, crop.width, crop.height, `${hash}_${props.portraitVersion.objectFitPositionH}`, props.portraitVersion.widths)
     }
 
-    return { sizes: resizeImageMultiple(image, metadata.width, metadata.height, hash, props.widths, lqip), portraitSizes: portraitSizes };
+    return {
+        sizes: resizeImageMultiple(image, metadata.width, metadata.height, hash, props.widths),
+        lqip: await getLqip(image, props.lqipWidth, props.lqipHeight),
+        portraitSizes: portraitSizes
+    };
 }

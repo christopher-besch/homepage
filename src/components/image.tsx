@@ -2,10 +2,8 @@ import type React from "react";
 import { convertImageOnPool } from "../worker_pool.js";
 import type { ImageSize } from "../worker.js";
 
-// TODO: don't use all those small defaultWidths when there is an extra portrait image.
 const defaultWidths = [400, 800, 1200, 1600];
 const portraitAspectRatio = 9 / 16;
-// const portraitAspectRatio = 3 / 4;
 const portraitWidths = [400, 800];
 // On portrait devices with relatively wide screens (i.e. a square device) there is a jump when we switch to the portrait image.
 // This is because an almost square device that is small enough will render the portrait image but should actually show some more of the edges of the image (i.e., the landscape image would be better).
@@ -46,8 +44,12 @@ export default async function Image(props: ImageProps): Promise<React.ReactNode>
 
     const defaultWidth = exportedImage.sizes[0]!.width;
     const defaultHeight = exportedImage.sizes[0]!.height;
-    const lqip = exportedImage.sizes[0]!.lqip;
+    const lqip = exportedImage.lqip;
     const defaultSrcSet = sizesToSrcSet(exportedImage.sizes);
+
+    if ((exportedImage.portraitSizes == undefined) != (props.portraitVersion == undefined)) {
+        throw new Error("portrait undefined mismatch");
+    }
 
     const imgTag = <img srcSet={defaultSrcSet} width={defaultWidth} height={defaultHeight} alt={props.alt} style={lqip} />;
     if (exportedImage.portraitSizes != undefined) {
