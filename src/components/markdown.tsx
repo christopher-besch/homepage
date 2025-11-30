@@ -1,13 +1,11 @@
 import * as mdx from "@mdx-js/mdx";
-import * as fs from "fs";
 import * as runtime from "react/jsx-runtime";
 
 interface MarkdownProps {
-    path: string,
+    content: string,
 }
-export default function Markdown(props: MarkdownProps): React.ReactNode {
-    // TODO: make async
-    const file = fs.readFileSync(props.path);
-    const { default: Markdown } = mdx.evaluateSync(file, runtime);
+export default async function Markdown(props: MarkdownProps): Promise<React.ReactNode> {
+    const { default: Markdown } = await mdx.evaluate(props.content, runtime);
+
     return <Markdown />;
 }

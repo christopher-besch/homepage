@@ -14,6 +14,7 @@ interface LayoutProps {
     },
 }
 export default function Layout(props: React.PropsWithChildren<LayoutProps>): React.ReactNode {
+    // TODO: use callback and react context
     if (props.styleSheets == undefined) {
         props.styleSheets = [];
     }

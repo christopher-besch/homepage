@@ -1,9 +1,8 @@
 import Layout from "./layout.js";
-import Markdown from "./markdown.js";
 
-interface IndexProps {
+interface IndexPageProps {
 }
-export default function Index(_props: IndexProps): React.ReactNode {
+export default function IndexPage(_props: IndexPageProps): React.ReactNode {
     return (
         <Layout
             title="Chris' Homepage"
@@ -28,7 +27,6 @@ export default function Index(_props: IndexProps): React.ReactNode {
                 Hello World!<br />
                 Hello World!<br />
                 Hello World!
-                <Markdown path="./articles/test/test.md" />
             </div>
         </Layout>
     );
