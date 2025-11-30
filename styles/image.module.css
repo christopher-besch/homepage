@@ -1,4 +1,7 @@
 .image_picture img {
     /* The default inline would add a few pixels of space below the image. */
     display: block;
+    /* TODO: this makes it hard to overwrite */
+    width: 100%;
+    height: 100%;
 }

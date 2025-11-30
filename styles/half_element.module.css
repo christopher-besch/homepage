@@ -1,0 +1,59 @@
+.half_element_wrapper {
+    margin: 0;
+}
+
+.half_element_element {
+    height: auto;
+    float: right;
+    max-width: 60%;
+    margin-left: 16px;
+}
+
+.half_element_full_element {
+    height: auto;
+    float: left;
+    max-width: 100%;
+    width: 100%;
+    /* because margin-bottom in the wrapper doesn't work */
+    margin-bottom: 16px;
+}
+
+.half_element_before {
+    /* clear float before element */
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.half_element_after {
+    display: none;
+}
+
+
+.half_element_spacer {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* when small, make act like normal paragraph */
+@media (max-width: 1100px) {
+    .half_element_wrapper {
+        margin-bottom: 16px;
+    }
+
+    .half_element_element {
+        max-width: 100%;
+        float: left;
+        margin-left: 0px;
+    }
+
+    .half_element_before {
+        display: none;
+    }
+
+    .half_element_after {
+        display: table;
+        clear: both;
+    }
+}

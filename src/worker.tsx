@@ -65,7 +65,7 @@ async function getLqip(image: sharp.Sharp, width: number, height: number): Promi
 // All the parameters needed to convert an image.
 export interface ConvertImageProps {
     // the input image's path
-    input: string,
+    inputPath: string,
     // the requested widths of the output images
     widths: number[],
     // the width of the low quality image preview
@@ -74,14 +74,14 @@ export interface ConvertImageProps {
     lqipHeight: number,
     // When we use object-fit: cover and we use a landscape photo on a portrait device, we might want to create a separate image for this purpose.
     // The other direction (using a portrait image on a landscape device) would be possible, too, but isn't implemented.
-    portraitVersion: {
+    portraitVersion?: {
         // the first value in object-position
         objectFitPositionH: number,
         // the aspect ratio of the cropped image
         aspectRatio: number,
         // the requested widths of the output images
         widths: number[],
-    } | undefined
+    }
 };
 
 // Represent one size of the image.
@@ -171,14 +171,14 @@ export interface ExportedImage {
     // If the image is smaller than any of them, that width won't be used.
     sizes: ImageSize[];
     // Same as sizes but with the portrait version of the image if requested.
-    portraitSizes: ImageSize[] | undefined;
+    portraitSizes?: ImageSize[];
     // The low quality image preview.
     // There's only one lqip for the entire image.
     lqip: React.CSSProperties;
 };
 
 export async function convertImage(props: ConvertImageProps): Promise<ExportedImage> {
-    const file = await fs.promises.readFile(props.input);
+    const file = await fs.promises.readFile(props.inputPath);
     const hash = crypto.hash("md5", file);
     const image = sharp(file).autoOrient().webp({ quality: 80, effort: 6 });
     const metadata = await image.metadata();

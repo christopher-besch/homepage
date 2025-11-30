@@ -5,6 +5,7 @@ import Markdown from "./components/markdown.js";
 import path from "path";
 
 export interface Article {
+    dirPath: string,
     title: string,
     description: string,
     banner: string,
@@ -42,15 +43,16 @@ function assertIsBoolean(input: any): boolean {
 }
 
 export async function prepareArticle(mdPath: string): Promise<Article> {
-    const parentPath = path.dirname(mdPath);
+    const dirPath = path.dirname(mdPath);
     const file = await fs.promises.readFile(mdPath, "utf8");
     const { content: md, data: frontMatter } = matter(file);
 
     return {
+        dirPath: dirPath,
         title: assertIsString(frontMatter['title']),
         description: assertIsString(frontMatter['description']),
-        banner: path.join(parentPath, assertIsString(frontMatter['banner'])),
-        hero: path.join(parentPath, assertIsString(frontMatter['hero'])),
+        banner: path.join(dirPath, assertIsString(frontMatter['banner'])),
+        hero: path.join(dirPath, assertIsString(frontMatter['hero'])),
         heroHorizontalPosition: assertIsNumber(frontMatter['hero_horizontal_position']),
         heroVerticalPosition: assertIsNumber(frontMatter['hero_vertical_position']),
         slug: assertIsString(frontMatter['slug']),
@@ -59,7 +61,7 @@ export async function prepareArticle(mdPath: string): Promise<Article> {
         listed: assertIsBoolean(frontMatter['listed']),
         readingTimeMinutes: readingTime(md).minutes,
         markdown: md,
-        html: <Markdown content={md} />,
+        html: <Markdown content={md} dirPath={dirPath} />,
     };
 }
 

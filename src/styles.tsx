@@ -18,6 +18,8 @@ sourceMap.set("default.css", [
 ]);
 sourceMap.set("article.css", [
     "markdown.module.css",
+    "half_element.module.css",
+    "half_image.module.css",
 ]);
 
 export async function buildStyles() {

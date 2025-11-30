@@ -15,7 +15,7 @@ const portraitWidths = [400, 800];
 const portraitMaxWidth = 500;
 
 interface ImageProps {
-    input: string,
+    inputPath: string,
     alt?: string,
     // When we use object-fit: cover and we use a landscape photo on a portrait device, we might want to create a separate image for this purpose.
     // The other direction (using a portrait image on a landscape device) would be possible, too, but isn't implemented.
@@ -31,7 +31,7 @@ function sizesToSrcSet(sizes: ImageSize[]): string {
 
 export default async function Image(props: ImageProps): Promise<React.ReactNode> {
     const exportedImage = await convertImageOnPool({
-        input: props.input,
+        inputPath: props.inputPath,
         widths: defaultWidths,
         lqipWidth: 3,
         lqipHeight: 3,

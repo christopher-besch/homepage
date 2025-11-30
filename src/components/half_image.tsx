@@ -1,0 +1,16 @@
+import HalfElement from "./half_element.js";
+import Image from "./image.js";
+
+interface HalfImageProps {
+    inputPath: string;
+    alt?: string;
+    // should spread entire width?
+    full?: boolean;
+}
+export default function HalfImage(props: HalfImageProps): React.ReactNode {
+    return (
+        <HalfElement full={props.full}>
+            <Image inputPath={props.inputPath} alt={props.alt} />
+        </HalfElement>
+    );
+}
