@@ -12,13 +12,13 @@ date: "2025-11-22"
 listed: true
 ---
 
-
 Photography needs a camera and I like photography.
 The other day I bought a new, bigger camera making me feel like a big-boy photographer.
 I took it out on a stroll and before the third shot, someone noticed my weighty device.
 They were art students asking me if I could photograph their installations.
 I did and it was fun until the sun set.
 
+<HalfImage full={true} src="zwischenraum.jpg" />
 *Zwischenraum by Maria Charlotte Bitzer, photo: Christopher Besch*
 
 But why did they notice me?
