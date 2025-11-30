@@ -6,7 +6,7 @@ export default function IndexPage(_props: IndexPageProps): React.ReactNode {
     return (
         <Layout
             title="Chris' Homepage"
-            styleSheets={["default.css"]}
+            styleSheets={["always.css", "default.css"]}
             heroImage={{
                 loadPath: "/home/chris/IMG_0026.jpg",
                 objectFitHorizontal: 65,

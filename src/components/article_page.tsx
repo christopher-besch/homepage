@@ -8,7 +8,7 @@ export default async function ArticlePage(props: React.PropsWithChildren<Article
     return <Layout
         title={props.article.title}
         description={props.article.description}
-        styleSheets={["default.css"]}
+        styleSheets={["always.css", "article.css"]}
     >
         {props.article.html}
     </Layout>

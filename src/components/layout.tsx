@@ -4,7 +4,7 @@ import Image from "./image.js";
 interface LayoutProps {
     title: string,
     description?: string,
-    styleSheets?: string[],
+    styleSheets: string[],
     heroImage?: {
         loadPath: string,
         heightFraction?: number,
@@ -14,14 +14,6 @@ interface LayoutProps {
     },
 }
 export default function Layout(props: React.PropsWithChildren<LayoutProps>): React.ReactNode {
-    // TODO: use callback and react context
-    if (props.styleSheets == undefined) {
-        props.styleSheets = [];
-    }
-    props.styleSheets.push("reset.css");
-    const styleSheetLinks = props.styleSheets.map((styleSheet, i) =>
-        <link key={i} rel="stylesheet" type="text/css" href={createStyleLoadPath(styleSheet)} />
-    );
     const nav_links = <div className="layout_nav_links">
         <a href="/articles">Articles</a>
         <a href="/photography">Photos</a>
@@ -37,7 +29,12 @@ export default function Layout(props: React.PropsWithChildren<LayoutProps>): Rea
                 <title>{props.title}</title>
                 <meta name="viewport" content="width=device-width,initial-scale=1" />
                 <meta name="description" content={props.description} />
-                {styleSheetLinks}
+                {/* TODO: add social banner and the likes */}
+
+                {props.styleSheets.map((styleSheet, i) =>
+                    <link key={i} rel="stylesheet" type="text/css" href={createStyleLoadPath(styleSheet)} />
+                )}
+
                 {/* <link rel="icon" href="favicon.png" /> */}
             </head>
 
