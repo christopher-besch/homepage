@@ -17,6 +17,7 @@ sourceMap.set("default.css", [
     "index.module.css",
 ]);
 sourceMap.set("article.css", [
+    "katex.css",
     "markdown.module.css",
     "half_element.module.css",
     "half_image.module.css",

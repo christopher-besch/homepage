@@ -3,6 +3,8 @@ import * as runtime from "react/jsx-runtime";
 import HalfImage from "./half_image.js";
 import HalfVideo from "./half_video.js";
 import path from "path";
+import rehypeKatex from "rehype-katex";
+import remarkMath from "remark-math";
 
 interface MarkdownProps {
     content: string,
@@ -14,6 +16,9 @@ export default async function Markdown(props: MarkdownProps): Promise<React.Reac
     const { default: Markdown } = await mdx.evaluate(props.content,
         {
             ...runtime,
+            // TODO: add fonts
+            rehypePlugins: [rehypeKatex],
+            remarkPlugins: [remarkMath],
         });
 
     return <Markdown components={{
