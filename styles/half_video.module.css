@@ -1,0 +1,18 @@
+.half_video_video {
+    width: 100%;
+    height: auto;
+}
+
+.half_video_removed_warn {
+    display: none;
+}
+
+@media print {
+    .half_video_video {
+        display: none;
+    }
+
+    .half_video_removed_warn {
+        display: block;
+    }
+}

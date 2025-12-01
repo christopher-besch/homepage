@@ -1,6 +1,6 @@
 import type React from "react";
-import { convertImageOnPool } from "../worker_pool.js";
-import type { ImageSize } from "../worker.js";
+import { convertImageOnPool } from "../worker/worker_pool.js";
+import type { ImageSize } from "../worker/convert_image.js";
 
 const defaultWidths = [400, 800, 1200, 1600];
 const portraitAspectRatio = 9 / 16;

@@ -1,6 +1,7 @@
 import * as mdx from "@mdx-js/mdx";
 import * as runtime from "react/jsx-runtime";
 import HalfImage from "./half_image.js";
+import HalfVideo from "./half_video.js";
 import path from "path";
 
 interface MarkdownProps {
@@ -17,7 +18,19 @@ export default async function Markdown(props: MarkdownProps): Promise<React.Reac
 
     return <Markdown components={{
         HalfImage(imageProps) {
-            return <HalfImage inputPath={path.join(props.dirPath, imageProps.src)} full={imageProps.full} alt={imageProps.alt} />
+            return <HalfImage inputPath={path.join(props.dirPath, imageProps.src)} full={imageProps.full} alt={imageProps.alt} />;
+        },
+        HalfVideo(videoProps) {
+            return <HalfVideo
+                inputPath={path.join(props.dirPath, videoProps.src)}
+                width={videoProps.width}
+                height={videoProps.height}
+                full={videoProps.full}
+            />;
+        },
+        // Clear float.
+        Spacer(_spacerProps) {
+            return <div className="markdown_spacer" />;
         },
     }} />;
 }

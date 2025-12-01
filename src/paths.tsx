@@ -28,16 +28,13 @@ export function createRouteDeployPath(route: string): string {
 // styles //
 const loadStylesPath = `/styles`;
 const deployStylesPath = path.join(deployPath, loadStylesPath);
-
 export function createStyleLoadPath(style: string): string {
     return path.join(loadStylesPath, style);
 }
-
 export function createStyleDeployPath(style: string): string {
     ensureDirExists(deployStylesPath);
     return path.join(deployStylesPath, style);
 }
-
 export function getStyleSourcePath(style: string): string {
     return path.join(stylesPath, style);
 }
@@ -45,11 +42,9 @@ export function getStyleSourcePath(style: string): string {
 // images //
 const loadImagesPath = `/images`;
 const deployImagesPath = path.join(deployPath, loadImagesPath);
-
 export function createImageLoadPath(hash: string, width: number, height: number): string {
     return path.join(loadImagesPath, `${hash}_${width}_${height}.webp`);
 }
-
 export function createImageDeployPath(hash: string, width: number, height: number): string {
     ensureDirExists(deployImagesPath);
     return path.join(deployImagesPath, `${hash}_${width}_${height}.webp`);
@@ -78,4 +73,28 @@ export async function getArticles(): Promise<string[]> {
 
 export function getArticleDeployRoute(slug: string): string {
     return path.join(loadArticlesPath, slug);
+}
+
+// videos //
+const loadVideosPath = `/videos`;
+const deployVideosPath = path.join(deployPath, loadVideosPath);
+function createVideoLoadPath(name: string): string {
+    return path.join(loadVideosPath, name);
+}
+function createVideoDeployPath(name: string): string {
+    ensureDirExists(deployVideosPath);
+    return path.join(deployVideosPath, name);
+}
+// Return the loadPath for the video.
+export function copyVideo(inputPath: string): string {
+    const name = path.basename(inputPath);
+    const deployPath = createVideoDeployPath(name);
+    // Only copy when there's a new file.
+    // TODO: add hashing to detect change
+    if (!fs.existsSync(deployPath)) {
+        // We don't need to await this.
+        // This can happen in the background.
+        fs.promises.cp(inputPath, deployPath);
+    }
+    return createVideoLoadPath(name);
 }

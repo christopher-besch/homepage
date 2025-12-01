@@ -2,7 +2,7 @@ import * as fs from "fs";
 import { renderToPipeableStream } from "react-dom/server";
 import { buildStyles } from "./styles.js";
 import { createRouteDeployPath, copyStatic, getArticles, getArticleDeployRoute } from "./paths.js";
-import { startPool } from "./worker_pool.js";
+import { startPool } from "./worker/worker_pool.js";
 
 import IndexPage from "./components/index_page.js";
 import ArticlePage from "./components/article_page.js";

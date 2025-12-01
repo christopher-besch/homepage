@@ -20,6 +20,7 @@ sourceMap.set("article.css", [
     "markdown.module.css",
     "half_element.module.css",
     "half_image.module.css",
+    "half_video.module.css",
 ]);
 
 export async function buildStyles() {

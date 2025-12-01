@@ -1,6 +1,6 @@
 import { Piscina } from "piscina";
-import { workerPath } from "./paths.js";
-import { type ConvertImageProps, type ExportedImage } from "./worker.js";
+import { workerPath } from "../paths.js";
+import { type ConvertImageProps, type ExportedImage } from "./convert_image.js";
 
 let pool: Piscina;
 
