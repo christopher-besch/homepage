@@ -151,10 +151,13 @@ function resizeImageMultiple(
     hash: string,
     widths: number[],
 ): ImageSize[] {
-    let actualWidths = widths.filter((width) => { return width <= originalWidth; });
-    if (actualWidths.length == 0) {
-        // None of the target widths are small enough.
-        // This is a tiny image.
+    let actualWidths = widths.filter(width => width <= originalWidth);
+    const largerWidths = widths.filter(width => width > originalWidth);
+    if (largerWidths.length != 0 && !actualWidths.includes(originalWidth)) {
+        // There is a whished for width that the we can't produce because the input is too small.
+        // But the actual input width is throw away because there is no whished for width exactly that wide.
+        // This problem can be very severe.
+        // Therefore we add the original width, too.
         actualWidths.push(originalWidth);
     }
 
