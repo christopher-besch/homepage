@@ -1,5 +1,4 @@
 ---
-type: article
 title: "The Bitter Feeling of Technical Compromises"
 description: "
 My very personal troubles dealing with compromises,
@@ -7,15 +6,13 @@ explained at an example of docker_cron with Renovate.
 
 Sometimes you really don't have to worry as much and trust your previous, careful considerations.
 "
-banner: /social_banner/docker_cron.png
-thumb: ../../../static/social_banner/docker_cron.png
-title_banner: ../../images/photography/bravo_alpha.jpg
-title_banner_horizontal_position: 10%
-title_banner_vertical_position: 100%
+banner: ./"banner.png"
+hero: ./"hero.jpg"
+hero_horizontal_position: 10
+hero_vertical_position: 100
 slug: technical_compromises
-date: 2025-09-25T00:00:00+00:00
+date: "2025-09-25"
 listed: true
-version: 1.0.0
 ---
 
 Heads up:

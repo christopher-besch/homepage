@@ -1,15 +1,12 @@
 ---
-type: article
 title: "Bodging MP3 Names in Bash"
 description: "
 Why do it complicated when a Bash one-liner does it too?
 "
-banner: /social_banner/bash_cmds.png
-thumb: ../../../static/social_banner/bash_cmds.png
+banner: ./"banner.png"
 slug: bash_cmds/mp3_tag
-date: 2022-10-12T00:00:00+00:00
+date: "2022-10-12"
 listed: true
-version: 1.0.0
 ---
 
 ```bash

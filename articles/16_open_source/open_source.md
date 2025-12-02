@@ -1,5 +1,4 @@
 ---
-type: article
 title: "Why I love Open-Source"
 description: "
 We all live in a world of immensely complex technology.
@@ -8,21 +7,14 @@ Regardless if you are a user, developer or simply interested in a healthy societ
 Open-Source is a quality mark, a form of democracy and ownership, capitalism at its best and thus the response to this world, a world in which software exists.
 This article gets to that conclusion without requiring any prior technical knowledge.
 "
-banner: /social_banner/open_source.png
-thumb: ../../../static/social_banner/open_source.png
-title_banner: ../../images/photography/bravo_bravo.jpg
-title_banner_horizontal_position: 40%
-title_banner_vertical_position: 0%
+banner: ./"banner.png"
+hero: ./"hero.jpg"
+hero_horizontal_position: 40
+hero_vertical_position: 0
 slug: open_source
-date: 2025-10-11T00:00:00+00:00
+date: "2025-10-11"
 listed: true
-version: 1.0.0
 ---
-
-import eniac from "./eniac.jpg";
-import chrisw_typewriter_article from "./chrisw_typewriter_article.jpg";
-import chrisw_typewriter from "./chrisw_typewriter.jpg";
-import chrisw_typewriter_open from "./chrisw_typewriter_open.jpg";
 
 We all live in a world of immensely complex technology.
 The concept of Open-Source might seem radical at first but it's indispensable in our world.
@@ -37,7 +29,7 @@ The thing you can hold in your hand is *hardware*, the text editor you use on it
 To use this text editor you need to give your laptop an *executable*.
 The developer of that text editor wrote *source code* and converted (i.e., *compiled*) that into the executable.
 
-<HalfImage src={eniac} />
+<HalfImage src="eniac.jpg" />
 
 With this example in mind, enjoy the general explanation:
 For centuries we humans have been hard at work creating technology.
@@ -260,7 +252,7 @@ They actually do work on some Open-Source software, too.
 And I think that's pretty cool!
 
 ### Why wasn't Closed-Source a Problem Back in the Day?
-<HalfImage src={chrisw_typewriter} />
+<HalfImage src="chrisw_typewriter.jpg" />
 
 Let's buy a typewriter (picture by [Christoph Wolf](https://teccheck.xyz))!
 Sure, you can write your document with it but there's more.
@@ -275,7 +267,7 @@ However, if the manufacturer switched from mechanical typewriters to software an
 That's a loss.
 I argue, Open-Source is the **response to a world in which software exists**.
 
-<HalfImage src={chrisw_typewriter_open} />
+<HalfImage src="chrisw_typewriter_open.jpg" />
 
 Let me spin this along a little more:
 Press a key on the typewriter and follow the mechanism producing some ink on the page.
@@ -469,4 +461,4 @@ The first result was an official wiki on the matter of [how to properly discard 
 How German, I suppose...<br />
 Instead, [Christoph Wolf](https://teccheck.xyz) helped out, tracked down a typewriter and took a few pictures for me.
 He even typed down this article's introduction on it, how cute!
-<HalfImage src={chrisw_typewriter_article} full={true}/>
+<HalfImage src="chrisw_typewriter_article.jpg" full={true}/>

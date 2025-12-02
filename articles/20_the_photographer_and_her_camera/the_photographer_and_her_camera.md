@@ -1,21 +1,16 @@
 ---
-type: article
 title: "The Photographer and her Camera"
 description: "
 I bought a new, bigger camera and want to be independent of it.
 "
-banner: /social_banner/the_photographer_and_her_camera.png
-thumb: ../../../static/social_banner/the_photographer_and_her_camera.png
-title_banner: ../../images/photography/bravo_foxtrot.jpg
-title_banner_horizontal_position: 0%
-title_banner_vertical_position: 100%
+banner: ./"banner.png"
+hero: ./"hero.jpg"
+hero_horizontal_position: 0
+hero_vertical_position: 100
 slug: the_photographer_and_her_camera
-date: 2025-11-22T00:00:00+00:00
+date: "2025-11-22"
 listed: true
-version: 1.0.0
 ---
-
-import zwischenraum from "./zwischenraum.jpg";
 
 Photography needs a camera and I like photography.
 The other day I bought a new, bigger camera making me feel like a big-boy photographer.
@@ -23,7 +18,7 @@ I took it out on a stroll and before the third shot, someone noticed my weighty 
 They were art students asking me if I could photograph their installations.
 I did and it was fun until the sun set.
 
-<HalfImage full={true} src={zwischenraum} />
+<HalfImage full={true} src="zwischenraum.jpg" />
 *Zwischenraum by Maria Charlotte Bitzer, photo: Christopher Besch*
 
 But why did they notice me?

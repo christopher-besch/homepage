@@ -1,18 +1,15 @@
 ---
-type: article
 title: "Inject Fonts into Web SVGs with sed"
 description: "
 Add font-loading CSS to SVGs with a sed script.
 "
-banner: /social_banner/web_svgs.png
-thumb: ../../../static/social_banner/web_svgs.png
-title_banner: ../../images/photography/alpha_romeo.jpg
-title_banner_horizontal_position: 30%
-title_banner_vertical_position: 25%
+banner: ./"banner.png"
+hero: ./"hero.jpg"
+hero_horizontal_position: 30
+hero_vertical_position: 25
 slug: svg_fonts_with_sed
-date: 2025-02-10T00:00:00+00:00
+date: "2025-02-10"
 listed: true
-version: 1.0.0
 ---
 
 So you want to embed an SVG on your website and add this to your HTML:

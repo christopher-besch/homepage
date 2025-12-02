@@ -1,20 +1,17 @@
 ---
-type: article
 title: "LunarVim in Distrobox"
 description: "
 You're missing that one program that isn't available in your Linux distro?
 With Distrobox, the 'Linux Subsystem for Linux,' you can install it anyways.
 This article explains how to do that with the example of installing LunarVim on Red Hat.
 "
-banner: /social_banner/lvim.png
-thumb: ../../../static/social_banner/lvim.png
-title_banner: ../../images/photography/alpha_tango.jpg
-title_banner_horizontal_position: 60%
-title_banner_vertical_position: 70%
+banner: ./"banner.png"
+hero: ./"hero.jpg"
+hero_horizontal_position: 60
+hero_vertical_position: 70
 slug: lvim_in_distrobox
-date: 2022-10-25T00:00:00+00:00
+date: "2022-10-25"
 listed: true
-version: 1.0.0
 ---
 
 You're missing that one program that isn't available in your Linux distro?

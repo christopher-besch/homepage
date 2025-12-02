@@ -1,25 +1,18 @@
 ---
-type: article
 title: "Real-Time Linux on RISC-V"
 description: "
 Setting up Linux v6.12 on a StarFive VisionFive 2 with PREEMPT_RT.
 
 Also: How to setup your Linux laptop as a simple NAT router.
 "
-banner: /social_banner/riscv_rt.png
-thumb: ../../../static/social_banner/riscv_rt.png
-title_banner: ../../images/photography/alpha_yankee.jpg
-title_banner_horizontal_position: 20%
-title_banner_vertical_position: 40%
+banner: ./"banner.png"
+hero: ./"hero.jpg"
+hero_horizontal_position: 20
+hero_vertical_position: 40
 slug: riscv_rt
-date: 2025-06-27T00:00:00+00:00
+date: "2025-06-27"
 listed: true
-version: 1.0.0
 ---
-
-import kernel_config from "./kernel_config.png";
-import general_setup_config from "./general_setup_config.png";
-import preemption_model_config from "./preemption_model_config.png";
 
 I got access to a StarFive VisionFive 2 and wanted to play around with Real-Time Linux on it.
 This article goes into excruciating detail on how I set that machine up to with `PREEMPT_RT`.
@@ -205,7 +198,7 @@ Now we need to configure PREEMPT_RT:
 make ARCH=riscv menuconfig
 ```
 
-<HalfImage src={preemption_model_config} />
+<HalfImage src="preemption_model_config.png" />
 
 In this menu screen we select **Scheduler controlled preemption model** mode under **General setup** then **Preemption Model**.
 In my case I also had to set this in the `.config` file in order to differentiate this kernel from a `PREEMPT_DYNAMIC` build I also created.
@@ -263,7 +256,6 @@ menu title U-Boot menu
 prompt 0
 timeout 50
 
-
 label l0
         menu label Debian GNU/Linux trixie/sid 6.12.5preempt-rt+
         linux /vmlinuz-6.12.5preempt-rt+
@@ -279,7 +271,6 @@ label l0r
         fdtdir /dtbs/6.12.5preempt-rt+
         append root=/dev/mmcblk1p4 root=/dev/mmcblk1p4 rw console=tty0 console=ttyS0,115200 earlycon rootwait stmmaceth=chain_mode:1 selinux=0 single
 
-
 label l1
         menu label Debian GNU/Linux trixie/sid 6.12.5+
         linux /vmlinuz-6.12.5+
@@ -294,7 +285,6 @@ label l1r
         initrd /initrd.img-6.12.5+
         fdtdir /dtbs/6.12.5+
         append root=/dev/mmcblk1p4 root=/dev/mmcblk1p4 rw console=tty0 console=ttyS0,115200 earlycon rootwait stmmaceth=chain_mode:1 selinux=0 single
-
 
 label l2
         menu label Debian GNU/Linux trixie/sid 6.6.20-starfive

@@ -1,31 +1,15 @@
 ---
-type: article
 title: "Maki, Atoms and Time Travel"
 description: "
     Maki showcases how a program for interactive and programmatic animation development can be implemented.
 
     Its programmatic approach provides the precision technical concepts require, while its interactivity and real-time updates avoid a disconnect between input and output.
 "
-banner: /social_banner/maki_atoms_and_time_travel.png
-thumb: ../../../static/social_banner/maki_atoms_and_time_travel.png
+banner: ./"banner.png"
 slug: maki_atoms_and_time_travel
-date: 2022-02-06T00:00:00+00:00
+date: "2022-02-06"
 listed: true
-version: 1.0.2
 ---
-import full_showcase_01 from "./full_showcase_01.mp4";
-import full_showcase_01_poster from "./full_showcase_01_poster.png";
-
-import 01_init from "./01_init.mp4";
-import 02_create_cube from "./02_create_cube.mp4";
-import 03_show_cube from "./03_show_cube.mp4";
-import 04_colouring from "./04_colouring.mp4";
-import 05_translate_cube from "./05_translate_cube.mp4";
-import 06_smooth_translation from "./06_smooth_translation.mp4";
-import 07_time_travel from "./07_time_travel.mp4";
-
-import fly_around_01 from "./fly_around_01.mp4";
-import fly_around_02 from "./fly_around_02.mp4";
 
 To create animations for technical concepts, one is advised to use graphics software with a programmatic approach.
 While these provide the required precision, they suffer from an inherent disconnect between input and output.
@@ -36,7 +20,7 @@ To experiment with different technologies and programming paradigms, I created a
 This article outlines Maki's design decisions and discusses planned future development.
 
 ### Table of Contents
-<AutoPlayVideo src={full_showcase_01} poster={full_showcase_01_poster} />
+<HalfVideo src="full_showcase_01.mp4" />
 
 {
 <ul>
@@ -88,39 +72,39 @@ The user can decide which frame of the animation should be played.
 This allows an **easy to use** workflow, minimizing the time between defining animations and playing with the results.
 
 ## Walkthrough
-<AutoPlayVideo src={01_init} />
+<HalfVideo src="01_init.mp4" />
 
 To start working with Maki, one has to initialize it.
 This defines the rendering API to be used and creates a window of the specified size.
 
-<AutoPlayVideo src={02_create_cube} />
+<HalfVideo src="02_create_cube.mp4" />
 
 Once that is done, you can create an atom.
 This call to `add_cuboid_atom` returns a handle to the cuboid.
 But you will see...that you don't see anything.
 
-<AutoPlayVideo src={03_show_cube} />
+<HalfVideo src="03_show_cube.mp4" />
 
 That's because you've only created the atom;
 you still have to tell Maki to actually render it.
 This call to `show_cuboid_atom` orders Maki to start showing the atom at frame `1`.
 
-<AutoPlayVideo src={04_colouring} />
+<HalfVideo src="04_colouring.mp4" />
 
 We can also change the colour.
 Each call again needs to know what frame it should be applied to.
 
-<AutoPlayVideo src={05_translate_cube} />
+<HalfVideo src="05_translate_cube.mp4" />
 
 Our cube can also be moved.
 But Maki currently only supports instant movement—"teleporting" from one frame to the next.
 
-<AutoPlayVideo src={06_smooth_translation} />
+<HalfVideo src="06_smooth_translation.mp4" />
 
 Smooth transitions have to be implemented on the Python side. 
 This quick implementation performs just that; it smoothly shifts the cube from frame `60` to frame `200`.
 
-<AutoPlayVideo src={07_time_travel} />
+<HalfVideo src="07_time_travel.mp4" />
 
 As you can see, Maki currently shows the 199th frame.
 But now I'm applying another downward translation from frame `5` to `50`.
@@ -130,7 +114,6 @@ The moment the shift is being applied, Maki performs a [Chrono Sync](#chrono-syn
 The past was altered, and we see the repercussions in the present.
 
 <Quote text="The past was erased, the erasure was forgotten, the lie became truth." author="1984" />
-
 
 <Spacer />
 
@@ -232,7 +215,7 @@ This macro has to be set using the `-Dplatform=glfw` flag at compilation.
 As you can see, **extensibility** lies at the heart of Maki.
 
 # Multi Threading
-<AutoPlayVideo src={fly_around_01} />
+<HalfVideo src="fly_around_01.mp4" />
 
 There are always two things happening concurrently:
 
@@ -488,7 +471,7 @@ CuboidRenderer* m_cuboid_renderer {nullptr};
 (The `{nullptr}` is not necessary but always a nice touch ^^).
 
 ## Why Templates?
-<AutoPlayVideo src={fly_around_02} />
+<HalfVideo src="fly_around_02.mp4" />
 
 Why not use an arguably much simpler object-oriented approach?
 

@@ -1,25 +1,20 @@
 ---
-type: article
 title: "Docker: Breathing Life into Decades old Fortran"
 description: "
 Bringing decades old Fortran code to life with Docker and animating it with Python.
 
 Now you get to see Fig.3.5. from \"Introduction to Conventional Transmission Electron Microscopy\" by Prof. Marc De Graef at 30 frames a second.
 "
-banner: /social_banner/ctemsoft.png
-thumb: ../../../static/social_banner/ctemsoft.png
-title_banner: ../../images/photography/alpha_victor.jpg
-title_banner_horizontal_position: 70%
-title_banner_vertical_position: 70%
+banner: ./"banner.png"
+hero: ./"hero.jpg"
+hero_horizontal_position: 70
+hero_vertical_position: 70
 slug: ctemsoft
-date: 2025-04-06T00:00:00+00:00
+date: "2025-04-06"
 listed: true
-version: 1.0.0
 ---
-import lens_cropped from "./lens_cropped.mp4";
-import lens_3_5_cropped from "./lens_3_5_cropped.png";
 
-<HalfImage src={lens_3_5_cropped} />
+<HalfImage src="lens_3_5_cropped.png" />
 
 The other day a friend came by: "Do you know some Fortran90?"
 She was reading "Introduction to Conventional Transmission Electron Microscopy" by Prof. Marc De Graef and wanted to reproduce Fig.3.5 on the right (or above on mobile).
@@ -102,7 +97,7 @@ ENTRYPOINT ["/bin/python3", "/python_src/main.py"]
 
 # Let's make it twirl!
 
-<AutoPlayVideo src={lens_cropped} />
+<HalfVideo src="lens_cropped.mp4" />
 
 lens.f90 takes in a bunch of configuration parameters: the magnetic field strength your electron microscope boasts and the number of sampling points for example.
 Let's interpret these parameters as a vector in the six-dimensional (or nine-dimensional if you have two fields) configuration space.

@@ -1,20 +1,17 @@
 ---
-type: article
 title: "Saving Time with Tests"
 description: "
 Using tests not to increase quality but to more quickly get things done.
 
 Or: How I started to enjoy writing tests.
 "
-banner: /social_banner/testing.png
-thumb: ../../../static/social_banner/testing.png
-title_banner: ../../images/photography/alpha_whiskey.jpg
-title_banner_horizontal_position: 20%
-title_banner_vertical_position: 80%
+banner: ./"banner.png"
+hero: ./"hero.jpg"
+hero_horizontal_position: 20
+hero_vertical_position: 80
 slug: testing
-date: 2025-05-14T00:00:00+00:00
+date: "2025-05-14"
 listed: true
-version: 1.0.0
 ---
 
 Writing tests is awful!

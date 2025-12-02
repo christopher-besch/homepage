@@ -1,27 +1,14 @@
 ---
-type: article
 title: "Installing Gentoo To My Liking"
 description: "
     Gentoo is a Linux distribution that offers as many options as possible.
     This article leads you through the decisions I took to end up with a system that best suits my needs.
 "
-banner: /social_banner/installing_gentoo.png
-thumb: ../../../static/social_banner/installing_gentoo.png
+banner: ./"banner.png"
 slug: installing_gentoo
-date: 2022-04-26T00:00:00+00:00
+date: "2022-04-26"
 listed: true
-version: 1.2.1
 ---
-import cpu_usage from "./cpu_usage.png";
-import pavucontrol from "./pavucontrol.png";
-import xfce_system_defaults_keyboard_layout from "./xfce_system_defaults_keyboard_layout.png";
-import firefox_keyword_enabled from "./firefox_keyword_enabled.png";
-import firefox_search_bar from "./firefox_search_bar.png";
-import stage3_download from "./stage3_download.png";
-import my_desktop from "./my_desktop.png";
-import unixporn from "./unixporn.png";
-import bash_completion from "./bash_completion.mp4";
-import vm_snapshots from "./vm_snapshots.png";
 
 Gentoo is a Linux distribution that offers as many options as possible.
 While its package manager Portage leverages the heavy lifting, you have to deal with the choosing such freedom entails:
@@ -32,7 +19,7 @@ While dysfunctional combinations butchered some of those installations beyond re
 In the end I might not have become an expert but I surely did learn a lot during this endeavour.
 So this opinionated article documents said endeavour, all choices I made, any problems I encountered and their subsequent solutions.
 
-<HalfImage src={vm_snapshots} />
+<HalfImage src="vm_snapshots.png" />
 
 If you decide to try Gentoo for yourself, I'd recommend doing so in a virtual machine instead of directly on your hardware.
 VMs allow you to save snapshots before each step.
@@ -137,7 +124,7 @@ UUID=0b04fdcc-6d7f-4a88-bf57-1c2965bf8ceb /     ext4 noatime          0 1
 To install the operating system, a few tools need to be available.
 These are the first things your soon to be Linux installation gets to consist out of, or in other words its primordial soup.
 This primordial soup, correctly called stage 3, comes in a few varieties:
-<HalfImage src={stage3_download} />
+<HalfImage src="stage3_download.png" />
 
 I want a system with a desktop, so I chose the appropriate desktop profile.
 And then there's the matter of the init system.
@@ -205,10 +192,10 @@ Therefore I'm using the most lightweight and least painful desktop environment I
 Out of the box it doesn't look as fancy as your average [r/unixporn](https://www.reddit.com/r/unixporn) post but you can tailor it to your liking—which I promptly didn't do.
 
 So my desktop looks as basic as you can get:
-<HalfImage src={my_desktop} full={true} />
+<HalfImage src="my_desktop.png" full={true} />
 
 But if pretty graphics are your cup of tee, take a look at what [u/linuxscoop](https://www.reddit.com/user/linuxscoop) managed to do with Xfce:
-<HalfImage src={unixporn} full={true} />
+<HalfImage src="unixporn.png" full={true} />
 
 <Spacer />
 
@@ -217,10 +204,10 @@ This most notably includes selecting an appropriate profile when [installing the
 
 There are a few extra packages I like to complement Xfce with.
 - `xfce-extra/xfce4-screenshooter`: A simple screenshot tool.
-<HalfImage src={cpu_usage} />
+<HalfImage src="cpu_usage.png" />
 - `xfce-extra/xfce4-cpugraph-plugin`: Show your current CPU usage in the task bar.
 - `xfce-extra/xfce4-notifyd`: Enable notifications.
-<HalfImage src={pavucontrol} />
+<HalfImage src="pavucontrol.png" />
 - `media-sound/pavucontrol`: Allow for more fine grained control over your audio devices.
 - `media-fonts/fonts-meta`: Install non-Latin character set.
 - `media-fonts/noto-emoji`: Install emojis.
@@ -244,7 +231,7 @@ Feel free to play around with other options, SDDM is only the first one I tried 
 (Don't forget to activate its daemon with `systemctl enable sddm.service`.)
 
 To set the keyboard layout for the login screen—what Xfce calls it's "system defaults"—you have to create the `/usr/share/sddm/scripts/Xsetup` script.
-<HalfImage src={xfce_system_defaults_keyboard_layout} />
+<HalfImage src="xfce_system_defaults_keyboard_layout.png" />
 
 This sets it to the UK keyboard layout:
 ```bash
@@ -311,7 +298,7 @@ To install it you have to extract a tarball in your home directory.
 This is explained [here](https://github.com/lawl/NoiseTorch#download--install).
 
 ### Git
-<AutoPlayVideo src={bash_completion} width={600} height={280} />
+<HalfVideo src="bash_completion.mp4" width={600} height={280} />
 
 To make git work the way you're used to, you need two packages:
 - `dev-vcs/git`
@@ -362,11 +349,11 @@ I like using these extensions:
 - [Stylus](https://addons.mozilla.org/en-US/firefox/addon/styl-us): Add prettier dark mode to GitHub with [this StylishTheme](https://github.com/StylishThemes/Github-Dark).
 
 What I also like doing is splitting the address and search bar.
-<HalfImage src={firefox_search_bar} />
+<HalfImage src="firefox_search_bar.png" />
 
 Then you can remove search results from the address bar and not leak any urls to your search provider.
 You can do so in the `about:config` page.
-<HalfImage src={firefox_keyword_enabled} />
+<HalfImage src="firefox_keyword_enabled.png" />
 
 ### QEMU and Virt-manager
 After [a friend](https://github.com/RaafatTurki) made me aware of the huge performance increase KVM (**K**ernel-based **V**irtual **M**achine) entails, I switched to QEMU with the Virt-manager frontend.

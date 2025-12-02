@@ -1,5 +1,4 @@
 ---
-type: article
 title: "Forgejo Actions Notification Development"
 description: "
 Some stories of how I work on Forgejo.
@@ -7,20 +6,14 @@ How is a Go project structured?
 What's the point of Forgejo's layered architecture and what's that pub-sub pattern?
 Additionally, I exhaustively explain how to setup a development environment for Forgejo.
 "
-banner: /social_banner/forgejo_actions_notification.png
-thumb: ../../../static/social_banner/forgejo_actions_notification.png
-title_banner: ../../images/photography/bravo_delta.jpg
-title_banner_horizontal_position: 85%
-title_banner_vertical_position: 60%
+banner: ./"banner.png"
+hero: ./"hero.jpg"
+hero_horizontal_position: 85
+hero_vertical_position: 60
 slug: forgejo_actions_notification
-date: 2025-11-20T00:00:00+00:00
+date: "2025-11-20"
 listed: true
-version: 1.0.0
 ---
-
-import architecture from "./architecture.svg";
-import release_notes from "./release_notes.png";
-import webhook_settings from "./webhook_settings.png";
 
 This article is about Forgejo, a code forge:
 Just like GitHub or GitLab it's a place to (collaboratively) develop software.
@@ -161,7 +154,7 @@ Forgejo tackle this issue by introducing a layered [architecture](https://forgej
 It groups packages into layers and forbids packages from importing code in higher layers.
 I've drawn an overview over this structure:
 
-<HalfImage full={true} src={architecture} />
+<HalfImage full={true} src="architecture.svg" />
 
 `/routers`, `/services`, `/models` and `/modules` are some of the *main directories* where most of Forgejo's Go code lives.
 As we can see, there are three layers.
@@ -231,7 +224,7 @@ I find this pub-sub pattern pretty intuitive because topics and messages are a c
 Additionally, it allows you to get a quick overview over what code is interested in what change.
 For example, if you give this interactive visualization a brief look, you can figure out that the code related to Forgejo packages is quite separate from everything else.
 
-<Iframe src="https://christopher-besch.github.io/go_observer_pattern_visualizer/viewer" fullscreen />
+<iframe src="https://christopher-besch.github.io/go_observer_pattern_visualizer/viewer" allowFullScreen={true}/>
 
 If you're interested in this visualization and what the commit history on the right has to do with it, take a look at my new article: [The History of Forgejo's Pub-Sub Pattern](/articles/forgejo_pub_sub_pattern_history).
 
@@ -284,7 +277,7 @@ Again, I added many tests ensuring whenever an `ActionRunNowDone` message requir
 
 ### [#7508](https://codeberg.org/forgejo/forgejo/pulls/7508): Actions Done Webhook
 
-<HalfImage full={false} src={webhook_settings} />
+<HalfImage full={false} src="webhook_settings.png" />
 
 In this PR `forgejo.org/services/webhook` got interested in the `ActionRunNowDone` topic, too.
 It sends out HTTP requests to the webhooks configured in the new settings.<br />
@@ -303,7 +296,7 @@ Both the webhook and the API use the same struct now.
 
 ### Other PRs
 
-<HalfImage full={false} src={release_notes} />
+<HalfImage full={false} src="release_notes.png" />
 
 A few more PRs accompanied this feature, which I won't get into detail:
 - [#7697](https://codeberg.org/forgejo/forgejo/pulls/7697): After the Fact Cleanup

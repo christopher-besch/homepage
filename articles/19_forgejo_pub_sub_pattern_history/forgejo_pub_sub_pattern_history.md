@@ -1,20 +1,17 @@
 ---
-type: article
 title: "The History of Forgejo's Pub-Sub Pattern"
 description: "
 I created a tool to visualize Forgejo's Pub-Sub pattern.
 Why not run that tool on all 24 thousand commits in Forgejo's history?
 What could possibly go wrong?
 "
-banner: /social_banner/forgejo_pub_sub_pattern_history.png
-thumb: ../../../static/social_banner/forgejo_pub_sub_pattern_history.png
-title_banner: ../../images/photography/bravo_echo.jpg
-title_banner_horizontal_position: 50%
-title_banner_vertical_position: 30%
+banner: ./"banner.png"
+hero: ./"hero.jpg"
+hero_horizontal_position: 50
+hero_vertical_position: 30
 slug: forgejo_pub_sub_pattern_history
-date: 2025-10-30T00:00:00+00:00
+date: "2025-10-30"
 listed: true
-version: 1.0.0
 ---
 
 I stood before a well and wondered how deep it would go.
@@ -33,7 +30,7 @@ Packages are Forgejo-orange and topics Codeberg-blue.
 Every arrow goes in the direction messages flow; from sender to receiver.
 Please use a device with a large screen like a laptop; it doesn't work on a smartphone.
 
-<Iframe src="https://christopher-besch.github.io/go_observer_pattern_visualizer/viewer" fullscreen />
+<iframe src="https://christopher-besch.github.io/go_observer_pattern_visualizer/viewer" allowFullScreen={true}/>
 
 The list on the right shows all commits in Forgejo's history that change something about the pub-sub pattern.
 Select a commit see how Forgejo looked like back then.

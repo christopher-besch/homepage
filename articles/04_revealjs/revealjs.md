@@ -1,5 +1,4 @@
 ---
-type: article
 title: "reveal.js your Presentation"
 description: "
     reveal.js is a PowerPoint alternative.
@@ -7,14 +6,11 @@ description: "
 
     This article shows how you can use reveal.js for your own presentation.
 "
-banner: /social_banner/revealjs.png
-thumb: ../../../static/social_banner/revealjs.png
+banner: ./"banner.png"
 slug: revealjs
-date: 2022-06-24T00:00:00+00:00
+date: "2022-06-24"
 listed: true
-version: 1.0.0
 ---
-import resource_loading from "./resource_loading.png";
 
 [reveal.js](https://revealjs.com/) is an open source HTML presentation framework.
 It's recommended to those with a heart for programmatic approaches and web technologies.
@@ -61,7 +57,7 @@ If you're interested in bash, it also explains the automation scripts used.
 }
 
 # What is reveal.js?
-<Iframe present="2022_06_24_reveal_example/" fullscreen />
+<iframe src="https://present.chris-besch.com/2022_06_24_reveal_example/" allowFullScreen={true}/>
 
 Use the blue arrows in the bottom right corner to jump between slides.
 If you're using a vertical mobile device, consider turning it and reading this article in landscape mode&mdash;presentations aren't held on TikTok after all.
@@ -103,7 +99,7 @@ Here is an example, where ellipsis (`...`) indicate omitted parts:
     ...
 </div>
 ```
-<Iframe present="2022_06_24_reveal_example/#/1" fullscreen />
+<iframe src="https://present.chris-besch.com/2022_06_24_reveal_example/#/1" allowFullScreen={true}/>
 
 I never use plain horizontal slides.
 Instead I use the outer `<section>` tags to group multiple vertical slides into logical units.
@@ -139,7 +135,7 @@ Lists can be created with the `<ul>` and `<li>` tags as shown below.
     </ul>
 </section>
 ```
-<Iframe present="2022_06_24_reveal_example/#/4" fullscreen />
+<iframe src="https://present.chris-besch.com/2022_06_24_reveal_example/#/4" allowFullScreen={true}/>
 
 ## Horizontal Partitioning
 I use the custom class `half-part` to horizontally split the slide in two parts.
@@ -165,7 +161,7 @@ I use the custom class `half-part` to horizontally split the slide in two parts.
     </ul>
 </div>
 ```
-<Iframe present="2022_06_24_reveal_example/#/5" fullscreen />
+<iframe src="https://present.chris-besch.com/2022_06_24_reveal_example/#/5" allowFullScreen={true}/>
 
 `half-part` class is defined in [theme/template/custom_styles.scss](https://github.com/christopher-besch/presentations/blob/main/theme/template/custom_styles.scss).
 The build system compiling SCSS to CSS I used is described [below](#installing-and-compiling-like-me).
@@ -196,7 +192,7 @@ This article is already nerdy enough so check out [2022_03_14_neue_formeln_messu
     \end{aligned}\]
 </p>
 ```
-<Iframe present="2022_06_24_reveal_example/#/6" fullscreen />
+<iframe src="https://present.chris-besch.com/2022_06_24_reveal_example/#/6" allowFullScreen={true}/>
 
 The `<p>` tag creates a paragraph and the `<br / >` a newline.
 
@@ -208,7 +204,7 @@ The `<p>` tag creates a paragraph and the `<br / >` a newline.
     <span style="float: right;">—Bjarne Stroustrup</span>
 </blockquote>
 ```
-<Iframe present="2022_06_24_reveal_example/#/7" fullscreen />
+<iframe src="https://present.chris-besch.com/2022_06_24_reveal_example/#/7" allowFullScreen={true}/>
 
 ## Code Blocks
 I'm using [highlight.js](https://highlightjs.org) for code highlighting.
@@ -221,7 +217,7 @@ A little bit of code
     </code>
 </pre>
 ```
-<Iframe present="2022_06_24_reveal_example/#/8" fullscreen />
+<iframe src="https://present.chris-besch.com/2022_06_24_reveal_example/#/8" allowFullScreen={true}/>
 
 ## Animations
 There are two main ways of animating elements:
@@ -260,7 +256,7 @@ You can find more information in [the official documentation](https://revealjs.c
     </div>
 </section>
 ```
-<Iframe present="2022_06_24_reveal_example/#/9" fullscreen />
+<iframe src="https://present.chris-besch.com/2022_06_24_reveal_example/#/9" allowFullScreen={true}/>
 
 ### Fragments
 The main problem with auto-animate is code duplication:
@@ -286,7 +282,7 @@ If you need a different order in which to reveal the fragments, use the `data-fr
     </ul>
 </section>
 ```
-<Iframe present="2022_06_24_reveal_example/#/10" fullscreen />
+<iframe src="https://present.chris-besch.com/2022_06_24_reveal_example/#/10" allowFullScreen={true}/>
 
 ## Title Page
 At this point you might be wondering how I'm defining the left and right headers on each slide.
@@ -328,7 +324,7 @@ Take another look at the very beginning of the example presentation:
     </section>
     ...
 ```
-<Iframe present="2022_06_24_reveal_example/" fullscreen />
+<iframe src="https://present.chris-besch.com/2022_06_24_reveal_example/" allowFullScreen={true}/>
 
 Contrary to Benjamin Hackl's version, these headers are defined within the `div class="slides">` environment, right before the first slide.
 This makes the headers scale correctly with different screen resolutions.
@@ -367,7 +363,7 @@ This is only a little sneak peek of what can be done.
     taken by an even more beautiful photographer.
 </section>
 ```
-<Iframe present="2022_06_24_reveal_example/#/11" fullscreen />
+<iframe src="https://present.chris-besch.com/2022_06_24_reveal_example/#/11" allowFullScreen={true}/>
 
 # Template
 To quickly get started you can use [my template](https://github.com/christopher-besch/presentations/blob/main/template/index.html).
@@ -393,7 +389,7 @@ While searching for a workaround, I realized that the `index.html` file isn't ac
 This means that you can compile the reveal.js resources once and use them in multiple presentations;
 the compiled reveal.js resources are independent of the individual presentations.
 
-<HalfImage src={resource_loading} />
+<HalfImage src="resource_loading.png" />
 
 Additionally I need high reliability&mdash;
 when you're standing in front of an audience, your presentation **has** to work.

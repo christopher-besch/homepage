@@ -1,37 +1,29 @@
 ---
-type: article
 title: "How my GitHub Pages got Hacked"
 description: "
 A DNS forward is an expression of trust.
 GitHub broke my trust and someone else received control over my domain.
 "
-banner: /social_banner/github_pages_hack.png
-thumb: ../../../static/social_banner/github_pages_hack.png
-title_banner: ../../images/photography/bravo_charlie.jpg
-title_banner_horizontal_position: 100%
-title_banner_vertical_position: 80%
+banner: ./"banner.png"
+hero: ./"hero.jpg"
+hero_horizontal_position: 100
+hero_vertical_position: 80
 slug: github_pages_hack
-date: 2025-10-18T00:00:00+00:00
+date: "2025-10-18"
 listed: true
-version: 1.0.0
 ---
-
-import hacked_page from "./hacked_page.png";
-import github_pages_settings from "./github_pages_settings.png";
-import name_com from "./name_com.png";
-import github_verified_domains from "./github_verified_domains.png";
 
 On 13th October 2025 at 16:22 UTC+2 I opened one of my websites, `dev.chris-besch.com`, and found it hacked (see the below screenshot).
 
-<HalfImage src={hacked_page} />
+<HalfImage src="hacked_page.png" />
 
 Let me explain what happened and how I resolved the situation.
 Firstly, I'm using [GitHub Pages](https://docs.github.com/en/pages) to host the website in question.
 GitHub Pages allows me to define what domain to host the website on.
 
-<HalfImage full={true} src={github_pages_settings} />
+<HalfImage full={true} src="github_pages_settings.png" />
 
-<HalfImage src={name_com} />
+<HalfImage src="name_com.png" />
 
 How does that work?
 After all GitHub doesn't have control over my domain, only I do.
@@ -58,7 +50,7 @@ Those kinds of validations proof that a website has a right to be where it is; t
 Still, browsers don't really differentiate between the validation types in the user interface.
 
 ### Resolution
-<HalfImage src={github_verified_domains} />
+<HalfImage src="github_verified_domains.png" />
 
 I didn't forward to a generic GitHub domain, I forwarded to `christopher-besch.github.io`.
 So, GitHub could have checked my DNS record and realized that I, `christopher-besch`, don't want someone else hosting GitHub Pages on my domain.
