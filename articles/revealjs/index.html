@@ -7,7 +7,7 @@ If you&#x27;re interested in bash, it also explains the automation scripts used.
 <h3 id="table-of-contents"><a aria-hidden="true" tabindex="-1" class="markdown_heading_a" href="#table-of-contents"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Table of Contents</h3>
 <ul><li><a href="#what-is-revealjs">What is reveal.js?</a><ul><li><a href="#slides-and-vertical-slides">Slides and Vertical Slides</a></li><li><a href="#headings-and-lists">Headings and Lists</a></li><li><a href="#horizontal-partitioning">Horizontal Partitioning</a></li><li><a href="#latex">LaTeX</a></li><li><a href="#quotes">Quotes</a></li><li><a href="#code-blocks">Code Blocks</a></li><li><a href="#animations">Animations</a><ul><li><a href="#auto-animate">Auto-Animate</a></li><li><a href="#fragments">Fragments</a></li></ul></li><li><a href="#title-page">Title Page</a></li><li><a href="#backgrounds">Backgrounds</a></li></ul></li><li><a href="#template">Template</a></li><li><a href="#installing-and-compiling-like-me">Installing and Compiling Like Me</a><ul><li><a href="#build-script">Build Script</a><ul><li><a href="#plugins">Plugins</a></li><li><a href="#development-environment">Development Environment</a></li></ul></li><li><a href="#clean-script">Clean Script</a></li><li><a href="#integrity-checks">Integrity Checks</a></li><li><a href="#directory-overview">Directory Overview</a></li></ul></li></ul>
 <h1 id="what-is-revealjs"><a aria-hidden="true" tabindex="-1" class="markdown_heading_a" href="#what-is-revealjs"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>What is reveal.js?</h1>
-<div><div class="half_element_full_element"><div class="markdown_iframe_wrapper"><iframe src="https://present.chris-besch.com/2022_06_24_reveal_example/" allowFullScreen=""></iframe></div></div><div class="half_element_spacer"></div></div>
+<div><div class="half_element_full_element"><div class="markdown_iframe_wrapper"><iframe allowFullScreen="" src="https://present.chris-besch.com/2022_06_24_reveal_example/"></iframe></div></div><div class="half_element_spacer"></div></div>
 <p>Use the blue arrows in the bottom right corner to jump between slides.
 If you&#x27;re using a vertical mobile device, consider turning it and reading this article in landscape mode—presentations aren&#x27;t held on TikTok after all.
 To enter fullscreen you have to use a PC, click on the presentation and press <code>F</code> (<code>Esc</code> to exit).
@@ -44,7 +44,7 @@ The default transition between horizontal slides is a horizontal swipe, while ve
     ...
 &lt;/<span class="pl-ent">div</span>&gt;
 </code></pre>
-<div><div class="half_element_full_element"><div class="markdown_iframe_wrapper"><iframe src="https://present.chris-besch.com/2022_06_24_reveal_example/#/1" allowFullScreen=""></iframe></div></div><div class="half_element_spacer"></div></div>
+<div><div class="half_element_full_element"><div class="markdown_iframe_wrapper"><iframe allowFullScreen="" src="https://present.chris-besch.com/2022_06_24_reveal_example/#/1"></iframe></div></div><div class="half_element_spacer"></div></div>
 <p>I never use plain horizontal slides.
 Instead I use the outer <code>&lt;section&gt;</code> tags to group multiple vertical slides into logical units.
 When there&#x27;s a horizontal swipe, the viewer knows that I start talking about a new subtopic.</p>
@@ -74,7 +74,7 @@ Lists can be created with the <code>&lt;ul&gt;</code> and <code>&lt;li&gt;</code
     &lt;/<span class="pl-ent">ul</span>&gt;
 &lt;/<span class="pl-ent">section</span>&gt;
 </code></pre>
-<div><div class="half_element_full_element"><div class="markdown_iframe_wrapper"><iframe src="https://present.chris-besch.com/2022_06_24_reveal_example/#/4" allowFullScreen=""></iframe></div></div><div class="half_element_spacer"></div></div>
+<div><div class="half_element_full_element"><div class="markdown_iframe_wrapper"><iframe allowFullScreen="" src="https://present.chris-besch.com/2022_06_24_reveal_example/#/4"></iframe></div></div><div class="half_element_spacer"></div></div>
 <h2 id="horizontal-partitioning"><a aria-hidden="true" tabindex="-1" class="markdown_heading_a" href="#horizontal-partitioning"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Horizontal Partitioning</h2>
 <p>I use the custom class <code>half-part</code> to horizontally split the slide in two parts.</p>
 <pre><code class="language-html">&lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">&quot;</span>half-part<span class="pl-pds">&quot;</span></span>&gt;
@@ -98,7 +98,7 @@ Lists can be created with the <code>&lt;ul&gt;</code> and <code>&lt;li&gt;</code
     &lt;/<span class="pl-ent">ul</span>&gt;
 &lt;/<span class="pl-ent">div</span>&gt;
 </code></pre>
-<div><div class="half_element_full_element"><div class="markdown_iframe_wrapper"><iframe src="https://present.chris-besch.com/2022_06_24_reveal_example/#/5" allowFullScreen=""></iframe></div></div><div class="half_element_spacer"></div></div>
+<div><div class="half_element_full_element"><div class="markdown_iframe_wrapper"><iframe allowFullScreen="" src="https://present.chris-besch.com/2022_06_24_reveal_example/#/5"></iframe></div></div><div class="half_element_spacer"></div></div>
 <p><code>half-part</code> class is defined in <a href="https://github.com/christopher-besch/presentations/blob/main/theme/template/custom_styles.scss">theme/template/custom_styles.scss</a>.
 The build system compiling SCSS to CSS I used is described <a href="#installing-and-compiling-like-me">below</a>.
 But feel free to simply add the code to a <code>style.css</code> file and import it like this in HTML:</p>
@@ -124,7 +124,7 @@ This article is already nerdy enough so check out <a href="https://github.com/ch
     \end{aligned}\]
 &lt;/<span class="pl-ent">p</span>&gt;
 </code></pre>
-<div><div class="half_element_full_element"><div class="markdown_iframe_wrapper"><iframe src="https://present.chris-besch.com/2022_06_24_reveal_example/#/6" allowFullScreen=""></iframe></div></div><div class="half_element_spacer"></div></div>
+<div><div class="half_element_full_element"><div class="markdown_iframe_wrapper"><iframe allowFullScreen="" src="https://present.chris-besch.com/2022_06_24_reveal_example/#/6"></iframe></div></div><div class="half_element_spacer"></div></div>
 <p>The <code>&lt;p&gt;</code> tag creates a paragraph and the <code>&lt;br / &gt;</code> a newline.</p>
 <h2 id="quotes"><a aria-hidden="true" tabindex="-1" class="markdown_heading_a" href="#quotes"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Quotes</h2>
 <pre><code class="language-html">&lt;<span class="pl-ent">blockquote</span>&gt;
@@ -133,7 +133,7 @@ This article is already nerdy enough so check out <a href="https://github.com/ch
     &lt;<span class="pl-ent">span</span> <span class="pl-e">style</span>=<span class="pl-s"><span class="pl-pds">&quot;</span><span class="pl-c1">float</span>: <span class="pl-c1">right</span>;<span class="pl-pds">&quot;</span></span>&gt;—Bjarne Stroustrup&lt;/<span class="pl-ent">span</span>&gt;
 &lt;/<span class="pl-ent">blockquote</span>&gt;
 </code></pre>
-<div><div class="half_element_full_element"><div class="markdown_iframe_wrapper"><iframe src="https://present.chris-besch.com/2022_06_24_reveal_example/#/7" allowFullScreen=""></iframe></div></div><div class="half_element_spacer"></div></div>
+<div><div class="half_element_full_element"><div class="markdown_iframe_wrapper"><iframe allowFullScreen="" src="https://present.chris-besch.com/2022_06_24_reveal_example/#/7"></iframe></div></div><div class="half_element_spacer"></div></div>
 <h2 id="code-blocks"><a aria-hidden="true" tabindex="-1" class="markdown_heading_a" href="#code-blocks"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Code Blocks</h2>
 <p>I&#x27;m using <a href="https://highlightjs.org">highlight.js</a> for code highlighting.
 It can again be loaded through a plugin (see <a href="#template">the template section</a> for more).
@@ -144,7 +144,7 @@ The actual code get&#x27;s loaded from a separate file (<code>code.cpp</code>) u
     &lt;/<span class="pl-ent">code</span>&gt;
 &lt;/<span class="pl-ent">pre</span>&gt;
 </code></pre>
-<div><div class="half_element_full_element"><div class="markdown_iframe_wrapper"><iframe src="https://present.chris-besch.com/2022_06_24_reveal_example/#/8" allowFullScreen=""></iframe></div></div><div class="half_element_spacer"></div></div>
+<div><div class="half_element_full_element"><div class="markdown_iframe_wrapper"><iframe allowFullScreen="" src="https://present.chris-besch.com/2022_06_24_reveal_example/#/8"></iframe></div></div><div class="half_element_spacer"></div></div>
 <h2 id="animations"><a aria-hidden="true" tabindex="-1" class="markdown_heading_a" href="#animations"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Animations</h2>
 <p>There are two main ways of animating elements:</p>
 <ul>
@@ -181,7 +181,7 @@ When you not only change the content of a tag but also the type of tag you use, 
     &lt;/<span class="pl-ent">div</span>&gt;
 &lt;/<span class="pl-ent">section</span>&gt;
 </code></pre>
-<div><div class="half_element_full_element"><div class="markdown_iframe_wrapper"><iframe src="https://present.chris-besch.com/2022_06_24_reveal_example/#/9" allowFullScreen=""></iframe></div></div><div class="half_element_spacer"></div></div>
+<div><div class="half_element_full_element"><div class="markdown_iframe_wrapper"><iframe allowFullScreen="" src="https://present.chris-besch.com/2022_06_24_reveal_example/#/9"></iframe></div></div><div class="half_element_spacer"></div></div>
 <h3 id="fragments"><a aria-hidden="true" tabindex="-1" class="markdown_heading_a" href="#fragments"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Fragments</h3>
 <p>The main problem with auto-animate is code duplication:
 When you add a new tag you still need to redefine your old tags over and over again.
@@ -204,7 +204,7 @@ If you need a different order in which to reveal the fragments, use the <code>da
     &lt;/<span class="pl-ent">ul</span>&gt;
 &lt;/<span class="pl-ent">section</span>&gt;
 </code></pre>
-<div><div class="half_element_full_element"><div class="markdown_iframe_wrapper"><iframe src="https://present.chris-besch.com/2022_06_24_reveal_example/#/10" allowFullScreen=""></iframe></div></div><div class="half_element_spacer"></div></div>
+<div><div class="half_element_full_element"><div class="markdown_iframe_wrapper"><iframe allowFullScreen="" src="https://present.chris-besch.com/2022_06_24_reveal_example/#/10"></iframe></div></div><div class="half_element_spacer"></div></div>
 <h2 id="title-page"><a aria-hidden="true" tabindex="-1" class="markdown_heading_a" href="#title-page"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Title Page</h2>
 <p>At this point you might be wondering how I&#x27;m defining the left and right headers on each slide.
 They are custom and heavily inspired by <a href="https://benjamin-hackl.at">Benjamin Hackl</a>&#x27;s reveal.js presentations.
@@ -243,7 +243,7 @@ they inspired me to try out reveal.js in the first place.</p>
     &lt;/<span class="pl-ent">section</span>&gt;
     ...
 </code></pre>
-<div><div class="half_element_full_element"><div class="markdown_iframe_wrapper"><iframe src="https://present.chris-besch.com/2022_06_24_reveal_example/" allowFullScreen=""></iframe></div></div><div class="half_element_spacer"></div></div>
+<div><div class="half_element_full_element"><div class="markdown_iframe_wrapper"><iframe allowFullScreen="" src="https://present.chris-besch.com/2022_06_24_reveal_example/"></iframe></div></div><div class="half_element_spacer"></div></div>
 <p>Contrary to Benjamin Hackl&#x27;s version, these headers are defined within the <code>div class=&quot;slides&quot;&gt;</code> environment, right before the first slide.
 This makes the headers scale correctly with different screen resolutions.
 The title section(s) should contain the <code>data-state=&quot;titleslide&quot;</code> attribute;
@@ -277,7 +277,7 @@ This is only a little sneak peek of what can be done.</p>
     taken by an even more beautiful photographer.
 &lt;/<span class="pl-ent">section</span>&gt;
 </code></pre>
-<div><div class="half_element_full_element"><div class="markdown_iframe_wrapper"><iframe src="https://present.chris-besch.com/2022_06_24_reveal_example/#/11" allowFullScreen=""></iframe></div></div><div class="half_element_spacer"></div></div>
+<div><div class="half_element_full_element"><div class="markdown_iframe_wrapper"><iframe allowFullScreen="" src="https://present.chris-besch.com/2022_06_24_reveal_example/#/11"></iframe></div></div><div class="half_element_spacer"></div></div>
 <h1 id="template"><a aria-hidden="true" tabindex="-1" class="markdown_heading_a" href="#template"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Template</h1>
 <p>To quickly get started you can use <a href="https://github.com/christopher-besch/presentations/blob/main/template/index.html">my template</a>.
 I&#x27;ll keep it updated with any necessary future fixes.
