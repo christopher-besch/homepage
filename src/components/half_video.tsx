@@ -8,8 +8,8 @@ interface HalfVideoProps {
     // should spread entire width?
     full?: boolean;
 }
-export default function AutoPlayVideo(props: HalfVideoProps): React.ReactNode {
-    const deployPath = copyVideo(props.inputPath);
+export default async function AutoPlayVideo(props: HalfVideoProps): Promise<React.ReactNode> {
+    const deployPath = await copyVideo(props.inputPath);
     return (
         <HalfElement full={props.full}>
             <p className="half_video_removed_warn">[video removed from print]</p>

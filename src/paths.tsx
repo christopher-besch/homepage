@@ -1,4 +1,5 @@
 import * as fs from "fs";
+import * as crypto from "crypto";
 import path from "path";
 
 // Load paths are for html loading the resource.
@@ -88,15 +89,16 @@ function createVideoDeployPath(name: string): string {
     return path.join(deployVideosPath, name);
 }
 // Return the loadPath for the video.
-export function copyVideo(inputPath: string): string {
-    const name = path.basename(inputPath);
+export async function copyVideo(inputPath: string): Promise<string> {
+    const file = await fs.promises.readFile(inputPath);
+    const hash = crypto.hash("md5", file);
+    const name = `${hash}${path.extname(inputPath)}`;
     const deployPath = createVideoDeployPath(name);
     // Only copy when there's a new file.
-    // TODO: add hashing to detect change
     if (!fs.existsSync(deployPath)) {
         // We don't need to await this.
         // This can happen in the background.
-        fs.promises.cp(inputPath, deployPath);
+        fs.promises.writeFile(deployPath, file);
     }
     return createVideoLoadPath(name);
 }
