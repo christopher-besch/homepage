@@ -146,10 +146,15 @@
     }
 }
 
-/* We use layout_content_container because we can't overwrite values on body. */
+/* We use layout_content_container because we can't overwrite these values on body because of the reset.css. */
 .layout_content_container {
-    background-color: var(--color-body-bg);
     min-height: calc(100vh - var(--layout-nav-height) - var(--layout-footer-height));
+}
+
+/* We set these on the body because reset.css doesn't set these and setting them on the body is nicer. */
+body {
+    background-color: var(--color-body-bg);
+    color: var(--color-body-text);
 }
 
 .layout_content {

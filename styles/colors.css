@@ -1,6 +1,21 @@
-:root {
-    --color-navbar-bg: darkgrey;
-    --color-navbar-text: black;
-    --color-navbar-highlight: lightgrey;
-    --color-body-bg: white;
+@media (prefers-color-scheme: light) {
+    :root {
+        --color-navbar-bg: darkgrey;
+        --color-navbar-text: black;
+        --color-navbar-highlight: lightgrey;
+        --color-body-bg: white;
+        --color-body-text: black;
+        color-scheme: light;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-navbar-bg: brown;
+        --color-navbar-text: white;
+        --color-navbar-highlight: darkgrey;
+        --color-body-bg: black;
+        --color-body-text: white;
+        color-scheme: dark;
+    }
 }
