@@ -16,10 +16,10 @@ date: 2025-04-06T00:00:00+00:00
 listed: true
 version: 1.0.0
 ---
-import lens_video from "./lens_cropped.mp4";
-import lens_3_5 from "./lens_3_5_cropped.png";
+import lens_cropped from "./lens_cropped.mp4";
+import lens_3_5_cropped from "./lens_3_5_cropped.png";
 
-<HalfImage src={lens_3_5} />
+<HalfImage src={lens_3_5_cropped} />
 
 The other day a friend came by: "Do you know some Fortran90?"
 She was reading "Introduction to Conventional Transmission Electron Microscopy" by Prof. Marc De Graef and wanted to reproduce Fig.3.5 on the right (or above on mobile).
@@ -102,7 +102,7 @@ ENTRYPOINT ["/bin/python3", "/python_src/main.py"]
 
 # Let's make it twirl!
 
-<AutoPlayVideo src={lens_video} />
+<AutoPlayVideo src={lens_cropped} />
 
 lens.f90 takes in a bunch of configuration parameters: the magnetic field strength your electron microscope boasts and the number of sampling points for example.
 Let's interpret these parameters as a vector in the six-dimensional (or nine-dimensional if you have two fields) configuration space.

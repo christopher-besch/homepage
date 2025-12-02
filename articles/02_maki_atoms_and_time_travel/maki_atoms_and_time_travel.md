@@ -16,13 +16,13 @@ version: 1.0.2
 import full_showcase_01 from "./full_showcase_01.mp4";
 import full_showcase_01_poster from "./full_showcase_01_poster.png";
 
-import init from "./01_init.mp4";
-import create_cube from "./02_create_cube.mp4";
-import show_cube from "./03_show_cube.mp4";
-import colouring from "./04_colouring.mp4";
-import translate_cube from "./05_translate_cube.mp4";
-import smooth_translation from "./06_smooth_translation.mp4";
-import time_travel from "./07_time_travel.mp4";
+import 01_init from "./01_init.mp4";
+import 02_create_cube from "./02_create_cube.mp4";
+import 03_show_cube from "./03_show_cube.mp4";
+import 04_colouring from "./04_colouring.mp4";
+import 05_translate_cube from "./05_translate_cube.mp4";
+import 06_smooth_translation from "./06_smooth_translation.mp4";
+import 07_time_travel from "./07_time_travel.mp4";
 
 import fly_around_01 from "./fly_around_01.mp4";
 import fly_around_02 from "./fly_around_02.mp4";
@@ -88,39 +88,39 @@ The user can decide which frame of the animation should be played.
 This allows an **easy to use** workflow, minimizing the time between defining animations and playing with the results.
 
 ## Walkthrough
-<AutoPlayVideo src={init} />
+<AutoPlayVideo src={01_init} />
 
 To start working with Maki, one has to initialize it.
 This defines the rendering API to be used and creates a window of the specified size.
 
-<AutoPlayVideo src={create_cube} />
+<AutoPlayVideo src={02_create_cube} />
 
 Once that is done, you can create an atom.
 This call to `add_cuboid_atom` returns a handle to the cuboid.
 But you will see...that you don't see anything.
 
-<AutoPlayVideo src={show_cube} />
+<AutoPlayVideo src={03_show_cube} />
 
 That's because you've only created the atom;
 you still have to tell Maki to actually render it.
 This call to `show_cuboid_atom` orders Maki to start showing the atom at frame `1`.
 
-<AutoPlayVideo src={colouring} />
+<AutoPlayVideo src={04_colouring} />
 
 We can also change the colour.
 Each call again needs to know what frame it should be applied to.
 
-<AutoPlayVideo src={translate_cube} />
+<AutoPlayVideo src={05_translate_cube} />
 
 Our cube can also be moved.
 But Maki currently only supports instant movement—"teleporting" from one frame to the next.
 
-<AutoPlayVideo src={smooth_translation} />
+<AutoPlayVideo src={06_smooth_translation} />
 
 Smooth transitions have to be implemented on the Python side. 
 This quick implementation performs just that; it smoothly shifts the cube from frame `60` to frame `200`.
 
-<AutoPlayVideo src={time_travel} />
+<AutoPlayVideo src={07_time_travel} />
 
 As you can see, Maki currently shows the 199th frame.
 But now I'm applying another downward translation from frame `5` to `50`.
