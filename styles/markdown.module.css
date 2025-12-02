@@ -12,6 +12,17 @@
     list-style: decimal;
 }
 
+.markdown_heading_a:hover {
+    /* Overwrite the default .markdown_body a underline */
+    /* Unfortunately we need !important for this. */
+    text-decoration: none !important;
+}
+
+.markdown_heading_a svg {
+    scale: 1.5;
+    padding-bottom: 3px;
+}
+
 @media (prefers-color-scheme: light) {
     /* following code copied and slightly modified with `:%s/markdown-body/markdown_body/g` from https://github.com/sindresorhus/github-markdown-css */
     /* changes: */
