@@ -1,20 +1,39 @@
 ---
+type: article
 title: "Guided Missiles in Minecraft"
 description: "
 I'm having a stab at designing an enitity seeking missile in Minecraft with the mc_missile mod.
 
 Or: How I blew up my brother.
 "
-banner: ./banner.png
-hero: ./hero.jpg
-hero_horizontal_position: 80
-hero_vertical_position: 100
+banner: /social_banner/mc_missile.png
+thumb: ../../../static/social_banner/mc_missile.png
+title_banner: ../../images/photography/alpha_xray.jpg
+title_banner_horizontal_position: 80%
+title_banner_vertical_position: 100%
 slug: mc_missile
-date: "2025-06-06"
+date: 2025-06-06T00:00:00+00:00
 listed: true
+version: 1.0.0
 ---
 
-<HalfVideo src="top_stromel_kill.mp4" width={1920} height={1080} />
+import compensate_gravity_diagram from "./compensate_gravity_diagram.png";
+import compensate_gravity_theta_plot from "./compensate_gravity_theta_plot.png";
+import sphere_ray_intersection_diagram from "./sphere_ray_intersection_diagram.png";
+import sphere_ray_projection_diagram from "./sphere_ray_projection_diagram.png";
+
+import buchel_air_strike_on_end_city from "./buchel_air_strike_on_end_city.mp4";
+import buchel_air_strike_on_enderman_enderman_view from "./buchel_air_strike_on_enderman_enderman_view.mp4";
+import direct_aerial_presentation from "./direct_aerial_presentation.mp4";
+import direct_presentation from "./direct_presentation.mp4";
+import none_presentation from "./none_presentation.mp4";
+import straight_presentation from "./straight_presentation.mp4";
+import straight_wo_gravtiy_presentation from "./straight_wo_gravtiy_presentation.mp4";
+import top_stromel_kill from "./top_stromel_kill.mp4";
+import top_true_presentation from "./top_true_presentation.mp4";
+import top_wov_presentation from "./top_wov_presentation.mp4";
+
+<AutoPlayVideo src={top_stromel_kill} width={1920} height={1080} />
 
 Cue [Soothing Minecraft — Relaxing Farm Morning](https://youtu.be/xLo-BrCh7JQ).
 I'm tending the fields, watching the river flow.
@@ -111,7 +130,7 @@ All we do is magically rotate a rock in vacuum.
 Thus the guidance code explained in this article can only be applied to the toy world that is Minecraft and nothing else.
 Still, it'll be fun!
 
-<HalfVideo src="none_presentation.mp4" width={1920} height={1080} />
+<AutoPlayVideo src={none_presentation} width={1920} height={1080} />
 
 So what happens when we write the simplest guidance code we can think of: doing nothing.
 We all like oxidized weapons so let's use Rust for this:
@@ -130,7 +149,7 @@ We're probably more likely to blow ourselves up than my brother like this.
 
 # Flying a Straight Line
 
-<HalfVideo src="straight_wo_gravtiy_presentation.mp4" width={1920} height={1080} />
+<AutoPlayVideo src={straight_wo_gravtiy_presentation} width={1920} height={1080} />
 
 Let's start with compensating the rotation noise $N_r$.
 We can simply record the missile's heading in the first tick
@@ -154,7 +173,7 @@ It just isn't flying where we're pointing our crosshair (at my brother).
 
 # Compensating for Gravity
 
-<HalfImage src="compensate_gravity_diagram.png" />
+<HalfImage src={compensate_gravity_diagram} />
 
 As we can see we only have to adjust our pitch:
 There's no gravity messing with our yaw.
@@ -185,7 +204,7 @@ $$
 \frac{\|g\|}{T(t)} + \cos(\theta) \tan(\alpha) - \sin(\theta) = 0.
 $$
 
-<HalfImage src="compensate_gravity_theta_plot.png" />
+<HalfImage src={compensate_gravity_theta_plot} />
 
 How do we do that with Rust?
 We use Python, calculate a lookup-table resolving $\left(\frac{\|g\|}{T(t)}, \alpha\right) \mapsto \theta$ and use that in Rust.
@@ -217,7 +236,7 @@ heading_pitches_rad = optimize.newton(
 heading_pitches_deg = np.rad2deg(heading_pitches_rad)
 ```
 
-<HalfVideo src="straight_presentation.mp4" width={1920} height={1080} />
+<AutoPlayVideo src={straight_presentation} width={1920} height={1080} />
 
 As you can see in the colourful plot, when the missile has high thrust we don't really have to correct for gravity at all and our yellow line is basically straight.
 When the thrust is almost as strong as the gravity, we have to adjust our heading a lot more aggressively.
@@ -250,7 +269,7 @@ pub async fn calc_alpha_psi(target_direction: Vec3) -> (f64, f64) {
 ```
 And then the gravity corrected pitch $\theta$, $\theta_{in}$ and $\psi_{in}$ to make the missile accelerate towards the target.
 
-<HalfVideo src="top_wov_presentation.mp4" width={1920} height={1080} />
+<AutoPlayVideo src={top_wov_presentation} width={1920} height={1080} />
 
 I had some fun with this and implemented top-attacks, where the missile rises into the air before striking the ground at high speed.
 At some point the missile switches from *flying to some block in the sky* to *flying towards my brother*.
@@ -262,7 +281,7 @@ Why is that?
 
 # Velocity-Awareness
 
-<HalfImage src="sphere_ray_intersection_diagram.png" />
+<HalfImage src={sphere_ray_intersection_diagram} />
 
 The issue is that accelerating towards my brother isn't actually what we want:
 We want to align our velocity $v$ so that it moves us closer towards the target.
@@ -304,7 +323,7 @@ $$
 $$
 We again need to compensate for gravity to calculate the right missile rotation.
 
-<HalfImage src="sphere_ray_projection_diagram.png" />
+<HalfImage src={sphere_ray_projection_diagram} />
 
 One last problem:
 When the above radical $r_{rad}$ is negative we can't calculate the square-root.
@@ -325,16 +344,16 @@ Fun fact:
 In this situation we aren't accelerating towards the target at all.
 We're completely focused on getting us on course, first.
 
-<HalfVideo src="top_true_presentation.mp4" width={1920} height={1080} />
+<AutoPlayVideo src={top_true_presentation} width={1920} height={1080} />
 
 Now our top attack works all the time.
 (Minus that one time the proximity fuse triggered too early, whoops.)
 
-<HalfVideo src="direct_presentation.mp4" width={1920} height={1080} />
+<AutoPlayVideo src={direct_presentation} width={1920} height={1080} />
 
 And direct attacks work, too.
 
-<HalfVideo src="direct_aerial_presentation.mp4" width={1920} height={1080} />
+<AutoPlayVideo src={direct_aerial_presentation} width={1920} height={1080} />
 
 Even aerial brothers can be engaged!
 This only works with this design because the rocket motor is so crazily powerful.
@@ -345,7 +364,7 @@ Anything cheaper wouldn't work like this.
 
 # Other Ideas
 
-<HalfVideo src="buchel_air_strike_on_end_city.mp4" width={1920} height={1080} />
+<AutoPlayVideo src={buchel_air_strike_on_end_city} width={1920} height={1080} />
 
 There's a lot you could improve upon.
 A few of my ideas:
@@ -365,7 +384,7 @@ I encourage you to give the [mc_missile](https://codeberg.org/christopher-besch/
 
 # PS
 
-<HalfVideo src="buchel_air_strike_on_enderman_enderman_view.mp4" width={1920} height={1080} />
+<AutoPlayVideo src={buchel_air_strike_on_enderman_enderman_view} width={1920} height={1080} />
 
 Psst, my [entire guidance code](https://codeberg.org/christopher-besch/mc_missile_guidance) is open-source; just don't tell my brother.
 
