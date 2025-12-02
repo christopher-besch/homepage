@@ -9,9 +9,11 @@ export interface Article {
     title: string,
     description: string,
     banner?: string,
-    hero?: string,
-    heroHorizontalPosition: number,
-    heroVerticalPosition: number,
+    hero?: {
+        inputPath: string,
+        horizontalPosition: number,
+        verticalPosition: number,
+    },
     slug: string,
     date: string,
     listed: boolean,
@@ -53,14 +55,19 @@ export async function prepareArticle(mdPath: string): Promise<Article> {
     const file = await fs.promises.readFile(mdPath, "utf8");
     const { content: md, data: frontMatter } = matter(file);
 
+    const banner_name = assertIsOptionalString(frontMatter['banner']);
+    const hero_name = assertIsOptionalString(frontMatter['hero']);
+
     return {
         dirPath: dirPath,
         title: assertIsString(frontMatter['title']),
         description: assertIsString(frontMatter['description']),
-        banner: path.join(dirPath, assertIsOptionalString(frontMatter['banner'])),
-        hero: path.join(dirPath, assertIsOptionalString(frontMatter['hero'])),
-        heroHorizontalPosition: assertIsNumber(frontMatter['hero_horizontal_position']),
-        heroVerticalPosition: assertIsNumber(frontMatter['hero_vertical_position']),
+        banner: banner_name != undefined ? path.join(dirPath, banner_name) : undefined,
+        hero: hero_name != undefined ? {
+            inputPath: path.join(dirPath, hero_name),
+            horizontalPosition: assertIsNumber(frontMatter['hero_horizontal_position']),
+            verticalPosition: assertIsNumber(frontMatter['hero_vertical_position']),
+        } : undefined,
         slug: assertIsString(frontMatter['slug']),
         // TODO: better type
         date: assertIsString(frontMatter['date']),
