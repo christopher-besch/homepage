@@ -28,7 +28,7 @@ export default async function Markdown(props: MarkdownProps): Promise<React.Reac
             ],
         });
 
-    return <><Markdown components={{
+    return <div className="markdown_body" ><Markdown components={{
         HalfImage(imageProps) {
             return <HalfImage inputPath={path.join(props.dirPath, imageProps.src)} full={imageProps.full} alt={imageProps.alt} />;
         },
@@ -47,5 +47,5 @@ export default async function Markdown(props: MarkdownProps): Promise<React.Reac
     }} />
         {/* Clear the last half element. */}
         <div className="markdown_spacer" />
-    </>;
+    </div>;
 }
