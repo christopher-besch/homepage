@@ -35,5 +35,6 @@ export async function buildStyles() {
             outFile.write(await fs.promises.readFile(sourcePath));
             outFile.write(`\n/* end of ${sourcePath} */\n`);
         }
+        outFile.close();
     }
 }
