@@ -10,6 +10,7 @@ import { all as allGrammar } from "@wooorm/starry-night";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeSlug from "rehype-slug";
 import { fromHtml } from "hast-util-from-html";
+import Quote from "./quote.js";
 
 // The icon is from Gatsby's gatsby-remark-autolink-headers plugin: https://github.com/gatsbyjs/gatsby/blob/master/packages/gatsby-remark-autolink-headers/src/index.js#L14
 // The MIT License (MIT)
@@ -82,6 +83,9 @@ export default async function Markdown(props: MarkdownProps): Promise<React.Reac
         // Clear float.
         Spacer(_spacerProps) {
             return <div className="markdown_spacer" />;
+        },
+        Quote(quoteProps) {
+            return <Quote {...quoteProps} />
         },
     }} />
         {/* Clear the last half element. */}
