@@ -8,8 +8,8 @@ export interface Article {
     dirPath: string,
     title: string,
     description: string,
-    banner: string,
-    hero: string,
+    banner?: string,
+    hero?: string,
     heroHorizontalPosition: number,
     heroVerticalPosition: number,
     slug: string,
@@ -22,8 +22,14 @@ export interface Article {
 
 function assertIsString(input: any): string {
     if (typeof input != "string") {
-        console.log(input);
         throw new Error(`${input} is no string but ${typeof input}`);
+    }
+    return input;
+}
+
+function assertIsOptionalString(input: any): string | undefined {
+    if (typeof input != "string" && typeof input != "undefined") {
+        throw new Error(`${input} is no string or undefined but ${typeof input}`);
     }
     return input;
 }
@@ -51,8 +57,8 @@ export async function prepareArticle(mdPath: string): Promise<Article> {
         dirPath: dirPath,
         title: assertIsString(frontMatter['title']),
         description: assertIsString(frontMatter['description']),
-        banner: path.join(dirPath, assertIsString(frontMatter['banner'])),
-        hero: path.join(dirPath, assertIsString(frontMatter['hero'])),
+        banner: path.join(dirPath, assertIsOptionalString(frontMatter['banner'])),
+        hero: path.join(dirPath, assertIsOptionalString(frontMatter['hero'])),
         heroHorizontalPosition: assertIsNumber(frontMatter['hero_horizontal_position']),
         heroVerticalPosition: assertIsNumber(frontMatter['hero_vertical_position']),
         slug: assertIsString(frontMatter['slug']),
