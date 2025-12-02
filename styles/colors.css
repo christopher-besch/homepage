@@ -1,10 +1,10 @@
 @media (prefers-color-scheme: light) {
     :root {
         --color-navbar-bg: darkgrey;
-        --color-navbar-text: black;
+        --color-navbar-text: #1f2328;
         --color-navbar-highlight: lightgrey;
-        --color-body-bg: white;
-        --color-body-text: black;
+        --color-body-bg: #ffffff;
+        --color-body-text: #1f2328;
         color-scheme: light;
     }
 }
@@ -12,10 +12,10 @@
 @media (prefers-color-scheme: dark) {
     :root {
         --color-navbar-bg: brown;
-        --color-navbar-text: white;
-        --color-navbar-highlight: darkgrey;
-        --color-body-bg: black;
-        --color-body-text: white;
+        --color-navbar-text: #f0f6fc;
+        --color-navbar-highlight: lightgrey;
+        --color-body-bg: #0d1117;
+        --color-body-text: #f0f6fc;
         color-scheme: dark;
     }
 }
