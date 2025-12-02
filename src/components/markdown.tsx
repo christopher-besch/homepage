@@ -5,6 +5,8 @@ import HalfVideo from "./half_video.js";
 import path from "path";
 import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
+import rehypeStarryNight from "rehype-starry-night";
+import { all as allGrammar } from "@wooorm/starry-night";
 
 interface MarkdownProps {
     content: string,
@@ -17,11 +19,16 @@ export default async function Markdown(props: MarkdownProps): Promise<React.Reac
         {
             ...runtime,
             // TODO: add fonts
-            rehypePlugins: [rehypeKatex],
-            remarkPlugins: [remarkMath],
+            rehypePlugins: [
+                rehypeKatex,
+                [rehypeStarryNight, { grammars: allGrammar }],
+            ],
+            remarkPlugins: [
+                remarkMath,
+            ],
         });
 
-    return <Markdown components={{
+    return <><Markdown components={{
         HalfImage(imageProps) {
             return <HalfImage inputPath={path.join(props.dirPath, imageProps.src)} full={imageProps.full} alt={imageProps.alt} />;
         },
@@ -37,5 +44,8 @@ export default async function Markdown(props: MarkdownProps): Promise<React.Reac
         Spacer(_spacerProps) {
             return <div className="markdown_spacer" />;
         },
-    }} />;
+    }} />
+        {/* Clear the last half element. */}
+        <div className="markdown_spacer" />
+    </>;
 }

@@ -6,33 +6,34 @@ import * as fs from "fs";
 const sourceMap = new Map<string, string[]>();
 // We need these styles everywhere.
 sourceMap.set("always.css", [
-    "reset.css",
-    "colors.css",
-    "fonts.css",
-    "layout.module.css",
+    getStyleSourcePath("reset.css"),
+    getStyleSourcePath("colors.css"),
+    getStyleSourcePath("fonts.css"),
+    getStyleSourcePath("layout.module.css"),
     // This might not strictly be needed on all pages but kinda is.
-    "image.module.css",
+    getStyleSourcePath("image.module.css"),
 ]);
 sourceMap.set("default.css", [
-    "index.module.css",
+    getStyleSourcePath("index.module.css"),
 ]);
 sourceMap.set("article.css", [
-    "katex.css",
-    "markdown.module.css",
-    "half_element.module.css",
-    "half_image.module.css",
-    "half_video.module.css",
+    getStyleSourcePath("markdown.module.css"),
+    getStyleSourcePath("half_element.module.css"),
+    getStyleSourcePath("half_image.module.css"),
+    getStyleSourcePath("half_video.module.css"),
+    "./node_modules/katex/dist/katex.min.css",
+    "./node_modules/@wooorm/starry-night/style/core.css",
+    "./node_modules/@wooorm/starry-night/style/both.css",
 ]);
 
 export async function buildStyles() {
-    for (const [deployName, sourceNames] of sourceMap) {
+    for (const [deployName, sourcePaths] of sourceMap) {
         const destPath = createStyleDeployPath(deployName);
         const outFile = await fs.promises.open(destPath, "w");
-        for (const sourceName of sourceNames) {
-            const sourcePath = getStyleSourcePath(sourceName);
-            outFile.write(`\n/* start of ${sourceName} */\n`);
+        for (const sourcePath of sourcePaths) {
+            outFile.write(`\n/* start of ${sourcePath} */\n`);
             outFile.write(await fs.promises.readFile(sourcePath));
-            outFile.write(`\n/* end of ${sourceName} */\n`);
+            outFile.write(`\n/* end of ${sourcePath} */\n`);
         }
     }
 }
