@@ -20,7 +20,8 @@
 
 .markdown_heading_a svg {
     scale: 1.5;
-    padding-bottom: 3px;
+    padding-bottom: 2px;
+    padding-right: 7px;
 }
 
 /* https://stackoverflow.com/questions/11122249/scale-iframe-css-width-100-like-an-image */
