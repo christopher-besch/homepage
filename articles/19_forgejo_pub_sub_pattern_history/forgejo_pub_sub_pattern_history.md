@@ -30,7 +30,7 @@ Packages are Forgejo-orange and topics Codeberg-blue.
 Every arrow goes in the direction messages flow; from sender to receiver.
 Please use a device with a large screen like a laptop; it doesn't work on a smartphone.
 
-<iframe src="https://christopher-besch.github.io/go_observer_pattern_visualizer/viewer" allowFullScreen={true}/>
+<HalfIframe full={true} src="https://christopher-besch.github.io/go_observer_pattern_visualizer/viewer" allowFullScreen={true}/>
 
 The list on the right shows all commits in Forgejo's history that change something about the pub-sub pattern.
 Select a commit see how Forgejo looked like back then.

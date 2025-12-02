@@ -224,7 +224,7 @@ I find this pub-sub pattern pretty intuitive because topics and messages are a c
 Additionally, it allows you to get a quick overview over what code is interested in what change.
 For example, if you give this interactive visualization a brief look, you can figure out that the code related to Forgejo packages is quite separate from everything else.
 
-<iframe src="https://christopher-besch.github.io/go_observer_pattern_visualizer/viewer" allowFullScreen={true}/>
+<HalfIframe full={true} src="https://christopher-besch.github.io/go_observer_pattern_visualizer/viewer" allowFullScreen={true}/>
 
 If you're interested in this visualization and what the commit history on the right has to do with it, take a look at my new article: [The History of Forgejo's Pub-Sub Pattern](/articles/forgejo_pub_sub_pattern_history).
 
