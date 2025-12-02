@@ -54,6 +54,7 @@ export function createImageDeployPath(hash: string, width: number, height: numbe
 // static //
 const deployFontsPath = path.join(deployStylesPath, `fonts`);
 export function copyStatic() {
+    console.log(fs.readdirSync(deployPath));
     fs.cp(staticPath, deployPath, { recursive: true, force: true, errorOnExist: false }, (err) => { if (err != null) { throw err; } });
     fs.cp("./node_modules/katex/dist/fonts", deployFontsPath, { recursive: true, force: true, errorOnExist: false }, (err) => { if (err != null) { throw err; } });
 }
