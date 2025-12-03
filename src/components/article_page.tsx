@@ -1,4 +1,5 @@
 import type { Article } from "../article.js";
+import Title from "./title.js";
 import Layout from "./layout.js";
 
 interface ArticlePageProps {
@@ -13,7 +14,7 @@ export default async function ArticlePage(props: React.PropsWithChildren<Article
             heightFraction: 0.7,
             objectFitHorizontal: props.article.hero.horizontalPosition,
             objectFitVertical: props.article.hero.verticalPosition,
-            children: undefined,
+            children: <Title isHero={true} title={props.article.title} subtitle="25th January 2025 todo" />,
         };
     }
     return <Layout
@@ -22,6 +23,7 @@ export default async function ArticlePage(props: React.PropsWithChildren<Article
         styleSheets={["always.css", "article.css"]}
         heroImage={heroImage}
     >
+        {props.article.hero == undefined ? <Title isHero={false} title={props.article.title} subtitle="25th January 2025 todo" /> : undefined}
         <div className="article_page_markdown">{props.article.html}</div>
     </Layout>
 }

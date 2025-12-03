@@ -2,7 +2,6 @@ import { createStyleDeployPath, getStyleSourcePath } from "./paths.js";
 import * as fs from "fs";
 
 // This is just a little bit of manual tree-shaking.
-// TODO: maybe load more than one style sheet for each type of page.
 const sourceMap = new Map<string, string[]>();
 // We need these styles everywhere.
 sourceMap.set("always.css", [
@@ -12,6 +11,7 @@ sourceMap.set("always.css", [
     getStyleSourcePath("layout.module.css"),
     // This might not strictly be needed on all pages but kinda is.
     getStyleSourcePath("image.module.css"),
+    getStyleSourcePath("title.module.css"),
 ]);
 sourceMap.set("default.css", [
     getStyleSourcePath("index_page.module.css"),

@@ -5,6 +5,7 @@
         --color-navbar-highlight: lightgrey;
         --color-body-bg: #ffffff;
         --color-body-text: #1f2328;
+        --color-hero-text: white;
         color-scheme: light;
     }
 }
@@ -16,6 +17,7 @@
         --color-navbar-highlight: lightgrey;
         --color-body-bg: #0d1117;
         --color-body-text: #f0f6fc;
+        --color-hero-text: white;
         color-scheme: dark;
     }
 }
