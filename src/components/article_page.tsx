@@ -22,6 +22,6 @@ export default async function ArticlePage(props: React.PropsWithChildren<Article
         styleSheets={["always.css", "article.css"]}
         heroImage={heroImage}
     >
-        {props.article.html}
+        <div className="article_page_markdown">{props.article.html}</div>
     </Layout>
 }

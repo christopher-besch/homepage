@@ -14,7 +14,7 @@ export default function IndexPage(_props: IndexPageProps): React.ReactNode {
                 // heightFraction: 0.5,
                 children: <div>Hello World</div>,
             }}>
-            <div className="index_div">
+            <div className="index_page_div">
                 Hello World!<br />
                 Hello World!<br />
                 Hello World!<br />

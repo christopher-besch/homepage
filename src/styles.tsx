@@ -14,9 +14,10 @@ sourceMap.set("always.css", [
     getStyleSourcePath("image.module.css"),
 ]);
 sourceMap.set("default.css", [
-    getStyleSourcePath("index.module.css"),
+    getStyleSourcePath("index_page.module.css"),
 ]);
 sourceMap.set("article.css", [
+    getStyleSourcePath("article_page.module.css"),
     getStyleSourcePath("markdown.module.css"),
     getStyleSourcePath("half_element.module.css"),
     getStyleSourcePath("half_image.module.css"),

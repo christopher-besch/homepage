@@ -3,7 +3,8 @@ import { convertImageOnPool } from "../worker/worker_pool.js";
 import type { ImageSize } from "../worker/convert_image.js";
 
 const defaultWidths = [400, 800, 1200, 1600];
-const portraitAspectRatio = 9 / 16;
+// Making this too much portrait is a problem with say 60% images (i.e., the ones we use in the articles).
+const portraitAspectRatio = 3 / 4;
 const portraitWidths = [400, 800];
 // On portrait devices with relatively wide screens (i.e. a square device) there is a jump when we switch to the portrait image.
 // This is because an almost square device that is small enough will render the portrait image but should actually show some more of the edges of the image (i.e., the landscape image would be better).
