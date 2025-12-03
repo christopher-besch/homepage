@@ -265,7 +265,7 @@ table {
         display: block;
     }
 
-    body:has(#layout_navbar_toggle:checked) .layout_content {
+    body:has(#layout_navbar_toggle:checked) .layout_content_container {
         display: none;
     }
 
