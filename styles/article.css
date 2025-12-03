@@ -1,4 +1,11 @@
 
+/* start of styles/article_page.module.css */
+.article_page_markdown {
+    padding-top: 16px;
+}
+
+/* end of styles/article_page.module.css */
+
 /* start of styles/markdown.module.css */
 .markdown_spacer {
     content: "";
