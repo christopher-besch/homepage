@@ -2356,7 +2356,10 @@
 /* end of styles/half_element.module.css */
 
 /* start of styles/half_image.module.css */
-/* TODO: remove this file */
+.half_image_image img {
+    width: 100%;
+    height: 100%;
+}
 
 /* end of styles/half_image.module.css */
 
