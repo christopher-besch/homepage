@@ -5,8 +5,8 @@ I'm having a stab at designing an enitity seeking missile in Minecraft with the 
 
 Or: How I blew up my brother.
 "
-banner: ./"banner.png"
-hero: ./"hero.jpg"
+banner: "./banner.png"
+hero: "./hero.jpg"
 hero_horizontal_position: 80
 hero_vertical_position: 100
 slug: mc_missile

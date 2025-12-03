@@ -4,7 +4,7 @@ description: "
     Gentoo is a Linux distribution that offers as many options as possible.
     This article leads you through the decisions I took to end up with a system that best suits my needs.
 "
-banner: ./"banner.png"
+banner: "./banner.png"
 slug: installing_gentoo
 date: "2022-04-26"
 listed: true

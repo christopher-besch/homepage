@@ -4,8 +4,8 @@ description: "
 Links to web pages I enjoyed reading.
 You might like them, too.
 "
-banner: ./"banner.png"
-hero: ./"hero.jpg"
+banner: "./banner.png"
+hero: "./hero.jpg"
 hero_horizontal_position: 0
 hero_vertical_position: 60
 slug: bookmarks

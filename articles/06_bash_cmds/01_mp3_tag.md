@@ -3,7 +3,7 @@ title: "Bodging MP3 Names in Bash"
 description: "
 Why do it complicated when a Bash one-liner does it too?
 "
-banner: ./"banner.png"
+banner: "./banner.png"
 slug: bash_cmds/mp3_tag
 date: "2022-10-12"
 listed: true

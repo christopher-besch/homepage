@@ -8,7 +8,7 @@ export default function IndexPage(_props: IndexPageProps): React.ReactNode {
             title="Chris' Homepage"
             styleSheets={["always.css", "default.css"]}
             heroImage={{
-                loadPath: "/home/chris/IMG_0026.jpg",
+                inputPath: "/home/chris/IMG_0026.jpg",
                 objectFitHorizontal: 65,
                 objectFitVertical: 30,
                 // heightFraction: 0.5,

@@ -6,8 +6,8 @@ How is a Go project structured?
 What's the point of Forgejo's layered architecture and what's that pub-sub pattern?
 Additionally, I exhaustively explain how to setup a development environment for Forgejo.
 "
-banner: ./"banner.png"
-hero: ./"hero.jpg"
+banner: "./banner.png"
+hero: "./hero.jpg"
 hero_horizontal_position: 85
 hero_vertical_position: 60
 slug: forgejo_actions_notification

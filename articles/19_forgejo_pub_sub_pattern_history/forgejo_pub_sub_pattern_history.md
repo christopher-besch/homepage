@@ -5,8 +5,8 @@ I created a tool to visualize Forgejo's Pub-Sub pattern.
 Why not run that tool on all 24 thousand commits in Forgejo's history?
 What could possibly go wrong?
 "
-banner: ./"banner.png"
-hero: ./"hero.jpg"
+banner: "./banner.png"
+hero: "./hero.jpg"
 hero_horizontal_position: 50
 hero_vertical_position: 30
 slug: forgejo_pub_sub_pattern_history

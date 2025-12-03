@@ -3,8 +3,8 @@ title: "grub-install --removable for buggy UEFI"
 description: "
 Install Debian on a device with a broken NVRAM.
 "
-banner: ./"banner.png"
-hero: ./"hero.jpg"
+banner: "./banner.png"
+hero: "./hero.jpg"
 hero_horizontal_position: 40
 hero_vertical_position: 60
 slug: grub_install_removable

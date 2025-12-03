@@ -3,7 +3,6 @@ title: "Manim Introduction"
 description: "
     From never having touched programming to creating professional graphics with Manim.
 "
-banner: none
 slug: manim_intro
 date: "2022-01-11"
 listed: false

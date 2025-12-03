@@ -4,8 +4,8 @@ description: "
 A DNS forward is an expression of trust.
 GitHub broke my trust and someone else received control over my domain.
 "
-banner: ./"banner.png"
-hero: ./"hero.jpg"
+banner: "./banner.png"
+hero: "./hero.jpg"
 hero_horizontal_position: 100
 hero_vertical_position: 80
 slug: github_pages_hack

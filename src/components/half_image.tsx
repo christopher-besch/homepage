@@ -9,8 +9,10 @@ interface HalfImageProps {
 }
 export default function HalfImage(props: HalfImageProps): React.ReactNode {
     return (
-        <HalfElement full={props.full}>
-            <Image inputPath={props.inputPath} alt={props.alt} />
-        </HalfElement>
+        <div className="half_image_image">
+            <HalfElement full={props.full}>
+                <Image inputPath={props.inputPath} alt={props.alt} />
+            </HalfElement>
+        </div>
     );
 }

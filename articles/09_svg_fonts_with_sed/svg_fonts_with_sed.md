@@ -3,8 +3,8 @@ title: "Inject Fonts into Web SVGs with sed"
 description: "
 Add font-loading CSS to SVGs with a sed script.
 "
-banner: ./"banner.png"
-hero: ./"hero.jpg"
+banner: "./banner.png"
+hero: "./hero.jpg"
 hero_horizontal_position: 30
 hero_vertical_position: 25
 slug: svg_fonts_with_sed

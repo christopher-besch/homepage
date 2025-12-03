@@ -5,8 +5,8 @@ Bringing decades old Fortran code to life with Docker and animating it with Pyth
 
 Now you get to see Fig.3.5. from \"Introduction to Conventional Transmission Electron Microscopy\" by Prof. Marc De Graef at 30 frames a second.
 "
-banner: ./"banner.png"
-hero: ./"hero.jpg"
+banner: "./banner.png"
+hero: "./hero.jpg"
 hero_horizontal_position: 70
 hero_vertical_position: 70
 slug: ctemsoft

@@ -3,8 +3,8 @@ title: "The Photographer and her Camera"
 description: "
 I bought a new, bigger camera and want to be independent of it.
 "
-banner: ./"banner.png"
-hero: ./"hero.jpg"
+banner: "./banner.png"
+hero: "./hero.jpg"
 hero_horizontal_position: 0
 hero_vertical_position: 100
 slug: the_photographer_and_her_camera

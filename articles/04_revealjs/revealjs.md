@@ -6,7 +6,7 @@ description: "
 
     This article shows how you can use reveal.js for your own presentation.
 "
-banner: ./"banner.png"
+banner: "./banner.png"
 slug: revealjs
 date: "2022-06-24"
 listed: true

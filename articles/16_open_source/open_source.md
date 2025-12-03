@@ -7,8 +7,8 @@ Regardless if you are a user, developer or simply interested in a healthy societ
 Open-Source is a quality mark, a form of democracy and ownership, capitalism at its best and thus the response to this world, a world in which software exists.
 This article gets to that conclusion without requiring any prior technical knowledge.
 "
-banner: ./"banner.png"
-hero: ./"hero.jpg"
+banner: "./banner.png"
+hero: "./hero.jpg"
 hero_horizontal_position: 40
 hero_vertical_position: 0
 slug: open_source

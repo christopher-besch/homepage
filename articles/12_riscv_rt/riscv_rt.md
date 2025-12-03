@@ -5,8 +5,8 @@ Setting up Linux v6.12 on a StarFive VisionFive 2 with PREEMPT_RT.
 
 Also: How to setup your Linux laptop as a simple NAT router.
 "
-banner: ./"banner.png"
-hero: ./"hero.jpg"
+banner: "./banner.png"
+hero: "./hero.jpg"
 hero_horizontal_position: 20
 hero_vertical_position: 40
 slug: riscv_rt

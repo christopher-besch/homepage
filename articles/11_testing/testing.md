@@ -5,8 +5,8 @@ Using tests not to increase quality but to more quickly get things done.
 
 Or: How I started to enjoy writing tests.
 "
-banner: ./"banner.png"
-hero: ./"hero.jpg"
+banner: "./banner.png"
+hero: "./hero.jpg"
 hero_horizontal_position: 20
 hero_vertical_position: 80
 slug: testing

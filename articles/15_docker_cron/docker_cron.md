@@ -6,8 +6,8 @@ explained at an example of docker_cron with Renovate.
 
 Sometimes you really don't have to worry as much and trust your previous, careful considerations.
 "
-banner: ./"banner.png"
-hero: ./"hero.jpg"
+banner: "./banner.png"
+hero: "./hero.jpg"
 hero_horizontal_position: 10
 hero_vertical_position: 100
 slug: technical_compromises

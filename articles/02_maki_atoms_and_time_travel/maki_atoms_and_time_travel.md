@@ -5,7 +5,7 @@ description: "
 
     Its programmatic approach provides the precision technical concepts require, while its interactivity and real-time updates avoid a disconnect between input and output.
 "
-banner: ./"banner.png"
+banner: "./banner.png"
 slug: maki_atoms_and_time_travel
 date: "2022-02-06"
 listed: true
