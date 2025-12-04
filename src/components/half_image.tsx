@@ -11,7 +11,7 @@ export default function HalfImage(props: HalfImageProps): React.ReactNode {
     return (
         <div className="half_image_image">
             <HalfElement full={props.full}>
-                <Image inputPath={props.inputPath} alt={props.alt} />
+                <Image inputPath={props.inputPath} alt={props.alt} lazy={true} />
             </HalfElement>
         </div>
     );

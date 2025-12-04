@@ -10,7 +10,7 @@ export default function ArticlesPage(props: ArticlesPageProps): React.ReactNode 
     const articlesToShow = props.articles
         .filter(a => a.listed)
         // Date must be defined for all listed articles.
-        .sort((a, b) => a.date!.getTime() - b.date!.getTime());
+        .sort((a, b) => b.date!.getTime() - a.date!.getTime());
     return (
         <Layout
             title="Chris' Articles"

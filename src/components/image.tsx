@@ -17,13 +17,13 @@ const portraitMaxWidth = 500;
 
 interface ImageProps {
     inputPath: string,
+    lazy: boolean,
     alt?: string,
     // When we use object-fit: cover and we use a landscape photo on a portrait device, we might want to create a separate image for this purpose.
     // The other direction (using a portrait image on a landscape device) would be possible, too, but isn't implemented.
     portraitVersion?: {
         objectFitPositionH: number,
     },
-    // TODO: lazy img?
 }
 
 function sizesToSrcSet(sizes: ImageSize[]): string {
@@ -52,7 +52,7 @@ export default async function Image(props: ImageProps): Promise<React.ReactNode>
         throw new Error("portrait undefined mismatch");
     }
 
-    const imgTag = <img srcSet={defaultSrcSet} width={defaultWidth} height={defaultHeight} alt={props.alt} style={lqip} />;
+    const imgTag = <img srcSet={defaultSrcSet} width={defaultWidth} height={defaultHeight} alt={props.alt} style={lqip} loading={props.lazy ? "lazy" : "eager"} />;
     if (exportedImage.portraitSizes != undefined) {
         const portraitSrcSet = sizesToSrcSet(exportedImage.portraitSizes)
         const portraitWidth = exportedImage.portraitSizes[0]!.width;

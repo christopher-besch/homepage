@@ -8,6 +8,7 @@ export interface Article {
     dirPath: string,
     title: string,
     description: string,
+    // required when listed
     banner?: string,
     hero?: {
         inputPath: string,
@@ -15,6 +16,7 @@ export interface Article {
         verticalPosition: number,
     },
     slug: string,
+    // required when listed
     date?: Date,
     listed: boolean,
     readingTimeMinutes: number,
