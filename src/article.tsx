@@ -15,7 +15,7 @@ export interface Article {
         verticalPosition: number,
     },
     slug: string,
-    date: string,
+    date?: Date,
     listed: boolean,
     readingTimeMinutes: number,
     markdown: string,
@@ -55,22 +55,22 @@ export async function prepareArticle(mdPath: string): Promise<Article> {
     const file = await fs.promises.readFile(mdPath, "utf8");
     const { content: md, data: frontMatter } = matter(file);
 
-    const banner_name = assertIsOptionalString(frontMatter['banner']);
-    const hero_name = assertIsOptionalString(frontMatter['hero']);
+    const bannerName = assertIsOptionalString(frontMatter['banner']);
+    const heroName = assertIsOptionalString(frontMatter['hero']);
+    const dateStr = assertIsOptionalString(frontMatter['date']);
 
     return {
         dirPath: dirPath,
         title: assertIsString(frontMatter['title']),
         description: assertIsString(frontMatter['description']),
-        banner: banner_name != undefined ? path.join(dirPath, banner_name) : undefined,
-        hero: hero_name != undefined ? {
-            inputPath: path.join(dirPath, hero_name),
+        banner: bannerName != undefined ? path.join(dirPath, bannerName) : undefined,
+        hero: heroName != undefined ? {
+            inputPath: path.join(dirPath, heroName),
             horizontalPosition: assertIsNumber(frontMatter['hero_horizontal_position']),
             verticalPosition: assertIsNumber(frontMatter['hero_vertical_position']),
         } : undefined,
         slug: assertIsString(frontMatter['slug']),
-        // TODO: better type
-        date: assertIsString(frontMatter['date']),
+        date: dateStr != undefined ? new Date(dateStr) : undefined,
         listed: assertIsBoolean(frontMatter['listed']),
         readingTimeMinutes: readingTime(md).minutes,
         markdown: md,

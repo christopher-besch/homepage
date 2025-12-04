@@ -38,11 +38,3 @@
     border-width: 1.5px;
     border-radius: 3px;
 }
-
-@media (max-width: 500px) {
-
-    .title_in_hero h1,
-    .title_in_text h1 {
-        text-align: center;
-    }
-}

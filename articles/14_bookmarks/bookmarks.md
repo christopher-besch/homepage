@@ -9,7 +9,6 @@ hero: "./hero.jpg"
 hero_horizontal_position: 0
 hero_vertical_position: 60
 slug: bookmarks
-date: "2025-08-24"
 listed: false
 ---
 

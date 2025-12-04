@@ -1,18 +1,22 @@
 import type { Article } from "../article.js";
-import { getArticleDeployRoute } from "../paths.js";
+import ArticlesList from "./articles_list.js";
 import Layout from "./layout.js";
+import Title from "./title.js";
 
 interface ArticlesPageProps {
     articles: Article[],
 }
 export default function ArticlesPage(props: ArticlesPageProps): React.ReactNode {
+    const articlesToShow = props.articles
+        .filter(a => a.listed)
+        // Date must be defined for all listed articles.
+        .sort((a, b) => a.date!.getTime() - b.date!.getTime());
     return (
         <Layout
             title="Chris' Articles"
             styleSheets={["always.css", "default.css"]}>
-            <ul>
-                {props.articles.map(article => <li><a href={getArticleDeployRoute(article.slug)}>{article.title}</a></li>)}
-            </ul>
+            <Title isHero={false} title="Articles" />
+            <ArticlesList articles={articlesToShow} />
         </Layout>
     );
 }
