@@ -374,8 +374,6 @@ body {
 /* end of styles/image.module.css */
 
 /* start of styles/title.module.css */
-
-/* end of styles/title.module.css */
 .title_in_hero {
     max-width: 1200px;
     margin: auto;
@@ -416,3 +414,5 @@ body {
     border-width: 1.5px;
     border-radius: 3px;
 }
+
+/* end of styles/title.module.css */
