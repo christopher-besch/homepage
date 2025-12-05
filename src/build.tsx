@@ -23,8 +23,8 @@ function buildRoute(route: string, element: React.ReactNode) {
 async function buildArticles() {
     const articlePaths = await getArticles();
     const articles = await prepareArticles(articlePaths);
-    for (const article of articles) {
-        buildRoute(getArticleDeployRoute(article.slug), <ArticlePage article={article}>{article.reactNode}</ArticlePage>);
+    for (const [idx, article] of articles.entries()) {
+        buildRoute(getArticleDeployRoute(article.slug), <ArticlePage idx={idx} articles={articles} />);
     }
     buildRoute("/articles", <ArticlesPage articles={articles} />);
 }

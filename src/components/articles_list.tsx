@@ -7,6 +7,9 @@ interface ArticlesListProps {
     articles: Article[],
 }
 export default function ArticlesList(props: ArticlesListProps): React.ReactNode {
+    if (props.articles.filter(a => !a.listed).length) {
+        throw new Error("Created a list of unlisted articles.");
+    }
     return (
         <div className="articles_list">
             {props.articles.map((article, i) =>

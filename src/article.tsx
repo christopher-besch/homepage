@@ -116,8 +116,26 @@ async function embedSentences(sentences: string[]): Promise<Float32Array[]> {
     const output = await extractor(sentences, { pooling: "mean", normalize: true });
     const [n, dim] = output.dims as [number, number];
     const outputArray = Array.from({ length: n }, (_, i) =>
-        output.data.slice(i * dim, (i + i) * dim));
+        output.data.slice(i * dim, (i + 1) * dim));
     return outputArray as Float32Array[]
+}
+
+function dotProduct(a: Float32Array, b: Float32Array): number {
+    let dot = 0;
+    for (let i = 0; i < a.length; i++) {
+        const x = a[i]!;
+        const y = b[i]!;
+        dot += x * y;
+    }
+    return dot;
+}
+
+export function getNearestListedNeighbours(idx: number, neighbours: number, articles: Article[]): Article[] {
+    return [...articles]
+        .filter(a => a.listed)
+        .sort((a, b) => dotProduct(articles[idx]!.embedding, b.embedding) - dotProduct(articles[idx]!.embedding, a.embedding))
+        // Skip the first because that's the original article.
+        .slice(1, neighbours + 1);
 }
 
 export async function prepareArticles(articlePaths: string[]): Promise<Article[]> {

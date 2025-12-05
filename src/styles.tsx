@@ -12,10 +12,10 @@ sourceMap.set("always.css", [
     // This might not strictly be needed on all pages but kinda is.
     getStyleSourcePath("image.module.css"),
     getStyleSourcePath("title.module.css"),
+    getStyleSourcePath("articles_list.module.css"),
 ]);
 sourceMap.set("default.css", [
     getStyleSourcePath("index_page.module.css"),
-    getStyleSourcePath("articles_list.module.css"),
 ]);
 sourceMap.set("article.css", [
     getStyleSourcePath("article_page.module.css"),
