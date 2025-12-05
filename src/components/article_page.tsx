@@ -26,6 +26,6 @@ export default async function ArticlePage(props: React.PropsWithChildren<Article
         heroImage={heroImage}
     >
         {props.article.hero == undefined ? <Title isHero={false} title={props.article.title} subtitle={date} /> : undefined}
-        <div className="article_page_markdown">{props.article.html}</div>
+        <div className="article_page_markdown">{props.article.reactNode}</div>
     </Layout>
 }

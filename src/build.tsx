@@ -6,7 +6,7 @@ import { startPool } from "./worker/worker_pool.js";
 
 import IndexPage from "./components/index_page.js";
 import ArticlePage from "./components/article_page.js";
-import { prepareArticle } from "./article.js";
+import { prepareArticles } from "./article.js";
 import ArticlesPage from "./components/articles_page.js";
 
 function buildRoute(route: string, element: React.ReactNode) {
@@ -22,9 +22,9 @@ function buildRoute(route: string, element: React.ReactNode) {
 
 async function buildArticles() {
     const articlePaths = await getArticles();
-    const articles = await Promise.all(articlePaths.map(prepareArticle));
+    const articles = await prepareArticles(articlePaths);
     for (const article of articles) {
-        buildRoute(getArticleDeployRoute(article.slug), <ArticlePage article={article}>{article.html}</ArticlePage>);
+        buildRoute(getArticleDeployRoute(article.slug), <ArticlePage article={article}>{article.reactNode}</ArticlePage>);
     }
     buildRoute("/articles", <ArticlesPage articles={articles} />);
 }

@@ -22,9 +22,12 @@
         "typescript": "^5.9.3"
     },
     "dependencies": {
+        "@huggingface/transformers": "^3.8.1",
+        "@immich/sdk": "^2.3.1",
         "@mdx-js/mdx": "^3.1.1",
         "gray-matter": "^4.0.3",
         "hast-util-from-html": "^2.0.3",
+        "html-entities": "^2.6.0",
         "piscina": "^5.1.4",
         "react": "^19.2.0",
         "react-dom": "^19.2.0",

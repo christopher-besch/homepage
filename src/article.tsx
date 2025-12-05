@@ -2,9 +2,13 @@ import * as fs from "fs";
 import readingTime from "reading-time";
 import matter from "gray-matter";
 import Markdown from "./components/markdown.js";
+import { renderToPipeableStream } from "react-dom/server";
 import path from "path";
+import { pipeline } from "@huggingface/transformers";
+import { PassThrough } from "stream";
+import { decode } from "html-entities";
 
-export interface Article {
+interface UnembeddedArticle {
     dirPath: string,
     title: string,
     description: string,
@@ -20,9 +24,13 @@ export interface Article {
     date?: Date,
     listed: boolean,
     readingTimeMinutes: number,
-    markdown: string,
-    html: React.ReactNode,
+    reactNode: React.ReactNode,
 };
+
+export interface Article extends UnembeddedArticle {
+    embedding: Float32Array,
+}
+
 
 function assertIsString(input: any): string {
     if (typeof input != "string") {
@@ -52,7 +60,12 @@ function assertIsBoolean(input: any): boolean {
     return input;
 }
 
-export async function prepareArticle(mdPath: string): Promise<Article> {
+function htmlToPlaintext(html: string): string {
+    return decode(html.replace(/<[^>]+>/g, '')).replace(/\s+/g, ' ');
+}
+
+// Return article without embedding and plaintext string prepared for embedding the article.
+async function prepareArticle(mdPath: string): Promise<[UnembeddedArticle, string]> {
     const dirPath = path.dirname(mdPath);
     const file = await fs.promises.readFile(mdPath, "utf8");
     const { content: md, data: frontMatter } = matter(file);
@@ -61,7 +74,26 @@ export async function prepareArticle(mdPath: string): Promise<Article> {
     const heroName = assertIsOptionalString(frontMatter['hero']);
     const dateStr = assertIsOptionalString(frontMatter['date']);
 
-    return {
+    const reactNode = <Markdown content={md} dirPath={dirPath} />;
+    const html = await new Promise(r => {
+        let out = renderToPipeableStream(reactNode, {
+            onAllReady: () => {
+                const stream = new PassThrough();
+                let html = "";
+                stream.on("data", chunk => {
+                    html += chunk.toString();
+                });
+                stream.on("end", () => {
+                    r(html);
+                });
+                out.pipe(stream);
+            }
+        });
+    }) as string;
+
+    const plaintext = htmlToPlaintext(html);
+
+    return [{
         dirPath: dirPath,
         title: assertIsString(frontMatter['title']),
         description: assertIsString(frontMatter['description']),
@@ -75,8 +107,21 @@ export async function prepareArticle(mdPath: string): Promise<Article> {
         date: dateStr != undefined ? new Date(dateStr) : undefined,
         listed: assertIsBoolean(frontMatter['listed']),
         readingTimeMinutes: readingTime(md).minutes,
-        markdown: md,
-        html: <Markdown content={md} dirPath={dirPath} />,
-    };
+        reactNode: reactNode,
+    }, plaintext];
 }
 
+async function embedSentences(sentences: string[]): Promise<Float32Array[]> {
+    const extractor = await pipeline("feature-extraction", "Xenova/all-MiniLM-L6-v2", { dtype: "fp32" });
+    const output = await extractor(sentences, { pooling: "mean", normalize: true });
+    const [n, dim] = output.dims as [number, number];
+    const outputArray = Array.from({ length: n }, (_, i) =>
+        output.data.slice(i * dim, (i + i) * dim));
+    return outputArray as Float32Array[]
+}
+
+export async function prepareArticles(articlePaths: string[]): Promise<Article[]> {
+    const unembeddedArticles = await Promise.all(articlePaths.map(prepareArticle));
+    const embeddings = await embedSentences(unembeddedArticles.map(([_, p]) => p));
+    return unembeddedArticles.map(([a, _], i) => { return { ...a, embedding: embeddings[i]! }; });
+}

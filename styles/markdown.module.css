@@ -4,6 +4,10 @@
     clear: both;
 }
 
+.markdown_body {
+    text-align: justify;
+}
+
 .markdown_body ul {
     list-style: disc;
 }
