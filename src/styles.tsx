@@ -13,6 +13,7 @@ sourceMap.set("always.css", [
     getStyleSourcePath("image.module.css"),
     getStyleSourcePath("title.module.css"),
     getStyleSourcePath("articles_list.module.css"),
+    getStyleSourcePath("button.module.css"),
 ]);
 sourceMap.set("default.css", [
     getStyleSourcePath("index_page.module.css"),

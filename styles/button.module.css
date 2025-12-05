@@ -1,12 +1,15 @@
 .button {
-    border-radius: 3px;
     border-style: solid;
     border-color: var(--color-body-text);
+    border-radius: 3px;
     border-width: 2px;
     padding: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .button a {
     color: var(--color-body-text);
     text-decoration: none;
+    font-size: 24px;
 }
