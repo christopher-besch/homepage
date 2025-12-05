@@ -5,7 +5,8 @@ import { formatDate } from "../date.js";
 import ArticlesList from "./articles_list.js";
 
 const heroHeightFraction = 0.7;
-const nearestNeighbours = 4;
+const nearestNeighbours = 2;
+const antiNeighbours = 2;
 
 interface ArticlePageProps {
     articles: Article[],
@@ -25,7 +26,7 @@ export default async function ArticlePage(props: ArticlePageProps): Promise<Reac
             children: <Title isHero={true} title={article.title} subtitle={date} />,
         };
     }
-    const similarArticles = getNearestListedNeighbours(props.idx, nearestNeighbours, props.articles);
+    const similarArticles = getNearestListedNeighbours(props.idx, nearestNeighbours, antiNeighbours, props.articles);
     return <Layout
         title={article.title}
         description={article.description}

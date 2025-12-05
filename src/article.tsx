@@ -130,12 +130,16 @@ function dotProduct(a: Float32Array, b: Float32Array): number {
     return dot;
 }
 
-export function getNearestListedNeighbours(idx: number, neighbours: number, articles: Article[]): Article[] {
-    return [...articles]
+// Get neighbours articles that are as close as possible and antiNeighbours articles that are as different as possible.
+export function getNearestListedNeighbours(idx: number, neighbours: number, antiNeighbours: number, articles: Article[]): Article[] {
+    let processesArticles = [...articles];
+    // Skip the original article.
+    processesArticles.splice(idx, 1);
+    processesArticles = processesArticles
         .filter(a => a.listed)
-        .sort((a, b) => dotProduct(articles[idx]!.embedding, b.embedding) - dotProduct(articles[idx]!.embedding, a.embedding))
-        // Skip the first because that's the original article.
-        .slice(1, neighbours + 1);
+        .sort((a, b) => dotProduct(articles[idx]!.embedding, b.embedding) - dotProduct(articles[idx]!.embedding, a.embedding));
+    processesArticles.splice(neighbours, processesArticles.length - neighbours - antiNeighbours);
+    return processesArticles;
 }
 
 export async function prepareArticles(articlePaths: string[]): Promise<Article[]> {
