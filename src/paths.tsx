@@ -12,6 +12,7 @@ const articlesPath = `./articles`;
 const buildPath = `./build`;
 export const workerPath = path.join(buildPath, "worker/worker.js");
 const deployPath = `./deploy`;
+export const modelPath = `./models`;
 
 function ensureDirExists(dir: string): void {
     if (!fs.existsSync(dir)) {

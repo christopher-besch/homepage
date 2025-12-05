@@ -3,6 +3,7 @@ import Title from "./title.js";
 import Layout from "./layout.js";
 import { formatDate } from "../date.js";
 import ArticlesList from "./articles_list.js";
+import Button from "./button.js";
 
 const heroHeightFraction = 0.7;
 const nearestNeighbours = 2;
@@ -37,5 +38,6 @@ export default async function ArticlePage(props: ArticlePageProps): Promise<Reac
         <div className="article_page_markdown">{article.reactNode}</div>
         <Title isHero={false} title="Other Articles" />
         <ArticlesList articles={similarArticles} />
+        <Button href="/articles" text="Furthermore Articles" />
     </Layout>
 }

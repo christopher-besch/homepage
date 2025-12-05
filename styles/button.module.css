@@ -1,0 +1,12 @@
+.button {
+    border-radius: 3px;
+    border-style: solid;
+    border-color: var(--color-body-text);
+    border-width: 2px;
+    padding: 10px;
+}
+
+.button a {
+    color: var(--color-body-text);
+    text-decoration: none;
+}

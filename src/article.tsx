@@ -4,9 +4,10 @@ import matter from "gray-matter";
 import Markdown from "./components/markdown.js";
 import { renderToPipeableStream } from "react-dom/server";
 import path from "path";
-import { pipeline } from "@huggingface/transformers";
+import { pipeline, env } from "@huggingface/transformers";
 import { PassThrough } from "stream";
 import { decode } from "html-entities";
+import { modelPath } from "./paths.js";
 
 interface UnembeddedArticle {
     dirPath: string,
@@ -112,7 +113,9 @@ async function prepareArticle(mdPath: string): Promise<[UnembeddedArticle, strin
 }
 
 async function embedSentences(sentences: string[]): Promise<Float32Array[]> {
-    const extractor = await pipeline("feature-extraction", "Xenova/all-MiniLM-L6-v2", { dtype: "fp32" });
+    env.localModelPath = modelPath;
+    env.allowRemoteModels = false;
+    const extractor = await pipeline("feature-extraction", "Xenova/all-MiniLM-L6-v2", { dtype: "fp32", local_files_only: true });
     const output = await extractor(sentences, { pooling: "mean", normalize: true });
     const [n, dim] = output.dims as [number, number];
     const outputArray = Array.from({ length: n }, (_, i) =>
