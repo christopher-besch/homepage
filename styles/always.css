@@ -469,3 +469,22 @@ body {
 }
 
 /* end of styles/articles_list.module.css */
+
+/* start of styles/button.module.css */
+.button {
+    border-style: solid;
+    border-color: var(--color-body-text);
+    border-radius: 3px;
+    border-width: 2px;
+    padding: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.button a {
+    color: var(--color-body-text);
+    text-decoration: none;
+    font-size: 24px;
+}
+
+/* end of styles/button.module.css */
