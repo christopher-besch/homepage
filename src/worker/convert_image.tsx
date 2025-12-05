@@ -5,7 +5,7 @@ import * as crypto from "crypto";
 import type React from "react";
 
 function colorToCss(r: number, g: number, b: number, a: number): string {
-    if (a === 255) {
+    if (a == 255) {
         return `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)}`;
     } else {
         const af = (a / 255).toFixed(3);
