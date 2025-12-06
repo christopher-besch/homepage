@@ -16,7 +16,7 @@ export async function convertImageOnPool(props: ConvertImageProps): Promise<Expo
     // Otherwise this could lead to a race condition.
     // Also, this is saving resources.
     if (!exportedImagePromises.has(props.inputPath)) {
-        exportedImagePromises.set(props.inputPath, [props, pool.run(props, { name: "convertImage" })]);
+        exportedImagePromises.set(props.inputPath, [props, pool.run(props, { name: "convertImage" }).catch((e) => { throw e; })]);
     } else {
         const otherProps = exportedImagePromises.get(props.inputPath)![0];
         // Only ever create one kind of ConvertImageProps for each file path.
