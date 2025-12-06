@@ -12,7 +12,8 @@
     "main": "src/build.tsx",
     "scripts": {
         "build": "tsc && node --enable-source-maps build/build.js",
-        "clean": "rm -rf build deploy",
+        "clean": "rm -rf build deploy immich_cache",
+        "clean_immich_portfolio": "rm -f immich_cache/portfolio.json",
         "watch": "fswatch --one-per-batch --latency 0.1 --event Updated -r -0 ./articles/ ./src/ ./styles/ ./static ./immich_cache | xargs -0 -I {} -n 1 npm run build"
     },
     "devDependencies": {

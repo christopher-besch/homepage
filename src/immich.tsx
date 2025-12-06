@@ -12,6 +12,12 @@ export interface Asset {
 };
 
 export async function loadImmichPortfolio(): Promise<Asset[]> {
+    // Don't do anything if we've already downloaded everything.
+    if (fs.existsSync(immichPortfolioJSONPath)) {
+        const file = await fs.promises.readFile(immichPortfolioJSONPath);
+        return JSON.parse(file.toString());
+    }
+
     const IMMICH_BASE_URL = process.env['IMMICH_BASE_URL']!;
     // Needed permissions: asset.read, asset.download, tag.read
     const IMMICH_API_KEY = process.env['IMMICH_API_KEY']!;
