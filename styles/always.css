@@ -49,9 +49,9 @@ table {
 	border-spacing: 0;
 }
 
-/* end of styles/reset.css */
-
 /* start of styles/colors.css */
+
+/* end of styles/reset.css */
 @media (prefers-color-scheme: light) {
     :root {
         --color-navbar-bg: darkgrey;
