@@ -106,3 +106,11 @@ export async function copyVideo(inputPath: string): Promise<string> {
     }
     return createVideoLoadPath(name);
 }
+
+// immich cache //
+const immichCachePath = `./immich_cache`;
+export const immichPortfolioPath = path.join(immichCachePath, "portfolio.json");
+export function getImmichCachePath(name: string): string {
+    ensureDirExists(immichCachePath);
+    return path.join(immichCachePath, name);
+}

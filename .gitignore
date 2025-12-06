@@ -1,4 +1,6 @@
+.env
 build/
 deploy/
+immich_cache/
 node_modules/
 

@@ -8,6 +8,7 @@ import IndexPage from "./components/index_page.js";
 import ArticlePage from "./components/article_page.js";
 import { prepareArticles } from "./article.js";
 import ArticlesPage from "./components/articles_page.js";
+import { loadImmichPortfolio } from "./immich.js";
 
 function buildRoute(route: string, element: React.ReactNode) {
     const path = createRouteDeployPath(route);
@@ -28,6 +29,9 @@ async function buildArticles() {
     }
     buildRoute("/articles", <ArticlesPage articles={articles} />);
 }
+
+const portfolio = await loadImmichPortfolio();
+console.log(portfolio);
 
 startPool();
 buildStyles();
