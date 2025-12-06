@@ -25,6 +25,9 @@ jobs:
 
       - name: Build
         run: npm run build
+        env:
+          IMMICH_BASE_URL: "${{secrets.IMMICH_BASE_URL}}"
+          IMMICH_API_KEY: "${{secrets.IMMICH_API_KEY}}"
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@4.1.4
