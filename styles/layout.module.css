@@ -15,7 +15,7 @@
 }
 
 .layout_navbar {
-    height: calc(var(--layout-nav-height));
+    height: var(--layout-nav-height);
     display: flex;
     flex-direction: row;
     gap: var(--layout-nav-padding-right);
@@ -45,6 +45,7 @@
 .layout_navbar_right {
     font-size: 18px;
 
+    display: flex;
     flex-direction: row;
     justify-content: space-between;
     gap: 5px;

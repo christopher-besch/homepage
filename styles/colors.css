@@ -1,23 +1,27 @@
 @media (prefers-color-scheme: light) {
     :root {
-        --color-navbar-bg: darkgrey;
+        --color-navbar-bg: #e2e2e2;
         --color-navbar-text: #1f2328;
         --color-navbar-highlight: lightgrey;
         --color-body-bg: #ffffff;
         --color-body-text: #1f2328;
         --color-hero-text: white;
+        --color-card-bg: var(--color-navbar-bg);
+        --color-card-border: #9e9e9e;
         color-scheme: light;
     }
 }
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --color-navbar-bg: brown;
+        --color-navbar-bg: #454545;
         --color-navbar-text: #f0f6fc;
         --color-navbar-highlight: lightgrey;
         --color-body-bg: #0d1117;
         --color-body-text: #f0f6fc;
         --color-hero-text: white;
+        --color-card-bg: var(--color-navbar-bg);
+        --color-card-border: #656565;
         color-scheme: dark;
     }
 }

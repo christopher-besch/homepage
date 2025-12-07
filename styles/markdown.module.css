@@ -26,7 +26,7 @@
     scale: 1.5;
     padding-bottom: 2px;
     padding-right: 7px;
-    fill: var(--color-navbar-text);
+    fill: var(--color-body-text);
 }
 
 /* https://stackoverflow.com/questions/11122249/scale-iframe-css-width-100-like-an-image */
@@ -50,6 +50,7 @@
     /* .markdown_body { */
     /*     font-size: 18px; */
     /*     background-color: var(--color-body-bg); */
+    /*     color: var(--color-body-text); */
     /* } */
 
     /* MIT License */
@@ -68,7 +69,7 @@
         -ms-text-size-adjust: 100%;
         -webkit-text-size-adjust: 100%;
         margin: 0;
-        color: #1f2328;
+        color: var(--color-body-text);
         background-color: var(--color-body-bg);
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
         font-size: 18px;
@@ -1174,6 +1175,7 @@
     /* .markdown_body { */
     /*     font-size: 18px; */
     /*     background-color: var(--color-body-bg); */
+    /*     color: var(--color-body-text); */
     /* } */
 
     /* MIT License */
@@ -1192,7 +1194,7 @@
         -ms-text-size-adjust: 100%;
         -webkit-text-size-adjust: 100%;
         margin: 0;
-        color: #f0f6fc;
+        color: var(--color-body-text);
         background-color: var(--color-body-bg);
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
         font-size: 18px;
