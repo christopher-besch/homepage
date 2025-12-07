@@ -49,29 +49,33 @@ table {
 	border-spacing: 0;
 }
 
-/* start of styles/colors.css */
-
 /* end of styles/reset.css */
+
+/* start of styles/colors.css */
 @media (prefers-color-scheme: light) {
     :root {
-        --color-navbar-bg: darkgrey;
+        --color-navbar-bg: #e2e2e2;
         --color-navbar-text: #1f2328;
         --color-navbar-highlight: lightgrey;
         --color-body-bg: #ffffff;
         --color-body-text: #1f2328;
         --color-hero-text: white;
+        --color-card-bg: var(--color-navbar-bg);
+        --color-card-border: #9e9e9e;
         color-scheme: light;
     }
 }
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --color-navbar-bg: brown;
+        --color-navbar-bg: #454545;
         --color-navbar-text: #f0f6fc;
         --color-navbar-highlight: lightgrey;
         --color-body-bg: #0d1117;
         --color-body-text: #f0f6fc;
         --color-hero-text: white;
+        --color-card-bg: var(--color-navbar-bg);
+        --color-card-border: #656565;
         color-scheme: dark;
     }
 }
@@ -163,7 +167,7 @@ table {
 }
 
 .layout_navbar {
-    height: calc(var(--layout-nav-height));
+    height: var(--layout-nav-height);
     display: flex;
     flex-direction: row;
     gap: var(--layout-nav-padding-right);
@@ -193,6 +197,7 @@ table {
 .layout_navbar_right {
     font-size: 18px;
 
+    display: flex;
     flex-direction: row;
     justify-content: space-between;
     gap: 5px;
@@ -431,9 +436,10 @@ body {
 
 .articles_list_card {
     border-style: solid;
-    border-color: var(--color-body-text);
+    border-color: var(--color-card-border);
     border-radius: 3px;
     border-width: 2px;
+    background-color: var(--color-card-bg);
     padding: 10px;
 
     text-decoration: none;
@@ -452,7 +458,7 @@ body {
 
 .articles_list_card hr {
     border-style: solid;
-    border-color: var(--color-body-text);
+    border-color: var(--color-card-border);
     border-width: 1px;
     border-radius: 3px;
 }
@@ -473,9 +479,10 @@ body {
 /* start of styles/button.module.css */
 .button {
     border-style: solid;
-    border-color: var(--color-body-text);
+    border-color: var(--color-card-border);
     border-radius: 3px;
     border-width: 2px;
+    background-color: var(--color-card-bg);
     padding: 10px;
     margin-top: 20px;
     margin-bottom: 20px;
