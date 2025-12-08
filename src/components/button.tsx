@@ -3,5 +3,5 @@ interface ButtonProps {
     href: string,
 };
 export default function Button(props: ButtonProps): React.ReactNode {
-    return <div className="button" ><a href={props.href}>{props.text}</a></div>;
+    return <a href={props.href} className="button">{props.text}</a>;
 }
