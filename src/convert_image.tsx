@@ -133,7 +133,7 @@ function resizeImage(
         console.log(`converting ${deployPath}`);
         // We don't need to await this.
         // This can happen in the background.
-        image.clone().resize(width, null).toFile(deployPath);
+        image.clone().resize(width, height).toFile(deployPath);
     }
     return {
         width: width,
@@ -215,17 +215,19 @@ export async function convertImage(props: ConvertImageProps): Promise<ExportedIm
     const hash = crypto.hash("md5", file);
     const image = sharp(file).autoOrient().webp({ quality: 80, effort: 6 });
     const metadata = await image.metadata();
+    const originalWidth = metadata.autoOrient.width;
+    const originalHeight = metadata.autoOrient.height;
 
     let portraitSizes: ImageSize[] | undefined = undefined;
     if (props.portraitVersion != undefined) {
-        const crop = cropImageHorizontally(image, metadata.width, metadata.height, props.portraitVersion.aspectRatio, props.portraitVersion.objectFitPositionH);
+        const crop = cropImageHorizontally(image, originalWidth, originalHeight, props.portraitVersion.aspectRatio, props.portraitVersion.objectFitPositionH);
         // Add the objectFitPositionH to the hash so that when we change that, the cache doesn't bother us.
         // The aspect ratio is already part of the final file because of it's width and height.
         portraitSizes = resizeImageMultiple(crop.image, crop.width, crop.height, `${hash}_${props.portraitVersion.objectFitPositionH}`, props.portraitVersion.widths)
     }
 
     return {
-        sizes: resizeImageMultiple(image, metadata.width, metadata.height, hash, props.widths),
+        sizes: resizeImageMultiple(image, originalWidth, originalHeight, hash, props.widths),
         lqip: await getLqip(image, props.lqipWidth, props.lqipHeight),
         portraitSizes: portraitSizes
     };

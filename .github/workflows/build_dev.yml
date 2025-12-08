@@ -29,6 +29,9 @@ jobs:
           IMMICH_BASE_URL: "${{secrets.IMMICH_BASE_URL}}"
           IMMICH_API_KEY: "${{secrets.IMMICH_API_KEY}}"
 
+      - name: Check Image Size
+        run: npm run check_image_size
+
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
