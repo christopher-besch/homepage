@@ -124,14 +124,13 @@ function cropImageHorizontally(image: sharp.Sharp,
 function resizeImage(
     hash: string,
     image: sharp.Sharp,
-    originalWidth: number,
-    originalHeight: number,
     width: number,
+    height: number,
 ): ImageSize {
-    const height = Math.floor(width / originalWidth * originalHeight);
     const deployPath = createImageDeployPath(hash, width, height);
     // If the path already exists, the hashes match and we can use the cache.
     if (!fs.existsSync(deployPath)) {
+        console.log(`converting ${deployPath}`);
         // We don't need to await this.
         // This can happen in the background.
         image.clone().resize(width, null).toFile(deployPath);
@@ -144,28 +143,59 @@ function resizeImage(
 }
 
 // This function doesn't change the image but creates its own clone if needed.
+// The largest width declares the maximum width and height any image may have.
 function resizeImageMultiple(
     image: sharp.Sharp,
     originalWidth: number,
     originalHeight: number,
     hash: string,
-    widths: number[],
+    targetWidths: number[],
 ): ImageSize[] {
-    let actualWidths = widths.filter(width => width <= originalWidth);
-    const largerWidths = widths.filter(width => width > originalWidth);
-    if (largerWidths.length != 0 && !actualWidths.includes(originalWidth)) {
-        // There is a whished for width that the we can't produce because the input is too small.
+    // We can't upscale the image.
+    let downscalableWidths = targetWidths.filter(width => width <= originalWidth);
+    const largerWidths = targetWidths.filter(width => width > originalWidth);
+    if (largerWidths.length != 0 && !downscalableWidths.includes(originalWidth)) {
+        // There is a wished for width that the we can't produce because the input is too small.
         // But the actual input width is throw away because there is no whished for width exactly that wide.
         // This problem can be very severe.
         // Therefore we add the original width, too.
-        actualWidths.push(originalWidth);
+        downscalableWidths.push(originalWidth);
     }
 
-    let sizes: ImageSize[] = [];
-    for (const width of actualWidths) {
-        sizes.push(resizeImage(hash, image, originalWidth, originalHeight, width));
+    const maxWidth = Math.max(...targetWidths);
+    const resizeSizes: { width: number, height: number }[] = [];
+    downscalableWidths.sort((a, b) => a - b);
+    for (let width of downscalableWidths) {
+        let height = Math.floor(width / originalWidth * originalHeight);
+        // When the image is so portrait we'd include an awful amount of pixels.
+        // Don't do that.
+        // In that case we scale the image down.
+        if (height > maxWidth) {
+            height = maxWidth;
+            // Recalculate to keep aspect ratio.
+            width = Math.floor(height / originalHeight * originalWidth);
+            // Ensure we're not already creating this size.
+            if (!downscalableWidths.includes(width)) {
+                resizeSizes.push({ width, height });
+            }
+            // We're going through this list in ascending order;
+            // everything that's to come is only bigger.
+            break;
+        }
+        resizeSizes.push({ width, height });
     };
-    return sizes;
+
+    let finalSizes: ImageSize[] = [];
+    for (let { width, height } of resizeSizes) {
+        if (width > maxWidth || height > maxWidth) {
+            throw new Error;
+        }
+        finalSizes.push(resizeImage(hash, image, width, height));
+    };
+    if (finalSizes.length == 0) {
+        throw new Error;
+    }
+    return finalSizes;
 }
 
 export interface ExportedImage {
