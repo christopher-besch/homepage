@@ -478,6 +478,7 @@ body {
 
 /* start of styles/button.module.css */
 .button {
+    display: block;
     border-style: solid;
     border-color: var(--color-card-border);
     border-radius: 3px;
@@ -486,9 +487,7 @@ body {
     padding: 10px;
     margin-top: 20px;
     margin-bottom: 20px;
-}
 
-.button a {
     color: var(--color-body-text);
     text-decoration: none;
     font-size: 24px;
