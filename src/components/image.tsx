@@ -2,6 +2,7 @@ import type React from "react";
 import { convertImageOnPool } from "../worker/worker_pool.js";
 import type { ImageSize } from "../convert_image.js";
 
+// 1600 is the max width and height of any image on my homepage.
 const defaultWidths = [400, 800, 1200, 1600];
 // Making this too much portrait is a problem with say 60% images (i.e., the ones we use in the articles).
 const portraitAspectRatio = 3 / 4;

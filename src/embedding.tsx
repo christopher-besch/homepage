@@ -17,7 +17,7 @@ export async function embedSentences(sentences: string[]): Promise<Float32Array[
     }
     const hash = crypto.hash("md5", JSON.stringify(sentences));
     if (cache[hash] != undefined) {
-        console.log(`Using cache for sentece embedding ${hash}.`);
+        console.log(`Using cache for sentence embedding ${hash}`);
         return cache[hash];
     }
     console.log(`Embedding sentences ${hash}.`);
@@ -43,7 +43,7 @@ export async function embedImage(inputPath: string): Promise<Float32Array> {
         cache = JSON.parse(cacheFile.toString());
     }
     if (cache[inputPath] != undefined) {
-        console.log(`Using cache for image embedding ${inputPath}.`);
+        console.log(`Using cache for image embedding ${inputPath}`);
         return cache[inputPath];
     }
     console.log(`Embedding image ${inputPath}.`);
