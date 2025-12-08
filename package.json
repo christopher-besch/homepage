@@ -14,7 +14,7 @@
         "build": "tsc && node --enable-source-maps build/build.js",
         "clean": "rm -rf build deploy cache",
         "clean_immich_portfolio": "rm -f cache/portfolio.json",
-        "check_image_size": "exiftool -if '($ImageWidth > 1600) or ($ImageHeight > 1600)' -filename -FileSize -ImageWidth -ImageHeight /path/to/images",
+        "check_image_size": "! exiftool -if '($ImageWidth > 1600) or ($ImageHeight > 1600)' -filename -FileSize -ImageWidth -ImageHeight deploy/images",
         "watch": "fswatch --one-per-batch --latency 0.1 --event Updated -r -0 ./articles/ ./src/ ./styles/ ./static ./cache | xargs -0 -I {} -n 1 npm run build"
     },
     "devDependencies": {
