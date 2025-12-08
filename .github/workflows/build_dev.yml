@@ -14,6 +14,9 @@ jobs:
         with:
           node-version: 24.11.1
 
+      - name: Install exiftool
+        run: apt install exiftool
+
       - name: Clone Repo
         uses: actions/checkout@v6
         with:
