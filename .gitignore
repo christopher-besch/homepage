@@ -1,6 +1,6 @@
 .env
 build/
 deploy/
-immich_cache/
+cache/
 node_modules/
 

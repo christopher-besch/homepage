@@ -1,3 +1,4 @@
-import { convertImage } from "./convert_image.js";
+import { convertImage } from "../convert_image.js";
+import { embedImage, embedSentences } from "../embedding.js";
 
-export { convertImage };
+export { convertImage, embedImage, embedSentences };

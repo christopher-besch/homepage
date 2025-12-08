@@ -4,10 +4,10 @@ import matter from "gray-matter";
 import Markdown from "./components/markdown.js";
 import { renderToPipeableStream } from "react-dom/server";
 import path from "path";
-import { pipeline, env } from "@huggingface/transformers";
 import { PassThrough } from "stream";
 import { decode } from "html-entities";
-import { modelPath } from "./paths.js";
+import { type Embeddable } from "./embedding.js";
+import { embedSentencesOnPool } from "./worker/worker_pool.js";
 
 interface UnembeddedArticle {
     dirPath: string,
@@ -28,10 +28,7 @@ interface UnembeddedArticle {
     reactNode: React.ReactNode,
 };
 
-export interface Article extends UnembeddedArticle {
-    embedding: Float32Array,
-}
-
+export interface Article extends UnembeddedArticle, Embeddable { };
 
 function assertIsString(input: any): string {
     if (typeof input != "string") {
@@ -112,41 +109,8 @@ async function prepareArticle(mdPath: string): Promise<[UnembeddedArticle, strin
     }, plaintext];
 }
 
-async function embedSentences(sentences: string[]): Promise<Float32Array[]> {
-    env.localModelPath = modelPath;
-    env.allowRemoteModels = false;
-    const extractor = await pipeline("feature-extraction", "Xenova/all-MiniLM-L6-v2", { dtype: "fp32", local_files_only: true });
-    const output = await extractor(sentences, { pooling: "mean", normalize: true });
-    const [n, dim] = output.dims as [number, number];
-    const outputArray = Array.from({ length: n }, (_, i) =>
-        output.data.slice(i * dim, (i + 1) * dim));
-    return outputArray as Float32Array[]
-}
-
-function dotProduct(a: Float32Array, b: Float32Array): number {
-    let dot = 0;
-    for (let i = 0; i < a.length; i++) {
-        const x = a[i]!;
-        const y = b[i]!;
-        dot += x * y;
-    }
-    return dot;
-}
-
-// Get neighbours articles that are as close as possible and antiNeighbours articles that are as different as possible.
-export function getNearestListedNeighbours(idx: number, neighbours: number, antiNeighbours: number, articles: Article[]): Article[] {
-    let processesArticles = [...articles];
-    // Skip the original article.
-    processesArticles.splice(idx, 1);
-    processesArticles = processesArticles
-        .filter(a => a.listed)
-        .sort((a, b) => dotProduct(articles[idx]!.embedding, b.embedding) - dotProduct(articles[idx]!.embedding, a.embedding));
-    processesArticles.splice(neighbours, processesArticles.length - neighbours - antiNeighbours);
-    return processesArticles;
-}
-
 export async function prepareArticles(articlePaths: string[]): Promise<Article[]> {
     const unembeddedArticles = await Promise.all(articlePaths.map(prepareArticle));
-    const embeddings = await embedSentences(unembeddedArticles.map(([_, p]) => p));
+    const embeddings = await embedSentencesOnPool(unembeddedArticles.map(([_, p]) => p));
     return unembeddedArticles.map(([a, _], i) => { return { ...a, embedding: embeddings[i]! }; });
 }

@@ -1,6 +1,6 @@
 import { Piscina } from "piscina";
 import { workerPath } from "../paths.js";
-import { type ConvertImageProps, type ExportedImage } from "./convert_image.js";
+import { type ConvertImageProps, type ExportedImage } from "../convert_image.js";
 
 let pool: Piscina;
 
@@ -28,4 +28,14 @@ export async function convertImageOnPool(props: ConvertImageProps): Promise<Expo
         }
     }
     return await exportedImagePromises.get(props.inputPath)![1];
+}
+
+// You may only run one of these at any time.
+export async function embedImageOnPool(inputPath: string): Promise<Float32Array> {
+    return pool.run(inputPath, { name: "embedImage" }).catch((e) => { throw e; });
+}
+
+// You may only run one of these at any time.
+export async function embedSentencesOnPool(sentences: string[]): Promise<Float32Array[]> {
+    return pool.run(sentences, { name: "embedSentences" }).catch((e) => { throw e; });
 }

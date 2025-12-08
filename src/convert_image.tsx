@@ -1,5 +1,5 @@
 import sharp from "sharp";
-import { createImageDeployPath, createImageLoadPath } from "../paths.js";
+import { createImageDeployPath, createImageLoadPath } from "./paths.js";
 import * as fs from "fs";
 import * as crypto from "crypto";
 import type React from "react";

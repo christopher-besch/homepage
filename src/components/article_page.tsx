@@ -1,9 +1,10 @@
-import { getNearestListedNeighbours, type Article } from "../article.js";
+import { type Article } from "../article.js";
 import Title from "./title.js";
 import Layout from "./layout.js";
 import { formatDate } from "../date.js";
 import ArticlesList from "./articles_list.js";
 import Button from "./button.js";
+import { getNearestListedNeighbours } from "../embedding.js";
 
 const heroHeightFraction = 0.7;
 const nearestNeighbours = 2;

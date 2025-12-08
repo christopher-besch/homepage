@@ -30,10 +30,11 @@ async function buildArticles() {
     buildRoute("/articles", <ArticlesPage articles={articles} />);
 }
 
+startPool();
+
 const portfolio = await loadImmichPortfolio();
 console.log(portfolio);
 
-startPool();
 buildStyles();
 copyStatic();
 buildRoute("/", <IndexPage />);
