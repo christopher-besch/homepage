@@ -8,6 +8,7 @@ import { embedImageOnPool } from "./worker/worker_pool.js";
 const PORTFOLIO_TAG = "portfolio";
 
 export interface UnembeddedAsset {
+    id: string,
     cachePath: string,
     tags: string[],
     rating: number,
@@ -75,6 +76,7 @@ async function loadImmichPortfolioWithoutEmbedding(): Promise<UnembeddedAsset[]>
             throw new Error(`${asset.originalFileName} doesn't have tags.`);
         }
         return {
+            id: asset.id,
             cachePath: cachePath,
             tags: asset.tags.map(t => t.name).filter(n => n != PORTFOLIO_TAG),
             rating: asset.exifInfo.rating

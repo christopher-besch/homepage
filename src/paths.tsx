@@ -63,7 +63,7 @@ export function copyStatic() {
 }
 
 // articles //
-const loadArticlesPath = `/articles`;
+export const loadArticlesPath = `/articles`;
 export async function getArticles(): Promise<string[]> {
     const dirs = await fs.promises.readdir(articlesPath);
     let articles: string[] = [];
@@ -109,10 +109,16 @@ export async function copyVideo(inputPath: string): Promise<string> {
 
 // cache //
 const cachePath = `./cache`;
-export const immichPortfolioPath = path.join(cachePath, "portfolio.json");
+export const immichPortfolioPath = path.join(cachePath, "immich_download.json");
 export const sentenceEmbeddingCachePath = path.join(cachePath, "sentence_embeddings.json");
 export const imageEmbeddingCachePath = path.join(cachePath, "image_embeddings.json");
 export function getImmichCachePath(name: string): string {
     ensureDirExists(cachePath);
     return path.join(cachePath, name);
+}
+
+// asssets //
+export const loadPhotographyPath = `/photography`;
+export function getAssetDeployRoute(id: string): string {
+    return path.join(loadPhotographyPath, id);
 }

@@ -1,16 +1,20 @@
 import * as fs from "fs";
 import { renderToPipeableStream } from "react-dom/server";
 import { buildStyles } from "./styles.js";
-import { createRouteDeployPath, copyStatic, getArticles, getArticleDeployRoute } from "./paths.js";
+import { createRouteDeployPath, copyStatic, getArticles, getArticleDeployRoute, loadArticlesPath, loadPhotographyPath } from "./paths.js";
 import { startPool } from "./worker/worker_pool.js";
 
 import IndexPage from "./components/index_page.js";
 import ArticlePage from "./components/article_page.js";
 import { prepareArticles } from "./article.js";
 import ArticlesPage from "./components/articles_page.js";
-import { loadImmichPortfolio } from "./immich.js";
+import { loadImmichPortfolio, type Asset } from "./immich.js";
+import PhotographyPage from "./components/photography_page.js";
 
+// Build the route in the background.
+// Return immediately.
 function buildRoute(route: string, element: React.ReactNode) {
+    console.log(`Build route ${route}`);
     const path = createRouteDeployPath(route);
     // We cannot use renderToStaticMarkup because that doesn't support async components.
     let out = renderToPipeableStream(element, {
@@ -22,20 +26,25 @@ function buildRoute(route: string, element: React.ReactNode) {
 }
 
 async function buildArticles() {
+    console.log("Building articles");
     const articlePaths = await getArticles();
     const articles = await prepareArticles(articlePaths);
     for (const [idx, article] of articles.entries()) {
         buildRoute(getArticleDeployRoute(article.slug), <ArticlePage idx={idx} articles={articles} />);
     }
-    buildRoute("/articles", <ArticlesPage articles={articles} />);
+    buildRoute(loadArticlesPath, <ArticlesPage articles={articles} />);
+}
+
+async function buildPhotography(portfolio: Asset[]) {
+    console.log("Building photography");
+    buildRoute(loadPhotographyPath, <PhotographyPage portfolio={portfolio} />)
 }
 
 startPool();
-
-const portfolio = await loadImmichPortfolio();
-console.log(portfolio);
-
+// Do this in the background
+loadImmichPortfolio().then(buildPhotography);
+// Do this in the background
 buildStyles();
 copyStatic();
 buildRoute("/", <IndexPage />);
-await buildArticles();
+buildArticles();
