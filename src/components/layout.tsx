@@ -1,4 +1,4 @@
-import { createStyleLoadPath } from "../paths.js";
+import { createStyleLoadPath, getArticleDeployRoute, loadAboutPath, loadArticlesPath, loadPhotographyPath, loadProjectsPath, loadRssPath, loadTalksPath } from "../paths.js";
 import Image from "./image.js";
 
 interface LayoutProps {
@@ -15,12 +15,12 @@ interface LayoutProps {
 }
 export default function Layout(props: React.PropsWithChildren<LayoutProps>): React.ReactNode {
     const nav_links = <div className="layout_nav_links">
-        <a href="/articles">Articles</a>
-        <a href="/photography">Photos</a>
-        <a href="/projects">Projects</a>
-        <a href="/talks">Talks</a>
-        <a href="/articles/bookmarks">Bookmarks</a>
-        <a href="/about">About</a>
+        <a href={loadArticlesPath}>Articles</a>
+        <a href={loadPhotographyPath}>Photos</a>
+        <a href={loadProjectsPath}>Projects</a>
+        <a href={loadTalksPath}>Talks</a>
+        <a href={getArticleDeployRoute("bookmarks")}>Bookmarks</a>
+        <a href={loadAboutPath}>About</a>
     </div>;
     return (
         <html>
@@ -36,8 +36,6 @@ export default function Layout(props: React.PropsWithChildren<LayoutProps>): Rea
                 )}
 
                 <link rel="icon" type="image/png" sizes="48x48" href="/favicon.png" />
-
-                {/* <link rel="icon" href="favicon.png" /> */}
             </head>
 
             <body>
@@ -83,9 +81,9 @@ export default function Layout(props: React.PropsWithChildren<LayoutProps>): Rea
                 </div>
 
                 <div className="layout_footer">
-                    <a href="/about">Contact</a>
-                    <a href="/rss.xml">RSS</a>
-                    <a href="/privacy">Privacy</a>
+                    <a href={loadAboutPath}>Contact</a>
+                    <a href={loadRssPath}>RSS</a>
+                    <a href={getArticleDeployRoute("privacy")}>Privacy</a>
                     <div>© 2025 | All rights reserved</div>
                 </div>
             </body>

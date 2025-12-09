@@ -14,6 +14,8 @@ const buildPath = `./build`;
 export const workerPath = path.join(buildPath, "worker/worker.js");
 const deployPath = `./deploy`;
 export const modelPath = `./models`;
+export const loadRssPath = `/rss.xml`;
+export const loadAboutPath = `/about`;
 
 function ensureDirExists(dir: string): void {
     if (!fs.existsSync(dir)) {
@@ -136,3 +138,9 @@ export function getAssetDeployRoute(id: string): string {
 export function getResourceLoadPath(name: string): string {
     return path.join(resources, name);
 }
+
+// projects //
+export const loadProjectsPath = `/projects`;
+
+// talks //
+export const loadTalksPath = `/talks`;
