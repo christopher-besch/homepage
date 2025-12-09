@@ -37,13 +37,14 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-bottom: 20px;
-    padding-top: 20px;
+    --photo-page-padding: 20px;
+    padding-bottom: var(--photo-page-padding);
+    padding-top: var(--photo-page-padding);
 }
 
 .photo_page img {
     max-width: var(--layout-content-width);
-    max-height: calc(var(--layout-content-height));
+    max-height: calc(var(--layout-content-height) + var(--layout-footer-height) - 2 * var(--photo-page-padding));
     width: auto;
     height: 100%;
 }
