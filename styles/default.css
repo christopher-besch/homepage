@@ -5,3 +5,29 @@
 }
 
 /* end of styles/index_page.module.css */
+
+/* start of styles/photo_list.module.css */
+.photos_list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.photos_list_card {
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: auto;
+}
+
+.photos_list_card img {
+    width: 100%;
+    max-width: calc(100vw - 2 * var(--layout-content-padding));
+    height: 300px;
+    /* contain doesn't look so bad, either. */
+    /* It uses the nicely blurry background to fill the space. */
+    /* cover is the other option. */
+    object-fit: contain;
+}
+
+/* end of styles/photo_list.module.css */
