@@ -12,6 +12,8 @@
     --layout-burger-height: 3px;
 
     --layout-content-padding: 20px;
+    --layout-content-width: calc(100vw - 2 * var(--layout-content-padding));
+    --layout-content-height: calc(100vh - var(--layout-nav-height) - var(--layout-footer-height));
 
     --layout-footer-height: 30px;
 }
@@ -151,7 +153,7 @@
 
 /* We use layout_content_container because we can't overwrite these values on body because of the reset.css. */
 .layout_content_container {
-    min-height: calc(100vh - var(--layout-nav-height) - var(--layout-footer-height));
+    min-height: var(--layout-content-height);
 }
 
 /* We set these on the body because reset.css doesn't set these and setting them on the body is nicer. */

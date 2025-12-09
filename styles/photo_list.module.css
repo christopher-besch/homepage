@@ -13,7 +13,7 @@
 
 .photos_list_card img {
     width: 100%;
-    max-width: calc(100vw - 2 * var(--layout-content-padding));
+    max-width: var(--layout-content-width);
     height: 300px;
     /* contain doesn't look so bad, either. */
     /* It uses the nicely blurry background to fill the space. */

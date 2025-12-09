@@ -1,7 +1,7 @@
 import * as fs from "fs";
 import { renderToPipeableStream } from "react-dom/server";
 import { buildStyles } from "./styles.js";
-import { createRouteDeployPath, copyStatic, getArticles, getArticleDeployRoute, loadArticlesPath, loadPhotographyPath } from "./paths.js";
+import { createRouteDeployPath, copyStatic, getArticles, getArticleDeployRoute, loadArticlesPath, loadPhotographyPath, getAssetDeployRoute } from "./paths.js";
 import { startPool } from "./worker/worker_pool.js";
 
 import IndexPage from "./components/index_page.js";
@@ -10,6 +10,7 @@ import { prepareArticles } from "./article.js";
 import ArticlesPage from "./components/articles_page.js";
 import { loadImmichPortfolio, type Asset } from "./immich.js";
 import PhotographyPage from "./components/photography_page.js";
+import PhotoPage from "./components/photo_page.js";
 
 // Build the route in the background.
 // Return immediately.
@@ -43,6 +44,9 @@ async function buildArticles() {
 
 async function buildPhotography(portfolio: Asset[]) {
     console.log("Building photography");
+    for (const [idx, asset] of portfolio.entries()) {
+        buildRoute(getAssetDeployRoute(asset.id), <PhotoPage idx={idx} assets={portfolio} />);
+    }
     buildRoute(loadPhotographyPath, <PhotographyPage portfolio={portfolio} />)
 }
 

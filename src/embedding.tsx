@@ -18,6 +18,7 @@ export async function embedSentences(sentences: string[]): Promise<Float32Array[
     const hash = crypto.hash("md5", JSON.stringify(sentences));
     if (cache[hash] != undefined) {
         console.log(`Using cache for sentence embedding ${hash}`);
+        // TODO: this doesn't work
         return cache[hash];
     }
     console.log(`Embedding sentences ${hash}.`);
@@ -25,7 +26,7 @@ export async function embedSentences(sentences: string[]): Promise<Float32Array[
     env.localModelPath = modelPath;
     env.allowRemoteModels = false;
     const extractor = await pipeline("feature-extraction", "Xenova/all-MiniLM-L6-v2", { dtype: "fp32", local_files_only: true });
-    const output = await extractor(sentences, { pooling: "mean", normalize: true });
+    const output = await extractor(sentences, { pooling: "mean", normalize: false });
     const [n, dim] = output.dims as [number, number];
     const outputArray = Array.from({ length: n }, (_, i) =>
         output.data.slice(i * dim, (i + 1) * dim)) as Float32Array[];
@@ -51,6 +52,7 @@ export async function embedImage(inputPath: string): Promise<Float32Array> {
     }
     if (embedImageCache[inputPath] != undefined) {
         console.log(`Using cache for image embedding ${inputPath}`);
+        // TODO: this doesn't work
         return embedImageCache[inputPath];
     }
     console.log(`Embedding image ${inputPath}`);
@@ -58,7 +60,6 @@ export async function embedImage(inputPath: string): Promise<Float32Array> {
     env.localModelPath = modelPath;
     env.allowRemoteModels = false;
     const extractor = await pipeline("image-feature-extraction", "Xenova/clip-vit-base-patch32", { dtype: "fp32", local_files_only: true });
-    // TODO: normalize?
     const output = await extractor(inputPath);
     const outputArray = output.data as Float32Array;
 
@@ -67,14 +68,25 @@ export async function embedImage(inputPath: string): Promise<Float32Array> {
     return outputArray;
 }
 
-function dotProduct(a: Float32Array, b: Float32Array): number {
+function cosineSimilarity(a: Float32Array, b: Float32Array): number {
+    if (a.length != b.length) {
+        throw new Error("Arrays must have the same length");
+    }
+
     let dot = 0;
+    let normA = 0;
+    let normB = 0;
+
     for (let i = 0; i < a.length; i++) {
         const x = a[i]!;
         const y = b[i]!;
         dot += x * y;
+        normA += x * x;
+        normB += y * y;
     }
-    return dot;
+
+    const denom = Math.sqrt(normA) * Math.sqrt(normB);
+    return denom == 0 ? 0 : dot / denom;
 }
 
 // Get neighbouring embeddables that are as close as possible and antiNeighbours articles that are as different as possible.
@@ -84,7 +96,7 @@ export function getNearestListedNeighbours<T extends Embeddable>(idx: number, ne
     processedEmbeddable.splice(idx, 1);
     processedEmbeddable = processedEmbeddable
         .filter(a => a.listed)
-        .sort((a, b) => dotProduct(embeddables[idx]!.embedding, b.embedding) - dotProduct(embeddables[idx]!.embedding, a.embedding));
+        .sort((a, b) => cosineSimilarity(embeddables[idx]!.embedding, b.embedding) - cosineSimilarity(embeddables[idx]!.embedding, a.embedding));
     processedEmbeddable.splice(neighbours, processedEmbeddable.length - neighbours - antiNeighbours);
     return processedEmbeddable;
 }
