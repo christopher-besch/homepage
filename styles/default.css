@@ -32,6 +32,14 @@
 
 /* end of styles/photo_list.module.css */
 
+/* start of styles/photography_page.module.css */
+.photography_page_list {
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+/* end of styles/photography_page.module.css */
+
 /* start of styles/photo_page.module.css */
 .photo_page {
     display: flex;
