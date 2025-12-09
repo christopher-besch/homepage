@@ -425,9 +425,9 @@ body {
     border-radius: 3px;
 }
 
-/* end of styles/title.module.css */
-
 /* start of styles/articles_list.module.css */
+
+/* end of styles/title.module.css */
 .articles_list {
     margin-top: 20px;
     margin-bottom: 20px;
