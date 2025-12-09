@@ -110,9 +110,18 @@ export async function copyVideo(inputPath: string): Promise<string> {
 
 // cache //
 const cachePath = `./cache`;
-export const immichPortfolioPath = path.join(cachePath, "immich_download.json");
-export const sentenceEmbeddingCachePath = path.join(cachePath, "sentence_embeddings.json");
-export const imageEmbeddingCachePath = path.join(cachePath, "image_embeddings.json");
+export function getImmichPortfolioPath(): string {
+    ensureDirExists(cachePath);
+    return path.join(cachePath, "immich_download.json");
+}
+export function getSentenceEmbeddingCachePath(): string {
+    ensureDirExists(cachePath);
+    return path.join(cachePath, "sentence_embeddings.json");
+}
+export function getImageEmbeddingCachePath(): string {
+    ensureDirExists(cachePath);
+    return path.join(cachePath, "image_embeddings.json");
+}
 export function getImmichCachePath(name: string): string {
     ensureDirExists(cachePath);
     return path.join(cachePath, name);

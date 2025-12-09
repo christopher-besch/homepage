@@ -9,14 +9,15 @@ sourceMap.set("always.css", [
     getStyleSourcePath("colors.css"),
     getStyleSourcePath("fonts.css"),
     getStyleSourcePath("layout.module.css"),
-    // This might not strictly be needed on all pages but kinda is.
     getStyleSourcePath("image.module.css"),
     getStyleSourcePath("title.module.css"),
+    // This might not strictly be needed on all pages but kinda is.
     getStyleSourcePath("articles_list.module.css"),
     getStyleSourcePath("button.module.css"),
 ]);
 sourceMap.set("default.css", [
     getStyleSourcePath("index_page.module.css"),
+    getStyleSourcePath("photo_list.module.css"),
 ]);
 sourceMap.set("article.css", [
     getStyleSourcePath("article_page.module.css"),

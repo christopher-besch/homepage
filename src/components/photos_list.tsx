@@ -10,9 +10,9 @@ export default function PhotosList(props: PhotosListProps): React.ReactNode {
         throw new Error("Created a list of unlisted assets.");
     }
     return (
-        <div className="assets_list">
+        <div className="photos_list">
             {props.assets.map((asset, i) =>
-                <a key={i} className="assets_list_card" href={getAssetDeployRoute(asset.id)}>
+                <a key={i} className="photos_list_card" href={getAssetDeployRoute(asset.id)}>
                     <Image inputPath={asset.cachePath} lazy={true} />
                 </a>
             )}

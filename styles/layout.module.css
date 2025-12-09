@@ -11,6 +11,8 @@
     --layout-burger-width: 25px;
     --layout-burger-height: 3px;
 
+    --layout-content-padding: 20px;
+
     --layout-footer-height: 30px;
 }
 
@@ -159,8 +161,8 @@ body {
 }
 
 .layout_content {
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: var(--layout-content-padding);
+    padding-right: var(--layout-content-padding);
     max-width: 1200px;
     margin: auto;
 }

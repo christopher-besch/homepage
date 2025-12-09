@@ -7,6 +7,7 @@ interface PhotographyPageProps {
     portfolio: Asset[],
 }
 export default function PhotographyPage(props: PhotographyPageProps): React.ReactNode {
+    props.portfolio.sort((a, b) => b.rating - a.rating);
     return (
         <Layout
             title="Chris' Photos"

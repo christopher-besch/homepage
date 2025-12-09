@@ -1,5 +1,5 @@
 import { downloadAsset, getAllTags, getAssetInfo, init, searchAssets, type AssetResponseDto } from "@immich/sdk";
-import { getImmichCachePath, immichPortfolioPath as immichPortfolioJSONPath } from "./paths.js";
+import { getImmichCachePath, getImmichPortfolioPath as immichPortfolioJSONPath } from "./paths.js";
 import path from "path";
 import * as fs from "fs";
 import { type Embeddable } from "./embedding.js";
@@ -19,9 +19,9 @@ export interface Asset extends UnembeddedAsset, Embeddable { };
 // Download from Immich or if cached load JSON.
 async function loadImmichPortfolioWithoutEmbedding(): Promise<UnembeddedAsset[]> {
     // Don't do anything if we've already downloaded everything.
-    if (fs.existsSync(immichPortfolioJSONPath)) {
+    if (fs.existsSync(immichPortfolioJSONPath())) {
         console.log("Using immich image cache.");
-        const file = await fs.promises.readFile(immichPortfolioJSONPath);
+        const file = await fs.promises.readFile(immichPortfolioJSONPath());
         return JSON.parse(file.toString());
     }
     console.log("Downloading immich images.");
@@ -83,7 +83,7 @@ async function loadImmichPortfolioWithoutEmbedding(): Promise<UnembeddedAsset[]>
         };
     });
     const jsonPortfolio = JSON.stringify(portfolio, null, 4);
-    fs.promises.writeFile(immichPortfolioJSONPath, jsonPortfolio);
+    fs.promises.writeFile(immichPortfolioJSONPath(), jsonPortfolio);
     return portfolio;
 }
 

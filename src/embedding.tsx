@@ -1,4 +1,4 @@
-import { sentenceEmbeddingCachePath, modelPath, imageEmbeddingCachePath } from "./paths.js";
+import { getSentenceEmbeddingCachePath, modelPath, getImageEmbeddingCachePath } from "./paths.js";
 import { pipeline, env } from "@huggingface/transformers";
 import * as crypto from "crypto";
 import * as fs from "fs";
@@ -11,8 +11,8 @@ export interface Embeddable {
 // You may only run one of these at any time.
 export async function embedSentences(sentences: string[]): Promise<Float32Array[]> {
     let cache: { [key: string]: Float32Array[] } = {};
-    if (fs.existsSync(sentenceEmbeddingCachePath)) {
-        const cacheFile = await fs.promises.readFile(sentenceEmbeddingCachePath);
+    if (fs.existsSync(getSentenceEmbeddingCachePath())) {
+        const cacheFile = await fs.promises.readFile(getSentenceEmbeddingCachePath());
         cache = JSON.parse(cacheFile.toString());
     }
     const hash = crypto.hash("md5", JSON.stringify(sentences));
@@ -31,22 +31,29 @@ export async function embedSentences(sentences: string[]): Promise<Float32Array[
         output.data.slice(i * dim, (i + 1) * dim)) as Float32Array[];
 
     cache[hash] = outputArray;
-    await fs.promises.writeFile(sentenceEmbeddingCachePath, JSON.stringify(cache, null, 4));
+    await fs.promises.writeFile(getSentenceEmbeddingCachePath(), JSON.stringify(cache, null, 4));
     return outputArray;
 }
 
+let embedImageCache: { [key: string]: Float32Array } | undefined = undefined;
+
 // You may only run one of these at any time.
 export async function embedImage(inputPath: string): Promise<Float32Array> {
-    let cache: { [key: string]: Float32Array } = {};
-    if (fs.existsSync(imageEmbeddingCachePath)) {
-        const cacheFile = await fs.promises.readFile(imageEmbeddingCachePath);
-        cache = JSON.parse(cacheFile.toString());
+    // Don't load the json file every time.
+    // So, yes, we cache the cache.
+    if (embedImageCache == undefined) {
+        if (fs.existsSync(getImageEmbeddingCachePath())) {
+            const cacheFile = await fs.promises.readFile(getImageEmbeddingCachePath());
+            embedImageCache = JSON.parse(cacheFile.toString()) as { [key: string]: Float32Array };
+        } else {
+            embedImageCache = {};
+        }
     }
-    if (cache[inputPath] != undefined) {
+    if (embedImageCache[inputPath] != undefined) {
         console.log(`Using cache for image embedding ${inputPath}`);
-        return cache[inputPath];
+        return embedImageCache[inputPath];
     }
-    console.log(`Embedding image ${inputPath}.`);
+    console.log(`Embedding image ${inputPath}`);
 
     env.localModelPath = modelPath;
     env.allowRemoteModels = false;
@@ -55,8 +62,8 @@ export async function embedImage(inputPath: string): Promise<Float32Array> {
     const output = await extractor(inputPath);
     const outputArray = output.data as Float32Array;
 
-    cache[inputPath] = outputArray;
-    await fs.promises.writeFile(imageEmbeddingCachePath, JSON.stringify(cache, null, 4));
+    embedImageCache[inputPath] = outputArray;
+    await fs.promises.writeFile(getImageEmbeddingCachePath(), JSON.stringify(embedImageCache, null, 4));
     return outputArray;
 }
 
