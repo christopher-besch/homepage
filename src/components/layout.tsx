@@ -35,6 +35,8 @@ export default function Layout(props: React.PropsWithChildren<LayoutProps>): Rea
                     <link key={i} rel="stylesheet" type="text/css" href={createStyleLoadPath(styleSheet)} />
                 )}
 
+                <link rel="icon" type="image/png" sizes="48x48" href="/favicon.png" />
+
                 {/* <link rel="icon" href="favicon.png" /> */}
             </head>
 
