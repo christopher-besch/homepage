@@ -133,7 +133,7 @@ function resizeImage(
         console.log(`converting ${deployPath}`);
         // We don't need to await this.
         // This can happen in the background.
-        image.clone().resize(width, height).toFile(deployPath);
+        image.clone().resize(width, height).toFile(deployPath).catch(e => { throw e; });
     }
     return {
         width: width,

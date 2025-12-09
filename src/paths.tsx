@@ -8,6 +8,7 @@ import path from "path";
 
 const staticPath = `./static`;
 const stylesPath = `./styles`;
+const resources = `./resources`;
 const articlesPath = `./articles`;
 const buildPath = `./build`;
 export const workerPath = path.join(buildPath, "worker/worker.js");
@@ -59,7 +60,7 @@ export function copyStatic() {
     // Because of this the static dir may only contain fonts and things that aren't in subdirs that other code also accesses.
     fs.promises.cp(staticPath, deployPath, { recursive: true }).then(() => {
         fs.promises.cp("./node_modules/katex/dist/fonts", deployFontsPath, { recursive: true });
-    });
+    }).catch(e => { throw e; });
 }
 
 // articles //
@@ -102,7 +103,7 @@ export async function copyVideo(inputPath: string): Promise<string> {
     if (!fs.existsSync(deployPath)) {
         // We don't need to await this.
         // This can happen in the background.
-        fs.promises.writeFile(deployPath, file);
+        fs.promises.writeFile(deployPath, file).catch(e => { throw e; });
     }
     return createVideoLoadPath(name);
 }
@@ -121,4 +122,8 @@ export function getImmichCachePath(name: string): string {
 export const loadPhotographyPath = `/photography`;
 export function getAssetDeployRoute(id: string): string {
     return path.join(loadPhotographyPath, id);
+}
+
+export function getResourceLoadPath(name: string): string {
+    return path.join(resources, name);
 }

@@ -21,7 +21,13 @@ function buildRoute(route: string, element: React.ReactNode) {
         onAllReady: () => {
             const stream = fs.createWriteStream(path);
             out.pipe(stream);
-        }
+        },
+        onError: (e) => {
+            throw e;
+        },
+        onShellError: (e) => {
+            throw e;
+        },
     });
 }
 
@@ -42,9 +48,9 @@ async function buildPhotography(portfolio: Asset[]) {
 
 startPool();
 // Do this in the background
-loadImmichPortfolio().then(buildPhotography);
+loadImmichPortfolio().then(buildPhotography).catch(e => { throw e; });
 // Do this in the background
-buildStyles();
+buildStyles().catch(e => { throw e; });
 copyStatic();
 buildRoute("/", <IndexPage />);
-buildArticles();
+buildArticles().catch(e => { throw e; });

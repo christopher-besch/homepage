@@ -16,7 +16,8 @@ export async function convertImageOnPool(props: ConvertImageProps): Promise<Expo
     // Otherwise this could lead to a race condition.
     // Also, this is saving resources.
     if (!exportedImagePromises.has(props.inputPath)) {
-        exportedImagePromises.set(props.inputPath, [props, pool.run(props, { name: "convertImage" }).catch((e) => { throw e; })]);
+        // We don't need to catch this because we're awaiting this in the end of this function.
+        exportedImagePromises.set(props.inputPath, [props, pool.run(props, { name: "convertImage" })]);
     } else {
         const otherProps = exportedImagePromises.get(props.inputPath)![0];
         // Only ever create one kind of ConvertImageProps for each file path.
@@ -32,10 +33,10 @@ export async function convertImageOnPool(props: ConvertImageProps): Promise<Expo
 
 // You may only run one of these at any time.
 export async function embedImageOnPool(inputPath: string): Promise<Float32Array> {
-    return pool.run(inputPath, { name: "embedImage" }).catch((e) => { throw e; });
+    return pool.run(inputPath, { name: "embedImage" });
 }
 
 // You may only run one of these at any time.
 export async function embedSentencesOnPool(sentences: string[]): Promise<Float32Array[]> {
-    return pool.run(sentences, { name: "embedSentences" }).catch((e) => { throw e; });
+    return pool.run(sentences, { name: "embedSentences" });
 }

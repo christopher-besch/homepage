@@ -1,3 +1,4 @@
+import { getResourceLoadPath } from "../paths.js";
 import Layout from "./layout.js";
 
 interface IndexPageProps {
@@ -8,7 +9,7 @@ export default function IndexPage(_props: IndexPageProps): React.ReactNode {
             title="Chris' Homepage"
             styleSheets={["always.css", "default.css"]}
             heroImage={{
-                inputPath: "/home/chris/IMG_0026.jpg",
+                inputPath: getResourceLoadPath("index_hero.jpg"),
                 objectFitHorizontal: 65,
                 objectFitVertical: 30,
                 // heightFraction: 0.5,
