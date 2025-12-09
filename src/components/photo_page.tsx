@@ -7,7 +7,7 @@ import PhotosList from "./photos_list.js";
 import { getNearestListedNeighbours } from "../embedding.js";
 import { loadPhotographyPath } from "../paths.js";
 
-const nearestNeighbours = 2;
+const nearestNeighbours = 4;
 const antiNeighbours = 2;
 
 interface PhotoPageProps {
