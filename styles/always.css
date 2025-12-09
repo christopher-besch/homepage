@@ -254,11 +254,12 @@ table {
     gap: 30px;
 }
 
-.layout_transient_space .layout_nav_links a:nth-child(2n) {
-    text-align: right;
-}
+/* .layout_transient_space .layout_nav_links a:nth-child(2n) { */
+/*     text-align: right; */
+/* } */
 
 .layout_transient_space .layout_nav_links a {
+    text-align: center;
     color: var(--color-navbar-text);
     text-decoration: none;
 }
