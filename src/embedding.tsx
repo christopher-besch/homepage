@@ -10,6 +10,7 @@ export interface Embeddable {
 
 // You may only run one of these at any time.
 export async function embedSentences(sentences: string[]): Promise<number[][]> {
+    // We don't need to cache the cache in memory because we don't run this function more than once.
     let cache: { [key: string]: number[][] } = {};
     if (fs.existsSync(getSentenceEmbeddingCachePath())) {
         const cacheFile = await fs.promises.readFile(getSentenceEmbeddingCachePath());

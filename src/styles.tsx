@@ -18,6 +18,7 @@ sourceMap.set("always.css", [
 sourceMap.set("default.css", [
     getStyleSourcePath("index_page.module.css"),
     getStyleSourcePath("photo_list.module.css"),
+    getStyleSourcePath("photography_page.module.css"),
     getStyleSourcePath("photo_page.module.css"),
 ]);
 sourceMap.set("article.css", [

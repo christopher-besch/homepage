@@ -14,7 +14,9 @@ export default function PhotographyPage(props: PhotographyPageProps): React.Reac
             styleSheets={["always.css", "default.css"]}
         >
             <Title isHero={false} title="Photos" />
-            <PhotosList assets={props.portfolio} />
+            <div className="photography_page_list">
+                <PhotosList assets={props.portfolio} />
+            </div>
         </Layout>
     );
 }
