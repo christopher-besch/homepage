@@ -65,7 +65,7 @@ export function copyStatic() {
 
 // articles //
 export const loadArticlesPath = `/articles`;
-export async function getArticles(): Promise<string[]> {
+export async function getArticlePaths(): Promise<string[]> {
     const dirs = await fs.promises.readdir(articlesPath);
     let articles: string[] = [];
     for (const dir of dirs) {

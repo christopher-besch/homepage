@@ -32,11 +32,11 @@ export async function convertImageOnPool(props: ConvertImageProps): Promise<Expo
 }
 
 // You may only run one of these at any time.
-export async function embedImageOnPool(inputPath: string): Promise<Float32Array> {
+export async function embedImageOnPool(inputPath: string): Promise<number[]> {
     return pool.run(inputPath, { name: "embedImage" });
 }
 
 // You may only run one of these at any time.
-export async function embedSentencesOnPool(sentences: string[]): Promise<Float32Array[]> {
+export async function embedSentencesOnPool(sentences: string[]): Promise<number[][]> {
     return pool.run(sentences, { name: "embedSentences" });
 }

@@ -8,6 +8,7 @@ import { PassThrough } from "stream";
 import { decode } from "html-entities";
 import { type Embeddable } from "./embedding.js";
 import { embedSentencesOnPool } from "./worker/worker_pool.js";
+import { getArticlePaths } from "./paths.js";
 
 interface UnembeddedArticle {
     dirPath: string,
@@ -109,7 +110,8 @@ async function prepareArticle(mdPath: string): Promise<[UnembeddedArticle, strin
     }, plaintext];
 }
 
-export async function prepareArticles(articlePaths: string[]): Promise<Article[]> {
+export async function prepareArticles(): Promise<Article[]> {
+    const articlePaths = await getArticlePaths();
     const unembeddedArticles = await Promise.all(articlePaths.map(prepareArticle));
     const embeddings = await embedSentencesOnPool(unembeddedArticles.map(([_, p]) => p));
     return unembeddedArticles.map(([a, _], i) => { return { ...a, embedding: embeddings[i]! }; });

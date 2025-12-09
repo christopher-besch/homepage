@@ -4,13 +4,13 @@ import * as crypto from "crypto";
 import * as fs from "fs";
 
 export interface Embeddable {
-    embedding: Float32Array,
+    embedding: number[],
     listed: boolean,
 };
 
 // You may only run one of these at any time.
-export async function embedSentences(sentences: string[]): Promise<Float32Array[]> {
-    let cache: { [key: string]: Float32Array[] } = {};
+export async function embedSentences(sentences: string[]): Promise<number[][]> {
+    let cache: { [key: string]: number[][] } = {};
     if (fs.existsSync(getSentenceEmbeddingCachePath())) {
         const cacheFile = await fs.promises.readFile(getSentenceEmbeddingCachePath());
         cache = JSON.parse(cacheFile.toString());
@@ -18,7 +18,6 @@ export async function embedSentences(sentences: string[]): Promise<Float32Array[
     const hash = crypto.hash("md5", JSON.stringify(sentences));
     if (cache[hash] != undefined) {
         console.log(`Using cache for sentence embedding ${hash}`);
-        // TODO: this doesn't work
         return cache[hash];
     }
     console.log(`Embedding sentences ${hash}.`);
@@ -31,28 +30,27 @@ export async function embedSentences(sentences: string[]): Promise<Float32Array[
     const outputArray = Array.from({ length: n }, (_, i) =>
         output.data.slice(i * dim, (i + 1) * dim)) as Float32Array[];
 
-    cache[hash] = outputArray;
+    cache[hash] = outputArray.map(f => Array.from(f));
     await fs.promises.writeFile(getSentenceEmbeddingCachePath(), JSON.stringify(cache, null, 4));
-    return outputArray;
+    return cache[hash];
 }
 
-let embedImageCache: { [key: string]: Float32Array } | undefined = undefined;
+let embedImageCache: { [key: string]: number[] } | undefined = undefined;
 
 // You may only run one of these at any time.
-export async function embedImage(inputPath: string): Promise<Float32Array> {
+export async function embedImage(inputPath: string): Promise<number[]> {
     // Don't load the json file every time.
     // So, yes, we cache the cache.
     if (embedImageCache == undefined) {
         if (fs.existsSync(getImageEmbeddingCachePath())) {
             const cacheFile = await fs.promises.readFile(getImageEmbeddingCachePath());
-            embedImageCache = JSON.parse(cacheFile.toString()) as { [key: string]: Float32Array };
+            embedImageCache = JSON.parse(cacheFile.toString()) as { [key: string]: number[] };
         } else {
             embedImageCache = {};
         }
     }
     if (embedImageCache[inputPath] != undefined) {
         console.log(`Using cache for image embedding ${inputPath}`);
-        // TODO: this doesn't work
         return embedImageCache[inputPath];
     }
     console.log(`Embedding image ${inputPath}`);
@@ -63,12 +61,12 @@ export async function embedImage(inputPath: string): Promise<Float32Array> {
     const output = await extractor(inputPath);
     const outputArray = output.data as Float32Array;
 
-    embedImageCache[inputPath] = outputArray;
+    embedImageCache[inputPath] = Array.from(outputArray);
     await fs.promises.writeFile(getImageEmbeddingCachePath(), JSON.stringify(embedImageCache, null, 4));
-    return outputArray;
+    return embedImageCache[inputPath];
 }
 
-function cosineSimilarity(a: Float32Array, b: Float32Array): number {
+function cosineSimilarity(a: number[], b: number[]): number {
     if (a.length != b.length) {
         throw new Error("Arrays must have the same length");
     }

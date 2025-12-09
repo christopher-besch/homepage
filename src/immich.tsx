@@ -87,7 +87,7 @@ async function loadImmichPortfolioWithoutEmbedding(): Promise<UnembeddedAsset[]>
     return portfolio;
 }
 
-export async function loadImmichPortfolio(): Promise<Asset[]> {
+export async function prepareImmichPortfolio(): Promise<Asset[]> {
     const assetsWithoutEmbedding = await loadImmichPortfolioWithoutEmbedding();
     let assets: Asset[] = [];
     for (const a of assetsWithoutEmbedding) {
