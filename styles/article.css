@@ -45,6 +45,11 @@
     width: 100%;
 }
 
+.markdown_body em {
+    /* Somehow this isn't part of the theme below. */
+    font-style: italic;
+}
+
 .markdown_iframe_wrapper iframe {
     position: absolute;
     top: 0;

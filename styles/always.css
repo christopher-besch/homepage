@@ -384,6 +384,8 @@ body {
 /* end of styles/image.module.css */
 
 /* start of styles/title.module.css */
+
+/* end of styles/title.module.css */
 .title_in_hero {
     max-width: 1200px;
     margin: auto;
@@ -426,8 +428,6 @@ body {
 }
 
 /* start of styles/articles_list.module.css */
-
-/* end of styles/title.module.css */
 .articles_list {
     margin-top: 20px;
     margin-bottom: 20px;
