@@ -50,4 +50,5 @@ I think this is photography, too.<br />
 Every time I take a picture or fail at it I'm on the lookout for these abilities that I've acquired or am striving towards.
 Thinking of discrete abilities, single steps to take, makes photography so much more approachable, so much less illusive.
 It isn't just a matter of *"Other people get it, you don't."*
+That really motivates me to have fun with this hobby and get better at it.
 And I'm certain I'll find a lot more to photography in the years to come.

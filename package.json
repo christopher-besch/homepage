@@ -27,6 +27,7 @@
         "@huggingface/transformers": "^3.8.1",
         "@immich/sdk": "^2.3.1",
         "@mdx-js/mdx": "^3.1.1",
+        "feed": "^5.1.0",
         "gray-matter": "^4.0.3",
         "hast-util-from-html": "^2.0.3",
         "html-entities": "^2.6.0",
