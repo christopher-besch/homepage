@@ -4,7 +4,7 @@
         <title>Chris' Homepage</title>
         <link>https://dev.chris-besch.com</link>
         <description>Christopher Besch's Homepage about Software, Articles and Photography</description>
-        <lastBuildDate>Wed, 10 Dec 2025 21:40:01 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 10 Dec 2025 21:55:22 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
@@ -38,13 +38,13 @@ Now you get to see Fig.3.5. from "Introduction to Conventional Transmission Elec
             <enclosure url="https://dev.chris-besch.com/images/c5fde5a326c6a0b5e07c470ffda1eb59_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
-            <title><![CDATA[grub-install --removable for buggy UEFI]]></title>
-            <link>https://dev.chris-besch.com/articles/grub_install_removable</link>
-            <guid isPermaLink="false">https://dev.chris-besch.com/articles/grub_install_removable</guid>
-            <pubDate>Fri, 08 Nov 2024 00:00:00 GMT</pubDate>
-            <description><![CDATA[ Install Debian on a device with a broken NVRAM. ]]></description>
+            <title><![CDATA[Forgejo Actions Notification Development]]></title>
+            <link>https://dev.chris-besch.com/articles/forgejo_actions_notification</link>
+            <guid isPermaLink="false">https://dev.chris-besch.com/articles/forgejo_actions_notification</guid>
+            <pubDate>Thu, 20 Nov 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[ Some stories of how I work on Forgejo. How is a Go project structured? What's the point of Forgejo's layered architecture and what's that pub-sub pattern? Additionally, I exhaustively explain how to setup a development environment for Forgejo. ]]></description>
             <author>mail@chris-besch.com (Christopher Besch)</author>
-            <enclosure url="https://dev.chris-besch.com/images/5c5afcd8efd6183c56c8c807a694a48f_800_400.webp" length="0" type="image/webp"/>
+            <enclosure url="https://dev.chris-besch.com/images/75e7dd6865f7b8d52489a1f1368ebbef_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
             <title><![CDATA[Saving Time with Tests]]></title>
@@ -55,6 +55,15 @@ Now you get to see Fig.3.5. from "Introduction to Conventional Transmission Elec
 Or: How I started to enjoy writing tests. ]]></description>
             <author>mail@chris-besch.com (Christopher Besch)</author>
             <enclosure url="https://dev.chris-besch.com/images/4645af088304bd562c94708123e688f3_800_400.webp" length="0" type="image/webp"/>
+        </item>
+        <item>
+            <title><![CDATA[grub-install --removable for buggy UEFI]]></title>
+            <link>https://dev.chris-besch.com/articles/grub_install_removable</link>
+            <guid isPermaLink="false">https://dev.chris-besch.com/articles/grub_install_removable</guid>
+            <pubDate>Fri, 08 Nov 2024 00:00:00 GMT</pubDate>
+            <description><![CDATA[ Install Debian on a device with a broken NVRAM. ]]></description>
+            <author>mail@chris-besch.com (Christopher Besch)</author>
+            <enclosure url="https://dev.chris-besch.com/images/5c5afcd8efd6183c56c8c807a694a48f_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
             <title><![CDATA[Real-Time Linux on RISC-V]]></title>
@@ -75,15 +84,6 @@ Also: How to setup your Linux laptop as a simple NAT router. ]]></description>
 Or: How I blew up my brother. ]]></description>
             <author>mail@chris-besch.com (Christopher Besch)</author>
             <enclosure url="https://dev.chris-besch.com/images/e504095a9b565988179fa2df918ae18c_800_400.webp" length="0" type="image/webp"/>
-        </item>
-        <item>
-            <title><![CDATA[Forgejo Actions Notification Development]]></title>
-            <link>https://dev.chris-besch.com/articles/forgejo_actions_notification</link>
-            <guid isPermaLink="false">https://dev.chris-besch.com/articles/forgejo_actions_notification</guid>
-            <pubDate>Thu, 20 Nov 2025 00:00:00 GMT</pubDate>
-            <description><![CDATA[ Some stories of how I work on Forgejo. How is a Go project structured? What's the point of Forgejo's layered architecture and what's that pub-sub pattern? Additionally, I exhaustively explain how to setup a development environment for Forgejo. ]]></description>
-            <author>mail@chris-besch.com (Christopher Besch)</author>
-            <enclosure url="https://dev.chris-besch.com/images/75e7dd6865f7b8d52489a1f1368ebbef_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
             <title><![CDATA[Maki, Atoms and Time Travel]]></title>
@@ -114,15 +114,6 @@ Its programmatic approach provides the precision technical concepts require, whi
             <enclosure url="https://dev.chris-besch.com/images/e5fdc90ab34ba9a541ab0d11b75e02de_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
-            <title><![CDATA[Bodging MP3 Names in Bash]]></title>
-            <link>https://dev.chris-besch.com/articles/bash_cmds/mp3_tag</link>
-            <guid isPermaLink="false">https://dev.chris-besch.com/articles/bash_cmds/mp3_tag</guid>
-            <pubDate>Wed, 12 Oct 2022 00:00:00 GMT</pubDate>
-            <description><![CDATA[ Why do it complicated when a Bash one-liner does it too? ]]></description>
-            <author>mail@chris-besch.com (Christopher Besch)</author>
-            <enclosure url="https://dev.chris-besch.com/images/5c491b010e8b22c6ffd20605f69d322f_800_400.webp" length="0" type="image/webp"/>
-        </item>
-        <item>
             <title><![CDATA[Inject Fonts into Web SVGs with sed]]></title>
             <link>https://dev.chris-besch.com/articles/svg_fonts_with_sed</link>
             <guid isPermaLink="false">https://dev.chris-besch.com/articles/svg_fonts_with_sed</guid>
@@ -130,6 +121,15 @@ Its programmatic approach provides the precision technical concepts require, whi
             <description><![CDATA[ Add font-loading CSS to SVGs with a sed script. ]]></description>
             <author>mail@chris-besch.com (Christopher Besch)</author>
             <enclosure url="https://dev.chris-besch.com/images/f59a7f43e2f2a641d46f9fd994b5589c_800_400.webp" length="0" type="image/webp"/>
+        </item>
+        <item>
+            <title><![CDATA[Bodging MP3 Names in Bash]]></title>
+            <link>https://dev.chris-besch.com/articles/bash_cmds/mp3_tag</link>
+            <guid isPermaLink="false">https://dev.chris-besch.com/articles/bash_cmds/mp3_tag</guid>
+            <pubDate>Wed, 12 Oct 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[ Why do it complicated when a Bash one-liner does it too? ]]></description>
+            <author>mail@chris-besch.com (Christopher Besch)</author>
+            <enclosure url="https://dev.chris-besch.com/images/5c491b010e8b22c6ffd20605f69d322f_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
             <title><![CDATA[Installing Gentoo To My Liking]]></title>
