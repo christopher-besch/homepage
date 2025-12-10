@@ -1,4 +1,4 @@
-import { createStyleLoadPath, getArticleDeployRoute, loadAboutPath, loadArticlesPath, loadPhotographyPath, loadProjectsPath, loadRssPath, loadTalksPath } from "../paths.js";
+import { createStyleLoadPath, faviconLoadPath, getArticleRoute, loadAboutPath, loadArticlesPath, loadPhotographyPath, loadProjectsPath, loadRssPath, loadTalksPath } from "../paths.js";
 import Image from "./image.js";
 
 interface LayoutProps {
@@ -19,7 +19,7 @@ export default function Layout(props: React.PropsWithChildren<LayoutProps>): Rea
         <a href={loadPhotographyPath}>Photos</a>
         <a href={loadProjectsPath}>Projects</a>
         <a href={loadTalksPath}>Talks</a>
-        <a href={getArticleDeployRoute("bookmarks")}>Bookmarks</a>
+        <a href={getArticleRoute("bookmarks")}>Bookmarks</a>
         <a href={loadAboutPath}>About</a>
     </div>;
     return (
@@ -35,7 +35,7 @@ export default function Layout(props: React.PropsWithChildren<LayoutProps>): Rea
                     <link key={i} rel="stylesheet" type="text/css" href={createStyleLoadPath(styleSheet)} />
                 )}
 
-                <link rel="icon" type="image/png" sizes="48x48" href="/favicon.png" />
+                <link rel="icon" type="image/png" sizes="48x48" href={faviconLoadPath} />
             </head>
 
             <body>
@@ -83,7 +83,7 @@ export default function Layout(props: React.PropsWithChildren<LayoutProps>): Rea
                 <div className="layout_footer">
                     <a href={loadAboutPath}>Contact</a>
                     <a href={loadRssPath}>RSS</a>
-                    <a href={getArticleDeployRoute("privacy")}>Privacy</a>
+                    <a href={getArticleRoute("privacy")}>Privacy</a>
                     <div>© 2025 | All rights reserved</div>
                 </div>
             </body>

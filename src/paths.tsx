@@ -1,11 +1,16 @@
 import * as fs from "fs";
 import * as crypto from "crypto";
 import path from "path";
+import { env } from "process";
 
 // Load paths are for html loading the resource.
 // Deploy paths are for javascript to put data there.
 // Source paths are where javascript load the data from.
 
+export const homepageURL = env["HOMEPAGE_URL"]!;
+if (homepageURL == undefined) {
+    throw new Error("HOMEPAGE_URL is not defined");
+}
 const staticPath = `./static`;
 const stylesPath = `./styles`;
 const resources = `./resources`;
@@ -14,7 +19,6 @@ const buildPath = `./build`;
 export const workerPath = path.join(buildPath, "worker/worker.js");
 const deployPath = `./deploy`;
 export const modelPath = `./models`;
-export const loadRssPath = `/rss.xml`;
 export const loadAboutPath = `/about`;
 
 function ensureDirExists(dir: string): void {
@@ -28,6 +32,10 @@ export function createRouteDeployPath(route: string): string {
     const dir = path.join(deployPath, route);
     ensureDirExists(dir);
     return path.join(dir, "index.html");
+}
+
+export function getFullLoadPath(loadPath: string): string {
+    return `${homepageURL}${loadPath}`;
 }
 
 // styles //
@@ -80,9 +88,11 @@ export async function getArticlePaths(): Promise<string[]> {
     };
     return articles;
 }
-
-export function getArticleDeployRoute(slug: string): string {
+export function getArticleRoute(slug: string): string {
     return path.join(loadArticlesPath, slug);
+}
+export function getFullArticleLoadPath(slug: string): string {
+    return getFullLoadPath(getArticleRoute(slug));
 }
 
 // videos //
@@ -131,7 +141,7 @@ export function getImmichCachePath(name: string): string {
 
 // asssets //
 export const loadPhotographyPath = `/photography`;
-export function getAssetDeployRoute(id: string): string {
+export function getAssetRoute(id: string): string {
     return path.join(loadPhotographyPath, id);
 }
 
@@ -144,3 +154,14 @@ export const loadProjectsPath = `/projects`;
 
 // talks //
 export const loadTalksPath = `/talks`;
+
+// favicon //
+export const faviconLoadPath = `/favicon.png`;
+export const fullFaviconLoadPath = getFullLoadPath(faviconLoadPath);
+
+// rss //
+export const loadRssPath = `/rss.xml`;
+export function createRssFeedDeployPath(): string {
+    ensureDirExists(deployPath);
+    return path.join(deployPath, loadRssPath);
+}

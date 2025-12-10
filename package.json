@@ -11,7 +11,8 @@
     "type": "module",
     "main": "src/build.tsx",
     "scripts": {
-        "build": "tsc && node --enable-source-maps build/build.js",
+        "build": "tsc && HOMEPAGE_URL=https://chris-besch.com node --enable-source-maps build/build.js",
+        "build_dev": "tsc && HOMEPAGE_URL=https://dev.chris-besch.com node --enable-source-maps build/build.js",
         "clean": "rm -rf build deploy cache",
         "clean_immich_portfolio": "rm -f cache/portfolio.json",
         "check_image_size": "! exiftool -if '($ImageWidth > 1600) or ($ImageHeight > 1600)' -filename -FileSize -ImageWidth -ImageHeight deploy/images",

@@ -28,7 +28,7 @@ At some point I thought the best photographer could create an amazing photo in w
 I thought enough skill could negate adverse conditions.
 But since then I've realized that, of course, the location, weather, time of day and day of year does make a huge impact.
 For example, I started to carry my heavy camera around more often.
-I also travel more; the Karlatornet doesn't stand in Germany, I have to go to Sweden to photograph it.
+I also travel more; the [Karlatornet](https://en.wikipedia.org/wiki/Karlatornet) doesn't stand in Germany, I have to go to Sweden to photograph it.
 My photography simply isn't of the kind you do in your attic.<br />
 Oh and the sky.
 The sky makes such a difference!

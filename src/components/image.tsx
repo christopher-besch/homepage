@@ -1,6 +1,7 @@
 import type React from "react";
 import { convertImageOnPool } from "../worker/worker_pool.js";
 import type { ImageSize } from "../convert_image.js";
+import type { ExportedImage } from "../convert_image.js";
 
 // 1600 is the max width and height of any image on my homepage.
 const defaultWidths = [400, 800, 1200, 1600];
@@ -31,8 +32,11 @@ function sizesToSrcSet(sizes: ImageSize[]): string {
     return sizes.map((size, _) => `${size.loadPath} ${size.width}w`).join(",");
 }
 
-export default async function Image(props: ImageProps): Promise<React.ReactNode> {
-    const exportedImage = await convertImageOnPool({
+// We may only use this function to the get the actual load path of any image.
+// That's because converting the same image with different configs is not allowed.
+// Calling this multiple times is fine because convertImageOnPool caches.
+export async function getDefaultExportedImage(props: ImageProps): Promise<ExportedImage> {
+    return await convertImageOnPool({
         inputPath: props.inputPath,
         widths: defaultWidths,
         lqipWidth: 3,
@@ -43,6 +47,10 @@ export default async function Image(props: ImageProps): Promise<React.ReactNode>
             widths: portraitWidths,
         } : undefined,
     });
+}
+
+export default async function Image(props: ImageProps): Promise<React.ReactNode> {
+    const exportedImage = await getDefaultExportedImage(props);
 
     const defaultWidth = exportedImage.sizes[0]!.width;
     const defaultHeight = exportedImage.sizes[0]!.height;

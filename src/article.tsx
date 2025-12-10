@@ -105,7 +105,7 @@ async function prepareArticle(mdPath: string): Promise<[UnembeddedArticle, strin
         slug: assertIsString(frontMatter['slug']),
         date: dateStr != undefined ? new Date(dateStr) : undefined,
         listed: assertIsBoolean(frontMatter['listed']),
-        readingTimeMinutes: readingTime(md).minutes,
+        readingTimeMinutes: readingTime(plaintext).minutes,
         reactNode: reactNode,
     }, plaintext];
 }

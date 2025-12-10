@@ -29,7 +29,7 @@ jobs:
         run: npm run clean
 
       - name: Build
-        run: npm run build
+        run: npm run build_dev
         env:
           IMMICH_BASE_URL: "${{secrets.IMMICH_BASE_URL}}"
           IMMICH_API_KEY: "${{secrets.IMMICH_API_KEY}}"
