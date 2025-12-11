@@ -24,9 +24,9 @@ async function loadImmichPortfolioWithoutEmbedding(): Promise<UnembeddedAsset[]>
         const file = await fs.promises.readFile(immichPortfolioJSONPath());
         return JSON.parse(file.toString());
     }
-    console.log("Downloading immich images.");
 
     const IMMICH_BASE_URL = process.env['IMMICH_BASE_URL']!;
+    console.log(`Downloading immich images from ${IMMICH_BASE_URL}.`);
     // Needed permissions: asset.read, asset.download, tag.read
     const IMMICH_API_KEY = process.env['IMMICH_API_KEY']!;
     init({ baseUrl: IMMICH_BASE_URL, apiKey: IMMICH_API_KEY })
