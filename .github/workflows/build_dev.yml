@@ -12,7 +12,9 @@ jobs:
       - name: Test Connection
         run: |
           curl photo.chris-besch.com
-          curl "${{secrets.IMMICH_BASE_URL}}"
+          curl $IMMICH_BASE_URL
+        env:
+          IMMICH_BASE_URL: "${{vars.IMMICH_BASE_URL}}"
 
       - name: Setup Node
         uses: actions/setup-node@v6
@@ -36,6 +38,7 @@ jobs:
       - name: Build
         run: npm run build_dev
         env:
+          IMMICH_BASE_URL: "${{vars.IMMICH_BASE_URL}}"
           IMMICH_API_KEY: "${{secrets.IMMICH_API_KEY}}"
 
       - name: Check Image Size
