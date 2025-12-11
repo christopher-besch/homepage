@@ -1,22 +1,22 @@
-import type { Article } from "../articles.js";
+import type { Talk } from "../talks.js";
 import CardsList from "./cards_list.js";
 import Layout from "./layout.js";
 import Title from "./title.js";
 
-interface ArticlesPageProps {
-    articles: Article[],
+interface TalksPageProps {
+    talks: Talk[],
 }
-export default function ArticlesPage(props: ArticlesPageProps): React.ReactNode {
-    const articlesToShow = props.articles
+export default function TalksPage(props: TalksPageProps): React.ReactNode {
+    const talksToShow = props.talks
         .filter(a => a.listed)
         // Date must be defined for all listed articles.
         .sort((a, b) => b.date!.getTime() - a.date!.getTime());
     return (
         <Layout
-            title="Chris' Articles"
+            title="Chris' Talks"
             styleSheets={["always.css", "default.css"]}>
             <Title isHero={false} title="Articles" />
-            <CardsList cards={articlesToShow} />
+            <CardsList cards={talksToShow} />
         </Layout>
     );
 }

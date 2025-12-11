@@ -1,8 +1,8 @@
-import { type Article } from "../article.js";
+import { type Article } from "../articles.js";
 import Title from "./title.js";
 import Layout from "./layout.js";
 import { formatDate } from "../date.js";
-import ArticlesList from "./articles_list.js";
+import CardsList from "./cards_list.js";
 import Button from "./button.js";
 import { getNearestListedNeighbours } from "../embedding.js";
 import { loadArticlesPath } from "../paths.js";
@@ -39,7 +39,7 @@ export default async function ArticlePage(props: ArticlePageProps): Promise<Reac
         {article.hero == undefined ? <Title isHero={false} title={article.title} subtitle={date} /> : undefined}
         <div className="article_page_markdown">{article.reactNode}</div>
         <Title isHero={false} title="Other Articles" />
-        <ArticlesList articles={similarArticles} />
+        <CardsList cards={similarArticles} />
         <Button href={loadArticlesPath} text="Furthermore Articles" />
     </Layout>
 }

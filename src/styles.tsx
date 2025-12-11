@@ -12,7 +12,7 @@ sourceMap.set("always.css", [
     getStyleSourcePath("image.module.css"),
     getStyleSourcePath("title.module.css"),
     // This might not strictly be needed on all pages but kinda is.
-    getStyleSourcePath("articles_list.module.css"),
+    getStyleSourcePath("cards_list.module.css"),
     getStyleSourcePath("button.module.css"),
 ]);
 sourceMap.set("default.css", [

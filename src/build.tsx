@@ -1,17 +1,19 @@
 import * as fs from "fs";
 import { renderToPipeableStream } from "react-dom/server";
 import { buildStyles } from "./styles.js";
-import { createRouteDeployPath, copyStatic, getArticleRoute, loadArticlesPath, loadPhotographyPath, getAssetRoute } from "./paths.js";
+import { createRouteDeployPath, copyStatic, loadArticlesPath, loadPhotographyPath, getAssetRoute, loadTalksPath } from "./paths.js";
 import { startPool } from "./worker/worker_pool.js";
 
 import IndexPage from "./components/index_page.js";
 import ArticlePage from "./components/article_page.js";
-import { prepareArticles, type Article } from "./article.js";
+import { prepareArticles, type Article } from "./articles.js";
 import ArticlesPage from "./components/articles_page.js";
 import { prepareImmichPortfolio, type Asset } from "./immich.js";
 import PhotographyPage from "./components/photography_page.js";
 import PhotoPage from "./components/photo_page.js";
 import { createFeed } from "./feed.js";
+import { prepareTalks, type Talk } from "./talks.js";
+import TalksPage from "./components/talks_page.js";
 
 // Build the route in the background.
 // Return immediately.
@@ -36,7 +38,7 @@ function buildRouteInBG(route: string, element: React.ReactNode) {
 async function buildArticles(articles: Article[]) {
     console.log("Building articles");
     for (const [idx, article] of articles.entries()) {
-        buildRouteInBG(getArticleRoute(article.slug), <ArticlePage idx={idx} articles={articles} />);
+        buildRouteInBG(article.link, <ArticlePage idx={idx} articles={articles} />);
     }
     buildRouteInBG(loadArticlesPath, <ArticlesPage articles={articles} />);
     await createFeed(articles);
@@ -50,6 +52,11 @@ async function buildPhotography(portfolio: Asset[]) {
     buildRouteInBG(loadPhotographyPath, <PhotographyPage portfolio={portfolio} />)
 }
 
+async function buildTalks(talks: Talk[]) {
+    console.log("Building talks");
+    buildRouteInBG(loadTalksPath, <TalksPage talks={talks} />)
+}
+
 startPool();
 // Do this in the background
 buildStyles().catch(e => { throw e; });
@@ -60,3 +67,4 @@ buildRouteInBG("/", <IndexPage />);
 prepareImmichPortfolio().then(buildPhotography).catch(e => { throw e; });
 // Do this in the background
 prepareArticles().then(buildArticles).catch(e => { throw e; });
+prepareTalks().then(buildTalks).catch(e => { throw e; });

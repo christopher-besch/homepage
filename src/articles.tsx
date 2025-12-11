@@ -5,12 +5,13 @@ import Markdown from "./components/markdown.js";
 import { renderToPipeableStream } from "react-dom/server";
 import path from "path";
 import { PassThrough } from "stream";
-import { decode } from "html-entities";
 import { type Embeddable } from "./embedding.js";
 import { embedSentencesOnPool } from "./worker/worker_pool.js";
-import { getArticlePaths } from "./paths.js";
+import { getArticleSrcPaths, getArticleRoute } from "./paths.js";
+import type { CardListable } from "./components/cards_list.js";
+import { assertIsBoolean, assertIsNumber, assertIsOptionalString, assertIsString, htmlToPlaintext } from "./conversion.js";
 
-interface UnembeddedArticle {
+interface UnembeddedArticle extends CardListable {
     dirPath: string,
     title: string,
     description: string,
@@ -21,7 +22,7 @@ interface UnembeddedArticle {
         horizontalPosition: number,
         verticalPosition: number,
     },
-    slug: string,
+    link: string,
     // required when listed
     date?: Date,
     listed: boolean,
@@ -31,42 +32,10 @@ interface UnembeddedArticle {
 
 export interface Article extends UnembeddedArticle, Embeddable { };
 
-function assertIsString(input: any): string {
-    if (typeof input != "string") {
-        throw new Error(`${input} is no string but ${typeof input}`);
-    }
-    return input;
-}
-
-function assertIsOptionalString(input: any): string | undefined {
-    if (typeof input != "string" && typeof input != "undefined") {
-        throw new Error(`${input} is no string or undefined but ${typeof input}`);
-    }
-    return input;
-}
-
-function assertIsNumber(input: any): number {
-    if (typeof input != "number") {
-        throw new Error(`${input} is no number but ${typeof input}`);
-    }
-    return input;
-}
-
-function assertIsBoolean(input: any): boolean {
-    if (typeof input != "boolean") {
-        throw new Error(`${input} is no boolean but ${typeof input}`);
-    }
-    return input;
-}
-
-function htmlToPlaintext(html: string): string {
-    return decode(html.replace(/<[^>]+>/g, '')).replace(/\s+/g, ' ');
-}
-
 // Return article without embedding and plaintext string prepared for embedding the article.
-async function prepareArticle(mdPath: string): Promise<[UnembeddedArticle, string]> {
-    const dirPath = path.dirname(mdPath);
-    const file = await fs.promises.readFile(mdPath, "utf8");
+async function prepareArticle(mdSrcPath: string): Promise<[UnembeddedArticle, string]> {
+    const dirPath = path.dirname(mdSrcPath);
+    const file = await fs.promises.readFile(mdSrcPath, "utf8");
     const { content: md, data: frontMatter } = matter(file);
 
     const bannerName = assertIsOptionalString(frontMatter['banner']);
@@ -102,7 +71,7 @@ async function prepareArticle(mdPath: string): Promise<[UnembeddedArticle, strin
             horizontalPosition: assertIsNumber(frontMatter['hero_horizontal_position']),
             verticalPosition: assertIsNumber(frontMatter['hero_vertical_position']),
         } : undefined,
-        slug: assertIsString(frontMatter['slug']),
+        link: getArticleRoute(assertIsString(frontMatter['slug'])),
         date: dateStr != undefined ? new Date(dateStr) : undefined,
         listed: assertIsBoolean(frontMatter['listed']),
         readingTimeMinutes: readingTime(plaintext).minutes,
@@ -111,8 +80,8 @@ async function prepareArticle(mdPath: string): Promise<[UnembeddedArticle, strin
 }
 
 export async function prepareArticles(): Promise<Article[]> {
-    const articlePaths = await getArticlePaths();
-    const unembeddedArticles = await Promise.all(articlePaths.map(prepareArticle));
+    const articleSrcPaths = await getArticleSrcPaths();
+    const unembeddedArticles = await Promise.all(articleSrcPaths.map(prepareArticle));
     const embeddings = await embedSentencesOnPool(unembeddedArticles.map(([_, p]) => p));
     return unembeddedArticles.map(([a, _], i) => { return { ...a, embedding: embeddings[i]! }; });
 }

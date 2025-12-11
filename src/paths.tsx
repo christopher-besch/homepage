@@ -11,10 +11,9 @@ export const homepageURL = env["HOMEPAGE_URL"]!;
 if (homepageURL == undefined) {
     throw new Error("HOMEPAGE_URL is not defined");
 }
-const staticPath = `./static`;
-const stylesPath = `./styles`;
-const resources = `./resources`;
-const articlesPath = `./articles`;
+const staticSrcPath = `./static`;
+const stylesSrcPath = `./styles`;
+const resourcesSrcPath = `./resources`;
 const buildPath = `./build`;
 export const workerPath = path.join(buildPath, "worker/worker.js");
 const deployPath = `./deploy`;
@@ -25,6 +24,20 @@ function ensureDirExists(dir: string): void {
     if (!fs.existsSync(dir)) {
         fs.mkdirSync(dir, { recursive: true });
     }
+}
+
+async function getMDSrcPathsIn(parentDir: string): Promise<string[]> {
+    const dirs = await fs.promises.readdir(parentDir);
+    let mdSrcPaths: string[] = [];
+    for (const dir of dirs) {
+        const files = await fs.promises.readdir(path.join(parentDir, dir));
+        const mdFiles = files.filter((file) => file.endsWith(".md"));
+        if (mdFiles.length != 1) {
+            throw new Error("There's a markdown dir without exactly one markdown file.");
+        }
+        mdSrcPaths.push(path.join(parentDir, dir, mdFiles[0]!));
+    };
+    return mdSrcPaths;
 }
 
 // routes //
@@ -49,7 +62,7 @@ export function createStyleDeployPath(style: string): string {
     return path.join(deployStylesPath, style);
 }
 export function getStyleSourcePath(style: string): string {
-    return path.join(stylesPath, style);
+    return path.join(stylesSrcPath, style);
 }
 
 // images //
@@ -68,31 +81,36 @@ const deployFontsPath = path.join(deployStylesPath, `fonts`);
 export function copyStatic() {
     // Make sure we execute one after the other.
     // Because of this the static dir may only contain fonts and things that aren't in subdirs that other code also accesses.
-    fs.promises.cp(staticPath, deployPath, { recursive: true }).then(() => {
+    fs.promises.cp(staticSrcPath, deployPath, { recursive: true }).then(() => {
         fs.promises.cp("./node_modules/katex/dist/fonts", deployFontsPath, { recursive: true });
     }).catch(e => { throw e; });
 }
 
 // articles //
+const articlesSrcPath = `./articles`;
 export const loadArticlesPath = `/articles`;
-export async function getArticlePaths(): Promise<string[]> {
-    const dirs = await fs.promises.readdir(articlesPath);
-    let articles: string[] = [];
-    for (const dir of dirs) {
-        const files = await fs.promises.readdir(path.join(articlesPath, dir));
-        const mdFiles = files.filter((file) => file.endsWith(".md"));
-        if (mdFiles.length != 1) {
-            throw new Error("There's a markdown dir without exactly one markdown file.");
-        }
-        articles.push(path.join(articlesPath, dir, mdFiles[0]!));
-    };
-    return articles;
+export async function getArticleSrcPaths(): Promise<string[]> {
+    return await getMDSrcPathsIn(articlesSrcPath);
 }
 export function getArticleRoute(slug: string): string {
     return path.join(loadArticlesPath, slug);
 }
 export function getFullArticleLoadPath(slug: string): string {
     return getFullLoadPath(getArticleRoute(slug));
+}
+
+// talks //
+const talksSrcPath = `./talks`;
+export const loadTalksPath = `/talks`;
+export async function getTalksSrcPaths(): Promise<string[]> {
+    return await getMDSrcPathsIn(talksSrcPath);
+}
+
+// projects //
+const projectsSrc = `./projects`;
+export const loadProjectsPath = `/projects`;
+export async function getProjectsSrcPaths(): Promise<string[]> {
+    return await getMDSrcPathsIn(projectsSrc);
 }
 
 // videos //
@@ -146,14 +164,8 @@ export function getAssetRoute(id: string): string {
 }
 
 export function getResourceLoadPath(name: string): string {
-    return path.join(resources, name);
+    return path.join(resourcesSrcPath, name);
 }
-
-// projects //
-export const loadProjectsPath = `/projects`;
-
-// talks //
-export const loadTalksPath = `/talks`;
 
 // favicon //
 export const faviconLoadPath = `/favicon.png`;

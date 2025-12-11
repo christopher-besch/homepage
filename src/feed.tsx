@@ -1,6 +1,6 @@
 import { Feed } from "feed";
-import type { Article } from "./article.js";
-import { createRssFeedDeployPath, fullFaviconLoadPath, getFullArticleLoadPath, getFullLoadPath, homepageURL } from "./paths.js";
+import type { Article } from "./articles.js";
+import { createRssFeedDeployPath, fullFaviconLoadPath, getFullLoadPath, homepageURL } from "./paths.js";
 import * as fs from "fs";
 import { getDefaultExportedImage } from "./components/image.js";
 
@@ -44,8 +44,8 @@ export async function createFeed(articles: Article[]): Promise<void> {
 
         feed.addItem({
             title: a.title,
-            id: getFullArticleLoadPath(a.slug),
-            link: getFullArticleLoadPath(a.slug),
+            id: a.link,
+            link: a.link,
             description: a.description,
             // content: post.content,
             author: [
