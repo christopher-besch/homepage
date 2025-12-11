@@ -12,6 +12,7 @@ jobs:
       - name: Test Connection
         run:
           curl photo.chris-besch.com
+          curl "${{secrets.IMMICH_BASE_URL}}"
 
       - name: Setup Node
         uses: actions/setup-node@v6
