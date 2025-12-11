@@ -2,8 +2,6 @@ import { downloadAsset, getAllTags, getAssetInfo, init, searchAssets, type Asset
 import { getImmichCachePath, getImmichPortfolioPath as immichPortfolioJSONPath } from "./paths.js";
 import path from "path";
 import * as fs from "fs";
-import { type Embeddable } from "./embedding.js";
-import { embedImageOnPool } from "./worker/worker_pool.js";
 
 const PORTFOLIO_TAG = "portfolio";
 
@@ -14,10 +12,8 @@ export interface UnembeddedAsset {
     rating: number,
 };
 
-export interface Asset extends UnembeddedAsset, Embeddable { };
-
 // Download from Immich or if cached load JSON.
-async function loadImmichPortfolioWithoutEmbedding(): Promise<UnembeddedAsset[]> {
+export async function loadImmichPortfolioWithoutEmbedding(): Promise<UnembeddedAsset[]> {
     // Don't do anything if we've already downloaded everything.
     if (fs.existsSync(immichPortfolioJSONPath())) {
         console.log("Using immich image cache.");
@@ -92,26 +88,4 @@ async function loadImmichPortfolioWithoutEmbedding(): Promise<UnembeddedAsset[]>
     const jsonPortfolio = JSON.stringify(portfolio, null, 4);
     fs.promises.writeFile(immichPortfolioJSONPath(), jsonPortfolio);
     return portfolio;
-}
-
-export async function prepareImmichPortfolio(): Promise<Asset[]> {
-    const assetsWithoutEmbedding = await loadImmichPortfolioWithoutEmbedding();
-    let assets: Asset[] = [];
-    for (const a of assetsWithoutEmbedding) {
-        assets.push({
-            ...a,
-            embedding: await embedImageOnPool(a.cachePath),
-            listed: true,
-        });
-    }
-    return assets;
-
-    // Doing all at the same time sounds nice but consumes so much memory that the OOM killer is a problem.
-    // return await Promise.all(assetsWithoutEmbedding.map(async a => {
-    //     return {
-    //         ...a,
-    //         embedding: await embedImageOnPool(a.cachePath),
-    //         listed: true,
-    //     };
-    // }));
 }

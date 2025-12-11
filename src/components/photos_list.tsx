@@ -1,4 +1,4 @@
-import type { Asset } from "../immich.js";
+import type { Asset } from "../assets.js";
 import { getAssetRoute } from "../paths.js";
 import Image from "./image.js";
 

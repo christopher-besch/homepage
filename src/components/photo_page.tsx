@@ -1,11 +1,11 @@
 import Layout from "./layout.js";
-import { type Asset } from "../immich.js";
 import Image from "./image.js";
 import Title from "./title.js";
 import Button from "./button.js";
 import PhotosList from "./photos_list.js";
 import { getNearestListedNeighbours } from "../embedding.js";
 import { loadPhotographyPath } from "../paths.js";
+import type { Asset } from "../assets.js";
 
 const nearestNeighbours = 4;
 const antiNeighbours = 2;

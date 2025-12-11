@@ -1,6 +1,7 @@
 import { Piscina } from "piscina";
 import { workerPath } from "../paths.js";
 import { type ConvertImageProps, type ExportedImage } from "../convert_image.js";
+import type { UnembeddedAsset } from "../immich.js";
 
 let pool: Piscina;
 
@@ -39,4 +40,9 @@ export async function embedImageOnPool(inputPath: string): Promise<number[]> {
 // You may only run one of these at any time.
 export async function embedSentencesOnPool(sentences: string[]): Promise<number[][]> {
     return pool.run(sentences, { name: "embedSentences" });
+}
+
+// You may only run one of these at any time.
+export async function loadImmichPortfolioWithoutEmbeddingOnPool(): Promise<UnembeddedAsset[]> {
+    return pool.run(undefined, { name: "loadImmichPortfolioWithoutEmbedding" });
 }

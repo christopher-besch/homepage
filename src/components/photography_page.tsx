@@ -1,7 +1,7 @@
 import Layout from "./layout.js";
-import { type Asset } from "../immich.js";
 import Title from "./title.js";
 import PhotosList from "./photos_list.js";
+import type { Asset } from "../assets.js";
 
 interface PhotographyPageProps {
     portfolio: Asset[],
