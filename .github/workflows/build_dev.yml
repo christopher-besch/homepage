@@ -26,8 +26,8 @@ jobs:
 
       - name: Clone Repo
         uses: actions/checkout@v6
-        # with:
-        # lfs: true
+        with:
+          submodules: true
 
       - name: Install Dependencies
         run: npm install
