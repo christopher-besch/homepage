@@ -1,8 +1,6 @@
 
 /* start of styles/index_page.module.css */
-.index_page_div {
-    background-color: red;
-}
+.index_page_div {}
 
 /* end of styles/index_page.module.css */
 
@@ -11,7 +9,9 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    gap: 16px;
+    gap: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .photos_list_card {
@@ -31,14 +31,6 @@
 }
 
 /* end of styles/photo_list.module.css */
-
-/* start of styles/photography_page.module.css */
-.photography_page_list {
-    margin-top: 16px;
-    margin-bottom: 16px;
-}
-
-/* end of styles/photography_page.module.css */
 
 /* start of styles/photo_page.module.css */
 .photo_page {

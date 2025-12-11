@@ -80,9 +80,9 @@ table {
     }
 }
 
-/* start of styles/fonts.css */
-
 /* end of styles/colors.css */
+
+/* start of styles/fonts.css */
 @font-face {
     font-family: LiberationSans;
     src: url("fonts/LiberationSans-Regular-webfont.woff") format("woff");
@@ -147,9 +147,9 @@ table {
     font-display: swap;
 }
 
-/* start of styles/layout.module.css */
-
 /* end of styles/fonts.css */
+
+/* start of styles/layout.module.css */
 :root {
     font-family: LiberationSans, sans-serif;
 
@@ -397,7 +397,7 @@ body {
 
 .title_in_text {
     color: var(--color-body-text);
-    padding-top: 16px;
+    margin-top: 20px;
 }
 
 .title_in_hero h1,
