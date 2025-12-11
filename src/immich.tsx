@@ -26,9 +26,15 @@ async function loadImmichPortfolioWithoutEmbedding(): Promise<UnembeddedAsset[]>
     }
 
     const IMMICH_BASE_URL = process.env['IMMICH_BASE_URL']!;
-    console.log(`Downloading immich images from ${IMMICH_BASE_URL}.`);
+    if (IMMICH_BASE_URL == undefined || IMMICH_BASE_URL == "") {
+        throw new Error("IMMICH_BASE_URL not defined");
+    }
+    console.log(`Downloading immich images from ${IMMICH_BASE_URL}`);
     // Needed permissions: asset.read, asset.download, tag.read
     const IMMICH_API_KEY = process.env['IMMICH_API_KEY']!;
+    if (IMMICH_API_KEY == undefined || IMMICH_API_KEY == "") {
+        throw new Error("IMMICH_API_KEY not defined");
+    }
     init({ baseUrl: IMMICH_BASE_URL, apiKey: IMMICH_API_KEY })
 
     // Get all tags.
