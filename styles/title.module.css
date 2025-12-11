@@ -11,7 +11,7 @@
 
 .title_in_text {
     color: var(--color-body-text);
-    padding-top: 16px;
+    margin-top: 20px;
 }
 
 .title_in_hero h1,

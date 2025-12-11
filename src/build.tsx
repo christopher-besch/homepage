@@ -64,15 +64,35 @@ async function buildProjects(projects: Project[]) {
     buildRouteInBG(loadProjectsPath, <ProjectsPage projects={projects} />)
 }
 
-startPool();
-// Do this in the background
-buildStyles().catch(e => { throw e; });
-copyStatic();
-buildRouteInBG("/", <IndexPage />);
+async function build() {
+    startPool();
+    // Do this in the background
+    buildStyles().catch(e => { throw e; });
+    copyStatic();
 
-// Do this in the background
-prepareImmichPortfolio().then(buildPhotography).catch(e => { throw e; });
-// Do this in the background
-prepareArticles().then(buildArticles).catch(e => { throw e; });
-prepareTalks().then(buildTalks).catch(e => { throw e; });
-prepareProjects().then(buildProjects).catch(e => { throw e; });
+    const [portfolio, articles, talks, projects] = await Promise.all([
+        prepareImmichPortfolio().then(p => {
+            // Do this in the background
+            buildPhotography(p).catch(e => { throw e; });
+            return p;
+        }),
+        prepareArticles().then(a => {
+            // Do this in the background
+            buildArticles(a).catch(e => { throw e; });
+            return a;
+        }),
+        prepareTalks().then(t => {
+            // Do this in the background
+            buildTalks(t).catch(e => { throw e; });
+            return t;
+        }),
+        prepareProjects().then(p => {
+            // Do this in the background
+            buildProjects(p).catch(e => { throw e; });
+            return p;
+        }),
+    ]);
+    buildRouteInBG("/", <IndexPage portfolio={portfolio} articles={articles} talks={talks} projects={projects} />);
+}
+
+build();

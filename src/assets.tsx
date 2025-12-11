@@ -5,6 +5,7 @@ import { embedImageOnPool, loadImmichPortfolioWithoutEmbeddingOnPool } from "./w
 export interface Asset extends UnembeddedAsset, Embeddable { };
 
 export async function prepareImmichPortfolio(): Promise<Asset[]> {
+    // Do this in a separate worker thread because the network timeout may not be reached in the main thread.
     const assetsWithoutEmbedding = await loadImmichPortfolioWithoutEmbeddingOnPool();
     let assets: Asset[] = [];
     for (const a of assetsWithoutEmbedding) {

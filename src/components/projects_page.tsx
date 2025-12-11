@@ -7,15 +7,15 @@ interface ProjectsPageProps {
     projects: Project[],
 }
 export default function ProjectsPage(props: ProjectsPageProps): React.ReactNode {
-    const projectssToShow = props.projects
+    const projectsToShow = props.projects
         .filter(a => a.listed)
         .sort((a, b) => a.priority - b.priority);
     return (
         <Layout
-            title="Chris' Projects"
+            title="Chris' Software Projects"
             styleSheets={["always.css", "default.css"]}>
-            <Title isHero={false} title="Projects" />
-            <CardsList cards={projectssToShow} />
+            <Title isHero={false} title="Software Projects" />
+            <CardsList cards={projectsToShow} />
         </Layout>
     );
 }
