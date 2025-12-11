@@ -36,7 +36,6 @@ jobs:
       - name: Build
         run: npm run build_dev
         env:
-          IMMICH_BASE_URL: "${{secrets.IMMICH_BASE_URL}}"
           IMMICH_API_KEY: "${{secrets.IMMICH_API_KEY}}"
 
       - name: Check Image Size
