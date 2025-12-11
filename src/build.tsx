@@ -16,6 +16,7 @@ import TalksPage from "./components/talks_page.js";
 import { prepareProjects, type Project } from "./projects.js";
 import ProjectsPage from "./components/projects_page.js";
 import { prepareImmichPortfolio, type Asset } from "./assets.js";
+import * as SegfaultHandler from "segfault-handler";
 
 // Build the route in the background.
 // Return immediately.
@@ -65,7 +66,6 @@ async function buildProjects(projects: Project[]) {
 }
 
 async function build() {
-    startPool();
     // Do this in the background
     buildStyles().catch(e => { throw e; });
     copyStatic();
@@ -95,4 +95,6 @@ async function build() {
     buildRouteInBG("/", <IndexPage portfolio={portfolio} articles={articles} talks={talks} projects={projects} />);
 }
 
+SegfaultHandler.default.registerHandler();
+startPool();
 build();
