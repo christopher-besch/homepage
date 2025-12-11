@@ -427,8 +427,8 @@ body {
 
 /* end of styles/title.module.css */
 
-/* start of styles/articles_list.module.css */
-.articles_list {
+/* start of styles/cards_list.module.css */
+.cards_list {
     margin-top: 20px;
     margin-bottom: 20px;
     display: grid;
@@ -439,7 +439,7 @@ body {
     row-gap: 20px;
 }
 
-.articles_list_card {
+.cards_list_card {
     border-style: solid;
     border-color: var(--color-card-border);
     border-radius: 3px;
@@ -451,35 +451,35 @@ body {
     color: var(--color-body-text);
 }
 
-.articles_list_card h1 {
+.cards_list_card h1 {
     margin-top: 5px;
     font-size: 30px;
 }
 
-.articles_list_card h2 {
+.cards_list_card h2 {
     margin-top: 2px;
     font-size: 20px;
 }
 
-.articles_list_card hr {
+.cards_list_card hr {
     border-style: solid;
     border-color: var(--color-card-border);
     border-width: 1px;
     border-radius: 3px;
 }
 
-.articles_list_card img {
+.cards_list_card img {
     width: 100%;
     height: auto;
 }
 
 @media (max-width: 900px) {
-    .articles_list {
+    .cards_list {
         grid-template-columns: 1fr;
     }
 }
 
-/* end of styles/articles_list.module.css */
+/* end of styles/cards_list.module.css */
 
 /* start of styles/button.module.css */
 .button {
