@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Test Connection
-        run:
+        run: |
           curl photo.chris-besch.com
           curl "${{secrets.IMMICH_BASE_URL}}"
 
@@ -24,8 +24,8 @@ jobs:
 
       - name: Clone Repo
         uses: actions/checkout@v6
-        with:
-          lfs: true
+        # with:
+        # lfs: true
 
       - name: Install Dependencies
         run: npm install

@@ -24,8 +24,8 @@ export async function embedSentences(sentences: string[]): Promise<number[][]> {
     console.log(`Embedding sentences ${hash}.`);
 
     env.localModelPath = modelPath;
-    env.allowRemoteModels = false;
-    const extractor = await pipeline("feature-extraction", "Xenova/all-MiniLM-L6-v2", { dtype: "fp32", local_files_only: true });
+    // env.allowRemoteModels = false;
+    const extractor = await pipeline("feature-extraction", "Xenova/all-MiniLM-L6-v2", { dtype: "fp32" });
     const output = await extractor(sentences, { pooling: "mean", normalize: false });
     const [n, dim] = output.dims as [number, number];
     const outputArray = Array.from({ length: n }, (_, i) =>
@@ -57,8 +57,8 @@ export async function embedImage(inputPath: string): Promise<number[]> {
     console.log(`Embedding image ${inputPath}`);
 
     env.localModelPath = modelPath;
-    env.allowRemoteModels = false;
-    const extractor = await pipeline("image-feature-extraction", "Xenova/clip-vit-base-patch32", { dtype: "fp32", local_files_only: true });
+    // env.allowRemoteModels = false;
+    const extractor = await pipeline("image-feature-extraction", "Xenova/clip-vit-base-patch32", { dtype: "fp32" });
     const output = await extractor(inputPath);
     const outputArray = output.data as Float32Array;
 
