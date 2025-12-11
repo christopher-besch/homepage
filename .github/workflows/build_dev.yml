@@ -9,6 +9,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Test Connection
+        run:
+          curl photo.chris-besch.com
+
       - name: Setup Node
         uses: actions/setup-node@v6
         with:
