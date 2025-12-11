@@ -50,6 +50,7 @@ async function loadImmichPortfolioWithoutEmbedding(): Promise<UnembeddedAsset[]>
             tagIds: [tagToId.get(PORTFOLIO_TAG)!]
         }
     });
+    console.log(`Found ${rawAssets.items.length} assets`);
     // Get full asset info.
     const assetInfos = await Promise.all(rawAssets.items.map(async a => getAssetInfo({ id: a.id })));
 
