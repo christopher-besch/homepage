@@ -3,7 +3,7 @@ title: Blender Models
 description: Amateur 3D Models created with Blender.
 link: https://github.com/christopher-besch/blender_models
 priority: 3400
-date: 2020-05-14T00:00:00+00:00
+date: "2020-05-14"
 languages: []
 dependencies: [blender]
 banner: banner.png
