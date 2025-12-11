@@ -1,7 +1,7 @@
 import * as fs from "fs";
 import { renderToPipeableStream } from "react-dom/server";
 import { buildStyles } from "./styles.js";
-import { createRouteDeployPath, copyStatic, loadArticlesPath, loadPhotographyPath, getAssetRoute, loadTalksPath } from "./paths.js";
+import { createRouteDeployPath, copyStatic, loadArticlesPath, loadPhotographyPath, getAssetRoute, loadTalksPath, loadProjectsPath } from "./paths.js";
 import { startPool } from "./worker/worker_pool.js";
 
 import IndexPage from "./components/index_page.js";
@@ -14,6 +14,8 @@ import PhotoPage from "./components/photo_page.js";
 import { createFeed } from "./feed.js";
 import { prepareTalks, type Talk } from "./talks.js";
 import TalksPage from "./components/talks_page.js";
+import { prepareProjects, type Project } from "./projects.js";
+import ProjectsPage from "./components/projects_page.js";
 
 // Build the route in the background.
 // Return immediately.
@@ -57,6 +59,11 @@ async function buildTalks(talks: Talk[]) {
     buildRouteInBG(loadTalksPath, <TalksPage talks={talks} />)
 }
 
+async function buildProjects(projects: Project[]) {
+    console.log("Building projects");
+    buildRouteInBG(loadProjectsPath, <ProjectsPage projects={projects} />)
+}
+
 startPool();
 // Do this in the background
 buildStyles().catch(e => { throw e; });
@@ -68,3 +75,4 @@ prepareImmichPortfolio().then(buildPhotography).catch(e => { throw e; });
 // Do this in the background
 prepareArticles().then(buildArticles).catch(e => { throw e; });
 prepareTalks().then(buildTalks).catch(e => { throw e; });
+prepareProjects().then(buildProjects).catch(e => { throw e; });

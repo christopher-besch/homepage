@@ -38,9 +38,9 @@ async function prepareArticle(mdSrcPath: string): Promise<[UnembeddedArticle, st
     const file = await fs.promises.readFile(mdSrcPath, "utf8");
     const { content: md, data: frontMatter } = matter(file);
 
-    const bannerName = assertIsOptionalString(frontMatter['banner']);
-    const heroName = assertIsOptionalString(frontMatter['hero']);
-    const dateStr = assertIsOptionalString(frontMatter['date']);
+    const bannerName = assertIsOptionalString(frontMatter["banner"]);
+    const heroName = assertIsOptionalString(frontMatter["hero"]);
+    const dateStr = assertIsOptionalString(frontMatter["date"]);
 
     const reactNode = <Markdown content={md} dirPath={dirPath} />;
     const html = await new Promise(r => {
@@ -63,17 +63,17 @@ async function prepareArticle(mdSrcPath: string): Promise<[UnembeddedArticle, st
 
     return [{
         dirPath: dirPath,
-        title: assertIsString(frontMatter['title']),
-        description: assertIsString(frontMatter['description']),
+        title: assertIsString(frontMatter["title"]),
+        description: assertIsString(frontMatter["description"]),
         banner: bannerName != undefined ? path.join(dirPath, bannerName) : undefined,
         hero: heroName != undefined ? {
             inputPath: path.join(dirPath, heroName),
-            horizontalPosition: assertIsNumber(frontMatter['hero_horizontal_position']),
-            verticalPosition: assertIsNumber(frontMatter['hero_vertical_position']),
+            horizontalPosition: assertIsNumber(frontMatter["hero_horizontal_position"]),
+            verticalPosition: assertIsNumber(frontMatter["hero_vertical_position"]),
         } : undefined,
-        link: getArticleRoute(assertIsString(frontMatter['slug'])),
+        link: getArticleRoute(assertIsString(frontMatter["slug"])),
         date: dateStr != undefined ? new Date(dateStr) : undefined,
-        listed: assertIsBoolean(frontMatter['listed']),
+        listed: assertIsBoolean(frontMatter["listed"]),
         readingTimeMinutes: readingTime(plaintext).minutes,
         reactNode: reactNode,
     }, plaintext];

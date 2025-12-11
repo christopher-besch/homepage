@@ -9,13 +9,13 @@ interface TalksPageProps {
 export default function TalksPage(props: TalksPageProps): React.ReactNode {
     const talksToShow = props.talks
         .filter(a => a.listed)
-        // Date must be defined for all listed articles.
+        // Date must be defined for all listed talks.
         .sort((a, b) => b.date!.getTime() - a.date!.getTime());
     return (
         <Layout
             title="Chris' Talks"
             styleSheets={["always.css", "default.css"]}>
-            <Title isHero={false} title="Articles" />
+            <Title isHero={false} title="Talks" />
             <CardsList cards={talksToShow} />
         </Layout>
     );

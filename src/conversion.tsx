@@ -31,3 +31,10 @@ export function assertIsBoolean(input: any): boolean {
 export function htmlToPlaintext(html: string): string {
     return decode(html.replace(/<[^>]+>/g, '')).replace(/\s+/g, ' ');
 }
+
+export function assertIsArrayOfStrings(input: any): string[] {
+    if (!Array.isArray(input)) {
+        throw new Error(`${input} is no array`);
+    }
+    return input.map(assertIsString);
+}
