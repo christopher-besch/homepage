@@ -80,9 +80,9 @@ table {
     }
 }
 
-/* end of styles/colors.css */
-
 /* start of styles/fonts.css */
+
+/* end of styles/colors.css */
 @font-face {
     font-family: LiberationSans;
     src: url("fonts/LiberationSans-Regular-webfont.woff") format("woff");
@@ -147,9 +147,9 @@ table {
     font-display: swap;
 }
 
-/* end of styles/fonts.css */
-
 /* start of styles/layout.module.css */
+
+/* end of styles/fonts.css */
 :root {
     font-family: LiberationSans, sans-serif;
 
