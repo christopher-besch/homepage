@@ -1,5 +1,7 @@
 
 /* start of styles/reset.css */
+
+/* end of styles/reset.css */
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)
@@ -48,8 +50,6 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
-
-/* end of styles/reset.css */
 
 /* start of styles/colors.css */
 @media (prefers-color-scheme: light) {
