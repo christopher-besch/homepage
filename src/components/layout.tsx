@@ -22,7 +22,6 @@ export default async function Layout(props: React.PropsWithChildren<LayoutProps>
     let bannerSizes: ImageSize[] = [];
     if (props.banner != undefined) {
         const exportedBanner = await getDefaultExportedImage({ lazy: false, inputPath: props.banner });
-        // TODO: check order
         bannerSizes = exportedBanner.sizes.filter(s => s.width <= 1200).sort((a, b) => b.width - a.width);
     }
     const url = getFullLoadPath(props.route);
