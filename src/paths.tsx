@@ -79,6 +79,19 @@ export function createImageDeployPath(hash: string, width: number, height: numbe
     ensureDirExists(deployImagesPath);
     return path.join(deployImagesPath, `${hash}_${width}_${height}.webp`);
 }
+// This, for example, is useful for svgs.
+// Return the load path.
+export async function directCopyImage(inputPath: string): Promise<string> {
+    const file = await fs.promises.readFile(inputPath);
+    const hash = crypto.hash("md5", file);
+    const name = `${hash}${path.extname(inputPath)}`;
+    const directImageDeployPath = path.join(deployImagesPath, name);
+
+    if (!fs.existsSync(directImageDeployPath)) {
+        fs.promises.cp(inputPath, directImageDeployPath).catch(e => { throw e; });
+    }
+    return path.join(loadImagesPath, name);
+}
 
 // static //
 const deployFontsPath = path.join(deployStylesPath, `fonts`);
