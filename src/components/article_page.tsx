@@ -38,6 +38,7 @@ export default async function ArticlePage(props: ArticlePageProps): Promise<Reac
         description={article.description}
         styleSheets={["always.css", "article.css"]}
         heroImage={heroImage}
+        date={article.date}
     >
         {article.hero == undefined ? <Title isHero={false} title={article.title} subtitle={date} /> : undefined}
         <div className="article_page_markdown">{article.reactNode}</div>

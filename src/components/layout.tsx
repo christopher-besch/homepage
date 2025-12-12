@@ -6,6 +6,7 @@ import Image, { getDefaultExportedImage } from "./image.js";
 interface LayoutProps {
     route: string,
     title: string,
+    date?: Date,
     banner?: string,
     description?: string,
     styleSheets: string[],
@@ -64,6 +65,12 @@ export default async function Layout(props: React.PropsWithChildren<LayoutProps>
                     name="twitter:card"
                     content={bannerSizes.length != 0 ? "summary_large_image" : "summary"}
                 />
+                {props.date != undefined ?
+                    <meta name="og:article:published_time" content={props.date!.toISOString()} />
+                    : undefined}
+
+                <meta name="og:article:author" content="Christopher Besch" />
+                {/* TODO: tags */}
 
                 <meta
                     name="twitter:site"
