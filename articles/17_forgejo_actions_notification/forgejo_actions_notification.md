@@ -332,7 +332,7 @@ Let's start with just getting a Forgejo test instance up and running.
    Furthermore, Forgejo's Makefile strips the debug symbols so we disable that with the `STRIP` environment variable.
 7. Run `./gitea`.
    Yes, the executable is still called that.
-8. Open a webbrowser and navigate to [http://localhost:3000](http://localhost:3000).
+8. Open a webbrowser and navigate to `http://localhost:3000`.
 9. Choose SQLite, create an admin account and keep everything else default.
    Your config is in `~/forgejo/custom/conf/app.ini`.
 10. Create the `test_repo` repository and add the file `.forgejo/workflows/main.yml`:
@@ -369,7 +369,7 @@ I use [MailDev](https://github.com/maildev/maildev) to create a development emai
 It provides an SMTP server, which Forgejo connects to, and a web interface for me, the developer.
 1. [Install Docker](https://docs.docker.com/engine/install).
 2. Run `docker run --network host -p 1080:1080 -p 1025:1025 maildev/maildev`.
-3. Open [http://localhost:1080](http://localhost:1080) in a webbrowser.
+3. Open `http://localhost:1080` in a webbrowser.
 4. Shutdown Forgejo and edit it's config (in `~/forgejo/custom/conf/app.ini`).
    ```ini
    [mailer]

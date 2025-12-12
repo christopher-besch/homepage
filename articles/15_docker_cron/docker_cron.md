@@ -69,7 +69,7 @@ done
 
 What's good about docker_cron is how small it is.
 You can easily review everything docker_cron is in a few minutes:
-There's a total of 45 lines of [Dockerfile](https://github.com/christopher-besch/docker_cron/blob/main/Dockerfile), [bash script](github.com/christopher-besch/docker_cron/blob/main/init.sh) and [crontab template](https://github.com/christopher-besch/docker_cron/blob/main/crontab.tmpl).
+There's a total of 45 lines of [Dockerfile](https://github.com/christopher-besch/docker_cron/blob/main/Dockerfile), [bash script](https://github.com/christopher-besch/docker_cron/blob/main/init.sh) and [crontab template](https://github.com/christopher-besch/docker_cron/blob/main/crontab.tmpl).
 Its only dependencies are docker-gen and, well of course, cron.
 FYI, the nginx team develops docker-gen for their official Docker image.
 So it's not some obscure thing no one uses or maintains.
