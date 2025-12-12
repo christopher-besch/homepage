@@ -42,9 +42,11 @@ export default async function Layout(props: React.PropsWithChildren<LayoutProps>
                 <meta name="viewport" content="width=device-width,initial-scale=1" />
                 <link rel="canonical" href={url} />
                 <meta property="og:title" content={props.title} />
+                <meta property="twitter:title" content={props.title} />
                 {props.description != undefined ? <>
                     <meta name="description" content={props.description} />
                     <meta property="og:description" content={props.description} />
+                    <meta property="twitter:description" content={props.description} />
                 </> : undefined}
                 <meta property="og:type" content="article" />
                 <meta property="og:url" content={url} />
@@ -54,6 +56,24 @@ export default async function Layout(props: React.PropsWithChildren<LayoutProps>
                     <meta property="og:image:width" content={banner.width.toString()} />
                     <meta property="og:image:height" content={banner.height.toString()} />
                 </Fragment>)}
+                {bannerSizes.length != 0 ? <meta
+                    property="twitter:image"
+                    content={getFullLoadPath(bannerSizes[0]!.loadPath)}
+                /> : undefined}
+                <meta
+                    name="twitter:card"
+                    content={bannerSizes.length != 0 ? "summary_large_image" : "summary"}
+                />
+
+                <meta
+                    name="twitter:site"
+                    content="@besch_chris"
+                />
+                <meta
+                    name="twitter:creator"
+                    content="@besch_chris"
+                />
+
                 <meta name="author" content="Christopher Besch" />
 
                 {/* preloading fonts */}
