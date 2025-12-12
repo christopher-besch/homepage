@@ -62,8 +62,10 @@ export default async function Image(props: ImageProps): Promise<React.ReactNode>
         throw new Error("portrait undefined mismatch");
     }
     const alt = props.alt != undefined ? props.alt : "";
+    const loading = props.lazy ? "lazy" : "eager";
+    const fetchPriority = props.lazy ? "auto" : "high";
 
-    const imgTag = <img srcSet={defaultSrcSet} width={defaultWidth} height={defaultHeight} alt={alt} style={lqip} loading={props.lazy ? "lazy" : "eager"} />;
+    const imgTag = <img srcSet={defaultSrcSet} width={defaultWidth} height={defaultHeight} alt={alt} style={lqip} loading={loading} fetchPriority={fetchPriority} />;
     if (exportedImage.portraitSizes != undefined) {
         const portraitSrcSet = sizesToSrcSet(exportedImage.portraitSizes)
         const portraitWidth = exportedImage.portraitSizes[0]!.width;
@@ -80,6 +82,6 @@ export default async function Image(props: ImageProps): Promise<React.ReactNode>
     }
     // We don't need any source tags when there's no art direction.
     return <picture className="image_picture" >
-        <img srcSet={defaultSrcSet} width={defaultWidth} height={defaultHeight} style={lqip} alt={alt} />
+        <img srcSet={defaultSrcSet} width={defaultWidth} height={defaultHeight} alt={alt} style={lqip} loading={loading} fetchPriority={fetchPriority} />
     </picture>;
 }
