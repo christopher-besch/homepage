@@ -1,1 +1,11 @@
 /drop https://nextcloud.chris-besch.com/s/c7Etc9cGpw5ex6k
+/privacy /articles/privacy
+projects/python /projects
+projects/cpp /projects
+projects/typescript /projects
+projects/java /projects
+projects/rust /projects
+projects/c /projects
+projects/dart /projects
+projects/go /projects
+projects/javascript /projects

@@ -1,59 +1,47 @@
 {
-    "name": "homepage",
+    "name": "chris_homepage",
     "version": "1.0.0",
-    "private": true,
-    "description": "My Personal Homepage.",
-    "author": "christopher-besch",
-    "license": "UNLICENSED",
-    "keywords": [
-        "gatsby"
-    ],
-    "scripts": {
-        "build_private": "DEPLOY_ORIGIN='https://christopher-besch.github.io/private_homepage/suLo9aF9YkKzAEQEdgTRNBsQyTmC65qdru0B7ueQ' PRESENT_URL='https://dev.present.chris-besch.com' node_modules/.bin/gatsby build --prefix-paths",
-        "build_debug": "DEPLOY_ORIGIN='https://dev.chris-besch.com' PRESENT_URL='https://dev.present.chris-besch.com' node_modules/.bin/gatsby build",
-        "build_deploy": "DEPLOY_ORIGIN='https://chris-besch.com' PRESENT_URL='https://present.chris-besch.com' node_modules/.bin/gatsby build",
-        "build_local": "DEPLOY_ORIGIN='http://localhost:8000' PRESENT_URL='https://dev.present.chris-besch.com' node_modules/.bin/gatsby build",
-        "build_local_present": "DEPLOY_ORIGIN='http://localhost:8000' PRESENT_URL='http://localhost:8080' node_modules/.bin/gatsby build",
-        "develop": "DEPLOY_ORIGIN='http://localhost:8000' PRESENT_URL='https://dev.present.chris-besch.com' node_modules/.bin/gatsby develop --host 0.0.0.0",
-        "develop_present": "DEPLOY_ORIGIN='http://localhost:8000' PRESENT_URL='http://localhost:8080' node_modules/.bin/gatsby develop --host 0.0.0.0",
-        "serve": "node_modules/.bin/gatsby serve",
-        "clean": "node_modules/.bin/gatsby clean",
-        "type_check": "node_modules/.bin/tsc && echo 'type check ok'",
-        "type_check:watch": "node_modules/.bin/tsc --watch",
-        "check_links": "yarn run build_local && ( yarn run serve & to_kill=$! && sleep 5 && node_modules/.bin/broken-link-checker --filter-level 3 --input http://localhost:9000 -o -r --user-agent 'Mozilla/5.0 (X11; Linux x86_64; rv:99.0) Gecko/20100101 Firefox/99.0' || true && kill $to_kill )"
-    },
+    "description": "Chris' Homepage",
     "repository": {
         "type": "git",
-        "url": "https://github.com/christopher-besch/homepage"
+        "url": "codeberg.org/christopher-besch/homepage"
     },
-    "dependencies": {
-        "@mdx-js/react": "^3.1.0",
-        "compare_view": "^1.3.4",
-        "gatsby": "^5.14.3",
-        "gatsby-plugin-feed": "^5.15.0",
-        "gatsby-plugin-html-attributes": "^1.0.5",
-        "gatsby-plugin-image": "^3.14.0",
-        "gatsby-plugin-mdx": "^5.14.1",
-        "gatsby-plugin-sass": "^6.14.0",
-        "gatsby-plugin-sharp": "^5.14.0",
-        "gatsby-plugin-tsconfig-paths": "^1.0.6",
-        "gatsby-remark-autolink-headers": "^6.14.0",
-        "gatsby-remark-images": "^7.14.0",
-        "gatsby-remark-katex": "^7.14.0",
-        "gatsby-remark-table-of-contents": "^2.0.0",
-        "gatsby-source-filesystem": "^5.14.0",
-        "gatsby-transformer-sharp": "^5.14.0",
-        "prism-react-renderer": "^2.4.1",
-        "prismjs": "^1.30.0",
-        "react": "^18.3.0",
-        "react-dom": "^18.3.0",
-        "sass": "^1.89.1"
+    "license": "",
+    "author": "Christopher Besch <mail@chris-besch.com>",
+    "type": "module",
+    "main": "src/build.tsx",
+    "scripts": {
+        "build": "tsc && HOMEPAGE_URL=https://chris-besch.com node --enable-source-maps build/build.js",
+        "build_dev": "tsc && HOMEPAGE_URL=https://dev.chris-besch.com node --enable-source-maps build/build.js",
+        "clean": "rm -rf build deploy cache",
+        "clean_immich_portfolio": "rm -f cache/portfolio.json",
+        "check_image_size": "! exiftool -if '($ImageWidth > 1600) or ($ImageHeight > 1600)' -filename -FileSize -ImageWidth -ImageHeight deploy/images",
+        "watch": "fswatch --one-per-batch --latency 0.1 --event Updated -r -0 ./articles/ ./src/ ./styles/ ./static ./cache | xargs -0 -I {} -n 1 npm run build"
     },
     "devDependencies": {
-        "@types/node": "^22.15.29",
-        "@types/react": "^18.3.0",
-        "@types/react-dom": "^18.3.0",
-        "broken-link-checker": "^0.7.8",
-        "typescript": "^5.8.3"
+        "@types/node": "^24.10.1",
+        "@types/react": "^19.2.6",
+        "@types/react-dom": "^19.2.3",
+        "typescript": "^5.9.3"
+    },
+    "dependencies": {
+        "@huggingface/transformers": "^3.8.1",
+        "@immich/sdk": "^2.3.1",
+        "@mdx-js/mdx": "^3.1.1",
+        "feed": "^5.1.0",
+        "gray-matter": "^4.0.3",
+        "hast-util-from-html": "^2.0.3",
+        "html-entities": "^2.6.0",
+        "piscina": "^5.1.4",
+        "react": "^19.2.0",
+        "react-dom": "^19.2.0",
+        "reading-time": "^1.5.0",
+        "rehype-autolink-headings": "^7.1.0",
+        "rehype-katex": "^7.0.1",
+        "rehype-slug": "^6.0.0",
+        "rehype-starry-night": "^2.2.0",
+        "remark-math": "^6.0.0",
+        "segfault-handler": "^1.3.0",
+        "sharp": "^0.34.5"
     }
 }

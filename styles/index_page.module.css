@@ -1,0 +1,47 @@
+.index_page_title {
+    padding-left: 20px;
+    padding-right: 20px;
+    max-width: 1200px;
+    margin-bottom: 14vh;
+    margin-left: auto;
+    margin-right: auto;
+    color: var(--color-hero-text);
+    font-family: LiberationMono, monospace;
+}
+
+.index_page_title h1 {
+    font-size: clamp(0px, 12vw, 70px);
+}
+
+.index_page_title h2 {
+    margin-top: 5px;
+    font-size: clamp(0px, 6vw, 35px);
+}
+
+.index_page_links {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    gap: 5px;
+}
+
+.index_page_links a {
+    color: var(--color-hero-text);
+    text-decoration: none;
+    font-size: 30px;
+}
+
+.index_page_links a:hover span {
+    border-bottom-style: solid;
+    border-bottom-color: var(--color-hero-text);
+    border-bottom-width: 2px;
+}
+
+.index_page_links svg {
+    fill: var(--color-hero-text);
+    height: 30px;
+    width: auto;
+    margin-bottom: -8px;
+    margin-right: 5px;
+}

@@ -1,0 +1,4 @@
+.image_picture img {
+    /* The default inline would add a few pixels of space below the image. */
+    display: block;
+}

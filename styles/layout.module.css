@@ -1,0 +1,225 @@
+:root {
+    font-family: LiberationSans, sans-serif;
+
+    --layout-nav-height: 80px;
+    --layout-nav-padding-right: calc((var(--layout-nav-height) - var(--layout-nav-burger-height)) / 2);
+    --layout-nav-padding-left: 20px;
+
+    /* --layout-nav-burger-height: calc(var(--layout-nav-height) - 2 * var(--layout-nav-padding)); */
+    --layout-nav-burger-height: 25px;
+    --layout-burger-gap: calc((var(--layout-nav-burger-height) - 3 * var(--layout-burger-height)) / 2);
+    --layout-burger-width: 25px;
+    --layout-burger-height: 3px;
+
+    --layout-content-padding: 20px;
+    --layout-content-width: calc(100vw - 2 * var(--layout-content-padding));
+    --layout-content-height: calc(100vh - var(--layout-nav-height) - var(--layout-footer-height));
+
+    --layout-footer-height: 30px;
+}
+
+.layout_navbar {
+    height: var(--layout-nav-height);
+    display: flex;
+    flex-direction: row;
+    gap: var(--layout-nav-padding-right);
+    justify-content: space-between;
+    align-items: center;
+    padding-left: var(--layout-nav-padding-left);
+    padding-right: var(--layout-nav-padding-right);
+
+    background-color: var(--color-navbar-bg);
+}
+
+.layout_navbar_left {
+    color: var(--color-navbar-text);
+    text-decoration: none;
+    font-family: LiberationMono, monospace;
+}
+
+.layout_navbar_left h1 {
+    font-size: clamp(0px, 6.5vw, 30px);
+}
+
+.layout_navbar_left h2 {
+    margin-top: 3px;
+    font-size: clamp(0px, 3.5vw, 16px);
+}
+
+.layout_navbar_right {
+    font-size: 18px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 5px;
+}
+
+.layout_navbar_right input {
+    display: none;
+}
+
+.layout_nav_links a {
+    padding: 10px 15px;
+    border-radius: 3px;
+    color: var(--color-navbar-text);
+    text-decoration: none;
+}
+
+.layout_nav_links a:hover {
+    background: var(--color-navbar-highlight);
+}
+
+.layout_navbar_hamburger {
+    display: none;
+    flex-direction: column;
+    gap: var(--layout-burger-gap);
+    cursor: pointer;
+}
+
+.layout_navbar_hamburger div {
+    width: var(--layout-burger-width);
+    height: var(--layout-burger-height);
+    border-radius: 3px;
+    background-color: var(--color-navbar-text);
+    transition: 0.3s;
+}
+
+.layout_transient_space {
+    display: none;
+    height: calc(100vh - var(--layout-nav-height));
+
+    max-width: 200px;
+    margin: auto;
+}
+
+.layout_transient_space .layout_nav_links {
+    padding-top: 50px;
+    height: 80%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* .layout_transient_space .layout_nav_links a:nth-child(2n) { */
+/*     text-align: right; */
+/* } */
+
+.layout_transient_space .layout_nav_links a {
+    text-align: center;
+    color: var(--color-navbar-text);
+    text-decoration: none;
+}
+
+@media (max-width: 900px) {
+    .layout_navbar_hamburger {
+        display: flex;
+    }
+
+    .layout_navbar_right a {
+        display: none;
+    }
+
+    body:has(#layout_navbar_toggle:checked) .layout_transient_space {
+        display: block;
+    }
+
+    body:has(#layout_navbar_toggle:checked) .layout_content_container {
+        display: none;
+    }
+
+    body:has(#layout_navbar_toggle:checked) .layout_footer {
+        display: none;
+    }
+
+    body:has(#layout_navbar_toggle:checked) {
+        background-color: var(--color-navbar-bg);
+        color: var(--color-navbar-text);
+    }
+
+    body:has(#layout_navbar_toggle:checked) .layout_navbar_hamburger div:nth-child(1) {
+        transform: translateY(calc((var(--layout-burger-height) + var(--layout-burger-gap)))) rotate(45deg);
+    }
+
+    body:has(#layout_navbar_toggle:checked) .layout_navbar_hamburger div:nth-child(2) {
+        transform: rotate(45deg);
+        opacity: 0;
+    }
+
+    body:has(#layout_navbar_toggle:checked) .layout_navbar_hamburger div:nth-child(3) {
+        transform: translateY(calc(-1 * (var(--layout-burger-height) + var(--layout-burger-gap)))) rotate(-45deg);
+    }
+}
+
+/* We use layout_content_container because we can't overwrite these values on body because of the reset.css. */
+.layout_content_container {
+    min-height: var(--layout-content-height);
+    /* The title has a margin-top. */
+    /* This would extend the height of this div beyond what it should be on small content pages. */
+    overflow: auto;
+}
+
+/* We set these on the body because reset.css doesn't set these and setting them on the body is nicer. */
+body {
+    background-color: var(--color-body-bg);
+    color: var(--color-body-text);
+}
+
+.layout_content {
+    padding-left: var(--layout-content-padding);
+    padding-right: var(--layout-content-padding);
+    max-width: 1200px;
+    margin: auto;
+}
+
+.layout_footer {
+    height: var(--layout-footer-height);
+
+    background-color: var(--color-navbar-bg);
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.layout_footer a {
+    padding: 5px 10px;
+    border-radius: 3px;
+    color: var(--color-navbar-text);
+    text-decoration: none;
+}
+
+.layout_footer a:hover {
+    background: var(--color-navbar-highlight);
+}
+
+@media (max-width: 900px) {
+    :root {
+        --layout-footer-height: 140px;
+    }
+
+    .layout_footer {
+        flex-direction: column;
+    }
+}
+
+.layout_hero {
+    position: relative;
+}
+
+.layout_hero img {
+    width: 100%;
+    height: calc(var(--layout-hero-fraction) * (100vh - var(--layout-nav-height)));
+    object-fit: cover;
+    object-position: var(--layout-object-fit-h) var(--layout-object-fit-v);
+}
+
+.layout_hero_children {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}

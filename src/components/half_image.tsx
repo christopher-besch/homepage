@@ -1,20 +1,20 @@
-import React from "react";
-
-import HalfElement from "src/components/half_element"
-
-import * as styles from "src/styles/half_image.module.scss";
+import { directCopyImage } from "../paths.js";
+import HalfElement from "./half_element.js";
+import Image from "./image.js";
 
 interface HalfImageProps {
-    src: string;
+    inputPath: string;
+    alt?: string;
     // should spread entire width?
     full?: boolean;
 }
-const HalfImage = (props: HalfImageProps) => {
+export default async function HalfImage(props: HalfImageProps): Promise<React.ReactNode> {
     return (
-        <HalfElement full={props.full}>
-            <img className={styles.image} src={props.src} />
-        </HalfElement>
+        <div className="half_image_image">
+            <HalfElement full={props.full}>
+                {props.inputPath.endsWith(".svg") ? <img src={await directCopyImage(props.inputPath)} loading="lazy" alt="" />
+                    : <Image inputPath={props.inputPath} alt={props.alt} lazy={true} />}
+            </HalfElement>
+        </div>
     );
 }
-
-export default HalfImage;

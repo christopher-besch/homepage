@@ -1,10 +1,8 @@
-import React from "react";
-
 interface QuoteProps {
     text: string;
     author: string;
-}
-const Quote = (props: QuoteProps) => {
+};
+export default function Quote(props: QuoteProps): React.ReactNode {
     return (
         <blockquote>
             <center>
@@ -13,5 +11,3 @@ const Quote = (props: QuoteProps) => {
         </blockquote>
     );
 }
-
-export default Quote;

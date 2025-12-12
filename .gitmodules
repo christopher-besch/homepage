@@ -1,0 +1,6 @@
+[submodule "models/clip-vit-base-patch32"]
+	path = models/clip-vit-base-patch32
+	url = https://huggingface.co/Xenova/clip-vit-base-patch32
+[submodule "models/all-MiniLM-L6-v2"]
+	path = models/all-MiniLM-L6-v2
+	url = https://huggingface.co/Xenova/all-MiniLM-L6-v2

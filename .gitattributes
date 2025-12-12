@@ -1,0 +1,2 @@
+models/Xenova/all-MiniLM-L6-v2/onnx/model.onnx filter=lfs diff=lfs merge=lfs -text
+models/Xenova/clip-vit-base-patch32/onnx/vision_model.onnx filter=lfs diff=lfs merge=lfs -text
