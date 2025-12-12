@@ -155,6 +155,9 @@
 /* We use layout_content_container because we can't overwrite these values on body because of the reset.css. */
 .layout_content_container {
     min-height: var(--layout-content-height);
+    /* The title has a margin-top. */
+    /* This would extend the height of this div beyond what it should be on small content pages. */
+    overflow: auto;
 }
 
 /* We set these on the body because reset.css doesn't set these and setting them on the body is nicer. */

@@ -1,7 +1,7 @@
 import * as fs from "fs";
 import { renderToPipeableStream } from "react-dom/server";
 import { buildStyles } from "./styles.js";
-import { createRouteDeployPath, copyStatic, loadArticlesPath, loadPhotographyPath, getAssetRoute, loadTalksPath, loadProjectsPath } from "./paths.js";
+import { createRouteDeployPath, copyStaticInBG, loadArticlesPath, loadPhotographyPath, getAssetRoute, loadTalksPath, loadProjectsPath, create404RouteDeployPath } from "./paths.js";
 import { startPool } from "./worker/worker_pool.js";
 
 import IndexPage from "./components/index_page.js";
@@ -17,12 +17,12 @@ import { prepareProjects, type Project } from "./projects.js";
 import ProjectsPage from "./components/projects_page.js";
 import { prepareImmichPortfolio, type Asset } from "./assets.js";
 import * as SegfaultHandler from "segfault-handler";
+import PageNotFoundPage from "./components/page_not_found_page.js";
 
 // Build the route in the background.
 // Return immediately.
-function buildRouteInBG(route: string, element: React.ReactNode) {
-    console.log(`Build route ${route}`);
-    const path = createRouteDeployPath(route);
+function buildLoadPathHTMLInBG(path: string, element: React.ReactNode) {
+    console.log(`Build path ${path}`);
     // We cannot use renderToStaticMarkup because that doesn't support async components.
     let out = renderToPipeableStream(element, {
         onAllReady: () => {
@@ -36,6 +36,13 @@ function buildRouteInBG(route: string, element: React.ReactNode) {
             throw e;
         },
     });
+}
+
+// A route is a path with an index.html file.
+// Build the route in the background.
+// Return immediately.
+function buildRouteInBG(route: string, element: React.ReactNode) {
+    buildLoadPathHTMLInBG(createRouteDeployPath(route), element);
 }
 
 async function buildArticles(articles: Article[]) {
@@ -68,7 +75,8 @@ async function buildProjects(projects: Project[]) {
 async function build() {
     // Do this in the background
     buildStyles().catch(e => { throw e; });
-    copyStatic();
+    copyStaticInBG();
+    buildLoadPathHTMLInBG(create404RouteDeployPath(), <PageNotFoundPage />);
 
     const [portfolio, articles, talks, projects] = await Promise.all([
         prepareImmichPortfolio().then(p => {

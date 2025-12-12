@@ -46,6 +46,10 @@ export function createRouteDeployPath(route: string): string {
     ensureDirExists(dir);
     return path.join(dir, "index.html");
 }
+export function create404RouteDeployPath(): string {
+    ensureDirExists(deployPath);
+    return path.join(deployPath, "404.html");
+}
 
 export function getFullLoadPath(loadPath: string): string {
     return `${homepageURL}${loadPath}`;
@@ -78,7 +82,7 @@ export function createImageDeployPath(hash: string, width: number, height: numbe
 
 // static //
 const deployFontsPath = path.join(deployStylesPath, `fonts`);
-export function copyStatic() {
+export function copyStaticInBG() {
     // Make sure we execute one after the other.
     // Because of this the static dir may only contain fonts and things that aren't in subdirs that other code also accesses.
     fs.promises.cp(staticSrcPath, deployPath, { recursive: true }).then(() => {
