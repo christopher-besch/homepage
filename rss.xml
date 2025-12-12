@@ -4,7 +4,7 @@
         <title>Chris' Homepage</title>
         <link>https://dev.chris-besch.com</link>
         <description>Christopher Besch's Homepage about Software, Articles and Photography</description>
-        <lastBuildDate>Fri, 12 Dec 2025 14:25:01 GMT</lastBuildDate>
+        <lastBuildDate>Fri, 12 Dec 2025 14:44:01 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
@@ -68,13 +68,13 @@ Or: How I blew up my brother.]]></description>
             <enclosure url="https://dev.chris-besch.com/images/e504095a9b565988179fa2df918ae18c_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
-            <title><![CDATA[Installing Gentoo To My Liking]]></title>
-            <link>/articles/installing_gentoo</link>
-            <guid isPermaLink="false">/articles/installing_gentoo</guid>
-            <pubDate>Tue, 26 Apr 2022 00:00:00 GMT</pubDate>
-            <description><![CDATA[Gentoo is a Linux distribution that offers as many options as possible. This article leads you through the decisions I took to end up with a system that best suits my needs.]]></description>
+            <title><![CDATA[The History of Forgejo's Pub-Sub Pattern]]></title>
+            <link>/articles/forgejo_pub_sub_pattern_history</link>
+            <guid isPermaLink="false">/articles/forgejo_pub_sub_pattern_history</guid>
+            <pubDate>Thu, 30 Oct 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[I created a tool to visualize Forgejo's Pub-Sub pattern. Why not run that tool on all 24 thousand commits in Forgejo's history? What could possibly go wrong?]]></description>
             <author>mail@chris-besch.com (Christopher Besch)</author>
-            <enclosure url="https://dev.chris-besch.com/images/dd509c81379268c048ef45318173ad70_800_400.webp" length="0" type="image/webp"/>
+            <enclosure url="https://dev.chris-besch.com/images/a7f291280fadb4822ddaf7ed36c95bf8_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
             <title><![CDATA[Bodging MP3 Names in Bash]]></title>
@@ -86,13 +86,13 @@ Or: How I blew up my brother.]]></description>
             <enclosure url="https://dev.chris-besch.com/images/5c491b010e8b22c6ffd20605f69d322f_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
-            <title><![CDATA[The History of Forgejo's Pub-Sub Pattern]]></title>
-            <link>/articles/forgejo_pub_sub_pattern_history</link>
-            <guid isPermaLink="false">/articles/forgejo_pub_sub_pattern_history</guid>
-            <pubDate>Thu, 30 Oct 2025 00:00:00 GMT</pubDate>
-            <description><![CDATA[I created a tool to visualize Forgejo's Pub-Sub pattern. Why not run that tool on all 24 thousand commits in Forgejo's history? What could possibly go wrong?]]></description>
+            <title><![CDATA[Installing Gentoo To My Liking]]></title>
+            <link>/articles/installing_gentoo</link>
+            <guid isPermaLink="false">/articles/installing_gentoo</guid>
+            <pubDate>Tue, 26 Apr 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[Gentoo is a Linux distribution that offers as many options as possible. This article leads you through the decisions I took to end up with a system that best suits my needs.]]></description>
             <author>mail@chris-besch.com (Christopher Besch)</author>
-            <enclosure url="https://dev.chris-besch.com/images/a7f291280fadb4822ddaf7ed36c95bf8_800_400.webp" length="0" type="image/webp"/>
+            <enclosure url="https://dev.chris-besch.com/images/dd509c81379268c048ef45318173ad70_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
             <title><![CDATA[Why I love Open-Source]]></title>
@@ -132,16 +132,6 @@ This article shows how you can use reveal.js for your own presentation.]]></desc
             <enclosure url="https://dev.chris-besch.com/images/90f1af0c0e4970e8cf923a375c719169_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
-            <title><![CDATA[Maki, Atoms and Time Travel]]></title>
-            <link>/articles/maki_atoms_and_time_travel</link>
-            <guid isPermaLink="false">/articles/maki_atoms_and_time_travel</guid>
-            <pubDate>Sun, 06 Feb 2022 00:00:00 GMT</pubDate>
-            <description><![CDATA[Maki showcases how a program for interactive and programmatic animation development can be implemented.
-Its programmatic approach provides the precision technical concepts require, while its interactivity and real-time updates avoid a disconnect between input and output.]]></description>
-            <author>mail@chris-besch.com (Christopher Besch)</author>
-            <enclosure url="https://dev.chris-besch.com/images/ec9e9265791849f80f7f7e1d76995206_800_400.webp" length="0" type="image/webp"/>
-        </item>
-        <item>
             <title><![CDATA[Docker: Breathing Life into Decades old Fortran]]></title>
             <link>/articles/ctemsoft</link>
             <guid isPermaLink="false">/articles/ctemsoft</guid>
@@ -150,15 +140,6 @@ Its programmatic approach provides the precision technical concepts require, whi
 Now you get to see Fig.3.5. from "Introduction to Conventional Transmission Electron Microscopy" by Prof. Marc De Graef at 30 frames a second.]]></description>
             <author>mail@chris-besch.com (Christopher Besch)</author>
             <enclosure url="https://dev.chris-besch.com/images/c5fde5a326c6a0b5e07c470ffda1eb59_800_400.webp" length="0" type="image/webp"/>
-        </item>
-        <item>
-            <title><![CDATA[Inject Fonts into Web SVGs with sed]]></title>
-            <link>/articles/svg_fonts_with_sed</link>
-            <guid isPermaLink="false">/articles/svg_fonts_with_sed</guid>
-            <pubDate>Mon, 10 Feb 2025 00:00:00 GMT</pubDate>
-            <description><![CDATA[Add font-loading CSS to SVGs with a sed script.]]></description>
-            <author>mail@chris-besch.com (Christopher Besch)</author>
-            <enclosure url="https://dev.chris-besch.com/images/f59a7f43e2f2a641d46f9fd994b5589c_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
             <title><![CDATA[LunarVim in Distrobox]]></title>
@@ -170,6 +151,15 @@ Now you get to see Fig.3.5. from "Introduction to Conventional Transmission Elec
             <enclosure url="https://dev.chris-besch.com/images/7b55476245f182a8e9f9b7e91efbb1a6_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
+            <title><![CDATA[Inject Fonts into Web SVGs with sed]]></title>
+            <link>/articles/svg_fonts_with_sed</link>
+            <guid isPermaLink="false">/articles/svg_fonts_with_sed</guid>
+            <pubDate>Mon, 10 Feb 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[Add font-loading CSS to SVGs with a sed script.]]></description>
+            <author>mail@chris-besch.com (Christopher Besch)</author>
+            <enclosure url="https://dev.chris-besch.com/images/f59a7f43e2f2a641d46f9fd994b5589c_800_400.webp" length="0" type="image/webp"/>
+        </item>
+        <item>
             <title><![CDATA[How my GitHub Pages got Hacked]]></title>
             <link>/articles/github_pages_hack</link>
             <guid isPermaLink="false">/articles/github_pages_hack</guid>
@@ -177,6 +167,16 @@ Now you get to see Fig.3.5. from "Introduction to Conventional Transmission Elec
             <description><![CDATA[A DNS forward is an expression of trust. GitHub broke my trust and someone else received control over my domain.]]></description>
             <author>mail@chris-besch.com (Christopher Besch)</author>
             <enclosure url="https://dev.chris-besch.com/images/2429205e42d7ecf6646d20aea86a90ce_800_400.webp" length="0" type="image/webp"/>
+        </item>
+        <item>
+            <title><![CDATA[Maki, Atoms and Time Travel]]></title>
+            <link>/articles/maki_atoms_and_time_travel</link>
+            <guid isPermaLink="false">/articles/maki_atoms_and_time_travel</guid>
+            <pubDate>Sun, 06 Feb 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[Maki showcases how a program for interactive and programmatic animation development can be implemented.
+Its programmatic approach provides the precision technical concepts require, while its interactivity and real-time updates avoid a disconnect between input and output.]]></description>
+            <author>mail@chris-besch.com (Christopher Besch)</author>
+            <enclosure url="https://dev.chris-besch.com/images/ec9e9265791849f80f7f7e1d76995206_800_400.webp" length="0" type="image/webp"/>
         </item>
     </channel>
 </rss>
