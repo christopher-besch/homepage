@@ -4,7 +4,7 @@
         <title>Chris' Homepage</title>
         <link>https://dev.chris-besch.com</link>
         <description>Christopher Besch's Homepage about Software, Articles and Photography</description>
-        <lastBuildDate>Fri, 12 Dec 2025 15:27:30 GMT</lastBuildDate>
+        <lastBuildDate>Fri, 12 Dec 2025 16:34:17 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
@@ -95,15 +95,6 @@ Or: How I blew up my brother.]]></description>
             <enclosure url="https://dev.chris-besch.com/images/a7f291280fadb4822ddaf7ed36c95bf8_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
-            <title><![CDATA[grub-install --removable for buggy UEFI]]></title>
-            <link>/articles/grub_install_removable</link>
-            <guid isPermaLink="false">/articles/grub_install_removable</guid>
-            <pubDate>Fri, 08 Nov 2024 00:00:00 GMT</pubDate>
-            <description><![CDATA[Install Debian on a device with a broken NVRAM.]]></description>
-            <author>mail@chris-besch.com (Christopher Besch)</author>
-            <enclosure url="https://dev.chris-besch.com/images/5c5afcd8efd6183c56c8c807a694a48f_800_400.webp" length="0" type="image/webp"/>
-        </item>
-        <item>
             <title><![CDATA[Why I love Open-Source]]></title>
             <link>/articles/open_source</link>
             <guid isPermaLink="false">/articles/open_source</guid>
@@ -111,6 +102,15 @@ Or: How I blew up my brother.]]></description>
             <description><![CDATA[We all live in a world of immensely complex technology. The concept of Open-Source might seem radical at first but it's indispensable in our world. Regardless if you are a user, developer or simply interested in a healthy society, you benefit from Open-Source and we should fight for every bit of it. Open-Source is a quality mark, a form of democracy and ownership, capitalism at its best and thus the response to this world, a world in which software exists. This article gets to that conclusion without requiring any prior technical knowledge.]]></description>
             <author>mail@chris-besch.com (Christopher Besch)</author>
             <enclosure url="https://dev.chris-besch.com/images/e5fdc90ab34ba9a541ab0d11b75e02de_800_400.webp" length="0" type="image/webp"/>
+        </item>
+        <item>
+            <title><![CDATA[grub-install --removable for buggy UEFI]]></title>
+            <link>/articles/grub_install_removable</link>
+            <guid isPermaLink="false">/articles/grub_install_removable</guid>
+            <pubDate>Fri, 08 Nov 2024 00:00:00 GMT</pubDate>
+            <description><![CDATA[Install Debian on a device with a broken NVRAM.]]></description>
+            <author>mail@chris-besch.com (Christopher Besch)</author>
+            <enclosure url="https://dev.chris-besch.com/images/5c5afcd8efd6183c56c8c807a694a48f_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
             <title><![CDATA[Forgejo Actions Notification Development]]></title>
@@ -152,15 +152,6 @@ Now you get to see Fig.3.5. from "Introduction to Conventional Transmission Elec
             <enclosure url="https://dev.chris-besch.com/images/c5fde5a326c6a0b5e07c470ffda1eb59_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
-            <title><![CDATA[How my GitHub Pages got Hacked]]></title>
-            <link>/articles/github_pages_hack</link>
-            <guid isPermaLink="false">/articles/github_pages_hack</guid>
-            <pubDate>Sat, 18 Oct 2025 00:00:00 GMT</pubDate>
-            <description><![CDATA[A DNS forward is an expression of trust. GitHub broke my trust and someone else received control over my domain.]]></description>
-            <author>mail@chris-besch.com (Christopher Besch)</author>
-            <enclosure url="https://dev.chris-besch.com/images/2429205e42d7ecf6646d20aea86a90ce_800_400.webp" length="0" type="image/webp"/>
-        </item>
-        <item>
             <title><![CDATA[Inject Fonts into Web SVGs with sed]]></title>
             <link>/articles/svg_fonts_with_sed</link>
             <guid isPermaLink="false">/articles/svg_fonts_with_sed</guid>
@@ -177,6 +168,15 @@ Now you get to see Fig.3.5. from "Introduction to Conventional Transmission Elec
             <description><![CDATA[You're missing that one program that isn't available in your Linux distro? With Distrobox, the 'Linux Subsystem for Linux,' you can install it anyways. This article explains how to do that with the example of installing LunarVim on Red Hat.]]></description>
             <author>mail@chris-besch.com (Christopher Besch)</author>
             <enclosure url="https://dev.chris-besch.com/images/7b55476245f182a8e9f9b7e91efbb1a6_800_400.webp" length="0" type="image/webp"/>
+        </item>
+        <item>
+            <title><![CDATA[How my GitHub Pages got Hacked]]></title>
+            <link>/articles/github_pages_hack</link>
+            <guid isPermaLink="false">/articles/github_pages_hack</guid>
+            <pubDate>Sat, 18 Oct 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[A DNS forward is an expression of trust. GitHub broke my trust and someone else received control over my domain.]]></description>
+            <author>mail@chris-besch.com (Christopher Besch)</author>
+            <enclosure url="https://dev.chris-besch.com/images/2429205e42d7ecf6646d20aea86a90ce_800_400.webp" length="0" type="image/webp"/>
         </item>
     </channel>
 </rss>
