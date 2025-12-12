@@ -2379,6 +2379,8 @@
 .half_image_image img {
     width: 100%;
     height: 100%;
+    /* This is already being done in image.module.css but the svg needs it, too. */
+    display: block;
 }
 
 /* end of styles/half_image.module.css */
