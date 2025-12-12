@@ -26,6 +26,8 @@ sourceMap.set("article.css", [
     getStyleSourcePath("half_element.module.css"),
     getStyleSourcePath("half_image.module.css"),
     getStyleSourcePath("half_video.module.css"),
+    // This isn't really needed in many articles but the about page uses articles.css, so...
+    getStyleSourcePath("about_page.module.css"),
     "./node_modules/katex/dist/katex.min.css",
     "./node_modules/@wooorm/starry-night/style/core.css",
     "./node_modules/@wooorm/starry-night/style/both.css",

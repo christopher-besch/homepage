@@ -1,7 +1,7 @@
 import * as fs from "fs";
 import { renderToPipeableStream } from "react-dom/server";
 import { buildStyles } from "./styles.js";
-import { createRouteDeployPath, copyStaticInBG, loadArticlesPath, loadPhotographyPath, getAssetRoute, loadTalksPath, loadProjectsPath, create404RouteDeployPath } from "./paths.js";
+import { createRouteDeployPath, copyStaticInBG, loadArticlesPath, loadPhotographyPath, getAssetRoute, loadTalksPath, loadProjectsPath, create404RouteDeployPath, loadAboutPath } from "./paths.js";
 import { startPool } from "./worker/worker_pool.js";
 
 import IndexPage from "./components/index_page.js";
@@ -18,6 +18,7 @@ import ProjectsPage from "./components/projects_page.js";
 import { prepareImmichPortfolio, type Asset } from "./assets.js";
 import * as SegfaultHandler from "segfault-handler";
 import PageNotFoundPage from "./components/page_not_found_page.js";
+import AboutPage from "./components/about_page.js";
 
 // Build the route in the background.
 // Return immediately.
@@ -78,6 +79,7 @@ async function build() {
     buildStyles().catch(e => { throw e; });
     copyStaticInBG();
     buildLoadPathHTMLInBG(create404RouteDeployPath(), <PageNotFoundPage route="/" />);
+    buildRouteInBG(loadAboutPath, <AboutPage route={loadAboutPath} />);
 
     const [portfolio, articles, talks, projects] = await Promise.all([
         prepareImmichPortfolio().then(p => {
