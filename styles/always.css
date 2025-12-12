@@ -85,7 +85,7 @@ table {
 /* start of styles/fonts.css */
 @font-face {
     font-family: LiberationSans;
-    src: url("fonts/LiberationSans-Regular-webfont.woff") format("woff");
+    src: url("/styles/fonts/LiberationSans-Regular-webfont.woff") format("woff");
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -93,7 +93,7 @@ table {
 
 @font-face {
     font-family: LiberationSans;
-    src: url("fonts/LiberationSans-Bold-webfont.woff") format("woff");
+    src: url("/styles/fonts/LiberationSans-Bold-webfont.woff") format("woff");
     font-weight: bold;
     font-style: normal;
     font-display: swap;
@@ -101,7 +101,7 @@ table {
 
 @font-face {
     font-family: LiberationSans;
-    src: url("fonts/LiberationSans-Italic-webfont.woff") format("woff");
+    src: url("/styles/fonts/LiberationSans-Italic-webfont.woff") format("woff");
     font-weight: normal;
     font-style: italic;
     font-display: swap;
@@ -109,7 +109,7 @@ table {
 
 @font-face {
     font-family: LiberationSans;
-    src: url("fonts/LiberationSans-BoldItalic-webfont.woff") format("woff");
+    src: url("/styles/fonts/LiberationSans-BoldItalic-webfont.woff") format("woff");
     font-weight: bold;
     font-style: italic;
     font-display: swap;
@@ -117,7 +117,7 @@ table {
 
 @font-face {
     font-family: LiberationMono;
-    src: url("fonts/LiberationMono-Regular-webfont.woff") format("woff");
+    src: url("/styles/fonts/LiberationMono-Regular-webfont.woff") format("woff");
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -125,7 +125,7 @@ table {
 
 @font-face {
     font-family: LiberationMono;
-    src: url("fonts/LiberationMono-Bold-webfont.woff") format("woff");
+    src: url("/styles/fonts/LiberationMono-Bold-webfont.woff") format("woff");
     font-weight: bold;
     font-style: normal;
     font-display: swap;
@@ -133,7 +133,7 @@ table {
 
 @font-face {
     font-family: LiberationMono;
-    src: url("fonts/LiberationMono-Italic-webfont.woff") format("woff");
+    src: url("/styles/fonts/LiberationMono-Italic-webfont.woff") format("woff");
     font-weight: normal;
     font-style: italic;
     font-display: swap;
@@ -141,7 +141,7 @@ table {
 
 @font-face {
     font-family: LiberationMono;
-    src: url("fonts/LiberationMono-BoldItalic-webfont.woff") format("woff");
+    src: url("/styles/fonts/LiberationMono-BoldItalic-webfont.woff") format("woff");
     font-weight: bold;
     font-style: italic;
     font-display: swap;
