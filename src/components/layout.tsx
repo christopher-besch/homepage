@@ -35,8 +35,11 @@ export default async function Layout(props: React.PropsWithChildren<LayoutProps>
         <a href={getArticleRoute("bookmarks")}>Bookmarks</a>
         <a href={loadAboutPath}>About</a>
     </div>;
+
+    // Use the title as a fallback.
+    const description = props.description != undefined ? props.description : props.title;
     return (
-        <html>
+        <html lang="en">
             <head>
                 <meta charSet="UTF-8" />
                 <title>{props.title}</title>
@@ -44,11 +47,9 @@ export default async function Layout(props: React.PropsWithChildren<LayoutProps>
                 <link rel="canonical" href={url} />
                 <meta property="og:title" content={props.title} />
                 <meta property="twitter:title" content={props.title} />
-                {props.description != undefined ? <>
-                    <meta name="description" content={props.description} />
-                    <meta property="og:description" content={props.description} />
-                    <meta property="twitter:description" content={props.description} />
-                </> : undefined}
+                <meta name="description" content={description} />
+                <meta property="og:description" content={description} />
+                <meta property="twitter:description" content={description} />
                 <meta property="og:type" content="article" />
                 <meta property="og:url" content={url} />
                 <meta property="og:site_name" content="Chris' Place" />
@@ -56,6 +57,8 @@ export default async function Layout(props: React.PropsWithChildren<LayoutProps>
                     <meta property="og:image" content={getFullLoadPath(banner.loadPath)} />
                     <meta property="og:image:width" content={banner.width.toString()} />
                     <meta property="og:image:height" content={banner.height.toString()} />
+                    {/* This is entirely decorative. */}
+                    <meta property="og:image:alt" content="" />
                 </Fragment>)}
                 {bannerSizes.length != 0 ? <meta
                     property="twitter:image"
@@ -86,14 +89,14 @@ export default async function Layout(props: React.PropsWithChildren<LayoutProps>
                 {/* preloading fonts */}
                 <link
                     rel="preload"
-                    href="/fonts/LiberationSans-Regular-webfont.woff"
+                    href="/styles/fonts/LiberationSans-Regular-webfont.woff"
                     as="font"
                     type="font/woff"
                     crossOrigin="anonymous"
                 />
                 <link
                     rel="preload"
-                    href="/fonts/LiberationMono-Regular-webfont.woff"
+                    href="/styles/fonts/LiberationMono-Regular-webfont.woff"
                     as="font"
                     type="font/woff"
                     crossOrigin="anonymous"
@@ -119,7 +122,7 @@ export default async function Layout(props: React.PropsWithChildren<LayoutProps>
             </head>
 
             <body>
-                <div className="layout_navbar">
+                <nav className="layout_navbar" role="navigation">
                     <a className="layout_navbar_left" href="/">
                         <h1>Christopher&nbsp;Besch</h1>
                         <h2>Developer&bull;Writer&bull;Photographer</h2>
@@ -133,14 +136,14 @@ export default async function Layout(props: React.PropsWithChildren<LayoutProps>
                         </label>
                         {nav_links}
                     </div>
-                </div>
+                </nav>
 
                 <div className="layout_transient_space">
                     {nav_links}
                     <p>This is a transient space.</p>
                 </div>
 
-                <div className="layout_content_container">
+                <main className="layout_content_container" role="main">
                     {props.heroImage != undefined ?
                         <div className="layout_hero"
                             style={{
@@ -158,14 +161,14 @@ export default async function Layout(props: React.PropsWithChildren<LayoutProps>
                     <div className="layout_content">
                         {props.children}
                     </div>
-                </div>
+                </main>
 
-                <div className="layout_footer">
+                <footer className="layout_footer" role="contentinfo">
                     <a href={loadAboutPath}>Contact</a>
                     <a href={loadRssPath}>RSS</a>
                     <a href={getArticleRoute("privacy")}>Privacy</a>
                     <div>© 2025 | All rights reserved</div>
-                </div>
+                </footer>
             </body>
         </html >
     );
