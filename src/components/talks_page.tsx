@@ -4,6 +4,7 @@ import Layout from "./layout.js";
 import Title from "./title.js";
 
 interface TalksPageProps {
+    route: string,
     talks: Talk[],
 }
 export default function TalksPage(props: TalksPageProps): React.ReactNode {
@@ -13,6 +14,7 @@ export default function TalksPage(props: TalksPageProps): React.ReactNode {
         .sort((a, b) => b.date!.getTime() - a.date!.getTime());
     return (
         <Layout
+            route={props.route}
             title="Chris' Talks"
             styleSheets={["always.css", "default.css"]}>
             <Title isHero={false} title="Talks" />

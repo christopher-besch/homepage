@@ -12,6 +12,7 @@ const nearestNeighbours = 2;
 const antiNeighbours = 2;
 
 interface ArticlePageProps {
+    route: string,
     articles: Article[],
     idx: number;
 }
@@ -31,6 +32,8 @@ export default async function ArticlePage(props: ArticlePageProps): Promise<Reac
     }
     const similarArticles = getNearestListedNeighbours(props.idx, nearestNeighbours, antiNeighbours, props.articles);
     return <Layout
+        route={props.route}
+        banner={article.banner}
         title={article.title}
         description={article.description}
         styleSheets={["always.css", "article.css"]}

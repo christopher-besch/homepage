@@ -48,35 +48,36 @@ function buildRouteInBG(route: string, element: React.ReactNode) {
 async function buildArticles(articles: Article[]) {
     console.log("Building articles");
     for (const [idx, article] of articles.entries()) {
-        buildRouteInBG(article.link, <ArticlePage idx={idx} articles={articles} />);
+        buildRouteInBG(article.link, <ArticlePage route={article.link} idx={idx} articles={articles} />);
     }
-    buildRouteInBG(loadArticlesPath, <ArticlesPage articles={articles} />);
+    buildRouteInBG(loadArticlesPath, <ArticlesPage route={loadArticlesPath} articles={articles} />);
     await createFeed(articles);
 }
 
 async function buildPhotography(portfolio: Asset[]) {
     console.log("Building photography");
     for (const [idx, asset] of portfolio.entries()) {
-        buildRouteInBG(getAssetRoute(asset.id), <PhotoPage idx={idx} assets={portfolio} />);
+        const route = getAssetRoute(asset.id);
+        buildRouteInBG(route, <PhotoPage route={route} idx={idx} assets={portfolio} />);
     }
-    buildRouteInBG(loadPhotographyPath, <PhotographyPage portfolio={portfolio} />)
+    buildRouteInBG(loadPhotographyPath, <PhotographyPage route={loadPhotographyPath} portfolio={portfolio} />)
 }
 
 async function buildTalks(talks: Talk[]) {
     console.log("Building talks");
-    buildRouteInBG(loadTalksPath, <TalksPage talks={talks} />)
+    buildRouteInBG(loadTalksPath, <TalksPage route={loadTalksPath} talks={talks} />)
 }
 
 async function buildProjects(projects: Project[]) {
     console.log("Building projects");
-    buildRouteInBG(loadProjectsPath, <ProjectsPage projects={projects} />)
+    buildRouteInBG(loadProjectsPath, <ProjectsPage route={loadProjectsPath} projects={projects} />)
 }
 
 async function build() {
     // Do this in the background
     buildStyles().catch(e => { throw e; });
     copyStaticInBG();
-    buildLoadPathHTMLInBG(create404RouteDeployPath(), <PageNotFoundPage />);
+    buildLoadPathHTMLInBG(create404RouteDeployPath(), <PageNotFoundPage route="/" />);
 
     const [portfolio, articles, talks, projects] = await Promise.all([
         prepareImmichPortfolio().then(p => {
@@ -100,7 +101,7 @@ async function build() {
             return p;
         }),
     ]);
-    buildRouteInBG("/", <IndexPage portfolio={portfolio} articles={articles} talks={talks} projects={projects} />);
+    buildRouteInBG("/", <IndexPage route="/" portfolio={portfolio} articles={articles} talks={talks} projects={projects} />);
 }
 
 SegfaultHandler.default.registerHandler();

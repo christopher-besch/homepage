@@ -11,13 +11,17 @@ const nearestNeighbours = 4;
 const antiNeighbours = 2;
 
 interface PhotoPageProps {
+    route: string,
     idx: number,
     assets: Asset[],
 }
 export default function PhotoPage(props: PhotoPageProps): React.ReactNode {
     const similarAssets = getNearestListedNeighbours(props.idx, nearestNeighbours, antiNeighbours, props.assets);
+    const banner = props.assets[props.idx]!.cachePath;
     return (
         <Layout
+            route={props.route}
+            banner={banner}
             title="Chris' Photo"
             styleSheets={["always.css", "default.css"]}
         >

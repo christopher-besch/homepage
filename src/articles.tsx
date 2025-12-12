@@ -13,19 +13,11 @@ import { assertIsBoolean, assertIsNumber, assertIsOptionalString, assertIsString
 
 interface UnembeddedArticle extends CardListable {
     dirPath: string,
-    title: string,
-    description: string,
-    // required when listed
-    banner?: string,
     hero?: {
         inputPath: string,
         horizontalPosition: number,
         verticalPosition: number,
     },
-    link: string,
-    // required when listed
-    date?: Date,
-    listed: boolean,
     readingTimeMinutes: number,
     reactNode: React.ReactNode,
 };
@@ -64,7 +56,7 @@ async function prepareArticle(mdSrcPath: string): Promise<[UnembeddedArticle, st
     return [{
         dirPath: dirPath,
         title: assertIsString(frontMatter["title"]),
-        description: assertIsString(frontMatter["description"]),
+        description: assertIsString(frontMatter["description"]).trim(),
         banner: bannerName != undefined ? path.join(dirPath, bannerName) : undefined,
         hero: heroName != undefined ? {
             inputPath: path.join(dirPath, heroName),

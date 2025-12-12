@@ -4,6 +4,7 @@ import Layout from "./layout.js";
 import Title from "./title.js";
 
 interface ProjectsPageProps {
+    route: string,
     projects: Project[],
 }
 export default function ProjectsPage(props: ProjectsPageProps): React.ReactNode {
@@ -12,6 +13,7 @@ export default function ProjectsPage(props: ProjectsPageProps): React.ReactNode 
         .sort((a, b) => a.priority - b.priority);
     return (
         <Layout
+            route={props.route}
             title="Chris' Software Projects"
             styleSheets={["always.css", "default.css"]}>
             <Title isHero={false} title="Software Projects" />

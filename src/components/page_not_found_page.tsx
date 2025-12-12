@@ -2,9 +2,11 @@ import Layout from "./layout.js";
 import Title from "./title.js";
 
 interface PageNotFoundPageProps {
+    route: string,
 };
-export default function PageNotFoundPage(_props: PageNotFoundPageProps): React.ReactNode {
+export default function PageNotFoundPage(props: PageNotFoundPageProps): React.ReactNode {
     return <Layout
+        route={props.route}
         title="404 Page Not Found"
         styleSheets={["always.css", "article.css"]}>
         <Title isHero={false} title="404 Page Not Found" />

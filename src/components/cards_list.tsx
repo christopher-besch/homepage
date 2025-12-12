@@ -5,8 +5,11 @@ export interface CardListable {
     listed: boolean,
     title: string,
     description: string,
+    // required when listed
     date?: Date,
+    // required when listed
     banner?: string,
+    // This is the route when it's an article on this website.
     link: string,
 };
 

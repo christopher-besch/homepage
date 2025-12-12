@@ -1,8 +1,12 @@
-import { createStyleLoadPath, faviconLoadPath, getArticleRoute, loadAboutPath, loadArticlesPath, loadPhotographyPath, loadProjectsPath, loadRssPath, loadTalksPath } from "../paths.js";
-import Image from "./image.js";
+import { Fragment } from "react/jsx-dev-runtime";
+import type { ImageSize } from "../convert_image.js";
+import { createStyleLoadPath, faviconLoadPath, getArticleRoute, getFullLoadPath, loadAboutPath, loadArticlesPath, loadPhotographyPath, loadProjectsPath, loadRssPath, loadTalksPath } from "../paths.js";
+import Image, { getDefaultExportedImage } from "./image.js";
 
 interface LayoutProps {
+    route: string,
     title: string,
+    banner?: string,
     description?: string,
     styleSheets: string[],
     heroImage?: {
@@ -13,7 +17,15 @@ interface LayoutProps {
         children?: React.ReactNode,
     },
 }
-export default function Layout(props: React.PropsWithChildren<LayoutProps>): React.ReactNode {
+export default async function Layout(props: React.PropsWithChildren<LayoutProps>): Promise<React.ReactNode> {
+    let bannerSizes: ImageSize[] = [];
+    if (props.banner != undefined) {
+        const exportedBanner = await getDefaultExportedImage({ lazy: false, inputPath: props.banner });
+        // TODO: check order
+        bannerSizes = exportedBanner.sizes.filter(s => s.width <= 1200).sort((a, b) => b.width - a.width);
+    }
+    const url = getFullLoadPath(props.route);
+
     const nav_links = <div className="layout_nav_links">
         <a href={loadArticlesPath}>Articles</a>
         <a href={loadPhotographyPath}>Photos</a>
@@ -28,8 +40,49 @@ export default function Layout(props: React.PropsWithChildren<LayoutProps>): Rea
                 <meta charSet="UTF-8" />
                 <title>{props.title}</title>
                 <meta name="viewport" content="width=device-width,initial-scale=1" />
-                <meta name="description" content={props.description} />
-                {/* TODO: add social banner and the likes */}
+                <link rel="canonical" href={url} />
+                <meta property="og:title" content={props.title} />
+                {props.description != undefined ? <>
+                    <meta name="description" content={props.description} />
+                    <meta property="og:description" content={props.description} />
+                </> : undefined}
+                <meta property="og:type" content="article" />
+                <meta property="og:url" content={url} />
+                <meta property="og:site_name" content="Chris' Place" />
+                {bannerSizes.map((banner, idx) => <Fragment key={idx}>
+                    <meta property="og:image" content={getFullLoadPath(banner.loadPath)} />
+                    <meta property="og:image:width" content={banner.width.toString()} />
+                    <meta property="og:image:height" content={banner.height.toString()} />
+                </Fragment>)}
+                <meta name="author" content="Christopher Besch" />
+
+                {/* preloading fonts */}
+                <link
+                    rel="preload"
+                    href="/fonts/LiberationSans-Regular-webfont.woff"
+                    as="font"
+                    type="font/woff"
+                    crossOrigin="anonymous"
+                />
+                <link
+                    rel="preload"
+                    href="/fonts/LiberationMono-Regular-webfont.woff"
+                    as="font"
+                    type="font/woff"
+                    crossOrigin="anonymous"
+                />
+
+                {/* Samsung Internet likes to be special: https://developer.samsung.com/internet/blog/en/2020/12/15/dark-mode-in-samsung-internet */}
+                {/* this doesn't actually work: https://forum.developer.samsung.com/t/websites-dark-mode-gets-overridden-by-samsung-internets-dark-mode/22937/11 */}
+                {/* the user has to set this: Internet → Settings → Labs → "Use website dark theme" */}
+                <meta name="color-scheme" content="light dark" />
+
+                {/* mastodon things */}
+                <link
+                    rel="me"
+                    href="https://mastodon.social/@christopher_besch"
+                />
+                <meta name="fediverse:creator" content="@christopher_besch@mastodon.social" />
 
                 {props.styleSheets.map((styleSheet, i) =>
                     <link key={i} rel="stylesheet" type="text/css" href={createStyleLoadPath(styleSheet)} />
@@ -87,6 +140,6 @@ export default function Layout(props: React.PropsWithChildren<LayoutProps>): Rea
                     <div>© 2025 | All rights reserved</div>
                 </div>
             </body>
-        </html>
+        </html >
     );
 }

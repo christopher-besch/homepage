@@ -4,6 +4,7 @@ import Layout from "./layout.js";
 import Title from "./title.js";
 
 interface ArticlesPageProps {
+    route: string,
     articles: Article[],
 }
 export default function ArticlesPage(props: ArticlesPageProps): React.ReactNode {
@@ -13,6 +14,7 @@ export default function ArticlesPage(props: ArticlesPageProps): React.ReactNode 
         .sort((a, b) => b.date!.getTime() - a.date!.getTime());
     return (
         <Layout
+            route={props.route}
             title="Chris' Articles"
             styleSheets={["always.css", "default.css"]}>
             <Title isHero={false} title="Articles" />

@@ -10,6 +10,7 @@ import PhotosList from "./photos_list.js";
 import Title from "./title.js";
 
 interface IndexPageProps {
+    route: string,
     portfolio: Asset[],
     articles: Article[],
     talks: Talk[],
@@ -30,6 +31,7 @@ export default function IndexPage(props: IndexPageProps): React.ReactNode {
     const portfolioToShow = props.portfolio.sort((a, b) => b.rating - a.rating).slice(0, 5);
     return (
         <Layout
+            route={props.route}
             title="Chris' Homepage"
             styleSheets={["always.css", "default.css"]}
             heroImage={{

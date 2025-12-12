@@ -4,6 +4,7 @@ import type { ImageSize } from "../convert_image.js";
 import type { ExportedImage } from "../convert_image.js";
 
 // 1600 is the max width and height of any image on my homepage.
+// 1200 is important because that's the max width I use in the social preview.
 const defaultWidths = [400, 800, 1200, 1600];
 // Making this too much portrait is a problem with say 60% images (i.e., the ones we use in the articles).
 const portraitAspectRatio = 3 / 4;
