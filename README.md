@@ -1,35 +1,16 @@
-# Chris' New WIP Homepage
+# My Homepage
+[![Dev Build](https://github.com/christopher-besch/homepage/actions/workflows/build_dev.yml/badge.svg)](https://github.com/christopher-besch/homepage/actions/workflows/build_dev.yml)
+[![Deploy Build](https://github.com/christopher-besch/homepage/actions/workflows/build_deploy.yml/badge.svg)](https://github.com/christopher-besch/homepage/actions/workflows/build_deploy.yml)
 
-```
-articles/
- 01_some_article/
-  some_article.md
-  some_image.png
- 02_other_article/
-  some_other_article.md
-  image.png
+[![pages-build-deployment](https://github.com/christopher-besch/homepage/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/christopher-besch/homepage/actions/workflows/pages/pages-build-deployment)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/d4019205-7938-4358-b65b-1c6f4e20ef8f/deploy-status)](https://app.netlify.com/sites/chris-besch/deploys)
 
-build/ compiled typescript files
+- [Production Deployment](https://chris-besch.com)
+- [Debug Build](https://dev.chris-besch.com)
 
-deploy/ dir to put on static server
- index.html
- 404.html
- styles/
-  default.css
-  reset.css
- articles/
-  index.html
-  some_article/
-   index.html
- images/
-  23c37ede-1c09-422a-8da8-42ad65cc33f9_200px.webp
-  23c37ede-1c09-422a-8da8-42ad65cc33f9_600px.webp
-  23c37ede-1c09-422a-8da8-42ad65cc33f9_1920px.webp
+This homepage is under Christopher Besch's copyright!
+Even though it is on GitHub it is not under an open-source license!
+If you intend to use any of the code or content from it, you have to ask the copyright holder for permission.
 
-node_modules/
-package-lock.json
-package.json
-src/
-styles/
-tsconfig.json
-```
+Some files, however, already are Open-Source and are accompanied with an Open-Source license.
+You may use those under the conditions layed out in the respective license.
