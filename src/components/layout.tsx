@@ -26,6 +26,11 @@ export default async function Layout(props: React.PropsWithChildren<LayoutProps>
     }
     const url = getFullLoadPath(props.route);
 
+    const website_id = process.env["WEBSITE_ID"]
+    if (website_id == undefined) {
+        throw new Error("WEBSITE_ID env variable needs to be defined.");
+    }
+
     const nav_links = <div className="layout_nav_links">
         <a href={loadArticlesPath}>Articles</a>
         <a href={loadPhotographyPath}>Photos</a>
@@ -118,6 +123,8 @@ export default async function Layout(props: React.PropsWithChildren<LayoutProps>
                 )}
 
                 <link rel="icon" type="image/png" sizes="48x48" href={faviconLoadPath} />
+
+                <script defer src="https://analytics.chris-besch.com/script.js" data-website-id={website_id}></script>
             </head>
 
             <body>
