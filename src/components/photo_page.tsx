@@ -6,6 +6,7 @@ import PhotosList from "./photos_list.js";
 import { getNearestListedNeighbours } from "../embedding.js";
 import { loadPhotographyPath } from "../paths.js";
 import type { Asset } from "../assets.js";
+import ReactTo from "./react_to.js";
 
 const nearestNeighbours = 4;
 const antiNeighbours = 2;
@@ -28,6 +29,7 @@ export default function PhotoPage(props: PhotoPageProps): React.ReactNode {
             <div className="photo_page">
                 <Image inputPath={props.assets[props.idx]!.cachePath} lazy={false} />
             </div>
+            <ReactTo route={props.route} />
             <Title isHero={false} title="Other Photos" />
             <PhotosList assets={similarAssets} />
             <Button href={loadPhotographyPath} text="Furthermore Photos" />

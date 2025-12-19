@@ -6,8 +6,9 @@
     border-width: 2px;
     background-color: var(--color-card-bg);
     padding: 10px;
-    margin-top: 20px;
     margin-bottom: 20px;
+    width: fit-content;
+    cursor: pointer;
 
     color: var(--color-body-text);
     text-decoration: none;

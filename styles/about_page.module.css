@@ -1,3 +1,7 @@
+.about_page {
+    margin-bottom: 20px;
+}
+
 .about_page_left {
     max-width: clamp(0px, 80%, 600px);
 }

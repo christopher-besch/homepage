@@ -6,6 +6,7 @@ import CardsList from "./cards_list.js";
 import Button from "./button.js";
 import { getNearestListedNeighbours } from "../embedding.js";
 import { loadArticlesPath } from "../paths.js";
+import ReactTo from "./react_to.js";
 
 const heroHeightFraction = 0.7;
 const nearestNeighbours = 2;
@@ -42,6 +43,7 @@ export default async function ArticlePage(props: ArticlePageProps): Promise<Reac
     >
         {article.hero == undefined ? <Title isHero={false} title={article.title} subtitle={date} /> : undefined}
         <div className="article_page_markdown">{article.reactNode}</div>
+        <ReactTo route={props.route} />
         <Title isHero={false} title="Other Articles" />
         <CardsList cards={similarArticles} />
         <Button href={loadArticlesPath} text="Furthermore Articles" />

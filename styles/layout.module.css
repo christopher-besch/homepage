@@ -53,7 +53,7 @@
 }
 
 .layout_navbar_left img {
-    height: calc(var(--layout-nav-height) - 4px);
+    height: calc(var(--layout-nav-height) - 8px);
     width: auto;
 }
 
