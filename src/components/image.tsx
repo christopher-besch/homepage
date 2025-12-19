@@ -21,6 +21,8 @@ const portraitMaxWidth = 500;
 interface ImageProps {
     inputPath: string,
     lazy: boolean,
+    // Should the background be left transparent (true) or an lqip (false)?
+    transparent?: boolean,
     alt?: string,
     // When we use object-fit: cover and we use a landscape photo on a portrait device, we might want to create a separate image for this purpose.
     // The other direction (using a portrait image on a landscape device) would be possible, too, but isn't implemented.
@@ -55,7 +57,7 @@ export default async function Image(props: ImageProps): Promise<React.ReactNode>
 
     const defaultWidth = exportedImage.sizes[0]!.width;
     const defaultHeight = exportedImage.sizes[0]!.height;
-    const lqip = exportedImage.lqip;
+    const lqip = props.transparent != undefined && props.transparent ? undefined : exportedImage.lqip;
     const defaultSrcSet = sizesToSrcSet(exportedImage.sizes);
 
     if ((exportedImage.portraitSizes == undefined) != (props.portraitVersion == undefined)) {

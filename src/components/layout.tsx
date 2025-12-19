@@ -1,6 +1,6 @@
 import { Fragment } from "react/jsx-dev-runtime";
 import type { ImageSize } from "../convert_image.js";
-import { createStyleLoadPath, faviconLoadPath, getArticleRoute, getFullLoadPath, loadAboutPath, loadArticlesPath, loadPhotographyPath, loadProjectsPath, loadRssPath, loadTalksPath } from "../paths.js";
+import { createStyleLoadPath, faviconLoadPath, getArticleRoute, getFullLoadPath, getResourceLoadPath, loadAboutPath, loadArticlesPath, loadPhotographyPath, loadProjectsPath, loadRssPath, loadTalksPath } from "../paths.js";
 import Image, { getDefaultExportedImage } from "./image.js";
 
 interface LayoutProps {
@@ -130,8 +130,11 @@ export default async function Layout(props: React.PropsWithChildren<LayoutProps>
             <body>
                 <nav className="layout_navbar" role="navigation">
                     <a className="layout_navbar_left" href="/">
-                        <h1>Christopher&nbsp;Besch</h1>
-                        <h2>Developer&bull;Writer&bull;Photographer</h2>
+                        <div>
+                            <h1>Christopher&nbsp;Besch</h1>
+                            <h2>Developer&bull;Writer&bull;Photographer</h2>
+                        </div>
+                        <Image lazy={false} transparent={true} inputPath={getResourceLoadPath("snake.png")} />
                     </a>
                     <div className="layout_navbar_right">
                         <input id="layout_navbar_toggle" type="checkbox"></input>
@@ -145,6 +148,7 @@ export default async function Layout(props: React.PropsWithChildren<LayoutProps>
                 </nav>
 
                 <div className="layout_transient_space">
+                    <a href="/"><Image lazy={false} transparent={true} inputPath={getResourceLoadPath("snake.png")} /></a>
                     {nav_links}
                     <p>This is a transient space.</p>
                 </div>
