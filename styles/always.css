@@ -184,6 +184,12 @@ table {
 }
 
 .layout_navbar_left {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    gap: var(--layout-nav-padding-right);
+
     color: var(--color-navbar-text);
     text-decoration: none;
     font-family: LiberationMono, monospace;
@@ -196,6 +202,11 @@ table {
 .layout_navbar_left h2 {
     margin-top: 3px;
     font-size: clamp(0px, 3.5vw, 16px);
+}
+
+.layout_navbar_left img {
+    height: calc(var(--layout-nav-height) - 8px);
+    width: auto;
 }
 
 .layout_navbar_right {
@@ -245,9 +256,14 @@ table {
     margin: auto;
 }
 
+.layout_transient_space img {
+    width: 100%;
+    height: auto;
+}
+
 .layout_transient_space .layout_nav_links {
     padding-top: 50px;
-    height: 80%;
+    height: 75%;
 
     display: flex;
     flex-direction: column;
@@ -264,7 +280,7 @@ table {
     text-decoration: none;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1200px) {
     .layout_navbar_hamburger {
         display: flex;
     }
@@ -301,6 +317,16 @@ table {
 
     body:has(#layout_navbar_toggle:checked) .layout_navbar_hamburger div:nth-child(3) {
         transform: translateY(calc(-1 * (var(--layout-burger-height) + var(--layout-burger-gap)))) rotate(-45deg);
+    }
+
+    body:has(#layout_navbar_toggle:checked) .layout_navbar_left img {
+        display: none !important;
+    }
+}
+
+@media (max-width: 600px) {
+    .layout_navbar_left img {
+        display: none !important;
     }
 }
 
@@ -387,6 +413,8 @@ body {
 /* end of styles/image.module.css */
 
 /* start of styles/title.module.css */
+
+/* end of styles/title.module.css */
 .title_in_hero {
     max-width: 1200px;
     margin: auto;
@@ -427,8 +455,6 @@ body {
     border-width: 1.5px;
     border-radius: 3px;
 }
-
-/* end of styles/title.module.css */
 
 /* start of styles/cards_list.module.css */
 .cards_list {
@@ -493,8 +519,9 @@ body {
     border-width: 2px;
     background-color: var(--color-card-bg);
     padding: 10px;
-    margin-top: 20px;
     margin-bottom: 20px;
+    width: fit-content;
+    cursor: pointer;
 
     color: var(--color-body-text);
     text-decoration: none;
