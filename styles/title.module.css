@@ -22,11 +22,13 @@
 .title_in_hero h2,
 .title_in_text h2 {
     font-size: 20px;
+    line-height: 1.5;
 }
 
 .title_in_hero h2 span,
 .title_in_text h2 span {
     float: right;
+    margin-bottom: 5px;
 }
 
 .title_in_hero h2 a {

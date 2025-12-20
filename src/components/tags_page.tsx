@@ -1,4 +1,3 @@
-import { toTitleCase } from "../conversion.js";
 import { getTagRoute } from "../paths.js";
 import Layout from "./layout.js";
 import Link from "./link.js";
@@ -19,7 +18,7 @@ export default function TagsPage(props: TagsPageProps): React.ReactNode {
             <Title isHero={false} title="All Tags" />
             <div className="markdown_body">
                 {props.tags.map(([tag, num], idx) =>
-                    <h6 key={idx}><Link href={getTagRoute(tag)}>{toTitleCase(tag)} ({num})</Link></h6>
+                    <h6 key={idx}><Link href={getTagRoute(tag)}>#{tag} ({num})</Link></h6>
                 )}
             </div>
         </Layout>

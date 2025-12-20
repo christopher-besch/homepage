@@ -1,6 +1,5 @@
 import type { Article } from "../articles.js";
 import type { Asset } from "../assets.js";
-import { toTitleCase } from "../conversion.js";
 import { loadArticlesPath, loadPhotographyPath, loadProjectsPath, loadTalksPath } from "../paths.js";
 import type { Project } from "../projects.js";
 import type { Talk } from "../talks.js";
@@ -33,7 +32,6 @@ export default function TagPage(props: TagPageProps): React.ReactNode {
     const portfolioToShow = props.portfolio
         .filter(a => a.tags.includes(props.tag))
         .sort((a, b) => b.rating - a.rating);
-    const tag = toTitleCase(props.tag);
     return (
         <Layout
             route={props.route}
@@ -42,28 +40,28 @@ export default function TagPage(props: TagPageProps): React.ReactNode {
         >
             {articlesToShow.length != 0 ?
                 <>
-                    <Title isHero={false} title={`Articles: ${tag}`} />
+                    <Title isHero={false} title={`Articles: #${props.tag}`} />
                     <CardsList cards={articlesToShow} />
                     <Button href={loadArticlesPath} text="More Articles" />
                 </>
                 : undefined}
             {talksToShow.length != 0 ?
                 <>
-                    <Title isHero={false} title={`Talks: ${tag}`} />
+                    <Title isHero={false} title={`Talks: #${props.tag}`} />
                     <CardsList cards={talksToShow} />
                     <Button href={loadTalksPath} text="More Talks" />
                 </>
                 : undefined}
             {projectsToShow.length != 0 ?
                 <>
-                    <Title isHero={false} title={`Software Projects: ${tag}`} />
+                    <Title isHero={false} title={`Software Projects: #${props.tag}`} />
                     <CardsList cards={projectsToShow} />
                     <Button href={loadProjectsPath} text="More Software Projects" />
                 </>
                 : undefined}
             {portfolioToShow.length != 0 ?
                 <>
-                    <Title isHero={false} title={`Photography: ${tag}`} />
+                    <Title isHero={false} title={`Photography: #${props.tag}`} />
                     <PhotosList assets={portfolioToShow} />
                     <Button href={loadPhotographyPath} text="More Photos" />
                 </>
