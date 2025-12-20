@@ -24,6 +24,24 @@
     font-size: 20px;
 }
 
+.title_in_hero h2 span,
+.title_in_text h2 span {
+    float: right;
+}
+
+.title_in_hero h2 a {
+    color: var(--color-hero-text);
+}
+
+.title_in_text h2 a {
+    color: var(--color-text-link);
+    text-decoration: none;
+}
+
+.title_in_text h2 a:hover {
+    text-decoration: underline;
+}
+
 .title_in_hero hr {
     border-color: var(--color-hero-text);
 }

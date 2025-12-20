@@ -5,9 +5,8 @@ import { formatDate } from "../date.js";
 import CardsList from "./cards_list.js";
 import Button from "./button.js";
 import { getNearestListedNeighbours } from "../embedding.js";
-import { getTagRoute, loadArticlesPath } from "../paths.js";
+import { loadArticlesPath } from "../paths.js";
 import ReactTo from "./react_to.js";
-import Link from "./link.js";
 
 const heroHeightFraction = 0.7;
 const nearestNeighbours = 2;
@@ -20,7 +19,12 @@ interface ArticlePageProps {
 }
 export default async function ArticlePage(props: ArticlePageProps): Promise<React.ReactNode> {
     const article = props.articles[props.idx]!;
-    const date = article.date != undefined ? formatDate(article.date) : undefined;
+    // Articles without a date but with tags and/or readtime don't exist.
+    const subtitle = article.date == undefined ? undefined : {
+        left: formatDate(article.date),
+        right: article.listed ? `${Math.round(article.readingTimeMinutes)}min` : undefined,
+        tags: article.tags,
+    };
     let heroImage: any = undefined;
     if (article.hero != undefined) {
         heroImage = {
@@ -29,7 +33,7 @@ export default async function ArticlePage(props: ArticlePageProps): Promise<Reac
             heightFraction: heroHeightFraction,
             objectFitHorizontal: article.hero.horizontalPosition,
             objectFitVertical: article.hero.verticalPosition,
-            children: <Title isHero={true} title={article.title} subtitle={date} />,
+            children: <Title isHero={true} title={article.title} subtitle={subtitle} />,
         };
     }
     const similarArticles = getNearestListedNeighbours(props.idx, nearestNeighbours, antiNeighbours, props.articles);
@@ -42,13 +46,7 @@ export default async function ArticlePage(props: ArticlePageProps): Promise<Reac
         heroImage={heroImage}
         date={article.date}
     >
-        {article.hero == undefined ? <Title isHero={false} title={article.title} subtitle={date} /> : undefined}
-        <div className="markdown_body">
-            <span>{Math.round(article.readingTimeMinutes)}min </span>
-            {article.tags.map((tag, idx) =>
-                <span key={idx}><Link href={getTagRoute(tag)}>#{tag}</Link> </span>
-            )}
-        </div>
+        {article.hero == undefined ? <Title isHero={false} title={article.title} subtitle={subtitle} /> : undefined}
         <div>{article.reactNode}</div>
         <ReactTo route={props.route} />
         <Title isHero={false} title="Other Articles" />

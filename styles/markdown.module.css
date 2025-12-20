@@ -59,6 +59,9 @@
     /*     color: var(--color-body-text); */
     /*     remove margin: 0; */
     /* } */
+    /* .markdown_body a { */
+    /*     color: var(--color-text-link); */
+    /* } */
 
     /* MIT License */
 
@@ -121,7 +124,7 @@
 
     .markdown_body a {
         background-color: transparent;
-        color: #0969da;
+        color: var(--color-text-link);
         text-decoration: none;
     }
 
@@ -1185,6 +1188,9 @@
     /*     color: var(--color-body-text); */
     /*     remove margin: 0; */
     /* } */
+    /* .markdown_body a { */
+    /*     color: var(--color-text-link); */
+    /* } */
 
     /* MIT License */
 
@@ -1247,7 +1253,7 @@
 
     .markdown_body a {
         background-color: transparent;
-        color: #4493f8;
+        color: var(--color-text-link);
         text-decoration: none;
     }
 

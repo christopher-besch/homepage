@@ -102,7 +102,7 @@ export async function loadImmichPortfolioWithoutEmbedding(): Promise<UnembeddedA
         return {
             id: asset.id,
             cachePath: cachePath,
-            tags: asset.tags.map(t => t.name).filter(n => n != PORTFOLIO_TAG),
+            tags: asset.tags.map(t => t.name).filter(n => n != PORTFOLIO_TAG).concat(["photography"]),
             rating: asset.exifInfo.rating
         };
     });

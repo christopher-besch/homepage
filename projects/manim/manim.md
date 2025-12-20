@@ -6,7 +6,7 @@ priority: 170
 date: "2021-09-06"
 languages: [python]
 dependencies: []
-tags: [visualization]
+tags: [visualization, manim]
 banner: banner.png
 listed: true
 ---
