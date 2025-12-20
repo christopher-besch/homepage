@@ -9,8 +9,30 @@
 - [Debug Build](https://dev.chris-besch.com)
 
 This homepage is under Christopher Besch's copyright!
-Even though it is on GitHub it is not under an open-source license!
+Even though it's source code is public it is not under an open-source license!
 If you intend to use any of the code or content from it, you have to ask the copyright holder for permission.
 
 Some files, however, already are Open-Source and are accompanied with an Open-Source license.
 You may use those under the conditions layed out in the respective license.
+
+# Structure
+The website doesn't have any client-side (i.e., in-brower) JavaScript except for some [umami](https://umami.is) analytics.
+
+- `articles/`: One directory per article. One markdown file in that directory.
+- `build/`: Where the TypeScript compiler places the commpiled JavaScript files. This code is build-code and to be run in Node.js and not on the browser. It runs React to create the static website.
+- `cache/`: Where the downloaded full-res images
+- `deploy/`: The final output directory that will be deployed to the static web server. Open this directory in `live-server` or `python3 -m http.server` for development.
+- `models/`: Here are the transformer.js models for sentence and image embeddings.
+- `projects/`: One directory per project. One markdown file in that directory.
+- `resources/`: Resources can be loaded from the build code and processed however the build code feels like.
+- `src/`: The TypeScript source code used for building the final website.
+- `static/`: Files that are directly copied into `deploy/`.
+- `styles/`: CSS files that are combined into bundles placed in `deploy/`.
+- `talks/`: One directory per talk. One markdown file in that directory.
+
+
+The steps are:
+1. Compile TypeScript from `src/` into `build/`.
+2. Run the compiled JavaScript in `build/` with Node.js.
+3. Serve the output in `deploy/` on a static web server.
+
