@@ -1,3 +1,4 @@
+import { transform } from "lightningcss";
 import { createStyleDeployPath, getStyleSourcePath } from "./paths.js";
 import * as fs from "fs";
 
@@ -34,14 +35,16 @@ sourceMap.set("article.css", [
 ]);
 
 export async function buildStyles() {
-    for (const [deployName, sourcePaths] of sourceMap) {
+    await Promise.all(sourceMap.entries().map(async ([deployName, sourcePaths]) => {
+        console.log("start:", deployName);
         const destPath = createStyleDeployPath(deployName);
-        const outFile = await fs.promises.open(destPath, "w");
-        for (const sourcePath of sourcePaths) {
-            outFile.write(`\n/* start of ${sourcePath} */\n`);
-            outFile.write(await fs.promises.readFile(sourcePath));
-            outFile.write(`\n/* end of ${sourcePath} */\n`);
-        }
-        outFile.close();
-    }
+        const sources = await Promise.all(sourcePaths.map(s => fs.promises.readFile(s)));
+        const { code } = transform({
+            filename: destPath,
+            code: new Uint8Array(sources.flatMap(s => Array.from(new Uint8Array(s)))),
+            minify: true,
+            sourceMap: false,
+        });
+        await fs.promises.writeFile(destPath, code).catch();
+    }));
 }

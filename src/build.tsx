@@ -1,7 +1,7 @@
 import * as fs from "fs";
 import { renderToPipeableStream } from "react-dom/server";
 import { buildStyles } from "./styles.js";
-import { createRouteDeployPath, copyStaticInBG, loadArticlesPath, loadPhotographyPath, getAssetRoute, loadTalksPath, loadProjectsPath, create404RouteDeployPath, loadAboutPath } from "./paths.js";
+import { createRouteDeployPath, copyStaticInBG, loadArticlesPath, loadPhotographyPath, getAssetRoute, loadTalksPath, loadProjectsPath, create404RouteDeployPath, loadAboutPath, syncDirSetup } from "./paths.js";
 import { startPool } from "./worker/worker_pool.js";
 
 import IndexPage from "./components/index_page.js";
@@ -75,6 +75,7 @@ async function buildProjects(projects: Project[]) {
 }
 
 async function build() {
+    syncDirSetup();
     // Do this in the background
     buildStyles().catch(e => { throw e; });
     copyStaticInBG();

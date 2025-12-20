@@ -32,6 +32,7 @@
         "gray-matter": "^4.0.3",
         "hast-util-from-html": "^2.0.3",
         "html-entities": "^2.6.0",
+        "lightningcss": "^1.30.2",
         "piscina": "^5.1.4",
         "react": "^19.2.0",
         "react-dom": "^19.2.0",

@@ -27,6 +27,12 @@ function ensureDirExists(dir: string): void {
     }
 }
 
+// Some dirs need to be created first so that not multiple threads try creating the dir.
+// node.js crashes otherwise.
+export function syncDirSetup(): void {
+    ensureDirExists(deployPath);
+}
+
 async function getMDSrcPathsIn(parentDir: string): Promise<string[]> {
     const dirs = await fs.promises.readdir(parentDir);
     let mdSrcPaths: string[] = [];
