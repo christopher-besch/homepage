@@ -11,6 +11,7 @@ hero_horizontal_position: 0
 hero_vertical_position: 100
 slug: photo_abilities
 date: "2025-12-10"
+tags: [photography, thoughts_and_emotions]
 listed: true
 ---
 

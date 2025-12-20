@@ -9,6 +9,7 @@ hero_horizontal_position: 40
 hero_vertical_position: 60
 slug: grub_install_removable
 date: "2024-11-08"
+tags: [linux, debian]
 listed: true
 ---
 

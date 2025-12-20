@@ -11,6 +11,7 @@ hero_horizontal_position: 80
 hero_vertical_position: 100
 slug: mc_missile
 date: "2025-06-06"
+tags: [minecraft, java, software_development]
 listed: true
 ---
 

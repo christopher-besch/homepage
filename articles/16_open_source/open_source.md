@@ -13,6 +13,7 @@ hero_horizontal_position: 40
 hero_vertical_position: 0
 slug: open_source
 date: "2025-10-11"
+tags: [thoughts_and_emotions, politics]
 listed: true
 ---
 

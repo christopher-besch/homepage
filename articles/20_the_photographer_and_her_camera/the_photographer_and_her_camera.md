@@ -9,6 +9,7 @@ hero_horizontal_position: 0
 hero_vertical_position: 100
 slug: the_photographer_and_her_camera
 date: "2025-11-22"
+tags: [photography, thoughts_and_emotions]
 listed: true
 ---
 

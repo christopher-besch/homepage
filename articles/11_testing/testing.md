@@ -11,6 +11,7 @@ hero_horizontal_position: 20
 hero_vertical_position: 80
 slug: testing
 date: "2025-05-14"
+tags: [cpp, software_development]
 listed: true
 ---
 

@@ -12,6 +12,7 @@ hero_horizontal_position: 85
 hero_vertical_position: 60
 slug: forgejo_actions_notification
 date: "2025-11-20"
+tags: [software_development, forgejo, go]
 listed: true
 ---
 

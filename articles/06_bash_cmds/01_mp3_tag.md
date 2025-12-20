@@ -6,6 +6,7 @@ Why do it complicated when a Bash one-liner does it too?
 banner: "./banner.png"
 slug: bash_cmds/mp3_tag
 date: "2022-10-12"
+tags: [linux, bash]
 listed: true
 ---
 

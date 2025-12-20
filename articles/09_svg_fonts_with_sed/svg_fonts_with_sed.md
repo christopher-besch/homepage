@@ -9,6 +9,7 @@ hero_horizontal_position: 30
 hero_vertical_position: 25
 slug: svg_fonts_with_sed
 date: "2025-02-10"
+tags: [web, bash]
 listed: true
 ---
 

@@ -11,6 +11,7 @@ hero_horizontal_position: 60
 hero_vertical_position: 70
 slug: lvim_in_distrobox
 date: "2022-10-25"
+tags: [linux, docker]
 listed: true
 ---
 

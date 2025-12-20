@@ -7,6 +7,7 @@ description: "
 banner: "./banner.png"
 slug: installing_gentoo
 date: "2022-04-26"
+tags: [linux]
 listed: true
 ---
 

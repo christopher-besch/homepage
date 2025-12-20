@@ -9,6 +9,7 @@ hero: "./hero.jpg"
 hero_horizontal_position: 0
 hero_vertical_position: 60
 slug: bookmarks
+tags: []
 listed: false
 ---
 

@@ -8,6 +8,7 @@ description: "
 banner: "./banner.png"
 slug: maki_atoms_and_time_travel
 date: "2022-02-06"
+tags: [cpp, python, manim, software_development, visualization]
 listed: true
 ---
 

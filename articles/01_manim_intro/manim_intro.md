@@ -5,6 +5,7 @@ description: "
 "
 slug: manim_intro
 date: "2022-01-11"
+tags: [manim]
 listed: false
 ---
 

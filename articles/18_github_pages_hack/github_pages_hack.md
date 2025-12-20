@@ -10,6 +10,7 @@ hero_horizontal_position: 100
 hero_vertical_position: 80
 slug: github_pages_hack
 date: "2025-10-18"
+tags: [github, hacking, web]
 listed: true
 ---
 
