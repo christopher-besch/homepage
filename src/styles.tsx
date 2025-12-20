@@ -57,7 +57,7 @@ sourceMap.set("article.css", [
 
 export async function buildStyles() {
     await Promise.all(sourceMap.entries().map(async ([deployName, sourcePaths]) => {
-        console.log("bundling css:", deployName);
+        console.log("Bundling css:", deployName);
         const destPath = createStyleDeployPath(deployName);
         const sources = await Promise.all(sourcePaths.map(s => fs.promises.readFile(s)));
         const { code } = transform({
