@@ -82,7 +82,7 @@ export async function loadImmichPortfolioWithoutEmbedding(): Promise<UnembeddedA
         if (!fs.existsSync(cachePath)) {
             const blob = await downloadAsset({ id: a.id });
             console.log(`Downloaded ${cachePath}`);
-            fs.promises.writeFile(cachePath, blob.stream());
+            await fs.promises.writeFile(cachePath, blob.stream());
             assets.push({ cachePath: cachePath, asset: a });
         } else {
             console.log(`Using cache for ${cachePath}`);
@@ -107,6 +107,7 @@ export async function loadImmichPortfolioWithoutEmbedding(): Promise<UnembeddedA
         };
     });
     const jsonPortfolio = JSON.stringify(portfolio, null, 4);
-    fs.promises.writeFile(immichPortfolioJSONPath(), jsonPortfolio);
+    // Do this in the background
+    fs.promises.writeFile(immichPortfolioJSONPath(), jsonPortfolio).catch(e => { throw e; });
     return portfolio;
 }

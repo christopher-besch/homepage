@@ -27,6 +27,7 @@ export interface Asset extends UnembeddedAsset, Embeddable { };
 
 export async function prepareImmichPortfolio(): Promise<Asset[]> {
     // Do this in a separate worker thread because the network timeout may not be reached in the main thread.
+    // TODO: downloading and embedding could be parallelized
     const assetsWithoutEmbedding = await loadImmichPortfolioWithoutEmbeddingOnPool();
     let assets: Asset[] = [];
     for (const a of assetsWithoutEmbedding) {
