@@ -14,6 +14,7 @@ If you intend to use any of the code or content from it, you have to ask the cop
 
 Some files, however, already are Open-Source and are accompanied with an Open-Source license.
 You may use those under the conditions layed out in the respective license.
+The license closest to the source copyrighted material applies.
 
 # Structure
 The website doesn't have any client-side (i.e., in-brower) JavaScript except for some [umami](https://umami.is) analytics.
@@ -30,9 +31,13 @@ The website doesn't have any client-side (i.e., in-brower) JavaScript except for
 - `styles/`: CSS files that are combined into bundles placed in `deploy/`.
 - `talks/`: One directory per talk. One markdown file in that directory.
 
-
 The steps are:
 1. Compile TypeScript from `src/` into `build/`.
 2. Run the compiled JavaScript in `build/` with Node.js.
 3. Serve the output in `deploy/` on a static web server.
 
+# Caching
+This build systems caches a lot.
+It caches the images loaded from immich and the embeddings.
+It also caches cropped and resized images.
+When things don't update properly, delete the cache.
