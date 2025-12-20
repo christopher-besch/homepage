@@ -1,5 +1,6 @@
 import type { Article } from "../articles.js";
 import type { Asset } from "../assets.js";
+import { toTitleCase } from "../conversion.js";
 import { loadArticlesPath, loadPhotographyPath, loadProjectsPath, loadTalksPath } from "../paths.js";
 import type { Project } from "../projects.js";
 import type { Talk } from "../talks.js";
@@ -8,25 +9,6 @@ import CardsList from "./cards_list.js";
 import Layout from "./layout.js";
 import PhotosList from "./photos_list.js";
 import Title from "./title.js";
-
-function toTitleCase(text: string): string {
-    let outStr = "";
-    let nextUpper = true;
-    for (const char of text.replaceAll("_", " ").toLowerCase()) {
-        if (char == " ") {
-            outStr += char;
-            nextUpper = true;
-            continue;
-        }
-        if (nextUpper) {
-            outStr += char.toUpperCase();
-            nextUpper = false;
-        } else {
-            outStr += char;
-        }
-    }
-    return outStr;
-}
 
 interface TagPageProps {
     route: string,

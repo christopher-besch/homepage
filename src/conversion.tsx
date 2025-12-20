@@ -59,3 +59,24 @@ export function assertIsArrayOfStrings(input: any): string[] {
     }
     return input.map(assertIsString);
 }
+
+// TODO: this butchers AI -> Ai (hihi)
+export function toTitleCase(text: string): string {
+    let outStr = "";
+    let nextUpper = true;
+    for (const char of text.replaceAll("_", " ").toLowerCase()) {
+        if (char == " ") {
+            outStr += char;
+            nextUpper = true;
+            continue;
+        }
+        if (nextUpper) {
+            outStr += char.toUpperCase();
+            nextUpper = false;
+        } else {
+            outStr += char;
+        }
+    }
+    return outStr;
+}
+

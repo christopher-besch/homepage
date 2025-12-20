@@ -183,7 +183,8 @@
     min-height: var(--layout-content-height);
     /* The title has a margin-top. */
     /* This would extend the height of this div beyond what it should be on small content pages. */
-    overflow: auto;
+    /* Overflow auto does strange things when scrolling. */
+    overflow: hidden;
 }
 
 /* We set these on the body because reset.css doesn't set these and setting them on the body is nicer. */
@@ -196,7 +197,10 @@ body {
     padding-left: var(--layout-content-padding);
     padding-right: var(--layout-content-padding);
     max-width: 1200px;
-    margin: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .layout_footer {

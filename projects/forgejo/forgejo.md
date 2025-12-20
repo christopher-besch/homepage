@@ -7,7 +7,7 @@ priority: 50
 date: "2025-03-06"
 languages: [go]
 dependencies: [sqlite, git, mail]
-tags: [web, db, server]
+tags: [web, db, server, forgejo]
 banner: banner.png
 listed: true
 ---

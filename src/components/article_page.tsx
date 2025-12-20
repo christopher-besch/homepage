@@ -5,8 +5,9 @@ import { formatDate } from "../date.js";
 import CardsList from "./cards_list.js";
 import Button from "./button.js";
 import { getNearestListedNeighbours } from "../embedding.js";
-import { loadArticlesPath } from "../paths.js";
+import { getTagRoute, loadArticlesPath } from "../paths.js";
 import ReactTo from "./react_to.js";
+import Link from "./link.js";
 
 const heroHeightFraction = 0.7;
 const nearestNeighbours = 2;
@@ -42,7 +43,13 @@ export default async function ArticlePage(props: ArticlePageProps): Promise<Reac
         date={article.date}
     >
         {article.hero == undefined ? <Title isHero={false} title={article.title} subtitle={date} /> : undefined}
-        <div className="article_page_markdown">{article.reactNode}</div>
+        <div className="markdown_body">
+            <span>{Math.round(article.readingTimeMinutes)}min </span>
+            {article.tags.map((tag, idx) =>
+                <span key={idx}><Link href={getTagRoute(tag)}>#{tag}</Link> </span>
+            )}
+        </div>
+        <div>{article.reactNode}</div>
         <ReactTo route={props.route} />
         <Title isHero={false} title="Other Articles" />
         <CardsList cards={similarArticles} />

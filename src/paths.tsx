@@ -239,7 +239,7 @@ export function createRssFeedDeployPath(): string {
 }
 
 // tags //
-const loadTagPath = `/tag`;
+export const loadTagPath = `/tag`;
 export function getTagRoute(tag: string): string {
     return path.join(loadTagPath, tag);
 }

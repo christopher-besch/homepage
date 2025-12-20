@@ -10,7 +10,7 @@ export default function Button(props: ButtonProps): React.ReactNode {
         throw new Error("Provide href or onClick, not both.");
     }
     if (props.href != undefined) {
-        return <div><Link className="button" {...props} /></div>;
+        return <div><Link className="button" href={props.href}>{props.text}</Link></div>;
     } else {
         if (props.text.indexOf('<') > -1 || props.onClick!.indexOf('"') > -1) {
             throw new Error;

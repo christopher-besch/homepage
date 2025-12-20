@@ -12,7 +12,7 @@ hero_horizontal_position: 10
 hero_vertical_position: 100
 slug: technical_compromises
 date: "2025-09-25"
-tags: [docker, thoughts_and_emotions]
+tags: [docker, thoughts_and_emotions, server]
 listed: true
 ---
 
