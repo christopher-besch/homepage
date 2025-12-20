@@ -6,6 +6,7 @@ priority: 3200
 date: "2022-01-12"
 languages: [typescript]
 dependencies: [gatsby]
+tags: [web]
 banner: banner.png
 listed: true
 ---

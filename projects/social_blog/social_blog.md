@@ -6,6 +6,7 @@ priority: 4500
 date: "2020-10-08"
 languages: [java]
 dependencies: [sqllite, spark, maven]
+tags: [web, db]
 banner: banner.png
 listed: true
 ---

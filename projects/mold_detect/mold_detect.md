@@ -6,6 +6,7 @@ priority: 140
 date: "2023-11-15"
 languages: [c]
 dependencies: [kicad, avr, i2c, uart, spi, make]
+tags: [hardware]
 banner: banner.png
 listed: true
 ---

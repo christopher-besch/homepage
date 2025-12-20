@@ -6,6 +6,7 @@ priority: 800
 date: "2021-03-27"
 languages: [python, typescript]
 dependencies: [flask, webpack]
+tags: [web, db]
 banner: banner.png
 listed: true
 ---

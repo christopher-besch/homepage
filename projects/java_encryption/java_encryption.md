@@ -6,6 +6,7 @@ priority: 4500
 date: "2021-02-25"
 languages: [java]
 dependencies: []
+tags: [algorithms]
 banner: banner.png
 listed: true
 ---

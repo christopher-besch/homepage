@@ -9,7 +9,7 @@ description: "
 banner: "./banner.png"
 slug: revealjs
 date: "2022-06-24"
-tags: [web]
+tags: [web, visualization]
 listed: true
 ---
 

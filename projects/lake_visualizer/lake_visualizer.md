@@ -6,6 +6,7 @@ priority: 400
 date: "2021-04-09"
 languages: [typescript]
 dependencies: []
+tags: [visualization, web]
 banner: banner.png
 listed: true
 ---

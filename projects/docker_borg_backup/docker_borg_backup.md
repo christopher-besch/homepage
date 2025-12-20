@@ -6,6 +6,7 @@ priority: 600
 date: "2022-09-04"
 languages: []
 dependencies: [docker, borg]
+tags: [server]
 banner: banner.png
 listed: true
 ---

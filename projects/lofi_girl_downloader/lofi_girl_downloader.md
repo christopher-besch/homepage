@@ -5,7 +5,8 @@ link: https://github.com/christopher-besch/lofi_girl_downloader
 priority: 900
 date: "2021-08-29"
 languages: [python]
-dependencies: [ffmpeg, youtube-dl]
+dependencies: [ffmpeg, youtube_dl]
+tags: []
 banner: banner.png
 listed: true
 ---

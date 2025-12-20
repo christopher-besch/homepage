@@ -6,6 +6,7 @@ priority: 3300
 date: "2020-08-28"
 languages: [python]
 dependencies: []
+tags: [algorithms]
 banner: banner.png
 listed: true
 ---

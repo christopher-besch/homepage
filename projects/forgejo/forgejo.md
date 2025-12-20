@@ -6,7 +6,8 @@ priority: 50
 # probably quite a bit earlier
 date: "2025-03-06"
 languages: [go]
-dependencies: [sqlite]
+dependencies: [sqlite, git, mail]
+tags: [web, db, server]
 banner: banner.png
 listed: true
 ---

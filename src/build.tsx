@@ -22,7 +22,7 @@
 import * as fs from "fs";
 import { renderToPipeableStream } from "react-dom/server";
 import { buildStyles } from "./styles.js";
-import { createRouteDeployPath, copyStaticInBG, loadArticlesPath, loadPhotographyPath, getAssetRoute, loadTalksPath, loadProjectsPath, create404RouteDeployPath, loadAboutPath, syncDirSetup } from "./paths.js";
+import { createRouteDeployPath, copyStaticInBG, loadArticlesPath, loadPhotographyPath, getAssetRoute, loadTalksPath, loadProjectsPath, create404RouteDeployPath, loadAboutPath, syncDirSetup, getTagRoute } from "./paths.js";
 import { startPool } from "./worker/worker_pool.js";
 
 import IndexPage from "./components/index_page.js";
@@ -40,6 +40,7 @@ import { prepareImmichPortfolio, type Asset } from "./assets.js";
 import * as SegfaultHandler from "segfault-handler";
 import PageNotFoundPage from "./components/page_not_found_page.js";
 import AboutPage from "./components/about_page.js";
+import TagPage from "./components/tag_page.js";
 
 // Build the route in the background.
 // Return immediately.
@@ -96,6 +97,16 @@ async function buildProjects(projects: Project[]) {
     buildRouteInBG(loadProjectsPath, <ProjectsPage route={loadProjectsPath} projects={projects} />)
 }
 
+function buildTags(portfolio: Asset[], articles: Article[], talks: Talk[], projects: Project[]) {
+    const tags = portfolio.flatMap(p => p.tags)
+        .concat(articles.flatMap(a => a.tags))
+        .concat(talks.flatMap(t => t.tags))
+        .concat(projects.flatMap(p => p.tags));
+    for (const tag of tags) {
+        buildRouteInBG(getTagRoute(tag), <TagPage route={getTagRoute(tag)} tag={tag} portfolio={portfolio} articles={articles} talks={talks} projects={projects} />);
+    }
+}
+
 async function build() {
     syncDirSetup();
     // Do this in the background
@@ -126,6 +137,7 @@ async function build() {
             return p;
         }),
     ]);
+    buildTags(portfolio, articles, talks, projects);
     buildRouteInBG("/", <IndexPage route="/" portfolio={portfolio} articles={articles} talks={talks} projects={projects} />);
 }
 

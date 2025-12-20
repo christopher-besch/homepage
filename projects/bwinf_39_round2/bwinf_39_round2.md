@@ -6,6 +6,7 @@ priority: 3200
 date: "2020-12-22"
 languages: [cpp]
 dependencies: []
+tags: [algorithms]
 banner: banner.png
 listed: true
 ---

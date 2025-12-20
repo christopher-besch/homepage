@@ -6,6 +6,7 @@ priority: 4100
 date: "2020-09-14"
 languages: [java]
 dependencies: []
+tags: [algorithms]
 banner: banner.png
 listed: true
 ---

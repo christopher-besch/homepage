@@ -6,6 +6,7 @@ priority: 700
 date: "2018-07-16"
 languages: [python]
 dependencies: [flask, bootstrap]
+tags: [web, db]
 banner: banner.png
 listed: true
 ---

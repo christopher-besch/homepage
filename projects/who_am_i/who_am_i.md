@@ -6,6 +6,7 @@ priority: 700
 date: "2021-03-09"
 languages: [typescript]
 dependencies: [bootstrap]
+tags: [web]
 banner: banner.png
 listed: true
 ---

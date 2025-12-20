@@ -157,9 +157,6 @@ export async function getArticleSrcPaths(): Promise<string[]> {
 export function getArticleRoute(slug: string): string {
     return path.join(loadArticlesPath, slug);
 }
-export function getFullArticleLoadPath(slug: string): string {
-    return getFullLoadPath(getArticleRoute(slug));
-}
 
 // talks //
 const talksSrcPath = `./talks`;
@@ -239,4 +236,10 @@ export const loadRssPath = `/rss.xml`;
 export function createRssFeedDeployPath(): string {
     ensureDirExists(deployPath);
     return path.join(deployPath, loadRssPath);
+}
+
+// tags //
+const loadTagPath = `/tag`;
+export function getTagRoute(tag: string): string {
+    return path.join(loadTagPath, tag);
 }

@@ -6,6 +6,7 @@ priority: 400
 date: "2021-05-07"
 languages: [cpp]
 dependencies: [emscripten, cmake, sdl, armadillo, spdlog]
+tags: [visualization]
 banner: banner.png
 listed: true
 ---

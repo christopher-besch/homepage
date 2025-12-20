@@ -6,6 +6,7 @@ priority: 700
 date: "2021-05-23"
 languages: [typescript]
 dependencies: [firefox]
+tags: [web]
 banner: banner.png
 listed: true
 ---

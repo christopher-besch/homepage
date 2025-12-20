@@ -6,6 +6,7 @@ priority: 300
 date: "2025-07-11"
 languages: [rust]
 dependencies: []
+tags: [algorithms]
 banner: banner.png
 listed: true
 ---

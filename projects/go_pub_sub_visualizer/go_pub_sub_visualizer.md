@@ -6,6 +6,7 @@ priority: 300
 date: "2025-10-27"
 languages: [go, javascript]
 dependencies: [html, css, git]
+tags: [visualization, web]
 banner: banner.png
 listed: true
 ---

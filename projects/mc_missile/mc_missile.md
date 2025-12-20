@@ -6,6 +6,7 @@ priority: 150
 date: "2025-01-24"
 languages: [java, rust]
 dependencies: [docker, minecraft, maths]
+tags: [server]
 banner: banner.png
 listed: true
 ---

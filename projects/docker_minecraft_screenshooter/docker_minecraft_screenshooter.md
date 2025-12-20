@@ -6,6 +6,7 @@ priority: 900
 date: "2023-03-10"
 languages: [python]
 dependencies: [docker, minecraft]
+tags: [server]
 banner: banner.png
 listed: true
 ---

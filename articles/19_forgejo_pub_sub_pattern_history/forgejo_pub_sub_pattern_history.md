@@ -11,7 +11,7 @@ hero_horizontal_position: 50
 hero_vertical_position: 30
 slug: forgejo_pub_sub_pattern_history
 date: "2025-10-30"
-tags: [forgejo, go]
+tags: [forgejo, go, git, visualization]
 listed: true
 ---
 

@@ -6,6 +6,7 @@ priority: 300
 date: "2022-08-22"
 languages: []
 dependencies: [docker]
+tags: [server]
 banner: banner.png
 listed: true
 ---

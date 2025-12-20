@@ -6,6 +6,7 @@ priority: 300
 date: "2021-05-23"
 languages: [cpp]
 dependencies: [gcc, premake, stb]
+tags: [visualization]
 banner: banner.png
 listed: true
 ---

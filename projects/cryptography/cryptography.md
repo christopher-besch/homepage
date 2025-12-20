@@ -5,7 +5,8 @@ link: https://github.com/christopher-besch/cryptography
 priority: 600
 date: "2020-12-09"
 languages: [cpp]
-dependencies: [gcc, premake]
+dependencies: [premake]
+tags: [algorithms, hacking, arg]
 banner: banner.png
 listed: true
 ---
