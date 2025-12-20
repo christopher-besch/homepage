@@ -100,14 +100,31 @@ export async function directCopyImage(inputPath: string): Promise<string> {
     return path.join(loadImagesPath, name);
 }
 
+async function copyDir(srcDir: string, destDir: string): Promise<void> {
+    const files = await fs.promises.readdir(srcDir, { recursive: true, withFileTypes: true });
+    await Promise.all(files.map(async file => {
+        if (!file.isFile) {
+            return;
+        }
+        const srcPath = path.join(file.parentPath, file.name);
+        const destPathDir = path.join(destDir, path.relative(srcDir, file.parentPath));
+        const destPath = path.join(destDir, path.relative(srcDir, srcPath));
+        // Don't copy files that already exist.
+        if (!fs.existsSync(destPath)) {
+            console.log(`Copying: ${srcPath} to ${destPath}`);
+            // This needs to be done with that sync function.
+            // Otherwise copyring, e.g. copying with fs.cp, would cause a file system race condition.
+            ensureDirExists(destPathDir);
+            await fs.promises.cp(srcPath, destPath);
+        }
+    }));
+}
+
 // static //
 const deployFontsPath = path.join(deployStylesPath, `fonts`);
 export function copyStaticInBG() {
-    // Make sure we execute one after the other.
-    // Because of this the static dir may only contain fonts and things that aren't in subdirs that other code also accesses.
-    fs.promises.cp(staticSrcPath, deployPath, { recursive: true }).then(() => {
-        fs.promises.cp("./node_modules/katex/dist/fonts", deployFontsPath, { recursive: true });
-    }).catch(e => { throw e; });
+    copyDir(staticSrcPath, deployPath).catch(e => { throw e; });
+    copyDir("./node_modules/katex/dist/fonts", deployFontsPath).catch(e => { throw e; });
 }
 
 // articles //
