@@ -5,7 +5,7 @@ link: https://github.com/ibm/gh_runner_uptime
 priority: 190
 date: "2024-04-01"
 languages: [rust]
-dependencies: [docker, tokio, GitHub]
+dependencies: [docker, tokio, github]
 banner: banner.png
 listed: true
 ---
