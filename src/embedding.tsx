@@ -26,7 +26,7 @@ export interface Embeddable {
 
 function cosineSimilarity(a: number[], b: number[]): number {
     if (a.length != b.length) {
-        throw new Error("Arrays must have the same length");
+        throw new Error("Arrays must have the same length.");
     }
 
     let dot = 0;
@@ -53,6 +53,7 @@ export function getNearestListedNeighbours<T extends Embeddable>(idx: number, ne
     processedEmbeddable = processedEmbeddable
         .filter(a => a.listed)
         .sort((a, b) => cosineSimilarity(embeddables[idx]!.embedding, b.embedding) - cosineSimilarity(embeddables[idx]!.embedding, a.embedding));
+    // Remove the elements in the middle that we don't want.
     processedEmbeddable.splice(neighbours, processedEmbeddable.length - neighbours - antiNeighbours);
     return processedEmbeddable;
 }

@@ -225,6 +225,7 @@ export function getAssetRoute(id: string): string {
     return path.join(loadPhotographyPath, id);
 }
 
+// resources //
 export function getResourceLoadPath(name: string): string {
     return path.join(resourcesSrcPath, name);
 }

@@ -73,7 +73,8 @@ async function buildArticles(articles: Article[]) {
         buildRouteInBG(article.link, <ArticlePage route={article.link} idx={idx} articles={articles} />);
     }
     buildRouteInBG(loadArticlesPath, <ArticlesPage route={loadArticlesPath} articles={articles} />);
-    await createFeed(articles);
+    // Do this in the background.
+    createFeed(articles).catch(e => { throw e; });
 }
 
 async function buildPhotography(portfolio: Asset[]) {

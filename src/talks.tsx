@@ -23,7 +23,7 @@ import * as fs from "fs";
 import matter from "gray-matter";
 import path from "path";
 import type { CardListable } from "./components/cards_list.js";
-import { assertIsBoolean, assertIsOptionalString, assertIsString } from "./conversion.js";
+import { assertIsArrayOfStrings, assertIsBoolean, assertIsOptionalString, assertIsString } from "./conversion.js";
 import { getTalksSrcPaths } from "./paths.js";
 
 export interface Talk extends CardListable {
@@ -52,6 +52,7 @@ async function prepareTalk(mdSrcPath: string): Promise<Talk> {
         description: assertIsString(frontMatter["description"]),
         banner: bannerName != undefined ? path.join(dirPath, bannerName) : undefined,
         link: assertIsString(frontMatter["link"]),
+        tags: assertIsArrayOfStrings(frontMatter["tags"]),
         date: dateStr != undefined ? new Date(dateStr) : undefined,
         listed: assertIsBoolean(frontMatter["listed"]),
     };

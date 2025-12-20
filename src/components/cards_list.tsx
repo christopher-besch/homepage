@@ -9,6 +9,7 @@ export interface CardListable {
     date?: Date,
     // required when listed
     banner?: string,
+    tags: string[],
     // This is the route when it's an article on this website.
     link: string,
 };

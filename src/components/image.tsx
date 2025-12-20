@@ -1,3 +1,24 @@
+// Copyright 2025 Christopher Besch
+// This file is published under the MIT license:
+
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
 import type React from "react";
 import { convertImageOnPool } from "../worker/worker_pool.js";
 import type { ImageSize } from "../convert_image.js";
@@ -66,8 +87,8 @@ export default async function Image(props: ImageProps): Promise<React.ReactNode>
     const alt = props.alt != undefined ? props.alt : "";
     const loading = props.lazy ? "lazy" : "eager";
     const fetchPriority = props.lazy ? "auto" : "high";
-
     const imgTag = <img srcSet={defaultSrcSet} width={defaultWidth} height={defaultHeight} alt={alt} style={lqip} loading={loading} fetchPriority={fetchPriority} />;
+
     if (exportedImage.portraitSizes != undefined) {
         const portraitSrcSet = sizesToSrcSet(exportedImage.portraitSizes)
         const portraitWidth = exportedImage.portraitSizes[0]!.width;
@@ -81,9 +102,8 @@ export default async function Image(props: ImageProps): Promise<React.ReactNode>
             <source srcSet={portraitSrcSet} type="image/webp" width={portraitWidth} height={portraitHeight} media={`(orientation: portrait) and (max-width: ${portraitMaxWidth}px)`} />
             {imgTag}
         </picture>;
+    } else {
+        // We don't need any source tags when there's no art direction.
+        return <picture className="image_picture" >{imgTag}</picture>;
     }
-    // We don't need any source tags when there's no art direction.
-    return <picture className="image_picture" >
-        <img srcSet={defaultSrcSet} width={defaultWidth} height={defaultHeight} alt={alt} style={lqip} loading={loading} fetchPriority={fetchPriority} />
-    </picture>;
 }

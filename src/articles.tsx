@@ -30,7 +30,7 @@ import { type Embeddable } from "./embedding.js";
 import { embedSentencesOnPool } from "./worker/worker_pool.js";
 import { getArticleSrcPaths, getArticleRoute } from "./paths.js";
 import type { CardListable } from "./components/cards_list.js";
-import { assertIsBoolean, assertIsNumber, assertIsOptionalString, assertIsString, htmlToPlaintext } from "./conversion.js";
+import { assertIsArrayOfStrings, assertIsBoolean, assertIsNumber, assertIsOptionalString, assertIsString, htmlToPlaintext } from "./conversion.js";
 
 interface UnembeddedArticle extends CardListable {
     dirPath: string,
@@ -54,8 +54,10 @@ async function prepareArticle(mdSrcPath: string): Promise<[UnembeddedArticle, st
     const bannerName = assertIsOptionalString(frontMatter["banner"]);
     const heroName = assertIsOptionalString(frontMatter["hero"]);
     const dateStr = assertIsOptionalString(frontMatter["date"]);
+    const tags = assertIsArrayOfStrings(frontMatter["tags"]);
 
     const reactNode = <Markdown content={md} dirPath={dirPath} />;
+    // We need to render the html here again because we need the plaintext for the readtime and sentence embedding.
     const html = await new Promise(r => {
         let out = renderToPipeableStream(reactNode, {
             onAllReady: () => {
@@ -86,6 +88,7 @@ async function prepareArticle(mdSrcPath: string): Promise<[UnembeddedArticle, st
         } : undefined,
         link: getArticleRoute(assertIsString(frontMatter["slug"])),
         date: dateStr != undefined ? new Date(dateStr) : undefined,
+        tags: tags,
         listed: assertIsBoolean(frontMatter["listed"]),
         readingTimeMinutes: readingTime(plaintext).minutes,
         reactNode: reactNode,

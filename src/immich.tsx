@@ -42,17 +42,17 @@ export async function loadImmichPortfolioWithoutEmbedding(): Promise<UnembeddedA
         return JSON.parse(file.toString());
     }
 
-    const IMMICH_BASE_URL = process.env['IMMICH_BASE_URL']!;
-    if (IMMICH_BASE_URL == undefined || IMMICH_BASE_URL == "") {
+    const immichBaseUrl = process.env['IMMICH_BASE_URL']!;
+    if (immichBaseUrl == undefined || immichBaseUrl == "") {
         throw new Error("IMMICH_BASE_URL not defined");
     }
-    console.log(`Downloading immich images from ${IMMICH_BASE_URL}`);
+    console.log(`Downloading immich images from ${immichBaseUrl}`);
     // Needed permissions: asset.read, asset.download, tag.read
-    const IMMICH_API_KEY = process.env['IMMICH_API_KEY']!;
-    if (IMMICH_API_KEY == undefined || IMMICH_API_KEY == "") {
+    const immichApiKey = process.env['IMMICH_API_KEY']!;
+    if (immichApiKey == undefined || immichApiKey == "") {
         throw new Error("IMMICH_API_KEY not defined");
     }
-    init({ baseUrl: IMMICH_BASE_URL, apiKey: IMMICH_API_KEY })
+    init({ baseUrl: immichBaseUrl, apiKey: immichApiKey })
 
     // Get all tags.
     const rawTags = await getAllTags({});

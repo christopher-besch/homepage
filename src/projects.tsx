@@ -31,8 +31,6 @@ export interface Project extends CardListable {
     title: string,
     description: string,
     priority: number,
-    languages: string[],
-    dependencies: string[],
     // required when listed
     banner?: string,
     // required when listed
@@ -54,8 +52,7 @@ async function prepareProject(mdSrcPath: string): Promise<Project> {
         title: assertIsString(frontMatter["title"]),
         description: assertIsString(frontMatter["description"]),
         priority: assertIsNumber(frontMatter["priority"]),
-        languages: assertIsArrayOfStrings(frontMatter["languages"]),
-        dependencies: assertIsArrayOfStrings(frontMatter["dependencies"]),
+        tags: assertIsArrayOfStrings(frontMatter["languages"]).concat(assertIsArrayOfStrings(frontMatter["dependencies"])),
         banner: bannerName != undefined ? path.join(dirPath, bannerName) : undefined,
         link: assertIsString(frontMatter["link"]),
         date: dateStr != undefined ? new Date(dateStr) : undefined,
