@@ -16,6 +16,7 @@ const stylesSrcPath = `./styles`;
 const resourcesSrcPath = `./resources`;
 const buildPath = `./build`;
 export const workerPath = path.join(buildPath, "worker/worker.js");
+export const embeddingWorkerPath = path.join(buildPath, "worker/embedding_worker.js");
 const deployPath = `./deploy`;
 export const modelPath = `./models`;
 export const loadAboutPath = `/about`;
