@@ -150,7 +150,6 @@ export default async function Layout(props: React.PropsWithChildren<LayoutProps>
                 <div className="layout_transient_space">
                     <a href="/"><Image lazy={false} transparent={true} inputPath={getResourceLoadPath("snake.png")} /></a>
                     {nav_links}
-                    <p>This is a transient space.</p>
                 </div>
 
                 <main className="layout_content_container" role="main">

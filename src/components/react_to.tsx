@@ -44,7 +44,7 @@ umami.track(
         </div>
         <Button onClick={likeJS} text="👍 I like this!" />
         <div className="react_to_comment">
-            <textarea id="react_to_comment_input" placeholder="Some Comment..." />
+            <textarea id="react_to_comment_input" placeholder="Your Comment..." />
             <Button onClick={commentJS} text="Send Comment" />
         </div>
     </div>;
