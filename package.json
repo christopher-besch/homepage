@@ -11,6 +11,8 @@
     "type": "module",
     "main": "src/build.tsx",
     "scripts": {
+        "compile": "tsc",
+        "build_styles_only": "HOMEPAGE_URL=https://chris-besch.com node --enable-source-maps build/build_styles_only.js",
         "build": "tsc && WEBSITE_ID=0774a88d-dde9-4972-8559-84538b09a044 HOMEPAGE_URL=https://chris-besch.com node --enable-source-maps build/build.js",
         "build_dev": "tsc && WEBSITE_ID=973e85bb-1afd-474c-be89-7b8acecd4088 HOMEPAGE_URL=https://dev.chris-besch.com node --enable-source-maps build/build.js",
         "clean": "rm -rf build deploy cache",
