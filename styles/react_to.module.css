@@ -1,0 +1,19 @@
+.react_to,
+.react_to_comment {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.react_to a,
+.react_to div,
+.react_to button {
+    margin: 0 !important;
+}
+
+.react_to textarea {
+    height: 45px;
+    width: 200px;
+}

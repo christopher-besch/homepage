@@ -36,6 +36,7 @@ sourceMap.set("always.css", [
     // This might not strictly be needed on all pages but kinda is.
     getStyleSourcePath("cards_list.module.css"),
     getStyleSourcePath("button.module.css"),
+    getStyleSourcePath("react_to.module.css"),
 ]);
 sourceMap.set("default.css", [
     getStyleSourcePath("index_page.module.css"),
