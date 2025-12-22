@@ -8,8 +8,8 @@ import { loadPhotographyPath } from "../paths.js";
 import type { Asset } from "../assets.js";
 import ReactTo from "./react_to.js";
 
-const nearestNeighbours = 4;
-const antiNeighbours = 2;
+const nearestNeighbours = 6;
+const antiNeighbours = 0;
 
 interface PhotoPageProps {
     route: string,
