@@ -6,7 +6,7 @@ export default function Link(props: React.PropsWithChildren<LinkProps>): React.R
     const href = props.href == undefined ? "#" : props.href;
 
     let target = "_blank";
-    if (href.startsWith("/") || href.startsWith("#")) {
+    if ((href.startsWith("/") || href.startsWith("#")) && !href.endsWith(".pdf")) {
         // Open on same tab.
         target = "_self";
     }

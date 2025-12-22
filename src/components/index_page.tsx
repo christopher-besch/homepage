@@ -64,19 +64,19 @@ export default function IndexPage(props: IndexPageProps): React.ReactNode {
             }}>
             <Title isHero={false} title="Articles" />
             <CardsList cards={articlesToShow} />
-            <Button href={loadArticlesPath} text="More Articles" />
+            <Button href={loadArticlesPath} text="All Articles" />
 
             <Title isHero={false} title="Photography" />
             <PhotosList assets={portfolioToShow} />
-            <Button href={loadPhotographyPath} text="More Photos" />
+            <Button href={loadPhotographyPath} text="All Photos" />
 
             <Title isHero={false} title="Software Projects" />
             <CardsList cards={projectsToShow} />
-            <Button href={loadProjectsPath} text="More Software Projects" />
+            <Button href={loadProjectsPath} text="All Software Projects" />
 
             <Title isHero={false} title="Talks" />
             <CardsList cards={talksToShow} />
-            <Button href={loadTalksPath} text="More Talks" />
+            <Button href={loadTalksPath} text="All Talks" />
         </Layout>
     );
 }

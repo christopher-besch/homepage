@@ -28,22 +28,42 @@ import path from "path";
 import { PassThrough } from "stream";
 import { type Embeddable } from "./embedding.js";
 import { embedSentencesOnPool } from "./worker/worker_pool.js";
-import { getArticleSrcPaths, getArticleRoute } from "./paths.js";
+import { getArticleSrcPaths, getArticleRoute, copyArticlePDFInBG } from "./paths.js";
 import type { CardListable } from "./components/cards_list.js";
 import { assertIsArrayOfStrings, assertIsBoolean, assertIsNumber, assertIsOptionalString, assertIsString, htmlToPlaintext } from "./conversion.js";
+import { PdfReader } from "pdfreader";
 
 interface UnembeddedArticle extends CardListable {
     dirPath: string,
+    isPDF: boolean,
     hero?: {
         inputPath: string,
         horizontalPosition: number,
         verticalPosition: number,
     },
-    readingTimeMinutes: number,
     reactNode: React.ReactNode,
 };
 
 export interface Article extends UnembeddedArticle, Embeddable { };
+
+async function getPDFReadingTimeMinutes(pdfPath: string): Promise<number> {
+    return new Promise(r => {
+        let readingTimeMinutes = 0;
+        new PdfReader().parseFileItems(pdfPath, (err, item) => {
+            if (err) {
+                throw err;
+            }
+            // Reached EOF.
+            if (item == null) {
+                r(readingTimeMinutes);
+                return;
+            }
+            if (item.text != null) {
+                readingTimeMinutes += readingTime(item.text).minutes;
+            }
+        });
+    });
+}
 
 // Return article without embedding and plaintext string prepared for embedding the article.
 async function prepareArticle(mdSrcPath: string): Promise<[UnembeddedArticle, string]> {
@@ -75,9 +95,24 @@ async function prepareArticle(mdSrcPath: string): Promise<[UnembeddedArticle, st
     }) as string;
 
     const plaintext = htmlToPlaintext(html);
+    const pdfName = assertIsOptionalString(frontMatter["pdf"]);
+    const slug = assertIsString(frontMatter["slug"]);
+    const isPDF = pdfName != undefined;
+    // Always use the slug for the pdf link.
+    // This makes it so that the link is always the same.
+    const link = isPDF ? copyArticlePDFInBG(dirPath, slug, pdfName) :
+        getArticleRoute(slug);
+
+    const readingTimeMinutes = isPDF ? await getPDFReadingTimeMinutes(path.join(dirPath, pdfName)) :
+        readingTime(plaintext).minutes;
+
+    if (isPDF) {
+        console.log(readingTimeMinutes);
+    }
 
     return [{
-        dirPath: dirPath,
+        dirPath,
+        isPDF,
         title: assertIsString(frontMatter["title"]),
         description: assertIsString(frontMatter["description"]).trim(),
         banner: bannerName != undefined ? path.join(dirPath, bannerName) : undefined,
@@ -86,12 +121,12 @@ async function prepareArticle(mdSrcPath: string): Promise<[UnembeddedArticle, st
             horizontalPosition: assertIsNumber(frontMatter["hero_horizontal_position"]),
             verticalPosition: assertIsNumber(frontMatter["hero_vertical_position"]),
         } : undefined,
-        link: getArticleRoute(assertIsString(frontMatter["slug"])),
+        link,
         date: dateStr != undefined ? new Date(dateStr) : undefined,
-        tags: tags,
+        tags,
         listed: assertIsBoolean(frontMatter["listed"]),
-        readingTimeMinutes: readingTime(plaintext).minutes,
-        reactNode: reactNode,
+        readingTimeMinutes,
+        reactNode,
     }, plaintext];
 }
 

@@ -72,6 +72,9 @@ function buildRouteInBG(route: string, element: React.ReactNode) {
 async function buildArticles(articles: Article[]) {
     console.log("Building articles");
     for (const [idx, article] of articles.entries()) {
+        if (article.isPDF) {
+            continue;
+        }
         buildRouteInBG(article.link, <ArticlePage route={article.link} idx={idx} articles={articles} />);
     }
     buildRouteInBG(loadArticlesPath, <ArticlesPage route={loadArticlesPath} articles={articles} />);

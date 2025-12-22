@@ -1,5 +1,6 @@
 import { formatDate } from "../date.js";
 import Image from "./image.js";
+import Link from "./link.js";
 
 export interface CardListable {
     listed: boolean,
@@ -12,6 +13,7 @@ export interface CardListable {
     tags: string[],
     // This is the route when it's an article on this website.
     link: string,
+    readingTimeMinutes?: number,
 };
 
 interface CardsListProps {
@@ -24,15 +26,15 @@ export default function CardsList(props: CardsListProps): React.ReactNode {
     return (
         <div className="cards_list">
             {props.cards.map((card, i) =>
-                <a key={i} className="cards_list_card" href={card.link}>
+                <Link key={i} className="cards_list_card" href={card.link}>
                     <Image inputPath={card.banner!} lazy={true} />
                     <h1>{card.title}</h1>
                     {card.date != undefined ?
-                        <h2>{formatDate(card.date)}</h2>
+                        <h2>{card.readingTimeMinutes == undefined ? undefined : `${Math.round(card.readingTimeMinutes)}min `}{formatDate(card.date)}</h2>
                         : undefined}
                     <hr />
                     <p>{card.description}</p>
-                </a>
+                </Link>
             )}
         </div>
     );

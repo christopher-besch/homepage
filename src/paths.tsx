@@ -157,6 +157,18 @@ export async function getArticleSrcPaths(): Promise<string[]> {
 export function getArticleRoute(slug: string): string {
     return path.join(loadArticlesPath, slug);
 }
+// Return the article route.
+export function copyArticlePDFInBG(dirPath: string, slug: string, pdfName: string): string {
+    const destPath = path.join(deployPath, loadArticlesPath, slug + ".pdf");
+    const srcPath = path.join(dirPath, pdfName);
+    if (!fs.existsSync(destPath)) {
+        console.log(`Copying to ${destPath}`);
+        // Do this in the background.
+        fs.promises.cp(srcPath, destPath).catch(e => { throw e; });
+    }
+    const loadPath = path.join(loadArticlesPath, slug + ".pdf");
+    return loadPath
+}
 
 // talks //
 const talksSrcPath = `./talks`;

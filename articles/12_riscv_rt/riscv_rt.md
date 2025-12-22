@@ -11,7 +11,7 @@ hero_horizontal_position: 20
 hero_vertical_position: 40
 slug: riscv_rt
 date: "2025-06-27"
-tags: [linux]
+tags: [linux, riscv, real_time]
 listed: true
 ---
 

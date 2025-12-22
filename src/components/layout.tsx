@@ -132,7 +132,7 @@ export default async function Layout(props: React.PropsWithChildren<LayoutProps>
                     <a className="layout_navbar_left" href="/">
                         <div>
                             <h1>Christopher&nbsp;Besch</h1>
-                            <h2>Developer&bull;Writer&bull;Photographer</h2>
+                            <h2>Developer&bull;Photographer</h2>
                         </div>
                         <Image lazy={false} transparent={true} inputPath={getResourceLoadPath("snake.png")} />
                     </a>

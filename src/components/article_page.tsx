@@ -19,6 +19,9 @@ interface ArticlePageProps {
 }
 export default async function ArticlePage(props: ArticlePageProps): Promise<React.ReactNode> {
     const article = props.articles[props.idx]!;
+    if (article.readingTimeMinutes == undefined) {
+        throw Error;
+    }
     // Articles without a date but with tags and/or readtime don't exist.
     const subtitle = article.date == undefined ? undefined : {
         left: formatDate(article.date),
