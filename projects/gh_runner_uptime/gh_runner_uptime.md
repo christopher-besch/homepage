@@ -1,7 +1,7 @@
 ---
 title: gh_runner_uptime
 description: "IBM: Monitor Uptime Status of GitHub Self-Hosted Runner."
-link: https://github.com/ibm/gh_runner_uptime
+link: https://codeberg.org/ibm/gh_runner_uptime
 priority: 190
 date: "2024-04-01"
 languages: [rust]

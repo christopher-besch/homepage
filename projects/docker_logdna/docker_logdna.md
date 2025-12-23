@@ -1,7 +1,7 @@
 ---
 title: docker_logdna
 description: "IBM: Logdna logging driver Docker plugin."
-link: https://github.com/ibm/docker_logdna
+link: https://codeberg.org/ibm/docker_logdna
 priority: 160
 date: "2023-06-22"
 languages: [rust]
