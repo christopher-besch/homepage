@@ -42,28 +42,28 @@ export default function TagPage(props: TagPageProps): React.ReactNode {
                 <>
                     <Title isHero={false} title={`Articles: #${props.tag}`} />
                     <CardsList cards={articlesToShow} />
-                    <Button href={loadArticlesPath} text="More Articles" />
+                    <Button href={loadArticlesPath} text="All Articles" />
                 </>
                 : undefined}
             {talksToShow.length != 0 ?
                 <>
                     <Title isHero={false} title={`Talks: #${props.tag}`} />
                     <CardsList cards={talksToShow} />
-                    <Button href={loadTalksPath} text="More Talks" />
+                    <Button href={loadTalksPath} text="All Talks" />
                 </>
                 : undefined}
             {projectsToShow.length != 0 ?
                 <>
                     <Title isHero={false} title={`Software Projects: #${props.tag}`} />
                     <CardsList cards={projectsToShow} />
-                    <Button href={loadProjectsPath} text="More Software Projects" />
+                    <Button href={loadProjectsPath} text="All Software Projects" />
                 </>
                 : undefined}
             {portfolioToShow.length != 0 ?
                 <>
                     <Title isHero={false} title={`Photography: #${props.tag}`} />
                     <PhotosList assets={portfolioToShow} />
-                    <Button href={loadPhotographyPath} text="More Photos" />
+                    <Button href={loadPhotographyPath} text="All Photos" />
                 </>
                 : undefined}
         </Layout>
