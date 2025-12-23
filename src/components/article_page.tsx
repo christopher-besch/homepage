@@ -9,8 +9,8 @@ import { loadArticlesPath } from "../paths.js";
 import ReactTo from "./react_to.js";
 
 const heroHeightFraction = 0.7;
-const nearestNeighbours = 2;
-const antiNeighbours = 2;
+const nearestNeighbours = 4;
+const antiNeighbours = 0;
 
 interface ArticlePageProps {
     route: string,
@@ -20,6 +20,9 @@ interface ArticlePageProps {
 export default async function ArticlePage(props: ArticlePageProps): Promise<React.ReactNode> {
     const article = props.articles[props.idx]!;
     if (article.readingTimeMinutes == undefined) {
+        throw Error;
+    }
+    if (article.reactNode == undefined) {
         throw Error;
     }
     // Articles without a date but with tags and/or readtime don't exist.

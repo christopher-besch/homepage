@@ -31,7 +31,7 @@ import { embedSentencesOnPool } from "./worker/worker_pool.js";
 import { getArticleSrcPaths, getArticleRoute, copyArticlePDFInBG } from "./paths.js";
 import type { CardListable } from "./components/cards_list.js";
 import { assertIsArrayOfStrings, assertIsBoolean, assertIsNumber, assertIsOptionalString, assertIsString, htmlToPlaintext } from "./conversion.js";
-import { PdfReader } from "pdfreader";
+import { PDFParse } from "pdf-parse";
 
 interface UnembeddedArticle extends CardListable {
     dirPath: string,
@@ -41,29 +41,30 @@ interface UnembeddedArticle extends CardListable {
         horizontalPosition: number,
         verticalPosition: number,
     },
-    reactNode: React.ReactNode,
+    reactNode?: React.ReactNode,
 };
 
 export interface Article extends UnembeddedArticle, Embeddable { };
 
-async function getPDFReadingTimeMinutes(pdfPath: string): Promise<number> {
-    return new Promise(r => {
-        let readingTimeMinutes = 0;
-        new PdfReader().parseFileItems(pdfPath, (err, item) => {
-            if (err) {
-                throw err;
-            }
-            // Reached EOF.
-            if (item == null) {
-                r(readingTimeMinutes);
-                return;
-            }
-            if (item.text != null) {
-                readingTimeMinutes += readingTime(item.text).minutes;
-            }
-        });
-    });
-}
+// async function getPDFText(pdfPath: string): Promise<string> {
+//     return new Promise(r => {
+//         let text = "";
+//         new PdfReader().parseFileItems(pdfPath, (err, item) => {
+//             if (err) {
+//                 throw err;
+//             }
+//             // Reached EOF.
+//             if (item == null) {
+//                 r(text);
+//                 console.log(text);
+//                 return;
+//             }
+//             if (item.text != null) {
+//                 text += item.text;
+//             }
+//         });
+//     });
+// }
 
 // Return article without embedding and plaintext string prepared for embedding the article.
 async function prepareArticle(mdSrcPath: string): Promise<[UnembeddedArticle, string]> {
@@ -75,26 +76,6 @@ async function prepareArticle(mdSrcPath: string): Promise<[UnembeddedArticle, st
     const heroName = assertIsOptionalString(frontMatter["hero"]);
     const dateStr = assertIsOptionalString(frontMatter["date"]);
     const tags = assertIsArrayOfStrings(frontMatter["tags"]);
-
-    const reactNode = <Markdown content={md} dirPath={dirPath} />;
-    // We need to render the html here again because we need the plaintext for the readtime and sentence embedding.
-    const html = await new Promise(r => {
-        let out = renderToPipeableStream(reactNode, {
-            onAllReady: () => {
-                const stream = new PassThrough();
-                let html = "";
-                stream.on("data", chunk => {
-                    html += chunk.toString();
-                });
-                stream.on("end", () => {
-                    r(html);
-                });
-                out.pipe(stream);
-            }
-        });
-    }) as string;
-
-    const plaintext = htmlToPlaintext(html);
     const pdfName = assertIsOptionalString(frontMatter["pdf"]);
     const slug = assertIsString(frontMatter["slug"]);
     const isPDF = pdfName != undefined;
@@ -103,11 +84,33 @@ async function prepareArticle(mdSrcPath: string): Promise<[UnembeddedArticle, st
     const link = isPDF ? copyArticlePDFInBG(dirPath, slug, pdfName) :
         getArticleRoute(slug);
 
-    const readingTimeMinutes = isPDF ? await getPDFReadingTimeMinutes(path.join(dirPath, pdfName)) :
-        readingTime(plaintext).minutes;
-
-    if (isPDF) {
-        console.log(readingTimeMinutes);
+    // PDF articles don't have reactNode and have a different method of retrieving the plaintext.
+    let reactNode: React.ReactNode | undefined = undefined;
+    let plaintext = "";
+    if (!isPDF) {
+        reactNode = <Markdown content={md} dirPath={dirPath} />;
+        // We need to render the html here again because we need the plaintext for the readtime and sentence embedding.
+        const html = await new Promise(r => {
+            let out = renderToPipeableStream(reactNode, {
+                onAllReady: () => {
+                    const stream = new PassThrough();
+                    let html = "";
+                    stream.on("data", chunk => {
+                        html += chunk.toString();
+                    });
+                    stream.on("end", () => {
+                        r(html);
+                    });
+                    out.pipe(stream);
+                }
+            });
+        }) as string;
+        plaintext = htmlToPlaintext(html);
+    } else {
+        const parser = new PDFParse({ url: path.join(dirPath, pdfName) })
+        const result = await parser.getText();
+        await parser.destroy();
+        plaintext = result.text.replaceAll("\n", " ");
     }
 
     return [{
@@ -125,7 +128,7 @@ async function prepareArticle(mdSrcPath: string): Promise<[UnembeddedArticle, st
         date: dateStr != undefined ? new Date(dateStr) : undefined,
         tags,
         listed: assertIsBoolean(frontMatter["listed"]),
-        readingTimeMinutes,
+        readingTimeMinutes: readingTime(plaintext).minutes,
         reactNode,
     }, plaintext];
 }
