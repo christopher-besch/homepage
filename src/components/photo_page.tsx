@@ -30,9 +30,9 @@ export default function PhotoPage(props: PhotoPageProps): React.ReactNode {
                 <Image inputPath={props.assets[props.idx]!.cachePath} lazy={false} />
             </div>
             <ReactTo route={props.route} tags={props.assets[props.idx]!.tags} />
-            <Title isHero={false} title="Other Photos" />
+            <Title isHero={false} title="Similar Photos" />
             <PhotosList assets={similarAssets} />
-            <Button href={loadPhotographyPath} text="Furthermore Photos" />
+            <Button href={loadPhotographyPath} text="All Photos" />
         </Layout>
     );
 }

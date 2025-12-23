@@ -55,8 +55,8 @@ export default async function ArticlePage(props: ArticlePageProps): Promise<Reac
         {article.hero == undefined ? <Title isHero={false} title={article.title} subtitle={subtitle} /> : undefined}
         <div>{article.reactNode}</div>
         <ReactTo route={props.route} tags={article.tags} />
-        <Title isHero={false} title="Other Articles" />
+        <Title isHero={false} title="Similar Articles" />
         <CardsList cards={similarArticles} />
-        <Button href={loadArticlesPath} text="Furthermore Articles" />
+        <Button href={loadArticlesPath} text="All Articles" />
     </Layout>
 }
