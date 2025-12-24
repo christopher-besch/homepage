@@ -73,6 +73,7 @@ async function getLqip(image: sharp.Sharp, width: number, height: number): Promi
             gradients.push(`radial-gradient(${elipseWidth}% ${elipseHeight}% at ${percentX}% ${percentY}%, ${pixels[i]}, transparent)`);
         }
     }
+    // TODO: find something better. Using a single value for a linear gradient is not spec.
     gradients.push(`linear-gradient(${background})`);
 
     return {

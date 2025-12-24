@@ -1,7 +1,5 @@
-import { Fragment } from "react/jsx-dev-runtime";
 import Button from "./button.js";
-import Link from "./link.js";
-import { getTagRoute } from "../paths.js";
+import TagsList from "./tags_list.js";
 
 interface ReactToProps {
     route: string,
@@ -37,11 +35,7 @@ umami.track(
 
     // The route prop is needed because umami doesn't store the url properly.
     return <div className="react_to">
-        <div className="markdown_body">
-            {props.tags.map((tag, idx) =>
-                <Fragment key={idx}> <Link href={getTagRoute(tag)}>#{tag}</Link></Fragment>
-            )}
-        </div>
+        <TagsList tags={props.tags} />
         <Button onClick={likeJS} text="👍 I like this!" />
         <div className="react_to_comment">
             <textarea id="react_to_comment_input" placeholder="Your Comment..." />

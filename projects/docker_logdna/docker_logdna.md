@@ -5,7 +5,7 @@ link: https://codeberg.org/ibm/docker_logdna
 priority: 160
 date: "2023-06-22"
 languages: [rust]
-dependencies: [docker, logdna]
+dependencies: [docker, logdna, tokio]
 tags: [server, logging]
 banner: banner.png
 listed: true

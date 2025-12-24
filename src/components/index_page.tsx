@@ -2,11 +2,13 @@ import type { Article } from "../articles.js";
 import type { Asset } from "../assets.js";
 import { getResourceLoadPath, loadArticlesPath, loadPhotographyPath, loadProjectsPath, loadTalksPath } from "../paths.js";
 import type { Project } from "../projects.js";
+import { sortTags } from "../tags.js";
 import type { Talk } from "../talks.js";
 import Button from "./button.js";
 import CardsList from "./cards_list.js";
 import Layout from "./layout.js";
 import PhotosList from "./photos_list.js";
+import TagsList from "./tags_list.js";
 import Title from "./title.js";
 
 interface IndexPageProps {
@@ -29,6 +31,15 @@ export default function IndexPage(props: IndexPageProps): React.ReactNode {
         // Date must be defined for all listed articles.
         .sort((a, b) => b.date!.getTime() - a.date!.getTime()).slice(0, 2);
     const portfolioToShow = props.portfolio.sort((a, b) => b.rating - a.rating).slice(0, 5);
+
+    // All projects are software_development.
+    // Don't include photo tags here.
+    const allTags = props.articles.filter(p => p.listed).flatMap(p => p.tags)
+        .concat(props.talks.filter(t => t.listed).flatMap(t => t.tags))
+        .concat(props.projects.filter(a => a.listed).flatMap(a => a.tags))
+        .filter(t => t != "software_development");
+    const tagsList = sortTags(allTags).slice(0, 10);
+
     return (
         <Layout
             route={props.route}
@@ -62,6 +73,8 @@ export default function IndexPage(props: IndexPageProps): React.ReactNode {
                     </div>
                 </div>,
             }}>
+            <TagsList tags={tagsList.map(([tag, _n]) => tag)} />
+
             <Title isHero={false} title="Articles" />
             <CardsList cards={articlesToShow} />
             <Button href={loadArticlesPath} text="All Articles" />
