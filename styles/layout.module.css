@@ -247,6 +247,12 @@ body {
     object-position: var(--layout-object-fit-h) var(--layout-object-fit-v);
 }
 
+@media print {
+    .layout_hero img {
+        visibility: hidden;
+    }
+}
+
 .layout_hero_children {
     position: absolute;
     bottom: 0;
