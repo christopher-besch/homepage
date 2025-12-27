@@ -38,7 +38,7 @@ export default function IndexPage(props: IndexPageProps): React.ReactNode {
         .concat(props.talks.filter(t => t.listed).flatMap(t => t.tags))
         .concat(props.projects.filter(a => a.listed).flatMap(a => a.tags))
         .filter(t => t != "software_development");
-    const tagsList = sortTags(allTags).slice(0, 10);
+    const tagsList = sortTags(allTags).slice(0, 12);
 
     return (
         <Layout

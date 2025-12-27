@@ -14,7 +14,7 @@ export default function PhotographyPage(props: PhotographyPageProps): React.Reac
 
     // All photos are photography.
     const allTags = portfolioToShow.flatMap(p => p.tags).filter(p => p != "photography");
-    const tagsList = sortTags(allTags).slice(0, 10);
+    const tagsList = sortTags(allTags).slice(0, 12);
     return (
         <Layout
             route={props.route}

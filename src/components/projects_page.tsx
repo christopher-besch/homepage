@@ -15,7 +15,7 @@ export default function ProjectsPage(props: ProjectsPageProps): React.ReactNode 
         .sort((a, b) => a.priority - b.priority);
     // All projects are software_development.
     const allTags = projectsToShow.flatMap(p => p.tags).filter(t => t != "software_development");
-    const tagsList = sortTags(allTags).slice(0, 10);
+    const tagsList = sortTags(allTags).slice(0, 12);
     return (
         <Layout
             route={props.route}

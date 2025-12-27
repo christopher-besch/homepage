@@ -15,7 +15,7 @@ export default function ArticlesPage(props: ArticlesPageProps): React.ReactNode 
         // Date must be defined for all listed articles.
         .sort((a, b) => b.date!.getTime() - a.date!.getTime());
     const allTags = articlesToShow.flatMap(p => p.tags);
-    const tagsList = sortTags(allTags).slice(0, 10);
+    const tagsList = sortTags(allTags).slice(0, 12);
     return (
         <Layout
             route={props.route}

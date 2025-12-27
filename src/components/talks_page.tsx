@@ -15,7 +15,7 @@ export default function TalksPage(props: TalksPageProps): React.ReactNode {
         // Date must be defined for all listed talks.
         .sort((a, b) => b.date!.getTime() - a.date!.getTime());
     const allTags = talksToShow.flatMap(p => p.tags);
-    const tagsList = sortTags(allTags).slice(0, 5);
+    const tagsList = sortTags(allTags).slice(0, 4);
     return (
         <Layout
             route={props.route}
