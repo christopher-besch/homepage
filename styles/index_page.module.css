@@ -21,10 +21,10 @@
 .index_page_links {
     margin-top: 30px;
     display: grid;
-    column-gap: clamp(0px, 8vw, 80px);
+    column-gap: clamp(0px, 4vw, 80px);
     row-gap: 5px;
     grid-template-columns: 1fr 1fr;
-    --index-page-links-size: clamp(0px, 10vw, 50px);
+    --index-page-links-size: clamp(0px, 6vw, 35px);
 }
 
 .index_page_links a {
