@@ -124,7 +124,7 @@ export async function directCopyImage(inputPath: string): Promise<string> {
 async function copyDir(srcDir: string, destDir: string): Promise<void> {
     const files = await fs.promises.readdir(srcDir, { recursive: true, withFileTypes: true });
     await Promise.all(files.map(async file => {
-        if (!file.isFile) {
+        if (!file.isFile()) {
             return;
         }
         const srcPath = path.join(file.parentPath, file.name);
@@ -134,7 +134,7 @@ async function copyDir(srcDir: string, destDir: string): Promise<void> {
         if (!fs.existsSync(destPath)) {
             console.log(`Copying: ${srcPath} to ${destPath}`);
             // This needs to be done with that sync function.
-            // Otherwise copyring, e.g. copying with fs.cp, would cause a file system race condition.
+            // Otherwise copying, e.g. copying with fs.cp, would cause a file system race condition.
             ensureDirExists(destPathDir);
             await fs.promises.cp(srcPath, destPath);
         }

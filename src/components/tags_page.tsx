@@ -1,6 +1,5 @@
-import { getTagRoute } from "../paths.js";
 import Layout from "./layout.js";
-import Link from "./link.js";
+import TagsList from "./tags_list.js";
 import Title from "./title.js";
 
 interface TagsPageProps {
@@ -13,14 +12,10 @@ export default function TagsPage(props: TagsPageProps): React.ReactNode {
         <Layout
             route={props.route}
             title="Tags"
-            styleSheets={["always.css", "article.css"]}
+            styleSheets={["always.css"]}
         >
             <Title isHero={false} title="All Tags" />
-            <div className="markdown_body">
-                {props.tags.map(([tag, num], idx) =>
-                    <h6 key={idx}><Link href={getTagRoute(tag)}>#{tag} ({num})</Link></h6>
-                )}
-            </div>
+            <TagsList tags={props.tags.map(([tag, _n]) => tag)} />
         </Layout>
     );
 }

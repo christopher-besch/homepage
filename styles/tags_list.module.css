@@ -1,0 +1,36 @@
+.tags_list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    /* Don't specify grid-template-rows so that each row has it's own height. */
+    grid-auto-flow: row;
+    gap: 5px;
+}
+
+@media (max-width: 1200px) {
+    .tags_list {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .tags_list {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 500px) {
+    .tags_list {
+        grid-template-columns: 1fr;
+    }
+}
+
+.tags_list a {
+    border-style: dashed;
+    border-color: black;
+    color: var(--color-text-link);
+    text-decoration: none;
+}
+
+.tags_list a:hover {
+    text-decoration: underline;
+}

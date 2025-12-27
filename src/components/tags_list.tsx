@@ -6,7 +6,7 @@ interface TagsListProps {
     tags: string[],
 };
 export default function TagsList(props: TagsListProps): React.ReactNode {
-    return <div className="markdown_body">
+    return <div className="tags_list">
         {props.tags.map((tag, idx) =>
             <Fragment key={idx}> <Link href={getTagRoute(tag)}>#{tag}</Link></Fragment>
         )}

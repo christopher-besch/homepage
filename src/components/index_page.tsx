@@ -73,7 +73,6 @@ export default function IndexPage(props: IndexPageProps): React.ReactNode {
                     </div>
                 </div>,
             }}>
-            <TagsList tags={tagsList.map(([tag, _n]) => tag)} />
 
             <Title isHero={false} title="Articles" />
             <CardsList cards={articlesToShow} />
@@ -90,6 +89,9 @@ export default function IndexPage(props: IndexPageProps): React.ReactNode {
             <Title isHero={false} title="Talks" />
             <CardsList cards={talksToShow} />
             <Button href={loadTalksPath} text="All Talks" />
+
+            {/* TODO: move to hero */}
+            <TagsList tags={tagsList.map(([tag, _n]) => tag)} />
         </Layout>
     );
 }

@@ -179,6 +179,6 @@ export default async function Layout(props: React.PropsWithChildren<LayoutProps>
                     <div>© 2025 | All rights reserved</div>
                 </footer>
             </body>
-        </html >
+        </html>
     );
 }

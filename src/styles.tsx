@@ -37,6 +37,7 @@ sourceMap.set("always.css", [
     getStyleSourcePath("cards_list.module.css"),
     getStyleSourcePath("button.module.css"),
     getStyleSourcePath("react_to.module.css"),
+    getStyleSourcePath("tags_list.module.css"),
 ]);
 sourceMap.set("default.css", [
     getStyleSourcePath("index_page.module.css"),
