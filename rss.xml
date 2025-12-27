@@ -4,7 +4,7 @@
         <title>Chris' Homepage</title>
         <link>https://chris-besch.com</link>
         <description>Christopher Besch's Homepage about Software, Articles and Photography</description>
-        <lastBuildDate>Sat, 27 Dec 2025 12:24:47 GMT</lastBuildDate>
+        <lastBuildDate>Sat, 27 Dec 2025 15:33:20 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
@@ -26,24 +26,6 @@
             <description><![CDATA[I bought a new, bigger camera and want to be independent of it.]]></description>
             <author>mail@chris-besch.com (Christopher Besch)</author>
             <enclosure url="https://chris-besch.com/images/54a145d113acd5aed9dd5a5e3e9ff082_800_400.webp" length="0" type="image/webp"/>
-        </item>
-        <item>
-            <title><![CDATA[When You Don't Take the Shot]]></title>
-            <link>/articles/photo_abilities</link>
-            <guid isPermaLink="false">/articles/photo_abilities</guid>
-            <pubDate>Wed, 10 Dec 2025 00:00:00 GMT</pubDate>
-            <description><![CDATA[I list the things I realized to improve my photos. There are the technical abilities (equipment, exposure, post processing, ...) and the surrounding conditions (time, location, ...). And sometimes, photography means letting the shutter rest.]]></description>
-            <author>mail@chris-besch.com (Christopher Besch)</author>
-            <enclosure url="https://chris-besch.com/images/649107d285c96dd4c9b87ed2f0084b53_800_400.webp" length="0" type="image/webp"/>
-        </item>
-        <item>
-            <title><![CDATA[Why I love Open-Source]]></title>
-            <link>/articles/open_source</link>
-            <guid isPermaLink="false">/articles/open_source</guid>
-            <pubDate>Sat, 11 Oct 2025 00:00:00 GMT</pubDate>
-            <description><![CDATA[We all live in a world of immensely complex technology. The concept of Open-Source might seem radical at first but it's indispensable in our world. Regardless if you are a user, developer or simply interested in a healthy society, you benefit from Open-Source and we should fight for every bit of it. Open-Source is a quality mark, a form of democracy and ownership, capitalism at its best and thus the response to this world, a world in which software exists. This article gets to that conclusion without requiring any prior technical knowledge.]]></description>
-            <author>mail@chris-besch.com (Christopher Besch)</author>
-            <enclosure url="https://chris-besch.com/images/e5fdc90ab34ba9a541ab0d11b75e02de_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
             <title><![CDATA[The History of Forgejo's Pub-Sub Pattern]]></title>
@@ -74,23 +56,13 @@ Or: How I blew up my brother.]]></description>
             <enclosure url="https://chris-besch.com/images/e504095a9b565988179fa2df918ae18c_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
-            <title><![CDATA[grub-install --removable for buggy UEFI]]></title>
-            <link>/articles/grub_install_removable</link>
-            <guid isPermaLink="false">/articles/grub_install_removable</guid>
-            <pubDate>Fri, 08 Nov 2024 00:00:00 GMT</pubDate>
-            <description><![CDATA[Install Debian on a device with a broken NVRAM.]]></description>
+            <title><![CDATA[When You Don't Take the Shot]]></title>
+            <link>/articles/photo_abilities</link>
+            <guid isPermaLink="false">/articles/photo_abilities</guid>
+            <pubDate>Wed, 10 Dec 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[I list the things I realized to improve my photos. There are the technical abilities (equipment, exposure, post processing, ...) and the surrounding conditions (time, location, ...). And sometimes, photography means letting the shutter rest.]]></description>
             <author>mail@chris-besch.com (Christopher Besch)</author>
-            <enclosure url="https://chris-besch.com/images/5c5afcd8efd6183c56c8c807a694a48f_800_400.webp" length="0" type="image/webp"/>
-        </item>
-        <item>
-            <title><![CDATA[The Bitter Feeling of Technical Compromises]]></title>
-            <link>/articles/technical_compromises</link>
-            <guid isPermaLink="false">/articles/technical_compromises</guid>
-            <pubDate>Thu, 25 Sep 2025 00:00:00 GMT</pubDate>
-            <description><![CDATA[My very personal troubles dealing with compromises, explained at an example of docker_cron with Renovate.
-Sometimes you really don't have to worry as much and trust your previous, careful considerations.]]></description>
-            <author>mail@chris-besch.com (Christopher Besch)</author>
-            <enclosure url="https://chris-besch.com/images/3548ef292f5ade7df6bc737602d59bd8_800_400.webp" length="0" type="image/webp"/>
+            <enclosure url="https://chris-besch.com/images/649107d285c96dd4c9b87ed2f0084b53_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
             <title><![CDATA[Docker: Breathing Life into Decades old Fortran]]></title>
@@ -103,13 +75,32 @@ Now you get to see Fig.3.5. from "Introduction to Conventional Transmission Elec
             <enclosure url="https://chris-besch.com/images/c5fde5a326c6a0b5e07c470ffda1eb59_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
-            <title><![CDATA[Installing Gentoo To My Liking]]></title>
-            <link>/articles/installing_gentoo</link>
-            <guid isPermaLink="false">/articles/installing_gentoo</guid>
-            <pubDate>Tue, 26 Apr 2022 00:00:00 GMT</pubDate>
-            <description><![CDATA[Gentoo is a Linux distribution that offers as many options as possible. This article leads you through the decisions I took to end up with a system that best suits my needs.]]></description>
+            <title><![CDATA[The Bitter Feeling of Technical Compromises]]></title>
+            <link>/articles/technical_compromises</link>
+            <guid isPermaLink="false">/articles/technical_compromises</guid>
+            <pubDate>Thu, 25 Sep 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[My very personal troubles dealing with compromises, explained at an example of docker_cron with Renovate.
+Sometimes you really don't have to worry as much and trust your previous, careful considerations.]]></description>
             <author>mail@chris-besch.com (Christopher Besch)</author>
-            <enclosure url="https://chris-besch.com/images/dd509c81379268c048ef45318173ad70_800_400.webp" length="0" type="image/webp"/>
+            <enclosure url="https://chris-besch.com/images/3548ef292f5ade7df6bc737602d59bd8_800_400.webp" length="0" type="image/webp"/>
+        </item>
+        <item>
+            <title><![CDATA[Why I love Open-Source]]></title>
+            <link>/articles/open_source</link>
+            <guid isPermaLink="false">/articles/open_source</guid>
+            <pubDate>Sat, 11 Oct 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[We all live in a world of immensely complex technology. The concept of Open-Source might seem radical at first but it's indispensable in our world. Regardless if you are a user, developer or simply interested in a healthy society, you benefit from Open-Source and we should fight for every bit of it. Open-Source is a quality mark, a form of democracy and ownership, capitalism at its best and thus the response to this world, a world in which software exists. This article gets to that conclusion without requiring any prior technical knowledge.]]></description>
+            <author>mail@chris-besch.com (Christopher Besch)</author>
+            <enclosure url="https://chris-besch.com/images/e5fdc90ab34ba9a541ab0d11b75e02de_800_400.webp" length="0" type="image/webp"/>
+        </item>
+        <item>
+            <title><![CDATA[grub-install --removable for buggy UEFI]]></title>
+            <link>/articles/grub_install_removable</link>
+            <guid isPermaLink="false">/articles/grub_install_removable</guid>
+            <pubDate>Fri, 08 Nov 2024 00:00:00 GMT</pubDate>
+            <description><![CDATA[Install Debian on a device with a broken NVRAM.]]></description>
+            <author>mail@chris-besch.com (Christopher Besch)</author>
+            <enclosure url="https://chris-besch.com/images/5c5afcd8efd6183c56c8c807a694a48f_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
             <title><![CDATA[Bodging MP3 Names in Bash]]></title>
@@ -119,6 +110,15 @@ Now you get to see Fig.3.5. from "Introduction to Conventional Transmission Elec
             <description><![CDATA[Why do it complicated when a Bash one-liner does it too?]]></description>
             <author>mail@chris-besch.com (Christopher Besch)</author>
             <enclosure url="https://chris-besch.com/images/5c491b010e8b22c6ffd20605f69d322f_800_400.webp" length="0" type="image/webp"/>
+        </item>
+        <item>
+            <title><![CDATA[Installing Gentoo To My Liking]]></title>
+            <link>/articles/installing_gentoo</link>
+            <guid isPermaLink="false">/articles/installing_gentoo</guid>
+            <pubDate>Tue, 26 Apr 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[Gentoo is a Linux distribution that offers as many options as possible. This article leads you through the decisions I took to end up with a system that best suits my needs.]]></description>
+            <author>mail@chris-besch.com (Christopher Besch)</author>
+            <enclosure url="https://chris-besch.com/images/dd509c81379268c048ef45318173ad70_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
             <title><![CDATA[Saving Time with Tests]]></title>
@@ -131,13 +131,13 @@ Or: How I started to enjoy writing tests.]]></description>
             <enclosure url="https://chris-besch.com/images/4645af088304bd562c94708123e688f3_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
-            <title><![CDATA[LunarVim in Distrobox]]></title>
-            <link>/articles/lvim_in_distrobox</link>
-            <guid isPermaLink="false">/articles/lvim_in_distrobox</guid>
-            <pubDate>Tue, 25 Oct 2022 00:00:00 GMT</pubDate>
-            <description><![CDATA[You're missing that one program that isn't available in your Linux distro? With Distrobox, the 'Linux Subsystem for Linux,' you can install it anyways. This article explains how to do that with the example of installing LunarVim on Red Hat.]]></description>
+            <title><![CDATA[Real-Time Application Development on Linux with PREEMPT RT]]></title>
+            <link>/articles/rt_on_linux.pdf</link>
+            <guid isPermaLink="false">/articles/rt_on_linux.pdf</guid>
+            <pubDate>Mon, 29 Sep 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[While Linux is optimized for throughput and efficiency, real-time applications require bounded worst case latencies. However, with the merging of PREEMPT RT, mainline Linux converts to a real-time operating system (RTOS). Through presenting the application developer’s perspective and the changes PREEMPT RT introduces to the kernel, we review Linux’ real-time capabilities. Additionally, we investigate dynamic worst case execution time (WCET) analysis using a StarFive VisionFive 2 as a case study. Finally, we compare Linux to other RTOSes and argue that the lack of static WCET analysis is Linux’ main drawback for real-time applications.]]></description>
             <author>mail@chris-besch.com (Christopher Besch)</author>
-            <enclosure url="https://chris-besch.com/images/7b55476245f182a8e9f9b7e91efbb1a6_800_400.webp" length="0" type="image/webp"/>
+            <enclosure url="https://chris-besch.com/images/90aa1c30ead3a00608bd83478b9f3b84_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
             <title><![CDATA[Real-Time Linux on RISC-V]]></title>
@@ -148,15 +148,6 @@ Or: How I started to enjoy writing tests.]]></description>
 Also: How to setup your Linux laptop as a simple NAT router.]]></description>
             <author>mail@chris-besch.com (Christopher Besch)</author>
             <enclosure url="https://chris-besch.com/images/e85afd024262b6186553d361a5908877_800_400.webp" length="0" type="image/webp"/>
-        </item>
-        <item>
-            <title><![CDATA[Real-Time Application Development on Linux with PREEMPT RT]]></title>
-            <link>/articles/rt_on_linux.pdf</link>
-            <guid isPermaLink="false">/articles/rt_on_linux.pdf</guid>
-            <pubDate>Mon, 29 Sep 2025 00:00:00 GMT</pubDate>
-            <description><![CDATA[While Linux is optimized for throughput and efficiency, real-time applications require bounded worst case latencies. However, with the merging of PREEMPT RT, mainline Linux converts to a real-time operating system (RTOS). Through presenting the application developer’s perspective and the changes PREEMPT RT introduces to the kernel, we review Linux’ real-time capabilities. Additionally, we investigate dynamic worst case execution time (WCET) analysis using a StarFive VisionFive 2 as a case study. Finally, we compare Linux to other RTOSes and argue that the lack of static WCET analysis is Linux’ main drawback for real-time applications.]]></description>
-            <author>mail@chris-besch.com (Christopher Besch)</author>
-            <enclosure url="https://chris-besch.com/images/90aa1c30ead3a00608bd83478b9f3b84_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
             <title><![CDATA[reveal.js your Presentation]]></title>
@@ -186,6 +177,15 @@ Its programmatic approach provides the precision technical concepts require, whi
             <description><![CDATA[Add font-loading CSS to SVGs with a sed script.]]></description>
             <author>mail@chris-besch.com (Christopher Besch)</author>
             <enclosure url="https://chris-besch.com/images/f59a7f43e2f2a641d46f9fd994b5589c_800_400.webp" length="0" type="image/webp"/>
+        </item>
+        <item>
+            <title><![CDATA[LunarVim in Distrobox]]></title>
+            <link>/articles/lvim_in_distrobox</link>
+            <guid isPermaLink="false">/articles/lvim_in_distrobox</guid>
+            <pubDate>Tue, 25 Oct 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[You're missing that one program that isn't available in your Linux distro? With Distrobox, the 'Linux Subsystem for Linux,' you can install it anyways. This article explains how to do that with the example of installing LunarVim on Red Hat.]]></description>
+            <author>mail@chris-besch.com (Christopher Besch)</author>
+            <enclosure url="https://chris-besch.com/images/7b55476245f182a8e9f9b7e91efbb1a6_800_400.webp" length="0" type="image/webp"/>
         </item>
     </channel>
 </rss>
