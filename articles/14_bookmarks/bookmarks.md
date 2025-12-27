@@ -37,6 +37,7 @@ If you have something to recommend, feel free to tell me at [mail@chris-besch.co
 - [Differential Coverage for Debugging](https://research.swtch.com/diffcover) by Russ Cox
 - [Australia/Lord_Howe is the weirdest timezone](https://ssoready.com/blog/engineering/truths-programmers-timezones/) by Ulysse Carion
 - [Package managers keep using git as a database, it never works out](https://nesbitt.io/2025/12/24/package-managers-keep-using-git-as-a-database.html) by Andrew Nesbitt
+- [Why JavaScript Needed Docker](https://nesbitt.io/2025/12/19/why-javascript-needed-docker.html) by Andrew Nesbitt
 
 ### Hacking and Networking
 - [Everyone knows your location: tracking myself down through in-app ads](https://timsh.org/tracking-myself-down-through-in-app-ads/) by Tim Sh
