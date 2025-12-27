@@ -24,17 +24,13 @@
     column-gap: clamp(0px, 8vw, 80px);
     row-gap: 5px;
     grid-template-columns: 1fr 1fr;
-    /* grid-template-rows: 1fr 1fr 1fr 1fr 1fr; */
-}
-
-.index_page_links a:nth-child(1) {
-    /* background-color: red; */
+    --index-page-links-size: clamp(0px, 10vw, 50px);
 }
 
 .index_page_links a {
     color: var(--color-hero-text);
     text-decoration: none;
-    font-size: clamp(0px, 5vw, 30px);
+    font-size: var(--index-page-links-size);
 }
 
 .index_page_links a:hover span {
@@ -45,7 +41,7 @@
 
 .index_page_links svg {
     fill: var(--color-hero-text);
-    height: clamp(0px, 5vw, 30px);
+    height: var(--index-page-links-size);
     width: auto;
     margin-bottom: -0.2em;
     margin-right: 5px;
