@@ -4,23 +4,28 @@
     /* Don't specify grid-template-rows so that each row has it's own height. */
     grid-auto-flow: row;
     gap: 5px;
+    /* columns: 4; */
+    width: 100%;
 }
 
 @media (max-width: 1200px) {
     .tags_list {
         grid-template-columns: 1fr 1fr 1fr;
+        /* columns: 3; */
     }
 }
 
 @media (max-width: 600px) {
     .tags_list {
         grid-template-columns: 1fr 1fr;
+        /* columns: 2; */
     }
 }
 
 @media (max-width: 500px) {
     .tags_list {
         grid-template-columns: 1fr;
+        /* columns: 1; */
     }
 }
 
@@ -29,6 +34,7 @@
     border-color: black;
     color: var(--color-text-link);
     text-decoration: none;
+    display: block;
 }
 
 .tags_list a:hover {

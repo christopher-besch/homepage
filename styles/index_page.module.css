@@ -20,16 +20,21 @@
 
 .index_page_links {
     margin-top: 30px;
-    display: flex;
-    flex-direction: column;
-    align-items: baseline;
-    gap: 5px;
+    display: grid;
+    column-gap: clamp(0px, 8vw, 80px);
+    row-gap: 5px;
+    grid-template-columns: 1fr 1fr;
+    /* grid-template-rows: 1fr 1fr 1fr 1fr 1fr; */
+}
+
+.index_page_links a:nth-child(1) {
+    /* background-color: red; */
 }
 
 .index_page_links a {
     color: var(--color-hero-text);
     text-decoration: none;
-    font-size: 30px;
+    font-size: clamp(0px, 5vw, 30px);
 }
 
 .index_page_links a:hover span {
@@ -40,8 +45,8 @@
 
 .index_page_links svg {
     fill: var(--color-hero-text);
-    height: 30px;
+    height: clamp(0px, 5vw, 30px);
     width: auto;
-    margin-bottom: -8px;
+    margin-bottom: -0.2em;
     margin-right: 5px;
 }

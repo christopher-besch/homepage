@@ -1,14 +1,12 @@
 import type { Article } from "../articles.js";
 import type { Asset } from "../assets.js";
-import { getResourceLoadPath, loadArticlesPath, loadPhotographyPath, loadProjectsPath, loadTalksPath } from "../paths.js";
+import { getResourceLoadPath, getTagRoute, loadArticlesPath, loadPhotographyPath, loadProjectsPath, loadTalksPath } from "../paths.js";
 import type { Project } from "../projects.js";
-import { sortTags } from "../tags.js";
 import type { Talk } from "../talks.js";
 import Button from "./button.js";
 import CardsList from "./cards_list.js";
 import Layout from "./layout.js";
 import PhotosList from "./photos_list.js";
-import TagsList from "./tags_list.js";
 import Title from "./title.js";
 
 interface IndexPageProps {
@@ -31,14 +29,6 @@ export default function IndexPage(props: IndexPageProps): React.ReactNode {
         // Date must be defined for all listed articles.
         .sort((a, b) => b.date!.getTime() - a.date!.getTime()).slice(0, 2);
     const portfolioToShow = props.portfolio.sort((a, b) => b.rating - a.rating).slice(0, 5);
-
-    // All projects are software_development.
-    // Don't include photo tags here.
-    const allTags = props.articles.filter(p => p.listed).flatMap(p => p.tags)
-        .concat(props.talks.filter(t => t.listed).flatMap(t => t.tags))
-        .concat(props.projects.filter(a => a.listed).flatMap(a => a.tags))
-        .filter(t => t != "software_development");
-    const tagsList = sortTags(allTags).slice(0, 12);
 
     return (
         <Layout
@@ -64,12 +54,20 @@ export default function IndexPage(props: IndexPageProps): React.ReactNode {
                         </a>
                         <a href={loadProjectsPath}>
                             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M320-240 80-480l240-240 57 57-184 184 183 183-56 56Zm320 0-57-57 184-184-183-183 56-56 240 240-240 240Z" /></svg>
-                            <span>Software Projects</span>
+                            <span>Software</span>
                         </a>
                         <a href={loadTalksPath}>
                             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M840-120v-640H120v320H40v-320q0-33 23.5-56.5T120-840h720q33 0 56.5 23.5T920-760v560q0 33-23.5 56.5T840-120ZM360-400q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47Zm0-80q33 0 56.5-23.5T440-560q0-33-23.5-56.5T360-640q-33 0-56.5 23.5T280-560q0 33 23.5 56.5T360-480ZM40-80v-112q0-34 17.5-62.5T104-298q62-31 126-46.5T360-360q66 0 130 15.5T616-298q29 15 46.5 43.5T680-192v112H40Zm80-80h480v-32q0-11-5.5-20T580-226q-54-27-109-40.5T360-280q-56 0-111 13.5T140-226q-9 5-14.5 14t-5.5 20v32Zm240-400Zm0 400Z" /></svg>
                             <span>Talks</span>
                         </a>
+                    </div>
+                    <div className="index_page_links">
+                        <a href={getTagRoute("linux")}><span>#linux</span></a>
+                        <a href={getTagRoute("docker")}><span>#docker</span></a>
+                        <a href={getTagRoute("go")}><span>#go</span></a>
+                        <a href={getTagRoute("web")}><span>#web</span></a>
+                        <a href={getTagRoute("rust")}><span>#rust</span></a>
+                        <a href={getTagRoute("cpp")}><span>#cpp</span></a>
                     </div>
                 </div>,
             }}>
@@ -89,9 +87,6 @@ export default function IndexPage(props: IndexPageProps): React.ReactNode {
             <Title isHero={false} title="Talks" />
             <CardsList cards={talksToShow} />
             <Button href={loadTalksPath} text="All Talks" />
-
-            {/* TODO: move to hero */}
-            <TagsList tags={tagsList.map(([tag, _n]) => tag)} />
         </Layout>
     );
 }

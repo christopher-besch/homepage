@@ -15,7 +15,7 @@ export default function TagsPage(props: TagsPageProps): React.ReactNode {
             styleSheets={["always.css"]}
         >
             <Title isHero={false} title="All Tags" />
-            <TagsList tags={props.tags.map(([tag, _n]) => tag)} />
+            <TagsList tags={props.tags.toSorted().map(([tag, _n]) => tag)} />
         </Layout>
     );
 }
