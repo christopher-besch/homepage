@@ -18,8 +18,15 @@
     font-size: clamp(0px, 6vw, 35px);
 }
 
-.index_page_links {
+.index_page_types {
     margin-top: 30px;
+}
+
+.index_page_tags {
+    margin-top: 22px;
+}
+
+.index_page_links {
     display: grid;
     column-gap: clamp(0px, 4vw, 80px);
     row-gap: 5px;

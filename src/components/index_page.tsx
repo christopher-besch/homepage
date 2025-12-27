@@ -42,7 +42,7 @@ export default function IndexPage(props: IndexPageProps): React.ReactNode {
                 children: <div className="index_page_title">
                     <h1>Welcome&nbsp;to Chris'&nbsp;Place!</h1>
                     <h2>What are you here for?</h2>
-                    <div className="index_page_links">
+                    <div className="index_page_links index_page_types">
                         {/* The icons are google material icons, Apache 2.0 license: https://github.com/google/material-design-icons/blob/master/LICENSE */}
                         <a href={loadArticlesPath}>
                             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M280-280h280v-80H280v80Zm0-160h400v-80H280v80Zm0-160h400v-80H280v80Zm-80 480q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm0-560v560-560Z" /></svg>
@@ -61,7 +61,7 @@ export default function IndexPage(props: IndexPageProps): React.ReactNode {
                             <span>Talks</span>
                         </a>
                     </div>
-                    <div className="index_page_links">
+                    <div className="index_page_links index_page_tags">
                         <a href={getTagRoute("linux")}><span>#linux</span></a>
                         <a href={getTagRoute("docker")}><span>#docker</span></a>
                         <a href={getTagRoute("go")}><span>#go</span></a>
