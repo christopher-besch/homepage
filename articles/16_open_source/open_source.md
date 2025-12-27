@@ -18,7 +18,7 @@ listed: true
 ---
 
 We all live in a world of immensely complex technology.
-The concept of Open-Source might seem radical at first but it's indispensable in our world.
+The concept of Open-Source might seem radical at first but is indispensable in our world.
 Regardless if you are a user, developer or simply interested in a healthy society, you benefit from Open-Source and we should fight for every bit of it.
 Open-Source is a quality mark, a form of democracy and ownership, capitalism at its best and thus the response to this world, a world in which software exists.
 This article gets to that conclusion without requiring any prior technical knowledge.
