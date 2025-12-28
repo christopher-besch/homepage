@@ -19,13 +19,21 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-export function formatDate(date: Date): string {
+export function formatDateFull(date: Date): string {
     const weekday = new Intl.DateTimeFormat("en-US", { weekday: "long" }).format(date);
     const day = date.getDate();
     const month = new Intl.DateTimeFormat("en-US", { month: "long" }).format(date);
     const year = date.getFullYear();
 
     return `${weekday}, ${withOrdinal(day)} ${month}, ${year}`;
+}
+
+export function formatDateShort(date: Date): string {
+    const day = date.getDate();
+    const month = new Intl.DateTimeFormat("en-US", { month: "long" }).format(date);
+    const year = date.getFullYear();
+
+    return `${withOrdinal(day)} ${month}, ${year}`;
 }
 
 function withOrdinal(n: number): string {

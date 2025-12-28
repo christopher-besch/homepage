@@ -1,7 +1,7 @@
 import { type Article } from "../articles.js";
 import Title from "./title.js";
 import Layout from "./layout.js";
-import { formatDate } from "../date.js";
+import { formatDateFull } from "../date.js";
 import CardsList from "./cards_list.js";
 import Button from "./button.js";
 import { getNearestListedNeighbours } from "../embedding.js";
@@ -27,7 +27,7 @@ export default async function ArticlePage(props: ArticlePageProps): Promise<Reac
     }
     // Articles without a date but with tags and/or readtime don't exist.
     const subtitle = article.date == undefined ? undefined : {
-        left: formatDate(article.date),
+        left: formatDateFull(article.date),
         right: article.listed ? `${Math.round(article.readingTimeMinutes)}min` : undefined,
         tags: article.tags,
     };

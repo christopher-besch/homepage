@@ -1,6 +1,7 @@
 import type { Asset } from "../assets.js";
 import { getAssetRoute } from "../paths.js";
 import Image from "./image.js";
+import Link from "./link.js";
 
 interface PhotosListProps {
     assets: Asset[],
@@ -12,9 +13,9 @@ export default function PhotosList(props: PhotosListProps): React.ReactNode {
     return (
         <div className="photos_list">
             {props.assets.map((asset, i) =>
-                <a key={i} className="photos_list_card" href={getAssetRoute(asset.id)}>
+                <Link key={i} className="photos_list_card" href={getAssetRoute(asset.id)}>
                     <Image inputPath={asset.cachePath} lazy={true} />
-                </a>
+                </Link>
             )}
         </div>
     );

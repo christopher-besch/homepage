@@ -1,5 +1,6 @@
 import { getArticleRoute, getResourceLoadPath, loadProjectsPath } from "../paths.js";
 import Layout from "./layout.js";
+import Link from "./link.js";
 import Title from "./title.js";
 
 interface AboutPageProps {
@@ -28,9 +29,9 @@ export default function AboutPage(props: AboutPageProps): React.ReactNode {
                 Do so via
             </p>
             <ul className="about_page_left">
-                <li><a href="mailto:mail@chris-besch.com">mail@chris-besch.com</a> (PGP: <a href={"/pgp_pub_key.asc"}><em>9393&nbsp;2AD1&nbsp;1DCC&nbsp;2CCB&nbsp;4852&nbsp;AE70&nbsp;D610&nbsp;18FF&nbsp;A38E&nbsp;5AFA</em></a>) or</li>
-                <li>with hearts and stars on <a href="https://codeberg.org/christopher-besch">codeberg.org/christopher-besch</a> or</li>
-                <li><a href="https://github.com/christopher-besch">github.com/christopher-besch</a>, thank you :)</li>
+                <li><Link href="mailto:mail@chris-besch.com">mail@chris-besch.com</Link> (PGP: <Link href={"/pgp_pub_key.asc"}><em>9393&nbsp;2AD1&nbsp;1DCC&nbsp;2CCB&nbsp;4852&nbsp;AE70&nbsp;D610&nbsp;18FF&nbsp;A38E&nbsp;5AFA</em></Link>) or</li>
+                <li>with hearts and stars on <Link href="https://codeberg.org/christopher-besch">codeberg.org/christopher-besch</Link> or</li>
+                <li><Link href="https://github.com/christopher-besch">github.com/christopher-besch</Link>, thank you :)</li>
             </ul>
             <p className="about_page_left">
                 <br />
@@ -46,7 +47,7 @@ export default function AboutPage(props: AboutPageProps): React.ReactNode {
                 What are the things I'm interested in?
                 <br />
                 Everything, kinda.
-                Somehow it's very easy for me to find motivation for all sorts of things — just take a look at my <a href={loadProjectsPath}>projects</a> and you'll see where that got me.
+                Somehow it's very easy for me to find motivation for all sorts of things — just take a look at my <Link href={loadProjectsPath}>projects</Link> and you'll see where that got me.
                 <br />
                 That's fun and all but In the long run I'd like to work on:
             </p>
@@ -63,7 +64,7 @@ export default function AboutPage(props: AboutPageProps): React.ReactNode {
             <p className="about_page_left">
                 {/* The space is required because the link on the next line fudges things up. */}
                 What's more, I love working in public.&nbsp;
-                <a href={getArticleRoute("open_source")}>Open-Source is quite amazing</a> — I try publishing as much as possible.
+                <Link href={getArticleRoute("open_source")}>Open-Source is quite amazing</Link> — I try publishing as much as possible.
                 I hope you can find some use for it.
             </p>
             <p className="about_page_right"><em>...2, 1, zero, all engine running...</em></p>
@@ -76,7 +77,7 @@ export default function AboutPage(props: AboutPageProps): React.ReactNode {
                 Thank you and have a very safe and productive day.
                 <br />
                 <em>
-                    Do you get the <a href="https://combineoverwiki.net/wiki/Black_Mesa_Transit_System/Quotes#Half-Life">quote</a>?
+                    Do you get the <Link href="https://combineoverwiki.net/wiki/Black_Mesa_Transit_System/Quotes#Half-Life">quote</Link>?
                 </em>
             </p>
         </div>

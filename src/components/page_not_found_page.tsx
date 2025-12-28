@@ -1,4 +1,5 @@
 import Layout from "./layout.js";
+import Link from "./link.js";
 import Title from "./title.js";
 
 interface PageNotFoundPageProps {
@@ -13,8 +14,8 @@ export default function PageNotFoundPage(props: PageNotFoundPageProps): React.Re
         <div className="markdown_body">
             This page is not the page you are looking for.
             If you followed a link, that link is broken.
-            Please send me a mail at <a href="mailto:mail@chris-besch.com">mail@chris-besch.com</a> and tell me where the broken link is.
-            In any case you can always get back <a href="/">Home</a>.
+            Please send me a mail at <Link href="mailto:mail@chris-besch.com">mail@chris-besch.com</Link> and tell me where the broken link is.
+            In any case you can always get back <Link href="/">Home</Link>.
         </div>
     </Layout>;
 }

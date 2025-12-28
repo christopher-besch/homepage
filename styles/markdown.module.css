@@ -30,6 +30,15 @@
     margin-top: 20px;
 }
 
+.markdown_body h1,
+.markdown_body h2,
+.markdown_body h3,
+.markdown_body h4,
+.markdown_body h5,
+.markdown_body h6 {
+    text-align: left;
+}
+
 .markdown_body ul {
     list-style: disc;
 }

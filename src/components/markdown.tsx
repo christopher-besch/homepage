@@ -33,6 +33,7 @@ import rehypeSlug from "rehype-slug";
 import { fromHtml } from "hast-util-from-html";
 import Quote from "./quote.js";
 import HalfElement from "./half_element.js";
+import Link from "./link.js";
 
 // The icon is from Gatsby's gatsby-remark-autolink-headers plugin: https://github.com/gatsbyjs/gatsby/blob/master/packages/gatsby-remark-autolink-headers/src/index.js#L14
 // The MIT License (MIT)
@@ -117,6 +118,9 @@ export default async function Markdown(props: MarkdownProps): Promise<React.Reac
         },
         Quote(quoteProps) {
             return <Quote {...quoteProps} />
+        },
+        a(anchorProps) {
+            return <Link {...anchorProps} />
         },
     }} />
         {/* Clear the last half element. */}

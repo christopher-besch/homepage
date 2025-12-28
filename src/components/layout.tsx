@@ -2,6 +2,7 @@ import { Fragment } from "react/jsx-dev-runtime";
 import type { ImageSize } from "../convert_image.js";
 import { createStyleLoadPath, faviconLoadPath, getArticleRoute, getFullLoadPath, getResourceLoadPath, loadAboutPath, loadArticlesPath, loadPhotographyPath, loadProjectsPath, loadRssPath, loadTalksPath } from "../paths.js";
 import Image, { getDefaultExportedImage } from "./image.js";
+import Link from "./link.js";
 
 interface LayoutProps {
     route: string,
@@ -32,12 +33,12 @@ export default async function Layout(props: React.PropsWithChildren<LayoutProps>
     }
 
     const nav_links = <div className="layout_nav_links">
-        <a href={loadArticlesPath}>Articles</a>
-        <a href={loadPhotographyPath}>Photos</a>
-        <a href={loadProjectsPath}>Projects</a>
-        <a href={loadTalksPath}>Talks</a>
-        <a href={getArticleRoute("bookmarks")}>Bookmarks</a>
-        <a href={loadAboutPath}>About</a>
+        <Link href={loadArticlesPath}>Articles</Link>
+        <Link href={loadPhotographyPath}>Photos</Link>
+        <Link href={loadProjectsPath}>Projects</Link>
+        <Link href={loadTalksPath}>Talks</Link>
+        <Link href={getArticleRoute("bookmarks")}>Bookmarks</Link>
+        <Link href={loadAboutPath}>About</Link>
     </div>;
 
     // Use the title as a fallback.
@@ -129,13 +130,13 @@ export default async function Layout(props: React.PropsWithChildren<LayoutProps>
 
             <body>
                 <nav className="layout_navbar" role="navigation">
-                    <a className="layout_navbar_left" href="/">
+                    <Link className="layout_navbar_left" href="/">
                         <div>
                             <h1>Christopher&nbsp;Besch</h1>
                             <h2>Developer&bull;Photographer</h2>
                         </div>
                         <Image lazy={false} transparent={true} inputPath={getResourceLoadPath("snake.png")} />
-                    </a>
+                    </Link>
                     <div className="layout_navbar_right">
                         <input id="layout_navbar_toggle" type="checkbox"></input>
                         <label htmlFor="layout_navbar_toggle" className="layout_navbar_hamburger">
@@ -148,7 +149,7 @@ export default async function Layout(props: React.PropsWithChildren<LayoutProps>
                 </nav>
 
                 <div className="layout_transient_space">
-                    <a href="/"><Image lazy={false} transparent={true} inputPath={getResourceLoadPath("snake.png")} /></a>
+                    <Link href="/"><Image lazy={false} transparent={true} inputPath={getResourceLoadPath("snake.png")} /></Link>
                     {nav_links}
                 </div>
 
@@ -173,9 +174,9 @@ export default async function Layout(props: React.PropsWithChildren<LayoutProps>
                 </main>
 
                 <footer className="layout_footer" role="contentinfo">
-                    <a href={loadAboutPath}>Contact</a>
-                    <a href={loadRssPath}>RSS</a>
-                    <a href={getArticleRoute("privacy")}>Privacy</a>
+                    <Link href={loadAboutPath}>Contact</Link>
+                    <Link href={loadRssPath}>RSS</Link>
+                    <Link href={getArticleRoute("privacy")}>Privacy</Link>
                     <div>© 2025 | All rights reserved</div>
                 </footer>
             </body>

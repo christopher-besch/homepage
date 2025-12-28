@@ -1,4 +1,4 @@
-import { formatDate } from "../date.js";
+import { formatDateShort } from "../date.js";
 import Image from "./image.js";
 import Link from "./link.js";
 
@@ -30,8 +30,10 @@ export default function CardsList(props: CardsListProps): React.ReactNode {
                     <Image inputPath={card.banner!} lazy={true} />
                     <h1>{card.title}</h1>
                     {card.date != undefined ?
-                        <h2>{card.readingTimeMinutes == undefined ? undefined : `${Math.round(card.readingTimeMinutes)}min `}{formatDate(card.date)}</h2>
-                        : undefined}
+                        <h2>
+                            {formatDateShort(card.date)}
+                            <span>{card.readingTimeMinutes == undefined ? undefined : ` ${Math.round(card.readingTimeMinutes)}min`}</span>
+                        </h2> : undefined}
                     <hr />
                     <p>{card.description}</p>
                 </Link>
