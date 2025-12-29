@@ -29,8 +29,8 @@ There&#x27;s no keyword for that.
 Instead, symbols with a leading capital letter are implicitly exported, otherwise not.
 Those things are hard to figure out if you haven&#x27;t inhaled the Go docs and for the first time read through a project.
 Therefore, I want to quickly explain how Go handles dependencies.
-There also is an <a href="https://go.dev/doc/modules/managing-dependencies" target="_blank">official generic explanation</a> if you prefer that.</p>
-<p>Okay, so, you find Forgejo&#x27;s source code on <a href="https://codeberg.org/forgejo/forgejo" target="_blank">codeberg.org/forgejo/forgejo</a>.
+There also is an <a href="https://go.dev/doc/modules/managing-dependencies" target="_blank" rel="noopener">official generic explanation</a> if you prefer that.</p>
+<p>Okay, so, you find Forgejo&#x27;s source code on <a href="https://codeberg.org/forgejo/forgejo" target="_blank" rel="noopener">codeberg.org/forgejo/forgejo</a>.
 In this section we&#x27;ll concern ourself with this subsection of Forgejo&#x27;s files:</p>
 <pre><code>/
 ├── go.mod
@@ -45,7 +45,7 @@ In this section we&#x27;ll concern ourself with this subsection of Forgejo&#x27;
 A Go library is a module, a Go executable too.
 Typically one git repo houses a single Go module.
 Forgejo is a binary Go module with the module path <code>forgejo.org</code>.
-We can figure that out by looking at its <a href="https://codeberg.org/forgejo/forgejo/src/branch/forgejo/go.mod" target="_blank"><code>go.mod</code></a> file.</p>
+We can figure that out by looking at its <a href="https://codeberg.org/forgejo/forgejo/src/branch/forgejo/go.mod" target="_blank" rel="noopener"><code>go.mod</code></a> file.</p>
 <pre><code class="language-go"><span class="pl-c">// /go.mod</span>
 module forgejo.<span class="pl-smi">org</span>
 <span class="pl-c">// --snip--</span>
@@ -73,7 +73,7 @@ Every Go file declares what package they are in.
 Go code can use exported and not-exported symbols inside its own package (i.e., functions, values, etc.).
 To use symbols in other packages, however, they must be exported and you need to import that other package.<br/>
 The package <code>main</code> is special, that&#x27;s where the entrypoint is.
-Take a look at Forgejo&#x27;s <a href="https://codeberg.org/forgejo/forgejo/src/branch/forgejo/main.go" target="_blank"><code>main.go</code></a>:</p>
+Take a look at Forgejo&#x27;s <a href="https://codeberg.org/forgejo/forgejo/src/branch/forgejo/main.go" target="_blank" rel="noopener"><code>main.go</code></a>:</p>
 <pre><code class="language-go"><span class="pl-c">// /main.go</span>
 <span class="pl-c">// --snip--</span>
 <span class="pl-k">package</span> main
@@ -95,7 +95,7 @@ Take a look at Forgejo&#x27;s <a href="https://codeberg.org/forgejo/forgejo/src/
 <code>forgejo.org</code> is a domain you can visit with your browser but that&#x27;s more or less just a coincidence.
 Go only uses it to identify Forgejo&#x27;s main package&#x27;s path.
 Therefore, <code>forgejo.org/cmd</code> is not a web endpoint at all, even though it might look like one.
-Instead, it refers to the package <code>cmd</code> located in the <a href="https://codeberg.org/forgejo/forgejo/src/branch/forgejo/cmd" target="_blank"><code>/cmd</code> directory</a>.</p>
+Instead, it refers to the package <code>cmd</code> located in the <a href="https://codeberg.org/forgejo/forgejo/src/branch/forgejo/cmd" target="_blank" rel="noopener"><code>/cmd</code> directory</a>.</p>
 <pre><code class="language-go"><span class="pl-c">// /cmd/main.go</span>
 <span class="pl-c">// --snip--</span>
 <span class="pl-k">package</span> cmd
@@ -109,7 +109,7 @@ Instead, it refers to the package <code>cmd</code> located in the <a href="https
 </code></pre>
 <p>And the <code>forgejo.org/cmd</code> package imports some more packages.
 When you read this, be aware of the to-be-imported package&#x27;s location in the directory structure.
-The package lies in the <a href="https://codeberg.org/forgejo/forgejo/src/branch/forgejo/modules/log" target="_blank"><code>/modules/log</code></a> directory of the <code>forgejo.org</code> module, thus <code>forgejo.org/modules/log</code> refers to it.
+The package lies in the <a href="https://codeberg.org/forgejo/forgejo/src/branch/forgejo/modules/log" target="_blank" rel="noopener"><code>/modules/log</code></a> directory of the <code>forgejo.org</code> module, thus <code>forgejo.org/modules/log</code> refers to it.
 <code>github.com/urfave/cli/v3</code>, however, refers to a dependency Go will download from GitHub during a build.
 The imports look so similar but one is resolved locally and the other from the internet.<br/>
 Notice that the Go files in the <code>forgejo.org/modules/log</code> package declare their package without its full path:</p>
@@ -125,7 +125,7 @@ Remember how the code&#x27;s directory influences the package&#x27;s path.</p>
 They import the functionality of those other packages but also their complexity.
 It is much easier to reason about a package that is as self-contained as possible, that doesn&#x27;t import as many other packages.
 If every package imports every other package, the code-base turns into soup.
-Forgejo tackle this issue by introducing a layered <a href="https://forgejo.org/docs/next/contributor/architecture" target="_blank">architecture</a>.
+Forgejo tackle this issue by introducing a layered <a href="https://forgejo.org/docs/next/contributor/architecture" target="_blank" rel="noopener">architecture</a>.
 It groups packages into layers and forbids packages from importing code in higher layers.
 I&#x27;ve drawn an overview over this structure:</p>
 <div class="half_image_image"><div><div class="half_element_full_element"><img src="/images/30ca8795417abcd2f086abd8cd8ddf53.svg" loading="lazy" alt=""/></div><div class="half_element_spacer"></div></div></div>
@@ -212,11 +212,11 @@ Therefore, that function should send the message.
 However, there&#x27;s a problem:
 When we think back to Forgejo&#x27;s layered architecture we realize that
 <code>forgejo.org/models/actions</code> is not allowed to import <code>forgejo.org/services/notify</code>, because it lies in a lower layer.</p>
-<p>At this point I already compiled everything I figured out and planned to do into issue <a href="https://codeberg.org/forgejo/forgejo/issues/3719" target="_blank">#3719</a>.
+<p>At this point I already compiled everything I figured out and planned to do into issue <a href="https://codeberg.org/forgejo/forgejo/issues/3719" target="_blank" rel="noopener">#3719</a>.
 That gave Forgejo&#x27;s maintainers the option to share their opinion.
 After all, perhaps I didn&#x27;t understand Forgejo&#x27;s structure well enough.
 It&#x27;s better to find that out before spending hours implementing something no one needs.</p>
-<h3 id="pr-7510-refactoring"><a class="markdown_heading_a" href="#pr-7510-refactoring" target="_self"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>PR <a href="https://codeberg.org/forgejo/forgejo/pulls/7510" target="_blank">#7510</a>: Refactoring</h3>
+<h3 id="pr-7510-refactoring"><a class="markdown_heading_a" href="#pr-7510-refactoring" target="_self"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>PR <a href="https://codeberg.org/forgejo/forgejo/pulls/7510" target="_blank" rel="noopener">#7510</a>: Refactoring</h3>
 <p>This is where my first pull request comes in.
 I had to move some code from <code>forgejo.org/models/actions</code> up a layer into <code>forgejo.org/services/actions</code>.
 That&#x27;s where Actions-related code lives that needs to import more things.
@@ -225,15 +225,15 @@ Of course, I had to move <code>UpdateRunJob</code> but e.g., <code>CleanRepoSche
 If I had only moved <code>UpdateRunJob</code>, <code>CleanRepoScheduleTasks</code> would require an import of <code>forgejo.org/services/actions</code>.
 But that is, again, not possible because of the layered architecture.
 Therefore, I also had to move all the function transitively changing the Actions Run&#x27;s status.</p>
-<h3 id="pr-7491-actionrunnowdone-topic"><a class="markdown_heading_a" href="#pr-7491-actionrunnowdone-topic" target="_self"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>PR <a href="https://codeberg.org/forgejo/forgejo/pulls/7491" target="_blank">#7491</a>: <code>ActionRunNowDone</code> Topic</h3>
+<h3 id="pr-7491-actionrunnowdone-topic"><a class="markdown_heading_a" href="#pr-7491-actionrunnowdone-topic" target="_self"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>PR <a href="https://codeberg.org/forgejo/forgejo/pulls/7491" target="_blank" rel="noopener">#7491</a>: <code>ActionRunNowDone</code> Topic</h3>
 <p>Now <code>UpdateRunJob</code> calls the <code>sendActionRunNowDoneNotificationIfNeeded</code> function, which I just implemented.
 It sends a message to the new <code>ActionRunNowDone</code> topic whenever an Action Run is now done.
 Finally, I added a bunch of tests ensuring that in all cases the <code>ActionRunNowDone</code> topic is used.</p>
-<h3 id="pr-7509-actions-done-mail"><a class="markdown_heading_a" href="#pr-7509-actions-done-mail" target="_self"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>PR <a href="https://codeberg.org/forgejo/forgejo/pulls/7509" target="_blank">#7509</a>: Actions Done Mail</h3>
+<h3 id="pr-7509-actions-done-mail"><a class="markdown_heading_a" href="#pr-7509-actions-done-mail" target="_self"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>PR <a href="https://codeberg.org/forgejo/forgejo/pulls/7509" target="_blank" rel="noopener">#7509</a>: Actions Done Mail</h3>
 <p><code>forgejo.org/services/mailer</code>&#x27;s notifier received interest in the <code>ActionRunNowDone</code> topic in this PR.
 I made it send out a mail whenever a Run failed or recovered (i.e., succeeded after a prior failure).
 Again, I added many tests ensuring whenever an <code>ActionRunNowDone</code> message requires it, a mail is sent.</p>
-<h3 id="7508-actions-done-webhook"><a class="markdown_heading_a" href="#7508-actions-done-webhook" target="_self"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><a href="https://codeberg.org/forgejo/forgejo/pulls/7508" target="_blank">#7508</a>: Actions Done Webhook</h3>
+<h3 id="7508-actions-done-webhook"><a class="markdown_heading_a" href="#7508-actions-done-webhook" target="_self"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><a href="https://codeberg.org/forgejo/forgejo/pulls/7508" target="_blank" rel="noopener">#7508</a>: Actions Done Webhook</h3>
 <div class="half_image_image"><div class="half_element_wrapper"><div class="half_element_before"></div><div class="half_element_element"><picture class="image_picture"><img srcSet="/images/b4e166780a33bdeacf27d6d863d98a41_400_372.webp 400w,/images/b4e166780a33bdeacf27d6d863d98a41_800_744.webp 800w,/images/b4e166780a33bdeacf27d6d863d98a41_972_905.webp 972w" width="400" height="372" alt="" style="background-image:radial-gradient(67% 67% at 25% 25%, #f3f4f5, transparent),radial-gradient(67% 67% at 50% 25%, #f9f9fa, transparent),radial-gradient(67% 67% at 75% 25%, #f9f9fa, transparent),radial-gradient(67% 67% at 25% 50%, #f9f9f9, transparent),radial-gradient(67% 67% at 50% 50%, #fdfdfd, transparent),radial-gradient(67% 67% at 75% 50%, #fdfdfd, transparent),radial-gradient(67% 67% at 25% 75%, #f8f8f8, transparent),radial-gradient(67% 67% at 50% 75%, #fafafb, transparent),radial-gradient(67% 67% at 75% 75%, #f9fafa, transparent),linear-gradient(#f9fafa);background-position:0 0, 0 100%;background-size:100% 100%;background-repeat:no-repeat" loading="lazy" fetchPriority="auto"/></picture></div><div class="half_element_after"></div></div></div>
 <p>In this PR <code>forgejo.org/services/webhook</code> got interested in the <code>ActionRunNowDone</code> topic, too.
 It sends out HTTP requests to the webhooks configured in the new settings.<br/>
@@ -241,19 +241,19 @@ For this I had to introduce the <code>ActionRun</code> struct, which allows seri
 Of course, I added tests ensuring whenever an <code>ActionRunNowDone</code> message requires it, a webhook is sent.</p>
 <div class="markdown_spacer"></div>
 <h3 id="repoactionrun-and-actionrun-structs"><a class="markdown_heading_a" href="#repoactionrun-and-actionrun-structs" target="_self"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>RepoActionRun</code> and <code>ActionRun</code> Structs</h3>
-<p>While I got <a href="https://codeberg.org/forgejo/forgejo/pulls/7508" target="_blank">#7508</a> merged, <a href="https://codeberg.org/klausfyhn" target="_blank">klausfyhn</a>&#x27;s <a href="https://codeberg.org/forgejo/forgejo/pulls/7699" target="_blank">#7699</a> extended Forgejo&#x27;s API.
+<p>While I got <a href="https://codeberg.org/forgejo/forgejo/pulls/7508" target="_blank" rel="noopener">#7508</a> merged, <a href="https://codeberg.org/klausfyhn" target="_blank" rel="noopener">klausfyhn</a>&#x27;s <a href="https://codeberg.org/forgejo/forgejo/pulls/7699" target="_blank" rel="noopener">#7699</a> extended Forgejo&#x27;s API.
 The new API endpoints allow for retrieving Action Runs programmatically, which, of course, needed an <code>ActionRun</code> struct for serialisation.
 So his and my PR introduced the same struct at the same time and broke the main <code>forgejo</code> branch, ups.
-<a href="https://codeberg.org/earl-warren" target="_blank">Earl Warren</a> quickly resolved the merge conflict in <a href="https://codeberg.org/forgejo/forgejo/pulls/8066" target="_blank">#8066</a> by renaming <a href="https://codeberg.org/forgejo/forgejo/pulls/7699" target="_blank">#7699</a>&#x27;s struct to <code>RepoActionRun</code>.
-Then, because having two structs for the same purpose is bad, he removed the <code>RepoActionRun</code>, leaving only <code>ActionRun</code> in <a href="https://codeberg.org/forgejo/forgejo/pulls/8250" target="_blank">#8250</a>.
+<a href="https://codeberg.org/earl-warren" target="_blank" rel="noopener">Earl Warren</a> quickly resolved the merge conflict in <a href="https://codeberg.org/forgejo/forgejo/pulls/8066" target="_blank" rel="noopener">#8066</a> by renaming <a href="https://codeberg.org/forgejo/forgejo/pulls/7699" target="_blank" rel="noopener">#7699</a>&#x27;s struct to <code>RepoActionRun</code>.
+Then, because having two structs for the same purpose is bad, he removed the <code>RepoActionRun</code>, leaving only <code>ActionRun</code> in <a href="https://codeberg.org/forgejo/forgejo/pulls/8250" target="_blank" rel="noopener">#8250</a>.
 Both the webhook and the API use the same struct now.</p>
 <h3 id="other-prs"><a class="markdown_heading_a" href="#other-prs" target="_self"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Other PRs</h3>
 <div class="half_image_image"><div class="half_element_wrapper"><div class="half_element_before"></div><div class="half_element_element"><picture class="image_picture"><img srcSet="/images/8eab88a8e6da12ab55525111fb758fef_400_210.webp 400w,/images/8eab88a8e6da12ab55525111fb758fef_800_421.webp 800w,/images/8eab88a8e6da12ab55525111fb758fef_1200_632.webp 1200w,/images/8eab88a8e6da12ab55525111fb758fef_1536_810.webp 1536w" width="400" height="210" alt="" style="background-image:radial-gradient(67% 67% at 25% 25%, #e8e8ea, transparent),radial-gradient(67% 67% at 50% 25%, #f2f2f3, transparent),radial-gradient(67% 67% at 75% 25%, #ffffff, transparent),radial-gradient(67% 67% at 25% 50%, #efeff0, transparent),radial-gradient(67% 67% at 50% 50%, #f1f2f3, transparent),radial-gradient(67% 67% at 75% 50%, #fcfcfc, transparent),radial-gradient(67% 67% at 25% 75%, #f0f2f3, transparent),radial-gradient(67% 67% at 50% 75%, #f6f6f7, transparent),radial-gradient(67% 67% at 75% 75%, #fefefe, transparent),linear-gradient(#f5f6f6);background-position:0 0, 0 100%;background-size:100% 100%;background-repeat:no-repeat" loading="lazy" fetchPriority="auto"/></picture></div><div class="half_element_after"></div></div></div>
 <p>A few more PRs accompanied this feature, which I won&#x27;t get into detail:</p>
 <ul>
-<li><a href="https://codeberg.org/forgejo/forgejo/pulls/7697" target="_blank">#7697</a>: After the Fact Cleanup</li>
-<li><a href="https://codeberg.org/forgejo/forgejo/pulls/8227" target="_blank">#8227</a>: (Earl Warren) Only single user receives mail</li>
-<li><a href="https://codeberg.org/forgejo/forgejo/pulls/8242" target="_blank">#8242</a>: (Earl Warren) actions mail opt-in</li>
+<li><a href="https://codeberg.org/forgejo/forgejo/pulls/7697" target="_blank" rel="noopener">#7697</a>: After the Fact Cleanup</li>
+<li><a href="https://codeberg.org/forgejo/forgejo/pulls/8227" target="_blank" rel="noopener">#8227</a>: (Earl Warren) Only single user receives mail</li>
+<li><a href="https://codeberg.org/forgejo/forgejo/pulls/8242" target="_blank" rel="noopener">#8242</a>: (Earl Warren) actions mail opt-in</li>
 </ul>
 <p>With all that work done, Action notification got into the v12.0 release of Forgejo!
 You can go back up to the visualization and see if you can find my PRs.
@@ -270,12 +270,12 @@ No, I also need an action runner, a mail server and some place to send webhooks 
 <p>Let&#x27;s start with just getting a Forgejo test instance up and running.</p>
 <ol>
 <li>I use Debian but this setup should work on all Linux distros (and maybe macOS and BSD?).</li>
-<li><a href="https://github.com/nvm-sh/nvm?tab=readme-ov-file#install--update-script" target="_blank">Install node and npm</a>.</li>
-<li><a href="https://go.dev/doc/install" target="_blank">Install go</a>.</li>
-<li>Install <a href="https://github.com/gotestyourself/gotestsum" target="_blank">gotestsum</a>.
+<li><a href="https://github.com/nvm-sh/nvm?tab=readme-ov-file#install--update-script" target="_blank" rel="noopener">Install node and npm</a>.</li>
+<li><a href="https://go.dev/doc/install" target="_blank" rel="noopener">Install go</a>.</li>
+<li>Install <a href="https://github.com/gotestyourself/gotestsum" target="_blank" rel="noopener">gotestsum</a>.
 This is entirely optional.
 If you don&#x27;t install gotestsum, ignore all the <code>USE_GOTESTSUM=yes</code> statements below.</li>
-<li>Download the <a href="https://codeberg.org/forgejo/forgejo" target="_blank">Forgejo repo</a> with <code>git clone https://codeberg.org/forgejo/forgejo ~/forgejo &amp;&amp; cd ~/forgejo</code>.</li>
+<li>Download the <a href="https://codeberg.org/forgejo/forgejo" target="_blank" rel="noopener">Forgejo repo</a> with <code>git clone https://codeberg.org/forgejo/forgejo ~/forgejo &amp;&amp; cd ~/forgejo</code>.</li>
 <li>Build an executable with <code>STRIP=&quot;0&quot; EXTRA_GOFLAGS=&#x27;-gcflags=&quot;all=-N -l&quot;&#x27; TAGS=&quot;sqlite sqlite_unlock_notify&quot; make build</code>.
 It took me a while to realize that <code>go build</code> enables optimization by default but keeps all debug symbols present.
 We change that with the <code>gsflags</code> by neither optimizing or inlining.
@@ -308,17 +308,17 @@ I&#x27;m using password login, btw.</li>
 <h3 id="forgejo-runner"><a class="markdown_heading_a" href="#forgejo-runner" target="_self"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Forgejo Runner</h3>
 <p>To test a workflow I need a runner.</p>
 <ol>
-<li>Download the <a href="https://code.forgejo.org/forgejo/runner/releases" target="_blank">Forgejo runner binary</a> into <code>~/forgejo_runner</code>.</li>
+<li>Download the <a href="https://code.forgejo.org/forgejo/runner/releases" target="_blank" rel="noopener">Forgejo runner binary</a> into <code>~/forgejo_runner</code>.</li>
 <li>Register the runner with <code>./forgejo-runner-11.1.2-linux-amd64 register</code>, give the instance URL <code>http://localhost:3000</code>, the runner token you get from the repo settings in the web interface, choose a name like <code>test-runner</code> and select the label <code>self-hosted:host</code>.</li>
 <li>Run <code>./forgejo-runner-11.1.2-linux-amd64 daemon</code> and click the workflow trigger button in the web interface.
 You should see your workflow run now.</li>
 </ol>
 <h3 id="mail-server"><a class="markdown_heading_a" href="#mail-server" target="_self"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Mail Server</h3>
 <p>Okay, that works fine but we also want to test sending emails.
-I use <a href="https://github.com/maildev/maildev" target="_blank">MailDev</a> to create a development email server.
+I use <a href="https://github.com/maildev/maildev" target="_blank" rel="noopener">MailDev</a> to create a development email server.
 It provides an SMTP server, which Forgejo connects to, and a web interface for me, the developer.</p>
 <ol>
-<li><a href="https://docs.docker.com/engine/install" target="_blank">Install Docker</a>.</li>
+<li><a href="https://docs.docker.com/engine/install" target="_blank" rel="noopener">Install Docker</a>.</li>
 <li>Run <code>docker run --network host -p 1080:1080 -p 1025:1025 maildev/maildev</code>.</li>
 <li>Open <code>http://localhost:1080</code> in a webbrowser.</li>
 <li>Shutdown Forgejo and edit it&#x27;s config (in <code>~/forgejo/custom/conf/app.ini</code>).<!-- -->
@@ -339,7 +339,7 @@ It provides an SMTP server, which Forgejo connects to, and a web interface for m
 <h3 id="webhook"><a class="markdown_heading_a" href="#webhook" target="_self"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Webhook</h3>
 <p>Furthermore, we want to test webhooks.</p>
 <ol>
-<li>I&#x27;m using <a href="https://stackoverflow.com/a/46787467" target="_blank">this node script</a> as a test webhook:
+<li>I&#x27;m using <a href="https://stackoverflow.com/a/46787467" target="_blank" rel="noopener">this node script</a> as a test webhook:
 <code>webhook_tester.js</code>:<!-- -->
 <pre><code class="language-js"><span class="pl-c">#!/usr/bin/env node</span>
 
@@ -400,14 +400,14 @@ But what if, instead, you are concerned with this integration test in <code>~/fo
 }
 </code></pre>
 <p>Then you can run <code>USE_GOTESTSUM=yes TAGS=&#x27;sqlite sqlite_unlock_notify&#x27; make &#x27;test-sqlite#TestActionNotifications&#x27;</code>.
-Btw, there are other types of tests, namely frontend tests and the End-to-End tests in a <a href="https://code.forgejo.org/forgejo/end-to-end" target="_blank">special repo</a>.
-I didn&#x27;t work with these yet so I direct you to the <a href="https://forgejo.org/docs/latest/contributor/testing" target="_blank">testing docs</a>.</p>
+Btw, there are other types of tests, namely frontend tests and the End-to-End tests in a <a href="https://code.forgejo.org/forgejo/end-to-end" target="_blank" rel="noopener">special repo</a>.
+I didn&#x27;t work with these yet so I direct you to the <a href="https://forgejo.org/docs/latest/contributor/testing" target="_blank" rel="noopener">testing docs</a>.</p>
 <h2 id="debugging"><a class="markdown_heading_a" href="#debugging" target="_self"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Debugging</h2>
 <p>I like the terminal and am used to GDB.
-Therefore, I&#x27;m using the terminal debugger <a href="https://github.com/go-delve/delve" target="_blank">Delve</a>.
+Therefore, I&#x27;m using the terminal debugger <a href="https://github.com/go-delve/delve" target="_blank" rel="noopener">Delve</a>.
 Let&#x27;s set things up for that:</p>
 <ol>
-<li><a href="https://github.com/go-delve/delve/tree/master/Documentation/installation" target="_blank">Install Delve</a>.</li>
+<li><a href="https://github.com/go-delve/delve/tree/master/Documentation/installation" target="_blank" rel="noopener">Install Delve</a>.</li>
 <li>Build Forgejo as described <a href="#development-setup" target="_self">above</a>.</li>
 <li>Run <code>dlv exec ./gitea</code>.</li>
 <li>Now we can use the Delve console while Forgejo runs, letting you interact with the web interface.
@@ -432,10 +432,10 @@ Furthermore and even though I didn&#x27;t go in-depth in this article, I spent a
 Those tests are really important and not just a side-gig you slap onto the <em>&quot;real&quot;</em> code.
 They enable the maintainers to check things still work as they should when new code comes along and you might have left the project.</p>
 <p>And lastly, of course, the Forgejo maintainers are absolutely amazing.
-Especially <a href="https://codeberg.org/earl-warren" target="_blank">Earl Warren</a> did a lovely job helping me on my journey.
+Especially <a href="https://codeberg.org/earl-warren" target="_blank" rel="noopener">Earl Warren</a> did a lovely job helping me on my journey.
 Thank you!</p>
 <h2 id="ps"><a class="markdown_heading_a" href="#ps" target="_self"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>P.S.</h2>
-<p>I created the talk <a href="https://present.chris-besch.com/2025_11_21_ibm_forgejo/" target="_blank">Contributing to Forgejo</a> around this article.</p><div class="markdown_spacer"></div></div></div><div class="react_to"><div class="tags_list"> <a href="/tag/software_development" target="_self">#<!-- -->software_development</a> <a href="/tag/forgejo" target="_self">#<!-- -->forgejo</a> <a href="/tag/go" target="_self">#<!-- -->go</a> <a href="/tag/web" target="_self">#<!-- -->web</a> <a href="/tag/server" target="_self">#<!-- -->server</a></div><div><button type="button" class="button" onclick="
+<p>I created the talk <a href="https://present.chris-besch.com/2025_11_21_ibm_forgejo/" target="_blank" rel="noopener">Contributing to Forgejo</a> around this article.</p><div class="markdown_spacer"></div></div></div><div class="react_to"><div class="tags_list"> <a href="/tag/software_development" target="_self">#<!-- -->software_development</a> <a href="/tag/forgejo" target="_self">#<!-- -->forgejo</a> <a href="/tag/go" target="_self">#<!-- -->go</a> <a href="/tag/web" target="_self">#<!-- -->web</a> <a href="/tag/server" target="_self">#<!-- -->server</a></div><div><button type="button" class="button" onclick="
 umami.track(
     'like',
     {
@@ -461,4 +461,4 @@ umami.track(
 });
 ">Send Comment</button></div></div></div><div class="title_in_text"><h1>Similar Articles</h1><hr/></div><div class="cards_list"><a class="cards_list_card" href="/articles/forgejo_pub_sub_pattern_history" target="_self"><picture class="image_picture"><img srcSet="/images/a7f291280fadb4822ddaf7ed36c95bf8_400_200.webp 400w,/images/a7f291280fadb4822ddaf7ed36c95bf8_800_400.webp 800w,/images/a7f291280fadb4822ddaf7ed36c95bf8_1200_600.webp 1200w,/images/a7f291280fadb4822ddaf7ed36c95bf8_1280_640.webp 1280w" width="400" height="200" alt="" style="background-image:radial-gradient(67% 67% at 25% 25%, #fefefe, transparent),radial-gradient(67% 67% at 50% 25%, #fafbfc, transparent),radial-gradient(67% 67% at 75% 25%, #fcfdfd, transparent),radial-gradient(67% 67% at 25% 50%, #fcfcfd, transparent),radial-gradient(67% 67% at 50% 50%, #eff2f5, transparent),radial-gradient(67% 67% at 75% 50%, #f8f9fa, transparent),radial-gradient(67% 67% at 25% 75%, #fefdfe, transparent),radial-gradient(67% 67% at 50% 75%, #f2f4f6, transparent),radial-gradient(67% 67% at 75% 75%, #f3f6f7, transparent),linear-gradient(#f9fbfb);background-position:0 0, 0 100%;background-size:100% 100%;background-repeat:no-repeat" loading="lazy" fetchPriority="auto"/></picture><h1>The History of Forgejo&#x27;s Pub-Sub Pattern</h1><h2>30th October, 2025<span> 10min</span></h2><hr/><p>I created a tool to visualize Forgejo&#x27;s Pub-Sub pattern. Why not run that tool on all 24 thousand commits in Forgejo&#x27;s history? What could possibly go wrong?</p></a><a class="cards_list_card" href="/articles/ctemsoft" target="_self"><picture class="image_picture"><img srcSet="/images/c5fde5a326c6a0b5e07c470ffda1eb59_400_200.webp 400w,/images/c5fde5a326c6a0b5e07c470ffda1eb59_800_400.webp 800w,/images/c5fde5a326c6a0b5e07c470ffda1eb59_1200_600.webp 1200w,/images/c5fde5a326c6a0b5e07c470ffda1eb59_1280_640.webp 1280w" width="400" height="200" alt="" style="background-image:radial-gradient(67% 67% at 25% 25%, #e2e2e2, transparent),radial-gradient(67% 67% at 50% 25%, #e1e1e1, transparent),radial-gradient(67% 67% at 75% 25%, #e3e3e3, transparent),radial-gradient(67% 67% at 25% 50%, #e4e4e4, transparent),radial-gradient(67% 67% at 50% 50%, #d7d7d7, transparent),radial-gradient(67% 67% at 75% 50%, #c0c0c0, transparent),radial-gradient(67% 67% at 25% 75%, #f9f9f9, transparent),radial-gradient(67% 67% at 50% 75%, #d9d9d9, transparent),radial-gradient(67% 67% at 75% 75%, #c1c1c1, transparent),linear-gradient(#dddddd);background-position:0 0, 0 100%;background-size:100% 100%;background-repeat:no-repeat" loading="lazy" fetchPriority="auto"/></picture><h1>Docker: Breathing Life into Decades old Fortran</h1><h2>6th April, 2025<span> 4min</span></h2><hr/><p>Bringing decades old Fortran code to life with Docker and animating it with Python.
 Now you get to see Fig.3.5. from &quot;Introduction to Conventional Transmission Electron Microscopy&quot; by Prof. Marc De Graef at 30 frames a second.</p></a><a class="cards_list_card" href="/articles/open_source" target="_self"><picture class="image_picture"><img srcSet="/images/e5fdc90ab34ba9a541ab0d11b75e02de_400_200.webp 400w,/images/e5fdc90ab34ba9a541ab0d11b75e02de_800_400.webp 800w,/images/e5fdc90ab34ba9a541ab0d11b75e02de_1200_600.webp 1200w,/images/e5fdc90ab34ba9a541ab0d11b75e02de_1280_640.webp 1280w" width="400" height="200" alt="" style="background-image:radial-gradient(67% 67% at 25% 25%, #8e8784, transparent),radial-gradient(67% 67% at 50% 25%, #a69689, transparent),radial-gradient(67% 67% at 75% 25%, #bca38d, transparent),radial-gradient(67% 67% at 25% 50%, #695e66, transparent),radial-gradient(67% 67% at 50% 50%, #7a6368, transparent),radial-gradient(67% 67% at 75% 50%, #836168, transparent),radial-gradient(67% 67% at 25% 75%, #454d59, transparent),radial-gradient(67% 67% at 50% 75%, #5b525c, transparent),radial-gradient(67% 67% at 75% 75%, #7d585f, transparent),linear-gradient(#7f6f6f);background-position:0 0, 0 100%;background-size:100% 100%;background-repeat:no-repeat" loading="lazy" fetchPriority="auto"/></picture><h1>Why I love Open-Source</h1><h2>11th October, 2025<span> 23min</span></h2><hr/><p>We all live in a world of immensely complex technology. The concept of Open-Source might seem radical at first but it&#x27;s indispensable in our world. Regardless if you are a user, developer or simply interested in a healthy society, you benefit from Open-Source and we should fight for every bit of it. Open-Source is a quality mark, a form of democracy and ownership, capitalism at its best and thus the response to this world, a world in which software exists. This article gets to that conclusion without requiring any prior technical knowledge.</p></a><a class="cards_list_card" href="/articles/technical_compromises" target="_self"><picture class="image_picture"><img srcSet="/images/3548ef292f5ade7df6bc737602d59bd8_400_200.webp 400w,/images/3548ef292f5ade7df6bc737602d59bd8_800_400.webp 800w,/images/3548ef292f5ade7df6bc737602d59bd8_1200_600.webp 1200w,/images/3548ef292f5ade7df6bc737602d59bd8_1280_640.webp 1280w" width="400" height="200" alt="" style="background-image:radial-gradient(67% 67% at 25% 25%, #475764, transparent),radial-gradient(67% 67% at 50% 25%, #4a5b68, transparent),radial-gradient(67% 67% at 75% 25%, #4a5c68, transparent),radial-gradient(67% 67% at 25% 50%, #2b3c4d, transparent),radial-gradient(67% 67% at 50% 50%, #46505b, transparent),radial-gradient(67% 67% at 75% 50%, #847b70, transparent),radial-gradient(67% 67% at 25% 75%, #1d242a, transparent),radial-gradient(67% 67% at 50% 75%, #55483e, transparent),radial-gradient(67% 67% at 75% 75%, #665648, transparent),linear-gradient(#4b5155);background-position:0 0, 0 100%;background-size:100% 100%;background-repeat:no-repeat" loading="lazy" fetchPriority="auto"/></picture><h1>The Bitter Feeling of Technical Compromises</h1><h2>25th September, 2025<span> 5min</span></h2><hr/><p>My very personal troubles dealing with compromises, explained at an example of docker_cron with Renovate.
-Sometimes you really don&#x27;t have to worry as much and trust your previous, careful considerations.</p></a></div><div><a class="button" href="/articles" target="_self">All Articles</a></div></div></main><footer class="layout_footer" role="contentinfo"><a href="/about" target="_self">Contact</a><a href="/rss.xml" target="_self">RSS</a><a href="/articles/privacy" target="_self">Privacy</a><div>© 2025 | All rights reserved</div></footer></body></html>
+Sometimes you really don&#x27;t have to worry as much and trust your previous, careful considerations.</p></a></div><div><a class="button" href="/articles" target="_self">All Articles</a></div></div></main><footer class="layout_footer" role="contentinfo"><a href="/about" target="_self">Contact</a><a href="/rss.xml" target="_self">RSS</a><a href="/articles/privacy" target="_self">Privacy</a><div>© 2025 | All rights reserved</div><a href="https://webring.xxiivv.com/#chrisbesch" target="_blank" rel="noopener"><img loading="lazy" fetchPriority="auto" class="layout_webring_black" src="/xxiivv_black.svg" alt="XXIIVV webring"/><img loading="lazy" fetchPriority="auto" class="layout_webring_white" src="/xxiivv_white.svg" alt="XXIIVV webring"/></a></footer></body></html>
