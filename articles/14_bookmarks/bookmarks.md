@@ -60,6 +60,7 @@ If you have something to recommend, feel free to tell me at [mail@chris-besch.co
 
 ### Graphics
 - [5 ways to draw an outline](https://ameye.dev/notes/rendering-outlines/) by Alexander Ameye
+- [Dithering](https://vlad.website/dithering) by Vlad-Stefan Harbuz
 
 ### Theoretical Computer Science
 - [Lambda Calculus in 383 Bytes](https://justine.lol/lambda/) by Justine Tunney
