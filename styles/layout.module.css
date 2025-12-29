@@ -216,7 +216,7 @@ body {
 }
 
 .layout_footer a {
-    padding: 5px 10px;
+    padding: 2px 10px;
     border-radius: 3px;
     color: var(--color-navbar-text);
     text-decoration: none;
@@ -258,4 +258,21 @@ body {
     bottom: 0;
     left: 0;
     width: 100%;
+}
+
+.layout_webring_black,
+.layout_webring_white {
+    height: 1.3em;
+}
+
+@media (prefers-color-scheme: light) {
+    .layout_webring_white {
+        display: none;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    .layout_webring_black {
+        display: none;
+    }
 }

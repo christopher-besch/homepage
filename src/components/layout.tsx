@@ -1,6 +1,6 @@
 import { Fragment } from "react/jsx-dev-runtime";
 import type { ImageSize } from "../convert_image.js";
-import { createStyleLoadPath, faviconLoadPath, getArticleRoute, getFullLoadPath, getResourceLoadPath, loadAboutPath, loadArticlesPath, loadPhotographyPath, loadProjectsPath, loadRssPath, loadTalksPath } from "../paths.js";
+import { createStyleLoadPath, faviconLoadPath, getArticleRoute, getFullLoadPath, getResourceLoadPath, loadAboutPath, loadArticlesPath, loadPhotographyPath, loadProjectsPath, loadRssPath, loadTalksPath, XxiivvBlackLoadPath, XxiivvWhiteLoadPath } from "../paths.js";
 import Image, { getDefaultExportedImage } from "./image.js";
 import Link from "./link.js";
 
@@ -178,6 +178,10 @@ export default async function Layout(props: React.PropsWithChildren<LayoutProps>
                     <Link href={loadRssPath}>RSS</Link>
                     <Link href={getArticleRoute("privacy")}>Privacy</Link>
                     <div>© 2025 | All rights reserved</div>
+                    <Link href="https://webring.xxiivv.com/#chrisbesch">
+                        <img loading="lazy" fetchPriority="auto" className="layout_webring_black" src={XxiivvBlackLoadPath} alt="XXIIVV webring" />
+                        <img loading="lazy" fetchPriority="auto" className="layout_webring_white" src={XxiivvWhiteLoadPath} alt="XXIIVV webring" />
+                    </Link>
                 </footer>
             </body>
         </html>

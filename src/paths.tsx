@@ -255,3 +255,7 @@ export const loadTagPath = `/tag`;
 export function getTagRoute(tag: string): string {
     return path.join(loadTagPath, tag);
 }
+
+// XXIIVV //
+export const XxiivvWhiteLoadPath = `/xxiivv_white.svg`;
+export const XxiivvBlackLoadPath = `/xxiivv_black.svg`;
