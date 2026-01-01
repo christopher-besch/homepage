@@ -55,7 +55,8 @@ Still, browsers don't really differentiate between the validation types in the u
 
 I didn't forward to a generic GitHub domain, I forwarded to `christopher-besch.github.io`.
 So, GitHub could have checked my DNS record and realized that I, `christopher-besch`, don't want someone else hosting GitHub Pages on my domain.
-Though, GitHub doesn't do that.
+That's what I expected and trusted GitHub to do.
+However, GitHub doesn't do that.
 Instead, it needs a specific TXT DNS record to understand that that's my domain.
 They call this feature ["verified domains"](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/verifying-your-custom-domain-for-github-pages).
 I enabled that and got my domain back.
