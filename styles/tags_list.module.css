@@ -22,13 +22,6 @@
     }
 }
 
-@media (max-width: 500px) {
-    .tags_list {
-        grid-template-columns: 1fr;
-        /* columns: 1; */
-    }
-}
-
 .tags_list a {
     border-style: dashed;
     border-color: black;

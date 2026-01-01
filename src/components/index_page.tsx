@@ -77,7 +77,7 @@ export default function IndexPage(props: IndexPageProps): React.ReactNode {
             <CardsList cards={articlesToShow} />
             <Button href={loadArticlesPath} text="All Articles" />
 
-            <Title isHero={false} title="Photography" />
+            <Title isHero={false} title="Photos" />
             <PhotosList assets={portfolioToShow} />
             <Button href={loadPhotographyPath} text="All Photos" />
 
