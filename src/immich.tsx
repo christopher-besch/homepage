@@ -20,7 +20,7 @@
 // SOFTWARE.
 
 import { downloadAsset, getAllTags, getAssetInfo, init, searchAssets, type AssetResponseDto } from "@immich/sdk";
-import { getImmichCachePath, getImmichPortfolioPath as immichPortfolioJSONPath } from "./paths.js";
+import { getImmichCachePath, getImmichPortfolioPath } from "./paths.js";
 import path from "path";
 import * as fs from "fs";
 
@@ -36,9 +36,9 @@ export interface UnembeddedAsset {
 // Download from Immich or if cached load JSON.
 export async function loadImmichPortfolioWithoutEmbedding(): Promise<UnembeddedAsset[]> {
     // Don't do anything if we've already downloaded everything.
-    if (fs.existsSync(immichPortfolioJSONPath())) {
+    if (fs.existsSync(getImmichPortfolioPath())) {
         console.log("Using immich image cache.");
-        const file = await fs.promises.readFile(immichPortfolioJSONPath());
+        const file = await fs.promises.readFile(getImmichPortfolioPath());
         return JSON.parse(file.toString());
     }
 
@@ -58,7 +58,7 @@ export async function loadImmichPortfolioWithoutEmbedding(): Promise<UnembeddedA
     const rawTags = await getAllTags({});
     const tagToId = new Map<string, string>(rawTags.map(t => [t.name, t.id]));
     if (!tagToId.has(PORTFOLIO_TAG)) {
-        throw new Error(`Didn't fine ${PORTFOLIO_TAG} tag.`);
+        throw new Error(`Didn't find ${PORTFOLIO_TAG} tag.`);
     }
 
     // Get assets.
@@ -108,6 +108,6 @@ export async function loadImmichPortfolioWithoutEmbedding(): Promise<UnembeddedA
     });
     const jsonPortfolio = JSON.stringify(portfolio, null, 4);
     // Do this in the background
-    fs.promises.writeFile(immichPortfolioJSONPath(), jsonPortfolio).catch(e => { throw e; });
+    fs.promises.writeFile(getImmichPortfolioPath(), jsonPortfolio).catch(e => { throw e; });
     return portfolio;
 }
