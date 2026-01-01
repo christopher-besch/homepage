@@ -54,12 +54,8 @@ function buildLoadPathHTMLInBG(path: string, element: React.ReactNode) {
             const stream = fs.createWriteStream(path);
             out.pipe(stream);
         },
-        onError: (e) => {
-            throw e;
-        },
-        onShellError: (e) => {
-            throw e;
-        },
+        onShellError: (e) => { throw e; },
+        onError: (e) => { throw e; },
     });
 }
 

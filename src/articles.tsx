@@ -102,7 +102,9 @@ async function prepareArticle(mdSrcPath: string): Promise<[UnembeddedArticle, st
                         r(html);
                     });
                     out.pipe(stream);
-                }
+                },
+                onShellError: (e) => { throw e; },
+                onError: (e) => { throw e; },
             });
         }) as string;
         plaintext = htmlToPlaintext(html);
