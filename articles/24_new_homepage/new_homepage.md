@@ -60,9 +60,17 @@ Before an image has loaded, the browser shows a blurry gradient.
 
 <HalfImage full={false} src="lqip.png" />
 
-Those are all features you only need to add if you need them; feel free to stick to the basics and don't use any more dependencies than in the [homepage_template](https://codeberg.org/christopher-besch/homepage_template).
+### Analytics
+I use a self-hosted instance of [umami](https://umami.is) for analytics.
+It works amazingly and because it runs on my own domain, ad blockers don't block the tracker script.
+It's surprisingly fun looking through the analytics and see what happens when [manim.community](https://manim.community) temporarily links to one of my articles.
+
+<HalfImage full={false} src="analytics.png" />
+
+After all this remember: those are all features you only need to add if you need them.
+Feel free to stick to the basics and don't use any more dependencies than in the [homepage_template](https://codeberg.org/christopher-besch/homepage_template).
 That's the point of not using a framework:
-You might still have a lot of dependencies but you don't create your entire homepage around them.
+You might still have a lot of dependencies but you only have what you need and don't create your entire homepage around them.
 Once Gatsby kicked the bucked, I had to re-create my homepage.
 Now if MDX goes, I'll just slot-in a different MarkDown compiler and are back on-track.
 
@@ -95,7 +103,3 @@ I really like my new homepage and feel confident I'll get to implement any new f
 The source code is [here](https://github.com/christopher-besch/homepage), of which some files are Open-Source.
 My [homepage_template](https://codeberg.org/christopher-besch/homepage_template), however, is fully Open-Source.
 Enjoy!
-
-- AI generated helper function rather than dependency
-- umami
-Perhaps it simply isn't for my use-case but I never felt that pay off.
