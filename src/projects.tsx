@@ -55,7 +55,7 @@ async function prepareProject(mdSrcPath: string): Promise<Project> {
         tags: assertIsArrayOfStrings(frontMatter["languages"])
             .concat(assertIsArrayOfStrings(frontMatter["dependencies"]))
             .concat(assertIsArrayOfStrings(frontMatter["tags"]))
-            .concat(["software_development"]),
+            .concat(["software_dev"]),
         banner: bannerName != undefined ? path.join(dirPath, bannerName) : undefined,
         link: assertIsString(frontMatter["link"]),
         date: dateStr != undefined ? new Date(dateStr) : undefined,
