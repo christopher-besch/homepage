@@ -72,6 +72,7 @@ async function prepareArticle(mdSrcPath: string): Promise<[UnembeddedArticle, st
     const file = await fs.promises.readFile(mdSrcPath, "utf8");
     const { content: md, data: frontMatter } = matter(file);
 
+    const title = assertIsString(frontMatter["title"]);
     const bannerName = assertIsOptionalString(frontMatter["banner"]);
     const heroName = assertIsOptionalString(frontMatter["hero"]);
     const dateStr = assertIsOptionalString(frontMatter["date"]);
@@ -86,7 +87,8 @@ async function prepareArticle(mdSrcPath: string): Promise<[UnembeddedArticle, st
 
     // PDF articles don't have reactNode and have a different method of retrieving the plaintext.
     let reactNode: React.ReactNode | undefined = undefined;
-    let plaintext = "";
+    // We want the plaintext in the sentence embedding.
+    let plaintext = title + " ";
     if (!isPDF) {
         reactNode = <Markdown content={md} dirPath={dirPath} />;
         // We need to render the html here again because we need the plaintext for the readtime and sentence embedding.
@@ -107,18 +109,18 @@ async function prepareArticle(mdSrcPath: string): Promise<[UnembeddedArticle, st
                 onError: (e) => { throw e; },
             });
         }) as string;
-        plaintext = htmlToPlaintext(html);
+        plaintext += htmlToPlaintext(html);
     } else {
         const parser = new PDFParse({ url: path.join(dirPath, pdfName) })
         const result = await parser.getText();
         await parser.destroy();
-        plaintext = result.text.replaceAll("\n", " ");
+        plaintext += result.text.replaceAll("\n", " ");
     }
 
     return [{
         dirPath,
         isPDF,
-        title: assertIsString(frontMatter["title"]),
+        title,
         description: assertIsString(frontMatter["description"]).trim(),
         banner: bannerName != undefined ? path.join(dirPath, bannerName) : undefined,
         hero: heroName != undefined ? {
