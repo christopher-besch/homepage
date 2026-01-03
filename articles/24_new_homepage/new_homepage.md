@@ -116,6 +116,6 @@ Among others I also had issues with
 
 ### Conclusion
 I really like my new homepage and am confident implementing new features will be easy.
-The source code is [here](https://github.com/christopher-besch/homepage), of which some files are Open-Source.
+The source code is [here](https://github.com/christopher-besch/homepage), of which some files are [Open-Source](/articles/open_source).
 My [homepage_template](https://codeberg.org/christopher-besch/homepage_template), however, is fully Open-Source.
 Enjoy!
