@@ -51,7 +51,7 @@ export async function embedSentences(sentences: string[]): Promise<number[][]> {
 
     if (sentenceExtractor == undefined) {
         env.localModelPath = modelPath;
-        // We loda the model from the internet in the CI pipeline but use the local one on the dev machine.
+        // We load the model from the internet in the CI pipeline but use the local one on the dev machine.
         // env.allowRemoteModels = false;
         sentenceExtractor = await pipeline("feature-extraction", "Xenova/all-MiniLM-L6-v2", { dtype: "fp32" });
     }
