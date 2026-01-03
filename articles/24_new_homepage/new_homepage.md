@@ -20,7 +20,7 @@ What is the best framework to build a homepage?
 In 2021 I thought Gatsby and quickly regretted my choice.
 The framework forced me to look for Gatsby-specific solutions to general web-problems.
 After considering Next.js, Vue.js and the likes I chose to <s>create my own framework</s> use no framework whatsoever.
-This is what I came up with:
+I reimplemented my homepage, the very website you're currently on, and came up with this:
 
 <HalfImage full={true} src="dirs.webp" />
 
@@ -51,7 +51,7 @@ Now every article and photo on my homepage has a *Similar Articles* / *Similar P
 ### Immich
 [Immich](https://immich.app) is an amazing tool to (among other) select, sort, rate and tag photos.
 Firstly, I upload and catalogue all my photos to Immich.
-Then [`immich.tsx`](https://github.com/christopher-besch/homepage/blob/main/src/immich.tsx) uses the Immich API to download the photos I want to publish into the `./cache` dir.
+Then [`immich.tsx`](https://github.com/christopher-besch/homepage/blob/main/src/immich.tsx) uses the Immich API to download [the photos I want to publish](/photography) into the `./cache` dir.
 This keeps me from uploading my high-res images to the public Git repo, which I don't want to do.
 I actually really like this workflow; I code in the terminal and catalogue in a pretty web UI.
 
