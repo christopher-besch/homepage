@@ -17,6 +17,7 @@ You may use those under the conditions layed out in the respective license.
 The license closest to the source copyrighted material applies.
 
 # Structure
+See my [React without a Framework](https://chris-besch.com/articles/no_framework_homepage) article for an overview.
 The website doesn't have any client-side (i.e., in-brower) JavaScript except for some [umami](https://umami.is) analytics.
 
 - `articles/`: One directory per article. One markdown file in that directory.
