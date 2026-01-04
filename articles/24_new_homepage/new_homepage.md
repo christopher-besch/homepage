@@ -42,8 +42,9 @@ Funnily enough, my old Gatsby homepage used MDX, too.
 The difference:
 Now I can directly use the massive [unified](https://unifiedjs.com) ecosystem whenever I want some new feature (e.g., Code Highlighting or LaTeX markup) and don't have to rely on outdated, undocumented Gatsby-plugins.
 
-### Chris' AI Homepage Agentic AI genAI AI xD
-It's just image and sentence [embedding](https://en.wikipedia.org/wiki/Embedding_(machine_learning)) with [transformer.js](https://huggingface.co/docs/transformers.js/index), actually.
+### Chris' AI Homepage with Agentic AI, genAI AI xD
+Yes, I use AI on my homepage now.
+But it's just image and sentence [embedding](https://en.wikipedia.org/wiki/Embedding_(machine_learning)) with [transformer.js](https://huggingface.co/docs/transformers.js/index), actually.
 [`embedding_worker.tsx`](https://github.com/christopher-besch/homepage/blob/main/src/worker/embedding_worker.tsx) and [`embedding.tsx`](https://github.com/christopher-besch/homepage/blob/main/src/embedding.tsx) take care of finding similar articles and [photos](/photography).
 transformer.js runs surprisingly fast on my CPU-only machine, too.
 Now every article and photo on my homepage has a *Similar Articles* / *Similar Photos* section.
@@ -82,7 +83,7 @@ Though, feel free to stick to the basics and don't use any more dependencies tha
 That's the point of not using a framework:
 You might still have a lot of dependencies but only those you truly need.
 Most importantly, you don't create your entire homepage around them:
-Once Gatsby kicked the bucked, I had to re-create my whole homepage.
+Once Gatsby kicked the bucket, I had to re-create my whole homepage.
 Now if, e.g., MDX goes, I'll just slot-in a different MarkDown compiler and am back on-track.
 
 ### Why not Parallel and Async?
