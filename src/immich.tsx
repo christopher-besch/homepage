@@ -62,14 +62,36 @@ export async function loadImmichPortfolioWithoutEmbedding(): Promise<UnembeddedA
     }
 
     // Get assets.
-    const { assets: rawAssets } = await searchAssets({
-        metadataSearchDto: {
-            tagIds: [tagToId.get(PORTFOLIO_TAG)!]
+    let rawAssets: AssetResponseDto[] = [];
+    // Do pagination.
+    let page = 1;
+    do {
+        console.log(`Requesting asset page ${page}`)
+        const { assets: rawAssetsPage } = await searchAssets({
+            metadataSearchDto: {
+                tagIds: [tagToId.get(PORTFOLIO_TAG)!],
+                page,
+            }
+        });
+        rawAssets.push(...rawAssetsPage.items);
+        if (rawAssetsPage.nextPage != null) {
+            page = parseInt(rawAssetsPage.nextPage);
+            continue;
         }
-    });
-    console.log(`Found ${rawAssets.items.length} assets`);
+    } while (false)
+    console.log(`Found ${rawAssets.length} assets`);
+
     // Get full asset info.
-    const assetInfos = await Promise.all(rawAssets.items.map(async a => getAssetInfo({ id: a.id })));
+    // const assetInfos = await Promise.all(rawAssets.map(async a => getAssetInfo({ id: a.id })));
+    const assetInfos = [];
+    const BATCH_SIZE = 50;
+    for (let i = 0; i < rawAssets.length; i += BATCH_SIZE) {
+        const batch = rawAssets.slice(i, i + BATCH_SIZE);
+        const infos = await Promise.all(
+            batch.map(a => getAssetInfo({ id: a.id }))
+        );
+        assetInfos.push(...infos);
+    }
 
     // TODO: use zip download
     // Download asset if not cached.
