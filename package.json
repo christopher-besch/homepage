@@ -6,7 +6,6 @@
         "type": "git",
         "url": "codeberg.org/christopher-besch/homepage"
     },
-    "license": "",
     "author": "Christopher Besch <mail@chris-besch.com>",
     "type": "module",
     "main": "src/build.tsx",
