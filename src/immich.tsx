@@ -65,7 +65,7 @@ export async function loadImmichPortfolioWithoutEmbedding(): Promise<UnembeddedA
     let rawAssets: AssetResponseDto[] = [];
     // Do pagination.
     let page = 1;
-    do {
+    while(true) {
         console.log(`Requesting asset page ${page}`)
         const { assets: rawAssetsPage } = await searchAssets({
             metadataSearchDto: {
@@ -78,7 +78,7 @@ export async function loadImmichPortfolioWithoutEmbedding(): Promise<UnembeddedA
             page = parseInt(rawAssetsPage.nextPage);
             continue;
         }
-    } while (false)
+    }
     console.log(`Found ${rawAssets.length} assets`);
 
     // Get full asset info.
