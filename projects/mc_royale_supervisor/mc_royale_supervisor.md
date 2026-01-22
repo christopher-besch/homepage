@@ -5,7 +5,7 @@ link: https://github.com/christopher-besch/mc_royale_supervisor
 priority: 800
 date: "2019-12-27"
 languages: [python]
-dependencies: [flask, bootstrap, minecraft]
+dependencies: [flask, bootstrap, minecraft, jinja2]
 tags: [web, db, server]
 banner: banner.png
 listed: true

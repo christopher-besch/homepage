@@ -5,7 +5,7 @@ link: https://github.com/christopher-besch/ohg_plan_parser
 priority: 700
 date: "2018-07-16"
 languages: [python]
-dependencies: [flask, bootstrap]
+dependencies: [flask, bootstrap, jinja2]
 tags: [web, db]
 banner: banner.png
 listed: true

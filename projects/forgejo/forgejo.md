@@ -5,8 +5,8 @@ link: https://codeberg.org/forgejo/forgejo/pulls?q=&type=all&sort=recentupdate&s
 priority: 25
 # probably quite a bit earlier
 date: "2025-03-06"
-languages: [go]
-dependencies: [sqlite, git, mail]
+languages: [go, sql]
+dependencies: [git, mail]
 tags: [web, db, server, forgejo]
 banner: banner.png
 listed: true
