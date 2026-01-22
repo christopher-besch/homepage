@@ -76,7 +76,8 @@ export async function loadImmichPortfolioWithoutEmbedding(): Promise<UnembeddedA
         rawAssets.push(...rawAssetsPage.items);
         if (rawAssetsPage.nextPage != null) {
             page = parseInt(rawAssetsPage.nextPage);
-            continue;
+        } else {
+            break;
         }
     }
     console.log(`Found ${rawAssets.length} assets`);
