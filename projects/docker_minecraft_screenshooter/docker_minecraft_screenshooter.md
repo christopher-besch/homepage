@@ -1,5 +1,5 @@
 ---
-title: docker_minecraft screenshooter
+title: docker_minecraft_screenshooter
 description: "Record Minecraft Timelapse videos."
 link: https://github.com/christopher-besch/docker_minecraft_screenshooter
 priority: 900

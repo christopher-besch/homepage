@@ -6,7 +6,7 @@ priority: 3200
 date: "2022-02-08"
 languages: [typescript]
 dependencies: [webpack]
-tags: [web]
+tags: [kit, web]
 banner: banner.png
 listed: true
 ---

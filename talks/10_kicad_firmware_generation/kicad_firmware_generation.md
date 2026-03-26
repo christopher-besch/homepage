@@ -6,6 +6,6 @@ Automatic Firmware Generation for Spaceflight Hardware based on Schematics
 banner: banner.png
 link: https://present.chris-besch.com/2026_02_20_dlr_kicad_firmware_generation
 date: "2026-02-20" # also on 18.02 in Bremen
-tags: [dlr, kit, software_dev, hardware, kicad, spaceflight]
+tags: [dlr, kit, software_dev, hardware, kicad, spaceflight, python]
 listed: true
 ---

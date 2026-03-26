@@ -6,7 +6,7 @@ priority: 700
 date: "2020-03-08"
 languages: [python]
 dependencies: [gephi]
-tags: [visualization]
+tags: [ohg, visualization]
 banner: banner.png
 listed: true
 ---

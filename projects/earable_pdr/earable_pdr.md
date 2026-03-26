@@ -6,7 +6,7 @@ priority: 300
 date: "2024-12-17"
 languages: [dart]
 dependencies: [flutter, android, kalman_filter]
-tags: []
+tags: [kit]
 banner: banner.png
 listed: true
 ---

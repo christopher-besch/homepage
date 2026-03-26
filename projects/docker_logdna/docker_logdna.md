@@ -6,7 +6,7 @@ priority: 160
 date: "2023-06-22"
 languages: [rust]
 dependencies: [docker, logdna, tokio]
-tags: [server, logging]
+tags: [ibm, server, logging]
 banner: banner.png
 listed: true
 ---

@@ -11,6 +11,6 @@ banner: "./banner.png"
 date: "2025-09-29"
 slug: "rt_on_linux"
 pdf: "./rt_on_linux_report_v3.pdf"
-tags: [linux, real_time, riscv]
+tags: [kit, linux, real_time, riscv]
 listed: true
 ---

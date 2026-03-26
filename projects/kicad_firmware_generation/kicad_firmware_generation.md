@@ -6,7 +6,7 @@ priority: 0
 date: "2025-07-22"
 languages: [python]
 dependencies: [kicad, make, jinja2]
-tags: [hardware]
+tags: [dlr, kit, hardware]
 banner: banner.png
 listed: true
 ---
