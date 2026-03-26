@@ -4,7 +4,7 @@
         <title>Chris' Homepage</title>
         <link>https://chris-besch.com</link>
         <description>Christopher Besch's Homepage about Software, Articles and Photography</description>
-        <lastBuildDate>Thu, 26 Mar 2026 09:44:03 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 26 Mar 2026 12:17:58 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
@@ -18,6 +18,18 @@
 Also, it has been a lot of fun!]]></description>
             <author>mail@chris-besch.com (Christopher Besch)</author>
             <enclosure url="https://chris-besch.com/images/a26b14d67a4aa15f4bd06b01fff6bade_800_400.webp" length="0" type="image/webp"/>
+        </item>
+        <item>
+            <title><![CDATA[Automatic Firmware Generation for Spaceflight Hardware based on Schematics]]></title>
+            <link>/articles/kicad_firmware_generation.pdf</link>
+            <guid isPermaLink="false">/articles/kicad_firmware_generation.pdf</guid>
+            <pubDate>Mon, 16 Feb 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[Any satellite's Power Conditioning and Distribution Unit (PCDU) fulfills the same purpose, providing the subsystems with electrical power. However, because each satellite has a unique set of subsystems, differing PCDUs must realize differing power distributions. How do you efficiently develop firmware for such similar hardware?
+One approach is to group components and their PCB layout into a snippet, e.g., an Analog to Digital Converter (ADC) with supportive components. Each PCDU can reuse the same snippets arranged differently to create different power distributions. While this drastically speeds up the hardware design process, previous works failed at translating this speedup to the firmware development process.
+We propose the Group Netlist, a novel representation of the logical functions of hardware. This machine-readable file format enables automatic firmware generation while remaining agnostic to both programming-language and schematics editor. The electrical engineer annotates the schematics to produce not just the PCB layout but also the Group Netlist.
+Contrary to initial expectations, we show that the Group Netlist has uses beyond firmware generation. This includes but is not limited to harness specification and snippet based design analysis. We provide the reference implementation kicad_firmware_generation as a ready-to-use product for different projects even outside space-exploration.]]></description>
+            <author>mail@chris-besch.com (Christopher Besch)</author>
+            <enclosure url="https://chris-besch.com/images/0169e84fd832065b026f89151e46a407_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
             <title><![CDATA[Forgejo Actions Notification Development]]></title>
@@ -65,72 +77,6 @@ Also, it has been a lot of fun!]]></description>
             <enclosure url="https://chris-besch.com/images/2429205e42d7ecf6646d20aea86a90ce_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
-            <title><![CDATA[Guided Missiles in Minecraft]]></title>
-            <link>/articles/mc_missile</link>
-            <guid isPermaLink="false">/articles/mc_missile</guid>
-            <pubDate>Fri, 06 Jun 2025 00:00:00 GMT</pubDate>
-            <description><![CDATA[I'm having a stab at designing an enitity seeking missile in Minecraft with the mc_missile mod.
-Or: How I blew up my brother.]]></description>
-            <author>mail@chris-besch.com (Christopher Besch)</author>
-            <enclosure url="https://chris-besch.com/images/e504095a9b565988179fa2df918ae18c_800_400.webp" length="0" type="image/webp"/>
-        </item>
-        <item>
-            <title><![CDATA[Why I love Open-Source]]></title>
-            <link>/articles/open_source</link>
-            <guid isPermaLink="false">/articles/open_source</guid>
-            <pubDate>Sat, 11 Oct 2025 00:00:00 GMT</pubDate>
-            <description><![CDATA[We all live in a world of immensely complex technology. The concept of Open-Source might seem radical at first but it's indispensable in our world. Regardless if you are a user, developer or simply interested in a healthy society, you benefit from Open-Source and we should fight for every bit of it. Open-Source is a quality mark, a form of democracy and ownership, capitalism at its best and thus the response to this world, a world in which software exists. This article gets to that conclusion without requiring any prior technical knowledge.]]></description>
-            <author>mail@chris-besch.com (Christopher Besch)</author>
-            <enclosure url="https://chris-besch.com/images/e5fdc90ab34ba9a541ab0d11b75e02de_800_400.webp" length="0" type="image/webp"/>
-        </item>
-        <item>
-            <title><![CDATA[grub-install --removable for buggy UEFI]]></title>
-            <link>/articles/grub_install_removable</link>
-            <guid isPermaLink="false">/articles/grub_install_removable</guid>
-            <pubDate>Fri, 08 Nov 2024 00:00:00 GMT</pubDate>
-            <description><![CDATA[Install Debian on a device with a broken NVRAM.]]></description>
-            <author>mail@chris-besch.com (Christopher Besch)</author>
-            <enclosure url="https://chris-besch.com/images/5c5afcd8efd6183c56c8c807a694a48f_800_400.webp" length="0" type="image/webp"/>
-        </item>
-        <item>
-            <title><![CDATA[Docker: Breathing Life into Decades old Fortran]]></title>
-            <link>/articles/ctemsoft</link>
-            <guid isPermaLink="false">/articles/ctemsoft</guid>
-            <pubDate>Sun, 06 Apr 2025 00:00:00 GMT</pubDate>
-            <description><![CDATA[Bringing decades old Fortran code to life with Docker and animating it with Python.
-Now you get to see Fig.3.5. from "Introduction to Conventional Transmission Electron Microscopy" by Prof. Marc De Graef at 30 frames a second.]]></description>
-            <author>mail@chris-besch.com (Christopher Besch)</author>
-            <enclosure url="https://chris-besch.com/images/c5fde5a326c6a0b5e07c470ffda1eb59_800_400.webp" length="0" type="image/webp"/>
-        </item>
-        <item>
-            <title><![CDATA[The Bitter Feeling of Technical Compromises]]></title>
-            <link>/articles/technical_compromises</link>
-            <guid isPermaLink="false">/articles/technical_compromises</guid>
-            <pubDate>Thu, 25 Sep 2025 00:00:00 GMT</pubDate>
-            <description><![CDATA[My very personal troubles dealing with compromises, explained at an example of docker_cron with Renovate.
-Sometimes you really don't have to worry as much and trust your previous, careful considerations.]]></description>
-            <author>mail@chris-besch.com (Christopher Besch)</author>
-            <enclosure url="https://chris-besch.com/images/3548ef292f5ade7df6bc737602d59bd8_800_400.webp" length="0" type="image/webp"/>
-        </item>
-        <item>
-            <title><![CDATA[Bodging MP3 Names in Bash]]></title>
-            <link>/articles/bash_cmds/mp3_tag</link>
-            <guid isPermaLink="false">/articles/bash_cmds/mp3_tag</guid>
-            <pubDate>Wed, 12 Oct 2022 00:00:00 GMT</pubDate>
-            <description><![CDATA[Why do it complicated when a Bash one-liner does it too?]]></description>
-            <author>mail@chris-besch.com (Christopher Besch)</author>
-            <enclosure url="https://chris-besch.com/images/5c491b010e8b22c6ffd20605f69d322f_800_400.webp" length="0" type="image/webp"/>
-        </item>
-        <item>
-            <title><![CDATA[Installing Gentoo To My Liking]]></title>
-            <link>/articles/installing_gentoo</link>
-            <guid isPermaLink="false">/articles/installing_gentoo</guid>
-            <pubDate>Tue, 26 Apr 2022 00:00:00 GMT</pubDate>
-            <description><![CDATA[Gentoo is a Linux distribution that offers as many options as possible. This article leads you through the decisions I took to end up with a system that best suits my needs.]]></description>
-            <author>mail@chris-besch.com (Christopher Besch)</author>
-            <enclosure url="https://chris-besch.com/images/dd509c81379268c048ef45318173ad70_800_400.webp" length="0" type="image/webp"/>
-        </item>
-        <item>
             <title><![CDATA[Real-Time Application Development on Linux with PREEMPT RT]]></title>
             <link>/articles/rt_on_linux.pdf</link>
             <guid isPermaLink="false">/articles/rt_on_linux.pdf</guid>
@@ -138,6 +84,25 @@ Sometimes you really don't have to worry as much and trust your previous, carefu
             <description><![CDATA[While Linux is optimized for throughput and efficiency, real-time applications require bounded worst case latencies. However, with the merging of PREEMPT RT, mainline Linux converts to a real-time operating system (RTOS). Through presenting the application developer’s perspective and the changes PREEMPT RT introduces to the kernel, we review Linux’ real-time capabilities. Additionally, we investigate dynamic worst case execution time (WCET) analysis using a StarFive VisionFive 2 as a case study. Finally, we compare Linux to other RTOSes and argue that the lack of static WCET analysis is Linux’ main drawback for real-time applications.]]></description>
             <author>mail@chris-besch.com (Christopher Besch)</author>
             <enclosure url="https://chris-besch.com/images/90aa1c30ead3a00608bd83478b9f3b84_800_400.webp" length="0" type="image/webp"/>
+        </item>
+        <item>
+            <title><![CDATA[Inject Fonts into Web SVGs with sed]]></title>
+            <link>/articles/svg_fonts_with_sed</link>
+            <guid isPermaLink="false">/articles/svg_fonts_with_sed</guid>
+            <pubDate>Mon, 10 Feb 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[Add font-loading CSS to SVGs with a sed script.]]></description>
+            <author>mail@chris-besch.com (Christopher Besch)</author>
+            <enclosure url="https://chris-besch.com/images/f59a7f43e2f2a641d46f9fd994b5589c_800_400.webp" length="0" type="image/webp"/>
+        </item>
+        <item>
+            <title><![CDATA[Saving Time with Tests]]></title>
+            <link>/articles/testing</link>
+            <guid isPermaLink="false">/articles/testing</guid>
+            <pubDate>Wed, 14 May 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[Using tests not to increase quality but to more quickly get things done.
+Or: How I started to enjoy writing tests.]]></description>
+            <author>mail@chris-besch.com (Christopher Besch)</author>
+            <enclosure url="https://chris-besch.com/images/4645af088304bd562c94708123e688f3_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
             <title><![CDATA[Real-Time Linux on RISC-V]]></title>
@@ -150,15 +115,6 @@ Also: How to setup your Linux laptop as a simple NAT router.]]></description>
             <enclosure url="https://chris-besch.com/images/e85afd024262b6186553d361a5908877_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
-            <title><![CDATA[Inject Fonts into Web SVGs with sed]]></title>
-            <link>/articles/svg_fonts_with_sed</link>
-            <guid isPermaLink="false">/articles/svg_fonts_with_sed</guid>
-            <pubDate>Mon, 10 Feb 2025 00:00:00 GMT</pubDate>
-            <description><![CDATA[Add font-loading CSS to SVGs with a sed script.]]></description>
-            <author>mail@chris-besch.com (Christopher Besch)</author>
-            <enclosure url="https://chris-besch.com/images/f59a7f43e2f2a641d46f9fd994b5589c_800_400.webp" length="0" type="image/webp"/>
-        </item>
-        <item>
             <title><![CDATA[reveal.js your Presentation]]></title>
             <link>/articles/revealjs</link>
             <guid isPermaLink="false">/articles/revealjs</guid>
@@ -167,6 +123,25 @@ Also: How to setup your Linux laptop as a simple NAT router.]]></description>
 This article shows how you can use reveal.js for your own presentation.]]></description>
             <author>mail@chris-besch.com (Christopher Besch)</author>
             <enclosure url="https://chris-besch.com/images/90f1af0c0e4970e8cf923a375c719169_800_400.webp" length="0" type="image/webp"/>
+        </item>
+        <item>
+            <title><![CDATA[LunarVim in Distrobox]]></title>
+            <link>/articles/lvim_in_distrobox</link>
+            <guid isPermaLink="false">/articles/lvim_in_distrobox</guid>
+            <pubDate>Tue, 25 Oct 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[You're missing that one program that isn't available in your Linux distro? With Distrobox, the 'Linux Subsystem for Linux,' you can install it anyways. This article explains how to do that with the example of installing LunarVim on Red Hat.]]></description>
+            <author>mail@chris-besch.com (Christopher Besch)</author>
+            <enclosure url="https://chris-besch.com/images/7b55476245f182a8e9f9b7e91efbb1a6_800_400.webp" length="0" type="image/webp"/>
+        </item>
+        <item>
+            <title><![CDATA[Guided Missiles in Minecraft]]></title>
+            <link>/articles/mc_missile</link>
+            <guid isPermaLink="false">/articles/mc_missile</guid>
+            <pubDate>Fri, 06 Jun 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[I'm having a stab at designing an enitity seeking missile in Minecraft with the mc_missile mod.
+Or: How I blew up my brother.]]></description>
+            <author>mail@chris-besch.com (Christopher Besch)</author>
+            <enclosure url="https://chris-besch.com/images/e504095a9b565988179fa2df918ae18c_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
             <title><![CDATA[Maki, Atoms and Time Travel]]></title>
@@ -179,23 +154,60 @@ Its programmatic approach provides the precision technical concepts require, whi
             <enclosure url="https://chris-besch.com/images/ec9e9265791849f80f7f7e1d76995206_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
-            <title><![CDATA[LunarVim in Distrobox]]></title>
-            <link>/articles/lvim_in_distrobox</link>
-            <guid isPermaLink="false">/articles/lvim_in_distrobox</guid>
-            <pubDate>Tue, 25 Oct 2022 00:00:00 GMT</pubDate>
-            <description><![CDATA[You're missing that one program that isn't available in your Linux distro? With Distrobox, the 'Linux Subsystem for Linux,' you can install it anyways. This article explains how to do that with the example of installing LunarVim on Red Hat.]]></description>
+            <title><![CDATA[The Bitter Feeling of Technical Compromises]]></title>
+            <link>/articles/technical_compromises</link>
+            <guid isPermaLink="false">/articles/technical_compromises</guid>
+            <pubDate>Thu, 25 Sep 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[My very personal troubles dealing with compromises, explained at an example of docker_cron with Renovate.
+Sometimes you really don't have to worry as much and trust your previous, careful considerations.]]></description>
             <author>mail@chris-besch.com (Christopher Besch)</author>
-            <enclosure url="https://chris-besch.com/images/7b55476245f182a8e9f9b7e91efbb1a6_800_400.webp" length="0" type="image/webp"/>
+            <enclosure url="https://chris-besch.com/images/3548ef292f5ade7df6bc737602d59bd8_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
-            <title><![CDATA[Saving Time with Tests]]></title>
-            <link>/articles/testing</link>
-            <guid isPermaLink="false">/articles/testing</guid>
-            <pubDate>Wed, 14 May 2025 00:00:00 GMT</pubDate>
-            <description><![CDATA[Using tests not to increase quality but to more quickly get things done.
-Or: How I started to enjoy writing tests.]]></description>
+            <title><![CDATA[grub-install --removable for buggy UEFI]]></title>
+            <link>/articles/grub_install_removable</link>
+            <guid isPermaLink="false">/articles/grub_install_removable</guid>
+            <pubDate>Fri, 08 Nov 2024 00:00:00 GMT</pubDate>
+            <description><![CDATA[Install Debian on a device with a broken NVRAM.]]></description>
             <author>mail@chris-besch.com (Christopher Besch)</author>
-            <enclosure url="https://chris-besch.com/images/4645af088304bd562c94708123e688f3_800_400.webp" length="0" type="image/webp"/>
+            <enclosure url="https://chris-besch.com/images/5c5afcd8efd6183c56c8c807a694a48f_800_400.webp" length="0" type="image/webp"/>
+        </item>
+        <item>
+            <title><![CDATA[Why I love Open-Source]]></title>
+            <link>/articles/open_source</link>
+            <guid isPermaLink="false">/articles/open_source</guid>
+            <pubDate>Sat, 11 Oct 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[We all live in a world of immensely complex technology. The concept of Open-Source might seem radical at first but it's indispensable in our world. Regardless if you are a user, developer or simply interested in a healthy society, you benefit from Open-Source and we should fight for every bit of it. Open-Source is a quality mark, a form of democracy and ownership, capitalism at its best and thus the response to this world, a world in which software exists. This article gets to that conclusion without requiring any prior technical knowledge.]]></description>
+            <author>mail@chris-besch.com (Christopher Besch)</author>
+            <enclosure url="https://chris-besch.com/images/e5fdc90ab34ba9a541ab0d11b75e02de_800_400.webp" length="0" type="image/webp"/>
+        </item>
+        <item>
+            <title><![CDATA[Bodging MP3 Names in Bash]]></title>
+            <link>/articles/bash_cmds/mp3_tag</link>
+            <guid isPermaLink="false">/articles/bash_cmds/mp3_tag</guid>
+            <pubDate>Wed, 12 Oct 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[Why do it complicated when a Bash one-liner does it too?]]></description>
+            <author>mail@chris-besch.com (Christopher Besch)</author>
+            <enclosure url="https://chris-besch.com/images/5c491b010e8b22c6ffd20605f69d322f_800_400.webp" length="0" type="image/webp"/>
+        </item>
+        <item>
+            <title><![CDATA[Docker: Breathing Life into Decades old Fortran]]></title>
+            <link>/articles/ctemsoft</link>
+            <guid isPermaLink="false">/articles/ctemsoft</guid>
+            <pubDate>Sun, 06 Apr 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[Bringing decades old Fortran code to life with Docker and animating it with Python.
+Now you get to see Fig.3.5. from "Introduction to Conventional Transmission Electron Microscopy" by Prof. Marc De Graef at 30 frames a second.]]></description>
+            <author>mail@chris-besch.com (Christopher Besch)</author>
+            <enclosure url="https://chris-besch.com/images/c5fde5a326c6a0b5e07c470ffda1eb59_800_400.webp" length="0" type="image/webp"/>
+        </item>
+        <item>
+            <title><![CDATA[Installing Gentoo To My Liking]]></title>
+            <link>/articles/installing_gentoo</link>
+            <guid isPermaLink="false">/articles/installing_gentoo</guid>
+            <pubDate>Tue, 26 Apr 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[Gentoo is a Linux distribution that offers as many options as possible. This article leads you through the decisions I took to end up with a system that best suits my needs.]]></description>
+            <author>mail@chris-besch.com (Christopher Besch)</author>
+            <enclosure url="https://chris-besch.com/images/dd509c81379268c048ef45318173ad70_800_400.webp" length="0" type="image/webp"/>
         </item>
     </channel>
 </rss>
