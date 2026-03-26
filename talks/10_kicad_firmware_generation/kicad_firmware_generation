@@ -1,11 +1,11 @@
 ---
-title: "DLR: kicad_firmware_generation"
+title: "DLR, KIT: kicad_firmware_generation"
 description: "
 Automatic Firmware Generation for Spaceflight Hardware based on Schematics
 "
 banner: banner.png
 link: https://present.chris-besch.com/2026_02_20_dlr_kicad_firmware_generation
 date: "2026-02-20" # also on 18.02 in Bremen
-tags: [dlr, hardware, kicad, spaceflight]
+tags: [dlr, kit, software_dev, hardware, kicad, spaceflight]
 listed: true
 ---
