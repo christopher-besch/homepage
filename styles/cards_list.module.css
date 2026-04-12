@@ -24,6 +24,8 @@
 .cards_list_card h1 {
     margin-top: 5px;
     font-size: 30px;
+    /* Instead we add a wbr tag before all underscores. */
+    /* overflow-wrap: anywhere; */
 }
 
 .cards_list_card h2 {
