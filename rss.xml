@@ -4,7 +4,7 @@
         <title>Chris' Homepage</title>
         <link>https://chris-besch.com</link>
         <description>Christopher Besch's Homepage about Software, Articles and Photography</description>
-        <lastBuildDate>Sun, 12 Apr 2026 11:03:46 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 16 Apr 2026 20:41:17 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
@@ -115,6 +115,15 @@ Also: How to setup your Linux laptop as a simple NAT router.]]></description>
             <enclosure url="https://chris-besch.com/images/f59a7f43e2f2a641d46f9fd994b5589c_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
+            <title><![CDATA[LunarVim in Distrobox]]></title>
+            <link>/articles/lvim_in_distrobox</link>
+            <guid isPermaLink="false">/articles/lvim_in_distrobox</guid>
+            <pubDate>Tue, 25 Oct 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[You're missing that one program that isn't available in your Linux distro? With Distrobox, the 'Linux Subsystem for Linux,' you can install it anyways. This article explains how to do that with the example of installing LunarVim on Red Hat.]]></description>
+            <author>mail@chris-besch.com (Christopher Besch)</author>
+            <enclosure url="https://chris-besch.com/images/7b55476245f182a8e9f9b7e91efbb1a6_800_400.webp" length="0" type="image/webp"/>
+        </item>
+        <item>
             <title><![CDATA[reveal.js your Presentation]]></title>
             <link>/articles/revealjs</link>
             <guid isPermaLink="false">/articles/revealjs</guid>
@@ -123,25 +132,6 @@ Also: How to setup your Linux laptop as a simple NAT router.]]></description>
 This article shows how you can use reveal.js for your own presentation.]]></description>
             <author>mail@chris-besch.com (Christopher Besch)</author>
             <enclosure url="https://chris-besch.com/images/90f1af0c0e4970e8cf923a375c719169_800_400.webp" length="0" type="image/webp"/>
-        </item>
-        <item>
-            <title><![CDATA[Guided Missiles in Minecraft]]></title>
-            <link>/articles/mc_missile</link>
-            <guid isPermaLink="false">/articles/mc_missile</guid>
-            <pubDate>Fri, 06 Jun 2025 00:00:00 GMT</pubDate>
-            <description><![CDATA[I'm having a stab at designing an enitity seeking missile in Minecraft with the mc_missile mod.
-Or: How I blew up my brother.]]></description>
-            <author>mail@chris-besch.com (Christopher Besch)</author>
-            <enclosure url="https://chris-besch.com/images/e504095a9b565988179fa2df918ae18c_800_400.webp" length="0" type="image/webp"/>
-        </item>
-        <item>
-            <title><![CDATA[LunarVim in Distrobox]]></title>
-            <link>/articles/lvim_in_distrobox</link>
-            <guid isPermaLink="false">/articles/lvim_in_distrobox</guid>
-            <pubDate>Tue, 25 Oct 2022 00:00:00 GMT</pubDate>
-            <description><![CDATA[You're missing that one program that isn't available in your Linux distro? With Distrobox, the 'Linux Subsystem for Linux,' you can install it anyways. This article explains how to do that with the example of installing LunarVim on Red Hat.]]></description>
-            <author>mail@chris-besch.com (Christopher Besch)</author>
-            <enclosure url="https://chris-besch.com/images/7b55476245f182a8e9f9b7e91efbb1a6_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
             <title><![CDATA[Maki, Atoms and Time Travel]]></title>
@@ -154,6 +144,16 @@ Its programmatic approach provides the precision technical concepts require, whi
             <enclosure url="https://chris-besch.com/images/ec9e9265791849f80f7f7e1d76995206_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
+            <title><![CDATA[Guided Missiles in Minecraft]]></title>
+            <link>/articles/mc_missile</link>
+            <guid isPermaLink="false">/articles/mc_missile</guid>
+            <pubDate>Fri, 06 Jun 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[I'm having a stab at designing an enitity seeking missile in Minecraft with the mc_missile mod.
+Or: How I blew up my brother.]]></description>
+            <author>mail@chris-besch.com (Christopher Besch)</author>
+            <enclosure url="https://chris-besch.com/images/e504095a9b565988179fa2df918ae18c_800_400.webp" length="0" type="image/webp"/>
+        </item>
+        <item>
             <title><![CDATA[The Bitter Feeling of Technical Compromises]]></title>
             <link>/articles/technical_compromises</link>
             <guid isPermaLink="false">/articles/technical_compromises</guid>
@@ -164,15 +164,6 @@ Sometimes you really don't have to worry as much and trust your previous, carefu
             <enclosure url="https://chris-besch.com/images/3548ef292f5ade7df6bc737602d59bd8_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
-            <title><![CDATA[Bodging MP3 Names in Bash]]></title>
-            <link>/articles/bash_cmds/mp3_tag</link>
-            <guid isPermaLink="false">/articles/bash_cmds/mp3_tag</guid>
-            <pubDate>Wed, 12 Oct 2022 00:00:00 GMT</pubDate>
-            <description><![CDATA[Why do it complicated when a Bash one-liner does it too?]]></description>
-            <author>mail@chris-besch.com (Christopher Besch)</author>
-            <enclosure url="https://chris-besch.com/images/5c491b010e8b22c6ffd20605f69d322f_800_400.webp" length="0" type="image/webp"/>
-        </item>
-        <item>
             <title><![CDATA[grub-install --removable for buggy UEFI]]></title>
             <link>/articles/grub_install_removable</link>
             <guid isPermaLink="false">/articles/grub_install_removable</guid>
@@ -180,6 +171,15 @@ Sometimes you really don't have to worry as much and trust your previous, carefu
             <description><![CDATA[Install Debian on a device with a broken NVRAM.]]></description>
             <author>mail@chris-besch.com (Christopher Besch)</author>
             <enclosure url="https://chris-besch.com/images/5c5afcd8efd6183c56c8c807a694a48f_800_400.webp" length="0" type="image/webp"/>
+        </item>
+        <item>
+            <title><![CDATA[Bodging MP3 Names in Bash]]></title>
+            <link>/articles/bash_cmds/mp3_tag</link>
+            <guid isPermaLink="false">/articles/bash_cmds/mp3_tag</guid>
+            <pubDate>Wed, 12 Oct 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[Why do it complicated when a Bash one-liner does it too?]]></description>
+            <author>mail@chris-besch.com (Christopher Besch)</author>
+            <enclosure url="https://chris-besch.com/images/5c491b010e8b22c6ffd20605f69d322f_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
             <title><![CDATA[Why I love Open-Source]]></title>
