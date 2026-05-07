@@ -42,3 +42,12 @@ This build systems caches a lot.
 It caches the images loaded from immich and the embeddings.
 It also caches cropped and resized images.
 When things don't update properly, delete the cache.
+
+# Building
+- create `.env` file:
+  ```
+  export IMMICH_BASE_URL=https://photo.chris-besch.com/api
+  export IMMICH_API_KEY=your_key
+  ```
+- `source .env`
+- `npm run build`
