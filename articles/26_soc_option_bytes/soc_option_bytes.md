@@ -101,6 +101,6 @@ That assumption is wrong.<br />
 I'm more of a software-guy and only recently started dabbling with hardware.
 In software you can reproduce and try out things so easily.
 Developing firmware so close to hardware, you only have the boards you bought and there are so many more variables you need to keep track of.<br />
-For another example, when the multimeter is still attached but out of battery, your device might reset seemingly randomly and you pull your hair out trying to figure out what your firmware is doing wrong.
+For another example, when the multimeter is still attached but turned off, your device might reset seemingly randomly and you pull your hair out trying to figure out what your firmware is doing wrong.
 Those things don't happen in software and never really happened to me.
 Now they do.
