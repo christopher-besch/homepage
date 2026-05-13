@@ -36,7 +36,7 @@ Let's check!
 ```c
 printk("setting watchdog to: %u %u\n", IWDG->PR, IWDG->RLR);
 ```
-That prints `setting watchdog to: 2 3999`, which indicates a correct timeout: $(\frac{2^(2+2) \cdot (3999+1)}{32kHz})=2s$.
+That prints `setting watchdog to: 2 3999`, which indicates a correct timeout: $(\frac{2^{2+2} \cdot (3999+1)}{32kHz})=2s$.
 
 But that only works if the $32kHz$ are correct.
 The IWDG is clocked by the LSI (Low Speed Internal clock), which runs at roughly $32kHz$.
@@ -91,7 +91,7 @@ So it wasn't that
 3. Zephyr disables the watchdog in sleep modes.
 
 All that was fine;
-it was the `IWDG_STOP` and `IWDG_STBY` Option Byte.<br />
+it was the `IWDG_STOP` and `IWDG_STBY` Option Byte disabling the watchdog in sleep modes.<br />
 That took half a day to figure out.
 I opened a [PR in the Zephyr docs](https://github.com/zephyrproject-rtos/zephyr/pull/108622).
 
