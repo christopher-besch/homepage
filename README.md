@@ -44,6 +44,7 @@ It also caches cropped and resized images.
 When things don't update properly, delete the cache.
 
 # Building
+- `npm install`
 - create `.env` file:
   ```
   export IMMICH_BASE_URL=https://photo.chris-besch.com/api
