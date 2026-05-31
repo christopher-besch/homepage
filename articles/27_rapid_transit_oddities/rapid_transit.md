@@ -79,23 +79,23 @@ On the other end of the spectrum lies Karlsruhe.
 There is the bus *30* and *70* and *52* so you think all two-digit lines are buses.
 But no, the *11* is a metro, as is the *S32*.
 Oh and if you thought the *2* and *S2* are the same you thought wrong!
-Of course they go in wildly different directions.
+Of course they go in wildly different directions.<br />
 How do you figure out what line to take?
 Of course, there's a local app and always Google Maps.
 Karlsruhe's app is awful, always has been, always will be.
-It keeps forgetting your connection, recommends Yorkstraße in Munich rather than the one in Karlsruhe with the same name, obviously fails to find a connection over there and crashes.<br />
+It keeps forgetting your connection, recommends Yorkstraße in Munich rather than the one in Karlsruhe, then obviously fails to find a connection and crashes.<br />
 But there's worse, like Verona:
 At least Verona' app spits out connections with line numbers that do exist.
 But there always are two buses with the same number, one in each direction along the line.
 So which one should you take?
 You need to look at the final stop.
 As in London: *Piccadilly line* towards *Cockfosters* or *Heathrow Airport*?
-But in Karlsruhe and Verona there are more than two buses with the same line number.
+Often there are more than two buses with the same line number.
 They stop sooner or later along the line.
 But in Verona none of the buses arriving show the final stop that the app provides.
 It never worked out over our entire stay there.
 We always had to guess and use a compass to figure out if we're on the right platform.<br />
-What could be worse than Verona?
+What could be worse than Verona in that aspect?
 Rome!
 In Rome sometimes the same bus, going in the same direction, arrives on the other side of the road.
 Sometimes it just turns around behind the platform.
@@ -120,7 +120,7 @@ Fun times.<br />
 In Bologna we had some troubles with platforms while waiting for our high-speed train, also.
 Bologna has two platforms named *4*: *4* and *4 (Ovest)*:
 One for high-speed trains and one for regional trains.
-I guess you're supposed to just know that and not realize it the moment your actual train departs...
+I guess you're supposed to just know that and not realize it the moment your train departs...
 
 Oh, and you're lucky if you even have platform labels in your app of choice.
 Google Maps is terrible at that and almost never shows them, for example.
