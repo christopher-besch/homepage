@@ -51,6 +51,8 @@ Then they're valid some 90 minutes or so after stamping them on the vehicle.
 Imagine how surprised we were when we bought four tickets on the platform in Verona and they came out already stamped.
 As we're only two people, we wasted 3€ on the extra two.
 
+In Verona you can also buy tickets in the app but you have to scan a QR code on the bus to activate it.
+That QR code is only next to the driver so everyone needs to cram through the first door.
 In Paris you instead charge a plastic card with some 10 trips and use those at the gates to the metro.
 In Århus you add bank details to the local app and pay for each trip in the vehicle.
 Other times you charge your card with money and pay for each trip, like in London.
