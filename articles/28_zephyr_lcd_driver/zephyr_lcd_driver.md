@@ -11,7 +11,7 @@ hero_horizontal_position: 0
 hero_vertical_position: 100
 slug: zephyr_lcd_driver
 date: "2026-05-31"
-tags: [zephyr, stm32, hardware_dev, c]
+tags: [zephyr, stm32, hardware, c]
 listed: true
 ---
 I want to use an LCD glass on an STM32WB55RG, which has an LCD direct driver in hardware.

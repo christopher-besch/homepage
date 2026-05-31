@@ -11,7 +11,7 @@ hero_horizontal_position: 100
 hero_vertical_position: 100
 slug: soc_option_bytes
 date: "2026-05-07"
-tags: [hardware_dev, stm32, c, zephyr]
+tags: [hardware, stm32, c, zephyr]
 listed: true
 ---
 
