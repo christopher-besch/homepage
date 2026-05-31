@@ -4,7 +4,7 @@
         <title>Chris' Homepage</title>
         <link>https://chris-besch.com</link>
         <description>Christopher Besch's Homepage about Software, Articles and Photography</description>
-        <lastBuildDate>Sun, 31 May 2026 13:14:51 GMT</lastBuildDate>
+        <lastBuildDate>Sun, 31 May 2026 18:54:10 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
@@ -17,6 +17,15 @@
             <description><![CDATA[High-speed trains are fun! My significant other and I typically use them to get to our vacation destination. Once we're there, we use rapid transit to get around, e.g., bus and metro. This article is about some oddities we've experienced, being tourists on rapid transit.]]></description>
             <author>mail@chris-besch.com (Christopher Besch)</author>
             <enclosure url="https://chris-besch.com/images/bce4df68d639a765c932a2654a94fd26_800_400.webp" length="0" type="image/webp"/>
+        </item>
+        <item>
+            <title><![CDATA[Dabbling with Zephyr Driver Development: STM32 direct LCD Driver]]></title>
+            <link>/articles/zephyr_lcd_driver</link>
+            <guid isPermaLink="false">/articles/zephyr_lcd_driver</guid>
+            <pubDate>Sun, 31 May 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[I want to use an LCD glass on an STM32WB55RG, which has an LCD direct driver in hardware. You directly connect all LCD segment and common pins to the SoC. Because I want to use Zephyr but Zephyr doesn't have an LCD driver already, I implemented one myself.]]></description>
+            <author>mail@chris-besch.com (Christopher Besch)</author>
+            <enclosure url="https://chris-besch.com/images/f0250cbd20877aba769128cf3a075d0d_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
             <title><![CDATA[React without a Framework]]></title>
@@ -59,6 +68,15 @@ Contrary to initial expectations, we show that the Group Netlist has uses beyond
             <enclosure url="https://chris-besch.com/images/a7f291280fadb4822ddaf7ed36c95bf8_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
+            <title><![CDATA[Don't forget about the Option Bytes]]></title>
+            <link>/articles/soc_option_bytes</link>
+            <guid isPermaLink="false">/articles/soc_option_bytes</guid>
+            <pubDate>Thu, 07 May 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[What's the reason for a watchdog taking 23 times as long to reset the device? It turns out the Flash Option Bytes are. And a mass erase doesn't reset those.]]></description>
+            <author>mail@chris-besch.com (Christopher Besch)</author>
+            <enclosure url="https://chris-besch.com/images/65158fab048e94e71f5e6129d4ef688d_800_400.webp" length="0" type="image/webp"/>
+        </item>
+        <item>
             <title><![CDATA[When You Don't Take the Shot]]></title>
             <link>/articles/photo_abilities</link>
             <guid isPermaLink="false">/articles/photo_abilities</guid>
@@ -66,6 +84,15 @@ Contrary to initial expectations, we show that the Group Netlist has uses beyond
             <description><![CDATA[I list the things I realized to improve my photos. There are the technical abilities (equipment, exposure, post processing, ...) and the surrounding conditions (time, location, ...). And sometimes, photography means letting the shutter rest.]]></description>
             <author>mail@chris-besch.com (Christopher Besch)</author>
             <enclosure url="https://chris-besch.com/images/649107d285c96dd4c9b87ed2f0084b53_800_400.webp" length="0" type="image/webp"/>
+        </item>
+        <item>
+            <title><![CDATA[The Photographer and her Camera]]></title>
+            <link>/articles/the_photographer_and_her_camera</link>
+            <guid isPermaLink="false">/articles/the_photographer_and_her_camera</guid>
+            <pubDate>Sat, 22 Nov 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[I bought a new, bigger camera and want to be independent of it.]]></description>
+            <author>mail@chris-besch.com (Christopher Besch)</author>
+            <enclosure url="https://chris-besch.com/images/54a145d113acd5aed9dd5a5e3e9ff082_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
             <title><![CDATA[Why I love Open-Source]]></title>
@@ -87,32 +114,13 @@ Or: How I blew up my brother.]]></description>
             <enclosure url="https://chris-besch.com/images/e504095a9b565988179fa2df918ae18c_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
-            <title><![CDATA[The Photographer and her Camera]]></title>
-            <link>/articles/the_photographer_and_her_camera</link>
-            <guid isPermaLink="false">/articles/the_photographer_and_her_camera</guid>
-            <pubDate>Sat, 22 Nov 2025 00:00:00 GMT</pubDate>
-            <description><![CDATA[I bought a new, bigger camera and want to be independent of it.]]></description>
+            <title><![CDATA[grub-install --removable for buggy UEFI]]></title>
+            <link>/articles/grub_install_removable</link>
+            <guid isPermaLink="false">/articles/grub_install_removable</guid>
+            <pubDate>Fri, 08 Nov 2024 00:00:00 GMT</pubDate>
+            <description><![CDATA[Install Debian on a device with a broken NVRAM.]]></description>
             <author>mail@chris-besch.com (Christopher Besch)</author>
-            <enclosure url="https://chris-besch.com/images/54a145d113acd5aed9dd5a5e3e9ff082_800_400.webp" length="0" type="image/webp"/>
-        </item>
-        <item>
-            <title><![CDATA[Don't forget about the Option Bytes]]></title>
-            <link>/articles/soc_option_bytes</link>
-            <guid isPermaLink="false">/articles/soc_option_bytes</guid>
-            <pubDate>Thu, 07 May 2026 00:00:00 GMT</pubDate>
-            <description><![CDATA[What's the reason for a watchdog taking 23 times as long to reset the device? It turns out the Flash Option Bytes are. And a mass erase doesn't reset those.]]></description>
-            <author>mail@chris-besch.com (Christopher Besch)</author>
-            <enclosure url="https://chris-besch.com/images/65158fab048e94e71f5e6129d4ef688d_800_400.webp" length="0" type="image/webp"/>
-        </item>
-        <item>
-            <title><![CDATA[The Bitter Feeling of Technical Compromises]]></title>
-            <link>/articles/technical_compromises</link>
-            <guid isPermaLink="false">/articles/technical_compromises</guid>
-            <pubDate>Thu, 25 Sep 2025 00:00:00 GMT</pubDate>
-            <description><![CDATA[My very personal troubles dealing with compromises, explained at an example of docker_cron with Renovate.
-Sometimes you really don't have to worry as much and trust your previous, careful considerations.]]></description>
-            <author>mail@chris-besch.com (Christopher Besch)</author>
-            <enclosure url="https://chris-besch.com/images/3548ef292f5ade7df6bc737602d59bd8_800_400.webp" length="0" type="image/webp"/>
+            <enclosure url="https://chris-besch.com/images/5c5afcd8efd6183c56c8c807a694a48f_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
             <title><![CDATA[Docker: Breathing Life into Decades old Fortran]]></title>
@@ -125,22 +133,14 @@ Now you get to see Fig.3.5. from "Introduction to Conventional Transmission Elec
             <enclosure url="https://chris-besch.com/images/c5fde5a326c6a0b5e07c470ffda1eb59_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
-            <title><![CDATA[grub-install --removable for buggy UEFI]]></title>
-            <link>/articles/grub_install_removable</link>
-            <guid isPermaLink="false">/articles/grub_install_removable</guid>
-            <pubDate>Fri, 08 Nov 2024 00:00:00 GMT</pubDate>
-            <description><![CDATA[Install Debian on a device with a broken NVRAM.]]></description>
+            <title><![CDATA[The Bitter Feeling of Technical Compromises]]></title>
+            <link>/articles/technical_compromises</link>
+            <guid isPermaLink="false">/articles/technical_compromises</guid>
+            <pubDate>Thu, 25 Sep 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[My very personal troubles dealing with compromises, explained at an example of docker_cron with Renovate.
+Sometimes you really don't have to worry as much and trust your previous, careful considerations.]]></description>
             <author>mail@chris-besch.com (Christopher Besch)</author>
-            <enclosure url="https://chris-besch.com/images/5c5afcd8efd6183c56c8c807a694a48f_800_400.webp" length="0" type="image/webp"/>
-        </item>
-        <item>
-            <title><![CDATA[Installing Gentoo To My Liking]]></title>
-            <link>/articles/installing_gentoo</link>
-            <guid isPermaLink="false">/articles/installing_gentoo</guid>
-            <pubDate>Tue, 26 Apr 2022 00:00:00 GMT</pubDate>
-            <description><![CDATA[Gentoo is a Linux distribution that offers as many options as possible. This article leads you through the decisions I took to end up with a system that best suits my needs.]]></description>
-            <author>mail@chris-besch.com (Christopher Besch)</author>
-            <enclosure url="https://chris-besch.com/images/dd509c81379268c048ef45318173ad70_800_400.webp" length="0" type="image/webp"/>
+            <enclosure url="https://chris-besch.com/images/3548ef292f5ade7df6bc737602d59bd8_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
             <title><![CDATA[Bodging MP3 Names in Bash]]></title>
@@ -152,51 +152,13 @@ Now you get to see Fig.3.5. from "Introduction to Conventional Transmission Elec
             <enclosure url="https://chris-besch.com/images/5c491b010e8b22c6ffd20605f69d322f_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
-            <title><![CDATA[Real-Time Linux on RISC-V]]></title>
-            <link>/articles/riscv_rt</link>
-            <guid isPermaLink="false">/articles/riscv_rt</guid>
-            <pubDate>Fri, 27 Jun 2025 00:00:00 GMT</pubDate>
-            <description><![CDATA[Setting up Linux v6.12 on a StarFive VisionFive 2 with PREEMPT_RT.
-Also: How to setup your Linux laptop as a simple NAT router.]]></description>
+            <title><![CDATA[Installing Gentoo To My Liking]]></title>
+            <link>/articles/installing_gentoo</link>
+            <guid isPermaLink="false">/articles/installing_gentoo</guid>
+            <pubDate>Tue, 26 Apr 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[Gentoo is a Linux distribution that offers as many options as possible. This article leads you through the decisions I took to end up with a system that best suits my needs.]]></description>
             <author>mail@chris-besch.com (Christopher Besch)</author>
-            <enclosure url="https://chris-besch.com/images/e85afd024262b6186553d361a5908877_800_400.webp" length="0" type="image/webp"/>
-        </item>
-        <item>
-            <title><![CDATA[Real-Time Application Development on Linux with PREEMPT RT]]></title>
-            <link>/articles/rt_on_linux.pdf</link>
-            <guid isPermaLink="false">/articles/rt_on_linux.pdf</guid>
-            <pubDate>Mon, 29 Sep 2025 00:00:00 GMT</pubDate>
-            <description><![CDATA[While Linux is optimized for throughput and efficiency, real-time applications require bounded worst case latencies. However, with the merging of PREEMPT RT, mainline Linux converts to a real-time operating system (RTOS). Through presenting the application developer’s perspective and the changes PREEMPT RT introduces to the kernel, we review Linux’ real-time capabilities. Additionally, we investigate dynamic worst case execution time (WCET) analysis using a StarFive VisionFive 2 as a case study. Finally, we compare Linux to other RTOSes and argue that the lack of static WCET analysis is Linux’ main drawback for real-time applications.]]></description>
-            <author>mail@chris-besch.com (Christopher Besch)</author>
-            <enclosure url="https://chris-besch.com/images/90aa1c30ead3a00608bd83478b9f3b84_800_400.webp" length="0" type="image/webp"/>
-        </item>
-        <item>
-            <title><![CDATA[Inject Fonts into Web SVGs with sed]]></title>
-            <link>/articles/svg_fonts_with_sed</link>
-            <guid isPermaLink="false">/articles/svg_fonts_with_sed</guid>
-            <pubDate>Mon, 10 Feb 2025 00:00:00 GMT</pubDate>
-            <description><![CDATA[Add font-loading CSS to SVGs with a sed script.]]></description>
-            <author>mail@chris-besch.com (Christopher Besch)</author>
-            <enclosure url="https://chris-besch.com/images/f59a7f43e2f2a641d46f9fd994b5589c_800_400.webp" length="0" type="image/webp"/>
-        </item>
-        <item>
-            <title><![CDATA[Maki, Atoms and Time Travel]]></title>
-            <link>/articles/maki_atoms_and_time_travel</link>
-            <guid isPermaLink="false">/articles/maki_atoms_and_time_travel</guid>
-            <pubDate>Sun, 06 Feb 2022 00:00:00 GMT</pubDate>
-            <description><![CDATA[Maki showcases how a program for interactive and programmatic animation development can be implemented.
-Its programmatic approach provides the precision technical concepts require, while its interactivity and real-time updates avoid a disconnect between input and output.]]></description>
-            <author>mail@chris-besch.com (Christopher Besch)</author>
-            <enclosure url="https://chris-besch.com/images/ec9e9265791849f80f7f7e1d76995206_800_400.webp" length="0" type="image/webp"/>
-        </item>
-        <item>
-            <title><![CDATA[LunarVim in Distrobox]]></title>
-            <link>/articles/lvim_in_distrobox</link>
-            <guid isPermaLink="false">/articles/lvim_in_distrobox</guid>
-            <pubDate>Tue, 25 Oct 2022 00:00:00 GMT</pubDate>
-            <description><![CDATA[You're missing that one program that isn't available in your Linux distro? With Distrobox, the 'Linux Subsystem for Linux,' you can install it anyways. This article explains how to do that with the example of installing LunarVim on Red Hat.]]></description>
-            <author>mail@chris-besch.com (Christopher Besch)</author>
-            <enclosure url="https://chris-besch.com/images/7b55476245f182a8e9f9b7e91efbb1a6_800_400.webp" length="0" type="image/webp"/>
+            <enclosure url="https://chris-besch.com/images/dd509c81379268c048ef45318173ad70_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
             <title><![CDATA[How my GitHub Pages got Hacked]]></title>
@@ -218,6 +180,43 @@ Or: How I started to enjoy writing tests.]]></description>
             <enclosure url="https://chris-besch.com/images/4645af088304bd562c94708123e688f3_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
+            <title><![CDATA[LunarVim in Distrobox]]></title>
+            <link>/articles/lvim_in_distrobox</link>
+            <guid isPermaLink="false">/articles/lvim_in_distrobox</guid>
+            <pubDate>Tue, 25 Oct 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[You're missing that one program that isn't available in your Linux distro? With Distrobox, the 'Linux Subsystem for Linux,' you can install it anyways. This article explains how to do that with the example of installing LunarVim on Red Hat.]]></description>
+            <author>mail@chris-besch.com (Christopher Besch)</author>
+            <enclosure url="https://chris-besch.com/images/7b55476245f182a8e9f9b7e91efbb1a6_800_400.webp" length="0" type="image/webp"/>
+        </item>
+        <item>
+            <title><![CDATA[Real-Time Application Development on Linux with PREEMPT RT]]></title>
+            <link>/articles/rt_on_linux.pdf</link>
+            <guid isPermaLink="false">/articles/rt_on_linux.pdf</guid>
+            <pubDate>Mon, 29 Sep 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[While Linux is optimized for throughput and efficiency, real-time applications require bounded worst case latencies. However, with the merging of PREEMPT RT, mainline Linux converts to a real-time operating system (RTOS). Through presenting the application developer’s perspective and the changes PREEMPT RT introduces to the kernel, we review Linux’ real-time capabilities. Additionally, we investigate dynamic worst case execution time (WCET) analysis using a StarFive VisionFive 2 as a case study. Finally, we compare Linux to other RTOSes and argue that the lack of static WCET analysis is Linux’ main drawback for real-time applications.]]></description>
+            <author>mail@chris-besch.com (Christopher Besch)</author>
+            <enclosure url="https://chris-besch.com/images/90aa1c30ead3a00608bd83478b9f3b84_800_400.webp" length="0" type="image/webp"/>
+        </item>
+        <item>
+            <title><![CDATA[Maki, Atoms and Time Travel]]></title>
+            <link>/articles/maki_atoms_and_time_travel</link>
+            <guid isPermaLink="false">/articles/maki_atoms_and_time_travel</guid>
+            <pubDate>Sun, 06 Feb 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[Maki showcases how a program for interactive and programmatic animation development can be implemented.
+Its programmatic approach provides the precision technical concepts require, while its interactivity and real-time updates avoid a disconnect between input and output.]]></description>
+            <author>mail@chris-besch.com (Christopher Besch)</author>
+            <enclosure url="https://chris-besch.com/images/ec9e9265791849f80f7f7e1d76995206_800_400.webp" length="0" type="image/webp"/>
+        </item>
+        <item>
+            <title><![CDATA[Inject Fonts into Web SVGs with sed]]></title>
+            <link>/articles/svg_fonts_with_sed</link>
+            <guid isPermaLink="false">/articles/svg_fonts_with_sed</guid>
+            <pubDate>Mon, 10 Feb 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[Add font-loading CSS to SVGs with a sed script.]]></description>
+            <author>mail@chris-besch.com (Christopher Besch)</author>
+            <enclosure url="https://chris-besch.com/images/f59a7f43e2f2a641d46f9fd994b5589c_800_400.webp" length="0" type="image/webp"/>
+        </item>
+        <item>
             <title><![CDATA[reveal.js your Presentation]]></title>
             <link>/articles/revealjs</link>
             <guid isPermaLink="false">/articles/revealjs</guid>
@@ -226,6 +225,16 @@ Or: How I started to enjoy writing tests.]]></description>
 This article shows how you can use reveal.js for your own presentation.]]></description>
             <author>mail@chris-besch.com (Christopher Besch)</author>
             <enclosure url="https://chris-besch.com/images/90f1af0c0e4970e8cf923a375c719169_800_400.webp" length="0" type="image/webp"/>
+        </item>
+        <item>
+            <title><![CDATA[Real-Time Linux on RISC-V]]></title>
+            <link>/articles/riscv_rt</link>
+            <guid isPermaLink="false">/articles/riscv_rt</guid>
+            <pubDate>Fri, 27 Jun 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[Setting up Linux v6.12 on a StarFive VisionFive 2 with PREEMPT_RT.
+Also: How to setup your Linux laptop as a simple NAT router.]]></description>
+            <author>mail@chris-besch.com (Christopher Besch)</author>
+            <enclosure url="https://chris-besch.com/images/e85afd024262b6186553d361a5908877_800_400.webp" length="0" type="image/webp"/>
         </item>
     </channel>
 </rss>
