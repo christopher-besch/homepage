@@ -83,7 +83,7 @@ But no, the *11* is a metro, as is the *S32*.
 Oh and if you thought the *2* and *S2* are the same you thought wrong!
 Of course they go in wildly different directions.<br />
 How do you figure out what line to take?
-Of course, there's a local app and always Google Maps.
+There always is a local app and Google Maps, also.
 Karlsruhe's app is awful, always has been, always will be.
 It keeps forgetting your connection, recommends Yorkstraße in Munich rather than the one in Karlsruhe, then obviously fails to find a connection and crashes.<br />
 But there's worse, like Verona:
