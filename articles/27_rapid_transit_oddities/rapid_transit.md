@@ -127,6 +127,12 @@ I guess you're supposed to just know that and not realize it the moment your tra
 Oh, and you're lucky if you even have platform labels in your app of choice.
 Google Maps is terrible at that and almost never shows them, for example.
 
+One last honourable mention are the train stations *Gifhorn Stadt* and *Gifhorn*.
+Once we waited for your relatives in *Gifhorn* but their regional train goes through *Gifhorn Stadt* first.
+We told them to disembark in *Gifhorn*.
+They heard the announcement "next stop: *Gifhorn Stadt*" and departed at the wrong station.
+Naming them *Gifhorn Nord* and *Gifhorn Süd* would've been too easy.
+
 <HalfImage src="./pride_flag.jpg" full="true" />
 
 ## Closing
