@@ -46,7 +46,7 @@ The datasheet states which UART uses what pins:
 - `UART2`: GPIO 4/5
 - `UART3`: GPIO 8/9
 - `UART4`: GPIO 12/13
-- `UART10`: debug UART connector (in the top left corner in the image above and shown below as a close-up) and also testpoints `TP35` and `TP36`
+- `UART10`: debug UART connector (in the top left corner in the image above and shown below in the [reverse engineered PCB layout](https://github.com/schlae/cm5-reveng)) and also testpoints `TP35` and `TP36`
 
 <HalfImage src="./debug_uart.png" full="true" />
 
