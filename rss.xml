@@ -4,7 +4,7 @@
         <title>Chris' Homepage</title>
         <link>https://chris-besch.com</link>
         <description>Christopher Besch's Homepage about Software, Articles and Photography</description>
-        <lastBuildDate>Mon, 08 Jun 2026 15:37:35 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 08 Jun 2026 15:44:28 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
@@ -14,7 +14,7 @@
             <link>/articles/raspberry_pi_5_uart</link>
             <guid isPermaLink="false">/articles/raspberry_pi_5_uart</guid>
             <pubDate>Mon, 08 Jun 2026 00:00:00 GMT</pubDate>
-            <description><![CDATA[We have a Raspberry Pi Compute Module 5 IO Board without a monitor or network connection. How do you see what the system is doing? How to read Linux' and the bootloader's log? A simple answer is UART. Turns out, UART isn't so simple on the Raspberry Pi 5 and its documentation and raspi-config is wrong in a couple of places.]]></description>
+            <description><![CDATA[We have a Raspberry Pi Compute Module 5 IO Board without a monitor or network connection. How do you see what the system is doing? How to read the Linux and bootloader log? A simple answer is UART. Turns out, UART isn't so simple on the Raspberry Pi 5 and its documentation, datasheet and raspi-config is wrong in a couple of places.]]></description>
             <author>mail@chris-besch.com (Christopher Besch)</author>
             <enclosure url="https://chris-besch.com/images/c4e11bf8da3ae1bb4763934fd622549e_800_400.webp" length="0" type="image/webp"/>
         </item>
@@ -86,15 +86,6 @@ Contrary to initial expectations, we show that the Group Netlist has uses beyond
             <enclosure url="https://chris-besch.com/images/65158fab048e94e71f5e6129d4ef688d_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
-            <title><![CDATA[The Photographer and her Camera]]></title>
-            <link>/articles/the_photographer_and_her_camera</link>
-            <guid isPermaLink="false">/articles/the_photographer_and_her_camera</guid>
-            <pubDate>Sat, 22 Nov 2025 00:00:00 GMT</pubDate>
-            <description><![CDATA[I bought a new, bigger camera and want to be independent of it.]]></description>
-            <author>mail@chris-besch.com (Christopher Besch)</author>
-            <enclosure url="https://chris-besch.com/images/54a145d113acd5aed9dd5a5e3e9ff082_800_400.webp" length="0" type="image/webp"/>
-        </item>
-        <item>
             <title><![CDATA[Guided Missiles in Minecraft]]></title>
             <link>/articles/mc_missile</link>
             <guid isPermaLink="false">/articles/mc_missile</guid>
@@ -112,6 +103,15 @@ Or: How I blew up my brother.]]></description>
             <description><![CDATA[I created a tool to visualize Forgejo's Pub-Sub pattern. Why not run that tool on all 24 thousand commits in Forgejo's history? What could possibly go wrong?]]></description>
             <author>mail@chris-besch.com (Christopher Besch)</author>
             <enclosure url="https://chris-besch.com/images/a7f291280fadb4822ddaf7ed36c95bf8_800_400.webp" length="0" type="image/webp"/>
+        </item>
+        <item>
+            <title><![CDATA[The Photographer and her Camera]]></title>
+            <link>/articles/the_photographer_and_her_camera</link>
+            <guid isPermaLink="false">/articles/the_photographer_and_her_camera</guid>
+            <pubDate>Sat, 22 Nov 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[I bought a new, bigger camera and want to be independent of it.]]></description>
+            <author>mail@chris-besch.com (Christopher Besch)</author>
+            <enclosure url="https://chris-besch.com/images/54a145d113acd5aed9dd5a5e3e9ff082_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
             <title><![CDATA[Why I love Open-Source]]></title>
@@ -189,6 +189,25 @@ Also: How to setup your Linux laptop as a simple NAT router.]]></description>
             <enclosure url="https://chris-besch.com/images/e85afd024262b6186553d361a5908877_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
+            <title><![CDATA[Inject Fonts into Web SVGs with sed]]></title>
+            <link>/articles/svg_fonts_with_sed</link>
+            <guid isPermaLink="false">/articles/svg_fonts_with_sed</guid>
+            <pubDate>Mon, 10 Feb 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[Add font-loading CSS to SVGs with a sed script.]]></description>
+            <author>mail@chris-besch.com (Christopher Besch)</author>
+            <enclosure url="https://chris-besch.com/images/f59a7f43e2f2a641d46f9fd994b5589c_800_400.webp" length="0" type="image/webp"/>
+        </item>
+        <item>
+            <title><![CDATA[reveal.js your Presentation]]></title>
+            <link>/articles/revealjs</link>
+            <guid isPermaLink="false">/articles/revealjs</guid>
+            <pubDate>Fri, 24 Jun 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[reveal.js is a PowerPoint alternative. With it you programmatically define your presentation via HTML.
+This article shows how you can use reveal.js for your own presentation.]]></description>
+            <author>mail@chris-besch.com (Christopher Besch)</author>
+            <enclosure url="https://chris-besch.com/images/90f1af0c0e4970e8cf923a375c719169_800_400.webp" length="0" type="image/webp"/>
+        </item>
+        <item>
             <title><![CDATA[Maki, Atoms and Time Travel]]></title>
             <link>/articles/maki_atoms_and_time_travel</link>
             <guid isPermaLink="false">/articles/maki_atoms_and_time_travel</guid>
@@ -199,13 +218,14 @@ Its programmatic approach provides the precision technical concepts require, whi
             <enclosure url="https://chris-besch.com/images/ec9e9265791849f80f7f7e1d76995206_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
-            <title><![CDATA[Inject Fonts into Web SVGs with sed]]></title>
-            <link>/articles/svg_fonts_with_sed</link>
-            <guid isPermaLink="false">/articles/svg_fonts_with_sed</guid>
-            <pubDate>Mon, 10 Feb 2025 00:00:00 GMT</pubDate>
-            <description><![CDATA[Add font-loading CSS to SVGs with a sed script.]]></description>
+            <title><![CDATA[Saving Time with Tests]]></title>
+            <link>/articles/testing</link>
+            <guid isPermaLink="false">/articles/testing</guid>
+            <pubDate>Wed, 14 May 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[Using tests not to increase quality but to more quickly get things done.
+Or: How I started to enjoy writing tests.]]></description>
             <author>mail@chris-besch.com (Christopher Besch)</author>
-            <enclosure url="https://chris-besch.com/images/f59a7f43e2f2a641d46f9fd994b5589c_800_400.webp" length="0" type="image/webp"/>
+            <enclosure url="https://chris-besch.com/images/4645af088304bd562c94708123e688f3_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
             <title><![CDATA[LunarVim in Distrobox]]></title>
@@ -224,26 +244,6 @@ Its programmatic approach provides the precision technical concepts require, whi
             <description><![CDATA[A DNS forward is an expression of trust. GitHub broke my trust and someone else received control over my domain.]]></description>
             <author>mail@chris-besch.com (Christopher Besch)</author>
             <enclosure url="https://chris-besch.com/images/2429205e42d7ecf6646d20aea86a90ce_800_400.webp" length="0" type="image/webp"/>
-        </item>
-        <item>
-            <title><![CDATA[reveal.js your Presentation]]></title>
-            <link>/articles/revealjs</link>
-            <guid isPermaLink="false">/articles/revealjs</guid>
-            <pubDate>Fri, 24 Jun 2022 00:00:00 GMT</pubDate>
-            <description><![CDATA[reveal.js is a PowerPoint alternative. With it you programmatically define your presentation via HTML.
-This article shows how you can use reveal.js for your own presentation.]]></description>
-            <author>mail@chris-besch.com (Christopher Besch)</author>
-            <enclosure url="https://chris-besch.com/images/90f1af0c0e4970e8cf923a375c719169_800_400.webp" length="0" type="image/webp"/>
-        </item>
-        <item>
-            <title><![CDATA[Saving Time with Tests]]></title>
-            <link>/articles/testing</link>
-            <guid isPermaLink="false">/articles/testing</guid>
-            <pubDate>Wed, 14 May 2025 00:00:00 GMT</pubDate>
-            <description><![CDATA[Using tests not to increase quality but to more quickly get things done.
-Or: How I started to enjoy writing tests.]]></description>
-            <author>mail@chris-besch.com (Christopher Besch)</author>
-            <enclosure url="https://chris-besch.com/images/4645af088304bd562c94708123e688f3_800_400.webp" length="0" type="image/webp"/>
         </item>
     </channel>
 </rss>
