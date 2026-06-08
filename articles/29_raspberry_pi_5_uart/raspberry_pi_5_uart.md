@@ -3,9 +3,9 @@ title: "Mistakes in the Docs: UART on Raspberry Pi 5 Compute Module"
 description: "
 We have a Raspberry Pi Compute Module 5 IO Board without a monitor or network connection.
 How do you see what the system is doing?
-How to read Linux' and the bootloader's log?
+How to read the Linux and bootloader log?
 A simple answer is UART.
-Turns out, UART isn't so simple on the Raspberry Pi 5 and its documentation and raspi-config is wrong in a couple of places.
+Turns out, UART isn't so simple on the Raspberry Pi 5 and its documentation, datasheet and raspi-config is wrong in a couple of places.
 "
 banner: "./banner.png"
 hero: "./hero.jpg"
@@ -19,9 +19,9 @@ listed: true
 
 We have a Raspberry Pi Compute Module 5 IO Board without a monitor or network connection.
 How do you see what the system is doing?
-How to read Linux' and the bootloader's log?<br />
+How to read the Linux and bootloader log?<br />
 A simple answer is UART.
-Turns out, UART isn't so simple on the Raspberry Pi 5 and its documentation and `raspi-config` is wrong in a couple of places.
+Turns out, UART isn't so simple on the Raspberry Pi 5 and its documentation, datasheet and `raspi-config` is wrong in a couple of places.
 Let's dig in!
 
 ### [Raspberry Pi 5 Boot Flow](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#eeprom-boot-flow)
