@@ -97,4 +97,4 @@ But, as I've said, we don't have physical access to the debug UART connector.
 Lastly, don't forget to reconnect your UART adapter when you close `screen` and want to reconnect.
 Otherwise you'll get very buggy output.<br />
 This and all the problems we've had with the Raspberry Pi documentation cost us some two days.
-We've opened a PR: [#]().
+We've opened a PR fixing the documentation: [#4310](https://github.com/raspberrypi/documentation/pull/4310).
