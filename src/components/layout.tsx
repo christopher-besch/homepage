@@ -112,6 +112,20 @@ export default async function Layout(props: React.PropsWithChildren<LayoutProps>
                 {/* the user has to set this: Internet → Settings → Labs → "Use website dark theme" */}
                 <meta name="color-scheme" content="light dark" />
 
+                {/* IndieLogin.com */}
+                <link
+                    rel="me"
+                    href="mailto:mail@chris-besch.com"
+                />
+                <link
+                    rel="me authn"
+                    href="https://codeberg.org/christopher-besch"
+                />
+                <link
+                    rel="me"
+                    href="https://github.com/christopher-besch"
+                />
+
                 {/* mastodon things */}
                 <link
                     rel="me"
