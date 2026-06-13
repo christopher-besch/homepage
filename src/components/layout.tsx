@@ -114,11 +114,11 @@ export default async function Layout(props: React.PropsWithChildren<LayoutProps>
 
                 {/* IndieLogin.com */}
                 <link
-                    rel="me"
+                    rel="me authn"
                     href="mailto:mail@chris-besch.com"
                 />
                 <link
-                    rel="me authn"
+                    rel="me"
                     href="https://codeberg.org/christopher-besch"
                 />
                 <link
