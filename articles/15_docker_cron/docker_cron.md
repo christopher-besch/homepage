@@ -77,7 +77,7 @@ So it's not some obscure thing no one uses or maintains.
 
 ## So What About that "Bitter Feeling" in the Title?
 
-Unfortunately there is no way of creating something like docker_cron without giving it access to the Docker daemon socket.
+Unfortunately, there is no way of creating something like docker_cron without giving it access to the Docker daemon socket.
 With this access the container has full root access to the host machine.
 That, of course, is not great.
 I really dislike this, actually.
