@@ -6,7 +6,7 @@ priority: 800
 date: "2019-12-27"
 languages: [python]
 dependencies: [flask, bootstrap, minecraft, jinja2]
-tags: [web, db, server]
+tags: [web, db, server, gaming]
 banner: banner.png
 listed: true
 ---

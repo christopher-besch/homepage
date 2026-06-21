@@ -6,7 +6,7 @@ priority: 300
 date: "2024-11-20"
 languages: [typescript]
 dependencies: [leaflet, minedmap, minecraft]
-tags: [kit, web, server]
+tags: [kit, web, server, gaming]
 banner: banner.png
 listed: true
 ---

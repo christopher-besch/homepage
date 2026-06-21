@@ -6,7 +6,7 @@ priority: 900
 date: "2023-01-07"
 languages: [cpp]
 dependencies: [glm, godot]
-tags: [visualization]
+tags: [visualization, gaming]
 banner: banner.png
 listed: true
 ---
