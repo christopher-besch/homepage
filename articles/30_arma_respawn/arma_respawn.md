@@ -1,5 +1,5 @@
 ---
-title: "ARMA: Cold War Assault enable Respawn"
+title: "Enable Respawn in ARMA: Cold War Assault"
 description: "
 The milestone in gaming history that is Arma: Cold War Assault (previously Operation Flashpoint) is a blast and runs on a toaster.
 
