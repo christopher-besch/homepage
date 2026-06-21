@@ -42,14 +42,14 @@ When saving as `User mission`, however, the Mission Editor doesn't create a `.pb
 That's were you'll find a `mission.sqm` file, also.
 
 We need to create (or modify) the `description.ext` file inside it.
-It is explained on the (Bohemia Interactive wiki)[https://community.bistudio.com/wiki/Description.ext#Respawn/Revive].
+It is explained on the [Bohemia Interactive wiki](https://community.bistudio.com/wiki/Description.ext#Respawn/Revive).
 What I want is to respawn at the base so I write:
 ```
 respawn = "BASE";
 respawnDelay = 20;
 ```
 You can choose from `NONE`, `BIRD`, `INSTANT`, `BASE`, `GROUP` and `SIDE` (see the above wiki for an explanation).
-Okay, but we want to play our mission and for that it needs to be a `.pbo`.
+Okay, but we want to *play* our mission and for that we need a `.pbo` file.
 To convert our directory into a `.pbo`, we use BinPBO, which is a part of the official [BI Tools](https://community.bistudio.com/wiki/BI_Tools).
 During installation it will ask you *a lot of times* to continue the install.
 Just install everything;
@@ -64,7 +64,8 @@ You can upload your `.pbo` to [ofpisnotdead-com.github.io/rust-pbo-wasm](https:/
 <HalfImage src="./binpbo.png" full="true" />
 
 And that should be everything.
-Load your new mission in the `Multiplayer` section in ARMA and you should respawn on your base when you die.<br />
+Load your new mission in the `Multiplayer` section in ARMA and you should respawn on your base when you die.
+Though, do remember that you need to do this procedure every time you export from the Mission Editor.<br />
 And as I've said, I'm doing all this on Linux through Wine, managed by [Lutris](https://lutris.net).
 Just use the `Run EXE inside Wine prefix` function to run programs and installers.<br />
 Have fun blowing eachother up—repeatedly.
