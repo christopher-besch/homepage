@@ -18,7 +18,7 @@ listed: true
 
 I wanted to play a military simulator with friends that is
 - DRM free and
-- runs on Linux.
+- runs on Linux (through Wine).
 
 That brought me to the milestone in gaming history that is [Arma: Cold War Assault](https://www.gog.com/en/game/arma_cold_war_assault) (previously Operation Flashpoint).
 It's a blast and runs on a toaster.<br />
