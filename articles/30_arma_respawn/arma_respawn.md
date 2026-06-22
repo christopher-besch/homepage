@@ -28,6 +28,7 @@ That's not easy so here I explain how you go about doing that.
 Open the Mission Editor and create the mission of your dreams.
 In my case that's a multiplayer mission.
 I want players to respawn at their base so I add a marker called `respawn_west` because we're playing as NATO and not as the USSR.
+`respawn_east`, `respawn_guerrila` and `respawn_civilian` are the other three options.
 Usually you need to select `Save` and then `Export to multiplayer missions`.
 Unfortunately, this makes it more difficult to enable respawning in your mission.
 We need to select `User mission`, instead.
