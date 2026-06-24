@@ -53,6 +53,7 @@ So as I worked more and more with networking on Linux, I always wondered:
     {/* NetworkManager and iproute2 are fine; firewalld and nftables aren't. */}
 
 This article will answer all those questions for modern Linux (as of v6.12).
+<HalfImage full="true" src="./IMG_0978.jpg" />
 
 # The Kernel Networking Stack: a Beast
 TODO
@@ -169,6 +170,7 @@ TODO
     That's something FRRouting does specifically.
     https://docs.frrouting.org/en/latest/kernel.html
     ioctl, sysctl, proc filesystem, netlink
+- GNOME
 
 - KIT subnet 127.17.0.0/17
 - docker subnet 127.17.0.0/16
