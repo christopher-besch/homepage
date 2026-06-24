@@ -2,7 +2,7 @@
 title: "Netlink: Linux' Network Configuration and Filtering"
 description: "
 "
-banner: "./banner.png"
+banner: "./stack.webp"
 hero: "./hero.jpg"
 hero_horizontal_position: 40
 hero_vertical_position: 70
@@ -73,7 +73,7 @@ The kernel what most applications use for this.
 
 These require `CAP_NET_RAW`.
 
-### https://bootlin.com/doc/training/networking/networking-slides.pdf
+https://bootlin.com/doc/training/networking/networking-slides.pdf
 - AF_xxx address family, PF_xxx protocol family (are equivalent on Linux)
 
 ```
@@ -98,6 +98,8 @@ explain configuring vs filtering; show diagram
 https://www.rfc-editor.org/info/rfc3549/
 - netfilter.org project (alternatives: eBPF, P4, TC)
 
+<HalfImage full="true" src="./stack.webp" />
+
 # Configuration Tools
 TODO
 - ip: part of iproute2
@@ -107,6 +109,8 @@ TODO
     One must use scripts or systemd units to call ip on boot.
 
     used for setup routing on my own, without "router" in between
+    https://github.com/iproute2/iproute2/blob/main/lib/libnetlink.c
+    `libnetlink` used.
 - bridge: part of iproute2
 - tc: part of iproute2
     Takes care of traffic scheduling
@@ -197,14 +201,17 @@ TODO
     https://firewalld.org/documentation/architecture.html
     Uses NetworkManager to be notified about network device renamings.
 
-    It is recommended to not use systemd-firewalld together with nftables <Cite id="redhat_firewalld" />.
-    systemd-firewalld implements higher-level filtering concepts, like network zones.
+    It is recommended to not use firewalld together with nftables <Cite id="redhat_firewalld" />.
+    firewalld implements higher-level filtering concepts, like network zones.
     It's implemented as a daemon, for example, because it allows configuring NAT for dynamically connected network links.
 - ufw:
     https://wiki.archlinux.org/title/Uncomplicated_Firewall
     calls iptables or nftables
 
 # Deprecated Tools
+- iptables-nft:
+    https://www.redhat.com/en/blog/using-iptables-nft-hybrid-linux-firewall
+- https://www.debian.org/doc/manuals/debian-reference/ch05.en.html
 
 # Conclusion
 TODO
@@ -237,7 +244,6 @@ TODO
 - What are network zones?
 - What is a network link for Linux?
 
-- https://www.debian.org/doc/manuals/debian-reference/ch05.en.html
 - https://linux.wiki/docs/commands/networking/ip
 - https://bootlin.com/doc/training/networking/networking-slides.pdf
 - https://www.kernel.org/doc/html/latest/networking/dsa/index.html
