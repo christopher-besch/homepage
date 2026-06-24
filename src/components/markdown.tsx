@@ -34,6 +34,8 @@ import { fromHtml } from "hast-util-from-html";
 import Quote from "./quote.js";
 import HalfElement from "./half_element.js";
 import Link from "./link.js";
+import References from "./references.js";
+import Cite from "./cite.js";
 
 // The icon is from Gatsby's gatsby-remark-autolink-headers plugin: https://github.com/gatsbyjs/gatsby/blob/master/packages/gatsby-remark-autolink-headers/src/index.js#L14
 // The MIT License (MIT)
@@ -91,6 +93,8 @@ export default async function Markdown(props: MarkdownProps): Promise<React.Reac
             ],
         });
 
+    const citations: [string, string[]][] = [];
+
     return <div className="markdown_body" ><Markdown components={{
         HalfImage(imageProps) {
             return <HalfImage inputPath={path.join(props.dirPath, imageProps.src)} full={imageProps.full} alt={imageProps.alt} />;
@@ -118,6 +122,12 @@ export default async function Markdown(props: MarkdownProps): Promise<React.Reac
         },
         Quote(quoteProps) {
             return <Quote {...quoteProps} />
+        },
+        Cite(citeProps) {
+            return <Cite citations={citations} {...citeProps} />
+        },
+        References(referencesProps) {
+            return <References citations={citations} bibliographyPath={path.join(props.dirPath, referencesProps.bibliography)} />
         },
         a(anchorProps) {
             return <Link {...anchorProps} />
