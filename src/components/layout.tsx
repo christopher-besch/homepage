@@ -191,7 +191,7 @@ export default async function Layout(props: React.PropsWithChildren<LayoutProps>
                     <Link href={loadAboutPath}>Contact</Link>
                     <Link href={loadRssPath}>RSS</Link>
                     <Link href={getArticleRoute("privacy")}>Privacy</Link>
-                    <div>© 2025 | All rights reserved</div>
+                    <div>© 2026 | All rights reserved</div>
                     <Link href="https://webring.xxiivv.com/#chrisbesch">
                         <img loading="lazy" fetchPriority="auto" className="layout_webring_black" src={XxiivvBlackLoadPath} alt="XXIIVV webring" />
                         <img loading="lazy" fetchPriority="auto" className="layout_webring_white" src={XxiivvWhiteLoadPath} alt="XXIIVV webring" />
