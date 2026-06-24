@@ -40,7 +40,7 @@ That is because The Mission Editor exports a `.pbo` file into, e.g., `C:\GOG Gam
 However, in that format we cannot adjust any options, like respawning behaviour.
 The `.pbo` file is a compressed directory containing a bunch of files.
 When saving as `User mission`, however, the Mission Editor doesn't create a `.pbo` file but saves the raw directory, e.g., into `C:\GOG Games\Arma Cold War Assault\Users\Stromel\missions\defend_the_fort_v9.Cain`.
-That's were you'll find a `mission.sqm` file, also.
+That's where you'll find a `mission.sqm` file, also.
 
 We need to create (or modify) the `description.ext` file inside it.
 It is explained on the [Bohemia Interactive wiki](https://community.bistudio.com/wiki/Description.ext#Respawn/Revive).
