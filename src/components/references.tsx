@@ -58,7 +58,10 @@ export default async function References(props: ReferencesProps): Promise<React.
                         </>;
                     }
 
-                    let formattedAuthors = bib_entry.author?.map(author => author.given + " " + author.family).join(", ");
+                    const formattedAuthors = bib_entry.author?.map(author =>
+                        (author.given == undefined ? "" : author.given + " ")
+                        + author.family
+                    ).join(", ");
 
                     return <li id={`reference-${id}`} key={id}>
                         {citationLinksNode}
