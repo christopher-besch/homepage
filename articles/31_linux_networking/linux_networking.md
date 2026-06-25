@@ -95,10 +95,28 @@ You can play some games through Wine or build an alternative to Proton on Linux.
 
 There's also socat, which allows you ...
 
+The kernel doesn't itself resolve domains to IP addresses via DNS.
+Instead, it upcalls userspace processes <Cite id="kernel_dns" />.
+systemd-resolved <Cite id="arch_resolved" /> is a daemon performing this name resolution.
+- arp: manipulate the kernel's IPv4 network neighbour cache.
+    Thin wrapper around kernel; no daemon; neighbour cache
+    Could also do `cat /proc/net/arp`.
+    There also is arpd.
+    ARP is implemented in a kernel module.
+- arpd: A userspace daemon doing more advances ARP actions and feeds the ARP database (IP-MAC pairs) to the kernel for usage.
+- avahi-daemon: daemon implementing mDNS, Apple Zeroconf, ...
+    It find services being provided on the network, i.e., printers.
+    https://wiki.archlinux.org/title/Network_configuration#Local_network_hostname_resolution
+    It takes your hostname and enables devices on the LAN to find you.
+    The alternative would be to setup a DNS server and make it the default for the LAN via DHCP.
+
+    `avahi-daemon` takes the machine's hostname and exposes it to other machines on the LAN <Cite id="arch_network" />.
+
 # Netlink
 TODO
 explain configuring vs filtering; show diagram
 https://www.rfc-editor.org/info/rfc3549/
+https://kernel-internals.org/net/netlink/
 - netfilter.org project (alternatives: eBPF, P4, TC)
 
 <HalfImage full="true" src="./stack.webp" />
@@ -119,16 +137,19 @@ Furthermore, these tools don't have any internal state, they only configure the 
 Therefore, any configuration you enter using the iproute2 tools doesn't persist across reboots.
 If you want to persist your configuration, you could simply write a shell script running your commands.
 Then for example a systemd unit could run your script at boot, setting up your network to your liking <Cite id="arch_network" />.
-Baturin's user guide <Cite id="iproute2_user_guide" /> is a highly useful reference for iproute2.
+Baturin's user guide <Cite id="iproute2_user_guide" /> is a highly useful reference for iproute2.<br />
+I do recommend playing around with them.
+Once I ran `ip route show` I solved a long standing mystery of why docker sometimes required `--net host` for contains to reach the internet.
+It turns out that one of the corporate wifi networks I often work in, has a conflicting subnet with Docker's.
+<HalfImage full="true" src="./docker_subnet_collision.png" />
 
-Boot scripts, of course, don't address dynamic changes to your network.
+But what about dynamic network changes?
 What if you unplug an Ethernet cable and connect to some other network?
-Then you'd have to manually run the iproute2 tools again.<br />
-The solution for the dynamic networking environment, e.g., portable devices find themselves in are network managers, like NetworkManager or systemd-networkd.
+Then you'd have to manually run the iproute2 tools again.
+Boot scripts cannot help here.<br />
+The solution for such dynamic networking environments are network managers like NetworkManager or systemd-networkd.
 A network manager runs a userspace daemon in the background dynamically changing the kernel's network configuration to the changing network environment.
-
-Additionally, network managers provide a higher level of abstraction than the low-level iproute2 tools.
-TODO: source
+Additionally, network managers provide a higher level of abstraction than the low-level iproute2 tools <Cite id="arch_network" />.
 
 While you configure systemd-networkd through configuration files <Cite id="arch_systemd_networkd" />, NetworkManager exposes a D-Bus API, which libnm connects to <Cite id="libnm" />.
 libnm, in turn, is how desktop managers like GNOME show the current network state.
@@ -142,64 +163,24 @@ On the terminal there is `nmcli`, which also uses libnm <Cite id="nmcli_libnm" /
 So taking my example from before, connecting a linux PC to a consumer router typically automatically establishes a link.
 NetworkManager does that using its integrated DHCP client.
 The NetworkManager daemon depends on udev to receive a notification on network device discovery <Cite id="networkmanager" />.
-Then it dynamically changes the kernel's network configuration according to the new device.<br />
+Then it dynamically changes the kernel's network configuration according to the new device.
+For wireless networks it might use wpa_supplicant for authentication <Cite id="arch_network" />.<br />
 udev is another userspace daemon listening for device events from the kernel <Cite id="udev" />.
 udev also performs systemd's predictable network interface naming.
 This naming is predictable in contrast to the kernel's own naming scheme, (e.g, `eth0`, `eth1`, ...), which may change from one boot to the next <Cite id="predictable_if_naming" />.
 
-Lastly, there is another layer on top of network managers:
+Importantly, iproute2 through libnetlink, systemd-networkd through sd-netlink and NetworkManager directly interact with the kernel via Netlink <Cite id="libnetlink" /> <Cite id="network_manager_netlink" /> <Cite id="sd_netlink" />.
+The iproute2 tools may even be used in parallel with NetworkManager.
+NetworkManager detects what iproute2 did <Cite id="red_hat_ip" />.
+
+As an aside, there is another layer on top of network managers:
 netplan parses yaml files and creates NetworkManager or systemd-networkd configuration files <Cite id="netplan" />.
 
-- ip: part of iproute2
-    iproute2 uses netlink API
-
-    used for setup routing on my own, without "router" in between
-    https://github.com/iproute2/iproute2/blob/main/lib/libnetlink.c
-    `libnetlink` used.
-- arp: manipulate the kernel's IPv4 network neighbour cache.
-    Thin wrapper around kernel; no daemon; neighbour cache
-    Could also do `cat /proc/net/arp`.
-    There also is arpd.
-    ARP is implemented in a kernel module.
-- arpd: A userspace daemon doing more advances ARP actions and feeds the ARP database (IP-MAC pairs) to the kernel for usage.
-- ss: investiage network ports
-- avahi-daemon: daemon implementing mDNS, Apple Zeroconf, ...
-    It find services being provided on the network, i.e., printers.
-    https://wiki.archlinux.org/title/Network_configuration#Local_network_hostname_resolution
-    It takes your hostname and enables devices on the LAN to find you.
-    The alternative would be to setup a DNS server and make it the default for the LAN via DHCP.
-
-    `avahi-daemon` takes the machine's hostname and exposes it to other machines on the LAN <Cite id="arch_network" />.
-- wpa_supplicant
-- NetworkManager: has integrated DHCP client
-    https://kernel-internals.org/net/netlink/
-    uses netlink to configure kernel
-    https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/7/html/networking_guide/sec-configuring_ip_networking_with_ip_commands
-    iproute2 may be used in parallel with NetworkManager.
-    NetworkManager detects what iproute2 did.
-- systemd-networkd: has integrated DHCP client
-- systemd-resolved
-- dhclient: DHCP client, not really maintained
-- dhcpcd: DHCP client, more lightweight
-- nmcli
-- ethtool: can be compiled with ioctl or netlink support
-    used for hardware timestamping
-- devlink
-- udhcp
-- netstat
-- ifup, ifdown:
-    Part of ifupdown package.
-    Config file: `/etc/network/interfaces`
-- FRRouting implements OSPF, RIP and other routing protocols; populates the kernels routing table
-    The kernel forget routes when links go down.
-    NetworkManager reinstates them they come back up.
-    That's something FRRouting does specifically.
-    https://docs.frrouting.org/en/latest/kernel.html
-    ioctl, sysctl, proc filesystem, netlink
-
-- KIT subnet 127.17.0.0/17
-- docker subnet 127.17.0.0/16
-- work around: `--net host`
+For routing equipment running Linux software like FRRouting implements large-scale routing protocols like OSPF or RIP.
+Its daemons populate the kernel's routing tables dynamically.
+The kernel simply forgets routes when links go down.
+That's where userspace daemons provide dynamic configuration changes.
+FRRouting also uses netlink directly <Cite id="frrouting_kernel_interface" />.
 
 # Filtering Tools
 TODO
@@ -278,5 +259,7 @@ TODO
 - https://linux.wiki/docs/commands/networking/ip
 - https://bootlin.com/doc/training/networking/networking-slides.pdf
 - https://www.kernel.org/doc/html/latest/networking/dsa/index.html
-- https://baturin.org/docs/iproute2/
+- ifup, ifdown:
+    Part of ifupdown package.
+    Config file: `/etc/network/interfaces`
 */}
