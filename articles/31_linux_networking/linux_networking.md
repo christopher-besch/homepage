@@ -222,14 +222,6 @@ And here users have choices on how to administrate their network.
     Config file: `/etc/network/interfaces`
 - https://www.debian.org/doc/manuals/debian-reference/ch05.en.html
 
-```
-/* interface name assignment types (sysfs name_assign_type attribute) */
-#define NET_NAME_UNKNOWN	0	/* unknown origin (not exposed to userspace) */
-#define NET_NAME_ENUM		1	/* enumerated by kernel */
-#define NET_NAME_PREDICTABLE	2	/* predictably named by the kernel */
-#define NET_NAME_USER		3	/* provided by user-space */
-#define NET_NAME_RENAMED	4	/* renamed by user-space */
-```
 Check with `cat /sys/class/net/wlp1s0/name_assign_type`.
 Back to networking, take for example setting up a firewall on Linux.
 When people talk about nftables being the Linux firewall
