@@ -81,10 +81,34 @@ For example, <em>&quot;On Linux playing Windows games is done through Proton&quo
 But, of course, the Linux kernel doesn&#x27;t enforce this at all.
 You can play some games through Wine or build an alternative to Proton on Linux.</p>
 <p>There&#x27;s also socat, which allows you ...</p>
+<p>The kernel doesn&#x27;t itself resolve domains to IP addresses via DNS.
+Instead, it upcalls userspace processes <sup id="citation-kernel_dns-0"><a href="#reference-kernel_dns">[<!-- -->1<!-- -->]</a></sup>.
+systemd-resolved <sup id="citation-arch_resolved-0"><a href="#reference-arch_resolved">[<!-- -->2<!-- -->]</a></sup> is a daemon performing this name resolution.</p>
+<ul>
+<li>
+<p>arp: manipulate the kernel&#x27;s IPv4 network neighbour cache.
+Thin wrapper around kernel; no daemon; neighbour cache
+Could also do <code>cat /proc/net/arp</code>.
+There also is arpd.
+ARP is implemented in a kernel module.</p>
+</li>
+<li>
+<p>arpd: A userspace daemon doing more advances ARP actions and feeds the ARP database (IP-MAC pairs) to the kernel for usage.</p>
+</li>
+<li>
+<p>avahi-daemon: daemon implementing mDNS, Apple Zeroconf, ...
+It find services being provided on the network, i.e., printers.
+https://wiki.archlinux.org/title/Network_configuration#Local_network_hostname_resolution
+It takes your hostname and enables devices on the LAN to find you.
+The alternative would be to setup a DNS server and make it the default for the LAN via DHCP.</p>
+<p><code>avahi-daemon</code> takes the machine&#x27;s hostname and exposes it to other machines on the LAN <sup id="citation-arch_network-0"><a href="#reference-arch_network">[<!-- -->3<!-- -->]</a></sup>.</p>
+</li>
+</ul>
 <h1 id="netlink"><a class="markdown_heading_a" href="#netlink" target="_self"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Netlink</h1>
 <p>TODO
 explain configuring vs filtering; show diagram
-https://www.rfc-editor.org/info/rfc3549/</p>
+https://www.rfc-editor.org/info/rfc3549/
+https://kernel-internals.org/net/netlink/</p>
 <ul>
 <li>netfilter.org project (alternatives: eBPF, P4, TC)</li>
 </ul>
@@ -104,122 +128,44 @@ All these tools do is configure the kernel&#x27;s networking stack for the <em>c
 Furthermore, these tools don&#x27;t have any internal state, they only configure the kernel.
 Therefore, any configuration you enter using the iproute2 tools doesn&#x27;t persist across reboots.
 If you want to persist your configuration, you could simply write a shell script running your commands.
-Then for example a systemd unit could run your script at boot, setting up your network to your liking <sup id="citation-arch_network-0"><a href="#reference-arch_network">[<!-- -->1<!-- -->]</a></sup>.
-Baturin&#x27;s user guide <sup id="citation-iproute2_user_guide-0"><a href="#reference-iproute2_user_guide">[<!-- -->2<!-- -->]</a></sup> is a highly useful reference for iproute2.</p>
-<p>Boot scripts, of course, don&#x27;t address dynamic changes to your network.
+Then for example a systemd unit could run your script at boot, setting up your network to your liking <sup id="citation-arch_network-1"><a href="#reference-arch_network">[<!-- -->3<!-- -->]</a></sup>.
+Baturin&#x27;s user guide <sup id="citation-iproute2_user_guide-0"><a href="#reference-iproute2_user_guide">[<!-- -->4<!-- -->]</a></sup> is a highly useful reference for iproute2.<br/>
+I do recommend playing around with them.
+Once I ran <code>ip route show</code> I solved a long standing mystery of why docker sometimes required <code>--net host</code> for contains to reach the internet.
+It turns out that one of the corporate wifi networks I often work in, has a conflicting subnet with Docker&#x27;s.</p>
+<div class="half_image_image"><div><div class="half_element_full_element"><picture class="image_picture"><img srcSet="/images/25ca1d225ca6681d9292bdd69535e761_400_52.webp 400w,/images/25ca1d225ca6681d9292bdd69535e761_690_90.webp 690w" width="400" height="52" alt="" style="background-image:radial-gradient(67% 67% at 25% 25%, #131313, transparent),radial-gradient(67% 67% at 50% 25%, #020202, transparent),radial-gradient(67% 67% at 75% 25%, #030303, transparent),radial-gradient(67% 67% at 25% 50%, #1d1722, transparent),radial-gradient(67% 67% at 50% 50%, #171b1d, transparent),radial-gradient(67% 67% at 75% 50%, #151114, transparent),radial-gradient(67% 67% at 25% 75%, #120f1a, transparent),radial-gradient(67% 67% at 50% 75%, #181a1a, transparent),radial-gradient(67% 67% at 75% 75%, #160f16, transparent),linear-gradient(#121014);background-position:0 0, 0 100%;background-size:100% 100%;background-repeat:no-repeat" loading="lazy" fetchPriority="auto"/></picture></div><div class="half_element_spacer"></div></div></div>
+<p>But what about dynamic network changes?
 What if you unplug an Ethernet cable and connect to some other network?
-Then you&#x27;d have to manually run the iproute2 tools again.<br/>
-The solution for the dynamic networking environment, e.g., portable devices find themselves in are network managers, like NetworkManager or systemd-networkd.
-A network manager runs a userspace daemon in the background dynamically changing the kernel&#x27;s network configuration to the changing network environment.</p>
-<p>Additionally, network managers provide a higher level of abstraction than the low-level iproute2 tools.
-TODO: source</p>
-<p>While you configure systemd-networkd through configuration files <sup id="citation-arch_systemd_networkd-0"><a href="#reference-arch_systemd_networkd">[<!-- -->3<!-- -->]</a></sup>, NetworkManager exposes a D-Bus API, which libnm connects to <sup id="citation-libnm-0"><a href="#reference-libnm">[<!-- -->4<!-- -->]</a></sup>.
+Then you&#x27;d have to manually run the iproute2 tools again.
+Boot scripts cannot help here.<br/>
+The solution for such dynamic networking environments are network managers like NetworkManager or systemd-networkd.
+A network manager runs a userspace daemon in the background dynamically changing the kernel&#x27;s network configuration to the changing network environment.
+Additionally, network managers provide a higher level of abstraction than the low-level iproute2 tools <sup id="citation-arch_network-2"><a href="#reference-arch_network">[<!-- -->3<!-- -->]</a></sup>.</p>
+<p>While you configure systemd-networkd through configuration files <sup id="citation-arch_systemd_networkd-0"><a href="#reference-arch_systemd_networkd">[<!-- -->5<!-- -->]</a></sup>, NetworkManager exposes a D-Bus API, which libnm connects to <sup id="citation-libnm-0"><a href="#reference-libnm">[<!-- -->6<!-- -->]</a></sup>.
 libnm, in turn, is how desktop managers like GNOME show the current network state.
-When you expand the GNOME quick settings <sup id="citation-gnome_quick_settings-0"><a href="#reference-gnome_quick_settings">[<!-- -->5<!-- -->]</a></sup>, for example, you&#x27;re interacting with libnm <sup id="citation-gnome_shell-0"><a href="#reference-gnome_shell">[<!-- -->6<!-- -->]</a></sup>.</p>
+When you expand the GNOME quick settings <sup id="citation-gnome_quick_settings-0"><a href="#reference-gnome_quick_settings">[<!-- -->7<!-- -->]</a></sup>, for example, you&#x27;re interacting with libnm <sup id="citation-gnome_shell-0"><a href="#reference-gnome_shell">[<!-- -->8<!-- -->]</a></sup>.</p>
 <div class="half_image_image"><div><div class="half_element_full_element"><picture class="image_picture"><img srcSet="/images/84bf8997fa930d46f8921a54466e1849_400_183.webp 400w,/images/84bf8997fa930d46f8921a54466e1849_414_190.webp 414w" width="400" height="183" alt="" style="background-image:radial-gradient(67% 67% at 25% 25%, #3f3f42, transparent),radial-gradient(67% 67% at 50% 25%, #3f3f41, transparent),radial-gradient(67% 67% at 75% 25%, #3e3e42, transparent),radial-gradient(67% 67% at 25% 50%, #3b424e, transparent),radial-gradient(67% 67% at 50% 50%, #383f4b, transparent),radial-gradient(67% 67% at 75% 50%, #393c43, transparent),radial-gradient(67% 67% at 25% 75%, #3a649b, transparent),radial-gradient(67% 67% at 50% 75%, #455d7d, transparent),radial-gradient(67% 67% at 75% 75%, #444141, transparent),linear-gradient(#3f4856);background-position:0 0, 0 100%;background-size:100% 100%;background-repeat:no-repeat" loading="lazy" fetchPriority="auto"/></picture></div><div class="half_element_spacer"></div></div></div>
 <p>These desktop managers are very closely intertwined with NetworkManager.
-If you want to use some other network manager, like systemd-networkd, you need to mimic NetworkManager&#x27;s D-Bus API<sup id="citation-nmlinkd-0"><a href="#reference-nmlinkd">[<!-- -->7<!-- -->]</a></sup>.<br/>
-On the terminal there is <code>nmcli</code>, which also uses libnm <sup id="citation-nmcli_libnm-0"><a href="#reference-nmcli_libnm">[<!-- -->8<!-- -->]</a></sup>.</p>
+If you want to use some other network manager, like systemd-networkd, you need to mimic NetworkManager&#x27;s D-Bus API<sup id="citation-nmlinkd-0"><a href="#reference-nmlinkd">[<!-- -->9<!-- -->]</a></sup>.<br/>
+On the terminal there is <code>nmcli</code>, which also uses libnm <sup id="citation-nmcli_libnm-0"><a href="#reference-nmcli_libnm">[<!-- -->10<!-- -->]</a></sup>.</p>
 <p>So taking my example from before, connecting a linux PC to a consumer router typically automatically establishes a link.
 NetworkManager does that using its integrated DHCP client.
-The NetworkManager daemon depends on udev to receive a notification on network device discovery <sup id="citation-networkmanager-0"><a href="#reference-networkmanager">[<!-- -->9<!-- -->]</a></sup>.
-Then it dynamically changes the kernel&#x27;s network configuration according to the new device.<br/>
-udev is another userspace daemon listening for device events from the kernel <sup id="citation-udev-0"><a href="#reference-udev">[<!-- -->10<!-- -->]</a></sup>.
+The NetworkManager daemon depends on udev to receive a notification on network device discovery <sup id="citation-networkmanager-0"><a href="#reference-networkmanager">[<!-- -->11<!-- -->]</a></sup>.
+Then it dynamically changes the kernel&#x27;s network configuration according to the new device.
+For wireless networks it might use wpa_supplicant for authentication <sup id="citation-arch_network-3"><a href="#reference-arch_network">[<!-- -->3<!-- -->]</a></sup>.<br/>
+udev is another userspace daemon listening for device events from the kernel <sup id="citation-udev-0"><a href="#reference-udev">[<!-- -->12<!-- -->]</a></sup>.
 udev also performs systemd&#x27;s predictable network interface naming.
-This naming is predictable in contrast to the kernel&#x27;s own naming scheme, (e.g, <code>eth0</code>, <code>eth1</code>, ...), which may change from one boot to the next <sup id="citation-predictable_if_naming-0"><a href="#reference-predictable_if_naming">[<!-- -->11<!-- -->]</a></sup>.</p>
-<p>Lastly, there is another layer on top of network managers:
-netplan parses yaml files and creates NetworkManager or systemd-networkd configuration files <sup id="citation-netplan-0"><a href="#reference-netplan">[<!-- -->12<!-- -->]</a></sup>.</p>
-<ul>
-<li>
-<p>ip: part of iproute2
-iproute2 uses netlink API</p>
-<p>used for setup routing on my own, without &quot;router&quot; in between
-https://github.com/iproute2/iproute2/blob/main/lib/libnetlink.c
-<code>libnetlink</code> used.</p>
-</li>
-<li>
-<p>arp: manipulate the kernel&#x27;s IPv4 network neighbour cache.
-Thin wrapper around kernel; no daemon; neighbour cache
-Could also do <code>cat /proc/net/arp</code>.
-There also is arpd.
-ARP is implemented in a kernel module.</p>
-</li>
-<li>
-<p>arpd: A userspace daemon doing more advances ARP actions and feeds the ARP database (IP-MAC pairs) to the kernel for usage.</p>
-</li>
-<li>
-<p>ss: investiage network ports</p>
-</li>
-<li>
-<p>avahi-daemon: daemon implementing mDNS, Apple Zeroconf, ...
-It find services being provided on the network, i.e., printers.
-https://wiki.archlinux.org/title/Network_configuration#Local_network_hostname_resolution
-It takes your hostname and enables devices on the LAN to find you.
-The alternative would be to setup a DNS server and make it the default for the LAN via DHCP.</p>
-<p><code>avahi-daemon</code> takes the machine&#x27;s hostname and exposes it to other machines on the LAN <sup id="citation-arch_network-1"><a href="#reference-arch_network">[<!-- -->1<!-- -->]</a></sup>.</p>
-</li>
-<li>
-<p>wpa_supplicant</p>
-</li>
-<li>
-<p>NetworkManager: has integrated DHCP client
-https://kernel-internals.org/net/netlink/
-uses netlink to configure kernel
-https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/7/html/networking_guide/sec-configuring_ip_networking_with_ip_commands
-iproute2 may be used in parallel with NetworkManager.
-NetworkManager detects what iproute2 did.</p>
-</li>
-<li>
-<p>systemd-networkd: has integrated DHCP client</p>
-</li>
-<li>
-<p>systemd-resolved</p>
-</li>
-<li>
-<p>dhclient: DHCP client, not really maintained</p>
-</li>
-<li>
-<p>dhcpcd: DHCP client, more lightweight</p>
-</li>
-<li>
-<p>nmcli</p>
-</li>
-<li>
-<p>ethtool: can be compiled with ioctl or netlink support
-used for hardware timestamping</p>
-</li>
-<li>
-<p>devlink</p>
-</li>
-<li>
-<p>udhcp</p>
-</li>
-<li>
-<p>netstat</p>
-</li>
-<li>
-<p>ifup, ifdown:
-Part of ifupdown package.
-Config file: <code>/etc/network/interfaces</code></p>
-</li>
-<li>
-<p>FRRouting implements OSPF, RIP and other routing protocols; populates the kernels routing table
-The kernel forget routes when links go down.
-NetworkManager reinstates them they come back up.
-That&#x27;s something FRRouting does specifically.
-https://docs.frrouting.org/en/latest/kernel.html
-ioctl, sysctl, proc filesystem, netlink</p>
-</li>
-<li>
-<p>KIT subnet 127.17.0.0/17</p>
-</li>
-<li>
-<p>docker subnet 127.17.0.0/16</p>
-</li>
-<li>
-<p>work around: <code>--net host</code></p>
-</li>
-</ul>
+This naming is predictable in contrast to the kernel&#x27;s own naming scheme, (e.g, <code>eth0</code>, <code>eth1</code>, ...), which may change from one boot to the next <sup id="citation-predictable_if_naming-0"><a href="#reference-predictable_if_naming">[<!-- -->13<!-- -->]</a></sup>.</p>
+<p>Importantly, iproute2 through libnetlink, systemd-networkd through sd-netlink and NetworkManager directly interact with the kernel via Netlink <sup id="citation-libnetlink-0"><a href="#reference-libnetlink">[<!-- -->14<!-- -->]</a></sup> <sup id="citation-network_manager_netlink-0"><a href="#reference-network_manager_netlink">[<!-- -->15<!-- -->]</a></sup> <sup id="citation-sd_netlink-0"><a href="#reference-sd_netlink">[<!-- -->16<!-- -->]</a></sup>.
+The iproute2 tools may even be used in parallel with NetworkManager.
+NetworkManager detects what iproute2 did <sup id="citation-red_hat_ip-0"><a href="#reference-red_hat_ip">[<!-- -->17<!-- -->]</a></sup>.</p>
+<p>As an aside, there is another layer on top of network managers:
+netplan parses yaml files and creates NetworkManager or systemd-networkd configuration files <sup id="citation-netplan-0"><a href="#reference-netplan">[<!-- -->18<!-- -->]</a></sup>.</p>
+<p>For routing equipment running Linux software like FRRouting implements large-scale routing protocols like OSPF or RIP.
+Its daemons populate the kernel&#x27;s routing tables dynamically.
+The kernel simply forgets routes when links go down.
+That&#x27;s where userspace daemons provide dynamic configuration changes.
+FRRouting also uses netlink directly <sup id="citation-frrouting_kernel_interface-0"><a href="#reference-frrouting_kernel_interface">[<!-- -->19<!-- -->]</a></sup>.</p>
 <h1 id="filtering-tools"><a class="markdown_heading_a" href="#filtering-tools" target="_self"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Filtering Tools</h1>
 <p>TODO</p>
 <ul>
@@ -245,7 +191,7 @@ https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/10/html/config
 Recommended to not use together with nftables.
 https://firewalld.org/documentation/architecture.html
 Uses NetworkManager to be notified about network device renamings.</p>
-<p>It is recommended to not use firewalld together with nftables <sup id="citation-redhat_firewalld-0"><a href="#reference-redhat_firewalld">[<!-- -->13<!-- -->]</a></sup>.
+<p>It is recommended to not use firewalld together with nftables <sup id="citation-redhat_firewalld-0"><a href="#reference-redhat_firewalld">[<!-- -->20<!-- -->]</a></sup>.
 firewalld implements higher-level filtering concepts, like network zones.
 It&#x27;s implemented as a daemon, for example, because it allows configuring NAT for dynamically connected network links.</p>
 </li>
@@ -281,7 +227,7 @@ And for doing that dynamically these programs need a userspace daemon running al
 <li>Userspace tools do ...</li>
 <li>Desktop managers do ...</li>
 </ul>
-<div class="references"><h1>References</h1><ol><li id="reference-arch_network">^ <a href="#citation-arch_network-0"><sup><i>0</i></sup></a> <a href="#citation-arch_network-1"><sup><i>1</i></sup></a> <a href="https://wiki.archlinux.org/title/Network_configuration" target="_blank" rel="noopener">Network Configuration</a>. <i>Arch Wiki</i>. <!-- -->Accessed: 2026-06-24</li><li id="reference-iproute2_user_guide"><a href="#citation-iproute2_user_guide-0">^</a> <a href="https://baturin.org/docs/iproute2" target="_blank" rel="noopener">Task-centered iproute2 user guide</a>. <i>Daniil Baturin</i>. <!-- -->Accessed: 2026-06-25</li><li id="reference-arch_systemd_networkd"><a href="#citation-arch_systemd_networkd-0">^</a> <a href="https://wiki.archlinux.org/title/Systemd-networkd" target="_blank" rel="noopener">systemd-networkd</a>. <i>Arch Wiki</i>. <!-- -->Accessed: 2026-06-25</li><li id="reference-libnm"><a href="#citation-libnm-0">^</a> <a href="https://networkmanager.dev/docs/libnm/latest/ref-overview.html" target="_blank" rel="noopener">Introduction to libnm</a>. <i>NetworkManager</i>. <!-- -->Accessed: 2026-06-25</li><li id="reference-gnome_quick_settings"><a href="#citation-gnome_quick_settings-0">^</a> <a href="https://help.gnome.org/gnome-help/quick-settings.html" target="_blank" rel="noopener">Quick Settings</a>. <i>GNOME</i>. <!-- -->Accessed: 2026-06-25</li><li id="reference-gnome_shell"><a href="#citation-gnome_shell-0">^</a> <a href="https://archlinux.org/packages/extra/x86_64/gnome-shell" target="_blank" rel="noopener">gnome-shell</a>. <i>Arch Packages</i>. <!-- -->Accessed: 2026-06-25</li><li id="reference-nmlinkd"><a href="#citation-nmlinkd-0">^</a> <a href="https://github.com/SubZ69/nmlinkd" target="_blank" rel="noopener">nmlinkd</a>. <i>subz69</i>. <!-- -->Accessed: 2026-06-25</li><li id="reference-nmcli_libnm"><a href="#citation-nmcli_libnm-0">^</a> <a href="https://www.networkmanager.dev/docs/libnm/latest/usage.html" target="_blank" rel="noopener">Using libnm</a>. <i>NetworkManager</i>. <!-- -->Accessed: 2026-06-25</li><li id="reference-networkmanager"><a href="#citation-networkmanager-0">^</a> <a href="https://networkmanager.dev/docs/api/latest/NetworkManager.html" target="_blank" rel="noopener">NetworkManager</a>. <i>NetworkManager</i>. <!-- -->Accessed: 2026-06-25</li><li id="reference-udev"><a href="#citation-udev-0">^</a> <a href="https://www.man7.org/linux/man-pages/man7/udev.7.html" target="_blank" rel="noopener">udev(7)</a>. <i>Linux page</i>. <!-- -->Accessed: 2026-06-25</li><li id="reference-predictable_if_naming"><a href="#citation-predictable_if_naming-0">^</a> <a href="https://systemd.io/PREDICTABLE_INTERFACE_NAMES/" target="_blank" rel="noopener">Predictable Network Interface Names</a>. <i>systemd</i>. <!-- -->Accessed: 2026-06-25</li><li id="reference-netplan"><a href="#citation-netplan-0">^</a> <a href="https://netplan.readthedocs.io/en/stable/netplan-yaml/" target="_blank" rel="noopener">YAML configuration</a>. <i>Netplan documentation</i>. <!-- -->Accessed: 2026-06-25</li><li id="reference-redhat_firewalld"><a href="#citation-redhat_firewalld-0">^</a> <a href="https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/10/html/configuring_firewalls_and_packet_filters/getting-started-with-nftables" target="_blank" rel="noopener">Getting started with nftables</a>. <i>Red Hat</i>. <!-- -->Accessed: 2026-06-24</li></ol></div>
+<div class="references"><h1>References</h1><ol><li id="reference-kernel_dns"><a href="#citation-kernel_dns-0">^</a> <a href="https://www.kernel.org/doc/html/latest/networking/dns_resolver.html" target="_blank" rel="noopener">DNS Resolver Module</a>. <i>kernel.org</i>. <!-- -->Accessed: 2026-06-25</li><li id="reference-arch_resolved"><a href="#citation-arch_resolved-0">^</a> <a href="https://wiki.archlinux.org/title/Systemd-resolved" target="_blank" rel="noopener">systemd-resolved</a>. <i>Arch Wiki</i>. <!-- -->Accessed: 2026-06-25</li><li id="reference-arch_network">^ <a href="#citation-arch_network-0"><sup><i>0</i></sup></a> <a href="#citation-arch_network-1"><sup><i>1</i></sup></a> <a href="#citation-arch_network-2"><sup><i>2</i></sup></a> <a href="#citation-arch_network-3"><sup><i>3</i></sup></a> <a href="https://wiki.archlinux.org/title/Network_configuration" target="_blank" rel="noopener">Network Configuration</a>. <i>Arch Wiki</i>. <!-- -->Accessed: 2026-06-24</li><li id="reference-iproute2_user_guide"><a href="#citation-iproute2_user_guide-0">^</a> <a href="https://baturin.org/docs/iproute2" target="_blank" rel="noopener">Task-centered iproute2 user guide</a>. <i>Daniil Baturin</i>. <!-- -->Accessed: 2026-06-25</li><li id="reference-arch_systemd_networkd"><a href="#citation-arch_systemd_networkd-0">^</a> <a href="https://wiki.archlinux.org/title/Systemd-networkd" target="_blank" rel="noopener">systemd-networkd</a>. <i>Arch Wiki</i>. <!-- -->Accessed: 2026-06-25</li><li id="reference-libnm"><a href="#citation-libnm-0">^</a> <a href="https://networkmanager.dev/docs/libnm/latest/ref-overview.html" target="_blank" rel="noopener">Introduction to libnm</a>. <i>NetworkManager</i>. <!-- -->Accessed: 2026-06-25</li><li id="reference-gnome_quick_settings"><a href="#citation-gnome_quick_settings-0">^</a> <a href="https://help.gnome.org/gnome-help/quick-settings.html" target="_blank" rel="noopener">Quick Settings</a>. <i>GNOME</i>. <!-- -->Accessed: 2026-06-25</li><li id="reference-gnome_shell"><a href="#citation-gnome_shell-0">^</a> <a href="https://archlinux.org/packages/extra/x86_64/gnome-shell" target="_blank" rel="noopener">gnome-shell</a>. <i>Arch Packages</i>. <!-- -->Accessed: 2026-06-25</li><li id="reference-nmlinkd"><a href="#citation-nmlinkd-0">^</a> <a href="https://github.com/SubZ69/nmlinkd" target="_blank" rel="noopener">nmlinkd</a>. <i>subz69</i>. <!-- -->Accessed: 2026-06-25</li><li id="reference-nmcli_libnm"><a href="#citation-nmcli_libnm-0">^</a> <a href="https://www.networkmanager.dev/docs/libnm/latest/usage.html" target="_blank" rel="noopener">Using libnm</a>. <i>NetworkManager</i>. <!-- -->Accessed: 2026-06-25</li><li id="reference-networkmanager"><a href="#citation-networkmanager-0">^</a> <a href="https://networkmanager.dev/docs/api/latest/NetworkManager.html" target="_blank" rel="noopener">NetworkManager</a>. <i>NetworkManager</i>. <!-- -->Accessed: 2026-06-25</li><li id="reference-udev"><a href="#citation-udev-0">^</a> <a href="https://www.man7.org/linux/man-pages/man7/udev.7.html" target="_blank" rel="noopener">udev(7)</a>. <i>Linux page</i>. <!-- -->Accessed: 2026-06-25</li><li id="reference-predictable_if_naming"><a href="#citation-predictable_if_naming-0">^</a> <a href="https://systemd.io/PREDICTABLE_INTERFACE_NAMES/" target="_blank" rel="noopener">Predictable Network Interface Names</a>. <i>systemd</i>. <!-- -->Accessed: 2026-06-25</li><li id="reference-libnetlink"><a href="#citation-libnetlink-0">^</a> <a href="https://github.com/iproute2/iproute2/blob/main/lib/libnetlink.c" target="_blank" rel="noopener">libnetlink.c</a>. <i>Git</i>. <!-- -->Accessed: 2026-06-25</li><li id="reference-network_manager_netlink"><a href="#citation-network_manager_netlink-0">^</a> <a href="https://github.com/lcp/NetworkManager/blob/master/src/nm-netlink-monitor.c" target="_blank" rel="noopener">nm-netlink-monitor.c</a>. <i>NetworkManager Git</i>. <!-- -->Accessed: 2026-06-25</li><li id="reference-sd_netlink"><a href="#citation-sd_netlink-0">^</a> <a href="https://github.com/systemd/systemd/blob/main/src/systemd/sd-netlink.h" target="_blank" rel="noopener">sd-netlink.h</a>. <i>Git</i>. <!-- -->Accessed: 2026-06-25</li><li id="reference-red_hat_ip"><a href="#citation-red_hat_ip-0">^</a> <a href="https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/7/html/networking_guide/sec-configuring_ip_networking_with_ip_commands" target="_blank" rel="noopener">Configuring IP Networking with ip Commands</a>. <i>Red Hat</i>. <!-- -->Accessed: 2026-06-25</li><li id="reference-netplan"><a href="#citation-netplan-0">^</a> <a href="https://netplan.readthedocs.io/en/stable/netplan-yaml/" target="_blank" rel="noopener">YAML configuration</a>. <i>Netplan documentation</i>. <!-- -->Accessed: 2026-06-25</li><li id="reference-frrouting_kernel_interface"><a href="#citation-frrouting_kernel_interface-0">^</a> <a href="https://docs.frrouting.org/en/latest/kernel.html" target="_blank" rel="noopener">Kernel Interface</a>. <i>FRRouting</i>. <!-- -->Accessed: 2026-06-25</li><li id="reference-redhat_firewalld"><a href="#citation-redhat_firewalld-0">^</a> <a href="https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/10/html/configuring_firewalls_and_packet_filters/getting-started-with-nftables" target="_blank" rel="noopener">Getting started with nftables</a>. <i>Red Hat</i>. <!-- -->Accessed: 2026-06-24</li></ol></div>
 <div class="markdown_spacer"></div></div></div><div class="react_to"><div class="tags_list"> <a href="/tag/linux" target="_self">#<!-- -->linux</a></div><div><button type="button" class="button" onclick="
 umami.track(
     'like',
