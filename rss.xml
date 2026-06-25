@@ -4,7 +4,7 @@
         <title>Chris' Homepage</title>
         <link>https://dev.chris-besch.com</link>
         <description>Christopher Besch's Homepage about Software, Articles and Photography</description>
-        <lastBuildDate>Thu, 25 Jun 2026 18:35:21 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 25 Jun 2026 21:00:58 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
@@ -14,8 +14,9 @@
             <link>/articles/linux_networking</link>
             <guid isPermaLink="false">/articles/linux_networking</guid>
             <pubDate>Wed, 24 Jun 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[TODO]]></description>
             <author>mail@chris-besch.com (Christopher Besch)</author>
-            <enclosure url="https://dev.chris-besch.com/images/1b6114ae28e1dd87942d09be9257256e_800_400.webp" length="0" type="image/webp"/>
+            <enclosure url="https://dev.chris-besch.com/images/0679c7e5fe7c5ad05436b5ad7dc477ec_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
             <title><![CDATA[Enable Respawn in ARMA: Cold War Assault]]></title>
@@ -86,6 +87,24 @@ Contrary to initial expectations, we show that the Group Netlist has uses beyond
             <enclosure url="https://dev.chris-besch.com/images/75e7dd6865f7b8d52489a1f1368ebbef_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
+            <title><![CDATA[The History of Forgejo's Pub-Sub Pattern]]></title>
+            <link>/articles/forgejo_pub_sub_pattern_history</link>
+            <guid isPermaLink="false">/articles/forgejo_pub_sub_pattern_history</guid>
+            <pubDate>Thu, 30 Oct 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[I created a tool to visualize Forgejo's Pub-Sub pattern. Why not run that tool on all 24 thousand commits in Forgejo's history? What could possibly go wrong?]]></description>
+            <author>mail@chris-besch.com (Christopher Besch)</author>
+            <enclosure url="https://dev.chris-besch.com/images/a7f291280fadb4822ddaf7ed36c95bf8_800_400.webp" length="0" type="image/webp"/>
+        </item>
+        <item>
+            <title><![CDATA[Why I love Open-Source]]></title>
+            <link>/articles/open_source</link>
+            <guid isPermaLink="false">/articles/open_source</guid>
+            <pubDate>Sat, 11 Oct 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[We all live in a world of immensely complex technology. The concept of Open-Source might seem radical at first but it's indispensable in our world. Regardless if you are a user, developer or simply interested in a healthy society, you benefit from Open-Source and we should fight for every bit of it. Open-Source is a quality mark, a form of democracy and ownership, capitalism at its best and thus the response to this world, a world in which software exists. This article gets to that conclusion without requiring any prior technical knowledge.]]></description>
+            <author>mail@chris-besch.com (Christopher Besch)</author>
+            <enclosure url="https://dev.chris-besch.com/images/e5fdc90ab34ba9a541ab0d11b75e02de_800_400.webp" length="0" type="image/webp"/>
+        </item>
+        <item>
             <title><![CDATA[When You Don't Take the Shot]]></title>
             <link>/articles/photo_abilities</link>
             <guid isPermaLink="false">/articles/photo_abilities</guid>
@@ -123,32 +142,14 @@ Or: How I blew up my brother.]]></description>
             <enclosure url="https://dev.chris-besch.com/images/e504095a9b565988179fa2df918ae18c_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
-            <title><![CDATA[The History of Forgejo's Pub-Sub Pattern]]></title>
-            <link>/articles/forgejo_pub_sub_pattern_history</link>
-            <guid isPermaLink="false">/articles/forgejo_pub_sub_pattern_history</guid>
-            <pubDate>Thu, 30 Oct 2025 00:00:00 GMT</pubDate>
-            <description><![CDATA[I created a tool to visualize Forgejo's Pub-Sub pattern. Why not run that tool on all 24 thousand commits in Forgejo's history? What could possibly go wrong?]]></description>
+            <title><![CDATA[Docker: Breathing Life into Decades old Fortran]]></title>
+            <link>/articles/ctemsoft</link>
+            <guid isPermaLink="false">/articles/ctemsoft</guid>
+            <pubDate>Sun, 06 Apr 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[Bringing decades old Fortran code to life with Docker and animating it with Python.
+Now you get to see Fig.3.5. from "Introduction to Conventional Transmission Electron Microscopy" by Prof. Marc De Graef at 30 frames a second.]]></description>
             <author>mail@chris-besch.com (Christopher Besch)</author>
-            <enclosure url="https://dev.chris-besch.com/images/a7f291280fadb4822ddaf7ed36c95bf8_800_400.webp" length="0" type="image/webp"/>
-        </item>
-        <item>
-            <title><![CDATA[Why I love Open-Source]]></title>
-            <link>/articles/open_source</link>
-            <guid isPermaLink="false">/articles/open_source</guid>
-            <pubDate>Sat, 11 Oct 2025 00:00:00 GMT</pubDate>
-            <description><![CDATA[We all live in a world of immensely complex technology. The concept of Open-Source might seem radical at first but it's indispensable in our world. Regardless if you are a user, developer or simply interested in a healthy society, you benefit from Open-Source and we should fight for every bit of it. Open-Source is a quality mark, a form of democracy and ownership, capitalism at its best and thus the response to this world, a world in which software exists. This article gets to that conclusion without requiring any prior technical knowledge.]]></description>
-            <author>mail@chris-besch.com (Christopher Besch)</author>
-            <enclosure url="https://dev.chris-besch.com/images/e5fdc90ab34ba9a541ab0d11b75e02de_800_400.webp" length="0" type="image/webp"/>
-        </item>
-        <item>
-            <title><![CDATA[The Bitter Feeling of Technical Compromises]]></title>
-            <link>/articles/technical_compromises</link>
-            <guid isPermaLink="false">/articles/technical_compromises</guid>
-            <pubDate>Thu, 25 Sep 2025 00:00:00 GMT</pubDate>
-            <description><![CDATA[My very personal troubles dealing with compromises, explained at an example of docker_cron with Renovate.
-Sometimes you really don't have to worry as much and trust your previous, careful considerations.]]></description>
-            <author>mail@chris-besch.com (Christopher Besch)</author>
-            <enclosure url="https://dev.chris-besch.com/images/3548ef292f5ade7df6bc737602d59bd8_800_400.webp" length="0" type="image/webp"/>
+            <enclosure url="https://dev.chris-besch.com/images/c5fde5a326c6a0b5e07c470ffda1eb59_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
             <title><![CDATA[grub-install --removable for buggy UEFI]]></title>
@@ -160,14 +161,14 @@ Sometimes you really don't have to worry as much and trust your previous, carefu
             <enclosure url="https://dev.chris-besch.com/images/5c5afcd8efd6183c56c8c807a694a48f_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
-            <title><![CDATA[Docker: Breathing Life into Decades old Fortran]]></title>
-            <link>/articles/ctemsoft</link>
-            <guid isPermaLink="false">/articles/ctemsoft</guid>
-            <pubDate>Sun, 06 Apr 2025 00:00:00 GMT</pubDate>
-            <description><![CDATA[Bringing decades old Fortran code to life with Docker and animating it with Python.
-Now you get to see Fig.3.5. from "Introduction to Conventional Transmission Electron Microscopy" by Prof. Marc De Graef at 30 frames a second.]]></description>
+            <title><![CDATA[The Bitter Feeling of Technical Compromises]]></title>
+            <link>/articles/technical_compromises</link>
+            <guid isPermaLink="false">/articles/technical_compromises</guid>
+            <pubDate>Thu, 25 Sep 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[My very personal troubles dealing with compromises, explained at an example of docker_cron with Renovate.
+Sometimes you really don't have to worry as much and trust your previous, careful considerations.]]></description>
             <author>mail@chris-besch.com (Christopher Besch)</author>
-            <enclosure url="https://dev.chris-besch.com/images/c5fde5a326c6a0b5e07c470ffda1eb59_800_400.webp" length="0" type="image/webp"/>
+            <enclosure url="https://dev.chris-besch.com/images/3548ef292f5ade7df6bc737602d59bd8_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
             <title><![CDATA[Bodging MP3 Names in Bash]]></title>
@@ -207,15 +208,6 @@ Also: How to setup your Linux laptop as a simple NAT router.]]></description>
             <enclosure url="https://dev.chris-besch.com/images/e85afd024262b6186553d361a5908877_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
-            <title><![CDATA[LunarVim in Distrobox]]></title>
-            <link>/articles/lvim_in_distrobox</link>
-            <guid isPermaLink="false">/articles/lvim_in_distrobox</guid>
-            <pubDate>Tue, 25 Oct 2022 00:00:00 GMT</pubDate>
-            <description><![CDATA[You're missing that one program that isn't available in your Linux distro? With Distrobox, the 'Linux Subsystem for Linux,' you can install it anyways. This article explains how to do that with the example of installing LunarVim on Red Hat.]]></description>
-            <author>mail@chris-besch.com (Christopher Besch)</author>
-            <enclosure url="https://dev.chris-besch.com/images/7b55476245f182a8e9f9b7e91efbb1a6_800_400.webp" length="0" type="image/webp"/>
-        </item>
-        <item>
             <title><![CDATA[Inject Fonts into Web SVGs with sed]]></title>
             <link>/articles/svg_fonts_with_sed</link>
             <guid isPermaLink="false">/articles/svg_fonts_with_sed</guid>
@@ -223,6 +215,16 @@ Also: How to setup your Linux laptop as a simple NAT router.]]></description>
             <description><![CDATA[Add font-loading CSS to SVGs with a sed script.]]></description>
             <author>mail@chris-besch.com (Christopher Besch)</author>
             <enclosure url="https://dev.chris-besch.com/images/f59a7f43e2f2a641d46f9fd994b5589c_800_400.webp" length="0" type="image/webp"/>
+        </item>
+        <item>
+            <title><![CDATA[reveal.js your Presentation]]></title>
+            <link>/articles/revealjs</link>
+            <guid isPermaLink="false">/articles/revealjs</guid>
+            <pubDate>Fri, 24 Jun 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[reveal.js is a PowerPoint alternative. With it you programmatically define your presentation via HTML.
+This article shows how you can use reveal.js for your own presentation.]]></description>
+            <author>mail@chris-besch.com (Christopher Besch)</author>
+            <enclosure url="https://dev.chris-besch.com/images/90f1af0c0e4970e8cf923a375c719169_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
             <title><![CDATA[Maki, Atoms and Time Travel]]></title>
@@ -254,14 +256,13 @@ Or: How I started to enjoy writing tests.]]></description>
             <enclosure url="https://dev.chris-besch.com/images/4645af088304bd562c94708123e688f3_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
-            <title><![CDATA[reveal.js your Presentation]]></title>
-            <link>/articles/revealjs</link>
-            <guid isPermaLink="false">/articles/revealjs</guid>
-            <pubDate>Fri, 24 Jun 2022 00:00:00 GMT</pubDate>
-            <description><![CDATA[reveal.js is a PowerPoint alternative. With it you programmatically define your presentation via HTML.
-This article shows how you can use reveal.js for your own presentation.]]></description>
+            <title><![CDATA[LunarVim in Distrobox]]></title>
+            <link>/articles/lvim_in_distrobox</link>
+            <guid isPermaLink="false">/articles/lvim_in_distrobox</guid>
+            <pubDate>Tue, 25 Oct 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[You're missing that one program that isn't available in your Linux distro? With Distrobox, the 'Linux Subsystem for Linux,' you can install it anyways. This article explains how to do that with the example of installing LunarVim on Red Hat.]]></description>
             <author>mail@chris-besch.com (Christopher Besch)</author>
-            <enclosure url="https://dev.chris-besch.com/images/90f1af0c0e4970e8cf923a375c719169_800_400.webp" length="0" type="image/webp"/>
+            <enclosure url="https://dev.chris-besch.com/images/7b55476245f182a8e9f9b7e91efbb1a6_800_400.webp" length="0" type="image/webp"/>
         </item>
     </channel>
 </rss>
