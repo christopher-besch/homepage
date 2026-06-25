@@ -93,6 +93,8 @@ For example, *"On Linux playing Windows games is done through Proton"* is a comm
 But, of course, the Linux kernel doesn't enforce this at all.
 You can play some games through Wine or build an alternative to Proton on Linux.
 
+There's also socat, which allows you ...
+
 # Netlink
 TODO
 explain configuring vs filtering; show diagram
@@ -102,28 +104,64 @@ https://www.rfc-editor.org/info/rfc3549/
 <HalfImage full="true" src="./stack.webp" />
 
 # Configuration Tools
-TODO
+Beginning with the diagram's left half, there is a zoo of network configuration tools.
+The iproute2 tools are one of the major players here.
+They contain the `ip`, `bridge`, `arp`, `tc` and `ss` terminal programs, among other.<br />
+Say, for example, you want to connect two PCs with a single Ethernet cable and connect via SSH from one PC to the other.
+In such a setup you typically don't have a DHCP server automatically configuring this network.
+That's what a dedicated consumer router would do, which is why connecting two PCs to a consumer route *just works*.
+To fill this gap you could host a DHCP server yourself or use the iproute2 tools.
+The tools allow you to assign static IPs to both PCs network links and configure IP routes; doing parts manually that DHCP would have done.<br />
+Notice the word *static*;
+The iproute2 tools don't have a daemon able to react to network changes.
+All these tools do is configure the kernel's networking stack for the *current* network situation.
+Furthermore, these tools don't have any internal state, they only configure the kernel.
+Therefore, any configuration you enter using the iproute2 tools doesn't persist across reboots.
+If you want to persist your configuration, you could simply write a shell script running your commands.
+Then for example a systemd unit could run your script at boot, setting up your network to your liking <Cite id="arch_network" />.
+Baturin's user guide <Cite id="iproute2_user_guide" /> is a highly useful reference for iproute2.
+
+Boot scripts, of course, don't address dynamic changes to your network.
+What if you unplug an Ethernet cable and connect to some other network?
+Then you'd have to manually run the iproute2 tools again.<br />
+The solution for the dynamic networking environment, e.g., portable devices find themselves in are network managers, like NetworkManager or systemd-networkd.
+A network manager runs a userspace daemon in the background dynamically changing the kernel's network configuration to the changing network environment.
+
+Additionally, network managers provide a higher level of abstraction than the low-level iproute2 tools.
+TODO: source
+
+While you configure systemd-networkd through configuration files <Cite id="arch_systemd_networkd" />, NetworkManager exposes a D-Bus API, which libnm connects to <Cite id="libnm" />.
+libnm, in turn, is how desktop managers like GNOME show the current network state.
+When you expand the GNOME quick settings <Cite id="gnome_quick_settings" />, for example, you're interacting with libnm <Cite id="gnome_shell" />.
+<HalfImage full="true" src="./gnome.png" />
+
+These desktop managers are very closely intertwined with NetworkManager.
+If you want to use some other network manager, like systemd-networkd, you need to mimic NetworkManager's D-Bus API<Cite id="nmlinkd" />.<br />
+On the terminal there is `nmcli`, which also uses libnm <Cite id="nmcli_libnm" />.
+
+So taking my example from before, connecting a linux PC to a consumer router typically automatically establishes a link.
+NetworkManager does that using its integrated DHCP client.
+The NetworkManager daemon depends on udev to receive a notification on network device discovery <Cite id="networkmanager" />.
+Then it dynamically changes the kernel's network configuration according to the new device.<br />
+udev is another userspace daemon listening for device events from the kernel <Cite id="udev" />.
+udev also performs systemd's predictable network interface naming.
+This naming is predictable in contrast to the kernel's own naming scheme, (e.g, `eth0`, `eth1`, ...), which may change from one boot to the next <Cite id="predictable_if_naming" />.
+
+Lastly, there is another layer on top of network managers:
+netplan parses yaml files and creates NetworkManager or systemd-networkd configuration files <Cite id="netplan" />.
+
 - ip: part of iproute2
     iproute2 uses netlink API
-    https://wiki.archlinux.org/title/Network_configuration
-    ip commands are not persistent.
-    One must use scripts or systemd units to call ip on boot.
 
     used for setup routing on my own, without "router" in between
     https://github.com/iproute2/iproute2/blob/main/lib/libnetlink.c
     `libnetlink` used.
-- bridge: part of iproute2
-- tc: part of iproute2
-    Takes care of traffic scheduling
-- dcb: part of iproute2
-- ifconfig (replaced by ip) part of net-tools
 - arp: manipulate the kernel's IPv4 network neighbour cache.
     Thin wrapper around kernel; no daemon; neighbour cache
     Could also do `cat /proc/net/arp`.
     There also is arpd.
     ARP is implemented in a kernel module.
 - arpd: A userspace daemon doing more advances ARP actions and feeds the ARP database (IP-MAC pairs) to the kernel for usage.
-- netstat (replaced by ss)
 - ss: investiage network ports
 - avahi-daemon: daemon implementing mDNS, Apple Zeroconf, ...
     It find services being provided on the network, i.e., printers.
@@ -134,12 +172,6 @@ TODO
     `avahi-daemon` takes the machine's hostname and exposes it to other machines on the LAN <Cite id="arch_network" />.
 - wpa_supplicant
 - NetworkManager: has integrated DHCP client
-    Also, somehow manages wifi.
-    https://networkmanager.dev/docs/libnm/latest/
-    https://networkmanager.dev/docs/libnm/latest/ref-overview.html
-    Provides `libnm`.
-    https://github.com/SubZ69/nmlinkd
-    GNOME and other desktop managers talk to NetworkManager D-Bus (or `libnm`, I guess)
     https://kernel-internals.org/net/netlink/
     uses netlink to configure kernel
     https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/7/html/networking_guide/sec-configuring_ip_networking_with_ip_commands
@@ -150,27 +182,20 @@ TODO
 - dhclient: DHCP client, not really maintained
 - dhcpcd: DHCP client, more lightweight
 - nmcli
-- udev: userspace daemon (systemd-udevd)
-    notified by kernel
-    performs action, e.g., mount device, notifies NetworkManager-daemon for NIC
 - ethtool: can be compiled with ioctl or netlink support
     used for hardware timestamping
 - devlink
-- brctl (replaced by bridge) part of net-tools
 - udhcp
 - netstat
 - ifup, ifdown:
     Part of ifupdown package.
     Config file: `/etc/network/interfaces`
-- netplan: network config for cloud systems
-    Creates config for systemd-networkd or NetworkManager.
 - FRRouting implements OSPF, RIP and other routing protocols; populates the kernels routing table
     The kernel forget routes when links go down.
     NetworkManager reinstates them they come back up.
     That's something FRRouting does specifically.
     https://docs.frrouting.org/en/latest/kernel.html
     ioctl, sysctl, proc filesystem, netlink
-- GNOME
 
 - KIT subnet 127.17.0.0/17
 - docker subnet 127.17.0.0/16
@@ -193,9 +218,6 @@ TODO
     `nft` compiles rules to VM bytecode and pushes that bytecode to the kernel via Netlink.
     The kernel then somehow runs that bytecode and uses it to filer, somewhow.
     Is this eBPF?
-- iptables (replaced by nftables)
-- ip6tables (replaced by nftables)
-- arptables (replaced by nftables)
 - firewalld, firewall-cmd:
     provides D-Bus
     https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/10/html/configuring_firewalls_and_packet_filters/getting-started-with-nftables
@@ -211,9 +233,16 @@ TODO
     calls iptables or nftables
 
 # Deprecated Tools
+TODO
 - iptables-nft:
     https://www.redhat.com/en/blog/using-iptables-nft-hybrid-linux-firewall
 - https://www.debian.org/doc/manuals/debian-reference/ch05.en.html
+- iptables (replaced by nftables)
+- ip6tables (replaced by nftables)
+- arptables (replaced by nftables)
+- brctl (replaced by bridge) part of net-tools
+- ifconfig (replaced by ip) part of net-tools
+- netstat (replaced by ss)
 
 # Conclusion
 TODO
