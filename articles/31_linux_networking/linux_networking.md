@@ -46,7 +46,7 @@ More precisely: I always wondered
 3. Do the userspace programs only configure the kernel or do they run in the background, actively parsing traffic.
 4. Does the kernel have it's own way of persisting configuration across reboots?
     Alternatively, do userspace programs configure the kernel again every time they start?
-5. May the user combine different tools; i.e., use `ip` tool with a system running NetworkManager.
+5. May the user combine different tools; i.e., use `ip` tool on a system running NetworkManager.
 
 <HalfImage full="true" src="./IMG_0978.jpg" />
 
@@ -71,6 +71,7 @@ Even the kernel itself upcalls into userspace for its own domain resolution need
 
 Below I've prepared a diagram on Linux' userspace networking stack.
 Do notice that I'm not interested in the kernel's internals in this article.
+Don't worry, I'll go over the entire diagram in detail.
 <HalfImage full="true" src="./stack.webp" />
 
 # Configuration Tools
@@ -103,10 +104,10 @@ The solution for such dynamic networking environments are network managers like 
 A network manager runs a userspace daemon in the background dynamically changing the kernel's network configuration to the changing network environment.
 Additionally, network managers provide a higher-level features like network profiles <Cite id="arch_network" />.
 
+<HalfImage src="./gnome.png" />
 While you configure systemd-networkd through configuration files <Cite id="arch_systemd_networkd" />, NetworkManager exposes a D-Bus API, which libnm connects to <Cite id="libnm" />.
 libnm, in turn, is how desktop managers like GNOME show the current network state.
 When you expand the GNOME quick settings <Cite id="gnome_quick_settings" />, for example, you're interacting with libnm <Cite id="gnome_shell" />.
-<HalfImage full="true" src="./gnome.png" />
 
 These desktop managers are very closely intertwined with NetworkManager.
 If you want to use some other network manager, like systemd-networkd, you need to mimic NetworkManager's D-Bus API<Cite id="nmlinkd" />.<br />

@@ -69,8 +69,7 @@ export default async function References(props: ReferencesProps): Promise<React.
                             <Link href={bib_entry.URL}>{bib_entry.title}</Link>
                             : bib_entry.title}
                         {". "}
-                        <i>{formattedAuthors}</i>
-                        {". "}
+                        {formattedAuthors == undefined ? "" : formattedAuthors + ". "}
                         {bib_entry.note}
                     </li>;
                 })}
