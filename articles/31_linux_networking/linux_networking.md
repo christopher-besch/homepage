@@ -1,6 +1,7 @@
 ---
 title: "Netlink: Linux' Network Configuration and Filtering"
 description: "
+TODO
 "
 banner: "./stack.webp"
 hero: "./hero.jpg"
@@ -28,95 +29,48 @@ There are so many userspace programs doing a lot of the heavy lifting.
 And here you have options, bundled together by the different distributions.
 Even so, I'll be using *Linux* to reference an entire operating system.
 Furthermore, I'll be referring to the Linux kernel simply as *kernel* from now on.<br />
-Take for example setting up a firewall on Linux.
-There isn't just *the one* Linux firewall;
-there are many userspace programs instead, e.g. firewalld or UFW.
-So as I worked more and more with networking on Linux, I always wondered:
+This naming situation leads to the following communication phenomenon:
+When people say *"On Linux X is done by Y,"* they sometimes refer to the Linux kernel doing *X* through *Y*.
+Often times, however, they refer to a general paradigm many Linux distributions do, but not all.<br />
+For example, one might say *"On Linux playing Windows games is done through Proton."*
+But, of course, the Linux kernel doesn't enforce this at all.
+You can play some games through Wine or build an alternative to Proton on Linux.
+That would still run on the same Linux kernel.<br />
+On Linux what does networking?
+More precisely: I always wondered
 
-1. Is networking implemented in the kernel?
-    E.g., does the kernel implement TCP and HTTP?
-    Or does userspace do that?
-    {/* Kernel networking is huge, implementing a lot. */}
-    {/* But the kernel does allow userspace to do things, too. */}
-    {/* That isn't used much. */}
+1. if the kernel implements network protocols itself?
+    I.e., does the kernel implement UDP and TCP or does userspace do that?
 2. What tools tightly integrate with the kernel and represent Linux' *natural* way of doing networking?
     In other words: what behaviour doesn't differ from one distribution to the next.
-    {/* iproute2, nft are very tightly integrated; NetworkManger and UFW less so. */}
 3. Do the userspace programs only configure the kernel or do they run in the background, actively parsing traffic.
-    {/* Some have daemons (i.e., NetworkManager) to dynamically configure the kernel based on changes in the network. */}
 4. Does the kernel have it's own way of persisting configuration across reboots?
     Alternatively, do userspace programs configure the kernel again every time they start?
-    {/* The kernel networking doesn't persist anything. */}
 5. May the user combine different tools; i.e., use `ip` tool with a system running NetworkManager.
-    {/* When you want to manually configure something (e.g., a static IP for a NIC), what do you need to look out for? */}
-    {/* What programs may reset your custom config? */}
-    {/* NetworkManager and iproute2 are fine; firewalld and nftables aren't. */}
 
-This article will answer all those questions for modern Linux (as of v6.12).
 <HalfImage full="true" src="./IMG_0978.jpg" />
 
 # The Kernel Networking Stack: a Beast
-TODO
-- kernel networking stack with AF_PACKET, ...
-    Linux is very capable of being used as for networking equipment, like routers or switches.
-    Your home PC running Linux could replace your off-the-shelf router.
+To answer the first question: 
+The Kernel's networking stack is immense.
+Once it is configured for the current network environment, almost all userspace applications can perform all their networking needs using the kernel.
+The kernel implements Ethernet, WiFi, IP, UDP, TCP, packet filtering, NAT-ing and much, much more.
+The Linux kernel is also very capable for use in dedicated networking equipment; it isn't limited to personal computers <Cite id="openwrt" />.
+These applications *only* need userspace processes to reconfigure the kernel to address changing network configurations <Cite id="bootlin_networking" />.
 
-The kernel is the main place for networking implementations to be found.
-IP, TCP and UDP, for example, are part of the kernel.
-But you could also open an Ethernet socket and implement IP, TCP and UDP in userspace.
-Python's [scapy](https://scapy.net) is a tool to play around with that.
-The kernel what most applications use for this.
+May a userspace program *skip* the kernel and implement TCP and other protocols itself?
+Yes, with the `CAP_NET_RAW` capability a process may use a `SOCK_RAW` `AF_PACKET` socket.
+These permit sending raw Ethernet frames to the network interface controller <Cite id="packet" />.
+Based on that one may implement their own network stack and even custom protocols.
+[socat](https://www.man7.org/linux/man-pages/man1/socat.1.html) and Python's [scapy](https://scapy.net) is a tool to play around with that, for example.
+But, of course, the kernel's network implementation is what most applications use.
 
-- `SOCK_RAW` with `AF_PACKET` allow sending custom Ethernet frames.
-- `SOCK_RAW` with `AF_INET` allow sending custom IP datagram.
-- `SOCK_DGRAM` with `AF_PACKET` allow sending Ethernet payloads.
-- `SOCK_DGRAM` with `AF_INET` allow sending IP payloads.
+One thing the kernel doesn't do itself is resolving domains to IP addresses via DNS.
+Instead, there are userspace daemons like systemd-resolved <Cite id="arch_resolved" /> for this job.
+Even the kernel itself upcalls into userspace for its own domain resolution needs <Cite id="kernel_dns" />.
 
-These require `CAP_NET_RAW`.
-
-https://bootlin.com/doc/training/networking/networking-slides.pdf
-- AF_xxx address family, PF_xxx protocol family (are equivalent on Linux)
-
-```
-/* interface name assignment types (sysfs name_assign_type attribute) */
-#define NET_NAME_UNKNOWN	0	/* unknown origin (not exposed to userspace) */
-#define NET_NAME_ENUM		1	/* enumerated by kernel */
-#define NET_NAME_PREDICTABLE	2	/* predictably named by the kernel */
-#define NET_NAME_USER		3	/* provided by user-space */
-#define NET_NAME_RENAMED	4	/* renamed by user-space */
-```
-Check with `cat /sys/class/net/wlp1s0/name_assign_type`.
-
-When people say *"On Linux X is done by Y"*, they sometimes refer to the Linux kernel doing *X* through *Y*.
-Often times, however, they refer to a general paradigm many Linux distributions do, but not all.
-For example, *"On Linux playing Windows games is done through Proton"* is a common statement.
-But, of course, the Linux kernel doesn't enforce this at all.
-You can play some games through Wine or build an alternative to Proton on Linux.
-
-There's also socat, which allows you ...
-
-The kernel doesn't itself resolve domains to IP addresses via DNS.
-Instead, it upcalls userspace processes <Cite id="kernel_dns" />.
-systemd-resolved <Cite id="arch_resolved" /> is a daemon performing this name resolution.
-- arp: manipulate the kernel's IPv4 network neighbour cache.
-    Thin wrapper around kernel; no daemon; neighbour cache
-    Could also do `cat /proc/net/arp`.
-    There also is arpd.
-    ARP is implemented in a kernel module.
-- arpd: A userspace daemon doing more advances ARP actions and feeds the ARP database (IP-MAC pairs) to the kernel for usage.
-- avahi-daemon: daemon implementing mDNS, Apple Zeroconf, ...
-    It find services being provided on the network, i.e., printers.
-    https://wiki.archlinux.org/title/Network_configuration#Local_network_hostname_resolution
-    It takes your hostname and enables devices on the LAN to find you.
-    The alternative would be to setup a DNS server and make it the default for the LAN via DHCP.
-
-    `avahi-daemon` takes the machine's hostname and exposes it to other machines on the LAN <Cite id="arch_network" />.
-
-Netlink is the main...
-https://www.rfc-editor.org/info/rfc3549/
-https://kernel-internals.org/net/netlink/
-- netfilter.org project (alternatives: eBPF, P4, TC)
-
+Below I've prepared a diagram on Linux' userspace networking stack.
+Do notice that I'm not interested in the kernel's internals in this article.
 <HalfImage full="true" src="./stack.webp" />
 
 # Configuration Tools
@@ -127,7 +81,7 @@ Say, for example, you want to connect two PCs with a single Ethernet cable and c
 In such a setup you typically don't have a DHCP server automatically configuring this network.
 That's what a dedicated off-the-shelf router would do, which is why connecting two PCs to a consumer route *just works*.
 To fill this gap you could host a DHCP server yourself or use the iproute2 tools.
-The tools allow you to assign static IPs to both PCs network links and configure IP routes; doing parts manually that DHCP would have done.<br />
+The iproute2 tools allow you to assign static IPs to both PCs network links and configure IP routes; doing parts manually that DHCP would have done.<br />
 Notice the word *static*;
 The iproute2 tools don't have a daemon able to react to network changes.
 All these tools do is configure the kernel's networking stack for the *current* network situation.
@@ -168,13 +122,18 @@ udev also performs systemd's predictable network interface naming.
 This naming is predictable in contrast to the kernel's own naming scheme, (e.g, `eth0`, `eth1`, ...), which may change from one boot to the next <Cite id="predictable_if_naming" />.
 
 Importantly, iproute2 through libnetlink, systemd-networkd through sd-netlink and NetworkManager directly interact with the kernel via Netlink <Cite id="libnetlink" /> <Cite id="network_manager_netlink" /> <Cite id="sd_netlink" />.
+Netlink how most network tools communicate with the Kernel <Cite id="netlink" />
 The iproute2 tools may even be used in parallel with NetworkManager.
 NetworkManager detects what iproute2 did <Cite id="red_hat_ip" />.
 
 As an aside, there is another layer on top of network managers:
-netplan parses yaml files and creates NetworkManager or systemd-networkd configuration files <Cite id="netplan" />.
-
-For routing equipment running Linux software like FRRouting implements large-scale routing protocols like OSPF or RIP.
+netplan parses yaml files and creates NetworkManager or systemd-networkd configuration files <Cite id="netplan" />.<br />
+There are other userspace daemons on Linux that do network-related work.
+avahi-daemon, for example, implements mDNS and Apple Zeroconf to advertise and find hostnames and services being provided on the network, i.e., printers <Cite id="arch_network" />.<br />
+Furthermore, arpd, for example is a userspace daemon with a more complicated ARP implementation than the kernel's.
+But arpd only populates the kernels ARP database with IP-MAC pairs, leaving the kernel to use it for sending out frames <Cite id="arpd" />.<br />
+As a last example, for dedicated routers running Linux, there is software like FRRouting.
+FRRouting implements large-scale routing protocols like OSPF or RIP.
 Its daemons populate the kernel's routing tables dynamically.
 The kernel simply forgets routes when links go down.
 That's where userspace daemons provide dynamic configuration changes.
@@ -221,6 +180,20 @@ TODO
     And for doing that dynamically these programs need a userspace daemon running all the time.
 - Userspace tools do ...
 - Desktop managers do ...
+{/* Kernel networking is huge, implementing a lot. */}
+{/* But the kernel does allow userspace to do things, too. */}
+{/* That isn't used much. */}
+{/* iproute2, nft are very tightly integrated; NetworkManger and UFW less so. */}
+{/* Some have daemons (i.e., NetworkManager) to dynamically configure the kernel based on changes in the network. */}
+{/* The kernel networking doesn't persist anything. */}
+{/* When you want to manually configure something (e.g., a static IP for a NIC), what do you need to look out for? */}
+{/* What programs may reset your custom config? */}
+{/* NetworkManager and iproute2 are fine; firewalld and nftables aren't. */}
+
+There is a pattern here:
+The kernel implements the live handling of packets, implements the physical, link, network and transport protocols for a static network.
+Dynamic changes are done by userspace processes.
+And here users have choices on how to administrate their network.
 
 <References bibliography="./linux_networking.bib" />
 
@@ -248,4 +221,24 @@ TODO
     Part of ifupdown package.
     Config file: `/etc/network/interfaces`
 - https://www.debian.org/doc/manuals/debian-reference/ch05.en.html
+
+```
+/* interface name assignment types (sysfs name_assign_type attribute) */
+#define NET_NAME_UNKNOWN	0	/* unknown origin (not exposed to userspace) */
+#define NET_NAME_ENUM		1	/* enumerated by kernel */
+#define NET_NAME_PREDICTABLE	2	/* predictably named by the kernel */
+#define NET_NAME_USER		3	/* provided by user-space */
+#define NET_NAME_RENAMED	4	/* renamed by user-space */
+```
+Check with `cat /sys/class/net/wlp1s0/name_assign_type`.
+Back to networking, take for example setting up a firewall on Linux.
+When people talk about nftables being the Linux firewall
+There isn't just *the one* Linux firewall;
+there are many userspace programs, instead, e.g., firewalld or UFW.
+So as I worked more and more with networking on Linux, I always wondered:
+- `SOCK_RAW` with `AF_PACKET` allow sending custom Ethernet frames.
+- `SOCK_RAW` with `AF_INET` allow sending custom IP datagram.
+- `SOCK_DGRAM` with `AF_PACKET` allow sending Ethernet payloads.
+- `SOCK_DGRAM` with `AF_INET` allow sending IP payloads.
+- AF_xxx address family, PF_xxx protocol family (are equivalent on Linux)
 */}
