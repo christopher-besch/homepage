@@ -112,9 +112,7 @@ systemd-resolved <Cite id="arch_resolved" /> is a daemon performing this name re
 
     `avahi-daemon` takes the machine's hostname and exposes it to other machines on the LAN <Cite id="arch_network" />.
 
-# Netlink
-TODO
-explain configuring vs filtering; show diagram
+Netlink is the main...
 https://www.rfc-editor.org/info/rfc3549/
 https://kernel-internals.org/net/netlink/
 - netfilter.org project (alternatives: eBPF, P4, TC)
@@ -127,7 +125,7 @@ The iproute2 tools are one of the major players here.
 They contain the `ip`, `bridge`, `arp`, `tc` and `ss` terminal programs, among other.<br />
 Say, for example, you want to connect two PCs with a single Ethernet cable and connect via SSH from one PC to the other.
 In such a setup you typically don't have a DHCP server automatically configuring this network.
-That's what a dedicated consumer router would do, which is why connecting two PCs to a consumer route *just works*.
+That's what a dedicated off-the-shelf router would do, which is why connecting two PCs to a consumer route *just works*.
 To fill this gap you could host a DHCP server yourself or use the iproute2 tools.
 The tools allow you to assign static IPs to both PCs network links and configure IP routes; doing parts manually that DHCP would have done.<br />
 Notice the word *static*;
@@ -140,7 +138,7 @@ Then for example a systemd unit could run your script at boot, setting up your n
 Baturin's user guide <Cite id="iproute2_user_guide" /> is a highly useful reference for iproute2.<br />
 I do recommend playing around with them.
 Once I ran `ip route show` I solved a long standing mystery of why docker sometimes required `--net host` for contains to reach the internet.
-It turns out that one of the corporate wifi networks I often work in, has a conflicting subnet with Docker's.
+It turns out that one of the corporate WiFi networks I often work in, has a conflicting subnet with Docker's.
 <HalfImage full="true" src="./docker_subnet_collision.png" />
 
 But what about dynamic network changes?
@@ -149,7 +147,7 @@ Then you'd have to manually run the iproute2 tools again.
 Boot scripts cannot help here.<br />
 The solution for such dynamic networking environments are network managers like NetworkManager or systemd-networkd.
 A network manager runs a userspace daemon in the background dynamically changing the kernel's network configuration to the changing network environment.
-Additionally, network managers provide a higher level of abstraction than the low-level iproute2 tools <Cite id="arch_network" />.
+Additionally, network managers provide a higher-level features like network profiles <Cite id="arch_network" />.
 
 While you configure systemd-networkd through configuration files <Cite id="arch_systemd_networkd" />, NetworkManager exposes a D-Bus API, which libnm connects to <Cite id="libnm" />.
 libnm, in turn, is how desktop managers like GNOME show the current network state.
@@ -160,7 +158,7 @@ These desktop managers are very closely intertwined with NetworkManager.
 If you want to use some other network manager, like systemd-networkd, you need to mimic NetworkManager's D-Bus API<Cite id="nmlinkd" />.<br />
 On the terminal there is `nmcli`, which also uses libnm <Cite id="nmcli_libnm" />.
 
-So taking my example from before, connecting a linux PC to a consumer router typically automatically establishes a link.
+So taking my example from before, connecting a linux PC to an off-the-shelf router typically automatically establishes a link.
 NetworkManager does that using its integrated DHCP client.
 The NetworkManager daemon depends on udev to receive a notification on network device discovery <Cite id="networkmanager" />.
 Then it dynamically changes the kernel's network configuration according to the new device.
@@ -180,50 +178,37 @@ For routing equipment running Linux software like FRRouting implements large-sca
 Its daemons populate the kernel's routing tables dynamically.
 The kernel simply forgets routes when links go down.
 That's where userspace daemons provide dynamic configuration changes.
-FRRouting also uses netlink directly <Cite id="frrouting_kernel_interface" />.
+FRRouting also uses Netlink directly <Cite id="frrouting_kernel_interface" />.
+
+Lastly, before iproute2 there was net-tools, which, among others, provided the now deprecated `brctl`, `ifconfig` and `netstat` terminal applications <Cite id="iproute2_user_guide" />.
 
 # Filtering Tools
-TODO
-- nftables: load rules into the kernel for filtering and forwarding packets
-    nftables uses netlink API
-    Command is `nft`.
-    Has backwards compatibility layer for iptables, ip6tables, arptables, ...
-    `libmnl` and `libnftnl` are userspace libraries for nftables.
-    `nft` uses these libraries.
+The network configuration tools all individually communicate with the kernel via Netlink.
+On the filtering side, however, there's more monolithic userspace system: nftables by the netfiler.org project.
+The nftables software consists of a kernel component, three libraries (libmnl, libnftnl and libnftables) and the `nft` terminal program.
+The kernel component implements a virtual machine, which executes bytecode to perform the per-packet filtering activity <Cite id="nftables" />.
+(Be aware that this is a different virtual machine than what eBPF runs on.)<br />
+A large part of nftables complexity resides in the libnftnl userspace library.
+libnftnl compiles firewall rules into the bytecode and passes it using libmnl through Netlink to the kernel, where it runs.
+This explains why there is no alternative to the monolithic nftables userspace system:
+The nftables' kernel component is tightly integrated with libnftnl.
+Therefore, all methods of interacting with the modern Linux firewall, nftables, better use libnftnl.
+There is no comparable library on the network configuration side.<br />
+The user may use nftables' terminal application `nft` to configure a static firewall.
+This already includes NAT-ing but isn't capable of persisting rules across reboots or reacting to dynamic network changes <Cite id="libnftables" />.
 
-    https://wiki.nftables.org/wiki-nftables/index.php/Portal:DeveloperDocs/nftables_internals#libnftables
-    `nft` is just a thin wrapper around `libnftables`.
+Interestingly, `nft` is only a thin wrapper around libnftables, permitting programmatically configuring the firewall.
+firewalld uses libnftables to implement higher-level filtering concepts, like network zones <Cite id="firewalld" />.
+firewalld is a daemon, running in the background to react to network changes.
+It uses NetworkManager to be notified about network device renamings <Cite id="firewalld_architecture" /> and then applies changes vai libnftables.
 
-    https://netfilter.org/projects/nftables/index.html
-    https://wiki.nftables.org/wiki-nftables/index.php/Ruleset_debug/VM_code_analysis
-    `nft` compiles rules to VM bytecode and pushes that bytecode to the kernel via Netlink.
-    The kernel then somehow runs that bytecode and uses it to filer, somewhow.
-    Is this eBPF?
-- firewalld, firewall-cmd:
-    provides D-Bus
-    https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/10/html/configuring_firewalls_and_packet_filters/getting-started-with-nftables
-    Recommended to not use together with nftables.
-    https://firewalld.org/documentation/architecture.html
-    Uses NetworkManager to be notified about network device renamings.
+UFW is another firewall manager.
+Different to firewalld UFW doesn't have a daemon but runs after every boot and when the user decides to.
+This makes it unsuitable for changing network environments.
+Furthermore, UFW uses the now deprecated iptables, which nftables replaced <Cite id="netfilter" />.
+For UFW to still work on modern Linux nftables there is iptables-nft, which uses libnftnl to implement the old iptables (and ip6tables, arptables, ...) terminal interface <Cite id="arch_ufw" />.
 
-    It is recommended to not use firewalld together with nftables <Cite id="redhat_firewalld" />.
-    firewalld implements higher-level filtering concepts, like network zones.
-    It's implemented as a daemon, for example, because it allows configuring NAT for dynamically connected network links.
-- ufw:
-    https://wiki.archlinux.org/title/Uncomplicated_Firewall
-    calls iptables or nftables
-
-# Deprecated Tools
-TODO
-- iptables-nft:
-    https://www.redhat.com/en/blog/using-iptables-nft-hybrid-linux-firewall
-- https://www.debian.org/doc/manuals/debian-reference/ch05.en.html
-- iptables (replaced by nftables)
-- ip6tables (replaced by nftables)
-- arptables (replaced by nftables)
-- brctl (replaced by bridge) part of net-tools
-- ifconfig (replaced by ip) part of net-tools
-- netstat (replaced by ss)
+Lastly, while one may combine different configuration tools, one shouldn't use, e.g., both nftables together with firewalld <Cite id="redhat_firewalld" />.
 
 # Conclusion
 TODO
@@ -262,4 +247,5 @@ TODO
 - ifup, ifdown:
     Part of ifupdown package.
     Config file: `/etc/network/interfaces`
+- https://www.debian.org/doc/manuals/debian-reference/ch05.en.html
 */}
