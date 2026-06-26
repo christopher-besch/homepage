@@ -1,9 +1,9 @@
 ---
-title: "Userspace's role in Linux Networking"
+title: "Userspace's Role in Linux Networking"
 description: "
 On Linux what does networking?
 What parts are implemented in the kernel and what parts require userspace tools or daemons?
-How much of networking is inherent to the kernel and how much is up to distribution?
+How much of networking is inherent to the kernel and how much is up to distributions?
 What tools may be combined and what others cause conflicts?
 
 I've always wondered these questions and more about Linux' networking stack.
@@ -14,7 +14,7 @@ hero: "./hero.jpg"
 hero_horizontal_position: 40
 hero_vertical_position: 70
 slug: linux_networking
-date: "2026-06-24"
+date: "2026-06-26"
 tags: [linux]
 listed: true
 ---
@@ -42,7 +42,7 @@ For example, one might say *"On Linux playing Windows games is done through Prot
 But, of course, the Linux kernel doesn't enforce this at all.
 You can play some games through Wine or build an alternative to Proton on Linux.
 That would still run on the same Linux kernel.<br />
-On Linux what does networking?
+So: On Linux what does networking?
 More precisely: I always wondered
 
 1. if the kernel implements network protocols itself?
@@ -52,7 +52,7 @@ More precisely: I always wondered
 3. Do the userspace programs only configure the kernel or do they run in the background, actively parsing traffic.
 4. Does the kernel have it's own way of persisting configuration across reboots?
     Alternatively, do userspace programs configure the kernel again every time they start?
-5. May the user combine different tools; i.e., use `ip` tool on a system running NetworkManager.
+5. May the user combine different tools; i.e., use `ip` on a system running NetworkManager.
 
 <HalfImage id="fig:cern" num={1} caption="Networking equipment at CERN." full="true" src="./IMG_0978.jpg" />
 
@@ -62,7 +62,7 @@ The Kernel's networking stack is immense.
 Once it is configured for the current network environment, almost all userspace applications (like Firefox or `apt-get`) can perform all their networking needs using the kernel.
 The kernel implements Ethernet, WiFi, IP, UDP, TCP, packet filtering, NAT-ing and much, much more.
 The Linux kernel is also very capable for use in dedicated networking equipment; it isn't limited to personal computers <Cite id="openwrt" />.
-These applications *only* need userspace processes to reconfigure the kernel to address changing network configurations <Cite id="bootlin_networking" />.
+These applications *only* need userspace processes to reconfigure the kernel to handle changing network configurations <Cite id="bootlin_networking" />.
 
 May a userspace program *skip* the kernel and implement TCP and other protocols itself?
 Yes, with the `CAP_NET_RAW` capability a process may use a `SOCK_RAW` `AF_PACKET` socket.
@@ -75,33 +75,37 @@ One thing the kernel doesn't do itself is resolving domains to IP addresses via 
 Instead, there are userspace daemons like systemd-resolved <Cite id="arch_resolved" /> for this job.
 Even the kernel itself upcalls into userspace for its own domain resolution needs <Cite id="kernel_dns" />.
 
+# The Userspace Networking Stack: a Zoo
 Below I've prepared [figure 2](#fig:overview) on Linux' userspace networking stack.
-Don't worry, I'll go over the entire diagram in detail.
+Don't worry, I'll go over the entire diagram in detail.<br />
 Do notice that the Linux userspace networking stack is quite well divisible into *configuration* and *filtering*.
 Configuration concerns itself with, e.g., setting up links and routes.
 Filtering, on the other hand, handles, e.g., firewalling and NAT-ing.
-<HalfImage id="fig:overview" num={2} caption="Linux' userspace networking stack. The kernel internals and less relevant dependencies are omitted. Furthermore, the most relevant and representative subset of all tools is shown, i.e., there are more network managers than just systemd-networkd and NetworkManager." full="true" src="./stack.webp" />
+<HalfImage id="fig:overview" num={2} caption="Linux' userspace networking stack. The kernel internals and less relevant dependencies are omitted. Furthermore, only the most relevant and representative subset of all tools is shown, i.e., there are more network managers than just systemd-networkd and NetworkManager." full="true" src="./stack.webp" />
 
-# Configuration Tools
+## Configuration Tools
 Beginning with [figure 2](#fig:overview)'s left half, there is a zoo of network configuration tools.
-The iproute2 tools are one of the major players here.
-They contain the `ip`, `bridge`, `arp`, `tc` and `ss` terminal programs, among other.<br />
-Say, for example, you want to connect two PCs with a single Ethernet cable and connect via SSH from one PC to the other.
+The modern iproute2 tools are one of the major players here.
+They contain the `ip`, `bridge`, `arp`, `tc` and `ss` terminal programs, among other (all shown in [figure 2](#fig:overview)).<br />
+Say you want to connect two PCs with a single Ethernet cable and, for example, use SSH on this link.
 In such a setup you typically don't have a DHCP server automatically configuring this network.
-That's what a dedicated off-the-shelf router would do, which is why connecting two PCs to a consumer route *just works*.
+(Even though, your PCs probably come with a DHCP client in the form of a userspace daemon, which I'll get to in a moment.)
+A dedicated off-the-shelf router typically comes with a DHCP server, which is why connecting two PCs to a consumer router *just works*.
+In the direct Ethernet cable connection, there is no DHCP server.
 To fill this gap you could host a DHCP server yourself or use the iproute2 tools.
-The iproute2 tools allow you to assign static IPs to both PCs network links and configure IP routes; doing parts manually that DHCP would have done.<br />
+The iproute2 tools allow you to assign static IPs to both PCs' network links and configure IP routes; doing parts manually that DHCP would have done automatically.<br />
 Notice the word *static*;
 The iproute2 tools don't have a daemon able to react to network changes.
 All these tools do is configure the kernel's networking stack for the *current* network situation.
 Furthermore, these tools don't have any internal state, they only configure the kernel.
 Therefore, any configuration you enter using the iproute2 tools doesn't persist across reboots.
 If you want to persist your configuration, you could simply write a shell script running your commands.
-Then for example a systemd unit could run your script at boot, setting up your network to your liking <Cite id="arch_network" />.
+Then, for example, a systemd unit could run your script at boot, setting up your network to your liking <Cite id="arch_network" />.
 Baturin's user guide <Cite id="iproute2_user_guide" /> is a highly useful reference for iproute2.<br />
-I do recommend playing around with them.
-Once I ran `ip route show` (see [figure 3](#fig:docker) I solved a long standing mystery of why docker sometimes required `--net host` for contains to reach the internet.
-It turns out that one of the corporate WiFi networks I often work in, has a conflicting subnet with Docker's.
+And I do recommend playing around with these tools.
+Once I ran `ip route show` (see [figure 3](#fig:docker)) and I solved a long standing mystery:
+why does docker sometimes require `--net host` for containers to reach the internet on my machine.
+It turns out that one of the corporate WiFi networks I often work in, has a conflicting subnet with Docker's default.
 <HalfImage id="fig:docker" num={3} caption="Docker subnet collision: 172.17.0.0/16 overlaps with 172.17.0.0/17." full="true" src="./docker_subnet_collision.png" />
 
 But what about dynamic network changes?
@@ -109,55 +113,56 @@ What if you unplug an Ethernet cable and connect to some other network?
 Then you'd have to manually run the iproute2 tools again.
 Boot scripts cannot help here.<br />
 The solution for such dynamic networking environments are network managers like NetworkManager or systemd-networkd.
-A network manager runs a userspace daemon in the background dynamically changing the kernel's network configuration to the changing network environment.
-Additionally, network managers provide a higher-level features like network profiles <Cite id="arch_network" />.
+A network manager runs a userspace daemon, in the background dynamically changing the kernel's network configuration to the changing network environment.
+Additionally, network managers provide higher-level features like network profiles <Cite id="arch_network" />.
 
 <HalfImage id="fig:gnome" num={4} caption="GNOME Quick Settings." src="./gnome.png" />
-While you configure systemd-networkd through configuration files <Cite id="arch_systemd_networkd" />, NetworkManager exposes a D-Bus API, which libnm connects to <Cite id="libnm" />.
-libnm, in turn, is how desktop managers like GNOME show the current network state.
+While you configure systemd-networkd through configuration files <Cite id="arch_systemd_networkd" />, NetworkManager also exposes a D-Bus API, which libnm connects to <Cite id="libnm" />.
+libnm, in turn, is the library desktop managers like GNOME use to show and adjust the current network state.
 When you expand the GNOME quick settings (see [figure 4](#fig:gnome)) <Cite id="gnome_quick_settings" />, for example, you're interacting with libnm <Cite id="gnome_shell" />.
 
 These desktop managers are very closely intertwined with NetworkManager.
 If you want to use some other network manager, like systemd-networkd, you need to mimic NetworkManager's D-Bus API<Cite id="nmlinkd" />.<br />
-On the terminal there is `nmcli`, which also uses libnm <Cite id="nmcli_libnm" />.
+Meanwhile on the terminal there is `nmcli`, which also uses libnm <Cite id="nmcli_libnm" />.
 
 So taking my example from before, connecting a linux PC to an off-the-shelf router typically automatically establishes a link.
 NetworkManager does that using its integrated DHCP client.
 The NetworkManager daemon depends on udev to receive a notification on network device discovery <Cite id="networkmanager" />.
 Then it dynamically changes the kernel's network configuration according to the new device.
-For wireless networks it might use wpa_supplicant for authentication <Cite id="arch_network" />.<br />
+For wireless networks it might also use wpa_supplicant for authentication <Cite id="arch_network" />.<br />
 udev is another userspace daemon listening for device events from the kernel <Cite id="udev" />.
-udev also performs systemd's predictable network interface naming.
+udev also performs systemd's predictable network interface naming (e.g., `enp2s0`, `wlp1s0`, ...).
 This naming is predictable in contrast to the kernel's own naming scheme, (e.g, `eth0`, `eth1`, ...), which may change from one boot to the next <Cite id="predictable_if_naming" />.
 
 Importantly, iproute2 through libnetlink, systemd-networkd through sd-netlink and NetworkManager directly interact with the kernel via Netlink <Cite id="libnetlink" /> <Cite id="network_manager_netlink" /> <Cite id="sd_netlink" />.
-Netlink how most network tools communicate with the Kernel <Cite id="netlink" />
+Netlink is how most network tools communicate with the Kernel <Cite id="netlink" />.
+The tools typically don't store the current network configuration themselves but let the kernel store that state.
+That makes them interoperable.
 The iproute2 tools may even be used in parallel with NetworkManager.
-NetworkManager detects what iproute2 did <Cite id="red_hat_ip" />.
+NetworkManager detects what iproute2 did and takes care as to not conflict <Cite id="red_hat_ip" />.
 
 As an aside, there is another layer on top of network managers:
 netplan parses yaml files and creates NetworkManager or systemd-networkd configuration files <Cite id="netplan" />.<br />
-There are other userspace daemons on Linux that do network-related work.
+There are other userspace daemons on Linux that do network-related work, also.
 avahi-daemon, for example, implements mDNS and Apple Zeroconf to advertise and find hostnames and services being provided on the network, i.e., printers <Cite id="arch_network" />.<br />
 Furthermore, arpd, for example is a userspace daemon with a more complicated ARP implementation than the kernel's.
-But arpd only populates the kernels ARP database with IP-MAC pairs, leaving the kernel to use it for sending out frames <Cite id="arpd" />.<br />
-As a last example, for dedicated routers running Linux, there is software like FRRouting.
+But arpd only populates the kernels ARP database with IP-MAC pairs, leaving the kernel to use them for sending out frames <Cite id="arpd" />.<br />
+As a last example, there is software like FRRouting for dedicated routers running Linux.
 FRRouting implements large-scale routing protocols like OSPF or RIP.
-Its daemons populate the kernel's routing tables dynamically.
-The kernel simply forgets routes when links go down.
-That's where userspace daemons provide dynamic configuration changes.
+One of the problems it solves is that the kernel itself forgets routes when links go down.
+FRRouting's daemons populate the kernel's routing tables dynamically.
 FRRouting also uses Netlink directly <Cite id="frrouting_kernel_interface" />.
 
 Lastly, before iproute2 there was net-tools, which, among others, provided the now deprecated `brctl`, `ifconfig` and `netstat` terminal applications <Cite id="iproute2_user_guide" />.
 
-# Filtering Tools
+## Filtering Tools
 The network configuration tools all individually, directly communicate with the kernel via Netlink.
-On the filtering side ([figure 2](#fig:overview)'s right side), however, there's more monolithic userspace system: nftables by the netfiler.org project.
-The nftables software consists of a kernel component, three libraries (libmnl, libnftnl and libnftables) and the `nft` terminal program.
+On the filtering side ([figure 2](#fig:overview)'s right side), however, there's a more monolithic userspace system: nftables by the netfiler.org project.
+The nftables software mainly consists of a kernel component, three libraries (libmnl, libnftnl and libnftables) and the `nft` terminal program.
 The kernel component implements a virtual machine, which executes bytecode to perform the per-packet filtering activity <Cite id="nftables" />.
 (Be aware that this is a different virtual machine than what eBPF runs on.)<br />
 A large part of nftables complexity resides in the libnftnl userspace library.
-libnftnl compiles firewall rules into the bytecode and passes it using libmnl through Netlink to the kernel, where it runs.
+libnftnl compiles firewall rules into bytecode and passes that bytecode using libmnl through Netlink to the kernel, where it runs.
 This explains why there is no alternative to the monolithic nftables userspace system:
 The nftables' kernel component is tightly integrated with libnftnl.
 Therefore, all methods of interacting with the modern Linux firewall, nftables, better use libnftnl.
@@ -165,17 +170,16 @@ There is no comparable library on the network configuration side.<br />
 The user may use nftables' terminal application `nft` to configure a static firewall.
 This already includes NAT-ing but isn't capable of persisting rules across reboots or reacting to dynamic network changes <Cite id="libnftables" />.
 
-Interestingly, `nft` is only a thin wrapper around libnftables, permitting programmatically configuring the firewall.
-firewalld uses libnftables to implement higher-level filtering concepts, like network zones <Cite id="firewalld" />.
+Interestingly, `nft` is only a thin wrapper around libnftables, permitting programmatic management of the firewall.
+For example, firewalld uses libnftables to implement higher-level filtering concepts, like network zones <Cite id="firewalld" />.
 firewalld is a daemon, running in the background to react to network changes.
-It uses NetworkManager to be notified about network device renamings <Cite id="firewalld_architecture" /> and then applies changes vai libnftables.
+It uses NetworkManager to be notified about network device renamings <Cite id="firewalld_architecture" /> and then applies changes via libnftables.
 
 UFW is another firewall manager.
-Different to firewalld UFW doesn't have a daemon but runs after every boot and when the user decides to.
+Different to firewalld, UFW doesn't have a daemon but runs after every boot and when the user decides to.
 This makes it unsuitable for changing network environments.
 Furthermore, UFW uses the now deprecated iptables, which nftables replaced <Cite id="netfilter" />.
-For UFW to still work on modern Linux nftables there is iptables-nft, which uses libnftnl to implement the old iptables (and ip6tables, arptables, ...) terminal interface <Cite id="arch_ufw" />.
-
+For UFW to still work on modern Linux' nftables, there is iptables-nft, which uses libnftnl to implement the old `iptables` (and `ip6tables`, `arptables`, ...) terminal interface <Cite id="arch_ufw" />.<br />
 Lastly, while one may combine different configuration tools, one shouldn't use, e.g., both nftables together with firewalld <Cite id="redhat_firewalld" />.
 
 # Conclusion

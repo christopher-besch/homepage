@@ -139,6 +139,7 @@ export default async function Markdown(props: MarkdownProps): Promise<React.Reac
         Cite(citeProps) {
             return <Cite citations={citations} {...citeProps} />
         },
+        // TODO: The references cannot be linked unlike all other headings.
         References(referencesProps) {
             return <References citations={citations} bibliographyPath={path.join(props.dirPath, referencesProps.bibliography)} />
         },
