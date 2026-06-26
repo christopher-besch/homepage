@@ -16,6 +16,7 @@ listed: true
 ---
 I want to use an LCD glass on an STM32WB55RG, which has an LCD direct driver in hardware.
 You directly connect all LCD segment and common pins to the SoC.
+For this I built a development PCB, which [figure 1](#fig:dev_setup) shows.
 Because I want to use Zephyr but Zephyr doesn't have an LCD driver already, I implemented one myself.
 It only supports my very own use-case, which is why I didn't attempt upstreaming it.
 Nevertheless, I'd like to talk about a few of the hurdles I had to overcome.
@@ -23,7 +24,7 @@ However, I won't explain all details.
 Take a look at [my repository](https://codeberg.org/christopher-besch/watch_firmware) for the entire code.
 Do be aware that this article is for readers already accustomed to developing applications with Zephyr.
 
-<HalfImage id="fig:dev_setup" caption="My development setup around the Casio LCD." src="./banner.jpg" full="false" />
+<HalfImage id="fig:dev_setup" num={1} caption="My development setup around the Casio LCD." src="./banner.jpg" full="false" />
 
 Okay, I do something Zephyr can't do, so I have to go a step lower than the Zephyr API and use the STM32 HAL.
 You're expected to do the things explained in the [reference manual](https://www.st.com/resource/en/reference_manual/rm0434-multiprotocol-wireless-32bit-mcu-armbased-cortexm4-with-fpu-bluetooth-lowenergy-and-802154-radio-solution-stmicroelectronics.pdf) and use the STM32 HAL; even though you could do everything without it, too.<br />
@@ -64,7 +65,7 @@ lcd_seg8: lcd_seg8 {
 };
 ```
 
-<HalfImage id="fig:tht_cap" caption="The VLCD capacitor with prosthetic legs." src="./tht.jpg" full="false" />
+<HalfImage id="fig:tht_cap" num={2} caption="The VLCD capacitor with prosthetic legs." src="./tht.jpg" full="false" />
 
 There's only one hiccup.
 While the reference manual proclaims:
@@ -73,7 +74,7 @@ It says a few pages down:
 <Quote text="[...] the VLCD pin must be connected to V_SS with a capacitor" author="also the STM32WB55RG reference manual" />
 And most importantly, the VLCD pin must use `AF11`, too.
 Otherwise `HAL_LCD_Init`, which calls `HAL_LCD_MspInit` internally, fails without an error message.<br />
-I didn't have any THT capacitors of the right capacitance so I added legs to an SMD one.
+I didn't have any THT capacitors of the right capacitance so I added legs to an SMD one, see [figure 2](#fig:tht_cap).
 
 With the device tree configured, you only need to activate it like this:
 ```c
@@ -95,8 +96,9 @@ You can easily have two orders of magnitudes higher power consumption because of
 
 Lastly, the STM32 HAL's `HAL_LCD_Write` takes care of setting and clearing individual LCD segments.
 Because I'm using the LCD of a Casio A159W watch, I simply copied the text printing library from the [Sensor Watch](https://www.sensorwatch.net).
+[Video 1](#vid:demo_lcd) shows this library in action.
 
-<HalfVideo id="vid:demo_lcd" caption="A demo application printing text onto the Casio LCD." src="lcd.mp4" width={1080} height={1920} />
+<HalfVideo id="vid:demo_lcd" num={1} caption="A demo application printing text onto the Casio LCD." src="lcd.mp4" width={1080} height={1920} />
 
 ### Conclusion
 Software development so close to the hardware is really hard.

@@ -100,6 +100,7 @@ export default async function Markdown(props: MarkdownProps): Promise<React.Reac
         HalfImage(imageProps) {
             return <HalfImage
                 id={imageProps.id}
+                num={imageProps.num}
                 caption={imageProps.caption}
                 elements={elements}
                 inputPath={path.join(props.dirPath, imageProps.src)}
@@ -110,6 +111,7 @@ export default async function Markdown(props: MarkdownProps): Promise<React.Reac
         HalfVideo(videoProps) {
             return <HalfVideo
                 id={videoProps.id}
+                num={videoProps.num}
                 caption={videoProps.caption}
                 elements={elements}
                 inputPath={path.join(props.dirPath, videoProps.src)}
@@ -121,7 +123,7 @@ export default async function Markdown(props: MarkdownProps): Promise<React.Reac
         HalfIframe(iframeProps) {
             // Notice that some props that iframe would accept are not supported by HalfIframe.
             // We can't just to ...iframeProps because then we'd pass full to it, too.
-            return <HalfElement id={iframeProps.id} caption={iframeProps.caption} elements={elements} full={iframeProps.full}>
+            return <HalfElement id={iframeProps.id} num={iframeProps.num} caption={iframeProps.caption} elements={elements} full={iframeProps.full}>
                 <div className="markdown_iframe_wrapper">
                     <iframe allowFullScreen={iframeProps.allowFullScreen} src={iframeProps.src}></iframe>
                 </div>
