@@ -128,7 +128,7 @@ If every package imports every other package, the code-base turns into soup.
 Forgejo tackle this issue by introducing a layered <a href="https://forgejo.org/docs/next/contributor/architecture" target="_blank" rel="noopener">architecture</a>.
 It groups packages into layers and forbids packages from importing code in higher layers.
 I&#x27;ve drawn an overview over this structure:</p>
-<div class="half_image_image"><div><div class="half_element_full_element"><img src="/images/30ca8795417abcd2f086abd8cd8ddf53.svg" loading="lazy" alt=""/></div><div class="half_element_spacer"></div></div></div>
+<div class="half_image_image"><div><div class="half_element_full_element"><img src="/images/30ca8795417abcd2f086abd8cd8ddf53.svg" loading="lazy"/></div><div class="half_element_spacer"></div></div></div>
 <p><code>/routers</code>, <code>/services</code>, <code>/models</code> and <code>/modules</code> are some of the <em>main directories</em> where most of Forgejo&#x27;s Go code lives.
 As we can see, there are three layers.
 Firstly, all code may access packages inside their respective main directory.
