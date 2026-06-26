@@ -1,7 +1,13 @@
 ---
-title: "Netlink: Linux' Network Configuration and Filtering"
+title: "Userspace's role in Linux Networking"
 description: "
-TODO
+On Linux what does networking?
+What parts are implemented in the kernel and what parts require userspace tools or daemons?
+How much of networking is inherent to the kernel and how much is up to distribution?
+What tools may be combined and what others cause conflicts?
+
+I've always wondered these questions and more about Linux' networking stack.
+For this article I finally took the time to thoroughly research userspace's role in Linux networking.
 "
 banner: "./stack.webp"
 hero: "./hero.jpg"
@@ -53,7 +59,7 @@ More precisely: I always wondered
 # The Kernel Networking Stack: a Beast
 To answer the first question: 
 The Kernel's networking stack is immense.
-Once it is configured for the current network environment, almost all userspace applications can perform all their networking needs using the kernel.
+Once it is configured for the current network environment, almost all userspace applications (like Firefox or `apt-get`) can perform all their networking needs using the kernel.
 The kernel implements Ethernet, WiFi, IP, UDP, TCP, packet filtering, NAT-ing and much, much more.
 The Linux kernel is also very capable for use in dedicated networking equipment; it isn't limited to personal computers <Cite id="openwrt" />.
 These applications *only* need userspace processes to reconfigure the kernel to address changing network configurations <Cite id="bootlin_networking" />.
@@ -74,7 +80,7 @@ Don't worry, I'll go over the entire diagram in detail.
 Do notice that the Linux userspace networking stack is quite well divisible into *configuration* and *filtering*.
 Configuration concerns itself with, e.g., setting up links and routes.
 Filtering, on the other hand, handles, e.g., firewalling and NAT-ing.
-<HalfImage id="fig:overview" num={2} caption="Linux' userspace networking stack. The kernel internals and less relevant dependencies are omitted." full="true" src="./stack.webp" />
+<HalfImage id="fig:overview" num={2} caption="Linux' userspace networking stack. The kernel internals and less relevant dependencies are omitted. Furthermore, the most relevant and representative subset of all tools is shown, i.e., there are more network managers than just systemd-networkd and NetworkManager." full="true" src="./stack.webp" />
 
 # Configuration Tools
 Beginning with [figure 2](#fig:overview)'s left half, there is a zoo of network configuration tools.
@@ -173,35 +179,21 @@ For UFW to still work on modern Linux nftables there is iptables-nft, which uses
 Lastly, while one may combine different configuration tools, one shouldn't use, e.g., both nftables together with firewalld <Cite id="redhat_firewalld" />.
 
 # Conclusion
-TODO
-- Networking is one of the main things distributions, differ.
-- The hardware does ...
-- The kernel does ...
-- Userspace daemons do ...
-    A typical theme is that the kernel actively implements the frame-by-frame networking activity.
-    However anything larger, like changing routes, bringing network links up or down; those are things userspace applications do.
-    And for doing that dynamically these programs need a userspace daemon running all the time.
-- Userspace tools do ...
-- Desktop managers do ...
-{/* Kernel networking is huge, implementing a lot. */}
-{/* But the kernel does allow userspace to do things, too. */}
-{/* That isn't used much. */}
-{/* iproute2, nft are very tightly integrated; NetworkManger and UFW less so. */}
-{/* Some have daemons (i.e., NetworkManager) to dynamically configure the kernel based on changes in the network. */}
-{/* The kernel networking doesn't persist anything. */}
-{/* When you want to manually configure something (e.g., a static IP for a NIC), what do you need to look out for? */}
-{/* What programs may reset your custom config? */}
-{/* NetworkManager and iproute2 are fine; firewalld and nftables aren't. */}
-
-There is a pattern here:
+After all this, a pattern emerges:
 The kernel implements the live handling of packets, implements the physical, link, network and transport protocols for a static network.
-Dynamic changes are done by userspace processes.
-And here users have choices on how to administrate their network.
+The network configuration and firewall administration is done through userspace processes.
+Dynamic changes are handled by userspace daemons.
+Here users have choices on how and with what tools to administrate their network.
+That's where different distributions take different approaches, too.<br />
+Coming back to our leading question: *On Linux, what does networking?*
+This depends on what *networking* means in ones context.
+In this very article I've used *networking* as a malleable term.
+If one refers to a static setup, where the applications only use UDP/TCP without DNS, the kernel does all the networking.
+In all other cases there are userspace components implementing relevant networking parts.
 
 <References bibliography="./linux_networking.bib" />
 
 {/*
-## Questions
 - The FritzBox allows devices to forward ports on their own.
     How does that work?
     UPnP IGD or PCP
@@ -236,4 +228,15 @@ So as I worked more and more with networking on Linux, I always wondered:
 - `SOCK_DGRAM` with `AF_PACKET` allow sending Ethernet payloads.
 - `SOCK_DGRAM` with `AF_INET` allow sending IP payloads.
 - AF_xxx address family, PF_xxx protocol family (are equivalent on Linux)
+
+Kernel networking is huge, implementing a lot.
+But the kernel does allow userspace to do things, too.
+That isn't used much.
+iproute2, nft are very tightly integrated; NetworkManager and UFW less so.
+Some have daemons (i.e., NetworkManager) to dynamically configure the kernel based on changes in the network.
+The kernel networking doesn't persist anything.
+When you want to manually configure something (e.g., a static IP for a NIC), what do you need to look out for?
+What programs may reset your custom config?
+NetworkManager and iproute2 are fine; firewalld and nftables aren't.
+
 */}
