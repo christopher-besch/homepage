@@ -48,7 +48,7 @@ More precisely: I always wondered
     Alternatively, do userspace programs configure the kernel again every time they start?
 5. May the user combine different tools; i.e., use `ip` tool on a system running NetworkManager.
 
-<HalfImage full="true" src="./IMG_0978.jpg" />
+<HalfImage id="fig:cern" num={1} caption="Networking equipment at CERN." full="true" src="./IMG_0978.jpg" />
 
 # The Kernel Networking Stack: a Beast
 To answer the first question: 
@@ -69,14 +69,15 @@ One thing the kernel doesn't do itself is resolving domains to IP addresses via 
 Instead, there are userspace daemons like systemd-resolved <Cite id="arch_resolved" /> for this job.
 Even the kernel itself upcalls into userspace for its own domain resolution needs <Cite id="kernel_dns" />.
 
-Below I've prepared a diagram on Linux' userspace networking stack.
-Do notice that I'm not interested in the kernel's internals in this article.
-Furthermore, it only shows the most relevant dependencies.
+Below I've prepared [figure 2](#fig:overview) on Linux' userspace networking stack.
 Don't worry, I'll go over the entire diagram in detail.
-<HalfImage full="true" src="./stack.webp" />
+Do notice that the Linux userspace networking stack is quite well divisible into *configuration* and *filtering*.
+Configuration concerns itself with, e.g., setting up links and routes.
+Filtering, on the other hand, handles, e.g., firewalling and NAT-ing.
+<HalfImage id="fig:overview" num={2} caption="Linux' userspace networking stack. The kernel internals and less relevant dependencies are omitted." full="true" src="./stack.webp" />
 
 # Configuration Tools
-Beginning with the diagram's left half, there is a zoo of network configuration tools.
+Beginning with [figure 2](#fig:overview)'s left half, there is a zoo of network configuration tools.
 The iproute2 tools are one of the major players here.
 They contain the `ip`, `bridge`, `arp`, `tc` and `ss` terminal programs, among other.<br />
 Say, for example, you want to connect two PCs with a single Ethernet cable and connect via SSH from one PC to the other.
@@ -93,9 +94,9 @@ If you want to persist your configuration, you could simply write a shell script
 Then for example a systemd unit could run your script at boot, setting up your network to your liking <Cite id="arch_network" />.
 Baturin's user guide <Cite id="iproute2_user_guide" /> is a highly useful reference for iproute2.<br />
 I do recommend playing around with them.
-Once I ran `ip route show` I solved a long standing mystery of why docker sometimes required `--net host` for contains to reach the internet.
+Once I ran `ip route show` (see [figure 3](#fig:docker) I solved a long standing mystery of why docker sometimes required `--net host` for contains to reach the internet.
 It turns out that one of the corporate WiFi networks I often work in, has a conflicting subnet with Docker's.
-<HalfImage full="true" src="./docker_subnet_collision.png" />
+<HalfImage id="fig:docker" num={3} caption="Docker subnet collision: 172.17.0.0/16 overlaps with 172.17.0.0/17." full="true" src="./docker_subnet_collision.png" />
 
 But what about dynamic network changes?
 What if you unplug an Ethernet cable and connect to some other network?
@@ -105,10 +106,10 @@ The solution for such dynamic networking environments are network managers like 
 A network manager runs a userspace daemon in the background dynamically changing the kernel's network configuration to the changing network environment.
 Additionally, network managers provide a higher-level features like network profiles <Cite id="arch_network" />.
 
-<HalfImage src="./gnome.png" />
+<HalfImage id="fig:gnome" num={4} caption="GNOME Quick Settings." src="./gnome.png" />
 While you configure systemd-networkd through configuration files <Cite id="arch_systemd_networkd" />, NetworkManager exposes a D-Bus API, which libnm connects to <Cite id="libnm" />.
 libnm, in turn, is how desktop managers like GNOME show the current network state.
-When you expand the GNOME quick settings <Cite id="gnome_quick_settings" />, for example, you're interacting with libnm <Cite id="gnome_shell" />.
+When you expand the GNOME quick settings (see [figure 4](#fig:gnome)) <Cite id="gnome_quick_settings" />, for example, you're interacting with libnm <Cite id="gnome_shell" />.
 
 These desktop managers are very closely intertwined with NetworkManager.
 If you want to use some other network manager, like systemd-networkd, you need to mimic NetworkManager's D-Bus API<Cite id="nmlinkd" />.<br />
@@ -144,8 +145,8 @@ FRRouting also uses Netlink directly <Cite id="frrouting_kernel_interface" />.
 Lastly, before iproute2 there was net-tools, which, among others, provided the now deprecated `brctl`, `ifconfig` and `netstat` terminal applications <Cite id="iproute2_user_guide" />.
 
 # Filtering Tools
-The network configuration tools all individually communicate with the kernel via Netlink.
-On the filtering side, however, there's more monolithic userspace system: nftables by the netfiler.org project.
+The network configuration tools all individually, directly communicate with the kernel via Netlink.
+On the filtering side ([figure 2](#fig:overview)'s right side), however, there's more monolithic userspace system: nftables by the netfiler.org project.
 The nftables software consists of a kernel component, three libraries (libmnl, libnftnl and libnftables) and the `nft` terminal program.
 The kernel component implements a virtual machine, which executes bytecode to perform the per-packet filtering activity <Cite id="nftables" />.
 (Be aware that this is a different virtual machine than what eBPF runs on.)<br />
