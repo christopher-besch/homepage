@@ -23,7 +23,7 @@ However, I won't explain all details.
 Take a look at [my repository](https://codeberg.org/christopher-besch/watch_firmware) for the entire code.
 Do be aware that this article is for readers already accustomed to developing applications with Zephyr.
 
-<HalfImage src="./banner.jpg" full="false" />
+<HalfImage id="fig:dev_setup" caption="My development setup around the Casio LCD." src="./banner.jpg" full="false" />
 
 Okay, I do something Zephyr can't do, so I have to go a step lower than the Zephyr API and use the STM32 HAL.
 You're expected to do the things explained in the [reference manual](https://www.st.com/resource/en/reference_manual/rm0434-multiprotocol-wireless-32bit-mcu-armbased-cortexm4-with-fpu-bluetooth-lowenergy-and-802154-radio-solution-stmicroelectronics.pdf) and use the STM32 HAL; even though you could do everything without it, too.<br />
@@ -64,7 +64,7 @@ lcd_seg8: lcd_seg8 {
 };
 ```
 
-<HalfImage src="./tht.jpg" full="false" />
+<HalfImage id="fig:tht_cap" caption="The VLCD capacitor with prosthetic legs." src="./tht.jpg" full="false" />
 
 There's only one hiccup.
 While the reference manual proclaims:
@@ -96,7 +96,7 @@ You can easily have two orders of magnitudes higher power consumption because of
 Lastly, the STM32 HAL's `HAL_LCD_Write` takes care of setting and clearing individual LCD segments.
 Because I'm using the LCD of a Casio A159W watch, I simply copied the text printing library from the [Sensor Watch](https://www.sensorwatch.net).
 
-<HalfVideo src="lcd.mp4" width={1080} height={1920} />
+<HalfVideo id="vid:demo_lcd" caption="A demo application printing text onto the Casio LCD." src="lcd.mp4" width={1080} height={1920} />
 
 ### Conclusion
 Software development so close to the hardware is really hard.

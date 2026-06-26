@@ -71,6 +71,7 @@ Even the kernel itself upcalls into userspace for its own domain resolution need
 
 Below I've prepared a diagram on Linux' userspace networking stack.
 Do notice that I'm not interested in the kernel's internals in this article.
+Furthermore, it only shows the most relevant dependencies.
 Don't worry, I'll go over the entire diagram in detail.
 <HalfImage full="true" src="./stack.webp" />
 

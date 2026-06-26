@@ -18,6 +18,12 @@
     margin-bottom: 16px;
 }
 
+.half_element_caption {
+    text-align: center;
+    font-style: italic;
+    font-size: 0.9em;
+}
+
 .half_element_before {
     /* clear float before element */
     content: "";

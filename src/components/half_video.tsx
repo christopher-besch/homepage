@@ -3,6 +3,11 @@ import HalfElement from "./half_element.js";
 
 interface HalfVideoProps {
     inputPath: string;
+    // Should be prefixed with `vid:` or similar.
+    id?: string;
+    caption?: string;
+    elements: string[];
+
     width?: number;
     height?: number;
     // should spread entire width?
@@ -11,7 +16,7 @@ interface HalfVideoProps {
 export default async function AutoPlayVideo(props: HalfVideoProps): Promise<React.ReactNode> {
     const deployPath = await copyVideo(props.inputPath);
     return (
-        <HalfElement full={props.full}>
+        <HalfElement id={props.id} caption={props.caption} elements={props.elements} full={props.full}>
             <p className="half_video_removed_warn">[video removed from print]</p>
             {/* show in print version if poster defined */}
             <video
