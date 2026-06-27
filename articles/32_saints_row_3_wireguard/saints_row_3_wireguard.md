@@ -14,9 +14,12 @@ listed: true
 ---
 
 A good friend of mine and I wanted to play a game, [Saints Row: The Third](https://www.gog.com/de/game/saints_row_the_third_the_full_package).
-The game supports local LAN co-op but we live far apart.
-Clearly the natural reaction is to try a VPN and we chose WireGuard.
-This didn't *just* work; let me explain why:
+The game supports LAN co-op but we live far apart.
+And the online co-op doesn't work on the GOG version because it requires Steam servers.
+That's not an option for us because we want to play the game DRM-free.<br />
+Clearly the natural reaction is to try local LAN co-op on a VPN and I chose WireGuard.
+This didn't *just* work;
+let me explain why:
 
 # The WireGuard Despair
 LAN co-op games typically work in two stages:
@@ -51,7 +54,7 @@ Such a VPN tunnels entire Ethernet frames through the VPN.
 WireGuard isn't capable of this.
 OpenVPN with it's bridge mode, however, is.
 Though, a layer 2 VPN like OpenVPN in bridge mode is much more complicated to set up.<br />
-So, with WireGuard games with LAN coop without a *direct IP* option don't work.
+So, with WireGuard games with LAN co-op without a *direct IP* option don't work.
 
 # Investigating the Matchmaking Process
 OpenVPN bridged mode was too complex for us to setup so instead, I started investigating the matchmaking process using Wireshark.
@@ -78,13 +81,13 @@ Now I can set the game to host a game lobby, send the canned UDP broadcast and s
 As you can see, the ASCII decoding of the datagram reads `s e l c h r i s `, which represents the lobby's hostname, `selchris` but using shorts rather than chars.
 Different to the lobby scan datagram, the scan response datagram, therefore, differs from one host to the next.
 The game, again, sends out the same datagram multiple times.
-Now we can reproduce this datagram as well with socat:
+Now I can reproduce this datagram as well with socat:
 ```
 echo "0000ffff014b000c00000000730065006c006300680072006900730000001ebca8c04594b0000606100102000000000000004594b00006061001000000001ebca8c06810ff00000000000000000000d80203" | xxd -r -p | socat -u - UDP-DATAGRAM:255.255.255.255:4200,broadcast,bind=0.0.0.0:4200
 ```
 
-With that we can turn our setup around and let the game search for lobbies.
-This sends out the UDP broadcasts and we respond with socat, sending our canned lobby scan response.
+With that I can turn our setup around and let the game search for lobbies.
+This sends out the UDP broadcasts and I respond with socat, sending our canned lobby scan response.
 And...it works!
 The game lists my fake game lobby, see [figure 4](#fig:game_list).
 <HalfImage id="fig:game_list" num={4} caption="The lobby scan showing my faked lobby." full={true} src="./selchris_in_game_list.png" />
@@ -96,42 +99,82 @@ Once both hosts know the other sides IP, they switch to UDP unicasts, after all 
 And using UDP unicasts the rest of the LAN co-op experience is implemented.
 <HalfImage id="fig:proper_lan_setup" num={5} caption="Wireshark showing the switch to UDP unicast after the broadcasts during matchmaking." full={true} src="./proper_lan_setup.png" />
 
-# UDP Broadcast Relay for Matchmaking
+# Binding to Ports the `sudo` Way
 With this knowledge I set out to implement a UDP broadcast relay.
 The idea is simple:
 Have another process listen for UDP broadcast datagrams and forward them through the WireGuard tunnel.
-I implemented a Python script doing this, which you'll find below.
-But let me explain how I got there, first.
-We use the BSD socket interface, which Python exposes through its `socket` package.
+I initially thought I had to implement another process on each end that receives the datagram through WireGuard and turns it back into a UDP broadcast.
+But as it turns out the game doesn't require the above messages to be broadcasts at all.
+As long as the game receives them on the right port, it's fine.<br />
+So implemented a single Python script proxying UDP broadcasts into the WireGuard tunnel.
+I use the BSD socket interface, which Python exposes through its `socket` package.
 It works on Linux, Windows and more.
-Importantly we choose to use a single `SOCK_RAW` as opposed to two `SOCK_DGRAM` sockets.
-With `SOCK_DGRAM` one can also send UDP datagrams.
-But `SOCK_DGRAM` requires binding to an IP address and UDP port.
-That's the port we may receive and/or send datagrams from.
-TODO: In our case that is...
+You'll find my script in the end of the article.
 
-# This is a SOCK_RAW because we want to receive the game's broadcast and send a UDP datagram through the tunnel on the same port.
-to that port on both the local network and the tunnel.
-# That wouldn't work because the game already binds to them.
+Before that, though, I want to write about another challenge I had to overcome:
+with my socat experiments I had two hosts: one running the game and the other injecting the UDP broadcasts.
+I want to have both the Python script and the game running on the same host.
+I need to
+1. receive the UDP broadcasts on port 4200.
+    As I've already stated, the game already binds to port 4200 on the LAN IP.
+    It needs to send and receive UDP broadcasts after all.
+    With the typical socket type `SOCK_DGRAM` I'd also have to bind to port 4200 on the host's LAN IP (in my case `192.168.188.49`).
+    Under normal circumstances this is not allowed so I cannot use `SOCK_DGRAM` here.
+2. Secondly, I need to send UDP datagrams through the tunnel.
+    With `SOCK_DGRAM` I'd have to bind to port 4200 on the IP of the host's side of the tunnel (in my case `10.13.13.2`).
+    While this would work during the matchmaking phase, once the actual gameplay starts, the game uses unicast UDP to talk to the other instance across the tunnel.
+    And the game uses port 4200 for unicast datagrams.
+    Because of that, the games will bind itself to port 4200 on the tunnel IP.
+    Having two processes bound to the same port on the same IP address isn't allowed so I can't use `SOCK_DGRAM` here either.
+`SOCK_RAW` comes to the rescue.
+This socket type combined with the `SOCK_DGRAM` protocol allows receiving any UDP datagrams on all interfaces regardless of their port.
+And the best part: you don't have to bind at all.
+This power is of course very dangerous as you can sniff on other processes' traffic.
+Therefore, you need `CAP_NET_RAW` or root / administrator privileges.
+Additionally, a `SOCK_RAW` socket may send and receive on all interfaces and from any IP address.
+Hence, I can use the same socket for both receiving broadcasts and proxying their payload into the tunnel.
+Also, do notice that I need to send raw IP datagrams.
+I cannot use the kernel's IP and UDP implementation but need to use something else.
+scapy is a Python library for just that.
+I use it to build an IP datagram to my liking before sending it into the tunnel.
+Lastly, I send the same packet to all hosts on the other side of the tunnel.
+My script simply uses a list of IP addresses.
 
+# Mangling the Payload
+With that simple UDP proxy script running on both hosts the game successfully finds the game lobby and attempts to connect.
+This is where the UDP unicast datagrams begin.
+And I thought the game would use the source IP addresses used in the prior broadcasts to select the destination IP addresses for the unicasts.
+That turns out to be wrong!
+Checking with Wireshark, the lobby joining host tries to connect to the other host through its LAN IP.
+That's the original IP address of the scan response broadcast.
+How could the game know that after we've proxied the datagram and, thus, changed the source IP to the tunnel's IP?
+A closer look at the scan response broadcast, see [figure 6](#fig:close_scan_return), gives the answer.
+<HalfImage id="fig:close_scan_return" num={6} caption="A closer inspection of the scan response. Notice how the highlighted parts repeat." full={true} src="./scan_return_datagram.png" />
+The UDP payload contains the LAN IP!
+Twice!
+In little endian, which reversed from the network byte order (big endian).
+That explains why all the bytes are the other way around in the payload compared to the IP header.
+That little snitch!<br />
+Okay, so `SOCK_RAW` with `sudo` wasn't enough for our game, we also need to mangle the payload's response.
+The simplest approach to this is to simply replace the LAN IP with the tunnel's IP everywhere in the payload.
 
-I tried investigating the entire matchmaking process and installed the game on another PC, a Windows PC.
-Unfortunately, the game on Windows fails at sending out UDP datagrams entirely.
-There must be a bug or misconfiguration on the Windows side.
-So this is where I leave this endeavour.
+Remember that this is a UDP broadcast, sent on all connected subnets.
+The same host has a different IP address for each connected subnet.
+Therefore, even in the expected, supported use-case without Wireguard, the IP address in the scan result is only right for one subnet.
+All other subnets receive an IP address they probably cannot connect to.
+And this isn't such a rare situation:
+Every time you provide a hotspot with your device, you have two IP address because you connect to two subnets:
+The one towards the Internet and the one towards all devices hanging on your hotspot.
+In such a situation you just need to hope that the game picks the right IP address.
+What great software engineering...
 
-I've realized that some VPNs operate at the link layer while others at the network layer.
-And I've caught the datagrams "Saints Row: The Third" sends when scanning and exposing a multiplayer LAN game.
-The actual connection process remains illusive.
-
-### ./saints_row_3_lan_coop_laptop_host.pcapng
-- laptop hosts game, IP: 192.168.188.49/24
-- desktop finds and joins game, IP: 192.168.188.30/24
-- `udp && (ip.dst == 255.255.255.255 || ip.dst == 192.168.188.49 || ip.src == 192.168.188.49)`
-- There are only three different UDP broadcasts: the two scan datagrams and one scan response datagram
-
-Apparently the dest ip doesn't have to be a broadcast.
-As long as the datagram receives the game IP it works.
+# The Script you've been Waiting for
+1. Copy this script into `udp_broadcast_relay.py`.
+2. Adjust the IP addresses.
+3. Run `chmod +x udp_broadcast_relay.py`.
+4. Run `sudo ./udp_broadcast_relay.py`.
+5. Open the game and host/join a LAN lobby.
+6. Enjoy!
 
 ```py
 #!/usr/bin/env python3
@@ -140,13 +183,14 @@ from scapy.all import *
 import socket
 
 # TODO: Adjust these to your network:
+# This might not work if you're connected to multiple subnets.
 LOCAL_PHYSICAL_IP = "192.168.188.49"
 LOCAL_TUNNEL_IP = "10.13.13.2"
 REMOTE_TUNNEL_IPS = ["10.13.13.3", "10.13.13.4", "10.13.13.5"]
 GAME_SPORT = 4200
 GAME_DPORT = 4200
 
-# SOCK_RAW requires root (or alternative capabilities).
+# SOCK_RAW requires CAP_NET_RAW or root.
 sock = socket.socket(socket.AF_INET, socket.SOCK_RAW, socket.IPPROTO_UDP)
 
 while True:
@@ -169,7 +213,7 @@ while True:
         local_physical_ip_reversed_network_byte_order,
         local_tunnel_ip_reversed_network_byte_order
     )
-    print(f"Patched  broadcast: {patched_udp_payload.hex()}")
+    print(f" Patched broadcast: {patched_udp_payload.hex()}")
 
     # Send patched datagram to all remote hosts through the tunnel.
     tunnel_datagram = UDP(dport=GAME_DPORT, sport=GAME_SPORT) / patched_udp_payload
@@ -177,26 +221,34 @@ while True:
         sock.sendto(bytes(tunnel_datagram), (remote_tunnel_ip, GAME_SPORT))
 ```
 
-# The current problem is that apparently the desktop's udp broadcast relay's "fake broadcasts" don't get received by the application on the desktop.
-# Meanwhile the laptop's udp broadcast relay does manage to reach the application with its "fake braodcasts".
-# A big difference is the destination MAC of the loopback frame: I'ts all zeros on the laptop but all ones on the desktop.
-# Other differeneces:
-# - UDP checksum
-# - source IP
-# - IP checksum
-# Crucially, the UDP payload is the same.
+{/*
+I tried investigating the entire matchmaking process and installed the game on another PC, a Windows PC.
+Unfortunately, the game on Windows fails at sending out UDP datagrams entirely.
+There must be a bug or misconfiguration on the Windows side.
+So this is where I leave this endeavour.
 
-# Another problem is that sometimes the datagrams don't get through the tunnel.
-# The datagrams do end up on the peer1 device but don't get through to peer4.
-# When peer4 opens an http connection to peer1, that works and afterwards the UDP datagrams get through, too.
-# Maybe this is a firewall?
-# This appears not to be an issue when just before 
+### ./saints_row_3_lan_coop_laptop_host.pcapng
+- laptop hosts game, IP: 192.168.188.49/24
+- desktop finds and joins game, IP: 192.168.188.30/24
+- `udp && (ip.dst == 255.255.255.255 || ip.dst == 192.168.188.49 || ip.src == 192.168.188.49)`
+- There are only three different UDP broadcasts: the two scan datagrams and one scan response datagram
 
-# When something has bound to 4200 locally the game apparently doesn't send out anything at all.
-# That would explain why it didn't work on Selina's Windows laptop.
+TODO
+The current problem is that apparently the desktop's udp broadcast relay's "fake broadcasts" don't get received by the application on the desktop.
+Meanwhile the laptop's udp broadcast relay does manage to reach the application with its "fake braodcasts".
+A big difference is the destination MAC of the loopback frame: I'ts all zeros on the laptop but all ones on the desktop.
+Other differeneces:
+- UDP checksum
+- source IP
+- IP checksum
+Crucially, the UDP payload is the same.
 
-# After the successful lobby finding the game doesn't address the broadcast's source ip, which we've faked, but the "real" IP.
-# That means that the game encodes the game's IP in its datagram.
-# Yes, it does, see the png.
-# This also means that the game only works when the PCs are connected to a single network.
-# Or, when the game guesses the right subnet.
+Another problem is that sometimes the datagrams don't get through the tunnel.
+The datagrams do end up on the peer1 device but don't get through to peer4.
+When peer4 opens an http connection to peer1, that works and afterwards the UDP datagrams get through, too.
+Maybe this is a firewall?
+This appears not to be an issue when just before 
+
+When something has bound to 4200 locally the game apparently doesn't send out anything at all.
+That would explain why it didn't work on Selina's Windows laptop.
+*/}
