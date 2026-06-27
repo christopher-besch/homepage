@@ -104,7 +104,7 @@ Then, for example, a systemd unit could run your script at boot, setting up your
 Baturin's user guide <Cite id="iproute2_user_guide" /> is a highly useful reference for iproute2.<br />
 And I do recommend playing around with these tools.
 Once I ran `ip route show` (see [figure 3](#fig:docker)) and I solved a long standing mystery:
-why does docker sometimes require `--net host` for containers to reach the internet on my machine.
+why does docker sometimes require `--net host` for containers to reach the Internet on my machine.
 It turns out that one of the corporate WiFi networks I often work in, has a conflicting subnet with Docker's default.
 <HalfImage id="fig:docker" num={3} caption="Docker subnet collision: 172.17.0.0/16 overlaps with 172.17.0.0/17." full="true" src="./docker_subnet_collision.png" />
 

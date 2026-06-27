@@ -1,5 +1,5 @@
 ---
-title: "Wireguard for Saints Row: The Third"
+title: "WireGuard for Saints Row: The Third"
 description: "
 TODO
 "
@@ -15,46 +15,89 @@ listed: true
 
 A good friend of mine and I wanted to play a game, [Saints Row: The Third](https://www.gog.com/de/game/saints_row_the_third_the_full_package).
 The game supports local LAN co-op but we live far apart.
-Clearly the natural reaction is to try out getting it to work regardless using a VPN.
-Spoiler: We didn't get it work but we did learn a lot.
+Clearly the natural reaction is to try a VPN and we chose WireGuard.
+This didn't *just* work; let me explain why:
 
-We started with wireguard.
+# The WireGuard Despair
+LAN co-op games typically work in two stages:
+1. hosting/joining a lobby (also called matchmaking) and
+2. playing the actual game.
 
-Surprisingly, creating a new LAN game doesn't send out anything.
-Instead, scanning for them does.
-You can reproduce those messages with:
+During the second part, during the actual gameplay, the hosts exchange the current state of the game, i.e., what player is where, what do they do, ...
+The game implements this using UDP unicast datagrams.
+This is the typical way UDP is used on the Internet.
+Here every datagram has a source IP and a destination IP and reaches only the host with that destination IP.<br />
+The first part of the game, hosting and joining a lobby cannot rely on unicasts because each host doesn't know the IP of the other host.
+Other games allow directly entering the IP of the PC hosting the lobby.
+Saints Row: The Third annoyingly does not.
+Instead, it uses UDP broadcasts.
+These are UDP datagrams sent not to a single IP but to `255.255.255.255`, the broadcast address.
+They are implemented using Ethernet broadcasts, which send the datagram to all hosts on the same subnet.
+That bit is crucial: *same subnet*.
+This doesn't work on the Internet, because there is more than one subnet on the Internet; it's what makes the Internet the Inter-net.
+Flooding the entire Internet with UDP broadcasts would not be handleable so there's no such broadcast concept on the Internet.<br />
+Okay, why does this cause a problem with our game?
+My friend and I are connected to the same WireGuard VPN.
+As it turns out, there are different types of VPN: layer 2 (link-layer) and layer 3 (network-layer) VPNs.
+A layer 3 VPN works by tunneling IP datagrams.
+Importantly, this doesn't include the Ethernet header:
+Layer 3 VPNs have no understanding of Ethernet, which `ip address show` reveals in [figure 1](#fig:peer1).
+There is no MAC address associated with the `peer1` link, only an IP address, `10.13.13.2`.
+<HalfImage id="fig:peer1" num={1} caption="Investigating a WireGuard connection with <code>ip address show</code>." full={true} src="./peer1.png" />
+
+A layer 2 VPN is different (and also much rarer).
+Such a VPN tunnels entire Ethernet frames through the VPN.
+(On Linux a layer 2 VPN uses `tap` devices and layer 3 VPNS `tun` devices.)
+WireGuard isn't capable of this.
+OpenVPN with it's bridge mode, however, is.
+Though, a layer 2 VPN like OpenVPN in bridge mode is much more complicated to set up.<br />
+So, with WireGuard games with LAN coop without a *direct IP* option don't work.
+
+# Investigating the Matchmaking Process
+OpenVPN bridged mode was too complex for us to setup so instead, I started investigating the matchmaking process using Wireshark.
+Surprisingly, hosting lobby doesn't send out anything at all.
+Instead, scanning for lobbies does as [figure 2](#fig:udp_scan) shows.
+<HalfImage id="fig:udp_scan" num={2} caption="Scanning for game lobbies using UDP broadcasts." full={true} src="./udp_scan.png" />
+
+There are two different broadcasts sent out, each four times.
+These broadcasts are the same no mater what device hosts the game.
+You can reproduce these broadcasts with socat:
 ```
 echo "0000ffff0005000c00000000" | xxd -r -p | socat -u - UDP-DATAGRAM:255.255.255.255:4200,broadcast,bind=0.0.0.0:4200
 echo "0000ffff0005000900000000" | xxd -r -p | socat -u - UDP-DATAGRAM:255.255.255.255:4200,broadcast,bind=0.0.0.0:4200
-# Repeat those two three more times.
+# Repeat both three more times.
 ```
-Do notice that these commands don't work on the same device because SRTT binds port 4200 already.
-I run them on a separate device in the same subnet.
+Do notice that these commands don't work on the same device because the game already binds to port 4200.
+Because of that I run them on a separate device on my LAN.<br />
+Fun fact: when some other application already binds to port 4200, Saints Row: The Third's matchmaking simply doesn't work without any errors.
+What great software engineering...<br />
 
-These datagrams appear to always be the same regardless of what device or what configuration scans for game lobbies.
-- game PC: 192.168.188.30
-- dev PC: 192.168.188.49
+Now I can set the game to host a game lobby, send the canned UDP broadcast and see what happens, see [figure 3](#fig:response_to_scan).
+<HalfImage id="fig:response_to_scan" num={3} caption="The game's response to the canned UDP broadcast (lobby scan)." full={true} src="./response_to_scan.png" />
 
-The response to such a scan is:
-TODO: image
-
-It sends the same datagram twice.
-It writes out `selchris` with two bytes per character.
-That's the username on the game PC.
-
-Multi-send probably because UDP datagrams are not reliable like TCP packets.
-
+As you can see, the ASCII decoding of the datagram reads `s e l c h r i s `, which represents the lobby's hostname, `selchris` but using shorts rather than chars.
+Different to the lobby scan datagram, the scan response datagram, therefore, differs from one host to the next.
+The game, again, sends out the same datagram multiple times.
+Now we can reproduce this datagram as well with socat:
 ```
 echo "0000ffff014b000c00000000730065006c006300680072006900730000001ebca8c04594b0000606100102000000000000004594b00006061001000000001ebca8c06810ff00000000000000000000d80203" | xxd -r -p | socat -u - UDP-DATAGRAM:255.255.255.255:4200,broadcast,bind=0.0.0.0:4200
 ```
 
-Okay so letting the game search for games and then sending that with socat actually makes the game show up a LAN game!
-TODO: image
+With that we can turn our setup around and let the game search for lobbies.
+This sends out the UDP broadcasts and we respond with socat, sending our canned lobby scan response.
+And...it works!
+The game lists my fake game lobby, see [figure 4](#fig:game_list).
+<HalfImage id="fig:game_list" num={4} caption="The lobby scan showing my faked lobby." full={true} src="./selchris_in_game_list.png" />
 
-However, the game doesn't appear to send out anything after clicking to connect to the lobby.
-And then the game times out because it doesn't hear back from socat.
-But I don't know what how respond.
-After all the game doesn't send out anything new after connecting.
+However, the scanning host doesn't appear to send out anything after clicking to connect to the lobby.
+Later I got another PC I could run the game on and setup a proper LAN co-op game and traced it with Wireshark.
+It turns out that you simply have to do the scanning-responding cycle multiple times.
+Once both hosts know the other sides IP, they switch to UDP unicasts, after all they don't want to annoy anyone else on the network more than necessary.
+And using UDP unicasts the rest of the LAN co-op experience is implemented.
+<HalfImage id="fig:proper_lan_setup" num={5} caption="Wireshark showing the switch to UDP unicast after the broadcasts during matchmaking." full={true} src="./proper_lan_setup.png" />
+
+# UDP Broadcast Relay for Matchmaking
+TODO
 
 I tried investigating the entire matchmaking process and installed the game on another PC, a Windows PC.
 Unfortunately, the game on Windows fails at sending out UDP datagrams entirely.
