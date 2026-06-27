@@ -15,7 +15,7 @@ hero_horizontal_position: 40
 hero_vertical_position: 70
 slug: linux_networking
 date: "2026-06-26"
-tags: [linux]
+tags: [linux, networking]
 listed: true
 ---
 
