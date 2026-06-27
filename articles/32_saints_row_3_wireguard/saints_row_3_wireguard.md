@@ -97,7 +97,23 @@ And using UDP unicasts the rest of the LAN co-op experience is implemented.
 <HalfImage id="fig:proper_lan_setup" num={5} caption="Wireshark showing the switch to UDP unicast after the broadcasts during matchmaking." full={true} src="./proper_lan_setup.png" />
 
 # UDP Broadcast Relay for Matchmaking
-TODO
+With this knowledge I set out to implement a UDP broadcast relay.
+The idea is simple:
+Have another process listen for UDP broadcast datagrams and forward them through the WireGuard tunnel.
+I implemented a Python script doing this, which you'll find below.
+But let me explain how I got there, first.
+We use the BSD socket interface, which Python exposes through its `socket` package.
+It works on Linux, Windows and more.
+Importantly we choose to use a single `SOCK_RAW` as opposed to two `SOCK_DGRAM` sockets.
+With `SOCK_DGRAM` one can also send UDP datagrams.
+But `SOCK_DGRAM` requires binding to an IP address and UDP port.
+That's the port we may receive and/or send datagrams from.
+TODO: In our case that is...
+
+# This is a SOCK_RAW because we want to receive the game's broadcast and send a UDP datagram through the tunnel on the same port.
+to that port on both the local network and the tunnel.
+# That wouldn't work because the game already binds to them.
+
 
 I tried investigating the entire matchmaking process and installed the game on another PC, a Windows PC.
 Unfortunately, the game on Windows fails at sending out UDP datagrams entirely.
@@ -123,16 +139,13 @@ As long as the datagram receives the game IP it works.
 from scapy.all import *
 import socket
 
-# Adjust these to your network:
+# TODO: Adjust these to your network:
 LOCAL_PHYSICAL_IP = "192.168.188.49"
 LOCAL_TUNNEL_IP = "10.13.13.2"
 REMOTE_TUNNEL_IPS = ["10.13.13.3", "10.13.13.4", "10.13.13.5"]
 GAME_SPORT = 4200
 GAME_DPORT = 4200
 
-# This is a SOCK_RAW because we want to receive the game's broadcast and send a UDP datagram through the tunnel on the same port.
-# Without SOCK_RAW we'd need to bind to that port on both the local network and the tunnel.
-# That wouldn't work because the game already binds to them.
 # SOCK_RAW requires root (or alternative capabilities).
 sock = socket.socket(socket.AF_INET, socket.SOCK_RAW, socket.IPPROTO_UDP)
 
