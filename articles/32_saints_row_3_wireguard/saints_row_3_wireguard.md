@@ -11,7 +11,7 @@ banner: "./banner.png"
 hero: "./hero.jpg"
 hero_horizontal_position: 80
 hero_vertical_position: 80
-slug: saintrs_row_3_wireguard
+slug: saints_row_3_wireguard
 date: "2026-06-28"
 tags: [gaming, networking]
 listed: true
