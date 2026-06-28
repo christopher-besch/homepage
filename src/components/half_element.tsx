@@ -42,7 +42,7 @@ export default function HalfElement(props: HalfElementProps): React.ReactNode {
             <div className={props.full ? "half_element_full_element" : "half_element_element"}>
                 {props.children}
                 {fullCaption == undefined ? undefined :
-                    <div className="half_element_caption">{fullCaption}</div>
+                    <div className="half_element_caption" dangerouslySetInnerHTML={{ __html: fullCaption}} />
                 }
             </div>
             {props.full ? <div className={"half_element_spacer"}></div> : <div className={"half_element_after"}></div>}
