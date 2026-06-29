@@ -53,7 +53,7 @@ I use this path to attach a terminal to that adapter.
 ```bash
 screen -U /dev/ttyUSB0 -b 115200
 ```
-Exit with `Ctrl+a d`.
+Exit with `Ctrl+a d` and reconnect with `screen -r` (or `screen -r [your instance name]`, checking with `screen -list` for instances).
 
 There is this magic of LEDs on a UART adapter blinking as you type.
 
