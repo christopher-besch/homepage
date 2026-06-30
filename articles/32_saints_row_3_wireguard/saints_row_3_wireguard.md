@@ -119,7 +119,6 @@ But as it turns out the game doesn't require the above messages to be broadcasts
 As long as the game receives them on the right port, be it via unicast or broadcast, it's fine.<br />
 So I implemented a single Python script proxying UDP broadcasts into the WireGuard tunnel.
 I use the BSD socket interface, which Python exposes through its [`socket` package](https://docs.python.org/3/library/socket.html).
-It works on Linux, Windows and more.
 You'll find my script in the end of the article.
 
 Before that, though, I want to write about another challenge I had to overcome:
@@ -143,7 +142,7 @@ What do you do?
 This socket type combined with the `SOCK_DGRAM` protocol allows receiving any UDP datagrams on all interfaces regardless of their port.
 And the best part: you don't have to bind at all.
 Such power is of course very dangerous as you can sniff on other processes' traffic with it.
-Therefore, you need `CAP_NET_RAW` or root / administrator privileges.
+Therefore, you need `CAP_NET_RAW` or root.
 Additionally, a `SOCK_RAW` socket may send and receive on all interfaces and from any IP address.
 Hence, I can use the same socket for both receiving broadcasts and proxying their payload into the tunnel.
 Also, do notice that I need to send raw IP datagrams.
@@ -151,7 +150,9 @@ I cannot use the kernel's IP and UDP implementation but need to use something el
 [scapy](https://scapy.net) is a Python library for just that.
 I use it to build IP datagram to my liking.
 Afterwards I send the same datagram to all hosts on the other side of the tunnel.
-My script simply uses a loop over a list of IP addresses.
+My script simply uses a loop over a list of IP addresses.<br />
+Unfortunately, Windows removed it's `SOCK_RAW` support during Windows XP for some reason <Cite id="winsock" />.
+Therefore, my script doesn't work on newer versions of Windows.
 
 # Mangling the Payload
 With that simple UDP proxy script running on both hosts the game successfully finds the game lobby and attempts to connect!
@@ -241,6 +242,8 @@ while True:
 ```
 
 PS: This script should work for games with similar LAN co-op, too.
+
+<References bibliography="./saints_row_3_wireguard.bib" />
 
 {/*
 I tried investigating the entire matchmaking process and installed the game on another PC, a Windows PC.
