@@ -72,7 +72,7 @@ Based on that one may implement their own network stack and even custom protocol
 But, of course, the kernel's network implementation is what most applications use.
 
 One thing the kernel doesn't do itself is resolving domains to IP addresses via DNS.
-Instead, there are libraries like resolver <Cite id="resolver /> or daemons like systemd-resolved <Cite id="arch_resolved" /> for this job.
+Instead, there are libraries like resolver <Cite id="resolver" /> or daemons like systemd-resolved <Cite id="arch_resolved" /> for this job.
 In the rare circumstances the kernel itself needs to resolve a domain (e.g., for nfs), the kernel upcalls into userspace <Cite id="kernel_dns" />.
 
 # The Userspace Networking Stack: a Zoo
