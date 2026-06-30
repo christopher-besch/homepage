@@ -81,7 +81,7 @@ Don't worry, I'll go over the entire diagram in detail.<br />
 Do notice that the Linux userspace networking stack is quite well divisible into *configuration* and *filtering*.
 Configuration concerns itself with, e.g., setting up links and routes.
 Filtering, on the other hand, handles, e.g., firewalling and NAT-ing.
-<HalfImage id="fig:overview" num={2} caption="Linux' userspace networking stack. The kernel internals and less relevant dependencies are omitted. Furthermore, only the most relevant and representative subset of all tools is shown, i.e., there are more network managers than just systemd-networkd and NetworkManager." full="true" src="./stack.webp" />
+<HalfImage id="fig:overview" num={2} caption="Linux' userspace networking stack. The kernel internals and less relevant dependencies are omitted. Furthermore, only the most relevant and representative subset of all tools is shown, i.e., there are more network managers than just systemd-networkd and NetworkManager. Dependencies via config files and through shell commands are explicitly labeled." full="true" src="./stack.webp" />
 
 ## Configuration Tools
 Beginning with [figure 2](#fig:overview)'s left half, there is a zoo of network configuration tools.
