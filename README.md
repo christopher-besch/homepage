@@ -52,3 +52,31 @@ When things don't update properly, delete the cache.
   ```
 - `source .env`
 - `npm run build`
+
+# ToDo
+- [ ] multi size favicon
+- [ ] pretty rss icon in footer
+- [ ] rethink about page
+- [ ] prettier buttons
+- [ ] analytics textanordnung???
+- [ ] about text on landing page
+- [ ] callsign
+- [ ] redirect from callsign
+- [ ] latest photos as well
+- [ ] update bookmarks
+- [ ] claimer that no ai
+
+# Nope (or later)
+- [ ] purchase image button
+- [ ] no react on privacy policy, maybe?
+- [ ] maybe add photo articles to photo page
+- [ ] parallel embedding, immich download
+- [ ] article image caption and label/reference
+- [ ] article footnotes
+- [ ] 404 page with send error field
+- [ ] talks social banner
+- [ ] card some tags as language icon
+- [ ] better color scheme, different color for articles/projects/talks cards
+- [ ] card style + tags in card
+- [ ] animated snake everywhere
+- [ ] crop media preview for photos to 2:1

@@ -46,6 +46,7 @@ If you have something to recommend, feel free to tell me at [mail@chris-besch.co
 
 ### Computer Hardware
 - [Architecture of Consoles](https://www.copetti.org/writings/consoles/) by Rodrigo Copetti
+- [Coding Without a Laptop - Two Weeks with AR Glasses and Linux on Android](https://holdtherobot.com/blog/2025/05/11/linux-on-android-with-ar-glasses/) by Hold the Robot
 
 ### DevOps
 - [How Discord Stores Trillions of Messages](https://discord.com/blog/how-discord-stores-trillions-of-messages) by Bo Ingram
@@ -54,7 +55,7 @@ If you have something to recommend, feel free to tell me at [mail@chris-besch.co
 ### AI and Statistics
 - [Too much efficiency makes everything worse: overfitting and the strong version of Goodhart's law](https://sohl-dickstein.github.io/2022/11/06/strong-Goodhart.html) by Jascha Sohl-Dickstein
 - [Neural network training makes beautiful fractals](https://sohl-dickstein.github.io/2024/02/12/fractal.html) by Jascha Sohl-Dickstein
-- [Something weird is happening with LLMs and chess](https://dynomight.net/chess/) by Dynomight
+{/* - [Something weird is happening with LLMs and chess](https://dynomight.net/chess/) by Dynomight */}
 - [The real data wall is billions of years of evolution](https://dynomight.net/data-wall/) by Dynomight
 - [Why ‟controlling for a variable” doesn't (usually) work](https://dynomight.net/control/) by Dynomight
 
@@ -70,9 +71,6 @@ If you have something to recommend, feel free to tell me at [mail@chris-besch.co
 - [Ten Rules for Negotiating a Job Offer](https://haseebq.com/my-ten-rules-for-negotiating-a-job-offer/) and [How Not to Bomb Your Offer Negotiation](https://haseebq.com/how-not-to-bomb-your-offer-negotiation/) by Haseeb Qureshi
 - [The Worst Programmer I Know](https://dannorth.net/the-worst-programmer/) by Daniel Terhorst-North
 - [Get Me Out Of Data Hell](https://ludic.mataroa.blog/blog/get-me-out-of-data-hell/) by Ludicity
-
-### Work Setup
-- [Coding Without a Laptop - Two Weeks with AR Glasses and Linux on Android](https://holdtherobot.com/blog/2025/05/11/linux-on-android-with-ar-glasses/) by Hold the Robot
 
 ### Art
 - [Painting and Drawing are not the Same](https://alexander-besch.com/articles/01_painting_drawing) by Alexander Besch
