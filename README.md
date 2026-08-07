@@ -80,3 +80,41 @@ When things don't update properly, delete the cache.
 - [ ] card style + tags in card
 - [ ] animated snake everywhere
 - [ ] crop media preview for photos to 2:1
+
+# IndieWeb
+- https://web.cobb.land
+    Overview over the Good Web
+- https://theindex.fyi/?category=curated_directories
+    List of Curated Directories
+- [ ] https://blogosphere.app/
+    pending
+
+    I love writing, hoping to create a resource.
+    Therefore, most of my blog articles are about (preferably Open-Source) technology and my opinionated way of using it.
+    But I also love photography and write about those experiences.
+    Lastly, sometimes I get the courage to write more personal articles, on personal troubles, also.
+    I strongly dislike LLMs; you won't find any slop here.
+- [ ] https://blogroll.club/
+    pending
+
+    Articles on photography and technology (Linux, microcontrollers, web, ...).
+- [ ] https://www.blogsareback.com/explore
+- [ ] https://blogscroll.com/
+- [ ] https://hnpwd.github.io/
+- [ ] https://indieseek.xyz/
+- [ ] https://collection.mataroa.blog/
+- [ ] https://minifeed.net/welcome
+- [x] https://personalsit.es/
+    https://github.com/xdesro/personalsit.es/pull/994
+- [ ] https://biglist.terraaeon.com/
+- [ ] https://www.webjamboree.net/
+- [ ] https://blogblog.es/
+- [ ] https://blogs.hn/
+- [ ] https://ooh.directory/
+- [ ] https://blogroll.org
+- [ ] https://blogofthe.day
+- [ ] https://gossipsweb.net
+- [ ] https://indieblog.page/
+- [x] https://marginalia-search.com/explore
+- [ ] https://smallweb.cc/
+- [ ] https://www.warppoint.games/
