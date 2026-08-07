@@ -1,0 +1,6 @@
+# for: https://www.blogsareback.com/guides/enable-cors?platform=Netlify
+[[headers]]
+  for = "/rss.xml"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "GET, HEAD, OPTIONS"
