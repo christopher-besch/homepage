@@ -86,6 +86,12 @@ When things don't update properly, delete the cache.
     Overview over the Good Web
 - https://theindex.fyi/?category=curated_directories
     List of Curated Directories
+- [x] https://webring.xxiivv.com/#chrisbesch
+    https://github.com/XXIIVV/webring/pull/1075
+- [x] https://marginalia-search.com/explore
+    https://github.com/MarginaliaSearch/submit-site-to-marginalia-search/pull/421
+- [x] https://personalsit.es/
+    https://github.com/xdesro/personalsit.es/pull/994
 - [ ] https://blogosphere.app/
     pending
 
@@ -99,14 +105,15 @@ When things don't update properly, delete the cache.
 
     Articles on photography and technology (Linux, microcontrollers, web, ...).
 - [ ] https://www.blogsareback.com/explore
-    await CORS settings
+    pending
+
+    Articles on Open-Source technology and (mostly landscape) photography.
+    There's a lot on Linux, microcontrollers and web development.
 - [ ] https://blogscroll.com/
 - [ ] https://hnpwd.github.io/
 - [ ] https://indieseek.xyz/
 - [ ] https://collection.mataroa.blog/
 - [ ] https://minifeed.net/welcome
-- [x] https://personalsit.es/
-    https://github.com/xdesro/personalsit.es/pull/994
 - [ ] https://biglist.terraaeon.com/
 - [ ] https://www.webjamboree.net/
 - [ ] https://blogblog.es/
@@ -116,6 +123,5 @@ When things don't update properly, delete the cache.
 - [ ] https://blogofthe.day
 - [ ] https://gossipsweb.net
 - [ ] https://indieblog.page/
-- [x] https://marginalia-search.com/explore
 - [ ] https://smallweb.cc/
 - [ ] https://www.warppoint.games/
