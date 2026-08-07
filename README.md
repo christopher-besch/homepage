@@ -99,6 +99,7 @@ When things don't update properly, delete the cache.
 
     Articles on photography and technology (Linux, microcontrollers, web, ...).
 - [ ] https://www.blogsareback.com/explore
+    await CORS settings
 - [ ] https://blogscroll.com/
 - [ ] https://hnpwd.github.io/
 - [ ] https://indieseek.xyz/
