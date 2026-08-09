@@ -86,12 +86,21 @@ When things don't update properly, delete the cache.
     Overview over the Good Web
 - https://theindex.fyi/?category=curated_directories
     List of Curated Directories
+- [ ] https://biglist.terraaeon.com/
+    unable to connect
+- [ ] https://www.warppoint.games/
+    for with gaming rss
 - [x] https://webring.xxiivv.com/#chrisbesch
     https://github.com/XXIIVV/webring/pull/1075
 - [x] https://marginalia-search.com/explore
     https://github.com/MarginaliaSearch/submit-site-to-marginalia-search/pull/421
 - [x] https://personalsit.es/
     https://github.com/xdesro/personalsit.es/pull/994
+- [x] https://indieblog.page/
+- [ ] https://indieseek.xyz/
+    pending
+    
+    A personal homepage on tinkering, technology (Linux, microcontrollers, web, ...) and photography.
 - [ ] https://blogosphere.app/
     pending
 
@@ -104,24 +113,42 @@ When things don't update properly, delete the cache.
     pending
 
     Articles on photography and technology (Linux, microcontrollers, web, ...).
+- [ ] https://ooh.directory/
+    pending
+- [ ] https://blogroll.org
+    pending
+- [ ] https://minifeed.net/welcome
+    pending
 - [ ] https://www.blogsareback.com/explore
     pending
 
     Articles on Open-Source technology and (mostly landscape) photography.
     There's a lot on Linux, microcontrollers and web development.
-- [ ] https://blogscroll.com/
-- [ ] https://hnpwd.github.io/
-- [ ] https://indieseek.xyz/
-- [ ] https://collection.mataroa.blog/
-- [ ] https://minifeed.net/welcome
-- [ ] https://biglist.terraaeon.com/
-- [ ] https://www.webjamboree.net/
-- [ ] https://blogblog.es/
-- [ ] https://blogs.hn/
-- [ ] https://ooh.directory/
-- [ ] https://blogroll.org
-- [ ] https://blogofthe.day
 - [ ] https://gossipsweb.net
-- [ ] https://indieblog.page/
+    pending
+- [ ] https://blogscroll.com/
+    pending
+
+    https://github.com/blogscroll/blogscroll/issues/760
+- [ ] https://hnpwd.github.io/
+    pending
+
+    https://github.com/hnpwd/hnpwd/pull/185
+
+    Into tinkering and sharing knowledge.  Mostly Open-Source tech and photography.
+- [ ] https://blogs.hn/
+    pending
+
+    https://github.com/surprisetalk/blogs.hn/pull/99
+
+    Into tinkering, sharing knowledge and experiences; mostly Open-Source tech and photography.
+- [ ] https://blogofthe.day
+    pending
+
+    https://github.com/artlung/blogofthe.day/pull/118
+- [ ] https://collection.mataroa.blog/
+    pending
 - [ ] https://smallweb.cc/
-- [ ] https://www.warppoint.games/
+    pending
+- [ ] https://www.webjamboree.net/
+    pending
