@@ -25,7 +25,7 @@ If you have something to recommend, feel free to tell me at [mail@chris-besch.co
 - [Nonfiction Writing Advice](https://slatestarcodex.com/2016/02/20/writing-advice/) by Scott Alexander
 - [Blog Writing for Developers](https://rmoff.net/2023/07/19/blog-writing-for-developers/) by Robin Moffatt
 - [How to write a good design document](https://grantslatton.com/how-to-design-document) by Grant Slatton
-- [A Tale about Typesetting with Typst vs. TeX](https://benjamin-hackl.at/blog/2024/07/typesetting-and-typst.html) by Benjamin Hackl
+- [A Tale about Typesetting with Typst vs. TeX](https://benjamin-hackl.at/blog/2024/07/typesetting-and-typst/) by Benjamin Hackl
 
 ### Programming
 - [C Is Not a Low-level Language](https://dl.acm.org/doi/10.1145/3212477.3212479) by David Chisnall

@@ -97,10 +97,14 @@ When things don't update properly, delete the cache.
 - [x] https://personalsit.es/
     https://github.com/xdesro/personalsit.es/pull/994
 - [x] https://indieblog.page/
-- [ ] https://indieseek.xyz/
-    pending
-    
+- [x] https://blogofthe.day
+    https://github.com/artlung/blogofthe.day/pull/118
+- [x] https://indieseek.xyz/
     A personal homepage on tinkering, technology (Linux, microcontrollers, web, ...) and photography.
+- [x] https://blogs.hn/
+    https://github.com/surprisetalk/blogs.hn/pull/99
+
+    Into tinkering, sharing knowledge and experiences; mostly Open-Source tech and photography.
 - [ ] https://blogosphere.app/
     pending
 
@@ -136,16 +140,6 @@ When things don't update properly, delete the cache.
     https://github.com/hnpwd/hnpwd/pull/185
 
     Into tinkering and sharing knowledge.  Mostly Open-Source tech and photography.
-- [ ] https://blogs.hn/
-    pending
-
-    https://github.com/surprisetalk/blogs.hn/pull/99
-
-    Into tinkering, sharing knowledge and experiences; mostly Open-Source tech and photography.
-- [ ] https://blogofthe.day
-    pending
-
-    https://github.com/artlung/blogofthe.day/pull/118
 - [ ] https://collection.mataroa.blog/
     pending
 - [ ] https://smallweb.cc/
