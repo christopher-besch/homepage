@@ -65,6 +65,10 @@ When things don't update properly, delete the cache.
 - [ ] latest photos as well
 - [ ] update bookmarks
 - [ ] claimer that no ai
+- [ ] add LinkedIn, ORCID, ham radio callsign to about
+- [ ] add list of publications, maybe science page or above articles
+- [ ] add paper
+- [ ] add reference to RSS feed after each article
 
 # Nope (or later)
 - [ ] purchase image button
@@ -105,6 +109,8 @@ When things don't update properly, delete the cache.
     https://github.com/surprisetalk/blogs.hn/pull/99
 
     Into tinkering, sharing knowledge and experiences; mostly Open-Source tech and photography.
+- [x] https://minifeed.net/welcome
+    pending
 - [ ] https://blogosphere.app/
     pending
 
@@ -120,8 +126,6 @@ When things don't update properly, delete the cache.
 - [ ] https://ooh.directory/
     pending
 - [ ] https://blogroll.org
-    pending
-- [ ] https://minifeed.net/welcome
     pending
 - [ ] https://www.blogsareback.com/explore
     pending
