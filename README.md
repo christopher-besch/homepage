@@ -111,6 +111,7 @@ When things don't update properly, delete the cache.
     Into tinkering, sharing knowledge and experiences; mostly Open-Source tech and photography.
 - [x] https://minifeed.net/welcome
     pending
+- [x] https://collection.mataroa.blog/
 - [ ] https://blogosphere.app/
     pending
 
@@ -144,8 +145,6 @@ When things don't update properly, delete the cache.
     https://github.com/hnpwd/hnpwd/pull/185
 
     Into tinkering and sharing knowledge.  Mostly Open-Source tech and photography.
-- [ ] https://collection.mataroa.blog/
-    pending
 - [ ] https://smallweb.cc/
     pending
 - [ ] https://www.webjamboree.net/
