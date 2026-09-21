@@ -233,6 +233,8 @@ body {
 
     .layout_footer {
         flex-direction: column;
+        padding-top: 5px;
+        padding-bottom: 5px;
     }
 }
 
