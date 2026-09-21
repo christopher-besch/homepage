@@ -60,8 +60,8 @@ When things don't update properly, delete the cache.
 - [ ] prettier buttons
 - [ ] analytics textanordnung???
 - [ ] about text on landing page
-- [ ] callsign
-- [ ] redirect from callsign
+- [x] callsign
+- [x] redirect from callsign
 - [ ] latest photos as well
 - [ ] update bookmarks
 - [ ] claimer that no ai
@@ -69,6 +69,9 @@ When things don't update properly, delete the cache.
 - [ ] add list of publications, maybe science page or above articles
 - [ ] add paper
 - [ ] add reference to RSS feed after each article
+- [x] what are you here for overhaul
+- [ ] ham radio site
+- [x] projects to oss contributions
 
 # Nope (or later)
 - [ ] purchase image button

@@ -26,7 +26,7 @@ umami.track(
         comment: document.getElementById('react_to_comment_input').value,
     }
 ).then(()=>{
-    this.innerText = 'Comment Sent';
+    this.innerText = 'Comment Sent. Thx so much ❤️';
     this.onclick = null;
     this.style = 'cursor:default;';
     document.getElementById('react_to_comment_input').disabled = true;
