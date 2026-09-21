@@ -65,10 +65,11 @@ export default function IndexPage(props: IndexPageProps): React.ReactNode {
                     <div className="index_page_links index_page_tags">
                         <Link href={getTagRoute("linux")}><span>#linux</span></Link>
                         <Link href={getTagRoute("docker")}><span>#docker</span></Link>
-                        <Link href={getTagRoute("go")}><span>#go</span></Link>
+                        <Link href={getTagRoute("hardware")}><span>#hardware</span></Link>
                         <Link href={getTagRoute("web")}><span>#web</span></Link>
-                        <Link href={getTagRoute("rust")}><span>#rust</span></Link>
-                        <Link href={getTagRoute("cpp")}><span>#cpp</span></Link>
+                        <Link href={getTagRoute("photography")}><span>#photography</span></Link>
+                        {/* <Link href={getTagRoute("politics")}><span>#politics</span></Link> */}
+                        <Link href={getTagRoute("cooking")}><span>#cooking</span></Link>
                     </div>
                 </div>,
             }}>
