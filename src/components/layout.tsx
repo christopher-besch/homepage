@@ -35,7 +35,7 @@ export default async function Layout(props: React.PropsWithChildren<LayoutProps>
     const nav_links = <div className="layout_nav_links">
         <Link href={loadArticlesPath}>Articles</Link>
         <Link href={loadPhotographyPath}>Photos</Link>
-        <Link href={loadProjectsPath}>Projects</Link>
+        <Link href={loadProjectsPath}>Software</Link>
         <Link href={loadTalksPath}>Talks</Link>
         <Link href={getArticleRoute("bookmarks")}>Bookmarks</Link>
         <Link href={loadAboutPath}>About</Link>
