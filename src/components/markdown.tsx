@@ -124,7 +124,7 @@ export default async function Markdown(props: MarkdownProps): Promise<React.Reac
             // Notice that some props that iframe would accept are not supported by HalfIframe.
             // We can't just to ...iframeProps because then we'd pass full to it, too.
             return <HalfElement id={iframeProps.id} num={iframeProps.num} caption={iframeProps.caption} elements={elements} full={iframeProps.full}>
-                <div className="markdown_iframe_wrapper">
+                <div className={`markdown_iframe_wrapper ${iframeProps.full_height ? "markdown_iframe_wrapper_full_height" : "markdown_iframe_wrapper_16_9"}`}>
                     <iframe allowFullScreen={iframeProps.allowFullScreen} src={iframeProps.src}></iframe>
                 </div>
             </HalfElement>;

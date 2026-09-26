@@ -63,8 +63,17 @@
 /* https://stackoverflow.com/questions/11122249/scale-iframe-css-width-100-like-an-image */
 .markdown_iframe_wrapper {
     position: relative;
-    padding-top: 56.25%;
     width: 100%;
+    border: 1px solid black;
+    border-radius: 1px;
+}
+
+.markdown_iframe_wrapper_16_9 {
+    padding-top: 56.25%;
+}
+
+.markdown_iframe_wrapper_full_height {
+    padding-top: 100vh;
 }
 
 .markdown_body em {

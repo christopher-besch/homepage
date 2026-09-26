@@ -11,4 +11,4 @@ tags: []
 listed: false
 ---
 
-<HalfIframe full={true} src="https://wavelog.chris-besch.com/visitor/dc8ris" allowFullScreen={true}/>
+<HalfIframe full={true} src="https://wavelog.chris-besch.com/visitor/dc8ris" allowFullScreen={true} full_height={true}/>
