@@ -25,7 +25,7 @@ listed: true
 
 ### Steps
 1. Cut or grind the ginger and garlic into small bits.
-2. Mix the soy sauce with the miso, chilli powder and ginger and garlic bits in a large enough bowl to mix the tofu.
+2. Mix the soy sauce with the miso, chilli powder as well as ginger and garlic bits in a large enough bowl to mix the tofu.
 3. Press as much water out of the tofu without crumbling it, cut it into 1cm cubes and let it marinade.
     Let it sit for a few minutes at least; ideally an hour.
     Do mix it every now and then; the tofu should be thoroughly soaked.

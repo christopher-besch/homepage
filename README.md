@@ -70,7 +70,7 @@ When things don't update properly, delete the cache.
 - [ ] add paper
 - [ ] add reference to RSS feed after each article
 - [x] what are you here for overhaul
-- [ ] ham radio site
+- [x] ham radio site
 - [x] projects to oss contributions
 
 # Nope (or later)
