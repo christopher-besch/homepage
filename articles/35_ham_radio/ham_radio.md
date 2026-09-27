@@ -42,7 +42,7 @@ Though, [Wavelog](https://www.wavelog.org) is pretty great software regardless.
 73,<br />
 DC8RIS
 
-PS: Thanks [Chris](https://teccheck.xyz) (there's other one) for the hero image.
+PS: Thanks [Chris](https://teccheck.xyz) (there's another one) for the hero image.
 I'm literally *on the air*.
 
 <HalfIframe full={true} src="https://wavelog.chris-besch.com/visitor/dc8ris" allowFullScreen={true} full_height={true}/>
