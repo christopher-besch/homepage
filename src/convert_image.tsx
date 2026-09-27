@@ -130,8 +130,8 @@ function cropImageHorizontally(image: sharp.Sharp,
     const targetHeight = originalHeight;
     const targetWidth = Math.round(targetHeight * aspectRatio);
     // This replicates CSS' behaviour with object-fit: cover and object-position.
-    const cropLeft = Math.round(0 * (1 - objectFitPositionH / 100) + (originalWidth - targetWidth) * (objectFitPositionH / 100));
-    const cropRight = Math.round((originalWidth - targetWidth) * (1 - objectFitPositionH / 100) + 0 * (objectFitPositionH / 100));
+    const cropLeft = Math.floor(0 * (1 - objectFitPositionH / 100) + (originalWidth - targetWidth) * (objectFitPositionH / 100));
+    const cropRight = Math.ceil((originalWidth - targetWidth) * (1 - objectFitPositionH / 100) + 0 * (objectFitPositionH / 100));
     if (cropLeft + targetWidth + cropRight != originalWidth) {
         throw new Error(`Widths don't add up: left: ${cropLeft} target: ${targetWidth} right: ${cropRight} actual: ${originalWidth}`);
     }
