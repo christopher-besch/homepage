@@ -128,7 +128,7 @@
     text-decoration: none;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1300px) {
     .layout_navbar_hamburger {
         display: flex;
     }
