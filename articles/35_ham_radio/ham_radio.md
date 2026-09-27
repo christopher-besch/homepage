@@ -31,7 +31,7 @@ And those are pretty much my reasons for doing amateur radio:
 1. I do informatics, I work with digital computers, which nonetheless communicate through analogue radio waves.
     Understanding high frequency electrical engineering at least a little helps diagnose problems with wireless computer networks, including my favourite: space systems.
 2. I believe we must be critical of other countries' actions, especially in the case of violations of international law.
-    However, I'm also afraid of, as part of a people, focusing to much on criticising other countries' governments and forgetting the ordinary citizens on the other side.
+    However, I'm also afraid of, as part of a people, focusing too much on criticising other countries' governments and forgetting the ordinary citizens on the other side.
     I believe having a shared technical task, for example, achieving a direct radio connection from, say, Germany to Belarus, is a fundamentally good thing, which I want to be a part of.
 3. As we've seen in 2026's blackout in Berlin, our infrastructure does fail at times.
     Having ordinary people, able to communicate across vast distances without grid power or the Internet, is quite a helpful addition to official relief operations.
