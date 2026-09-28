@@ -3,12 +3,14 @@ title: "DC8RIS: Chris on the Air"
 description: "
 I'm doing amateur radio now.
 "
+banner: "./banner.webp"
 hero: "./hero.jpg"
 hero_horizontal_position: 50
 hero_vertical_position: 60
 slug: ham_radio
-tags: []
-listed: false
+date: "2026-09-27"
+tags: [ham_radio, hardware]
+listed: true
 ---
 
 As of August 2026 I'm a full-licensed radio amateur (call sign DC8RIS).
