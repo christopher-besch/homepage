@@ -1,5 +1,5 @@
 ---
-title: "A Minimal Linux and systemd for Embedded"
+title: "Slay the Daemons on Embedded"
 description: "
 "
 banner: "./banner.webp"
