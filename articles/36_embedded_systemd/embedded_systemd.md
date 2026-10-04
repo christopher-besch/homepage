@@ -1,13 +1,18 @@
 ---
 title: "Slay the Daemons on Embedded"
 description: "
+My name is Chris and I'm afraid of daemons.
+Well, not literally but I am engineering the firmware for an embedded, real-time device.
+And I chose to use Debian Linux with systemd.
+What I'm afraid of are background processes, daemons, performing actions I don't anticipate.
+This article explains how I create a linux image for my device with only a handful purposeful daemons.
 "
 banner: "./banner.webp"
 hero: "./hero.webp"
 hero_horizontal_position: 0
 hero_vertical_position: 100
 slug: embedded_systemd
-date: "2026-10-02"
+date: "2026-10-04"
 tags: [raspberry_pi, hardware, linux, real_time]
 listed: true
 ---
@@ -67,7 +72,7 @@ This tool has official support and also creates a Debian based image with system
 Arguably, I don't particularly like rpi-image-gen, either.
 It's YAML based layer system appears unnecessarily over-engineered and so purpose-built for the Raspberry Pi.
 I would have liked to use a more cross platform solution that also works well on other hardware.
-But rpi-image-gen comes with official support and a plethora of Raspberry Pi specific layers, e.g., for the proprietary **:<** Raspberry Pi firmware.
+But rpi-image-gen comes with official support and a plethora of Raspberry Pi specific layers, e.g., for the proprietary :< Raspberry Pi firmware.
 Additionally, I still dislike the very verbose way you define a variable like `${IGconf_linux_kver}`:
 
 ```
@@ -95,10 +100,9 @@ In this environment the build system can, for example, use `apt` to install furt
 For this to work the build host and the final device must have the same architecture, in my case arm64.
 Therefore, I use another Raspberry Pi to build the image.
 
-{/* TODO: link the layers */}
 I won't go into all details of I exactly use rpi-image-gen to construct this custom image.
-But in short, I started with the `trixie-minbase` builtin rpi-image-gen layer, and used it's dependency layers directly.
-This let me exclude `systemd-timesyncd`, `wireless-regulatory` and `iwd`, which I don't need.
+But in short, I started with the [trixie-minbase](https://raspberrypi.github.io/rpi-image-gen/layer/trixie-minbase.html) builtin rpi-image-gen layer, and used it's dependency layers directly.
+This let me exclude [systemd-timesyncd](https://raspberrypi.github.io/rpi-image-gen/layer/systemd-timesyncd.html), [wireless-regulatory](https://raspberrypi.github.io/rpi-image-gen/layer/wireless-regulatory.html) and [iwd](https://raspberrypi.github.io/rpi-image-gen/layer/iwd.html), which I don't need.
 This leaves a pretty bare-bone image.
 Additionally, I added custom layers for all the things I need, as described below.
 This includes a layer for my custom C++ program.
@@ -222,9 +226,8 @@ mmdebstrap:
       EOF
 ```
 
-{/* TODO: link to layer: rpi-cm5, rpi-linux-2712 */}
-To actually use this layer I created a custom version of the `rpi-cm5` layer (what rpi-image-gen calls a *device layer*).
-This custom device layer uses my `custom_kernel` layer instead of the builtin `rpi-linux-2712` layer.
+To actually use this layer I created a custom version of the [rpi-cm5](https://raspberrypi.github.io/rpi-image-gen/layer/rpi-cm5.html) layer (what rpi-image-gen calls a *device layer*).
+This custom device layer uses my `custom_kernel` layer instead of the builtin [rpi-linux-2712](https://raspberrypi.github.io/rpi-image-gen/layer/rpi-linux-2712.html) layer.
 Like this rpi-image-gen properly installs the kernel.
 Unfortunately, the `image-rpios` builtin layer (what rpi-image-gen calls an *image layer*) changes the `root=` parameter inside `/boot/firmware/cmdline.txt`.
 It changes it to `root=/dev/disk/by-slot/system`.
