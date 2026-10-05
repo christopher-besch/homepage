@@ -1,0 +1,290 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Slay the Daemons on Embedded</title><link rel="canonical" href="https://chris-besch.com/articles/embedded_systemd"/><meta property="og:title" content="Slay the Daemons on Embedded"/><meta property="twitter:title" content="Slay the Daemons on Embedded"/><meta name="description" content="My name is Chris and I&#x27;m afraid of daemons. Well, not literally but I am engineering the firmware for an embedded, real-time device. And I chose to use Debian Linux with systemd. What I&#x27;m afraid of are background processes, daemons, performing actions I don&#x27;t anticipate. This article explains how I create a linux image for my device with only a handful purposeful daemons."/><meta property="og:description" content="My name is Chris and I&#x27;m afraid of daemons. Well, not literally but I am engineering the firmware for an embedded, real-time device. And I chose to use Debian Linux with systemd. What I&#x27;m afraid of are background processes, daemons, performing actions I don&#x27;t anticipate. This article explains how I create a linux image for my device with only a handful purposeful daemons."/><meta property="twitter:description" content="My name is Chris and I&#x27;m afraid of daemons. Well, not literally but I am engineering the firmware for an embedded, real-time device. And I chose to use Debian Linux with systemd. What I&#x27;m afraid of are background processes, daemons, performing actions I don&#x27;t anticipate. This article explains how I create a linux image for my device with only a handful purposeful daemons."/><meta property="og:type" content="article"/><meta property="og:url" content="https://chris-besch.com/articles/embedded_systemd"/><meta property="og:site_name" content="Chris&#x27; Place"/><meta property="og:image" content="https://chris-besch.com/images/07056f4273aded3bc17e7cef13eb8978_1200_600.webp"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="600"/><meta property="og:image:alt" content=""/><meta property="og:image" content="https://chris-besch.com/images/07056f4273aded3bc17e7cef13eb8978_800_400.webp"/><meta property="og:image:width" content="800"/><meta property="og:image:height" content="400"/><meta property="og:image:alt" content=""/><meta property="og:image" content="https://chris-besch.com/images/07056f4273aded3bc17e7cef13eb8978_400_200.webp"/><meta property="og:image:width" content="400"/><meta property="og:image:height" content="200"/><meta property="og:image:alt" content=""/><meta property="twitter:image" content="https://chris-besch.com/images/07056f4273aded3bc17e7cef13eb8978_1200_600.webp"/><meta name="twitter:card" content="summary_large_image"/><meta name="og:article:published_time" content="2026-10-04T00:00:00.000Z"/><meta name="og:article:author" content="Christopher Besch"/><meta name="twitter:site" content="@besch_chris"/><meta name="twitter:creator" content="@besch_chris"/><meta name="author" content="Christopher Besch"/><link rel="preload" href="/styles/fonts/LiberationSans-Regular-webfont.woff" as="font" type="font/woff" crossorigin="anonymous"/><link rel="preload" href="/styles/fonts/LiberationMono-Regular-webfont.woff" as="font" type="font/woff" crossorigin="anonymous"/><meta name="color-scheme" content="light dark"/><link rel="me authn" href="mailto:mail@chris-besch.com"/><link rel="me" href="https://codeberg.org/christopher-besch"/><link rel="me" href="https://github.com/christopher-besch"/><link rel="me" href="https://mastodon.social/@christopher_besch"/><meta name="fediverse:creator" content="@christopher_besch@mastodon.social"/><link rel="icon" type="image/png" sizes="48x48" href="/favicon.png"/><link rel="stylesheet" type="text/css" href="/styles/always.css"/><link rel="stylesheet" type="text/css" href="/styles/article.css"/><script defer="" src="https://analytics.chris-besch.com/script.js" data-website-id="0774a88d-dde9-4972-8559-84538b09a044"></script></head><body><nav class="layout_navbar" role="navigation"><a class="layout_navbar_left" href="/" target="_self"><div><h1>Christopher Besch</h1><h2>Developer•Photographer•DC8RIS</h2></div><picture class="image_picture"><img srcSet="/images/d806fbc6a3c117ec3cde9f83e2894a00_400_188.webp 400w,/images/d806fbc6a3c117ec3cde9f83e2894a00_699_329.webp 699w" width="400" height="188" alt="" loading="eager" fetchPriority="high"/></picture></a><div class="layout_navbar_right"><input id="layout_navbar_toggle" type="checkbox"/><label for="layout_navbar_toggle" class="layout_navbar_hamburger"><div></div><div></div><div></div></label><div class="layout_nav_links"><a href="/articles" target="_self">Articles</a><a href="/photography" target="_self">Photos</a><a href="/articles/ham_radio" target="_self">HAM Radio</a><a href="/projects" target="_self">Software</a><a href="/talks" target="_self">Talks</a><a href="/articles/bookmarks" target="_self">Bookmarks</a><a href="/about" target="_self">About</a></div></div></nav><div class="layout_transient_space"><a href="/" target="_self"><picture class="image_picture"><img srcSet="/images/d806fbc6a3c117ec3cde9f83e2894a00_400_188.webp 400w,/images/d806fbc6a3c117ec3cde9f83e2894a00_699_329.webp 699w" width="400" height="188" alt="" loading="eager" fetchPriority="high"/></picture></a><div class="layout_nav_links"><a href="/articles" target="_self">Articles</a><a href="/photography" target="_self">Photos</a><a href="/articles/ham_radio" target="_self">HAM Radio</a><a href="/projects" target="_self">Software</a><a href="/talks" target="_self">Talks</a><a href="/articles/bookmarks" target="_self">Bookmarks</a><a href="/about" target="_self">About</a></div></div><main class="layout_content_container" role="main"><div class="layout_hero" style="--layout-object-fit-h:0%;--layout-object-fit-v:100%;--layout-hero-fraction:0.7"><picture class="image_picture"><source srcSet="/images/d102daacdbd123ebe933244803d47a0a_400_266.webp 400w,/images/d102daacdbd123ebe933244803d47a0a_800_532.webp 800w,/images/d102daacdbd123ebe933244803d47a0a_1200_798.webp 1200w,/images/d102daacdbd123ebe933244803d47a0a_1600_1065.webp 1600w" type="image/webp" width="400" height="266" media="(orientation: landscape)"/><source srcSet="/images/d102daacdbd123ebe933244803d47a0a_0_400_533.webp 400w,/images/d102daacdbd123ebe933244803d47a0a_0_600_800.webp 600w" type="image/webp" width="400" height="533" media="(orientation: portrait) and (max-width: 500px)"/><img srcSet="/images/d102daacdbd123ebe933244803d47a0a_400_266.webp 400w,/images/d102daacdbd123ebe933244803d47a0a_800_532.webp 800w,/images/d102daacdbd123ebe933244803d47a0a_1200_798.webp 1200w,/images/d102daacdbd123ebe933244803d47a0a_1600_1065.webp 1600w" width="400" height="266" alt="" style="background-image:radial-gradient(67% 67% at 25% 25%, #e8d9ba, transparent),radial-gradient(67% 67% at 50% 25%, #eed8bd, transparent),radial-gradient(67% 67% at 75% 25%, #534b43, transparent),radial-gradient(67% 67% at 25% 50%, #554b35, transparent),radial-gradient(67% 67% at 50% 50%, #c2ad93, transparent),radial-gradient(67% 67% at 75% 50%, #5c534b, transparent),radial-gradient(67% 67% at 25% 75%, #58473a, transparent),radial-gradient(67% 67% at 50% 75%, #5c4b39, transparent),radial-gradient(67% 67% at 75% 75%, #433c2f, transparent),linear-gradient(#817360);background-position:0 0, 0 100%;background-size:100% 100%;background-repeat:no-repeat" loading="eager" fetchPriority="high"/></picture><div class="layout_hero_children"><div class="title_in_hero"><h1>Slay the Daemons on Embedded</h1><hr/><h2>Sunday, 4th October, 2026<span> <!-- -->13min<!-- --> <a href="/tag/raspberry_pi" target="_self">#<!-- -->raspberry_pi</a> <a href="/tag/hardware" target="_self">#<!-- -->hardware</a> <a href="/tag/linux" target="_self">#<!-- -->linux</a> <a href="/tag/real_time" target="_self">#<!-- -->real_time</a></span></h2></div></div></div><div class="layout_content"><div><div class="markdown_body"><p><em>My name is Chris and I&#x27;m afraid of daemons.</em><br/>
+Well, not literally but I am engineering the firmware for an embedded, real-time device.
+And I chose to use Debian Linux with systemd.
+What I&#x27;m afraid of are background processes, <em>daemons</em>, performing actions I don&#x27;t anticipate.
+More generally, I&#x27;m afraid of activities, that I can&#x27;t reason about but am responsible for.<br/>
+Now take a look at a desktop operating system:
+On my Debian Linux desktop I count 179 running processes (<code>ps --ppid 2 -p 2 --deselect | wc -l</code>).
+Imagine having that zoo running on the embedded, real-time device.
+Do I understand what all the processes do?
+Do I trust them not to interfere with the device&#x27;s critical tasks?
+For a general purpose desktop computer, this is okay but for my embedded device?
+For my embedded device I want a minimal environment, with all part having a good reason for being there;
+only parts I can reason about.</p>
+<h3 id="the-hardware-and-its-task"><a class="markdown_heading_a" href="#the-hardware-and-its-task" target="_self"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>The Hardware and its Task</h3>
+<p>My firmware runs on a Raspberry Pi Computer Module 5 on a custom board.
+It&#x27;s job is to measure things using it&#x27;s onboard sensors and talk to other computers via its two Ethernet interfaces.
+The network needs to be statically configured, there&#x27;s no DHCP server.<br/>
+Most importantly, it may <strong>never</strong> at its job and operate in real-time;
+it may never send out data at the wrong point in time!</p>
+<h3 id="system-architecture-considerations"><a class="markdown_heading_a" href="#system-architecture-considerations" target="_self"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>System Architecture Considerations</h3>
+<p>I implement task-specific logic in a C++ program: measure things, talk to other things.
+For the networking I rely on the Linux kernel, SSH is done by OpenSSH and there are a few other processes that handle NTP and PTP.
+I tested all this on a stock Raspberry Pi OS.
+However, the stock Raspberry Pi OS runs a few dozen demons, most of which I don&#x27;t need on the real, production device.
+A network manager, for example, or wireless things like wpa_supplicant.
+I don&#x27;t have anything wireless and do the network statically.
+All a network manager could do is interfere with that setup.
+Raspberry Pi OS is based on Debian and runs sytemds as its init system.
+Therefore, these daemons are handled by <em>systemd units</em>.
+While, I could just disable all the units I don&#x27;t want, it&#x27;d be cleaner to not have these programs in the first place.<br/>
+And there are other reasons against Raspberry Pi OS:</p>
+<ul>
+<li>Firstly, because of the real-time requirements, I want to use PREEMPT_RT, which I&#x27;ve already explained in my <a href="https://chris-besch.com/articles/riscv_rt" target="_blank" rel="noopener">Real-Time Linux on RISC-V article</a>.
+This requires a custom kernel and I don&#x27;t want to install a kernel on the device at runtime.</li>
+<li>Secondly, Raspberry Pi OS uses cloud-init to perform configuration, e.g., username, password and WiFi setup.
+Those are the configurations you requested with the <a href="https://www.raspberrypi.com/software" target="_blank" rel="noopener">rpi-imager</a>.
+cloud-init applies this configuration at the first boot.
+But I want the first boot and all other boots to be the same;
+I want a <code>custom_image.img</code> file to flash onto the device&#x27;s EMMC and have the device not change anything about its configuration.
+The fewer files change at runtime, the easier to comprehend what&#x27;s happening.
+You could even make most of the filesystem immutable, if you prefer the shotgun over trust.
+But, arguably, for my use-case I like being able to SSH into a running test system and toy around.</li>
+<li>Lastly, I want all programs I need, including my custom C++ program to be pre-installed and slated to run at boot.
+All this asks for a custom image.</li>
+</ul>
+<h3 id="image-creation-with-rpi-image-gen"><a class="markdown_heading_a" href="#image-creation-with-rpi-image-gen" target="_self"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Image Creation with rpi-image-gen</h3>
+<p>So how do you create such a custom image?
+Unfortunately I don&#x27;t want to use <a href="https://github.com/RPi-Distro/pi-gen" target="_blank" rel="noopener">pi-gen</a>, which builds the official Raspberry Pi OS image.
+While adjusting it to my needs might already not be trivial, the real problem is that pi-gen compiles all the image&#x27;s software, which takes hours.
+Luckily, there is <a href="https://raspberrypi.github.io/rpi-image-gen" target="_blank" rel="noopener">rpi-image-gen</a>, a tool to create custom images by installing pre-built deb packages with <code>apt</code>.
+This tool has official support and also creates a Debian based image with systemd.<br/>
+Arguably, I don&#x27;t particularly like rpi-image-gen, either.
+It&#x27;s YAML based layer system appears unnecessarily over-engineered and so purpose-built for the Raspberry Pi.
+I would have liked to use a more cross platform solution that also works well on other hardware.
+But rpi-image-gen comes with official support and a plethora of Raspberry Pi specific layers, e.g., for the proprietary :&lt; Raspberry Pi firmware.
+Additionally, I still dislike the very verbose way you define a variable like <code>${IGconf_linux_kver}</code>:</p>
+<pre><code># X-Env-VarPrefix: linux
+#
+# X-Env-Var-kver: 6.18.50-v8-16k-custom-kernel-1+
+# X-Env-Var-kver-Desc: kernel version
+# X-Env-Var-kver-Set: force
+</code></pre>
+<p>It took me so much time to comprehend this build system.
+However, the image this build process spits out is exactly what I want and simple to reason about.
+So I treat rpi-image-gen as a strange black-box, a means to an end.
+After all, creating a bootable image is a very complex process; there&#x27;s no way around it;
+there are so many moving parts that must work perfectly for the device to boot and operate.<br/>
+There are build tools like rpi-image-gen for other platforms, too.
+The general idea of creating a custom, minimal Linux image remains a universal one, see <a href="https://www.linuxfromscratch.org" target="_blank" rel="noopener">Linux from Scratch</a>:
+The build system creates a <em>chroot</em> directory as the basis of the final image.
+There, for example, there are the familiar <code>/bin</code> and <code>/etc</code> directories inside it.
+Those directories will be the <code>/bin</code> and <code>/etc</code> directories of the final image.
+After the build system placed a bunch of basic programs, e.g., <code>cat</code>, <code>ls</code> or <code>apt</code> inside the chroot directory, it <em>enters</em> this chroot environment using the <code>chroot</code> command:
+This command lets you run a program with a <strong>ch</strong>anged <strong>root</strong> directory.
+So while that program still runs under the build machine&#x27;s kernel, it appears to the program as if it already where on the actual hardware, with the custom image.
+In this environment the build system can, for example, use <code>apt</code> to install further programs.
+For this to work the build host and the final device must have the same architecture, in my case arm64.
+Therefore, I use another Raspberry Pi to build the image.</p>
+<p>I won&#x27;t go into all details of I exactly use rpi-image-gen to construct this custom image.
+But in short, I started with the <a href="https://raspberrypi.github.io/rpi-image-gen/layer/trixie-minbase.html" target="_blank" rel="noopener">trixie-minbase</a> builtin rpi-image-gen layer, and used it&#x27;s dependency layers directly.
+This let me exclude <a href="https://raspberrypi.github.io/rpi-image-gen/layer/systemd-timesyncd.html" target="_blank" rel="noopener">systemd-timesyncd</a>, <a href="https://raspberrypi.github.io/rpi-image-gen/layer/wireless-regulatory.html" target="_blank" rel="noopener">wireless-regulatory</a> and <a href="https://raspberrypi.github.io/rpi-image-gen/layer/iwd.html" target="_blank" rel="noopener">iwd</a>, which I don&#x27;t need.
+This leaves a pretty bare-bone image.
+Additionally, I added custom layers for all the things I need, as described below.
+This includes a layer for my custom C++ program.
+Interestingly, because I run rpi-image-gen on another Raspberry Pi, I compile my program directly inside the chroot by running cmake from my custom layer.
+This also means that all the build tools are installed on the image in case I want to hackily change something on a test.</p>
+<h3 id="static-network-setup"><a class="markdown_heading_a" href="#static-network-setup" target="_self"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Static Network Setup</h3>
+<p>As my <a href="https://chris-besch.com/articles/linux_networking" target="_blank" rel="noopener">Userspace&#x27;s Role in Linux Networking article</a> explains, on desktop Linux you have a network manager configuring your network dynamically.
+After all, the user might want the desktop to automatically connect to WiFi or Ethernet.
+On my embedded device, however, the network configuration is entirely static and doesn&#x27;t change;
+there isn&#x27;t even a DHCP server.
+Therefore, I simply use the iproute2 tools with a bash script to configure the Ethernet links:</p>
+<pre><code class="language-bash"><span class="pl-c">#!/bin/bash</span>
+<span class="pl-c1">set</span> -euo pipefail
+
+MY_DEVICE=eth0
+MY_ADDRESS=192.168.188.3/24
+
+<span class="pl-k">until</span> ip link show dev <span class="pl-smi">$MY_DEVICE</span> <span class="pl-k">2&gt;&amp;1</span> <span class="pl-k">&gt;</span>/dev/null<span class="pl-k">;</span> <span class="pl-k">do</span>
+    sleep 1
+<span class="pl-k">done</span>
+<span class="pl-c1">echo</span> found MY_DEVICE <span class="pl-smi">$MY_DEVICE</span>
+ip link <span class="pl-c1">set</span> dev <span class="pl-smi">$MY_DEVICE</span> up
+ip addr flush dev <span class="pl-smi">$MY_DEVICE</span>
+ip addr add <span class="pl-smi">$MY_ADDRESS</span> dev <span class="pl-smi">$MY_DEVICE</span>
+<span class="pl-c1">echo</span> configured MY_DEVICE <span class="pl-smi">$MY_DEVICE</span> <span class="pl-k">for</span> <span class="pl-smi">$MY_ADDRESS</span>
+</code></pre>
+<p>I place this script in <code>$1/usr/local/sbin/static_network_config.sh</code> and mark it executable.
+Notice that I write <code>$1</code> instead of the path to the chroot directory;
+I&#x27;m not installing these files on the build host.
+Furthermore, I decided that systemd units shall take care of running all programs.
+Therefore, I created the file <code>$1/etc/systemd/system/static_network_config.service</code>:</p>
+<pre><code class="language-ini"><span class="pl-en">[Unit]</span>
+<span class="pl-k">Description</span>=Static Network Config
+<span class="pl-k">Wants</span>=network-pre.target
+<span class="pl-k">After</span>=network-pre.target
+<span class="pl-k">Before</span>=network.target
+
+<span class="pl-en">[Service]</span>
+<span class="pl-k">Type</span>=oneshot
+<span class="pl-k">RemainAfterExit</span>=yes
+<span class="pl-k">ExecStart</span>=/usr/local/sbin/static_network_config.sh
+
+<span class="pl-en">[Install]</span>
+<span class="pl-k">WantedBy</span>=multi-user.target
+</code></pre>
+<p>This only creates the systemd unit, it isn&#x27;t enabled yet.
+To make my network configuration script run at boot, I enabled the systemd unit with <code>chroot &quot;$1&quot; sh -c &quot;systemctl enable static_network_config&quot;</code>
+Do notice that I run the <code>systemctl</code> command inside the chroot environment, not on the host.
+I also disabled the <code>systemd-networkd</code> and <code>systemd-resolved</code> units because I don&#x27;t need DNS or a network manager.<br/>
+This already works and defines a very simple but robust network configuration.</p>
+<h3 id="custom-kernel"><a class="markdown_heading_a" href="#custom-kernel" target="_self"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Custom Kernel</h3>
+<p>While I build the image on another Raspberry Pi, I don&#x27;t have the patience to let it also compile the kernel.
+Therefore, I use an x86 Debian Linux build machine and cross compile the kernel as the <a href="https://www.raspberrypi.com/documentation/computers/linux_kernel.html" target="_blank" rel="noopener">Raspberry pi docs</a> explain.
+FYI: I found a few mistakes in these docs, see <a href="https://github.com/raspberrypi/documentation/pull/4328" target="_blank" rel="noopener">#4328</a>.</p>
+<ol>
+<li><code>sudo apt update &amp;&amp; sudo dpkg --add-architecture arm64 &amp;&amp; sudo apt install -y git bc bison flex libssl-dev make libssl-dev:arm64</code></li>
+<li><code>git clone https://github.com/raspberrypi/linux &amp;&amp; cd linux &amp;&amp; git checkout stable_20260911</code></li>
+<li><code>KERNEL=kernel_2712</code></li>
+<li><code>make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- bcm2712_defconfig</code></li>
+<li><code>make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- menuconfig</code> and enable <em>General Setup/Preemption Model/Fully Preemptible Kernel</em>.</li>
+<li>Change <code>.config</code> to <code>CONFIG_LOCALVERSION=&quot;-v8-16k-custom-kernel-1&quot;</code>.</li>
+<li><code>make -j12 ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- Image modules dtbs</code> (1.5x <code>nproc</code>)</li>
+<li><code>mkdir -p ~/custom_kernel/boot/firmware/overlays/</code>, ensure <code>~/custom_kernel</code> doesn&#x27;t exist prior to this.</li>
+<li><code>sudo env &quot;PATH=$PATH&quot; make -j12 ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- INSTALL_MOD_PATH=~/custom_kernel modules_install</code></li>
+<li><code>sudo cp arch/arm64/boot/Image ~/custom_kernel/boot/firmware/$KERNEL.img</code></li>
+<li><code>sudo cp arch/arm64/boot/dts/broadcom/*.dtb ~/custom_kernel/boot/firmware</code></li>
+<li><code>sudo cp arch/arm64/boot/dts/overlays/*.dtb* ~/custom_kernel/boot/firmware/overlays/</code></li>
+<li><code>sudo cp arch/arm64/boot/dts/overlays/README ~/custom_kernel/boot/firmware/overlays/</code> This leaves <code>~/custom_kernel</code> with all the files you need inside the image.
+I copy that directory over to the Raspberry Pi image build machine and create the raspi-image-gen layer <code>custom_kernel</code> to install it into the image:</li>
+</ol>
+<pre><code class="language-yaml"><span class="pl-c"># METABEGIN</span>
+<span class="pl-c"># X-Env-Layer-Name: custom_kernel</span>
+<span class="pl-c"># X-Env-Layer-Category: kernel</span>
+<span class="pl-c"># X-Env-Layer-Desc: Install a custom kernel</span>
+<span class="pl-c"># X-Env-Layer-Version: 1.0.0</span>
+<span class="pl-c"># X-Env-Layer-Requires: linux-base</span>
+<span class="pl-c"># X-Env-Layer-RequiresProvider: hw:device:rpi,hw:soc:bcm2712</span>
+<span class="pl-c">#</span>
+<span class="pl-c"># X-Env-VarPrefix: linux</span>
+<span class="pl-c">#</span>
+<span class="pl-c"># X-Env-Var-page_size: 16384</span>
+<span class="pl-c"># X-Env-Var-page_size-Desc: 2712 uses a 16K page size kernel</span>
+<span class="pl-c"># X-Env-Var-page_size-Valid: int:16384-16384</span>
+<span class="pl-c"># X-Env-Var-page_size-Set: force</span>
+<span class="pl-c">#</span>
+<span class="pl-c"># X-Env-Var-kver: 6.18.50-v8-16k-custom-kernel-1+</span>
+<span class="pl-c"># X-Env-Var-kver-Desc: kernel version</span>
+<span class="pl-c"># X-Env-Var-kver-Set: force</span>
+<span class="pl-c"># METAEND</span>
+---
+
+<span class="pl-ent">mmdebstrap</span>:
+  <span class="pl-ent">architectures</span>:
+    - <span class="pl-s">arm64</span>
+  <span class="pl-ent">customize-hooks</span>:
+    <span class="pl-c"># install the kernel as described in https://www.raspberrypi.com/documentation/computers/linux_kernel.html</span>
+    - <span class="pl-s">mkdir -p &quot;$1/lib/modules&quot;</span>
+    - <span class="pl-s">cp -rv ./custom_kernel/lib/modules/${IGconf_linux_kver}/ &quot;$1/lib/modules/${IGconf_linux_kver}/&quot;</span>
+    - <span class="pl-s">mkdir -p &quot;$1/boot/firmware/overlays&quot;</span>
+    - <span class="pl-s">cp -v ./custom_kernel/boot/firmware/kernel_2712.img &quot;$1/boot/firmware/&quot;</span>
+    - <span class="pl-s">cp -v ./custom_kernel/boot/firmware/*.dtb &quot;$1/boot/firmware/&quot;</span>
+    - <span class="pl-s">cp -v ./custom_kernel/boot/firmware/overlays/*.dtb* &quot;$1/boot/firmware/overlays/&quot;</span>
+    - <span class="pl-s">cp -v ./custom_kernel/boot/firmware/overlays/README &quot;$1/boot/firmware/overlays/&quot;</span>
+
+    <span class="pl-c"># Lock out any linux-image-* pkg to prevent installation via apt.</span>
+    - <span class="pl-s">mkdir -p &quot;$1/etc/apt/preferences.d&quot;</span>
+    - <span class="pl-s">|</span>
+<span class="pl-s">      cat &lt;&lt;-EOF &gt; &quot;$1/etc/apt/preferences.d/99-kernel-lock&quot;</span>
+<span class="pl-s">        Package: linux-image-*</span>
+<span class="pl-s">        Pin: release *</span>
+<span class="pl-s">        Pin-Priority: -1</span>
+<span class="pl-s">      EOF</span>
+</code></pre>
+<p>To actually use this layer I created a custom version of the <a href="https://raspberrypi.github.io/rpi-image-gen/layer/rpi-cm5.html" target="_blank" rel="noopener">rpi-cm5</a> layer (what rpi-image-gen calls a <em>device layer</em>).
+This custom device layer uses my <code>custom_kernel</code> layer instead of the builtin <a href="https://raspberrypi.github.io/rpi-image-gen/layer/rpi-linux-2712.html" target="_blank" rel="noopener">rpi-linux-2712</a> layer.
+Like this rpi-image-gen properly installs the kernel.
+Unfortunately, the <code>image-rpios</code> builtin layer (what rpi-image-gen calls an <em>image layer</em>) changes the <code>root=</code> parameter inside <code>/boot/firmware/cmdline.txt</code>.
+It changes it to <code>root=/dev/disk/by-slot/system</code>.
+This <code>root=</code> parameter is for A/B slots (used for over the air updates (OTA)).
+This appears to be buggy as it prevents the device from mounting the root device at boot.
+The kernel just eternally waits for the root device to appear, without an error.</p>
+<p>Okay, let&#x27;s go on a little tangent here: <em>initramfs</em><br/>
+Firstly, know that on a Raspberry Pi OS image and on a typical desktop you have at least two partitions on your hard drive: the root partition (e.g., ext4) and a much smaller boot partition (typically vfat).
+The bootloader, loads the kernel from the boot partition and executes it.
+The bootloader doesn&#x27;t mount anything, it just starts the kernel.<br/>
+Secondly, the Linux kernel binary already includes drivers for quite some hardware.
+But there are many drivers which only some systems with certain hardware need.
+Putting those drivers in the binary, too, would be quite wasteful.
+Therefore, these drivers often take the form of modules.
+Those modules, in turn, are files on the root partition, e.g., in <code>/lib/modules</code>.
+The kernel loads the modules from such a path.
+But the kernel can only do so once it has mounted the root partition.
+Oftentimes this isn&#x27;t an issue but in some cases the kernel actually needs those modules to mount the root partition.
+Maybe you have a network mounted root partition or some other special hardware.
+Now the kernel needs</p>
+<ol>
+<li>the modules to mount the root partition and</li>
+<li>a mounted root partition to load the modules.</li>
+</ol>
+<p>Chicken and egg.<br/>
+To break out of this conundrum there is the <em>initramfs</em>.
+The initramfs is a special kind of filesystem that doesn&#x27;t have any backing storage, it lives entirely in RAM.
+To load the filesystem into RAM there is a single file with its content.
+So the idea is to mount a very small initial root filesystem, which contains all programs and modules needed to mount the actual root filesystem.
+Then the program specified by the <code>initrd=</code> kernel parameter (typically <code>/init</code> inside the initramfs) mounts the real root filesystem (using pivot_root).
+At a later point the kernel also mounts the boot partition, at <code>/boot/firmware</code>.
+To mount the root partition the initramfs file is on the boot partition (later mounted as <code>/boot/firmware/initramfs_2712</code>), accessible to the early kernel.<br/>
+In my case, I don&#x27;t need any of this, my root partition is a simple ext4 with a fixed device path, <code>root=/dev/mmcblk0p2</code> does the job.
+So I don&#x27;t use an initramfs.</p>
+<p>Going back to the buggy <code>image-rpios</code>, it configures the kernel cmdline.txt in a way that only works if <code>/init</code> inside the initramfs properly creates the <code>/dev/disk/by-slot/system</code> symlink.
+To my knowledge, the <code>image-rpios</code> layer simply doesn&#x27;t properly configure <code>/init</code> to do that.
+Therefore, the kernel fails to completely boot.<br/>
+Maybe this issue is fixed it by now.
+I&#x27;m using rpi-image-gen commit <code>d1021e82dd578b588cc3b4d45cd7b4b86e57b796</code>.<br/>
+Btw, there also is a custom_kernel example in the rpi-image-gen repo, which somehow didn&#x27;t work for me.
+It goes a convoluted way by creating a Docker image, compiling the kernel inside that and packaging it into a <code>.deb</code> file.
+Put simply, I chose not to do it that way.
+I just copied the <code>image-rpios</code> layer and threw all the initrafms and <code>cmdline.txt</code> editing out.
+My kernel mounts the root partition directly.</p>
+<h3 id="handling-images"><a class="markdown_heading_a" href="#handling-images" target="_self"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Handling Images</h3>
+<p>Say you have a custom image or <a href="https://www.raspberrypi.com/software/operating-systems" target="_blank" rel="noopener">an official one</a>.
+How do you look inside or modify it?
+Firstly, if the image comes in a compressed archive extract it to have a naked <code>.img</code> file.
+With <code>sudo losetup -fP 2026-06-18-raspios-trixie-arm64-lite.img</code> you create a loop block device, which you can mount with, e.g., <code>sudo mount /dev/loop0p1 /mnt</code>.
+There might be more partitions, e.g., <code>/dev/loop0p2</code>.
+On the Raspberry Pi OS image the first partition is the boot partition, mounted as <code>/boot/firmware</code> and the second is the root partition, mounted, of course, as <code>/</code>.
+After having done what you wanted to do close all loop devices with <code>sudo losetup -D</code>.<br/>
+Also be aware that if you create an image with a page size of 16KiB you need a kernel that is capable of actually mounting such a filesystem.
+A lot of kernels still only allow up to 4KiB page sizes.</p>
+<h3 id="conclusion"><a class="markdown_heading_a" href="#conclusion" target="_self"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Conclusion</h3>
+<p>And like this I&#x27;ve given you the basics of creating a custom Linux image.
+You can flash it using the rpi-imager tool or <code>dd</code>.
+Afterwards the device boots very quickly and results in quite the slim system.
+Or as <code>pstree</code> would put it:</p>
+<pre><code>systemd─┬─agetty
+        ├─dbus-daemon
+        ├─sshd
+        ├─systemd-journal
+        ├─systemd-logind
+        ├─systemd-udevd
+        └─custom_cpp_program
+</code></pre>
+<p>Leaving only the daemons I&#x27;m not afraid of.</p><div class="markdown_spacer"></div></div></div><div class="react_to"><div class="tags_list"> <a href="/tag/raspberry_pi" target="_self">#<!-- -->raspberry_pi</a> <a href="/tag/hardware" target="_self">#<!-- -->hardware</a> <a href="/tag/linux" target="_self">#<!-- -->linux</a> <a href="/tag/real_time" target="_self">#<!-- -->real_time</a></div><div><button type="button" class="button" onclick="
+umami.track(
+    'like',
+    {
+        route: '/articles/embedded_systemd',
+    }
+).then(()=>{
+    this.innerText = 'Thx!';
+    this.onclick = null;
+    this.style = 'cursor:default;';
+});
+">👍 I like this!</button></div><div class="react_to_comment"><textarea id="react_to_comment_input" placeholder="Your Comment..."></textarea><div><button type="button" class="button" onclick="
+umami.track(
+    'comment',
+    {
+        route: '/articles/embedded_systemd',
+        comment: document.getElementById('react_to_comment_input').value,
+    }
+).then(()=>{
+    this.innerText = 'Comment Sent. Thx so much ❤️';
+    this.onclick = null;
+    this.style = 'cursor:default;';
+    document.getElementById('react_to_comment_input').disabled = true;
+});
+">Send Comment</button></div></div></div><div class="title_in_text"><h1>Similar Articles</h1><hr/></div><div class="cards_list"><a class="cards_list_card" href="/articles/linux_networking" target="_self"><picture class="image_picture"><img srcSet="/images/67b71595cc4f085d7600d6a76535d8d1_400_200.webp 400w,/images/67b71595cc4f085d7600d6a76535d8d1_800_400.webp 800w,/images/67b71595cc4f085d7600d6a76535d8d1_1200_600.webp 1200w,/images/67b71595cc4f085d7600d6a76535d8d1_1323_662.webp 1323w" width="400" height="200" alt="" style="background-image:radial-gradient(67% 67% at 25% 25%, #f5ecd7, transparent),radial-gradient(67% 67% at 50% 25%, #ece4c6, transparent),radial-gradient(67% 67% at 75% 25%, #f4eabf, transparent),radial-gradient(67% 67% at 25% 50%, #d6e0e9, transparent),radial-gradient(67% 67% at 50% 50%, #e6e1d4, transparent),radial-gradient(67% 67% at 75% 50%, #fdfaf7, transparent),radial-gradient(67% 67% at 25% 75%, #edf2ea, transparent),radial-gradient(67% 67% at 50% 75%, #d8e49e, transparent),radial-gradient(67% 67% at 75% 75%, #f8f8f3, transparent),linear-gradient(#ecebd7);background-position:0 0, 0 100%;background-size:100% 100%;background-repeat:no-repeat" loading="lazy" fetchPriority="auto"/></picture><h1>Userspace&#x27;s Role in Linux Networking</h1><h2>26th June, 2026<span> 12min</span></h2><hr/><p>On Linux what does networking? What parts are implemented in the kernel and what parts require userspace tools or daemons? How much of networking is inherent to the kernel and how much is up to distributions? What tools may be combined and what others cause conflicts?
+I&#x27;ve always wondered these questions and more about Linux&#x27; networking stack. For this article I finally took the time to thoroughly research userspace&#x27;s role in Linux networking.</p></a><a class="cards_list_card" href="/articles/rt_on_linux.pdf" target="_blank" rel="noopener"><picture class="image_picture"><img srcSet="/images/90aa1c30ead3a00608bd83478b9f3b84_400_200.webp 400w,/images/90aa1c30ead3a00608bd83478b9f3b84_800_400.webp 800w,/images/90aa1c30ead3a00608bd83478b9f3b84_1200_600.webp 1200w,/images/90aa1c30ead3a00608bd83478b9f3b84_1280_640.webp 1280w" width="400" height="200" alt="" style="background-image:radial-gradient(67% 67% at 25% 25%, #f6f8f4, transparent),radial-gradient(67% 67% at 50% 25%, #efedf2, transparent),radial-gradient(67% 67% at 75% 25%, #fbfbfc, transparent),radial-gradient(67% 67% at 25% 50%, #dee2e5, transparent),radial-gradient(67% 67% at 50% 50%, #e1e0e8, transparent),radial-gradient(67% 67% at 75% 50%, #fbf9f9, transparent),radial-gradient(67% 67% at 25% 75%, #f2f2f4, transparent),radial-gradient(67% 67% at 50% 75%, #f2f2f3, transparent),radial-gradient(67% 67% at 75% 75%, #f0f0f0, transparent),linear-gradient(#f1f1f3);background-position:0 0, 0 100%;background-size:100% 100%;background-repeat:no-repeat" loading="lazy" fetchPriority="auto"/></picture><h1>Real-Time Application Development on Linux with PREEMPT RT</h1><h2>29th September, 2025<span> 34min</span></h2><hr/><p>While Linux is optimized for throughput and efficiency, real-time applications require bounded worst case latencies. However, with the merging of PREEMPT RT, mainline Linux converts to a real-time operating system (RTOS). Through presenting the application developer’s perspective and the changes PREEMPT RT introduces to the kernel, we review Linux’ real-time capabilities. Additionally, we investigate dynamic worst case execution time (WCET) analysis using a StarFive VisionFive 2 as a case study. Finally, we compare Linux to other RTOSes and argue that the lack of static WCET analysis is Linux’ main drawback for real-time applications.</p></a><a class="cards_list_card" href="/articles/soc_option_bytes" target="_self"><picture class="image_picture"><img srcSet="/images/65158fab048e94e71f5e6129d4ef688d_400_200.webp 400w,/images/65158fab048e94e71f5e6129d4ef688d_800_400.webp 800w,/images/65158fab048e94e71f5e6129d4ef688d_1042_521.webp 1042w" width="400" height="200" alt="" style="background-image:radial-gradient(67% 67% at 25% 25%, #eaeaea, transparent),radial-gradient(67% 67% at 50% 25%, #e0e0e0, transparent),radial-gradient(67% 67% at 75% 25%, #e7e7e7, transparent),radial-gradient(67% 67% at 25% 50%, #f8f8f8, transparent),radial-gradient(67% 67% at 50% 50%, #f4f4f4, transparent),radial-gradient(67% 67% at 75% 50%, #f9f9f9, transparent),radial-gradient(67% 67% at 25% 75%, #e3e3e3, transparent),radial-gradient(67% 67% at 50% 75%, #e4e4e4, transparent),radial-gradient(67% 67% at 75% 75%, #e5e5e5, transparent),linear-gradient(#e3e3e3);background-position:0 0, 0 100%;background-size:100% 100%;background-repeat:no-repeat" loading="lazy" fetchPriority="auto"/></picture><h1>Don&#x27;t forget about the Option Bytes</h1><h2>7th May, 2026<span> 4min</span></h2><hr/><p>What&#x27;s the reason for a watchdog taking 23 times as long to reset the device? It turns out the Flash Option Bytes are. And a mass erase doesn&#x27;t reset those.</p></a><a class="cards_list_card" href="/articles/riscv_rt" target="_self"><picture class="image_picture"><img srcSet="/images/e85afd024262b6186553d361a5908877_400_200.webp 400w,/images/e85afd024262b6186553d361a5908877_800_400.webp 800w,/images/e85afd024262b6186553d361a5908877_1200_600.webp 1200w,/images/e85afd024262b6186553d361a5908877_1280_640.webp 1280w" width="400" height="200" alt="" style="background-image:radial-gradient(67% 67% at 25% 25%, #cfcfd0, transparent),radial-gradient(67% 67% at 50% 25%, #c6cace, transparent),radial-gradient(67% 67% at 75% 25%, #cecdcd, transparent),radial-gradient(67% 67% at 25% 50%, #c4c7ca, transparent),radial-gradient(67% 67% at 50% 50%, #c1c2c4, transparent),radial-gradient(67% 67% at 75% 50%, #c7c9cb, transparent),radial-gradient(67% 67% at 25% 75%, #afc2d2, transparent),radial-gradient(67% 67% at 50% 75%, #a5bbd0, transparent),radial-gradient(67% 67% at 75% 75%, #b6c6d3, transparent),linear-gradient(#c0c8cf);background-position:0 0, 0 100%;background-size:100% 100%;background-repeat:no-repeat" loading="lazy" fetchPriority="auto"/></picture><h1>Real-Time Linux on RISC-V</h1><h2>27th June, 2025<span> 8min</span></h2><hr/><p>Setting up Linux v6.12 on a StarFive VisionFive 2 with PREEMPT_RT.
+Also: How to setup your Linux laptop as a simple NAT router.</p></a></div><div><a class="button" href="/articles" target="_self">All Articles</a></div></div></main><footer class="layout_footer" role="contentinfo"><a href="/about" target="_self">Contact</a><a href="/rss.xml" target="_self">RSS</a><a href="/articles/privacy" target="_self">Privacy</a><div>© 2026 | All rights reserved</div><a href="https://webring.xxiivv.com/#chrisbesch" target="_blank" rel="noopener"><img loading="lazy" fetchPriority="auto" class="layout_webring_black" src="/xxiivv_black.svg" alt="XXIIVV webring"/><img loading="lazy" fetchPriority="auto" class="layout_webring_white" src="/xxiivv_white.svg" alt="XXIIVV webring"/></a></footer></body></html>
