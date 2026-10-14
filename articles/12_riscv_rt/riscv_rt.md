@@ -71,7 +71,7 @@ First we need to know what network cards we're dealing with:
 2: wlp1s0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP mode DORMANT group default qlen 1000
     link/ether 10:6f:d9:1e:4f:e1 brd ff:ff:ff:ff:ff:ff
 3: enx00133bb15f5b: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP mode DEFAULT group default qlen 1000
-    link/ether 00:13:3b:b1:5f:5b brd ff:ff:ff:ff:ff:ff```
+    link/ether 00:13:3b:b1:5f:5b brd ff:ff:ff:ff:ff:ff
 ```
 As you can see I have three network cards, the loopback device (i.e. for localhost) my wifi card `wlp1s0` and a usb LAN adapter `enx00133bb15f5b`.
 
@@ -83,6 +83,9 @@ sudo iptables -t nat -A POSTROUTING -o wlp1s0 -j MASQUERADE
 sudo iptables -A FORWARD -i enx00133bb15f5b -o wlp1s0 -j ACCEPT
 sudo iptables -A FORWARD -i wlp1s0 -o enx00133bb15f5b -m state --state RELATED,ESTABLISHED -j ACCEPT
 ```
+Your firewall might cause issues here.
+In my case with firewalld, I configured the firewall to permit my actions, instead.
+To do this I had to add `enx00133bb15f5b` to the `internal` zone: `sudo firewall-cmd --zone=internal --change-interface=enx00133bb15f5b`
 
 ### IP Addresses
 We want to assign a new IP address for the laptop to the `enx00133bb15f5b` link.
@@ -151,6 +154,7 @@ Add this line (we all like Google, don't we?):
 nameserver 8.8.8.8
 ```
 
+If you're using resolved configure it, instead: `sudo resolvectl dns eth0 8.8.8.8`
 We don't need the NetworkManager for this, btw.
 Feel free to disable it:
 ```bash
