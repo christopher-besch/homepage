@@ -43,7 +43,7 @@ I have my Linux Laptop right here and want to share its network connection with 
 2: wlp1s0: <span class="pl-k">&lt;</span>BROADCAST,MULTICAST,UP,LOWER_UP<span class="pl-k">&gt;</span> mtu 1500 qdisc noqueue state UP mode DORMANT group default qlen 1000
     link/ether 10:6f:d9:1e:4f:e1 brd ff:ff:ff:ff:ff:ff
 3: enx00133bb15f5b: <span class="pl-k">&lt;</span>BROADCAST,MULTICAST,UP,LOWER_UP<span class="pl-k">&gt;</span> mtu 1500 qdisc fq_codel state UP mode DEFAULT group default qlen 1000
-    link/ether 00:13:3b:b1:5f:5b brd ff:ff:ff:ff:ff:ff<span class="pl-s"><span class="pl-pds">```</span></span>
+    link/ether 00:13:3b:b1:5f:5b brd ff:ff:ff:ff:ff:ff
 </code></pre>
 <p>As you can see I have three network cards, the loopback device (i.e. for localhost) my wifi card <code>wlp1s0</code> and a usb LAN adapter <code>enx00133bb15f5b</code>.</p>
 <h3 id="nat-setup"><a class="markdown_heading_a" href="#nat-setup" target="_self"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>NAT Setup</h3>
@@ -53,6 +53,9 @@ sudo iptables -t nat -A POSTROUTING -o wlp1s0 -j MASQUERADE
 sudo iptables -A FORWARD -i enx00133bb15f5b -o wlp1s0 -j ACCEPT
 sudo iptables -A FORWARD -i wlp1s0 -o enx00133bb15f5b -m state --state RELATED,ESTABLISHED -j ACCEPT
 </code></pre>
+<p>Your firewall might cause issues here.
+In my case with firewalld, I configured the firewall to permit my actions, instead.
+To do this I had to add <code>enx00133bb15f5b</code> to the <code>internal</code> zone: <code>sudo firewall-cmd --zone=internal --change-interface=enx00133bb15f5b</code></p>
 <h3 id="ip-addresses"><a class="markdown_heading_a" href="#ip-addresses" target="_self"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>IP Addresses</h3>
 <p>We want to assign a new IP address for the laptop to the <code>enx00133bb15f5b</code> link.</p>
 <pre><code class="language-bash">sudo ip addr add 192.168.10.1/24 dev enx00133bb15f5b
@@ -106,7 +109,8 @@ DHCP would have done that automatically but we didn&#x27;t setup a DHCP server o
 <p>Add this line (we all like Google, don&#x27;t we?):</p>
 <pre><code>nameserver 8.8.8.8
 </code></pre>
-<p>We don&#x27;t need the NetworkManager for this, btw.
+<p>If you&#x27;re using resolved configure it, instead: <code>sudo resolvectl dns eth0 8.8.8.8</code>
+We don&#x27;t need the NetworkManager for this, btw.
 Feel free to disable it:</p>
 <pre><code class="language-bash">sudo systemctl disable --now NetworkManager
 </code></pre>

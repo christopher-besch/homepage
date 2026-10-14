@@ -4,7 +4,7 @@
         <title>Chris' Homepage</title>
         <link>https://chris-besch.com</link>
         <description>Christopher Besch's Homepage about Software, Articles and Photography</description>
-        <lastBuildDate>Wed, 14 Oct 2026 06:48:31 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 14 Oct 2026 07:53:57 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
@@ -85,13 +85,13 @@ Also, it has been a lot of fun!]]></description>
             <enclosure url="https://chris-besch.com/images/07056f4273aded3bc17e7cef13eb8978_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
-            <title><![CDATA[Automatic Firmware Generation for Spaceflight Hardware based on Schematics]]></title>
-            <link>/articles/automating_firmware_generation_from_schematics.pdf</link>
-            <guid isPermaLink="false">/articles/automating_firmware_generation_from_schematics.pdf</guid>
-            <pubDate>Wed, 19 Aug 2026 00:00:00 GMT</pubDate>
-            <description><![CDATA[The interaction between hardware design and firmware implementation requires strict consistency in embedded systems. Firmware must exactly match the schematic-level component configuration and connectivity. In current workflows, this consistency is largely ensured through manual inspection and extensive testing. In this work, we introduce a schematics-aware approach to automate firmware generation. We propose the Group Netlist, a design- and PCB tool-agnostic abstraction of hardware. Using a reference implementation, we demonstrate our proposal for the open-source PCB design suite KiCad. As added benefit our approach serves for hardware verification purposes that we demonstrate through a fault-injection analysis. Considering relevant cases, our tool detects 75% of otherwise undetected injected faults and requires negligible overhead (less than 0.2% codebase addition and on average a 4.8% runtime increase). Lastly, we verify our tooling by successfully using it in the development workflow of an embedded satellite module.]]></description>
+            <title><![CDATA[Do-it-all Umami Tofu Recipe]]></title>
+            <link>/articles/umami_tofu</link>
+            <guid isPermaLink="false">/articles/umami_tofu</guid>
+            <pubDate>Fri, 18 Sep 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[A very quick and simple but also delicious tofu marinade for all kinds of dishes.]]></description>
             <author>mail@chris-besch.com (Christopher Besch)</author>
-            <enclosure url="https://chris-besch.com/images/0e261f1560a137580dbd2ad0fbd36b9d_800_400.webp" length="0" type="image/webp"/>
+            <enclosure url="https://chris-besch.com/images/3c928b923027b7ebfd5a269d3fc2051e_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
             <title><![CDATA[WireGuard for Saints Row: The Third]]></title>
@@ -103,15 +103,6 @@ Also, it has been a lot of fun!]]></description>
             <enclosure url="https://chris-besch.com/images/304de6cb11990d6e7fc04be0d07d40ba_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
-            <title><![CDATA[Do-it-all Umami Tofu Recipe]]></title>
-            <link>/articles/umami_tofu</link>
-            <guid isPermaLink="false">/articles/umami_tofu</guid>
-            <pubDate>Fri, 18 Sep 2026 00:00:00 GMT</pubDate>
-            <description><![CDATA[A very quick and simple but also delicious tofu marinade for all kinds of dishes.]]></description>
-            <author>mail@chris-besch.com (Christopher Besch)</author>
-            <enclosure url="https://chris-besch.com/images/3c928b923027b7ebfd5a269d3fc2051e_800_400.webp" length="0" type="image/webp"/>
-        </item>
-        <item>
             <title><![CDATA[Forgejo Actions Notification Development]]></title>
             <link>/articles/forgejo_actions_notification</link>
             <guid isPermaLink="false">/articles/forgejo_actions_notification</guid>
@@ -119,6 +110,15 @@ Also, it has been a lot of fun!]]></description>
             <description><![CDATA[Some stories of how I work on Forgejo. How is a Go project structured? What's the point of Forgejo's layered architecture and what's that pub-sub pattern? Additionally, I exhaustively explain how to setup a development environment for Forgejo.]]></description>
             <author>mail@chris-besch.com (Christopher Besch)</author>
             <enclosure url="https://chris-besch.com/images/75e7dd6865f7b8d52489a1f1368ebbef_800_400.webp" length="0" type="image/webp"/>
+        </item>
+        <item>
+            <title><![CDATA[Automatic Firmware Generation for Spaceflight Hardware based on Schematics]]></title>
+            <link>/articles/automating_firmware_generation_from_schematics.pdf</link>
+            <guid isPermaLink="false">/articles/automating_firmware_generation_from_schematics.pdf</guid>
+            <pubDate>Wed, 19 Aug 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[The interaction between hardware design and firmware implementation requires strict consistency in embedded systems. Firmware must exactly match the schematic-level component configuration and connectivity. In current workflows, this consistency is largely ensured through manual inspection and extensive testing. In this work, we introduce a schematics-aware approach to automate firmware generation. We propose the Group Netlist, a design- and PCB tool-agnostic abstraction of hardware. Using a reference implementation, we demonstrate our proposal for the open-source PCB design suite KiCad. As added benefit our approach serves for hardware verification purposes that we demonstrate through a fault-injection analysis. Considering relevant cases, our tool detects 75% of otherwise undetected injected faults and requires negligible overhead (less than 0.2% codebase addition and on average a 4.8% runtime increase). Lastly, we verify our tooling by successfully using it in the development workflow of an embedded satellite module.]]></description>
+            <author>mail@chris-besch.com (Christopher Besch)</author>
+            <enclosure url="https://chris-besch.com/images/0e261f1560a137580dbd2ad0fbd36b9d_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
             <title><![CDATA[How my GitHub Pages got Hacked]]></title>
@@ -236,14 +236,14 @@ Its programmatic approach provides the precision technical concepts require, whi
             <enclosure url="https://chris-besch.com/images/a7f291280fadb4822ddaf7ed36c95bf8_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
-            <title><![CDATA[Guided Missiles in Minecraft]]></title>
-            <link>/articles/mc_missile</link>
-            <guid isPermaLink="false">/articles/mc_missile</guid>
-            <pubDate>Fri, 06 Jun 2025 00:00:00 GMT</pubDate>
-            <description><![CDATA[I'm having a stab at designing an enitity seeking missile in Minecraft with the mc_missile mod.
-Or: How I blew up my brother.]]></description>
+            <title><![CDATA[The Bitter Feeling of Technical Compromises]]></title>
+            <link>/articles/technical_compromises</link>
+            <guid isPermaLink="false">/articles/technical_compromises</guid>
+            <pubDate>Thu, 25 Sep 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[My very personal troubles dealing with compromises, explained at an example of docker_cron with Renovate.
+Sometimes you really don't have to worry as much and trust your previous, careful considerations.]]></description>
             <author>mail@chris-besch.com (Christopher Besch)</author>
-            <enclosure url="https://chris-besch.com/images/e504095a9b565988179fa2df918ae18c_800_400.webp" length="0" type="image/webp"/>
+            <enclosure url="https://chris-besch.com/images/3548ef292f5ade7df6bc737602d59bd8_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
             <title><![CDATA[grub-install --removable for buggy UEFI]]></title>
@@ -262,6 +262,25 @@ Or: How I blew up my brother.]]></description>
             <description><![CDATA[Gentoo is a Linux distribution that offers as many options as possible. This article leads you through the decisions I took to end up with a system that best suits my needs.]]></description>
             <author>mail@chris-besch.com (Christopher Besch)</author>
             <enclosure url="https://chris-besch.com/images/dd509c81379268c048ef45318173ad70_800_400.webp" length="0" type="image/webp"/>
+        </item>
+        <item>
+            <title><![CDATA[Bodging MP3 Names in Bash]]></title>
+            <link>/articles/bash_cmds/mp3_tag</link>
+            <guid isPermaLink="false">/articles/bash_cmds/mp3_tag</guid>
+            <pubDate>Wed, 12 Oct 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[Why do it complicated when a Bash one-liner does it too?]]></description>
+            <author>mail@chris-besch.com (Christopher Besch)</author>
+            <enclosure url="https://chris-besch.com/images/5c491b010e8b22c6ffd20605f69d322f_800_400.webp" length="0" type="image/webp"/>
+        </item>
+        <item>
+            <title><![CDATA[Guided Missiles in Minecraft]]></title>
+            <link>/articles/mc_missile</link>
+            <guid isPermaLink="false">/articles/mc_missile</guid>
+            <pubDate>Fri, 06 Jun 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[I'm having a stab at designing an enitity seeking missile in Minecraft with the mc_missile mod.
+Or: How I blew up my brother.]]></description>
+            <author>mail@chris-besch.com (Christopher Besch)</author>
+            <enclosure url="https://chris-besch.com/images/e504095a9b565988179fa2df918ae18c_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
             <title><![CDATA[Docker: Breathing Life into Decades old Fortran]]></title>
@@ -283,16 +302,6 @@ Now you get to see Fig.3.5. from "Introduction to Conventional Transmission Elec
             <enclosure url="https://chris-besch.com/images/e5fdc90ab34ba9a541ab0d11b75e02de_800_400.webp" length="0" type="image/webp"/>
         </item>
         <item>
-            <title><![CDATA[The Bitter Feeling of Technical Compromises]]></title>
-            <link>/articles/technical_compromises</link>
-            <guid isPermaLink="false">/articles/technical_compromises</guid>
-            <pubDate>Thu, 25 Sep 2025 00:00:00 GMT</pubDate>
-            <description><![CDATA[My very personal troubles dealing with compromises, explained at an example of docker_cron with Renovate.
-Sometimes you really don't have to worry as much and trust your previous, careful considerations.]]></description>
-            <author>mail@chris-besch.com (Christopher Besch)</author>
-            <enclosure url="https://chris-besch.com/images/3548ef292f5ade7df6bc737602d59bd8_800_400.webp" length="0" type="image/webp"/>
-        </item>
-        <item>
             <title><![CDATA[The Photographer and her Camera]]></title>
             <link>/articles/the_photographer_and_her_camera</link>
             <guid isPermaLink="false">/articles/the_photographer_and_her_camera</guid>
@@ -300,15 +309,6 @@ Sometimes you really don't have to worry as much and trust your previous, carefu
             <description><![CDATA[I bought a new, bigger camera and want to be independent of it.]]></description>
             <author>mail@chris-besch.com (Christopher Besch)</author>
             <enclosure url="https://chris-besch.com/images/54a145d113acd5aed9dd5a5e3e9ff082_800_400.webp" length="0" type="image/webp"/>
-        </item>
-        <item>
-            <title><![CDATA[Bodging MP3 Names in Bash]]></title>
-            <link>/articles/bash_cmds/mp3_tag</link>
-            <guid isPermaLink="false">/articles/bash_cmds/mp3_tag</guid>
-            <pubDate>Wed, 12 Oct 2022 00:00:00 GMT</pubDate>
-            <description><![CDATA[Why do it complicated when a Bash one-liner does it too?]]></description>
-            <author>mail@chris-besch.com (Christopher Besch)</author>
-            <enclosure url="https://chris-besch.com/images/5c491b010e8b22c6ffd20605f69d322f_800_400.webp" length="0" type="image/webp"/>
         </item>
     </channel>
 </rss>
