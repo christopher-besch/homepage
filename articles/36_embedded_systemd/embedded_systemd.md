@@ -105,9 +105,6 @@ But in short, I started with the [trixie-minbase](https://raspberrypi.github.io/
 This let me exclude [systemd-timesyncd](https://raspberrypi.github.io/rpi-image-gen/layer/systemd-timesyncd.html), [wireless-regulatory](https://raspberrypi.github.io/rpi-image-gen/layer/wireless-regulatory.html) and [iwd](https://raspberrypi.github.io/rpi-image-gen/layer/iwd.html), which I don't need.
 This leaves a pretty bare-bone image.
 Additionally, I added custom layers for all the things I need, as described below.
-This includes a layer for my custom C++ program.
-Interestingly, because I run rpi-image-gen on another Raspberry Pi, I compile my program directly inside the chroot by running cmake from my custom layer.
-This also means that all the build tools are installed on the image in case I want to hackily change something on a test.
 
 ### Static Network Setup
 As my [Userspace's Role in Linux Networking article](https://chris-besch.com/articles/linux_networking) explains, on desktop Linux you have a network manager configuring your network dynamically.
@@ -274,6 +271,47 @@ It goes a convoluted way by creating a Docker image, compiling the kernel inside
 Put simply, I chose not to do it that way.
 I just copied the `image-rpios` layer and threw all the initrafms and `cmdline.txt` editing out.
 My kernel mounts the root partition directly.
+
+### Push Custom Program's Repo to Embedded Device
+After having created a layer for my custom kernel, I went to create a layer for my custom C++ program, too.
+Because I run rpi-image-gen on another Raspberry Pi, I compile my program directly inside the chroot by running cmake from my custom layer.
+This also means that all the build tools are installed on the image in case I want to hackily change something on a test.
+Lastly, I want to be able to conveniently update the custom program on my embedded device.
+These updates are only for development and testing purposes.
+There won't be any in-the-field updates except for an entirely new image.
+Therefore, the way I update only my custom program is through git.
+I need an SSH connection to the embedded device, anyways.
+So I can use git over SSH to push a git repository directly to the embedded device.
+To do this I need to 
+1. create a bare git directory on the embedded device (i.e., inside the chroot): `git init --bare /home/user/custom_cpp_program.git --shared=group`
+    This directory is similar to the hidden `.git` directory inside a cloned git repo.
+    It serves as a push target on the embedded device.
+    The advantage of this is that the embedded device doesn't need an Internet connection or credentials for the development git server.
+    I don't want those credentials on the embedded device for security reasons.
+1. Afterwards I can add a new remote on my development machine: `git remote add my_device user@my_device:/home/user/custom_cpp_program.git`
+    This works best with an SSH key and `my_device` to be properly configured in the development machine's `~/.ssh/config`.
+    But you don't have to do this and you may use an IP address directly instead of `my_device`.
+    Just be aware that you have to remove some lines from the `~/.ssh/known_hosts` when you re-flash the embedded device, which updates the device's cryptographic fingerprint.
+1. Now I can `git push my_device main` to push my custom program to the embedded device.
+    This doesn't require an Internet connection; it only needs my development machine to be connected with the embedded device via Ethernet.
+1. Lastly, the embedded device needs to clone the repo: `git clone /home/user/custom_cpp_program.git && cd custom_cpp_program && git checkout main`
+    I could instead clone from the git server directly, if the embedded device had an Internet connection and the required credentials.
+    Now there are two directories, `~/custom_cpp_program.git` and `~/custom_cpp_program` (do notice that there also is the directory `~/custom_cpp_program/.git`).
+    The former is the bare git repo and the latter is a cloned version, in which I can compile my C++ program.
+
+Now I can conveniently update the C++ program on the embedded device by just pushing.
+Actually, I can improve that in one way, a combined git remote:
+1. `git remote add all git@codeberg.org:christopher-besch/custom_cpp_program`
+1. `git remote set-url --add --push all git@codeberg.org:christopher-besch/custom_cpp_program`
+1. `git remote set-url --add --push all user@my_device:/home/user/custom_cpp_program.git`
+
+This setup creates a new git remote, called `all`, which has one fetch and two push targets:
+When I do `git pull` with a local branch (e.g., `main`) that tracks a remote branch on `all`, (e.g., `main/all`) I only pull from the git server on the Internet.
+But when I push, I don't just push to that git server but also to the embedded device.
+This is how I develop my custom program, whenever I commit and push, I update the git push target on the embedded device.
+And inside the cloned repo on the embedded device I can use git to choose which version of my custom program I'd like to run.
+Another advantage of this is that I force myself to create individual commits for each and every test.
+That's a very good thing!
 
 ### Handling Images
 Say you have a custom image or [an official one](https://www.raspberrypi.com/software/operating-systems).
