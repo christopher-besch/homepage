@@ -15,7 +15,7 @@ hero_horizontal_position: 40
 hero_vertical_position: 70
 slug: linux_networking
 date: "2026-06-26"
-tags: [linux, networking]
+tags: [linux, networking, dlr]
 listed: true
 ---
 
@@ -81,7 +81,10 @@ Don't worry, I'll go over the entire diagram in detail.<br />
 Do notice that the Linux userspace networking stack is quite well divisible into *configuration* and *filtering*.
 Configuration concerns itself with, e.g., setting up links and routes.
 Filtering, on the other hand, handles, e.g., firewalling and NAT-ing.
-<HalfImage id="fig:overview" num={2} caption="Linux' userspace networking stack. The kernel internals and less relevant dependencies are omitted. Furthermore, only the most relevant and representative subset of all tools is shown, i.e., there are more network managers than just systemd-networkd and NetworkManager. Dependencies via config files and through shell commands are explicitly labeled." full="true" src="./stack.webp" />
+<HalfImage id="fig:overview" num={2} caption="Linux' userspace networking stack.
+The kernel internals and less relevant dependencies are omitted.
+Furthermore, only the most relevant and representative subset of all tools is shown, i.e., there are more network managers than just systemd-networkd and NetworkManager.
+Dependencies via config files and through shell commands are explicitly labeled." full="true" src="./stack.webp" />
 
 ## Configuration Tools
 Beginning with [figure 2](#fig:overview)'s left half, there is a zoo of network configuration tools.
@@ -106,6 +109,7 @@ And I do recommend playing around with these tools.
 Once I ran `ip route show` (see [figure 3](#fig:docker)) and I solved a long standing mystery:
 why does docker sometimes require `--net host` for containers to reach the Internet on my machine.
 It turns out that one of the corporate WiFi networks I often work in, has a conflicting subnet with Docker's default.
+The solution is to change Docker's subnet as described on Stackoverflow <Cite id="docker_subnet" />.
 <HalfImage id="fig:docker" num={3} caption="Docker subnet collision: <code>172.17.0.0/16</code> overlaps with <code>172.17.0.0/17</code>." full="true" src="./docker_subnet_collision.png" />
 
 But what about dynamic network changes?
@@ -140,6 +144,9 @@ The tools typically don't store the current network configuration themselves but
 That makes them interoperable.
 The iproute2 tools may even be used in parallel with NetworkManager.
 NetworkManager detects what iproute2 did and takes care as to not conflict <Cite id="red_hat_ip" />.
+Or at least that's what NetworkManager is supposed to do.
+In my experience I've noticed NetworkManager rip out my custom network configuration made with iproute2.
+Therefore, I'm rather cautious of using NetworkManager in combination with iproute2.
 
 As an aside, there is another layer on top of network managers:
 netplan parses yaml files and creates NetworkManager or systemd-networkd configuration files <Cite id="netplan" />.<br />
