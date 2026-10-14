@@ -62,16 +62,18 @@ When things don't update properly, delete the cache.
 - [ ] about text on landing page
 - [x] callsign
 - [x] redirect from callsign
-- [ ] latest photos as well
+- [ ] latest photos as well as best
 - [ ] update bookmarks
 - [ ] claimer that no ai
 - [ ] add LinkedIn, ORCID, ham radio callsign to about
 - [ ] add list of publications, maybe science page or above articles
-- [ ] add paper
 - [ ] add reference to RSS feed after each article
 - [x] what are you here for overhaul
 - [x] ham radio site
 - [x] projects to oss contributions
+- [ ] add Raspberry pi docs: https://github.com/raspberrypi/documentation/commit/b7b58eabc57d55551cd9bb224ebf9bc9c3f79370
+- [ ] emoji in font?
+- [ ] esweek presentation
 
 # Nope (or later)
 - [ ] purchase image button
