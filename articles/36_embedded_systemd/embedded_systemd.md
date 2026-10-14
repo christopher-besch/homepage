@@ -13,7 +13,7 @@ hero_horizontal_position: 0
 hero_vertical_position: 100
 slug: embedded_systemd
 date: "2026-10-04"
-tags: [raspberry_pi, hardware, linux, real_time]
+tags: [raspberry_pi, hardware, linux, real_time, dlr]
 listed: true
 ---
 
