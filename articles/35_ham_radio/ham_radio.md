@@ -20,7 +20,7 @@ All without relays or the Internet, just direct broadcasts.
 It's very addicting.
 Currently, I mostly operate on 70cm, 2m FM and 20m and 40m SSB around Karlsruhe, Germany.
 
-While I dislike having another [equipment-heavy hobby next to photography](http://dev-vm:8080/articles/the_photographer_and_her_camera) I like amateur radio for three reasons:
+While I dislike having another [equipment-heavy hobby next to photography](/articles/the_photographer_and_her_camera) I like amateur radio for three reasons:
 According to the [Amateur Radio Act (Gesetz über den Amateurfunk — AFuG)](https://www.bundesnetzagentur.de/SharedDocs/Downloads/EN/Areas/Telecommunications/Companies/TelecomRegulation/FrequencyManagement/AmateurRadio/AFug_March_2008_kurz_ENd.pdf?__blob=publicationFile&v=1) § 2 (2)
 "amateur service [is] a radio service carried out by radio amateurs for the purpose of intercommunication,
 
