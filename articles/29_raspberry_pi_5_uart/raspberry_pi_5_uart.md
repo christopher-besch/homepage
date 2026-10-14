@@ -13,7 +13,7 @@ hero_horizontal_position: 0
 hero_vertical_position: 100
 slug: raspberry_pi_5_uart
 date: "2026-06-08"
-tags: [raspberry_pi, hardware, linux]
+tags: [raspberry_pi, hardware, linux, dlr]
 listed: true
 ---
 
@@ -88,6 +88,8 @@ What's most important to us is the Linux kernel log.
 That means `raspi-config` enables `UART0` but tells Linux to use `UART10` on the Raspberry Pi 5!
 That of course doesn't work.<br />
 To fix this we leave the device bootloader config at `[all] dtparam=uart0=on` but change the kernel command-line to `console=ttyAMA0,11520 console=tty1`.
+Do notice that the `/boot/firmware` directory lies on a separate partition, the boot partition.
+If you perform these changes by only mounting the Raspberry Pi's root partition, you won't see the `/boot/firmware` directory.
 Then `UART0` is enabled and used by the kernel.
 We attach our UART-to-USB adapter on GPIO 14/15 and interact with the Linux kernel.
 Hooray!<br />
