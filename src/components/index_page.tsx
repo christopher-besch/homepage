@@ -28,7 +28,7 @@ export default function IndexPage(props: IndexPageProps): React.ReactNode {
     const articlesToShow = props.articles
         .filter(a => a.listed)
         // Date must be defined for all listed articles.
-        .sort((a, b) => b.date!.getTime() - a.date!.getTime()).slice(0, 2);
+        .sort((a, b) => b.date!.getTime() - a.date!.getTime()).slice(0, 4);
     const portfolioToShow = props.portfolio.sort((a, b) => b.rating - a.rating).slice(0, 5);
 
     return (
