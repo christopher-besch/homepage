@@ -71,9 +71,13 @@ When things don't update properly, delete the cache.
 - [x] what are you here for overhaul
 - [x] ham radio site
 - [x] projects to oss contributions
-- [ ] add Raspberry pi docs: https://github.com/raspberrypi/documentation/commit/b7b58eabc57d55551cd9bb224ebf9bc9c3f79370
+- [ ] add Raspberry pi docs:
+    - https://github.com/raspberrypi/documentation/commit/b7b58eabc57d55551cd9bb224ebf9bc9c3f79370
+    - https://github.com/raspberrypi/documentation/commit/e1cef2e2b27ae8a46479e349cbda402023478cb6
 - [ ] emoji in font?
 - [ ] esweek presentation
+- [ ] link rott detector: check all outbound links
+- [ ] reverse link rott detector: create sitemap, then check these possibly inbound links again later
 
 # Nope (or later)
 - [ ] purchase image button
@@ -117,6 +121,8 @@ When things don't update properly, delete the cache.
 - [x] https://minifeed.net/welcome
     pending
 - [x] https://collection.mataroa.blog/
+- [x] https://gossipsweb.net
+    pending
 - [ ] https://blogosphere.app/
     pending
 
@@ -138,8 +144,6 @@ When things don't update properly, delete the cache.
 
     Articles on Open-Source technology and (mostly landscape) photography.
     There's a lot on Linux, microcontrollers and web development.
-- [ ] https://gossipsweb.net
-    pending
 - [ ] https://blogscroll.com/
     pending
 

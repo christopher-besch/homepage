@@ -1,6 +1,6 @@
 import { Fragment } from "react/jsx-dev-runtime";
 import type { ImageSize } from "../convert_image.js";
-import { createStyleLoadPath, faviconLoadPath, getArticleRoute, getFullLoadPath, getResourceLoadPath, loadAboutPath, loadArticlesPath, loadPhotographyPath, loadProjectsPath, loadRssPath, loadTalksPath, XxiivvBlackLoadPath, XxiivvWhiteLoadPath } from "../paths.js";
+import { createStyleLoadPath, faviconLoadPath, getArticleRoute, getFullLoadPath, getCanonicalFullLoadPath, getResourceLoadPath, loadAboutPath, loadArticlesPath, loadPhotographyPath, loadProjectsPath, loadRssPath, loadTalksPath, XxiivvBlackLoadPath, XxiivvWhiteLoadPath } from "../paths.js";
 import Image, { getDefaultExportedImage } from "./image.js";
 import Link from "./link.js";
 
@@ -25,7 +25,6 @@ export default async function Layout(props: React.PropsWithChildren<LayoutProps>
         const exportedBanner = await getDefaultExportedImage({ lazy: false, inputPath: props.banner });
         bannerSizes = exportedBanner.sizes.filter(s => s.width <= 1200).sort((a, b) => b.width - a.width);
     }
-    const url = getFullLoadPath(props.route);
 
     const website_id = process.env["WEBSITE_ID"]
     if (website_id == undefined) {
@@ -50,14 +49,14 @@ export default async function Layout(props: React.PropsWithChildren<LayoutProps>
                 <meta charSet="UTF-8" />
                 <title>{props.title}</title>
                 <meta name="viewport" content="width=device-width,initial-scale=1" />
-                <link rel="canonical" href={url} />
+                <link rel="canonical" href={getCanonicalFullLoadPath(props.route)} />
                 <meta property="og:title" content={props.title} />
                 <meta property="twitter:title" content={props.title} />
                 <meta name="description" content={description} />
                 <meta property="og:description" content={description} />
                 <meta property="twitter:description" content={description} />
                 <meta property="og:type" content="article" />
-                <meta property="og:url" content={url} />
+                <meta property="og:url" content={getFullLoadPath(props.route)} />
                 <meta property="og:site_name" content="Chris' Place" />
                 {bannerSizes.map((banner, idx) => <Fragment key={idx}>
                     <meta property="og:image" content={getFullLoadPath(banner.loadPath)} />

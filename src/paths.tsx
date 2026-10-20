@@ -83,6 +83,10 @@ export function getFullLoadPath(loadPath: string): string {
     return `${homepageURL}${loadPath}`;
 }
 
+export function getCanonicalFullLoadPath(loadPath: string): string {
+    return `https://chris-besch.com${loadPath}`;
+}
+
 // styles //
 const loadStylesPath = `/styles`;
 const deployStylesPath = path.join(deployPath, loadStylesPath);
