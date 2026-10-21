@@ -4,7 +4,7 @@ description: "
 On an Arduino there are libraries to drive sensors.
 On a Linux desktop the hardware is automatically configured and abstracted.
 But what about embedded Linux?
-What about a Raspberry Pi.
+What about a Raspberry Pi?
 This is where the Devicetree comes in:
 how Linux learns about the hardware — your way of specifying hardware.
 "
@@ -18,14 +18,14 @@ tags: [raspberry_pi, hardware, linux, dlr]
 listed: true
 ---
 In the beginning there was the Arduino.
-The way you read out a sensor on an Arduino is by using libraries.
+The way you read out a sensor on an Arduino is by using libraries:
 You search for your sensor's Arduino library and use its API.
 This library code runs as part of the application's code directly on bare-metal — without an operating system.<br />
-On desktop Linux your code runs as a process and doesn't directly interact with the hardware.
+On desktop Linux, however, your code runs as a process and doesn't directly interact with the hardware.
 Instead, the Linux kernel provides abstractions over the hardware; like a filesystem for storage or ALSA for audio.
 Firstly, the motherboard's firmware (i.e., UEFI/BIOS) tells Linux what hardware is needed to boot.
 Secondly, Linux automatically enumerates certain devices, e.g., those over USB or PCIe.
-Therefore, the user and application developer doesn't need to worry about telling Linux what hardware there is.<br />
+Therefore, the user and application developer don't need to worry about telling Linux what hardware there is.<br />
 But then there's embedded Linux:
 We have a Raspberry Pi 5 Compute Module with
 1. a DS18B20 temperature sensor connected via One-Wire,
@@ -36,12 +36,12 @@ We have a Raspberry Pi 5 Compute Module with
 
 How do you configure these sensors?
 For one, the drivers need to know what SPI interface with what chip-select pin interfaces the hardware.
-There's no enumeration procedure that could do this.<br />
-This article gives an introduction to Devicetree and answer the above question without going into too much details.
+There's no enumeration procedure that could do this, so how to do it?
+This article gives an introduction to Devicetree, the answer to the above questions.
 
 ### Devicetree: How the Bootloader tells Linux What it Runs On
-And this brings us to the Devicetree.
 If your Linux uses Devicetree you can run `dtc -I fs /sys/firmware/devicetree/base` to print out the currently loaded device tree (on x86 this is quite rare but on ARM, like on a Raspberry Pi, Devicetree is quite ubiquitous).
+Here is an example extract:
 ```c
 spi@50000 {
     pinctrl-names = "default";
@@ -69,17 +69,18 @@ spi@50000 {
 };
 ```
 In this example there are two nodes describing hardware: an `spi@50000` node with a single child, an `accelerometer@0` sensor.
-Notice how the `spi@50000` node specifies what chip-select pins are under this interface's control, only GPIO18.
+Notice how the `spi@50000` node specifies what chip-select pins are under this interface's control, only `GPIO18`.
 This allows the child, `accelerometer@0` to set the `reg` attribute to `<0>`, selecting the first and only chip-select pin.
 If you had other or more chip-select pins, you would need to change the Devicetree accordingly.
 Another important detail is the `compatible` attribute.
 It's purpose is to let Linux choose what driver to load.
-By specifying `microchip,mcp3008` Linux will load the kernel module (unless the driver is already compiled into the kernel itself).
+By specifying `microchip,mcp3008` Linux will load the kernel respective module (unless the driver is already compiled into the kernel itself).
 Therefore, the user doesn't need to worry about having the right kernel modules loaded; pretty neat, right?
-Let's slowly get to how to adjust the Devicetree:<br />
-The extract above is part of a *Devicetree source* (`.dts`) file.
+Let's slowly get to how to adjust the Devicetree.
+
+The extract above could be part of a *Devicetree source* (`.dts`) file.
 We won't go into the details of the Devicetree specification and invite you to read the well-written [specification](https://www.devicetree.org), instead.
-But as you might have guessed, `dtc`, the Devicetree Compiler, converts the loaded Devicetree from the virtual filesystem into the Devicetree source representation.
+But as you might have guessed, `dtc`, the Devicetree Compiler, converts the loaded Devicetree from the virtual *filesystem* into the *Devicetree source* representation.
 Besides the *source* and *filesystem* representation there also is the *Devicetree blob* representation(`.dtb` or `.dtbo` files).
 Typically, this is the type of file the firmware loads at boot as a basis to create the final Devicetree (`/boot/firmware/bcm2712-rpi-cm5-cm5io.dtb` in our case).
 This is because in the Raspberry Pi's case (like in a lot of other embedded devices) it's the bootloader's job to provide Linux with a Devicetree (see the [Raspberry Pi docs](https://www.raspberrypi.com/documentation/computers/configuration.html)).<br />
@@ -91,7 +92,7 @@ These describe how the base Devicetree should be extended to support whatever ha
 We'll get into the details of how overlays look like later.
 For now it suffices that the Raspberry Pi already comes with a lot of overlays in `/boot/firmware/overlays`.
 These overlays are also in the form of *Devicetree blobs*.
-You can find the *source* in the Raspberry Pi's [kernel git repo](https://github.com/raspberrypi/linux/tree/rpi-6.12.y/arch/arm/boot/dts/overlays).
+You can find their *source* in the Raspberry Pi's [kernel git repo](https://github.com/raspberrypi/linux/tree/rpi-6.12.y/arch/arm/boot/dts/overlays).
 We were quite surprised at the plethora of hardware the Raspberry Pi people created overlays for.
 
 ## DS18B20: Enable One-Wire
@@ -159,16 +160,16 @@ Therefore, we need to create a custom Devicetree overlay:
   };
 };
 ```
-This overlay, which applies to the `brcm,bcm2712` (the Raspberry Pi 5's main processor) compatible, does two things:
-1. `fragment@0` disables the existing, generic `spidev@0`.
+This overlay, which applies to the `brcm,bcm2712` compatible (the Raspberry Pi 5's main processor), does two things:
+1. `fragment@0` disables the existing, generic `spidev@0` placeholder child on the `spi0` interface.
 2. `fragment@1` addresses the `spi0` node and gives it a new child node, `adc@0`.
-    This child has the `microchip,mcp3208` compatible attribute, uses the first chip-select pin belonging to the `spi0` node and properly defines the `vref-supply` attribute.
+    This child has the `microchip,mcp3208` compatible attribute, uses the first chip-select pin belonging to the `spi0` node (`GPIO18` as defined by the dtparam in the `config.txt`) and properly defines the `vref-supply` attribute.
     Btw, `spi0` is an alias to `spi@50000` (see chapter 3.3 in the Devicetree specification for more details on aliases).
 
 Be aware that there is another shorthand syntax for overlays, which we don't use.
 This other syntax is explained quite well in the [Android docs](https://source.android.com/docs/core/architecture/dto/syntax).<br />
-We store this the overlay's *source* in `~/mcp3008_with_vref.dts` and compile it into the right format and place with `sudo dtc -@ -I dts -O dtb -o /boot/firmware/overlays/mcp3008_with_vref.dtbo mcp3008_with_vref.dts`.
-Afterwards we change the `config.txt` to:
+We store this, the overlay's *source*, in `~/mcp3008_with_vref.dts` and compile it into the right format with `sudo dtc -@ -I dts -O dtb -o /boot/firmware/overlays/mcp3008_with_vref.dtbo mcp3008_with_vref.dts`.
+Afterwards, we change the `config.txt` to:
 ```ini
 dtoverlay=spi0-1cs,cs0_pin=18
 dtoverlay=mcp3008_with_vref
@@ -197,16 +198,16 @@ Let's go on a quick rant about Linux drivers:
     This means that all the drivers are already part of the kernel.
     Read through the single Linux kernel [git repo](https://github.com/torvalds/linux) and there they are, all the drivers.
     For example, [`drivers/iio/adc/mcp320x.c`](https://github.com/torvalds/linux/blob/master/drivers/iio/adc/mcp320x.c) is the driver for the MCP3008.<br />
-    When a driver is upstreamed into this git repo the users are in the best most situation to be in.
+    When a driver is upstreamed into this git repo the users are in the best possible situation to be in.
     The user only has to adjust the Devicetree (if the interface doesn't support enumeration) as we did above and the kernel takes care of the hardware.
     Therefore, we always look for hardware with drivers upstreamed to the Linux kernel.
-- And then there are the somewhat dumb ones: not-upstreamed Open-Source drivers.
+- And then there are the somewhat dumb ones: not-upstreamed  (so-called *out-of-tree*) Open-Source drivers.
     In this case there are Open-Source drivers but the vendor (for whatever stupid reason) chose not to upstream them to the Linux kernel.
     Therefore, you need to patch the kernel sources and build kernel modules for the specific kernel you want to use.
-    At least you can read the source code and form trust for it.
-    Also you are a lot more free in your choice of kernel version.
+    At least you can read the source code and form trust over it.
+    Also, you are a lot more free in your choice of kernel version.
     Nevertheless, it's so frustrating that these vendors didn't take the last step of properly upstreaming the drivers.
-    This would have done the users (the engineer having purchased the vendor's product) job so much easier.
+    This would have done the user's job so much easier (that's the dude having purchased the vendor's product).
 
 <HalfImage src="./ais2ihtr.webp" full={false} />
 
@@ -215,14 +216,14 @@ Their instructions are, I kid you not, to add their repo as a git remote and man
 And there are conflicts, because of course there are (only in `README.md`, but still).
 These are the steps we had to perform to merge and configure the kernel sources:
 1. `sudo apt update && sudo dpkg --add-architecture arm64 && sudo apt install -y git bc bison flex libssl-dev make libssl-dev:arm64`
-2. `git clone https://github.com/raspberrypi/linux && cd linux && git checkout 5d39807272da852e10f3fc4467c33b57f59ecc61` oldstable_20260611 somehow doesn't compile
+2. `git clone https://github.com/raspberrypi/linux && cd linux && git checkout 5d39807272da852e10f3fc4467c33b57f59ecc61` `oldstable_20260611` somehow doesn't compile
 3. `git checkout -b custom_kernel`
 4. `git remote add stmems_iio_github https://github.com/STMicroelectronics/st-mems-android-linux-drivers-iio.git`
 5. `git fetch stmems_iio_github`
 6. `git checkout 0455f406e00484260474473e8fed29bddd15bfa2`
 7. `git checkout -b stemems_iio_branch`
 8. `git checkout custom_kernel`
-9. `git merge --allow-unrelated-histories custom_kernel stemems_iio_branch` Yes, do fix the merge conflict in `README.md` manually
+9. `git merge --allow-unrelated-histories custom_kernel stemems_iio_branch` Yes, do fix the merge conflict in `README.md` manually.
 10. `git am stm_iio_patches/6.12.y/*-stm-*.patch`
 11. `KERNEL=kernel_2712`
 12. `make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- bcm2712_defconfig`
@@ -231,8 +232,8 @@ These are the steps we had to perform to merge and configure the kernel sources:
    - mark as module: *Device Drivers/Industrial I/O support/STM MEMS Device drivers/Accelerometer/STMicroelectronics LIS2DW12/IIS2DLPC/AIS2IH Accelerometer Driver*
 
 Afterwards we could compile the kernel like normal, install it onto the Raspberry Pi and boot, see my [article on that](/articles/embedded_systemd/).
-The relevant module that all this effort adds to a more vanilla kernel is `st_lis2dw12_spi`.
-Once we've configured the Devicetree, Linux loads it automatically:
+The relevant module that all this effort adds is `st_lis2dw12_spi`.
+Once we've configured the Devicetree, Linux loads this module automatically:
 ```c
 /dts-v1/;
 /plugin/;
@@ -264,13 +265,14 @@ Once we've configured the Devicetree, Linux loads it automatically:
 };
 ```
 
-Like before we compile this Devicetree overlay with `sudo dtc -@ -I dts -O dtb -o /boot/firmware/overlays/ais2ih.dtbo ais2ih.dts` and configure `config.txt` like so:
+Like before, we compile this Devicetree overlay with `sudo dtc -@ -I dts -O dtb -o /boot/firmware/overlays/ais2ih.dtbo ais2ih.dts` and configure `config.txt` like so:
 ```ini
 dtoverlay=spi1-1cs,cs0_pin=16
 dtoverlay=ais2ih
 ```
 
-With that done, run `cat /sys/bus/iio/devices/iio\:device1/in_accel_{x,y,z}_*` to read the acceleration.<br />
+With that done, run `cat /sys/bus/iio/devices/iio\:device1/in_accel_{x,y,z}_*` to read the acceleration.
+
 Isn't it fascinating how this one data structure, the Devicetree, can describe the entire hardware configuration?
 The bootloader can do all it needs to do, initialize hardware, enumerate things, load overlays; all to build a single Devicetree to hand Linux and let the kernel do its thing.
-The Devicetree is quite the clean interface.
+The Devicetree is quite the clean interface and now we know how to bend it to our will.
