@@ -78,6 +78,7 @@ When things don't update properly, delete the cache.
 - [ ] esweek presentation
 - [ ] link rott detector: check all outbound links
 - [ ] reverse link rott detector: create sitemap, then check these possibly inbound links again later
+- [ ] ensure there are no https://chris-besch.com/something links and only /something links
 
 # Nope (or later)
 - [ ] purchase image button
@@ -119,10 +120,10 @@ When things don't update properly, delete the cache.
 
     Into tinkering, sharing knowledge and experiences; mostly Open-Source tech and photography.
 - [x] https://minifeed.net/welcome
-    pending
 - [x] https://collection.mataroa.blog/
 - [x] https://gossipsweb.net
-    pending
+- [ ] https://pxlarea.com
+    pending: X32Y32
 - [ ] https://blogosphere.app/
     pending
 

@@ -75,6 +75,7 @@ export default async function Markdown(props: MarkdownProps): Promise<React.Reac
             ...runtime,
             rehypePlugins: [
                 rehypeKatex,
+                // list of all grammars: https://github.com/wooorm/starry-night#languages
                 [rehypeStarryNight, { grammars: allGrammar }],
                 rehypeSlug,
                 [rehypeAutolinkHeadings, {
