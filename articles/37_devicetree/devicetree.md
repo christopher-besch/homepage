@@ -1,18 +1,22 @@
 ---
-title: "How to Sensor with Embedded Linux' Devicetree (on Raspberry Pi)"
+title: "How to Sensor with Devicetree (on Raspberry Pi)"
 description: "
-TODO
+On an Arduino there are libraries to drive sensors.
+On a Linux desktop the hardware is automatically configured and abstracted.
+But what about embedded Linux?
+What about a Raspberry Pi.
+This is where the Devicetree comes in:
+how Linux learns about the hardware — your way of specifying hardware.
 "
 banner: "./banner.webp"
 hero: "./hero.webp"
 hero_horizontal_position: 0
-hero_vertical_position: 100
+hero_vertical_position: 60
 slug: devicetree
-date: "2026-10-20"
+date: "2026-10-21"
 tags: [raspberry_pi, hardware, linux, dlr]
 listed: true
 ---
-TODO: explain that we don't go into the details of Devicetree files and only the general usage.
 In the beginning there was the Arduino.
 The way you read out a sensor on an Arduino is by using libraries.
 You search for your sensor's Arduino library and use its API.
@@ -28,11 +32,12 @@ We have a Raspberry Pi 5 Compute Module with
 2. an MCP3008 Analogue-to-Digital Converter (ADC) connected via `SPI0` and chip-select `GPIO18` and
 3. an AISIH accelerometer connected via `SPI1` and chip-select `GPIO16`.
 
-<HalfImage src="./overview.webp" full={true} />
+<HalfImage src="./overview.svg" full={true} />
 
-How do you drive these sensors?
+How do you configure these sensors?
 For one, the drivers need to know what SPI interface with what chip-select pin interfaces the hardware.
-There's no enumeration procedure that could do this.
+There's no enumeration procedure that could do this.<br />
+This article gives an introduction to Devicetree and answer the above question without going into too much details.
 
 ### Devicetree: How the Bootloader tells Linux What it Runs On
 And this brings us to the Devicetree.
@@ -203,9 +208,11 @@ Let's go on a quick rant about Linux drivers:
     Nevertheless, it's so frustrating that these vendors didn't take the last step of properly upstreaming the drivers.
     This would have done the users (the engineer having purchased the vendor's product) job so much easier.
 
+<HalfImage src="./ais2ihtr.webp" full={false} />
+
 In our case, in the AIS2IH case, the vendor, ST, chose not to upstream their [Open-Source drivers](https://github.com/STMicroelectronics/st-mems-android-linux-drivers-iio).
 Their instructions are, I kid you not, to add their repo as a git remote and manually merge their version into your kernel version...
-And there are conflicts, because of course there are (only in the README, but still).
+And there are conflicts, because of course there are (only in `README.md`, but still).
 These are the steps we had to perform to merge and configure the kernel sources:
 1. `sudo apt update && sudo dpkg --add-architecture arm64 && sudo apt install -y git bc bison flex libssl-dev make libssl-dev:arm64`
 2. `git clone https://github.com/raspberrypi/linux && cd linux && git checkout 5d39807272da852e10f3fc4467c33b57f59ecc61` oldstable_20260611 somehow doesn't compile
@@ -220,8 +227,8 @@ These are the steps we had to perform to merge and configure the kernel sources:
 11. `KERNEL=kernel_2712`
 12. `make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- bcm2712_defconfig`
 13. `make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- menuconfig` and
-   - mark as module *Device Drivers/Industrial I/O support/STM MEMS Device drivers*
-   - mark as module *Device Drivers/Industrial I/O support/STM MEMS Device drivers/Accelerometer/STMicroelectronics LIS2DW12/IIS2DLPC/AIS2IH Accelerometer Driver*
+   - mark as module: *Device Drivers/Industrial I/O support/STM MEMS Device drivers*
+   - mark as module: *Device Drivers/Industrial I/O support/STM MEMS Device drivers/Accelerometer/STMicroelectronics LIS2DW12/IIS2DLPC/AIS2IH Accelerometer Driver*
 
 Afterwards we could compile the kernel like normal, install it onto the Raspberry Pi and boot, see my [article on that](/articles/embedded_systemd/).
 The relevant module that all this effort adds to a more vanilla kernel is `st_lis2dw12_spi`.
@@ -263,5 +270,7 @@ dtoverlay=spi1-1cs,cs0_pin=16
 dtoverlay=ais2ih
 ```
 
-With that done, run `cat /sys/bus/iio/devices/iio\:device1/in_accel_{x,y,z}_*` to read acceleration.
-TODO: conclusion
+With that done, run `cat /sys/bus/iio/devices/iio\:device1/in_accel_{x,y,z}_*` to read the acceleration.<br />
+Isn't it fascinating how this one data structure, the Devicetree, can describe the entire hardware configuration?
+The bootloader can do all it needs to do, initialize hardware, enumerate things, load overlays; all to build a single Devicetree to hand Linux and let the kernel do its thing.
+The Devicetree is quite the clean interface.
