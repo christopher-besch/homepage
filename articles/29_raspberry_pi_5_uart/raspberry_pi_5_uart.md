@@ -56,7 +56,7 @@ The [documentation](https://www.raspberrypi.com/documentation/computers/configur
 On the Raspberry Pi 5 that is `UART10`.
 For all older models the `primary UART` instead is the UART which uses GPIO 14/15.
 
-### Raspberry Pi 5 Bootloader log to UART
+### Raspberry Pi 5 Bootloader Log to UART
 Okay, so we want to read the bootloader log.
 The [documentation](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#BOOT_UART) states that `BOOT_UART` would enable second level bootloader logging on the UART interface which uses GPIO 14/15.
 On the Raspberry Pi `UART0` uses those GPIOs.

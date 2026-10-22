@@ -181,7 +181,7 @@ This loads the overlay, which we can verify with `sudo vclog --msg`:
 005499.339: Loaded overlay 'mcp3008_with_vref'
 ```
 If there were any problems, the kernel log would tell us (check with `dmesg`).
-Now the `/sys/bus/iio/devices/iio:device0/in_voltage_scale` file reads the voltage reference and we can check the voltage readings with `cat /sys/bus/iio/devices/iio\:device0/in_voltage{0..7}_raw`.
+Now the `/sys/bus/iio/devices/iio:device0/in_voltage_scale` file reads the voltage reference and we can check the voltage readings with `cat /sys/bus/iio/devices/iio\:device0/in_voltage{0..7}_raw` (the number in `device0` varies).
 There's no need for any userspace libraries (like the Python gpiozero library); the kernel does it all once properly configured like this.
 What an amazing piece of software, the Linux kernel.
 
@@ -271,8 +271,13 @@ dtoverlay=spi1-1cs,cs0_pin=16
 dtoverlay=ais2ih
 ```
 
-With that done, run `cat /sys/bus/iio/devices/iio\:device1/in_accel_{x,y,z}_*` to read the acceleration.
+With that done, run `cat /sys/bus/iio/devices/iio\:device1/in_accel_{x,y,z}_*` to read the acceleration (the number in `device1` varies).
 
 Isn't it fascinating how this one data structure, the Devicetree, can describe the entire hardware configuration?
 The bootloader can do all it needs to do, initialize hardware, enumerate things, load overlays; all to build a single Devicetree to hand Linux and let the kernel do its thing.
 The Devicetree is quite the clean interface and now we know how to bend it to our will.
+
+PS: Thanks [Chris](https://teccheck.xyz) for the amazing banner image ❤️
+He always has the motivation for a nice touch.
+
+<HalfImage src="./banner.webp" full={true} />

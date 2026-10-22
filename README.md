@@ -76,9 +76,12 @@ When things don't update properly, delete the cache.
     - https://github.com/raspberrypi/documentation/commit/e1cef2e2b27ae8a46479e349cbda402023478cb6
 - [ ] emoji in font?
 - [ ] esweek presentation
+- [ ] papers, orcid
 - [ ] link rott detector: check all outbound links
 - [ ] reverse link rott detector: create sitemap, then check these possibly inbound links again later
 - [ ] ensure there are no https://chris-besch.com/something links and only /something links
+- [x] dt article: device0 might not be 0
+- [ ] casio project
 
 # Nope (or later)
 - [ ] purchase image button
@@ -122,8 +125,8 @@ When things don't update properly, delete the cache.
 - [x] https://minifeed.net/welcome
 - [x] https://collection.mataroa.blog/
 - [x] https://gossipsweb.net
-- [ ] https://pxlarea.com
-    pending: X32Y32
+- [x] https://pxlarea.com
+    X32Y32
 - [ ] https://blogosphere.app/
     pending
 
