@@ -45,6 +45,27 @@ jobs:
       - name: Check Image Size
         run: npm run check_image_size
 
+      - name: Generate the Sitemap
+        id: sitemap
+        uses: cicirello/generate-sitemap@v1
+        with:
+          base-url-path: https://www.chris-besch.com/
+          path-to-root: deploy
+
+      - name: Output stats
+        run: |
+          echo "sitemap-path = ${{ steps.sitemap.outputs.sitemap-path }}"
+          echo "url-count = ${{ steps.sitemap.outputs.url-count }}"
+          echo "excluded-count = ${{ steps.sitemap.outputs.excluded-count }}"
+
+      - name: Commit new Sitemap
+        uses: EndBug/add-and-commit@v10
+        with:
+          add: 'deploy/sitemap.xml'
+          author_name: Christopher Besch
+          author_email: mail@chris-besch.com
+          message: 'feat: Update sitemap.xml'
+
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4.7.4
         with:

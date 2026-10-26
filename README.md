@@ -54,36 +54,26 @@ When things don't update properly, delete the cache.
 - `npm run build`
 
 # ToDo
-- [ ] multi size favicon
-- [ ] pretty rss icon in footer
-- [ ] rethink about page
-- [ ] prettier buttons
-- [ ] analytics textanordnung???
-- [ ] about text on landing page
-- [x] callsign
-- [x] redirect from callsign
+- [ ] rethink about page; add LinkedIn, ORCID, ham radio callsign to about
 - [ ] latest photos as well as best
 - [ ] update bookmarks
 - [ ] claimer that no ai
-- [ ] add LinkedIn, ORCID, ham radio callsign to about
 - [ ] add list of publications, maybe science page or above articles
-- [ ] add reference to RSS feed after each article
-- [x] what are you here for overhaul
-- [x] ham radio site
-- [x] projects to oss contributions
+- [ ] add reference to RSS feed after each article; RSS article
+- [ ] pretty rss icon in footer
 - [ ] add Raspberry pi docs:
     - https://github.com/raspberrypi/documentation/commit/b7b58eabc57d55551cd9bb224ebf9bc9c3f79370
     - https://github.com/raspberrypi/documentation/commit/e1cef2e2b27ae8a46479e349cbda402023478cb6
+- [ ] casio project
 - [ ] emoji in font?
 - [ ] esweek presentation
-- [ ] papers, orcid
 - [ ] link rott detector: check all outbound links
 - [ ] reverse link rott detector: create sitemap, then check these possibly inbound links again later
 - [ ] ensure there are no https://chris-besch.com/something links and only /something links
-- [x] dt article: device0 might not be 0
-- [ ] casio project
 
 # Nope (or later)
+- [ ] multi size favicon
+- [ ] prettier buttons
 - [ ] purchase image button
 - [ ] no react on privacy policy, maybe?
 - [ ] maybe add photo articles to photo page
