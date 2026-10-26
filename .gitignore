@@ -1,6 +1,7 @@
 .env
 build/
-deploy/
+deploy/*
+!deploy/sitemap.xml
 cache/
 node_modules/
 
