@@ -152,3 +152,5 @@ When things don't update properly, delete the cache.
     pending
 - [ ] https://www.webjamboree.net/
     pending
+- [ ] https://xn--sr8hvo.ws/directory
+    needs some auth
